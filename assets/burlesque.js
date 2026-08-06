@@ -30,17 +30,32 @@
     { src: 'images/5O9A8496.jpg', full: 'images/5O9A8496.jpg', alt: 'Burlesque Mon Amour photograph 20', width: 1200, height: 800 }
   ];
 
+  function installScrubberStyles() {
+    if (document.getElementById('burlesque-scrubber-styles')) return;
+    const style = document.createElement('style');
+    style.id = 'burlesque-scrubber-styles';
+    style.textContent = `
+      .burlesque-scrubber{position:absolute;z-index:8;left:0;right:0;bottom:0;height:30px;color:#151715;opacity:1;transition:opacity .35s ease}
+      .burlesque-scrubber__input{position:absolute;z-index:2;left:0;right:0;bottom:0;width:100%;height:30px;margin:0;opacity:0;cursor:ew-resize}
+      .burlesque-scrubber__track{position:absolute;left:0;right:0;bottom:0;height:1px;background:#15171529;pointer-events:none}
+      .burlesque-scrubber__fill{position:absolute;inset:0;background:#15171580;transform:scaleX(var(--scrub-progress,.05));transform-origin:left center;transition:transform .8s cubic-bezier(.22,1,.36,1)}
+      .burlesque-scrubber__marker{position:absolute;left:clamp(4px,calc(var(--scrub-position,0) * 100%),calc(100% - 4px));bottom:-3px;width:7px;height:7px;border-radius:50%;background:#151715;transform:translateX(-50%);transition:left .8s cubic-bezier(.22,1,.36,1),transform .2s ease;box-shadow:0 0 0 3px #f0efe9b8}
+      .burlesque-scrubber.is-dragging .burlesque-scrubber__fill,.burlesque-scrubber.is-dragging .burlesque-scrubber__marker{transition-duration:.12s}
+      .burlesque-scrubber.is-dragging .burlesque-scrubber__marker{transform:translateX(-50%) scale(1.35)}
+      .burlesque-scrubber__input:focus-visible + .burlesque-scrubber__track .burlesque-scrubber__marker{outline:1px solid #151715;outline-offset:4px}
+      @media (max-width:760px){.burlesque-scrubber,.burlesque-scrubber__input{height:36px}}
+      @media (prefers-reduced-motion:reduce){.burlesque-scrubber__fill,.burlesque-scrubber__marker{transition:none}}
+    `;
+    document.head.append(style);
+  }
+
   function preloadPhotograph(slide, index) {
     return new Promise((resolve, reject) => {
       const image = new Image();
       image.decoding = 'async';
       image.fetchPriority = index < 3 ? 'high' : 'auto';
       image.onload = async () => {
-        try {
-          await image.decode();
-        } catch (_) {
-          // The file is already downloaded even when explicit decoding is unavailable.
-        }
+        try { await image.decode(); } catch (_) {}
         resolve(slide);
       };
       image.onerror = () => reject(new Error(`Could not preload ${slide.src}`));
@@ -49,8 +64,6 @@
   }
 
   async function loadSlides() {
-    // Download and decode every photograph while the visitor reads the introduction,
-    // so every arrow transition is immediate and no slide appears blank.
     await Promise.all(localSlides.map(preloadPhotograph));
     return localSlides;
   }
@@ -95,13 +108,14 @@
     next.type = 'button';
     next.setAttribute('aria-label', 'Next photograph');
     next.textContent = '→';
+
     dialog.append(close, previous, viewport, next);
     document.body.append(dialog);
     html.style.overflow = 'hidden';
 
     const render = () => {
       dialog.setAttribute('aria-label', `Fullscreen photograph ${activeIndex + 1} of ${slides.length}`);
-      track.style.transform = `translate3d(-${activeIndex * 100}%, 0, 0)`;
+      track.style.transform = `translate3d(-${activeIndex * 100}%,0,0)`;
       previous.disabled = activeIndex === 0;
       next.disabled = activeIndex === slides.length - 1;
       figures.forEach((item, index) => {
@@ -111,6 +125,7 @@
         item.image.loading = 'eager';
       });
     };
+
     let isClosing = false;
     const destroy = () => {
       if (isClosing) return;
@@ -118,7 +133,6 @@
       window.removeEventListener('keydown', onKeyDown);
       dialog.classList.remove('is-visible');
       dialog.classList.add('is-closing');
-
       const finish = () => {
         html.style.overflow = previousOverflow;
         dialog.remove();
@@ -127,11 +141,13 @@
       const closingTime = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 650;
       window.setTimeout(finish, closingTime);
     };
+
     const onKeyDown = (event) => {
       if (event.key === 'Escape') destroy();
       if (event.key === 'ArrowLeft' && activeIndex > 0) { activeIndex -= 1; render(); }
       if (event.key === 'ArrowRight' && activeIndex < slides.length - 1) { activeIndex += 1; render(); }
     };
+
     close.addEventListener('click', destroy);
     dialog.addEventListener('click', destroy);
     viewport.addEventListener('click', (event) => event.stopPropagation());
@@ -139,24 +155,19 @@
     next.addEventListener('click', (event) => { event.stopPropagation(); activeIndex = Math.min(slides.length - 1, activeIndex + 1); render(); });
     window.addEventListener('keydown', onKeyDown);
     render();
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => dialog.classList.add('is-visible'));
-    });
+    requestAnimationFrame(() => requestAnimationFrame(() => dialog.classList.add('is-visible')));
     close.focus();
   }
 
   function buildSequence(slides) {
+    installScrubberStyles();
     stage.replaceChildren();
     const slideEls = [];
 
     slides.forEach((slide, index) => {
       const figure = document.createElement('figure');
       const ratio = slide.height ? slide.width / slide.height : 1.5;
-      const sizeClass = ratio > 1.35
-        ? 'burlesque-horizontal-slide--wide'
-        : ratio < 0.88
-          ? 'burlesque-horizontal-slide--portrait'
-          : 'burlesque-horizontal-slide--medium';
+      const sizeClass = ratio > 1.35 ? 'burlesque-horizontal-slide--wide' : ratio < 0.88 ? 'burlesque-horizontal-slide--portrait' : 'burlesque-horizontal-slide--medium';
       figure.className = `burlesque-horizontal-slide ${sizeClass}`;
       figure.dataset.index = String(index);
       figure.setAttribute('aria-hidden', String(index !== 0));
@@ -198,6 +209,23 @@
       controls.querySelector('.burlesque-horizontal-next')?.addEventListener('click', () => goToSlide(index + 1));
     });
 
+    const scrubber = document.createElement('div');
+    scrubber.className = 'burlesque-scrubber';
+    scrubber.setAttribute('aria-label', 'Photograph progress');
+    const scrubberInput = document.createElement('input');
+    scrubberInput.className = 'burlesque-scrubber__input';
+    scrubberInput.type = 'range';
+    scrubberInput.min = '0';
+    scrubberInput.max = String(slides.length - 1);
+    scrubberInput.step = '1';
+    scrubberInput.value = '0';
+    scrubberInput.setAttribute('aria-label', 'Jump to a photograph');
+    const scrubberTrack = document.createElement('span');
+    scrubberTrack.className = 'burlesque-scrubber__track';
+    scrubberTrack.innerHTML = '<i class="burlesque-scrubber__fill"></i><b class="burlesque-scrubber__marker"></b>';
+    scrubber.append(scrubberInput, scrubberTrack);
+    film.append(scrubber);
+
     let activeIndex = 0;
     let wheelLockedUntil = 0;
     const TRANSITION_MS = 1300;
@@ -211,8 +239,17 @@
       scroller.setAttribute('data-view', open ? 'series' : 'intro');
     }
 
+    function updateScrubber() {
+      const progress = (activeIndex + 1) / slides.length;
+      const position = slides.length > 1 ? activeIndex / (slides.length - 1) : 0;
+      scrubber.style.setProperty('--scrub-progress', String(progress));
+      scrubber.style.setProperty('--scrub-position', String(position));
+      scrubberInput.value = String(activeIndex);
+      scrubberInput.setAttribute('aria-valuetext', `Photograph ${activeIndex + 1} of ${slides.length}`);
+    }
+
     function renderSlide() {
-      stage.style.transform = `translate3d(-${activeIndex * 100}%, 0, 0)`;
+      stage.style.transform = `translate3d(-${activeIndex * 100}%,0,0)`;
       slideEls.forEach((slideEl, index) => {
         const active = index === activeIndex;
         slideEl.classList.toggle('is-active', active);
@@ -223,6 +260,7 @@
           image.loading = 'eager';
         }
       });
+      updateScrubber();
     }
 
     function goToSlide(index) {
@@ -232,17 +270,22 @@
       renderSlide();
     }
 
+    scrubberInput.addEventListener('input', () => goToSlide(Number(scrubberInput.value)));
+    scrubberInput.addEventListener('pointerdown', () => scrubber.classList.add('is-dragging'));
+    scrubberInput.addEventListener('pointerup', () => scrubber.classList.remove('is-dragging'));
+    scrubberInput.addEventListener('pointercancel', () => scrubber.classList.remove('is-dragging'));
+    scrubber.addEventListener('click', (event) => event.stopPropagation());
+
     enterButton?.addEventListener('click', () => setSeriesOpen(true));
 
     window.addEventListener('keydown', (event) => {
       if (document.querySelector('.intermission-lightbox') || document.querySelector('.menu-panel.is-open')) return;
-
+      if (event.target === scrubberInput) return;
       if (event.key === 'ArrowRight') {
         event.preventDefault();
         if (!isSeriesOpen()) setSeriesOpen(true);
         else goToSlide(activeIndex + 1);
       }
-
       if (event.key === 'ArrowLeft') {
         event.preventDefault();
         if (isSeriesOpen() && activeIndex === 0) setSeriesOpen(false);
@@ -251,14 +294,12 @@
     });
 
     scroller.addEventListener('wheel', (event) => {
-      if (window.matchMedia('(max-width: 760px)').matches) return;
+      if (window.matchMedia('(max-width:760px)').matches) return;
       const delta = Math.abs(event.deltaY) >= Math.abs(event.deltaX) ? event.deltaY : event.deltaX;
       if (Math.abs(delta) < 18) return;
       event.preventDefault();
-
       const now = performance.now();
       if (now < wheelLockedUntil) return;
-
       if (!isSeriesOpen()) {
         if (delta > 0) setSeriesOpen(true);
       } else if (delta > 0 && activeIndex < slides.length - 1) {
@@ -268,15 +309,12 @@
       } else if (delta < 0 && activeIndex === 0) {
         setSeriesOpen(false);
       }
-
       wheelLockedUntil = now + TRANSITION_MS + 25;
     }, { passive: false });
 
-    // Keep the outer viewport fixed. The introduction and first photograph now
-    // use the same transform transition as every photograph-to-photograph move.
     scroller.scrollLeft = 0;
     setSeriesOpen(false);
-    stage.style.transform = 'translate3d(0, 0, 0)';
+    stage.style.transform = 'translate3d(0,0,0)';
     film.classList.add('is-ready');
     stage.setAttribute('aria-busy', 'false');
     renderSlide();
@@ -284,7 +322,7 @@
 
   function showError() {
     stage.setAttribute('aria-busy', 'false');
-    stage.innerHTML = `<div class="burlesque-error"><p>The photographs could not be loaded.</p></div>`;
+    stage.innerHTML = '<div class="burlesque-error"><p>The photographs could not be loaded.</p></div>';
   }
 
   loadSlides().then(buildSequence).catch(showError);
