@@ -86,6 +86,8 @@
     const dialog = document.createElement("div");
     const prefix = className;
     const previousOverflow = html.style.overflow;
+    const enableTrackpadNavigation = prefix === "healers-lightbox";
+    let wheelLockedUntil = 0;
 
     dialog.className = prefix;
     dialog.setAttribute("role", "dialog");
@@ -145,8 +147,32 @@
       });
     };
 
+    const onWheel = (event) => {
+      if (!enableTrackpadNavigation) return;
+      const delta =
+        Math.abs(event.deltaX) >= Math.abs(event.deltaY)
+          ? event.deltaX
+          : event.deltaY;
+      if (Math.abs(delta) < 18) return;
+
+      event.preventDefault();
+      const now = performance.now();
+      if (now < wheelLockedUntil) return;
+
+      if (delta > 0 && activeIndex < slides.length - 1) {
+        activeIndex += 1;
+        render();
+        wheelLockedUntil = now + 1325;
+      } else if (delta < 0 && activeIndex > 0) {
+        activeIndex -= 1;
+        render();
+        wheelLockedUntil = now + 1325;
+      }
+    };
+
     const destroy = () => {
       window.removeEventListener("keydown", onKeyDown);
+      viewport.removeEventListener("wheel", onWheel);
       html.style.overflow = previousOverflow;
       dialog.remove();
     };
@@ -166,6 +192,7 @@
     close.addEventListener("click", destroy);
     dialog.addEventListener("click", destroy);
     viewport.addEventListener("click", (event) => event.stopPropagation());
+    viewport.addEventListener("wheel", onWheel, { passive: false });
     previous.addEventListener("click", (event) => {
       event.stopPropagation();
       activeIndex = Math.max(activeIndex - 1, 0);
