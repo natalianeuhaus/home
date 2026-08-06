@@ -375,8 +375,18 @@
       });
     };
 
-    buttons[0]?.addEventListener("click", () => scrollToImage(activeIndex - 1));
-    buttons[1]?.addEventListener("click", () => scrollToImage(activeIndex + 1));
+    const showImageWithoutScrolling = (index) => {
+      const nextIndex = Math.max(0, Math.min(index, slides.length - 1));
+      if (nextIndex === activeIndex) return;
+      render(nextIndex);
+    };
+
+    buttons[0]?.addEventListener("click", () =>
+      showImageWithoutScrolling(activeIndex - 1),
+    );
+    buttons[1]?.addEventListener("click", () =>
+      showImageWithoutScrolling(activeIndex + 1),
+    );
     slides.forEach((slide, index) => {
       const image = slide.querySelector("img");
       if (!image) return;
