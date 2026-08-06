@@ -221,7 +221,14 @@
       const safeIndex = Math.max(0, Math.min(slides.length - 1, index));
       const target = slideEls[safeIndex];
       if (!target) return;
-      scroller.scrollTo({ left: target.offsetLeft, behavior });
+
+      // offsetLeft is relative to the inner film/stage, not the outer
+      // horizontal scroller. Calculate the target's actual position inside
+      // the scroller so the intro panel's width is included.
+      const scrollerRect = scroller.getBoundingClientRect();
+      const targetRect = target.getBoundingClientRect();
+      const targetLeft = scroller.scrollLeft + targetRect.left - scrollerRect.left;
+      scroller.scrollTo({ left: targetLeft, behavior });
     }
 
     function renderFromScroll() {
