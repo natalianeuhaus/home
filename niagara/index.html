@@ -4,190 +4,87 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Greetings from Niagara — Natalia Neuhaus</title>
-  <meta name="description" content="Greetings from Niagara, an ongoing investigation by Natalia Neuhaus into the radioactive industrial legacy of Western New York." />
+  <meta name="description" content="Greetings from Niagara, Natalia Neuhaus's ongoing investigation into the radioactive industrial legacy of Western New York." />
   <link rel="stylesheet" href="../assets/site.css" />
   <link rel="shortcut icon" href="../favicon.svg" />
   <link rel="icon" href="../favicon.svg" />
   <style>
-    .niagara-page {
-      color: #151715;
-      background: #f1f0ea;
-      min-height: 100svh;
-      overflow-x: hidden;
-    }
+    :root { --niagara-paper:#f1f0ea; --niagara-ink:#151715; --niagara-line:rgba(21,23,21,.22); }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body.niagara-page { margin:0; color:var(--niagara-ink); background:var(--niagara-paper); min-height:100svh; overflow-x:hidden; }
+    .niagara-page .wordmark,.niagara-page .menu-toggle { color:#fff; mix-blend-mode:difference; text-shadow:none; }
 
-    .niagara-page .wordmark,
-    .niagara-page .menu-toggle {
-      color: #fff;
-      mix-blend-mode: difference;
-      text-shadow: none;
-    }
+    .niagara-hero { height:100svh; min-height:620px; position:relative; overflow:hidden; background:#111; }
+    .niagara-hero img { width:100%; height:100%; object-fit:cover; object-position:center; display:block; }
+    .niagara-hero::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.02) 42%,rgba(0,0,0,.62) 100%); pointer-events:none; }
+    .niagara-hero-copy { position:absolute; z-index:2; left:42px; right:42px; bottom:42px; color:#f1f0ea; text-shadow:0 2px 20px rgba(0,0,0,.32); }
+    .niagara-eyebrow { margin:0 0 16px; letter-spacing:.34em; text-transform:uppercase; font:10px/1.4 Arial,Helvetica,sans-serif; }
+    .niagara-hero h1 { margin:0; max-width:1280px; letter-spacing:-.052em; font-size:clamp(58px,9vw,146px); font-weight:400; line-height:.84; }
+    .niagara-deck { margin:25px 0 0; max-width:760px; font-size:clamp(17px,1.55vw,24px); line-height:1.35; }
 
-    .niagara-hero {
-      height: 100svh;
-      min-height: 620px;
-      position: relative;
-      overflow: hidden;
-      background: #111;
-    }
+    .niagara-tabbar-wrap { position:sticky; top:0; z-index:24; background:rgba(241,240,234,.96); backdrop-filter:blur(12px); border-bottom:1px solid var(--niagara-line); }
+    .niagara-tabbar { width:min(1540px,calc(100% - 84px)); margin:0 auto; display:flex; align-items:stretch; overflow-x:auto; scrollbar-width:none; }
+    .niagara-tabbar::-webkit-scrollbar { display:none; }
+    .niagara-tab { appearance:none; flex:0 0 auto; min-height:66px; padding:0 27px; border:0; border-bottom:1px solid transparent; background:transparent; color:var(--niagara-ink); cursor:pointer; white-space:nowrap; font:13px/1.2 Georgia,"Times New Roman",serif; opacity:.58; transition:opacity .2s,border-color .2s; }
+    .niagara-tab:first-child { padding-left:0; }
+    .niagara-tab:hover,.niagara-tab:focus-visible { opacity:1; }
+    .niagara-tab[aria-selected="true"] { opacity:1; border-bottom-color:var(--niagara-ink); }
 
-    .niagara-hero img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      display: block;
-    }
+    .niagara-panel { display:none; }
+    .niagara-panel.is-active { display:block; }
+    .niagara-section { width:min(1540px,calc(100% - 84px)); margin:0 auto; padding:clamp(94px,13svh,170px) 0 clamp(120px,17svh,220px); }
+    .niagara-two-col { display:grid; grid-template-columns:minmax(260px,.72fr) minmax(500px,1.28fr); gap:clamp(70px,11vw,190px); align-items:start; }
+    .niagara-heading { position:sticky; top:132px; }
+    .niagara-kicker { margin:0 0 30px; letter-spacing:.34em; text-transform:uppercase; color:rgba(21,23,21,.48); font:10px/1.4 Arial,Helvetica,sans-serif; }
+    .niagara-heading h2,.niagara-iframe-intro h2,.niagara-photo-intro h2 { margin:0; letter-spacing:-.048em; font-size:clamp(52px,6vw,96px); font-weight:400; line-height:.9; }
+    .niagara-copy { max-width:900px; }
+    .niagara-copy p { margin:0 0 1.2em; letter-spacing:-.012em; font-size:clamp(18px,1.4vw,23px); line-height:1.43; }
+    .niagara-copy p:last-child { margin-bottom:0; }
+    .niagara-rule { width:100%; height:1px; background:var(--niagara-line); margin:62px 0; }
+    .niagara-copy h3 { margin:0 0 26px; font-size:clamp(26px,2.4vw,40px); font-weight:400; line-height:1.08; letter-spacing:-.03em; }
 
-    .niagara-hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,.04) 42%, rgba(0,0,0,.58) 100%);
-      pointer-events: none;
-    }
+    .niagara-iframe-intro,.niagara-photo-intro { width:min(1540px,calc(100% - 84px)); margin:0 auto; padding:clamp(86px,11svh,140px) 0 65px; display:grid; grid-template-columns:minmax(260px,.72fr) minmax(500px,1.28fr); gap:clamp(70px,11vw,190px); align-items:end; }
+    .niagara-iframe-intro p,.niagara-photo-intro p { max-width:780px; margin:0; font-size:clamp(17px,1.25vw,21px); line-height:1.46; }
+    .niagara-frame-shell { width:100%; min-height:76svh; border-top:1px solid var(--niagara-line); background:#fff; position:relative; }
+    .niagara-frame-shell iframe { width:100%; height:calc(100svh - 66px); min-height:720px; border:0; display:block; background:#fff; }
+    .niagara-frame-placeholder { min-height:76svh; display:grid; place-items:center; padding:40px; color:rgba(21,23,21,.55); font:12px/1.5 Arial,Helvetica,sans-serif; text-transform:uppercase; letter-spacing:.2em; }
 
-    .niagara-hero-title {
-      position: absolute;
-      z-index: 2;
-      left: 42px;
-      bottom: 42px;
-      color: #f1f0ea;
-      text-shadow: 0 2px 20px rgba(0,0,0,.28);
-      max-width: min(1100px, calc(100% - 84px));
-    }
+    .niagara-photo-grid { width:min(1540px,calc(100% - 84px)); margin:0 auto; padding:0 0 clamp(120px,17svh,220px); display:grid; grid-template-columns:repeat(12,1fr); gap:clamp(26px,4vw,66px); align-items:start; }
+    .niagara-photo { margin:0; }
+    .niagara-photo img { width:100%; height:auto; display:block; background:#ddd; }
+    .niagara-photo:nth-child(1) { grid-column:1 / span 8; }
+    .niagara-photo:nth-child(2) { grid-column:8 / span 5; margin-top:16svh; }
+    .niagara-photo:nth-child(3) { grid-column:2 / span 6; margin-top:7svh; }
+    .niagara-photo:nth-child(4) { grid-column:7 / span 6; margin-top:12svh; }
+    .niagara-photo:nth-child(5) { grid-column:1 / span 5; margin-top:10svh; }
+    .niagara-photo:nth-child(6) { grid-column:6 / span 7; margin-top:4svh; }
+    .niagara-photo figcaption { margin-top:11px; color:rgba(21,23,21,.56); font:11px/1.45 Arial,Helvetica,sans-serif; }
 
-    .niagara-hero-title h1 {
-      margin: 0;
-      letter-spacing: -.052em;
-      font-size: clamp(58px, 9vw, 146px);
-      font-weight: 400;
-      line-height: .84;
-    }
+    .niagara-footer { width:min(1540px,calc(100% - 84px)); margin:0 auto; padding:28px 0 34px; border-top:1px solid var(--niagara-line); display:flex; justify-content:space-between; gap:24px; font-size:13px; line-height:1.4; }
 
-    .niagara-investigation {
-      width: min(1540px, calc(100% - 84px));
-      margin: 0 auto;
-      padding: clamp(110px, 15svh, 190px) 0 clamp(120px, 18svh, 220px);
-      display: grid;
-      grid-template-columns: minmax(260px, .72fr) minmax(500px, 1.28fr);
-      gap: clamp(70px, 11vw, 190px);
-      align-items: start;
-    }
-
-    .niagara-investigation-heading {
-      position: sticky;
-      top: 150px;
-    }
-
-    .niagara-kicker {
-      margin: 0 0 30px;
-      letter-spacing: .34em;
-      text-transform: uppercase;
-      color: rgba(21,23,21,.48);
-      font: 10px/1.4 Arial, Helvetica, sans-serif;
-    }
-
-    .niagara-investigation-heading h2 {
-      margin: 0;
-      max-width: 440px;
-      letter-spacing: -.048em;
-      font-size: clamp(52px, 6vw, 96px);
-      font-weight: 400;
-      line-height: .9;
-    }
-
-    .niagara-copy {
-      max-width: 900px;
-    }
-
-    .niagara-copy p {
-      margin: 0 0 1.2em;
-      letter-spacing: -.012em;
-      font-size: clamp(18px, 1.4vw, 23px);
-      line-height: 1.43;
-    }
-
-    .niagara-copy p:last-child {
-      margin-bottom: 0;
-    }
-
-    .niagara-footer {
-      width: min(1540px, calc(100% - 84px));
-      margin: 0 auto;
-      padding: 28px 0 34px;
-      border-top: 1px solid rgba(21,23,21,.22);
-      display: flex;
-      justify-content: space-between;
-      gap: 24px;
-      font-size: 13px;
-      line-height: 1.4;
-    }
-
-    .niagara-footer a {
-      position: relative;
-    }
-
-    .niagara-footer a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -3px;
-      width: 0;
-      height: 1px;
-      background: currentColor;
-      transition: width .35s cubic-bezier(.65,0,.35,1);
-    }
-
-    .niagara-footer a:hover::after,
-    .niagara-footer a:focus-visible::after {
-      width: 100%;
-    }
-
-    @media (max-width: 820px) {
-      .niagara-hero {
-        min-height: 560px;
-      }
-
-      .niagara-hero-title {
-        left: 24px;
-        bottom: 28px;
-        max-width: calc(100% - 48px);
-      }
-
-      .niagara-investigation {
-        width: calc(100% - 48px);
-        padding: 92px 0 120px;
-        grid-template-columns: 1fr;
-        gap: 62px;
-      }
-
-      .niagara-investigation-heading {
-        position: static;
-      }
-
-      .niagara-investigation-heading h2 {
-        font-size: clamp(48px, 15vw, 74px);
-      }
-
-      .niagara-copy p {
-        font-size: 18px;
-        line-height: 1.46;
-      }
-
-      .niagara-footer {
-        width: calc(100% - 48px);
-        flex-direction: column;
-      }
+    @media (max-width:820px) {
+      .niagara-hero { min-height:560px; }
+      .niagara-hero-copy { left:24px; right:24px; bottom:28px; }
+      .niagara-tabbar { width:calc(100% - 48px); }
+      .niagara-tab { min-height:58px; padding:0 18px; font-size:12px; }
+      .niagara-section,.niagara-iframe-intro,.niagara-photo-intro { width:calc(100% - 48px); }
+      .niagara-section { padding:84px 0 110px; }
+      .niagara-two-col,.niagara-iframe-intro,.niagara-photo-intro { grid-template-columns:1fr; gap:48px; }
+      .niagara-heading { position:static; }
+      .niagara-heading h2,.niagara-iframe-intro h2,.niagara-photo-intro h2 { font-size:clamp(48px,15vw,74px); }
+      .niagara-copy p { font-size:18px; line-height:1.46; }
+      .niagara-frame-shell iframe { height:calc(100svh - 58px); min-height:620px; }
+      .niagara-photo-grid { width:calc(100% - 48px); display:block; }
+      .niagara-photo { width:100%; margin:0 0 64px !important; }
+      .niagara-footer { width:calc(100% - 48px); flex-direction:column; }
     }
   </style>
 </head>
 <body class="niagara-page">
   <header class="site-header">
     <a class="wordmark" href="../index.html" aria-label="Natalia Neuhaus home">Natalia Neuhaus</a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-label="Open menu">
-      <span></span><span></span>
-    </button>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-label="Open menu"><span></span><span></span></button>
   </header>
 
   <nav class="menu-panel" aria-hidden="true">
@@ -210,43 +107,150 @@
         </div>
       </section>
     </div>
-    <div class="menu-footer">
-      <a href="../bio-contact/index.html" tabindex="-1">Bio &amp; Contact</a>
-    </div>
+    <div class="menu-footer"><a href="../bio-contact/index.html" tabindex="-1">Bio &amp; Contact</a></div>
   </nav>
 
   <main>
     <section class="niagara-hero" aria-labelledby="niagara-title">
-      <img src="../niagara-home.jpg" alt="Greetings from Niagara" />
-      <div class="niagara-hero-title">
+      <img src="https://natalianeuhaus.com/wp-content/uploads/2024/05/Neuhaus-10.jpg" alt="Niagara region, from Greetings from Niagara" fetchpriority="high" />
+      <div class="niagara-hero-copy">
+        <p class="niagara-eyebrow">Ongoing investigation</p>
         <h1 id="niagara-title">Greetings from Niagara</h1>
+        <p class="niagara-deck">A research-driven photography and multimedia project tracing the human and environmental consequences of Manhattan Project and Cold War industry across Western New York.</p>
       </div>
     </section>
 
-    <section class="niagara-investigation" aria-labelledby="investigation-title">
-      <div class="niagara-investigation-heading">
-        <p class="niagara-kicker">Greetings from Niagara</p>
-        <h2 id="investigation-title">The investigation</h2>
+    <div class="niagara-tabbar-wrap">
+      <div class="niagara-tabbar" role="tablist" aria-label="Greetings from Niagara sections">
+        <button class="niagara-tab" role="tab" id="tab-investigation" aria-controls="panel-investigation" aria-selected="true" data-tab="investigation">The Investigation</button>
+        <button class="niagara-tab" role="tab" id="tab-evidence" aria-controls="panel-evidence" aria-selected="false" data-tab="evidence">Evidence</button>
+        <button class="niagara-tab" role="tab" id="tab-surveys" aria-controls="panel-surveys" aria-selected="false" data-tab="surveys">Surveys</button>
+        <button class="niagara-tab" role="tab" id="tab-photographs" aria-controls="panel-photographs" aria-selected="false" data-tab="photographs">Photographs</button>
+        <button class="niagara-tab" role="tab" id="tab-map" aria-controls="panel-map" aria-selected="false" data-tab="map">Interactive Map</button>
       </div>
+    </div>
 
-      <div class="niagara-copy">
-        <p>The unfortunate demise of Niagara Falls is rooted in the very force that drew industry to it: the waterfalls. Abundant, inexpensive hydroelectric power accelerated industrial growth beginning in the late nineteenth century, bringing severe pollution in its wake.</p>
+    <section class="niagara-panel is-active" id="panel-investigation" role="tabpanel" aria-labelledby="tab-investigation" data-panel="investigation">
+      <div class="niagara-section niagara-two-col">
+        <div class="niagara-heading">
+          <p class="niagara-kicker">Greetings from Niagara</p>
+          <h2>The investigation</h2>
+        </div>
+        <div class="niagara-copy">
+          <p>The unfortunate demise of Niagara Falls is rooted in the very force that drew industry to it: the waterfalls. Abundant, inexpensive hydroelectric power accelerated industrial growth beginning in the late nineteenth century, bringing severe pollution in its wake.</p>
+          <p>Beginning in 1942, during the Manhattan Project and continuing through the Cold War, Niagara Falls became a major center for the experimentation, research, development, and production of atomic bomb materials. U.S. Department of Energy records identify local industry during this period as the nation’s largest production center for uranium metal from ore. The nuclear buildup left a radioactive legacy across the region, one whose consequences extend far beyond the factories where these materials were handled.</p>
+          <p>A 2022 study by Roswell Park Comprehensive Cancer Center, <em>WNY Cancer Snapshot</em>, found an increased incidence of multiple cancers in Western New York compared with state and national averages.</p>
+          <p>For decades, government studies have documented radioactive contamination across the region. Yet the relationship between that contamination and the persistently high burden of cancer and endocrine disease remains largely absent from public understanding. <em>Greetings from Niagara</em> follows that evidence across archives, industrial sites, neighborhoods, roads, waterways, and the lives of residents who continue to inhabit this landscape.</p>
+          <div class="niagara-rule"></div>
+          <h3>Following the material</h3>
+          <p>The investigation traces a regional uranium-processing chain and the movement of radioactive waste through factories, storage sites, waterways, landfills, roads, homes, and public spaces. It brings together technical reports, government records, legal documents, archival footage, oral histories, photographs, and field research so that fragments scattered across different institutions can be understood as one history.</p>
+          <p>The project remains ongoing. As records are verified, residents share testimony, and new surveys become public, the archive continues to change.</p>
+        </div>
+      </div>
+    </section>
 
-        <p>Beginning in 1942, during the Manhattan Project and continuing through the Cold War, Niagara Falls became a major center for the experimentation, research, development, and production of atomic bomb materials. U.S. Department of Energy records identify local industry during this period as the nation’s largest production center for uranium metal from ore. The nuclear buildup left a radioactive legacy across the region, one whose consequences extend far beyond the factories where these materials were handled.</p>
+    <section class="niagara-panel" id="panel-evidence" role="tabpanel" aria-labelledby="tab-evidence" data-panel="evidence" hidden>
+      <div class="niagara-iframe-intro">
+        <h2>Evidence</h2>
+        <p>Government reports, archival records, correspondence, technical documents, and other primary-source material assembled through the investigation. The archive below is the working evidence collection and remains continuously updated.</p>
+      </div>
+      <div class="niagara-frame-shell" data-frame-shell>
+        <div class="niagara-frame-placeholder">Evidence archive loads when this tab is opened</div>
+        <iframe title="Greetings from Niagara evidence archive" data-src="https://natalianeuhaus.github.io/GreetingsFromNiagaraProject/archive.html" loading="lazy"></iframe>
+      </div>
+    </section>
 
-        <p>A 2022 study by Roswell Park Comprehensive Cancer Center, <em>WNY Cancer Snapshot</em>, found an increased incidence of multiple cancers in Western New York compared with state and national averages.</p>
+    <section class="niagara-panel" id="panel-surveys" role="tabpanel" aria-labelledby="tab-surveys" data-panel="surveys" hidden>
+      <div class="niagara-iframe-intro">
+        <h2>Surveys</h2>
+        <p>Historical and current radiological surveys, property screening information, road investigations, agency updates, and resources for residents. This section points directly to the living survey record.</p>
+      </div>
+      <div class="niagara-frame-shell" data-frame-shell>
+        <div class="niagara-frame-placeholder">Survey record loads when this tab is opened</div>
+        <iframe title="Greetings from Niagara survey updates and resources" data-src="https://natalianeuhaus.github.io/GreetingsFromNiagaraProject/necra.html" loading="lazy"></iframe>
+      </div>
+    </section>
 
-        <p>For decades, government studies have documented radioactive contamination across the region. Yet the relationship between that contamination and the persistently high burden of cancer and endocrine disease remains largely absent from public understanding. <em>Greetings from Niagara</em> follows that evidence across archives, industrial sites, neighborhoods, roads, waterways, and the lives of residents who continue to inhabit this landscape.</p>
+    <section class="niagara-panel" id="panel-photographs" role="tabpanel" aria-labelledby="tab-photographs" data-panel="photographs" hidden>
+      <div class="niagara-photo-intro">
+        <h2>Photographs</h2>
+        <p>The photographic record of the landscape, neighborhoods, industrial remains, and people whose lives intersect with this history. Images load only when this tab is opened.</p>
+      </div>
+      <div class="niagara-photo-grid">
+        <figure class="niagara-photo"><img data-src="https://natalianeuhaus.com/wp-content/uploads/2024/05/Neuhaus-10.jpg" alt="Photograph from Greetings from Niagara" loading="lazy" /><figcaption>Greetings from Niagara</figcaption></figure>
+        <figure class="niagara-photo"><img data-src="https://natalianeuhaus.com/wp-content/uploads/2026/07/soccer05copy.jpg" alt="Photograph from Greetings from Niagara" loading="lazy" /><figcaption>Greetings from Niagara</figcaption></figure>
+        <figure class="niagara-photo"><img data-src="https://natalianeuhaus.com/wp-content/uploads/2024/05/so04.jpg" alt="Photograph from Greetings from Niagara" loading="lazy" /><figcaption>Greetings from Niagara</figcaption></figure>
+        <figure class="niagara-photo"><img data-src="https://natalianeuhaus.com/wp-content/uploads/2024/05/lamp-scaled.jpg" alt="Photograph from Greetings from Niagara" loading="lazy" /><figcaption>Love Canal, Niagara Falls</figcaption></figure>
+        <figure class="niagara-photo"><img data-src="https://natalianeuhaus.com/wp-content/uploads/2024/05/house-scaled.jpg" alt="Photograph from Greetings from Niagara" loading="lazy" /><figcaption>Love Canal, Niagara Falls</figcaption></figure>
+        <figure class="niagara-photo"><img data-src="https://natalianeuhaus.com/wp-content/uploads/2024/05/moss-scaled.jpg" alt="Photograph from Greetings from Niagara" loading="lazy" /><figcaption>Love Canal, Niagara Falls</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="niagara-panel" id="panel-map" role="tabpanel" aria-labelledby="tab-map" data-panel="map" hidden>
+      <div class="niagara-iframe-intro">
+        <h2>Interactive Map</h2>
+        <p>The research map brings together factories, FUSRAP sites, historical radiological anomalies, survey footprints, waterways, documented findings, remediation records, and the archival evidence behind them.</p>
+      </div>
+      <div class="niagara-frame-shell" data-frame-shell>
+        <div class="niagara-frame-placeholder">Interactive map loads when this tab is opened</div>
+        <iframe title="Greetings from Niagara interactive map" data-src="https://natalianeuhaus.github.io/GreetingsFromNiagaraProject/" loading="lazy" allow="fullscreen"></iframe>
       </div>
     </section>
   </main>
 
-  <footer class="niagara-footer">
-    <span>© Natalia Neuhaus</span>
-    <a href="#niagara-title">Back to top</a>
-  </footer>
+  <footer class="niagara-footer"><span>© Natalia Neuhaus</span><a href="#niagara-title">Back to top</a></footer>
 
   <script defer src="../assets/site.js"></script>
-  <!-- Niagara deployment refresh: 2026-08-07 -->
+  <script>
+    (() => {
+      const tabs = Array.from(document.querySelectorAll('.niagara-tab'));
+      const panels = Array.from(document.querySelectorAll('.niagara-panel'));
+      const validTabs = new Set(tabs.map(tab => tab.dataset.tab));
+
+      function loadPanel(panel) {
+        panel.querySelectorAll('iframe[data-src]').forEach(frame => {
+          if (!frame.src) frame.src = frame.dataset.src;
+          const placeholder = frame.parentElement.querySelector('.niagara-frame-placeholder');
+          if (placeholder) {
+            frame.addEventListener('load', () => placeholder.remove(), { once:true });
+          }
+        });
+        panel.querySelectorAll('img[data-src]').forEach(image => {
+          if (!image.src) image.src = image.dataset.src;
+        });
+      }
+
+      function activate(name, updateHash = true) {
+        if (!validTabs.has(name)) name = 'investigation';
+        tabs.forEach(tab => {
+          const active = tab.dataset.tab === name;
+          tab.setAttribute('aria-selected', String(active));
+          tab.tabIndex = active ? 0 : -1;
+        });
+        panels.forEach(panel => {
+          const active = panel.dataset.panel === name;
+          panel.classList.toggle('is-active', active);
+          panel.hidden = !active;
+          if (active) loadPanel(panel);
+        });
+        if (updateHash) history.replaceState(null, '', `#${name}`);
+      }
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => activate(tab.dataset.tab));
+        tab.addEventListener('keydown', event => {
+          if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+          event.preventDefault();
+          const direction = event.key === 'ArrowRight' ? 1 : -1;
+          const next = (index + direction + tabs.length) % tabs.length;
+          tabs[next].focus();
+          activate(tabs[next].dataset.tab);
+        });
+      });
+
+      window.addEventListener('hashchange', () => activate(location.hash.slice(1), false));
+      activate(location.hash.slice(1) || 'investigation', false);
+    })();
+  </script>
 </body>
 </html>
