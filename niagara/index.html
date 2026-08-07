@@ -44,6 +44,34 @@
     .niagara-rule { width:100%; height:1px; background:var(--niagara-line); margin:62px 0; }
     .niagara-copy h3 { margin:0 0 26px; font-size:clamp(26px,2.4vw,40px); font-weight:400; line-height:1.08; letter-spacing:-.03em; }
 
+    /* Investigation */
+    .investigation-story { width:min(1540px,calc(100% - 84px)); margin:0 auto; padding:clamp(92px,12svh,150px) 0 clamp(150px,20svh,260px); }
+    .investigation-opening { display:grid; grid-template-columns:minmax(260px,.72fr) minmax(500px,1.28fr); gap:clamp(70px,11vw,190px); align-items:start; padding-bottom:clamp(110px,16svh,190px); }
+    .investigation-opening .niagara-heading { top:132px; }
+    .investigation-lede { margin:0 0 1.25em; font-size:clamp(24px,2.35vw,38px); line-height:1.2; letter-spacing:-.027em; }
+    .investigation-body p { max-width:900px; margin:0 0 1.25em; font-size:clamp(18px,1.35vw,23px); line-height:1.47; letter-spacing:-.012em; }
+    .investigation-chapter { border-top:1px solid var(--niagara-line); padding:clamp(86px,12svh,150px) 0; }
+    .investigation-chapter-grid { display:grid; grid-template-columns:minmax(220px,.48fr) minmax(560px,1.52fr); gap:clamp(60px,9vw,150px); align-items:start; }
+    .investigation-chapter-meta { position:sticky; top:132px; }
+    .investigation-number { display:block; margin:0 0 20px; color:rgba(21,23,21,.42); font:10px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.24em; text-transform:uppercase; }
+    .investigation-chapter h3 { margin:0; max-width:350px; font-size:clamp(38px,4.5vw,76px); line-height:.94; font-weight:400; letter-spacing:-.045em; }
+    .investigation-chapter-copy { max-width:900px; }
+    .investigation-chapter-copy p { margin:0 0 1.2em; font-size:clamp(18px,1.35vw,23px); line-height:1.47; letter-spacing:-.012em; }
+    .investigation-stat-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-top:1px solid var(--niagara-line); border-bottom:1px solid var(--niagara-line); margin:clamp(54px,7svh,90px) 0; }
+    .investigation-stat { padding:28px 28px 30px 0; }
+    .investigation-stat + .investigation-stat { border-left:1px solid var(--niagara-line); padding-left:28px; }
+    .investigation-stat strong { display:block; margin-bottom:9px; font-size:clamp(30px,3.5vw,56px); line-height:1; font-weight:400; letter-spacing:-.04em; }
+    .investigation-stat span { display:block; max-width:240px; color:rgba(21,23,21,.62); font:11px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.08em; text-transform:uppercase; }
+    .investigation-figure { margin:clamp(58px,8svh,105px) 0 0; }
+    .investigation-figure img { width:100%; height:auto; display:block; background:#ddd; }
+    .investigation-figure figcaption,.investigation-pair figcaption { margin-top:11px; color:rgba(21,23,21,.56); font:11px/1.48 Arial,Helvetica,sans-serif; }
+    .investigation-figure--narrow { width:min(680px,76%); margin-left:auto; }
+    .investigation-pair { display:grid; grid-template-columns:1fr 1fr; gap:clamp(24px,4vw,60px); align-items:start; margin:clamp(58px,8svh,105px) 0 0; }
+    .investigation-pair figure { margin:0; }
+    .investigation-pullquote { margin:clamp(60px,8svh,100px) 0; padding:0 0 0 clamp(22px,3vw,46px); border-left:1px solid var(--niagara-ink); max-width:890px; font-size:clamp(28px,3.4vw,54px); line-height:1.12; letter-spacing:-.035em; }
+    .investigation-source { margin-top:18px; color:rgba(21,23,21,.52); font:10px/1.5 Arial,Helvetica,sans-serif; letter-spacing:.13em; text-transform:uppercase; }
+    .investigation-end { margin-top:clamp(72px,10svh,130px); max-width:1080px; font-size:clamp(34px,4.4vw,72px); line-height:1.05; letter-spacing:-.045em; }
+
     .niagara-iframe-intro,.niagara-photo-intro { width:min(1540px,calc(100% - 84px)); margin:0 auto; padding:clamp(86px,11svh,140px) 0 65px; display:grid; grid-template-columns:minmax(260px,.72fr) minmax(500px,1.28fr); gap:clamp(70px,11vw,190px); align-items:end; }
     .niagara-iframe-intro p,.niagara-photo-intro p { max-width:780px; margin:0; font-size:clamp(17px,1.25vw,21px); line-height:1.46; }
     .niagara-frame-shell { width:100%; min-height:76svh; border-top:1px solid var(--niagara-line); background:#fff; position:relative; }
@@ -68,12 +96,22 @@
       .niagara-hero-copy { left:24px; right:24px; bottom:28px; }
       .niagara-tabbar { width:calc(100% - 48px); }
       .niagara-tab { min-height:58px; padding:0 18px; font-size:12px; }
-      .niagara-section,.niagara-iframe-intro,.niagara-photo-intro { width:calc(100% - 48px); }
+      .niagara-section,.niagara-iframe-intro,.niagara-photo-intro,.investigation-story { width:calc(100% - 48px); }
       .niagara-section { padding:84px 0 110px; }
-      .niagara-two-col,.niagara-iframe-intro,.niagara-photo-intro { grid-template-columns:1fr; gap:48px; }
-      .niagara-heading { position:static; }
+      .niagara-two-col,.niagara-iframe-intro,.niagara-photo-intro,.investigation-opening,.investigation-chapter-grid { grid-template-columns:1fr; gap:48px; }
+      .niagara-heading,.investigation-chapter-meta { position:static; }
       .niagara-heading h2,.niagara-iframe-intro h2,.niagara-photo-intro h2 { font-size:clamp(48px,15vw,74px); }
       .niagara-copy p { font-size:18px; line-height:1.46; }
+      .investigation-story { padding:80px 0 130px; }
+      .investigation-opening { padding-bottom:100px; }
+      .investigation-chapter { padding:82px 0; }
+      .investigation-chapter h3 { max-width:none; font-size:clamp(44px,14vw,68px); }
+      .investigation-chapter-copy p,.investigation-body p { font-size:18px; line-height:1.48; }
+      .investigation-stat-grid { grid-template-columns:1fr; }
+      .investigation-stat { padding:24px 0; }
+      .investigation-stat + .investigation-stat { border-left:0; border-top:1px solid var(--niagara-line); padding-left:0; }
+      .investigation-pair { grid-template-columns:1fr; gap:44px; }
+      .investigation-figure--narrow { width:100%; }
       .niagara-frame-shell iframe { height:calc(100svh - 58px); min-height:620px; }
       .niagara-photo-grid { width:calc(100% - 48px); display:block; }
       .niagara-photo { width:100%; margin:0 0 64px !important; }
@@ -131,22 +169,179 @@
     </div>
 
     <section class="niagara-panel is-active" id="panel-investigation" role="tabpanel" aria-labelledby="tab-investigation" data-panel="investigation">
-      <div class="niagara-section niagara-two-col">
-        <div class="niagara-heading">
-          <p class="niagara-kicker">Greetings from Niagara</p>
-          <h2>The investigation</h2>
-        </div>
-        <div class="niagara-copy">
-          <p>The unfortunate demise of Niagara Falls is rooted in the very force that drew industry to it: the waterfalls. Abundant, inexpensive hydroelectric power accelerated industrial growth beginning in the late nineteenth century, bringing severe pollution in its wake.</p>
-          <p>Beginning in 1942, during the Manhattan Project and continuing through the Cold War, Niagara Falls became a major center for the experimentation, research, development, and production of atomic bomb materials. U.S. Department of Energy records identify local industry during this period as the nation’s largest production center for uranium metal from ore. The nuclear buildup left a radioactive legacy across the region, one whose consequences extend far beyond the factories where these materials were handled.</p>
-          <p>A 2022 study by Roswell Park Comprehensive Cancer Center, <em>WNY Cancer Snapshot</em>, found an increased incidence of multiple cancers in Western New York compared with state and national averages.</p>
-          <p>For decades, government studies have documented radioactive contamination across the region. Yet the relationship between that contamination and the persistently high burden of cancer and endocrine disease remains largely absent from public understanding. <em>Greetings from Niagara</em> follows that evidence across archives, industrial sites, neighborhoods, roads, waterways, and the lives of residents who continue to inhabit this landscape.</p>
-          <div class="niagara-rule"></div>
-          <h3>Following the material</h3>
-          <p>The investigation traces a regional uranium-processing chain and the movement of radioactive waste through factories, storage sites, waterways, landfills, roads, homes, and public spaces. It brings together technical reports, government records, legal documents, archival footage, oral histories, photographs, and field research so that fragments scattered across different institutions can be understood as one history.</p>
-          <p>The project remains ongoing. As records are verified, residents share testimony, and new surveys become public, the archive continues to change.</p>
-        </div>
-      </div>
+      <article class="investigation-story">
+        <section class="investigation-opening">
+          <div class="niagara-heading">
+            <p class="niagara-kicker">Chapter 1</p>
+            <h2>The investigation</h2>
+          </div>
+          <div class="investigation-body">
+            <p class="investigation-lede">The story begins with the same force that made Niagara Falls famous: water.</p>
+            <p>Abundant and inexpensive hydroelectric power transformed Niagara Falls into an industrial center beginning in the late nineteenth century. By the early 1940s, the city was both America’s honeymoon capital and one of the country’s most important manufacturing hubs.</p>
+            <p>Beginning in 1942, that industrial network became deeply involved in the Manhattan Project and later Cold War nuclear programs. U.S. Department of Energy records describe Niagara-area industry as a major center for converting uranium ore into the materials needed for the atomic program. The work left behind a radiological legacy that extended far beyond factory property lines.</p>
+            <p>A 2022 Roswell Park Comprehensive Cancer Center report, <em>WNY Cancer Snapshot</em>, found that cancer incidence in Western New York remained higher than state and national rates for multiple cancers. This project asks what has remained outside the public narrative: how radioactive material moved through this landscape, where it went, and what communities were told—or not told—about it.</p>
+          </div>
+        </section>
+
+        <section class="investigation-chapter" id="atomic-niagara">
+          <div class="investigation-chapter-grid">
+            <div class="investigation-chapter-meta">
+              <span class="investigation-number">01 · 1942</span>
+              <h3>Atomic Niagara</h3>
+            </div>
+            <div class="investigation-chapter-copy">
+              <p>Hooker Electrochemical Company, Union Carbide and its subsidiaries Linde and Electromet, Carborundum, and other regional companies became part of a wartime production network built around uranium. Factories refined ore, converted uranium compounds into metal, recovered uranium from waste, fabricated rods and components, and experimented with processes designed to maximize yield.</p>
+              <p>General Leslie Groves, who directed the Manhattan Project, cultivated relationships with industrial operators whose existing laboratories, power supply, rail access, and culture of secrecy made Western New York particularly useful. That secrecy also meant that generations of workers handled radioactive materials without a public understanding of the risks or the full scope of the work.</p>
+
+              <figure class="investigation-figure investigation-figure--narrow">
+                <img src="https://natalianeuhaus.com/wp-content/uploads/2024/05/letter_award.jpg" alt="Archival Manhattan Project-era recognition connected to Niagara industry" loading="lazy" />
+                <figcaption>Archival evidence of Niagara industry’s wartime involvement.</figcaption>
+              </figure>
+            </div>
+          </div>
+        </section>
+
+        <section class="investigation-chapter" id="loow-nfss">
+          <div class="investigation-chapter-grid">
+            <div class="investigation-chapter-meta">
+              <span class="investigation-number">02 · Storage</span>
+              <h3>LOOW / NFSS</h3>
+            </div>
+            <div class="investigation-chapter-copy">
+              <p>Much of the radioactive waste generated by the regional uranium program was transported to the Lake Ontario Ordnance Works, or LOOW, a vast federal reservation near Lewiston. Built during World War II, the site was used for storage, handling, burial, repackaging, and disposal of radioactive residues and contaminated equipment from Manhattan Project and Atomic Energy Commission operations.</p>
+              <p>The site later became the Niagara Falls Storage Site. In 1986, an interim waste containment structure was built to consolidate a large volume of radioactive material. The word <em>interim</em> matters: the storage site remains part of an unfinished federal cleanup story, surrounded by communities, farms, roads, and schools.</p>
+
+              <figure class="investigation-figure">
+                <img src="https://natalianeuhaus.com/wp-content/uploads/2024/05/NFSS-copy-1.jpg" alt="Niagara Falls Storage Site archival material" loading="lazy" />
+                <figcaption>Niagara Falls Storage Site / former Lake Ontario Ordnance Works.</figcaption>
+              </figure>
+            </div>
+          </div>
+        </section>
+
+        <section class="investigation-chapter" id="sludge-slag">
+          <div class="investigation-chapter-grid">
+            <div class="investigation-chapter-meta">
+              <span class="investigation-number">03 · Waste pathways</span>
+              <h3>Sludge + slag</h3>
+            </div>
+            <div class="investigation-chapter-copy">
+              <p>The waste did not remain neatly contained inside federal storage or factory boundaries. A New York State Assembly investigation following Love Canal documented millions of gallons of radioactively contaminated chemical waste entering wells, sewers, and drainage systems connected to the region’s waterways.</p>
+              <p>Solid radioactive residues created another pathway. Slag and contaminated fill accumulated at factories and storage areas. Historical testimony and later investigations describe workers taking material home for driveways and foundations, while trucking and construction practices allowed similar material to move through the region as inexpensive fill.</p>
+
+              <div class="investigation-stat-grid" aria-label="Key findings from the investigation">
+                <div class="investigation-stat"><strong>37M</strong><span>gallons of contaminated chemical waste documented in the state investigation</span></div>
+                <div class="investigation-stat"><strong>1940s+</strong><span>decades during which radioactive material moved through industrial and federal sites</span></div>
+                <div class="investigation-stat"><strong>Regional</strong><span>roads, homes, waterways and construction fill became part of the disposal story</span></div>
+              </div>
+
+              <div class="investigation-pair">
+                <figure>
+                  <img src="https://natalianeuhaus.com/wp-content/uploads/2024/05/l2-e1715296165424-711x1024.jpg" alt="Archival correspondence concerning waste disposal" loading="lazy" />
+                  <figcaption>Correspondence between Manhattan Project regional personnel and Linde management concerning waste disposal.</figcaption>
+                </figure>
+                <figure>
+                  <img src="https://natalianeuhaus.com/wp-content/uploads/2024/05/l1-e1715296057999-689x1024.jpg" alt="Archival correspondence concerning waste disposal" loading="lazy" />
+                  <figcaption>Archival correspondence, continued.</figcaption>
+                </figure>
+              </div>
+
+              <div class="investigation-pair">
+                <figure>
+                  <img src="https://natalianeuhaus.com/wp-content/uploads/2024/05/gravy-scaled-copy.jpg" alt="Federal Connection Report material about radioactive gravel" loading="lazy" />
+                  <figcaption><em>The Federal Connection Report</em> documented accounts of workers taking radioactive gravel from LOOW for home improvements.</figcaption>
+                </figure>
+                <figure>
+                  <img src="https://natalianeuhaus.com/wp-content/uploads/2024/05/detective-scaled-copy-1971x1024-copy.jpg" alt="Private investigator report about radioactive construction fill" loading="lazy" />
+                  <figcaption>A private investigator’s report traced radioactive slag into commercial construction fill.</figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="investigation-chapter" id="uranium-chain">
+          <div class="investigation-chapter-grid">
+            <div class="investigation-chapter-meta">
+              <span class="investigation-number">04 · Production</span>
+              <h3>The uranium chain</h3>
+            </div>
+            <div class="investigation-chapter-copy">
+              <p>The material moved through a chain of specialized facilities. Linde in Tonawanda refined uranium ore into uranium compounds including uranium tetrafluoride, the green powder commonly called “green salt.” Electromet in Niagara Falls converted that material into uranium metal, producing radioactive C-2 slag as a byproduct. Hooker Chemical treated slag to recover uranium that remained in the waste.</p>
+              <p>Other facilities carried the process forward. Regional steel plants rolled and fabricated uranium components, while Carborundum participated in uranium-related research and later nuclear-fuel development. Bell Aerospace’s weapons work overlapped geographically with this expanding network of nuclear-material research.</p>
+              <p>This is why the project does not treat a single factory or dump as the whole story. Each process created a different waste stream, and those waste streams moved through shared rail lines, trucking routes, sewers, waterways, storage areas, landfills, and neighborhoods.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="investigation-chapter" id="historical-surveys">
+          <div class="investigation-chapter-grid">
+            <div class="investigation-chapter-meta">
+              <span class="investigation-number">05 · 1979—present</span>
+              <h3>The surveys</h3>
+            </div>
+            <div class="investigation-chapter-copy">
+              <p>In 1979, Oak Ridge National Laboratory conducted an aerial radiological survey of Niagara County and identified numerous areas of elevated radiation. A later mobile survey in the mid-1980s investigated locations across Niagara Falls and documented more than one hundred elevated gamma-radiation locations.</p>
+              <p>The limits of those surveys became clearer over time. New radiological findings continued to appear during road work, construction, and site investigations, including locations near the Robert Moses Parkway, the Whirlpool Bridge area, Niagara Falls State Park, and properties on Main Street.</p>
+              <p>The pattern raised a central question that drives this project: if radioactive industrial material was repeatedly moved and reused as fill, how much of the city was never comprehensively surveyed?</p>
+
+              <div class="investigation-pair">
+                <figure>
+                  <img src="https://natalianeuhaus.com/wp-content/uploads/2024/05/rvgeiger-1971x1024.jpg" alt="Historical mobile radiological survey vehicle" loading="lazy" />
+                  <figcaption>Historical mobile radiological survey work in Niagara Falls.</figcaption>
+                </figure>
+                <figure>
+                  <img src="https://natalianeuhaus.com/wp-content/uploads/2024/05/resultsnf-scaled-copy.jpg" alt="Historical Niagara radiological survey results" loading="lazy" />
+                  <figcaption>Survey results documenting elevated locations across the Niagara Falls area.</figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="investigation-chapter" id="fusrap-love-canal">
+          <div class="investigation-chapter-grid">
+            <div class="investigation-chapter-meta">
+              <span class="investigation-number">06 · Remediation</span>
+              <h3>FUSRAP + Love Canal</h3>
+            </div>
+            <div class="investigation-chapter-copy">
+              <p>By the 1970s, the federal government had begun identifying former Manhattan Project and Atomic Energy Commission sites that required radiological investigation and cleanup. That work became the Formerly Utilized Sites Remedial Action Program, or FUSRAP. Western New York contains an unusually dense concentration of sites connected to this history.</p>
+              <p>At almost the same moment, Love Canal forced the country to confront what industrial disposal could mean for a residential community. Residents organized around illnesses, miscarriages, birth defects, and chemicals surfacing around homes and a school built beside a former industrial dump. Their campaign helped propel the creation of the federal Superfund program.</p>
+
+              <figure class="investigation-figure investigation-figure--narrow">
+                <img src="https://natalianeuhaus.com/wp-content/uploads/2024/05/lamp-scaled.jpg" alt="Photograph from the former Love Canal neighborhood" loading="lazy" />
+                <figcaption>What remains of Love Canal, Niagara Falls.</figcaption>
+              </figure>
+            </div>
+          </div>
+        </section>
+
+        <section class="investigation-chapter" id="federal-connection">
+          <div class="investigation-chapter-grid">
+            <div class="investigation-chapter-meta">
+              <span class="investigation-number">07 · The record</span>
+              <h3>The Federal Connection</h3>
+            </div>
+            <div class="investigation-chapter-copy">
+              <p>After Love Canal, the New York State Assembly created a special task force to investigate claims that military and federal activities were connected to waste disposal in Niagara Falls. The resulting 293-page report, <em>The Federal Connection</em>, documented relationships among the U.S. Army, the Manhattan Engineer District, federal contractors, and the region’s chemical and metallurgical industries.</p>
+
+              <blockquote class="investigation-pullquote">Love Canal and federal involvement were merely the proverbial tip of the iceberg.</blockquote>
+              <p class="investigation-source"><em>The Federal Connection Report</em>, page 20</p>
+
+              <p><em>Greetings from Niagara</em> builds on that investigation with records that were unavailable or difficult to access when the state report was produced: worker-dose reconstruction files, FUSRAP records, environmental investigations, archival footage, historical surveys, court and legislative records, and hundreds of government documents scattered across multiple agencies.</p>
+              <p>The project follows those fragments across factories, roads, waterways, homes, public spaces, and the people who have lived with the consequences. It is an attempt to reconstruct a regional history that was divided among agencies and hidden behind industrial and military secrecy.</p>
+
+              <figure class="investigation-figure">
+                <img src="https://natalianeuhaus.com/wp-content/uploads/2024/05/karen3-scaled.jpg" alt="Archival material from the Niagara investigation" loading="lazy" />
+                <figcaption>The investigation continues from the documentary record assembled after Love Canal.</figcaption>
+              </figure>
+
+              <p class="investigation-end">What follows is the unraveling of a national story with consequences that remain embedded in the landscape of Western New York.</p>
+            </div>
+          </div>
+        </section>
+      </article>
     </section>
 
     <section class="niagara-panel" id="panel-evidence" role="tabpanel" aria-labelledby="tab-evidence" data-panel="evidence" hidden>
