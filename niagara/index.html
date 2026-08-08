@@ -44,7 +44,6 @@
     .niagara-tab:nth-child(4) .niagara-tab-label { --niagara-enter-y:calc(-100svh + 96px); --niagara-enter-delay:.98s; }
     .niagara-tab:nth-child(5) .niagara-tab-label { --niagara-enter-y:calc(-100svh + 62px); --niagara-enter-delay:1.14s; }
     .niagara-tab-indicator { position:absolute; z-index:2; left:0; top:10px; width:7px; height:7px; border-radius:50%; background:var(--niagara-red); opacity:0; transform:translateX(0); transition:transform .3s cubic-bezier(.65,0,.35,1),opacity .2s ease; animation:niagara-start-hint 1s ease-in-out 7.25s infinite both; pointer-events:none; }
-    body.niagara-has-chosen .niagara-tab-indicator { animation:none; opacity:1; }
     @keyframes niagara-tabbar-in { from { opacity:0; } to { opacity:1; } }
     @keyframes niagara-tab-label-in { from { opacity:0; transform:translateY(var(--niagara-enter-y,calc(-100svh + 72px))); } 12% { opacity:1; } to { opacity:1; transform:translateY(0); } }
     @keyframes niagara-start-hint { 0%,100% { opacity:0; } 50% { opacity:1; } }
@@ -473,7 +472,6 @@
 
       function activate(name, updateHash = true, animateIndicator = true, scrollToContent = false) {
         if (!validTabs.has(name)) name = 'investigation';
-        if (scrollToContent) page.classList.add('niagara-has-chosen');
         let activeTab = null;
         tabs.forEach(tab => {
           const active = tab.dataset.tab === name;
