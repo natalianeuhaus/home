@@ -89,6 +89,59 @@
     .investigation-source { margin-top:18px; color:rgba(21,23,21,.52); font:10px/1.5 Arial,Helvetica,sans-serif; letter-spacing:.13em; text-transform:uppercase; }
     .investigation-end { margin-top:clamp(72px,10svh,130px); max-width:1080px; font-size:clamp(34px,4.4vw,72px); line-height:1.05; letter-spacing:-.045em; }
 
+    /* Health record */
+    .health-record { border-top:1px solid var(--niagara-line); padding:clamp(92px,12svh,150px) 0 clamp(120px,17svh,210px); }
+    .health-record-grid { display:grid; grid-template-columns:minmax(220px,.48fr) minmax(560px,1.52fr); gap:clamp(60px,9vw,150px); align-items:start; }
+    .health-record-meta { position:sticky; top:132px; }
+    .health-record-meta h3 { margin:0; max-width:420px; font-size:clamp(38px,4.5vw,76px); line-height:.94; font-weight:400; letter-spacing:-.045em; }
+    .health-record-copy { max-width:920px; }
+    .health-record-lede { margin:0; font-size:clamp(23px,2.2vw,36px); line-height:1.25; letter-spacing:-.025em; }
+    .health-record-note { margin:26px 0 0; max-width:820px; color:rgba(21,23,21,.58); font:11px/1.55 Arial,Helvetica,sans-serif; }
+    .health-record-note a { border-bottom:1px solid rgba(21,23,21,.30); }
+    .health-quote-stack { margin-top:clamp(72px,10svh,120px); border-bottom:1px solid var(--niagara-line); }
+    .health-quote { margin:0; padding:clamp(50px,7svh,86px) 0; border-top:1px solid var(--niagara-line); }
+    .health-quote blockquote { margin:0; max-width:940px; font-size:clamp(30px,3.6vw,58px); line-height:1.12; letter-spacing:-.035em; }
+    .health-quote figcaption { margin-top:24px; color:rgba(21,23,21,.52); font:10px/1.5 Arial,Helvetica,sans-serif; letter-spacing:.13em; text-transform:uppercase; }
+    .health-stat-pair { display:grid; grid-template-columns:1fr 1fr; border-bottom:1px solid var(--niagara-line); }
+    .health-stat { padding:36px 36px 40px 0; }
+    .health-stat + .health-stat { border-left:1px solid var(--niagara-line); padding-left:36px; }
+    .health-stat strong { display:block; margin-bottom:12px; color:var(--niagara-red); font-size:clamp(46px,6vw,92px); line-height:.88; font-weight:400; letter-spacing:-.055em; }
+    .health-stat span { display:block; max-width:360px; font-size:clamp(16px,1.2vw,20px); line-height:1.4; }
+    .health-stat small { display:block; margin-top:14px; color:rgba(21,23,21,.48); font:9px/1.5 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
+
+    .health-archive { margin-top:clamp(92px,13svh,160px); padding:clamp(38px,5vw,76px); color:#f1f0ea; background:#151715; overflow:hidden; }
+    .health-archive-header { display:flex; justify-content:space-between; align-items:end; gap:30px; padding-bottom:28px; border-bottom:1px solid rgba(241,240,234,.22); }
+    .health-archive-header h4 { margin:0; font-size:clamp(28px,3vw,48px); font-weight:400; letter-spacing:-.035em; }
+    .health-archive-header p { margin:0; color:rgba(241,240,234,.58); font:9px/1.5 Arial,Helvetica,sans-serif; letter-spacing:.17em; text-transform:uppercase; }
+    .health-archive-track { display:flex; gap:clamp(44px,7vw,110px); overflow-x:auto; overscroll-behavior-inline:contain; scroll-snap-type:x mandatory; scrollbar-color:#440806 rgba(241,240,234,.18); scrollbar-width:thin; padding:clamp(52px,7svh,86px) 0 28px; cursor:ew-resize; }
+    .health-archive-track::-webkit-scrollbar { height:3px; }
+    .health-archive-track::-webkit-scrollbar-track { background:rgba(241,240,234,.18); }
+    .health-archive-track::-webkit-scrollbar-thumb { background:#440806; }
+    .health-archive-card { flex:0 0 min(1080px,82vw); min-width:0; display:grid; grid-template-columns:minmax(320px,.9fr) minmax(250px,.55fr); align-items:end; gap:clamp(36px,6vw,86px); color:inherit; scroll-snap-align:start; }
+    .health-archive-paper { aspect-ratio:8.5/11; width:min(520px,100%); max-height:68svh; display:grid; place-items:center; padding:38px; color:#151715; background:#f1f0ea; box-shadow:0 20px 48px rgba(0,0,0,.28); text-align:center; }
+    .health-archive-paper span { display:block; margin-bottom:18px; color:#440806; font:10px/1.5 Arial,Helvetica,sans-serif; letter-spacing:.19em; text-transform:uppercase; }
+    .health-archive-paper strong { display:block; font-size:clamp(23px,2.1vw,36px); line-height:1.15; font-weight:400; letter-spacing:-.025em; }
+    .health-archive-paper small { display:block; margin-top:20px; color:rgba(21,23,21,.48); font:9px/1.5 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
+    .health-archive-caption { padding-bottom:4px; }
+    .health-archive-index { display:block; margin-bottom:18px; color:rgba(241,240,234,.46); font:9px/1.5 Arial,Helvetica,sans-serif; letter-spacing:.18em; text-transform:uppercase; }
+    .health-archive-caption h5 { margin:0; font-size:clamp(26px,2.7vw,44px); line-height:1.05; font-weight:400; letter-spacing:-.035em; }
+    .health-archive-caption p { margin:18px 0 0; color:rgba(241,240,234,.66); font-size:15px; line-height:1.5; }
+    .health-archive-caption em { display:inline-block; margin-top:24px; padding-bottom:4px; border-bottom:1px solid rgba(241,240,234,.40); font:10px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; font-style:normal; }
+    @media (max-width:820px) {
+      .health-record-grid { grid-template-columns:1fr; gap:48px; }
+      .health-record-meta { position:static; }
+      .health-record-meta h3 { max-width:none; font-size:clamp(44px,14vw,68px); }
+      .health-record-lede { font-size:22px; line-height:1.3; }
+      .health-stat-pair { grid-template-columns:1fr; }
+      .health-stat { padding:30px 0 34px; }
+      .health-stat + .health-stat { border-left:0; border-top:1px solid var(--niagara-line); padding-left:0; }
+      .health-archive { width:100vw; margin-left:calc(50% - 50vw); padding:32px 24px 44px; }
+      .health-archive-header { align-items:start; flex-direction:column; }
+      .health-archive-card { flex-basis:86vw; grid-template-columns:1fr; align-items:start; gap:34px; }
+      .health-archive-paper { width:100%; max-height:none; padding:30px; }
+      .health-archive-caption { padding-bottom:18px; }
+    }
+
     .niagara-iframe-intro,.niagara-photo-intro { width:min(1540px,calc(100% - 84px)); margin:0 auto; padding:clamp(86px,11svh,140px) 0 65px; display:grid; grid-template-columns:minmax(260px,.72fr) minmax(500px,1.28fr); gap:clamp(70px,11vw,190px); align-items:end; }
     .niagara-iframe-intro p,.niagara-photo-intro p { max-width:780px; margin:0; font-size:clamp(17px,1.25vw,21px); line-height:1.46; }
     .niagara-frame-shell { width:100%; min-height:76svh; border-top:1px solid var(--niagara-line); background:#fff; position:relative; }
@@ -207,8 +260,76 @@
           <div class="investigation-body">
             <p class="investigation-lede">The unfortunate demise of Niagara Falls is actually based on what attracts its tourists year after year: its waterfalls. Niagara Falls has been the source of abundant and cheap hydroelectric power. The city’s industrialization began as early as 1875, when the first hydroelectric mill began operating. By 1892, the city had undergone considerable industrialization, resulting in significant pollution as a direct consequence.</p>
             <p>Since 1942, throughout the Manhattan Project and into the Cold War era, Niagara Falls was the premier city for experimentation, research, development, and production of atomic bomb materials (i.e. radioactive.) According to U.S. Department of Energy records, Niagara Falls industry during that period was the largest production center for uranium metal-from-ore in the nation. The city’s involvement in the Manhattan Project and the nuclear buildup that came after left a radioactive scar on the region. For thousands of years, this area will face the consequences of radioactive contamination. No other area in the world, not even Chornobyl’s exclusion zone, is comparable. It’s no accident that cancer rates in this area of western New York have remained disturbingly high for the past 40 years and are the highest in the U.S.</p>
-            <p>A 2022 study conducted by Roswell Park Comprehensive Cancer Center at the University at Buffalo, a renowned cancer research institution, titled “WNY Cancer Snapshot,” revealed an increased incidence of multiple cancers in the region compared to state and national averages.</p>
-            <p>This area of Western New York has witnessed its fair share of government studies, particularly those regarding radioactive contamination. Despite recent research suggesting that environmental factors, such as ionizing radiation, rather than genetic ones, are the primary causes of most cancers, these findings, which remain largely unknown, fail to address any probable connection between radioactive contamination and the disturbingly high rates of cancer and endocrine diseases.</p>
+          </div>
+        </section>
+
+        <section class="health-record" id="health-record">
+          <div class="health-record-grid">
+            <div class="health-record-meta">
+              <span class="investigation-number">Health record</span>
+              <h3>What the studies did not ask</h3>
+            </div>
+            <div class="health-record-copy">
+              <p class="health-record-lede">Western New York has been the subject of numerous government studies, many focused on radioactive contamination. Yet these investigations have repeatedly stopped short of addressing the question most urgent to the people who live here: whether decades of exposure may be connected to the region’s disturbingly high rates of cancer and endocrine disease. Most cancers are not caused by inherited genetic changes, and ionizing radiation is a known carcinogen. Still, the possible relationship between radioactive contamination and illness in this region remains largely unexamined.</p>
+              <p class="health-record-note">The National Cancer Institute estimates that inherited genetic changes account for approximately 5–10% of cancers. <a href="https://www.cancer.gov/about-cancer/causes-prevention/genetics" target="_blank" rel="noopener">National Cancer Institute ↗</a></p>
+
+              <div class="health-quote-stack">
+                <figure class="health-quote">
+                  <blockquote>“Cancer incidence generally remains higher in this region than in the state and nationwide.”</blockquote>
+                  <figcaption>Roswell Park Comprehensive Cancer Center · WNY Cancer Snapshot · 2022</figcaption>
+                </figure>
+                <figure class="health-quote">
+                  <blockquote>“The presence of cancer casts a pall over those who live and work here.”</blockquote>
+                  <figcaption>Joseph A. Ruffolo · President &amp; CEO, Niagara Falls Memorial Medical Center</figcaption>
+                </figure>
+              </div>
+
+              <div class="health-stat-pair" aria-label="Selected Western New York cancer findings">
+                <div class="health-stat">
+                  <strong>36%</strong>
+                  <span>Approximate rise in lung-cancer cases in Niagara County over four decades.</span>
+                  <small>Niagara Falls Memorial Medical Center / New York State health data</small>
+                </div>
+                <div class="health-stat">
+                  <strong>9 of 10</strong>
+                  <span>Most deadly cancers had higher death rates in Western New York than in the state and/or nationwide, 2015–2019.</span>
+                  <small>Roswell Park · WNY Cancer Snapshot · 2022</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="health-archive" aria-labelledby="health-archive-title">
+            <div class="health-archive-header">
+              <h4 id="health-archive-title">Health archive</h4>
+              <p>Scroll sideways through the evidence</p>
+            </div>
+            <div class="health-archive-track" tabindex="0" aria-label="Health surveys and newspaper clippings">
+              <a class="health-archive-card" href="https://www.roswellpark.org/sites/default/files/2022-09/wny-cancer-snapshot-roswell-park-september-202238.pdf" target="_blank" rel="noopener">
+                <div class="health-archive-paper"><div><span>Survey placeholder</span><strong>WNY Cancer Snapshot</strong><small>Document image to be added</small></div></div>
+                <div class="health-archive-caption"><span class="health-archive-index">01 · 2022</span><h5>Roswell Park cancer findings</h5><p>Regional cancer incidence, mortality, disparities, and trends through 2019.</p><em>View source ↗</em></div>
+              </a>
+              <a class="health-archive-card" href="https://www.health.ny.gov/statistics/cancer/registry/vol3/v3niagara.htm" target="_blank" rel="noopener">
+                <div class="health-archive-paper"><div><span>State data placeholder</span><strong>Cancer Incidence and Mortality Trends</strong><small>Document image to be added</small></div></div>
+                <div class="health-archive-caption"><span class="health-archive-index">02 · 1976–2020</span><h5>Niagara County cancer trends</h5><p>County-level incidence and mortality data from the New York State Cancer Registry.</p><em>View source ↗</em></div>
+              </a>
+              <a class="health-archive-card" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2721871/" target="_blank" rel="noopener">
+                <div class="health-archive-paper"><div><span>Health study placeholder</span><strong>Cancer Incidence Among Love Canal Residents</strong><small>Document image to be added</small></div></div>
+                <div class="health-archive-caption"><span class="health-archive-index">03 · Epidemiology</span><h5>Love Canal resident study</h5><p>A peer-reviewed study of cancer incidence among former Love Canal residents.</p><em>View source ↗</em></div>
+              </a>
+              <a class="health-archive-card" href="https://www.lrb.usace.army.mil/Portals/45/docs/FUSRAP/NFSS/Online%20AR/08/NFSS_08.08_0148_a.pdf?ver=2020-07-13-114634-447" target="_blank" rel="noopener">
+                <div class="health-archive-paper"><div><span>Newspaper placeholder</span><strong>Niagara Cancer Statistics</strong><small>Archival clipping image to be added</small></div></div>
+                <div class="health-archive-caption"><span class="health-archive-index">04 · 1983</span><h5>Niagara Gazette clipping</h5><p>Historical reporting on cancer statistics preserved in the federal NFSS administrative record.</p><em>View source ↗</em></div>
+              </a>
+              <a class="health-archive-card" href="https://www.lrb.usace.army.mil/Portals/45/docs/FUSRAP/NFSS/Online%20AR/08/NFSS_08.08_0626_a.pdf?ver=2020-07-13-120519-743" target="_blank" rel="noopener">
+                <div class="health-archive-paper"><div><span>Newspaper placeholder</span><strong>Cancer Study</strong><small>Archival clipping image to be added</small></div></div>
+                <div class="health-archive-caption"><span class="health-archive-index">05 · Public record</span><h5>Regional cancer-study clipping</h5><p>Newspaper coverage preserved inside the Niagara Falls Storage Site archive.</p><em>View source ↗</em></div>
+              </a>
+              <a class="health-archive-card" href="https://www.wbfo.org/health-wellness/2019-11-21/new-oncology-center-to-attack-niagara-countys-highest-rate-of-cancer-in-nys" target="_blank" rel="noopener">
+                <div class="health-archive-paper"><div><span>News placeholder</span><strong>Niagara County’s Cancer Burden</strong><small>Clipping image to be added</small></div></div>
+                <div class="health-archive-caption"><span class="health-archive-index">06 · 2019</span><h5>Local reporting</h5><p>Coverage of Niagara County’s cancer burden and the expansion of oncology services.</p><em>View source ↗</em></div>
+              </a>
+            </div>
           </div>
         </section>
 
@@ -507,6 +628,18 @@
           activate(tabs[next].dataset.tab, true, true, true);
         });
       });
+
+      const healthArchiveTrack = document.querySelector('.health-archive-track');
+      if (healthArchiveTrack) {
+        healthArchiveTrack.addEventListener('wheel', event => {
+          if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+          const atStart = healthArchiveTrack.scrollLeft <= 0;
+          const atEnd = healthArchiveTrack.scrollLeft + healthArchiveTrack.clientWidth >= healthArchiveTrack.scrollWidth - 1;
+          if ((atStart && event.deltaY < 0) || (atEnd && event.deltaY > 0)) return;
+          event.preventDefault();
+          healthArchiveTrack.scrollLeft += event.deltaY;
+        }, { passive:false });
+      }
 
       window.addEventListener('scroll', updateStickyHeader, { passive:true });
       window.addEventListener('resize', () => {
