@@ -35,12 +35,8 @@
     .niagara-tab { appearance:none; flex:0 0 auto; min-height:66px; padding:0 27px; position:relative; border:0; background:transparent; color:var(--niagara-ink); cursor:pointer; white-space:nowrap; font:13px/1.2 Georgia,"Times New Roman",serif; opacity:.78; transition:opacity .2s ease,color .22s ease; }
     .niagara-tab:first-child { padding-left:0; }
     .niagara-tab + .niagara-tab::before { content:"|"; position:absolute; left:0; top:50%; transform:translate(-50%,-52%); color:var(--niagara-ink); opacity:.30; pointer-events:none; font:12px/1 Georgia,"Times New Roman",serif; }
-    .niagara-tab::after { content:""; position:absolute; left:27px; right:27px; bottom:0; height:1px; background:var(--niagara-red); transform:scaleX(0); transform-origin:left center; opacity:.68; transition:transform .26s cubic-bezier(.65,0,.35,1); pointer-events:none; }
-    .niagara-tab:first-child::after { left:0; }
     .niagara-tab:hover,.niagara-tab:focus-visible { opacity:1; color:var(--niagara-red); }
-    .niagara-tab:hover::after,.niagara-tab:focus-visible::after { transform:scaleX(1); }
     .niagara-tab[aria-selected="true"] { opacity:1; color:var(--niagara-red); }
-    .niagara-tab[aria-selected="true"]::after { transform:scaleX(0); }
     .niagara-tab-label { display:inline-block; opacity:0; transform:translateY(var(--niagara-enter-y,calc(-100svh + 72px))); animation:niagara-tab-label-in 6s cubic-bezier(.16,.78,.22,1) forwards; animation-delay:var(--niagara-enter-delay,.46s); }
     .niagara-tab:first-child .niagara-tab-label { position:relative; }
     .niagara-tab:first-child .niagara-tab-label::after { content:""; position:absolute; left:50%; top:-12px; width:7px; height:7px; border-radius:50%; background:#440806; opacity:0; transform:translateX(-50%); animation:niagara-start-hint 1s ease-in-out 7.25s 8 both; pointer-events:none; }
@@ -49,7 +45,7 @@
     .niagara-tab:nth-child(3) .niagara-tab-label { --niagara-enter-y:calc(-100svh + 48px); --niagara-enter-delay:.80s; }
     .niagara-tab:nth-child(4) .niagara-tab-label { --niagara-enter-y:calc(-100svh + 96px); --niagara-enter-delay:.98s; }
     .niagara-tab:nth-child(5) .niagara-tab-label { --niagara-enter-y:calc(-100svh + 62px); --niagara-enter-delay:1.14s; }
-    .niagara-tab-indicator { position:absolute; z-index:2; left:0; bottom:0; height:2px; width:0; background:var(--niagara-red); opacity:0; transform:translateX(0); transition:transform .3s cubic-bezier(.65,0,.35,1),width .3s cubic-bezier(.65,0,.35,1); animation:niagara-indicator-in .55s ease-out 4.95s forwards; pointer-events:none; }
+    .niagara-tab-indicator { position:absolute; z-index:2; left:0; top:10px; width:7px; height:7px; border-radius:50%; background:var(--niagara-red); opacity:0; transform:translateX(0); transition:transform .3s cubic-bezier(.65,0,.35,1); animation:niagara-indicator-in .3s ease-out 15.25s forwards; pointer-events:none; }
     @keyframes niagara-tabbar-in { from { opacity:0; } to { opacity:1; } }
     @keyframes niagara-tab-label-in { from { opacity:0; transform:translateY(var(--niagara-enter-y,calc(-100svh + 72px))); } 12% { opacity:1; } to { opacity:1; transform:translateY(0); } }
     @keyframes niagara-start-hint { 0%,100% { opacity:0; } 50% { opacity:1; } }
@@ -449,13 +445,10 @@
 
       function moveIndicator(tab, animate = true) {
         if (!tab) return;
-        const styles = getComputedStyle(tab);
-        const leftPad = parseFloat(styles.paddingLeft) || 0;
-        const rightPad = parseFloat(styles.paddingRight) || 0;
-        const width = Math.max(0, tab.offsetWidth - leftPad - rightPad);
+        const label = tab.querySelector('.niagara-tab-label');
+        const center = tab.offsetLeft + (label ? label.offsetLeft + label.offsetWidth / 2 : tab.offsetWidth / 2);
         if (!animate) indicator.style.transition = 'none';
-        indicator.style.width = `${width}px`;
-        indicator.style.transform = `translateX(${tab.offsetLeft + leftPad}px)`;
+        indicator.style.transform = `translateX(${center - indicator.offsetWidth / 2}px)`;
         if (!animate) requestAnimationFrame(() => { indicator.style.transition = ''; });
       }
 
@@ -502,7 +495,13 @@
         if (scrollToContent) requestAnimationFrame(scrollTabsToTop);
       }
 
+      const activeTab = () => tabs.find(tab => tab.getAttribute('aria-selected') === 'true') || tabs[0];
+
       tabs.forEach((tab, index) => {
+        tab.addEventListener('mouseenter', () => moveIndicator(tab, true));
+        tab.addEventListener('mouseleave', () => moveIndicator(activeTab(), true));
+        tab.addEventListener('focus', () => moveIndicator(tab, true));
+        tab.addEventListener('blur', () => moveIndicator(activeTab(), true));
         tab.addEventListener('click', () => activate(tab.dataset.tab, true, true, true));
         tab.addEventListener('keydown', event => {
           if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
