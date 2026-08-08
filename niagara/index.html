@@ -24,12 +24,18 @@
     .niagara-deck { margin:25px 0 0; max-width:760px; font-size:clamp(17px,1.55vw,24px); line-height:1.35; }
 
     .niagara-tabbar-wrap { position:sticky; top:0; z-index:24; background:rgba(241,240,234,.96); backdrop-filter:blur(12px); border-bottom:1px solid var(--niagara-line); }
-    .niagara-tabbar { width:min(1540px,calc(100% - 84px)); margin:0 auto; display:flex; align-items:stretch; overflow-x:auto; scrollbar-width:none; }
+    .niagara-tabbar { width:min(1540px,calc(100% - 84px)); margin:0 auto; display:flex; align-items:stretch; overflow-x:auto; scrollbar-width:none; position:relative; }
     .niagara-tabbar::-webkit-scrollbar { display:none; }
-    .niagara-tab { appearance:none; flex:0 0 auto; min-height:66px; padding:0 27px; border:0; border-bottom:1px solid transparent; background:transparent; color:var(--niagara-ink); cursor:pointer; white-space:nowrap; font:13px/1.2 Georgia,"Times New Roman",serif; opacity:.58; transition:opacity .2s,border-color .2s; }
+    .niagara-tab { appearance:none; flex:0 0 auto; min-height:66px; padding:0 27px; position:relative; border:0; background:transparent; color:var(--niagara-ink); cursor:pointer; white-space:nowrap; font:13px/1.2 Georgia,"Times New Roman",serif; opacity:.74; transition:opacity .2s ease; }
     .niagara-tab:first-child { padding-left:0; }
+    .niagara-tab + .niagara-tab::before { content:"|"; position:absolute; left:0; top:50%; transform:translate(-50%,-52%); color:var(--niagara-ink); opacity:.28; pointer-events:none; font:12px/1 Georgia,"Times New Roman",serif; }
+    .niagara-tab::after { content:""; position:absolute; left:27px; right:27px; bottom:0; height:1px; background:var(--niagara-ink); transform:scaleX(0); transform-origin:left center; opacity:.52; transition:transform .26s cubic-bezier(.65,0,.35,1); pointer-events:none; }
+    .niagara-tab:first-child::after { left:0; }
     .niagara-tab:hover,.niagara-tab:focus-visible { opacity:1; }
-    .niagara-tab[aria-selected="true"] { opacity:1; border-bottom-color:var(--niagara-ink); }
+    .niagara-tab:hover::after,.niagara-tab:focus-visible::after { transform:scaleX(1); }
+    .niagara-tab[aria-selected="true"] { opacity:1; }
+    .niagara-tab[aria-selected="true"]::after { transform:scaleX(0); }
+    .niagara-tab-indicator { position:absolute; z-index:2; left:0; bottom:0; height:2px; width:0; background:var(--niagara-ink); transform:translateX(0); transition:transform .3s cubic-bezier(.65,0,.35,1),width .3s cubic-bezier(.65,0,.35,1); pointer-events:none; }
 
     .niagara-panel { display:none; }
     .niagara-panel.is-active { display:block; }
@@ -96,6 +102,8 @@
       .niagara-hero-copy { left:24px; right:24px; bottom:28px; }
       .niagara-tabbar { width:calc(100% - 48px); }
       .niagara-tab { min-height:58px; padding:0 18px; font-size:12px; }
+      .niagara-tab::after { left:18px; right:18px; }
+      .niagara-tab:first-child::after { left:0; }
       .niagara-section,.niagara-iframe-intro,.niagara-photo-intro,.investigation-story { width:calc(100% - 48px); }
       .niagara-section { padding:84px 0 110px; }
       .niagara-two-col,.niagara-iframe-intro,.niagara-photo-intro,.investigation-opening,.investigation-chapter-grid { grid-template-columns:1fr; gap:48px; }
@@ -401,6 +409,23 @@
       const tabs = Array.from(document.querySelectorAll('.niagara-tab'));
       const panels = Array.from(document.querySelectorAll('.niagara-panel'));
       const validTabs = new Set(tabs.map(tab => tab.dataset.tab));
+      const tabbar = document.querySelector('.niagara-tabbar');
+      const indicator = document.createElement('span');
+      indicator.className = 'niagara-tab-indicator';
+      indicator.setAttribute('aria-hidden', 'true');
+      tabbar.appendChild(indicator);
+
+      function moveIndicator(tab, animate = true) {
+        if (!tab) return;
+        const styles = getComputedStyle(tab);
+        const leftPad = parseFloat(styles.paddingLeft) || 0;
+        const rightPad = parseFloat(styles.paddingRight) || 0;
+        const width = Math.max(0, tab.offsetWidth - leftPad - rightPad);
+        if (!animate) indicator.style.transition = 'none';
+        indicator.style.width = `${width}px`;
+        indicator.style.transform = `translateX(${tab.offsetLeft + leftPad}px)`;
+        if (!animate) requestAnimationFrame(() => { indicator.style.transition = ''; });
+      }
 
       function loadPanel(panel) {
         panel.querySelectorAll('iframe[data-src]').forEach(frame => {
@@ -415,12 +440,14 @@
         });
       }
 
-      function activate(name, updateHash = true) {
+      function activate(name, updateHash = true, animateIndicator = true) {
         if (!validTabs.has(name)) name = 'investigation';
+        let activeTab = null;
         tabs.forEach(tab => {
           const active = tab.dataset.tab === name;
           tab.setAttribute('aria-selected', String(active));
           tab.tabIndex = active ? 0 : -1;
+          if (active) activeTab = tab;
         });
         panels.forEach(panel => {
           const active = panel.dataset.panel === name;
@@ -428,6 +455,7 @@
           panel.hidden = !active;
           if (active) loadPanel(panel);
         });
+        requestAnimationFrame(() => moveIndicator(activeTab, animateIndicator));
         if (updateHash) history.replaceState(null, '', `#${name}`);
       }
 
@@ -443,8 +471,12 @@
         });
       });
 
+      window.addEventListener('resize', () => {
+        const activeTab = tabs.find(tab => tab.getAttribute('aria-selected') === 'true');
+        requestAnimationFrame(() => moveIndicator(activeTab, false));
+      });
       window.addEventListener('hashchange', () => activate(location.hash.slice(1), false));
-      activate(location.hash.slice(1) || 'investigation', false);
+      activate(location.hash.slice(1) || 'investigation', false, false);
     })();
   </script>
 </body>
