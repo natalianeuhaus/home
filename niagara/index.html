@@ -9,7 +9,7 @@
   <link rel="shortcut icon" href="../favicon.svg" />
   <link rel="icon" href="../favicon.svg" />
   <style>
-    :root { --niagara-paper:#f1f0ea; --niagara-ink:#151715; --niagara-line:rgba(21,23,21,.22); --niagara-red:#a72a25; }
+    :root { --niagara-paper:#f1f0ea; --niagara-ink:#151715; --niagara-line:rgba(21,23,21,.22); --niagara-red:#440806; }
     * { box-sizing:border-box; }
     html { scroll-behavior:smooth; }
     body.niagara-page { margin:0; color:var(--niagara-ink); background:var(--niagara-paper); min-height:100svh; overflow-x:hidden; }
@@ -43,7 +43,7 @@
     .niagara-tab[aria-selected="true"]::after { transform:scaleX(0); }
     .niagara-tab-label { display:inline-block; opacity:0; transform:translateY(var(--niagara-enter-y,calc(-100svh + 72px))); animation:niagara-tab-label-in 6s cubic-bezier(.16,.78,.22,1) forwards; animation-delay:var(--niagara-enter-delay,.46s); }
     .niagara-tab:first-child .niagara-tab-label { position:relative; }
-    .niagara-tab:first-child .niagara-tab-label::after { content:""; position:absolute; left:50%; top:-12px; width:7px; height:7px; border-radius:50%; background:#7d1f1b; opacity:0; transform:translateX(-50%); animation:niagara-start-hint 2.2s ease-in-out 7.25s both; pointer-events:none; }
+    .niagara-tab:first-child .niagara-tab-label::after { content:""; position:absolute; left:50%; top:-12px; width:7px; height:7px; border-radius:50%; background:#440806; opacity:0; transform:translateX(-50%); animation:niagara-start-hint 2.2s ease-in-out 7.25s both; pointer-events:none; }
     .niagara-tab:nth-child(1) .niagara-tab-label { --niagara-enter-y:calc(-100svh + 72px); --niagara-enter-delay:.46s; }
     .niagara-tab:nth-child(2) .niagara-tab-label { --niagara-enter-y:calc(-100svh + 118px); --niagara-enter-delay:.64s; }
     .niagara-tab:nth-child(3) .niagara-tab-label { --niagara-enter-y:calc(-100svh + 48px); --niagara-enter-delay:.80s; }
