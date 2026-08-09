@@ -67,11 +67,6 @@
     .investigation-opening .niagara-heading { top:132px; }
     .investigation-lede { margin:0 0 1.25em; font-size:clamp(24px,2.35vw,38px); line-height:1.2; letter-spacing:-.027em; }
     .investigation-body p { max-width:900px; margin:0 0 1.25em; font-size:clamp(18px,1.35vw,23px); line-height:1.47; letter-spacing:-.012em; }
-    .investigation-cancer-bridge { appearance:none; width:min(430px,56%); margin:clamp(28px,4svh,48px) 0 0 auto !important; padding:18px 0 17px; display:grid; grid-template-columns:1fr auto; gap:7px 22px; align-items:end; color:inherit; background:transparent; border:0; border-top:1px solid var(--niagara-line); border-bottom:1px solid var(--niagara-line); text-align:left; font-family:inherit; cursor:pointer; }
-    .investigation-cancer-title { color:var(--niagara-red); font-size:clamp(35px,3.4vw,53px); line-height:.9; letter-spacing:-.045em; }
-    .investigation-cancer-arrow { color:var(--niagara-red); font:26px/1 Arial,Helvetica,sans-serif; transition:transform .3s ease; }
-    .investigation-cancer-note { grid-column:1 / -1; color:rgba(21,23,21,.68); font:10px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.06em; }
-    .investigation-cancer-bridge:hover .investigation-cancer-arrow,.investigation-cancer-bridge:focus-visible .investigation-cancer-arrow { transform:translateX(8px); }
     .investigation-chapter { border-top:1px solid var(--niagara-line); padding:clamp(86px,12svh,150px) 0; }
     .investigation-chapter-grid { display:grid; grid-template-columns:minmax(220px,.48fr) minmax(560px,1.52fr); gap:clamp(60px,9vw,150px); align-items:start; }
     .investigation-chapter-meta { position:sticky; top:132px; }
@@ -109,11 +104,14 @@
     .health-record-track { width:100%; height:calc(100svh - 66px); min-height:640px; display:flex; overflow-x:auto; overflow-y:hidden; overscroll-behavior-inline:contain; scroll-snap-type:x mandatory; scrollbar-width:none; cursor:default; }
     .health-record-track::-webkit-scrollbar { display:none; }
     .health-slide { flex:0 0 100%; width:100%; height:100%; min-width:0; padding:clamp(38px,4.8vw,70px); padding-bottom:clamp(78px,8svh,104px); scroll-snap-align:start; scroll-snap-stop:always; display:grid; align-items:center; background:#9d9d9d; border-right:1px solid rgba(21,23,21,.20); }
-    .health-slide--waterfalls { position:relative; background:var(--niagara-paper); }
-    .health-slide--waterfalls::after { content:""; position:absolute; top:0; right:0; width:clamp(42px,4vw,66px); height:100%; background:var(--niagara-cancer); box-shadow:-1px 0 rgba(21,23,21,.12); pointer-events:none; }
-    .health-slide--lead { color:var(--niagara-paper); background:var(--niagara-cancer); }
+    .waterfalls-record { height:calc(100svh - 66px); min-height:640px; }
+    .waterfalls-record .health-slide { width:100%; height:100%; border-right:0; }
+    .health-slide--waterfalls { background:var(--niagara-paper); }
+    .health-slide--lead { position:relative; color:var(--niagara-paper); background:var(--niagara-cancer); }
+    .health-slide--lead::after { content:""; position:absolute; top:0; right:0; width:clamp(24px,2.4vw,42px); height:100%; background:#9d9d9d; box-shadow:-1px 0 rgba(21,23,21,.12); pointer-events:none; }
     .health-slide--lead .health-slide-meta .investigation-number { color:rgba(241,240,234,.58); }
     .health-slide--lead .health-slide-quote figcaption { color:rgba(241,240,234,.66); }
+    .health-slide--lead .health-slide-intro { color:rgba(241,240,234,.82); }
     .waterfalls-slide-inner { width:min(1540px,calc(100% - 84px)); margin:0 auto; display:grid; grid-template-columns:minmax(260px,.72fr) minmax(500px,1.28fr); gap:clamp(70px,11vw,190px); align-items:center; }
     .waterfalls-slide-meta h2 { margin:0; letter-spacing:-.048em; font-size:clamp(52px,6vw,96px); font-weight:400; line-height:.9; }
     .health-slide-inner { width:min(1220px,100%); margin:0 auto; display:grid; grid-template-columns:minmax(210px,.42fr) minmax(470px,1.18fr); gap:clamp(44px,7vw,112px); align-items:center; }
@@ -338,9 +336,8 @@
           <path class="atomic-thread-path"></path>
           <circle class="atomic-thread-end" r="5"></circle>
         </svg>
-        <section class="health-record" id="health-record" aria-label="The waterfalls and health record">
-          <div class="health-record-track" tabindex="0" aria-label="The waterfalls followed by five health-record sections. Scroll horizontally for more.">
-            <article class="health-slide health-slide--waterfalls" data-health-section="0">
+        <section class="health-record waterfalls-record" id="waterfalls-chapter" aria-label="The waterfalls">
+          <article class="health-slide health-slide--waterfalls">
               <div class="waterfalls-slide-inner">
                 <header class="waterfalls-slide-meta">
                   <p class="niagara-kicker">Chapter 1</p>
@@ -348,113 +345,11 @@
                 </header>
                 <div class="investigation-body">
                   <p class="investigation-lede">The unfortunate demise of Niagara Falls is actually based on what attracts its tourists year after year: its waterfalls. Niagara Falls has been the source of abundant and cheap hydroelectric power. The city’s industrialization began as early as 1875, when the first hydroelectric mill began operating. By 1892, the city had undergone considerable industrialization, resulting in significant pollution as a direct consequence.</p>
-                  <p>Since 1942, Niagara Falls industry became central to Manhattan Project and Cold War production, including the nation’s largest production center for uranium metal-from-ore. That work left a radioactive scar whose consequences remain embedded in the region. For thousands of years, this area will face the consequences of radioactive contamination. No other area in the world, not even Chornobyl’s exclusion zone, is comparable. It’s no accident that cancer rates in this area of western New York have remained disturbingly high for the past 40 years and are the highest in the U.S.</p>
-                  <button class="investigation-cancer-bridge" type="button" aria-label="Continue right to the health record">
-                    <strong class="investigation-cancer-title">cancer</strong>
-                    <span class="investigation-cancer-arrow" aria-hidden="true">→</span>
-                    <span class="investigation-cancer-note">Four decades of studies, surveys, and archival findings</span>
-                  </button>
+                  <p>Since 1942, Niagara Falls industry became central to Manhattan Project and Cold War production, including the nation’s largest production center for uranium metal-from-ore. That work left a radioactive scar whose consequences remain embedded in the region.</p>
+                  
                 </div>
               </div>
             </article>
-
-
-            <article class="health-slide health-slide--lead" data-health-section="1">
-              <div class="health-slide-inner">
-                <header class="health-slide-meta">
-                  <span class="investigation-number">Health record · 01</span>
-                  <h3 id="health-record-title">Decades of cancer</h3>
-                </header>
-                <div class="health-slide-content">
-                  <figure class="health-slide-quote">
-                    <blockquote>“Cancer incidence generally remains higher in this region than in the state and nationwide.”</blockquote>
-                    <figcaption>Roswell Park Comprehensive Cancer Center · WNY Cancer Snapshot · 2022</figcaption>
-                  </figure>
-                </div>
-              </div>
-            </article>
-
-            <article class="health-slide" data-health-section="2">
-              <div class="health-slide-inner">
-                <header class="health-slide-meta">
-                  <span class="investigation-number">Health record · 02</span>
-                  <h3>Four decades of concern</h3>
-                </header>
-                <div class="health-slide-content">
-                  <figure class="health-slide-quote">
-                    <blockquote>“The presence of cancer casts a pall over those who live and work here.”</blockquote>
-                    <figcaption>Joseph A. Ruffolo · President &amp; CEO, Niagara Falls Memorial Medical Center</figcaption>
-                  </figure>
-                  <div class="health-finding">
-                    <strong>36%</strong>
-                    <div><p>Approximate rise in lung-cancer cases in Niagara County over four decades.</p><small>Niagara Falls Memorial Medical Center / New York State health data</small></div>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <article class="health-slide" data-health-section="3">
-              <div class="health-slide-inner">
-                <header class="health-slide-meta">
-                  <span class="investigation-number">Health record · 03</span>
-                  <h3>The findings accumulate</h3>
-                </header>
-                <div class="health-slide-content">
-                  <p class="health-context">Old newspaper reports, health surveys, and later cancer data repeatedly return to the same regional burden. Chemical contamination is mentioned throughout the public record. Radioactive contamination is not.</p>
-                  <div class="health-finding">
-                    <strong>9 of 10</strong>
-                    <div><p>Most deadly cancers had higher death rates in Western New York than in the state and/or nationwide, 2015–2019.</p><small>Roswell Park · WNY Cancer Snapshot · 2022</small></div>
-                  </div>
-                  <p class="health-context-note">The National Cancer Institute estimates that inherited genetic changes account for approximately 5–10% of cancers. <a href="https://www.cancer.gov/about-cancer/causes-prevention/genetics" target="_blank" rel="noopener">National Cancer Institute ↗</a></p>
-                </div>
-              </div>
-            </article>
-
-            <article class="health-slide" data-health-section="4">
-              <div class="health-slide-inner">
-                <header class="health-slide-meta">
-                  <span class="investigation-number">Health record · 04</span>
-                  <h3>The Vault</h3>
-                </header>
-                <div class="health-document-grid">
-                  <a class="health-document-card" href="https://www.lrb.usace.army.mil/Portals/45/docs/FUSRAP/NFSS/Online%20AR/08/NFSS_08.08_0148_a.pdf?ver=2020-07-13-114634-447" target="_blank" rel="noopener">
-                    <div class="health-archive-paper"><div><span>Newspaper placeholder</span><strong>Niagara Cancer Statistics</strong><small>Archival clipping image to be added</small></div></div>
-                    <div class="health-document-caption"><span>1983 · Niagara Gazette</span><strong>Cancer statistics in the historical record</strong></div>
-                  </a>
-                  <a class="health-document-card" href="https://www.lrb.usace.army.mil/Portals/45/docs/FUSRAP/NFSS/Online%20AR/08/NFSS_08.08_0626_a.pdf?ver=2020-07-13-120519-743" target="_blank" rel="noopener">
-                    <div class="health-archive-paper"><div><span>Newspaper placeholder</span><strong>Cancer Study</strong><small>Archival clipping image to be added</small></div></div>
-                    <div class="health-document-caption"><span>Public record</span><strong>Reporting that points back toward exposure</strong></div>
-                  </a>
-                </div>
-              </div>
-            </article>
-
-            <article class="health-slide" data-health-section="5">
-              <div class="health-slide-inner">
-                <header class="health-slide-meta">
-                  <span class="investigation-number">Health record · 05</span>
-                  <h3>Studies</h3>
-                </header>
-                <div class="health-source-list">
-                  <a class="health-source-link" href="https://www.roswellpark.org/sites/default/files/2022-09/wny-cancer-snapshot-roswell-park-september-202238.pdf" target="_blank" rel="noopener"><span>01</span><strong>WNY Cancer Snapshot</strong><em>Roswell Park · 2022 ↗</em></a>
-                  <a class="health-source-link" href="https://www.health.ny.gov/statistics/cancer/registry/vol3/v3niagara.htm" target="_blank" rel="noopener"><span>02</span><strong>Niagara County cancer trends</strong><em>NYS Cancer Registry · 1976–2020 ↗</em></a>
-                  <a class="health-source-link" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2721871/" target="_blank" rel="noopener"><span>03</span><strong>Love Canal resident study</strong><em>Peer-reviewed epidemiology ↗</em></a>
-                  <a class="health-source-link" href="https://www.wbfo.org/health-wellness/2019-11-21/new-oncology-center-to-attack-niagara-countys-highest-rate-of-cancer-in-nys" target="_blank" rel="noopener"><span>04</span><strong>Niagara County’s cancer burden</strong><em>Local reporting · 2019 ↗</em></a>
-                </div>
-              </div>
-            </article>
-          </div>
-
-          <button class="health-prev" type="button" aria-label="Return to the previous chapter screen">←</button>
-          <button class="health-next is-hinting" type="button" aria-label="Continue to the next health-record section">→</button>
-          <ol class="health-progress" aria-label="Choose a chapter screen">
-            <li class="is-current"><button type="button" data-health-target="0" aria-label="Go to The waterfalls" aria-current="step">00</button></li>
-            <li><button type="button" data-health-target="1" aria-label="Go to health-record section 1">01</button></li>
-            <li><button type="button" data-health-target="2" aria-label="Go to health-record section 2">02</button></li>
-            <li><button type="button" data-health-target="3" aria-label="Go to health-record section 3">03</button></li>
-            <li><button type="button" data-health-target="4" aria-label="Go to health-record section 4">04</button></li>
-            <li><button type="button" data-health-target="5" aria-label="Go to health-record section 5">05</button></li>
-          </ol>
         </section>
 
         <section class="investigation-chapter atomic-niagara-chapter" id="atomic-niagara">
@@ -595,6 +490,107 @@
               </figure>
             </div>
           </div>
+        </section>
+
+        <section class="health-record health-record--cancer" id="health-record" aria-labelledby="health-record-title">
+          <div class="health-record-track" tabindex="0" aria-label="Five health-record sections. Scroll horizontally for more.">
+            <article class="health-slide health-slide--lead" data-health-section="1">
+              <div class="health-slide-inner">
+                <header class="health-slide-meta">
+                  <span class="investigation-number">Health record · 01</span>
+                  <h3 id="health-record-title">Decades of cancer</h3>
+                </header>
+                <div class="health-slide-content">
+                  <figure class="health-slide-quote">
+                    <blockquote>“Cancer incidence generally remains higher in this region than in the state and nationwide.”</blockquote>
+                    <figcaption>Roswell Park Comprehensive Cancer Center · WNY Cancer Snapshot · 2022</figcaption>
+                  </figure>
+                  <p class="health-slide-intro health-slide-intro--statement">For thousands of years, this area will face the consequences of radioactive contamination. No other area in the world, not even Chornobyl’s exclusion zone, is comparable. It’s no accident that cancer rates in this area of western New York have remained disturbingly high for the past 40 years and are the highest in the U.S.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="health-slide" data-health-section="2">
+              <div class="health-slide-inner">
+                <header class="health-slide-meta">
+                  <span class="investigation-number">Health record · 02</span>
+                  <h3>Four decades of concern</h3>
+                </header>
+                <div class="health-slide-content">
+                  <figure class="health-slide-quote">
+                    <blockquote>“The presence of cancer casts a pall over those who live and work here.”</blockquote>
+                    <figcaption>Joseph A. Ruffolo · President &amp; CEO, Niagara Falls Memorial Medical Center</figcaption>
+                  </figure>
+                  <div class="health-finding">
+                    <strong>36%</strong>
+                    <div><p>Approximate rise in lung-cancer cases in Niagara County over four decades.</p><small>Niagara Falls Memorial Medical Center / New York State health data</small></div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="health-slide" data-health-section="3">
+              <div class="health-slide-inner">
+                <header class="health-slide-meta">
+                  <span class="investigation-number">Health record · 03</span>
+                  <h3>The findings accumulate</h3>
+                </header>
+                <div class="health-slide-content">
+                  <p class="health-context">Old newspaper reports, health surveys, and later cancer data repeatedly return to the same regional burden. Chemical contamination is mentioned throughout the public record. Radioactive contamination is not.</p>
+                  <div class="health-finding">
+                    <strong>9 of 10</strong>
+                    <div><p>Most deadly cancers had higher death rates in Western New York than in the state and/or nationwide, 2015–2019.</p><small>Roswell Park · WNY Cancer Snapshot · 2022</small></div>
+                  </div>
+                  <p class="health-context-note">The National Cancer Institute estimates that inherited genetic changes account for approximately 5–10% of cancers. <a href="https://www.cancer.gov/about-cancer/causes-prevention/genetics" target="_blank" rel="noopener">National Cancer Institute ↗</a></p>
+                </div>
+              </div>
+            </article>
+
+            <article class="health-slide" data-health-section="4">
+              <div class="health-slide-inner">
+                <header class="health-slide-meta">
+                  <span class="investigation-number">Health record · 04</span>
+                  <h3>The Vault</h3>
+                </header>
+                <div class="health-document-grid">
+                  <a class="health-document-card" href="https://www.lrb.usace.army.mil/Portals/45/docs/FUSRAP/NFSS/Online%20AR/08/NFSS_08.08_0148_a.pdf?ver=2020-07-13-114634-447" target="_blank" rel="noopener">
+                    <div class="health-archive-paper"><div><span>Newspaper placeholder</span><strong>Niagara Cancer Statistics</strong><small>Archival clipping image to be added</small></div></div>
+                    <div class="health-document-caption"><span>1983 · Niagara Gazette</span><strong>Cancer statistics in the historical record</strong></div>
+                  </a>
+                  <a class="health-document-card" href="https://www.lrb.usace.army.mil/Portals/45/docs/FUSRAP/NFSS/Online%20AR/08/NFSS_08.08_0626_a.pdf?ver=2020-07-13-120519-743" target="_blank" rel="noopener">
+                    <div class="health-archive-paper"><div><span>Newspaper placeholder</span><strong>Cancer Study</strong><small>Archival clipping image to be added</small></div></div>
+                    <div class="health-document-caption"><span>Public record</span><strong>Reporting that points back toward exposure</strong></div>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <article class="health-slide" data-health-section="5">
+              <div class="health-slide-inner">
+                <header class="health-slide-meta">
+                  <span class="investigation-number">Health record · 05</span>
+                  <h3>Studies</h3>
+                </header>
+                <div class="health-source-list">
+                  <a class="health-source-link" href="https://www.roswellpark.org/sites/default/files/2022-09/wny-cancer-snapshot-roswell-park-september-202238.pdf" target="_blank" rel="noopener"><span>01</span><strong>WNY Cancer Snapshot</strong><em>Roswell Park · 2022 ↗</em></a>
+                  <a class="health-source-link" href="https://www.health.ny.gov/statistics/cancer/registry/vol3/v3niagara.htm" target="_blank" rel="noopener"><span>02</span><strong>Niagara County cancer trends</strong><em>NYS Cancer Registry · 1976–2020 ↗</em></a>
+                  <a class="health-source-link" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2721871/" target="_blank" rel="noopener"><span>03</span><strong>Love Canal resident study</strong><em>Peer-reviewed epidemiology ↗</em></a>
+                  <a class="health-source-link" href="https://www.wbfo.org/health-wellness/2019-11-21/new-oncology-center-to-attack-niagara-countys-highest-rate-of-cancer-in-nys" target="_blank" rel="noopener"><span>04</span><strong>Niagara County’s cancer burden</strong><em>Local reporting · 2019 ↗</em></a>
+                </div>
+              </div>
+            </article>
+          
+          </div>
+
+          <button class="health-prev" type="button" aria-label="Return to the previous health-record section">←</button>
+          <button class="health-next is-hinting" type="button" aria-label="Continue to the next health-record section">→</button>
+          <ol class="health-progress" aria-label="Choose a health-record section">
+            <li class="is-current"><button type="button" data-health-target="0" aria-label="Go to health-record section 1" aria-current="step">01</button></li>
+            <li><button type="button" data-health-target="1" aria-label="Go to health-record section 2">02</button></li>
+            <li><button type="button" data-health-target="2" aria-label="Go to health-record section 3">03</button></li>
+            <li><button type="button" data-health-target="3" aria-label="Go to health-record section 4">04</button></li>
+            <li><button type="button" data-health-target="4" aria-label="Go to health-record section 5">05</button></li>
+          </ol>
         </section>
 
         <section class="investigation-chapter" id="federal-connection">
@@ -760,8 +756,6 @@
         });
       });
 
-      const cancerBridge = document.querySelector('.investigation-cancer-bridge');
-
       const atomicThread = document.querySelector('.atomic-thread');
       const atomicThreadPath = document.querySelector('.atomic-thread-path');
       const atomicThreadEnd = document.querySelector('.atomic-thread-end');
@@ -824,11 +818,10 @@
           if (healthPrev) healthPrev.classList.toggle('is-visible', index > 0);
           if (healthNext) {
             healthNext.disabled = index === healthSlides.length - 1;
-            healthNext.classList.toggle('is-hidden', index === 0);
-            healthNext.classList.toggle('is-hinting', index === 1);
+            healthNext.classList.remove('is-hidden');
+            healthNext.classList.toggle('is-hinting', index === 0);
           }
-          if (atomicThread) atomicThread.classList.toggle('is-offscreen', index !== 0);
-          if (healthRecord) healthRecord.classList.toggle('is-on-dark', index === 1);
+          if (healthRecord) healthRecord.classList.toggle('is-on-dark', index === 0);
         };
 
         if (healthPrev) healthPrev.addEventListener('click', () => {
@@ -836,9 +829,6 @@
         });
         if (healthNext) healthNext.addEventListener('click', () => {
           healthArchiveTrack.scrollBy({ left:healthArchiveTrack.clientWidth, behavior:'smooth' });
-        });
-        if (cancerBridge) cancerBridge.addEventListener('click', () => {
-          healthArchiveTrack.scrollTo({ left:healthArchiveTrack.clientWidth, behavior:'smooth' });
         });
         healthProgress.forEach(button => button.addEventListener('click', () => {
           const index = Number(button.dataset.healthTarget);
