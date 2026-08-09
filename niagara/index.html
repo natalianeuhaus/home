@@ -90,7 +90,6 @@
     .investigation-end { margin-top:clamp(72px,10svh,130px); max-width:1080px; font-size:clamp(34px,4.4vw,72px); line-height:1.05; letter-spacing:-.045em; }
 
     /* Health record */
-    .atomic-thread-origin { display:inline-block; }
     .atomic-thread { position:absolute; inset:0 auto auto 0; z-index:4; width:100%; height:100%; overflow:visible; pointer-events:none; opacity:0; transition:opacity .25s ease; }
     .atomic-thread.is-ready { opacity:1; }
     .atomic-thread-path { fill:none; stroke:var(--niagara-red); stroke-width:1; stroke-linecap:square; stroke-linejoin:miter; vector-effect:non-scaling-stroke; stroke-dasharray:var(--atomic-thread-length,1); stroke-dashoffset:var(--atomic-thread-length,1); will-change:stroke-dashoffset; }
@@ -383,7 +382,7 @@
               <div class="waterfalls-slide-inner">
                 <header class="waterfalls-slide-meta">
                   <p class="niagara-kicker">Chapter 1</p>
-                  <h2><span class="atomic-thread-origin">The</span> waterfalls</h2>
+                  <h2>The waterfalls</h2>
                 </header>
                 <div class="investigation-body">
                   <p class="investigation-lede">The unfortunate demise of Niagara Falls is actually based on what attracts its tourists year after year: its waterfalls. Niagara Falls has been the source of abundant and cheap hydroelectric power. The city’s industrialization began as early as 1875, when the first hydroelectric mill began operating. By 1892, the city had undergone considerable industrialization, resulting in significant pollution as a direct consequence.</p>
@@ -842,7 +841,7 @@
       const atomicThread = document.querySelector('.atomic-thread');
       const atomicThreadPath = document.querySelector('.atomic-thread-path');
       const atomicThreadEnd = document.querySelector('.atomic-thread-end');
-      const atomicThreadOrigin = document.querySelector('.atomic-thread-origin');
+      const investigationTabLabel = document.querySelector('.niagara-tab[data-tab="investigation"] .niagara-tab-label');
       const investigationStory = document.querySelector('.investigation-story');
       const atomicThreadReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
       let atomicThreadLength = 0;
@@ -869,13 +868,13 @@
       }
 
       function layoutAtomicThread() {
-        if (!atomicThread || !atomicThreadPath || !atomicThreadEnd || !atomicThreadOrigin || !investigationStory) return;
+        if (!atomicThread || !atomicThreadPath || !atomicThreadEnd || !investigationTabLabel || !investigationStory) return;
         const articleRect = investigationStory.getBoundingClientRect();
-        const originRect = atomicThreadOrigin.getBoundingClientRect();
+        const tabLabelRect = investigationTabLabel.getBoundingClientRect();
         const threadHeight = investigationStory.scrollHeight;
-        if (articleRect.width < 1 || originRect.width < 1 || threadHeight < 1) return;
-        atomicThreadX = originRect.left + originRect.width / 2 - articleRect.left;
-        atomicThreadStartY = originRect.bottom - articleRect.top + 4;
+        if (articleRect.width < 1 || tabLabelRect.width < 1 || threadHeight < 1) return;
+        atomicThreadX = tabLabelRect.left + tabLabelRect.width / 2 - articleRect.left;
+        atomicThreadStartY = 0;
         const endY = threadHeight - 2;
         atomicThread.style.height = `${threadHeight}px`;
         atomicThread.setAttribute('viewBox', `0 0 ${articleRect.width} ${threadHeight}`);
@@ -888,7 +887,7 @@
         updateAtomicThreadProgress();
       }
 
-      if (atomicThreadOrigin && atomicThread) {
+      if (investigationTabLabel && atomicThread) {
         layoutAtomicThread();
         if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutAtomicThread);
         window.addEventListener('load', layoutAtomicThread, { once:true });
