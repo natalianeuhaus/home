@@ -775,14 +775,10 @@
         const startY = anchorRect.bottom - articleRect.top + 4;
         const endX = Math.max(18, targetRect.left - articleRect.left - 18);
         const endY = targetRect.top - articleRect.top + Math.min(22, targetRect.height * .24);
-        const edgeX = Math.max(startX + 80, articleRect.width - 26);
-        const distance = Math.max(160, endY - startY);
-        const bendY = startY + Math.min(340, Math.max(120, distance * .38));
-
         atomicThread.style.height = `${threadHeight}px`;
         atomicThread.setAttribute('viewBox', `0 0 ${articleRect.width} ${threadHeight}`);
         atomicThread.setAttribute('preserveAspectRatio', 'none');
-        atomicThreadPath.setAttribute('d', `M ${startX} ${startY} H ${edgeX} V ${bendY} H ${endX} V ${endY}`);
+        atomicThreadPath.setAttribute('d', `M ${startX} ${startY} L ${endX} ${endY}`);
         const length = atomicThreadPath.getTotalLength();
         atomicThreadPath.style.setProperty('--atomic-thread-length', length);
         atomicThreadEnd.setAttribute('cx', endX);
