@@ -24,7 +24,7 @@
     .niagara-hero { height:100svh; min-height:620px; position:relative; overflow:hidden; background:#111; }
     .niagara-hero-image { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
     .niagara-hero-image--original { z-index:0; }
-    .niagara-hero-image--xray { z-index:1; opacity:0; filter:grayscale(1) invert(1) contrast(1.75) brightness(.78); animation:niagara-xray-reveal 3s cubic-bezier(.65,0,.35,1) 6.2s 1 forwards; pointer-events:none; }
+    .niagara-hero-image--xray { z-index:1; opacity:0; filter:grayscale(1) invert(1) contrast(1.75) brightness(.78); animation:niagara-xray-reveal 3s cubic-bezier(.65,0,.35,1) 5.4s 1 forwards; pointer-events:none; }
     .niagara-hero::after { content:""; position:absolute; z-index:2; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.02) 42%,rgba(0,0,0,.60) 100%); pointer-events:none; }
     .niagara-hero-copy { position:absolute; z-index:3; left:42px; right:42px; bottom:172px; color:#f1f0ea; text-shadow:0 2px 20px rgba(0,0,0,.32); }
     @keyframes niagara-xray-reveal { from { opacity:0; } to { opacity:.92; } }
@@ -40,7 +40,7 @@
     .niagara-tab + .niagara-tab::before { content:"|"; position:absolute; left:0; top:50%; transform:translate(-50%,-52%); color:var(--niagara-ink); opacity:.30; pointer-events:none; font:12px/1 Georgia,"Times New Roman",serif; }
     .niagara-tab:hover,.niagara-tab:focus-visible { opacity:1; color:var(--niagara-red); }
     .niagara-tab[aria-selected="true"] { opacity:1; color:var(--niagara-red); }
-    .niagara-tab-label { display:inline-block; opacity:0; transform:translateY(var(--niagara-enter-y,calc(-100svh + 72px))); animation:niagara-tab-label-in 5s linear forwards; animation-delay:var(--niagara-enter-delay,.46s); }
+    .niagara-tab-label { display:inline-block; opacity:0; transform:translateY(var(--niagara-enter-y,calc(-100svh + 72px))); animation:niagara-tab-label-in 4.2s linear forwards; animation-delay:var(--niagara-enter-delay,.46s); }
     .niagara-tab:nth-child(1) .niagara-tab-label { --niagara-enter-y:calc(-100svh + 72px); --niagara-enter-delay:.46s; }
     .niagara-tab:nth-child(2) .niagara-tab-label { --niagara-enter-y:calc(-100svh + 118px); --niagara-enter-delay:.64s; }
     .niagara-tab:nth-child(3) .niagara-tab-label { --niagara-enter-y:calc(-100svh + 48px); --niagara-enter-delay:.80s; }
