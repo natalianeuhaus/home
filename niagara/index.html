@@ -848,20 +848,18 @@
       const atomicThreadPath = document.querySelector('.atomic-thread-path');
       const atomicThreadEnd = document.querySelector('.atomic-thread-end');
       const atomicThreadAnchor = document.querySelector('.atomic-thread-anchor');
-      const atomicThreadTarget = document.querySelector('.atomic-niagara-title h3');
       const investigationStory = document.querySelector('.investigation-story');
 
       function layoutAtomicThread() {
-        if (!atomicThread || !atomicThreadPath || !atomicThreadEnd || !atomicThreadAnchor || !atomicThreadTarget || !investigationStory) return;
+        if (!atomicThread || !atomicThreadPath || !atomicThreadEnd || !atomicThreadAnchor || !investigationStory) return;
         const articleRect = investigationStory.getBoundingClientRect();
         const anchorRect = atomicThreadAnchor.getBoundingClientRect();
-        const targetRect = atomicThreadTarget.getBoundingClientRect();
         const threadHeight = investigationStory.scrollHeight;
-        if (articleRect.width < 1 || targetRect.width < 1 || threadHeight < 1) return;
+        if (articleRect.width < 1 || threadHeight < 1) return;
         const startX = anchorRect.right - articleRect.left + 10;
         const startY = anchorRect.bottom - articleRect.top + 4;
         const endX = startX;
-        const endY = targetRect.top - articleRect.top + Math.min(22, targetRect.height * .24);
+        const endY = threadHeight - 2;
         atomicThread.style.height = `${threadHeight}px`;
         atomicThread.setAttribute('viewBox', `0 0 ${articleRect.width} ${threadHeight}`);
         atomicThread.setAttribute('preserveAspectRatio', 'none');
