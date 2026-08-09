@@ -62,8 +62,8 @@
     .niagara-copy h3 { margin:0 0 26px; font-size:clamp(26px,2.4vw,40px); font-weight:400; line-height:1.08; letter-spacing:-.03em; }
 
     /* Investigation */
-    .investigation-story { width:min(1540px,calc(100% - 84px)); margin:0 auto; padding:clamp(92px,12svh,150px) 0 clamp(150px,20svh,260px); }
-    .investigation-opening { display:grid; grid-template-columns:minmax(260px,.72fr) minmax(500px,1.28fr); gap:clamp(70px,11vw,190px); align-items:start; padding-bottom:clamp(110px,16svh,190px); }
+    .investigation-story { width:min(1540px,calc(100% - 84px)); margin:0 auto; padding:clamp(92px,12svh,150px) 0 clamp(150px,20svh,260px); position:relative; }
+    .investigation-opening { display:grid; grid-template-columns:minmax(260px,.72fr) minmax(500px,1.28fr); gap:clamp(70px,11vw,190px); align-items:start; padding-bottom:clamp(200px,27svh,330px); }
     .investigation-opening .niagara-heading { top:132px; }
     .investigation-lede { margin:0 0 1.25em; font-size:clamp(24px,2.35vw,38px); line-height:1.2; letter-spacing:-.027em; }
     .investigation-body p { max-width:900px; margin:0 0 1.25em; font-size:clamp(18px,1.35vw,23px); line-height:1.47; letter-spacing:-.012em; }
@@ -90,10 +90,14 @@
     .investigation-end { margin-top:clamp(72px,10svh,130px); max-width:1080px; font-size:clamp(34px,4.4vw,72px); line-height:1.05; letter-spacing:-.045em; }
 
     /* Health record */
-    .health-connector { width:100vw; height:clamp(110px,17svh,190px); margin:clamp(-86px,-6svh,-46px) 0 0 calc(50% - 50vw); overflow:hidden; position:relative; }
-    .health-connector svg { width:100%; height:100%; display:block; overflow:visible; }
-    .health-connector path { fill:none; stroke:var(--niagara-red); stroke-width:2; vector-effect:non-scaling-stroke; }
-    .health-connector circle { fill:var(--niagara-red); }
+    .health-thread { position:absolute; inset:0 auto auto 0; z-index:4; width:100%; height:100%; overflow:visible; pointer-events:none; opacity:0; transition:opacity .2s ease; }
+    .health-thread.is-ready { opacity:1; }
+    .health-thread-path { fill:none; stroke:var(--niagara-red); stroke-width:2; stroke-linecap:square; stroke-linejoin:miter; vector-effect:non-scaling-stroke; stroke-dasharray:var(--health-thread-length,1); stroke-dashoffset:var(--health-thread-length,1); }
+    .health-thread-end { fill:var(--niagara-red); opacity:0; transform-box:fill-box; transform-origin:center; }
+    .health-thread.is-drawing .health-thread-path { animation:health-thread-draw 2.45s cubic-bezier(.65,0,.35,1) forwards; }
+    .health-thread.is-drawing .health-thread-end { animation:health-thread-end 1s ease-in-out 2.35s 3 both; }
+    @keyframes health-thread-draw { to { stroke-dashoffset:0; } }
+    @keyframes health-thread-end { 0% { opacity:0; transform:scale(.65); } 45% { opacity:1; transform:scale(1); } 72% { opacity:.22; transform:scale(.82); } 100% { opacity:1; transform:scale(1); } }
     .health-record { width:100vw; margin-left:calc(50% - 50vw); padding:0; color:#f1f0ea; background:#151715; overflow:hidden; }
     .health-record-track { width:100%; height:calc(100svh - 66px); min-height:640px; display:flex; overflow-x:auto; overflow-y:hidden; overscroll-behavior-inline:contain; scroll-snap-type:x mandatory; scrollbar-color:#440806 rgba(241,240,234,.18); scrollbar-width:thin; cursor:ew-resize; }
     .health-record-track::-webkit-scrollbar { height:3px; }
@@ -129,8 +133,7 @@
     .health-archive-caption p { margin:22px 0 0; max-width:520px; color:rgba(241,240,234,.66); font-size:clamp(15px,1.2vw,19px); line-height:1.5; }
     .health-archive-caption em { display:inline-block; margin-top:28px; padding-bottom:4px; border-bottom:1px solid rgba(241,240,234,.40); font:10px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; font-style:normal; }
     @media (max-width:820px) {
-      .health-connector { height:120px; margin-top:-46px; }
-      .health-connector svg { width:150%; transform:translateX(-27%); }
+      .investigation-opening { padding-bottom:160px; }
       .health-record-track { height:calc(100svh - 58px); min-height:620px; }
       .health-slide { padding:34px 24px 40px; }
       .health-slide-inner,.health-document .health-slide-inner { grid-template-columns:1fr; gap:30px; align-items:start; }
@@ -145,6 +148,11 @@
       .health-archive-caption h4 { font-size:clamp(30px,10vw,46px); }
       .health-archive-caption p { margin-top:14px; font-size:14px; }
       .health-archive-caption em { margin-top:17px; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      .health-thread-path { stroke-dashoffset:0; }
+      .health-thread-end { opacity:1; }
+      .health-thread.is-drawing .health-thread-path,.health-thread.is-drawing .health-thread-end { animation:none; }
     }
 
     .niagara-iframe-intro,.niagara-photo-intro { width:min(1540px,calc(100% - 84px)); margin:0 auto; padding:clamp(86px,11svh,140px) 0 65px; display:grid; grid-template-columns:minmax(260px,.72fr) minmax(500px,1.28fr); gap:clamp(70px,11vw,190px); align-items:end; }
@@ -257,6 +265,10 @@
 
     <section class="niagara-panel is-active" id="panel-investigation" role="tabpanel" aria-labelledby="tab-investigation" data-panel="investigation">
       <article class="investigation-story">
+        <svg class="health-thread" aria-hidden="true" focusable="false">
+          <path class="health-thread-path"></path>
+          <circle class="health-thread-end" r="5"></circle>
+        </svg>
         <section class="investigation-opening">
           <div class="niagara-heading">
             <p class="niagara-kicker">Chapter 1</p>
@@ -264,16 +276,9 @@
           </div>
           <div class="investigation-body">
             <p class="investigation-lede">The unfortunate demise of Niagara Falls is actually based on what attracts its tourists year after year: its waterfalls. Niagara Falls has been the source of abundant and cheap hydroelectric power. The city’s industrialization began as early as 1875, when the first hydroelectric mill began operating. By 1892, the city had undergone considerable industrialization, resulting in significant pollution as a direct consequence.</p>
-            <p>Since 1942, throughout the Manhattan Project and into the Cold War era, Niagara Falls was the premier city for experimentation, research, development, and production of atomic bomb materials (i.e. radioactive.) According to U.S. Department of Energy records, Niagara Falls industry during that period was the largest production center for uranium metal-from-ore in the nation. The city’s involvement in the Manhattan Project and the nuclear buildup that came after left a radioactive scar on the region. For thousands of years, this area will face the consequences of radioactive contamination. No other area in the world, not even Chornobyl’s exclusion zone, is comparable. It’s no accident that cancer rates in this area of western New York have remained disturbingly high for the past 40 years and are the highest in the U.S.</p>
+            <p>Since 1942, throughout the Manhattan Project and into the Cold War era, Niagara Falls was the premier city for experimentation, research, development, and production of atomic bomb materials (i.e. radioactive.) According to U.S. Department of Energy records, Niagara Falls industry during that period was the largest production center for uranium metal-from-ore in the nation. The city’s involvement in the Manhattan Project and the nuclear buildup that came after left a radioactive scar on the region. For thousands of years, this area will face the consequences of radioactive contamination. No other area in the world, not even Chornobyl’s exclusion zone, is comparable. It’s no accident that <span class="health-thread-anchor">cancer</span> rates in this area of western New York have remained disturbingly high for the past 40 years and are the highest in the U.S.</p>
           </div>
         </section>
-
-        <div class="health-connector" aria-hidden="true">
-          <svg viewBox="0 0 1200 180" preserveAspectRatio="none">
-            <path d="M 865 0 L 865 34 L 760 34 L 760 70 L 660 70 L 660 108 L 555 108 L 555 148 L 520 148 L 520 180" />
-            <circle cx="520" cy="174" r="6" />
-          </svg>
-        </div>
 
         <section class="health-record" id="health-record" aria-labelledby="health-record-title">
           <div class="health-record-track" tabindex="0" aria-label="Health findings, surveys, and newspaper clippings. Scroll horizontally for more.">
@@ -669,6 +674,48 @@
         });
       });
 
+      const healthThread = document.querySelector('.health-thread');
+      const healthThreadPath = document.querySelector('.health-thread-path');
+      const healthThreadEnd = document.querySelector('.health-thread-end');
+      const healthThreadAnchor = document.querySelector('.health-thread-anchor');
+      const healthThreadTarget = document.querySelector('.health-slide--lead .health-slide-quote blockquote');
+      const investigationStory = document.querySelector('.investigation-story');
+
+      function layoutHealthThread() {
+        if (!healthThread || !healthThreadPath || !healthThreadEnd || !healthThreadAnchor || !healthThreadTarget || !investigationStory) return;
+        const articleRect = investigationStory.getBoundingClientRect();
+        const anchorRect = healthThreadAnchor.getBoundingClientRect();
+        const targetRect = healthThreadTarget.getBoundingClientRect();
+        const threadHeight = investigationStory.scrollHeight;
+        const startX = anchorRect.right - articleRect.left + 2;
+        const startY = anchorRect.bottom - articleRect.top + 4;
+        const endX = Math.max(12, targetRect.left - articleRect.left - 18);
+        const endY = targetRect.top - articleRect.top + 8;
+        const distance = Math.max(120, endY - startY);
+        const bendY = startY + Math.min(280, Math.max(95, distance * .46));
+
+        healthThread.setAttribute('viewBox', `0 0 ${articleRect.width} ${threadHeight}`);
+        healthThread.setAttribute('preserveAspectRatio', 'none');
+        healthThreadPath.setAttribute('d', `M ${startX} ${startY} V ${bendY} H ${endX} V ${endY}`);
+        const length = healthThreadPath.getTotalLength();
+        healthThreadPath.style.setProperty('--health-thread-length', length);
+        healthThreadEnd.setAttribute('cx', endX);
+        healthThreadEnd.setAttribute('cy', endY);
+        healthThread.classList.add('is-ready');
+      }
+
+      if (healthThreadAnchor && healthThread) {
+        layoutHealthThread();
+        const healthThreadObserver = new IntersectionObserver(entries => {
+          if (!entries.some(entry => entry.isIntersecting)) return;
+          healthThread.classList.add('is-drawing');
+          healthThreadObserver.disconnect();
+        }, { threshold:.65, rootMargin:'0px 0px -8% 0px' });
+        healthThreadObserver.observe(healthThreadAnchor);
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutHealthThread);
+        window.addEventListener('load', layoutHealthThread, { once:true });
+      }
+
       const healthArchiveTrack = document.querySelector('.health-record-track');
       if (healthArchiveTrack) {
         const healthMore = healthArchiveTrack.querySelector('.health-more');
@@ -689,6 +736,7 @@
       window.addEventListener('resize', () => {
         const activeTab = tabs.find(tab => tab.getAttribute('aria-selected') === 'true');
         requestAnimationFrame(() => moveIndicator(activeTab, false));
+        requestAnimationFrame(layoutHealthThread);
         updateStickyHeader();
       });
       window.addEventListener('hashchange', () => activate(location.hash.slice(1), false));
