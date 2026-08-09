@@ -67,14 +67,15 @@
     .investigation-opening .niagara-heading { top:132px; }
     .investigation-lede { margin:0 0 1.25em; font-size:clamp(24px,2.35vw,38px); line-height:1.2; letter-spacing:-.027em; }
     .investigation-body p { max-width:900px; margin:0 0 1.25em; font-size:clamp(18px,1.35vw,23px); line-height:1.47; letter-spacing:-.012em; }
-    .investigation-cancer-bridge { appearance:none; width:min(430px,56%); margin:clamp(28px,4svh,48px) 0 0 auto !important; padding:18px 0 17px; display:grid; grid-template-columns:1fr auto; gap:7px 22px; align-items:end; color:inherit; background:transparent; border:0; border-top:1px solid var(--niagara-line); border-bottom:1px solid var(--niagara-line); text-align:left; font-family:inherit; cursor:pointer; }
+    .investigation-cancer-bridge { appearance:none; width:min(430px,56%); margin:clamp(28px,4svh,48px) 0 0 auto !important; padding:18px 0 17px; display:grid; grid-template-columns:1fr auto; gap:7px 22px; align-items:end; color:inherit; background:transparent; border:0; border-top:1px solid var(--niagara-line); border-bottom:1px solid var(--niagara-line); text-align:left; font-family:inherit; cursor:pointer; opacity:.58; transition:opacity .3s ease; }
     .investigation-cancer-kicker { grid-column:1 / -1; color:rgba(21,23,21,.48); font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.18em; text-transform:uppercase; }
     .investigation-cancer-title { color:var(--niagara-red); font-size:clamp(35px,3.4vw,53px); line-height:.9; letter-spacing:-.045em; }
     .investigation-cancer-arrow { color:var(--niagara-red); font:26px/1 Arial,Helvetica,sans-serif; transition:transform .3s ease; }
     .investigation-cancer-note { grid-column:1 / -1; color:rgba(21,23,21,.58); font:10px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.06em; }
     .investigation-cancer-bridge:hover .investigation-cancer-arrow,.investigation-cancer-bridge:focus-visible .investigation-cancer-arrow { transform:translateX(8px); }
     .investigation-cancer-bridge.is-ready { opacity:0; transform:translateX(-42px); transition:opacity .9s ease,transform 1.15s cubic-bezier(.22,.7,.25,1); }
-    .investigation-cancer-bridge.is-ready.is-visible { opacity:1; transform:translateX(0); }
+    .investigation-cancer-bridge.is-ready.is-visible { opacity:.58; transform:translateX(0); }
+    .investigation-cancer-bridge.is-ready.is-visible:hover,.investigation-cancer-bridge.is-ready.is-visible:focus-visible { opacity:1; }
     .investigation-chapter { border-top:1px solid var(--niagara-line); padding:clamp(86px,12svh,150px) 0; }
     .investigation-chapter-grid { display:grid; grid-template-columns:minmax(220px,.48fr) minmax(560px,1.52fr); gap:clamp(60px,9vw,150px); align-items:start; }
     .investigation-chapter-meta { position:sticky; top:132px; }
@@ -112,7 +113,7 @@
     .health-record-track { width:100%; height:calc(100svh - 66px); min-height:640px; display:flex; overflow-x:auto; overflow-y:hidden; overscroll-behavior-inline:contain; scroll-snap-type:x mandatory; scrollbar-width:none; cursor:default; }
     .health-record-track::-webkit-scrollbar { display:none; }
     .health-slide { flex:0 0 100%; width:100%; height:100%; min-width:0; padding:clamp(38px,4.8vw,70px); padding-bottom:clamp(78px,8svh,104px); scroll-snap-align:start; scroll-snap-stop:always; display:grid; align-items:center; background:#9d9d9d; border-right:1px solid rgba(21,23,21,.20); }
-    .health-slide--waterfalls { background:var(--niagara-paper); }
+    .health-slide--waterfalls,.health-slide--lead { background:var(--niagara-paper); }
     .waterfalls-slide-inner { width:min(1540px,calc(100% - 84px)); margin:0 auto; display:grid; grid-template-columns:minmax(260px,.72fr) minmax(500px,1.28fr); gap:clamp(70px,11vw,190px); align-items:center; }
     .waterfalls-slide-meta h2 { margin:0; letter-spacing:-.048em; font-size:clamp(52px,6vw,96px); font-weight:400; line-height:.9; }
     .health-slide-inner { width:min(1220px,100%); margin:0 auto; display:grid; grid-template-columns:minmax(210px,.42fr) minmax(470px,1.18fr); gap:clamp(44px,7vw,112px); align-items:center; }
@@ -151,6 +152,11 @@
     .health-progress button:hover,.health-progress button:focus-visible { color:var(--niagara-red); }
     .health-progress li.is-current { transform:translateY(-3px); }
     .health-progress li.is-current button { color:var(--niagara-red); }
+    .health-prev { appearance:none; position:absolute; z-index:4; left:42%; bottom:24px; width:64px; height:42px; padding:0; border:0; color:rgba(21,23,21,.58); background:transparent; cursor:pointer; font-size:0; opacity:0; pointer-events:none; transition:color .22s ease,opacity .25s ease,transform .25s ease; }
+    .health-prev::before { content:""; position:absolute; right:8px; top:50%; width:44px; height:1px; background:currentColor; }
+    .health-prev::after { content:""; position:absolute; left:11px; top:calc(50% - 4px); width:8px; height:8px; border-top:1px solid currentColor; border-left:1px solid currentColor; transform:rotate(-45deg); }
+    .health-prev:hover,.health-prev:focus-visible { color:var(--niagara-red); transform:translateX(-5px); }
+    .health-prev.is-visible { opacity:1; pointer-events:auto; }
     .health-next { appearance:none; position:absolute; z-index:4; left:58%; bottom:24px; width:64px; height:42px; padding:0; border:0; color:rgba(21,23,21,.58); background:transparent; cursor:pointer; font-size:0; transition:color .22s ease,opacity .25s ease,transform .25s ease; }
     .health-next::before { content:""; position:absolute; left:8px; top:50%; width:44px; height:1px; background:currentColor; }
     .health-next::after { content:""; position:absolute; right:11px; top:calc(50% - 4px); width:8px; height:8px; border-top:1px solid currentColor; border-right:1px solid currentColor; transform:rotate(45deg); }
@@ -180,6 +186,9 @@
       .health-source-link em { grid-column:2; }
       .health-progress { right:22px; bottom:23px; gap:2px; }
       .health-progress button { min-width:34px; }
+      .health-prev { left:calc(50% - 72px); bottom:19px; width:58px; height:40px; }
+      .health-prev::before { right:8px; width:39px; }
+      .health-prev::after { left:9px; }
       .health-next { left:50%; bottom:19px; width:58px; height:40px; }
       .health-next::before { left:8px; width:39px; }
       .health-next::after { right:9px; }
@@ -432,6 +441,7 @@
             </article>
           </div>
 
+          <button class="health-prev" type="button" aria-label="Return to the previous chapter screen">←</button>
           <button class="health-next is-hinting" type="button" aria-label="Continue to the next health-record section">→</button>
           <ol class="health-progress" aria-label="Choose a chapter screen">
             <li class="is-current"><button type="button" data-health-target="0" aria-label="Go to The waterfalls" aria-current="step">00</button></li>
@@ -802,6 +812,7 @@
       if (healthArchiveTrack) {
         const healthSlides = Array.from(healthArchiveTrack.querySelectorAll('.health-slide'));
         const healthProgress = Array.from(document.querySelectorAll('.health-progress button'));
+        const healthPrev = document.querySelector('.health-prev');
         const healthNext = document.querySelector('.health-next');
         let healthProgressFrame = 0;
 
@@ -814,6 +825,7 @@
             if (current) button.setAttribute('aria-current', 'step');
             else button.removeAttribute('aria-current');
           });
+          if (healthPrev) healthPrev.classList.toggle('is-visible', index > 0);
           if (healthNext) {
             healthNext.disabled = index === healthSlides.length - 1;
             healthNext.classList.toggle('is-hidden', index === 0);
@@ -822,6 +834,9 @@
           if (atomicThread) atomicThread.classList.toggle('is-offscreen', index !== 0);
         };
 
+        if (healthPrev) healthPrev.addEventListener('click', () => {
+          healthArchiveTrack.scrollBy({ left:-healthArchiveTrack.clientWidth, behavior:'smooth' });
+        });
         if (healthNext) healthNext.addEventListener('click', () => {
           healthArchiveTrack.scrollBy({ left:healthArchiveTrack.clientWidth, behavior:'smooth' });
         });
