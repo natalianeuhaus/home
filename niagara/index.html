@@ -24,7 +24,7 @@
     .niagara-hero { height:100svh; min-height:620px; position:relative; overflow:hidden; background:#111; }
     .niagara-hero-image { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
     .niagara-hero-image--original { z-index:0; }
-    .niagara-hero-image--xray { z-index:1; opacity:0; filter:grayscale(1) invert(1) contrast(1.75) brightness(.78); animation:niagara-xray-reveal 3s cubic-bezier(.65,0,.35,1) 5.4s 1 forwards; pointer-events:none; }
+    .niagara-hero-image--xray { z-index:1; opacity:0; filter:grayscale(1) invert(1) contrast(1.75) brightness(.78); animation:niagara-xray-reveal 4.8s cubic-bezier(.65,0,.35,1) .35s 1 forwards; pointer-events:none; }
     .niagara-hero::after { content:""; position:absolute; z-index:2; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.02) 42%,rgba(0,0,0,.60) 100%); pointer-events:none; }
     .niagara-hero-copy { position:absolute; z-index:3; left:42px; right:42px; bottom:172px; color:#f1f0ea; text-shadow:0 2px 20px rgba(0,0,0,.32); }
     @keyframes niagara-xray-reveal { from { opacity:0; } to { opacity:.92; } }
