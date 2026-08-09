@@ -156,6 +156,7 @@
     .health-next::after { content:""; position:absolute; right:11px; top:calc(50% - 4px); width:8px; height:8px; border-top:1px solid currentColor; border-right:1px solid currentColor; transform:rotate(45deg); }
     .health-next:hover,.health-next:focus-visible { color:var(--niagara-red); transform:translateX(5px); }
     .health-next.is-hinting { animation:health-next-hint 1.15s ease-in-out 3; }
+    .health-next.is-hidden { opacity:0; pointer-events:none; animation:none; }
     .health-next:disabled { opacity:.18; cursor:default; transform:none; animation:none; }
     @keyframes health-next-hint { 0%,100% { transform:translateX(0); } 50% { transform:translateX(8px); } }
     @media (max-width:820px) {
@@ -772,12 +773,12 @@
         if (articleRect.width < 1 || targetRect.width < 1 || threadHeight < 1) return;
         const startX = anchorRect.right - articleRect.left + 10;
         const startY = anchorRect.bottom - articleRect.top + 4;
-        const endX = Math.max(18, targetRect.left - articleRect.left - 18);
+        const endX = startX;
         const endY = targetRect.top - articleRect.top + Math.min(22, targetRect.height * .24);
         atomicThread.style.height = `${threadHeight}px`;
         atomicThread.setAttribute('viewBox', `0 0 ${articleRect.width} ${threadHeight}`);
         atomicThread.setAttribute('preserveAspectRatio', 'none');
-        atomicThreadPath.setAttribute('d', `M ${startX} ${startY} L ${endX} ${endY}`);
+        atomicThreadPath.setAttribute('d', `M ${startX} ${startY} V ${endY}`);
         const length = atomicThreadPath.getTotalLength();
         atomicThreadPath.style.setProperty('--atomic-thread-length', length);
         atomicThreadEnd.setAttribute('cx', endX);
@@ -815,7 +816,8 @@
           });
           if (healthNext) {
             healthNext.disabled = index === healthSlides.length - 1;
-            healthNext.classList.toggle('is-hinting', index === 0);
+            healthNext.classList.toggle('is-hidden', index === 0);
+            healthNext.classList.toggle('is-hinting', index === 1);
           }
           if (atomicThread) atomicThread.classList.toggle('is-offscreen', index !== 0);
         };
