@@ -41,11 +41,11 @@
     .niagara-tab:hover,.niagara-tab:focus-visible { opacity:1; color:var(--niagara-red); }
     .niagara-tab[aria-selected="true"] { opacity:1; color:var(--niagara-red); }
     .niagara-tab-label { display:inline-block; opacity:0; transform:translateY(var(--niagara-enter-y,calc(-100svh + 72px))); animation:niagara-tab-label-in 4.2s linear forwards; animation-delay:var(--niagara-enter-delay,.46s); }
-    .niagara-tab:nth-child(1) .niagara-tab-label { --niagara-enter-y:calc(-100svh + 72px); --niagara-enter-delay:.46s; }
-    .niagara-tab:nth-child(2) .niagara-tab-label { --niagara-enter-y:calc(-100svh + 118px); --niagara-enter-delay:.64s; }
-    .niagara-tab:nth-child(3) .niagara-tab-label { --niagara-enter-y:calc(-100svh + 48px); --niagara-enter-delay:.80s; }
-    .niagara-tab:nth-child(4) .niagara-tab-label { --niagara-enter-y:calc(-100svh + 96px); --niagara-enter-delay:.98s; }
-    .niagara-tab:nth-child(5) .niagara-tab-label { --niagara-enter-y:calc(-100svh + 62px); --niagara-enter-delay:1.14s; }
+    .niagara-tab:nth-child(1) .niagara-tab-label { --niagara-enter-y:calc(-100svh + 72px); --niagara-enter-delay:1.05s; }
+    .niagara-tab:nth-child(2) .niagara-tab-label { --niagara-enter-y:calc(-100svh + 118px); --niagara-enter-delay:1.23s; }
+    .niagara-tab:nth-child(3) .niagara-tab-label { --niagara-enter-y:calc(-100svh + 48px); --niagara-enter-delay:1.39s; }
+    .niagara-tab:nth-child(4) .niagara-tab-label { --niagara-enter-y:calc(-100svh + 96px); --niagara-enter-delay:1.57s; }
+    .niagara-tab:nth-child(5) .niagara-tab-label { --niagara-enter-y:calc(-100svh + 62px); --niagara-enter-delay:1.73s; }
     .niagara-tab-indicator { position:absolute; z-index:2; left:0; top:10px; width:7px; height:7px; border-radius:50%; background:var(--niagara-red); opacity:0; transform:translateX(0); transition:transform .3s cubic-bezier(.65,0,.35,1),opacity .2s ease; animation:niagara-start-hint 1s ease-in-out 7.25s infinite both; pointer-events:none; }
     @keyframes niagara-tabbar-in { from { opacity:0; } to { opacity:1; } }
     @keyframes niagara-tab-label-in { from { opacity:0; transform:translateY(var(--niagara-enter-y,calc(-100svh + 72px))); } 12% { opacity:1; } to { opacity:1; transform:translateY(0); } }
