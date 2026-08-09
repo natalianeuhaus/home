@@ -224,10 +224,26 @@
     .atomic-evidence-item:nth-child(6) { grid-column:8 / 10; grid-row:3 / 4; }
     .atomic-evidence-item img { width:100%; height:100%; display:block; object-fit:cover; filter:saturate(.72) contrast(1.04); transition:transform .7s cubic-bezier(.22,.7,.25,1),filter .35s ease; }
     .atomic-evidence-item--document img { object-fit:contain; padding:10px; background:#202020; }
+    .atomic-evidence-item::before { content:"open"; position:absolute; z-index:2; top:12px; right:12px; width:42px; height:42px; display:grid; place-items:center; border:1px solid rgba(241,240,234,.62); border-radius:50%; color:var(--niagara-paper); background:rgba(0,0,0,.26); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); opacity:0; transform:scale(.82); transition:opacity .25s ease,transform .35s cubic-bezier(.22,.7,.25,1); pointer-events:none; font:7px/1 Arial,Helvetica,sans-serif; letter-spacing:.1em; text-transform:uppercase; }
     .atomic-evidence-item::after { content:""; position:absolute; inset:auto 0 0; height:48%; background:linear-gradient(transparent,rgba(0,0,0,.82)); pointer-events:none; }
-    .atomic-evidence-item figcaption { position:absolute; z-index:1; left:14px; right:14px; bottom:12px; color:rgba(241,240,234,.88); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.11em; text-transform:uppercase; }
+    .atomic-evidence-caption { position:absolute; z-index:1; left:14px; right:14px; bottom:12px; color:rgba(241,240,234,.88); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.11em; text-transform:uppercase; }
+    .atomic-evidence-item:hover::before,.atomic-evidence-item:focus-visible::before { opacity:1; transform:scale(1); }
     .atomic-evidence-item:hover img,.atomic-evidence-item:focus-visible img { transform:scale(1.025); filter:saturate(1) contrast(1.02); }
     .atomic-evidence-item:focus-visible { outline:1px solid var(--niagara-paper); outline-offset:-3px; }
+    .atomic-evidence-viewer { width:min(1180px,calc(100vw - 42px)); height:min(88svh,850px); max-width:none; max-height:none; margin:auto; padding:0; border:0; color:var(--niagara-paper); background:#101010; box-shadow:0 28px 90px rgba(0,0,0,.58); overflow:hidden; }
+    .atomic-evidence-viewer::backdrop { background:rgba(0,0,0,.84); backdrop-filter:blur(5px); -webkit-backdrop-filter:blur(5px); }
+    .atomic-evidence-viewer-shell { height:100%; display:grid; grid-template-columns:58px minmax(0,1fr) 58px; }
+    .atomic-evidence-viewer figure { min-width:0; min-height:0; margin:0; display:grid; grid-template-rows:minmax(0,1fr) auto; }
+    .atomic-evidence-viewer-image { width:100%; height:100%; min-height:0; display:block; object-fit:contain; background:#090909; }
+    .atomic-evidence-viewer-caption { min-height:84px; padding:17px 22px 18px; display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:18px; align-items:center; border-top:1px solid rgba(241,240,234,.18); }
+    .atomic-evidence-viewer-count { color:rgba(241,240,234,.5); font:8px/1 Arial,Helvetica,sans-serif; letter-spacing:.14em; }
+    .atomic-evidence-viewer-title { font-size:clamp(17px,1.6vw,24px); line-height:1.08; font-weight:400; letter-spacing:-.02em; }
+    .atomic-evidence-follow { padding-bottom:3px; border-bottom:1px solid rgba(241,240,234,.5); color:var(--niagara-paper); font:8px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
+    .atomic-evidence-viewer-nav,.atomic-evidence-viewer-close { appearance:none; border:0; color:rgba(241,240,234,.76); background:transparent; cursor:pointer; font-family:Arial,Helvetica,sans-serif; transition:color .2s ease,background .2s ease; }
+    .atomic-evidence-viewer-nav { font-size:18px; }
+    .atomic-evidence-viewer-nav:hover,.atomic-evidence-viewer-nav:focus-visible,.atomic-evidence-viewer-close:hover,.atomic-evidence-viewer-close:focus-visible { color:#fff; background:rgba(255,255,255,.07); }
+    .atomic-evidence-viewer-close { position:absolute; z-index:2; top:8px; right:8px; width:42px; height:42px; border-radius:50%; background:rgba(0,0,0,.35); font-size:18px; }
+    body:has(.atomic-evidence-viewer[open]) { overflow:hidden; }
     @media (max-width:820px) {
       .atomic-niagara-hero { height:auto; min-height:calc(100svh - 58px); grid-template-columns:1fr; grid-template-rows:minmax(250px,.42fr) minmax(300px,.58fr); }
       .atomic-niagara-title { padding:48px 24px 40px; }
@@ -240,7 +256,12 @@
       .atomic-evidence-item:nth-child(n) { grid-column:auto; grid-row:auto; }
       .atomic-evidence-item:nth-child(1) { grid-column:1 / -1; min-height:38svh; }
       .atomic-evidence-item:nth-child(2),.atomic-evidence-item:nth-child(4) { grid-row:span 2; }
-      .atomic-evidence-item figcaption { left:10px; right:10px; bottom:9px; }
+      .atomic-evidence-caption { left:10px; right:10px; bottom:9px; }
+      .atomic-evidence-item::before { display:none; }
+      .atomic-evidence-viewer { width:100vw; height:100svh; }
+      .atomic-evidence-viewer-shell { grid-template-columns:42px minmax(0,1fr) 42px; }
+      .atomic-evidence-viewer-caption { min-height:116px; padding:15px 12px 18px; grid-template-columns:auto minmax(0,1fr); gap:8px 12px; }
+      .atomic-evidence-follow { grid-column:2; justify-self:start; }
     }
 
     .niagara-iframe-intro,.niagara-photo-intro { width:min(1540px,calc(100% - 84px)); margin:0 auto; padding:clamp(86px,11svh,140px) 0 65px; display:grid; grid-template-columns:minmax(260px,.72fr) minmax(500px,1.28fr); gap:clamp(70px,11vw,190px); align-items:end; }
@@ -399,30 +420,46 @@
             <div class="atomic-evidence-grid">
               <a class="atomic-evidence-item" href="#atomic-niagara">
                 <img src="https://natalianeuhaus.com/wp-content/uploads/2024/05/letter_award.jpg" alt="Manhattan Project-era recognition documenting Niagara industry’s wartime involvement" loading="lazy" />
-                <figcaption>Wartime recognition · Niagara industry</figcaption>
+                <span class="atomic-evidence-caption">Wartime recognition · Niagara industry</span>
               </a>
               <a class="atomic-evidence-item" href="#loow-nfss">
                 <img src="https://natalianeuhaus.com/wp-content/uploads/2024/05/NFSS-copy-1.jpg" alt="Archival evidence from the Niagara Falls Storage Site" loading="lazy" />
-                <figcaption>Niagara Falls Storage Site · LOOW</figcaption>
+                <span class="atomic-evidence-caption">Niagara Falls Storage Site · LOOW</span>
               </a>
               <a class="atomic-evidence-item atomic-evidence-item--document" href="#sludge-slag">
                 <img src="https://natalianeuhaus.com/wp-content/uploads/2024/05/l2-e1715296165424-711x1024.jpg" alt="Archival correspondence concerning radioactive waste disposal" loading="lazy" />
-                <figcaption>Waste-disposal correspondence</figcaption>
+                <span class="atomic-evidence-caption">Waste-disposal correspondence</span>
               </a>
               <a class="atomic-evidence-item" href="#sludge-slag">
                 <img src="https://natalianeuhaus.com/wp-content/uploads/2024/05/gravy-scaled-copy.jpg" alt="Federal Connection Report evidence concerning radioactive gravel" loading="lazy" />
-                <figcaption>Radioactive gravel · Federal Connection</figcaption>
+                <span class="atomic-evidence-caption">Radioactive gravel · Federal Connection</span>
               </a>
               <a class="atomic-evidence-item" href="#historical-surveys">
                 <img src="https://natalianeuhaus.com/wp-content/uploads/2024/05/rvgeiger-1971x1024.jpg" alt="Historical mobile radiological survey vehicle in Niagara Falls" loading="lazy" />
-                <figcaption>Mobile radiological survey</figcaption>
+                <span class="atomic-evidence-caption">Mobile radiological survey</span>
               </a>
               <a class="atomic-evidence-item" href="#historical-surveys">
                 <img src="https://natalianeuhaus.com/wp-content/uploads/2024/05/resultsnf-scaled-copy.jpg" alt="Historical Niagara radiological survey results" loading="lazy" />
-                <figcaption>Survey results · elevated locations</figcaption>
+                <span class="atomic-evidence-caption">Survey results · elevated locations</span>
               </a>
             </div>
           </div>
+
+          <dialog class="atomic-evidence-viewer" aria-label="Evidence viewer">
+            <button class="atomic-evidence-viewer-close" type="button" aria-label="Close evidence viewer">×</button>
+            <div class="atomic-evidence-viewer-shell">
+              <button class="atomic-evidence-viewer-nav atomic-evidence-viewer-prev" type="button" aria-label="Previous piece of evidence">←</button>
+              <figure>
+                <img class="atomic-evidence-viewer-image" alt="" />
+                <figcaption class="atomic-evidence-viewer-caption">
+                  <span class="atomic-evidence-viewer-count"></span>
+                  <strong class="atomic-evidence-viewer-title"></strong>
+                  <a class="atomic-evidence-follow" href="#">Follow this evidence →</a>
+                </figcaption>
+              </figure>
+              <button class="atomic-evidence-viewer-nav atomic-evidence-viewer-next" type="button" aria-label="Next piece of evidence">→</button>
+            </div>
+          </dialog>
         </section>
 
         <section class="investigation-chapter" id="loow-nfss">
@@ -844,6 +881,48 @@
         atomicThreadObserver.observe(atomicThreadAnchor);
         if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutAtomicThread);
         window.addEventListener('load', layoutAtomicThread, { once:true });
+      }
+
+      const evidenceItems = Array.from(document.querySelectorAll('.atomic-evidence-item'));
+      const evidenceViewer = document.querySelector('.atomic-evidence-viewer');
+      if (evidenceItems.length && evidenceViewer && typeof evidenceViewer.showModal === 'function') {
+        const evidenceImage = evidenceViewer.querySelector('.atomic-evidence-viewer-image');
+        const evidenceCount = evidenceViewer.querySelector('.atomic-evidence-viewer-count');
+        const evidenceTitle = evidenceViewer.querySelector('.atomic-evidence-viewer-title');
+        const evidenceFollow = evidenceViewer.querySelector('.atomic-evidence-follow');
+        const evidenceClose = evidenceViewer.querySelector('.atomic-evidence-viewer-close');
+        const evidencePrev = evidenceViewer.querySelector('.atomic-evidence-viewer-prev');
+        const evidenceNext = evidenceViewer.querySelector('.atomic-evidence-viewer-next');
+        let evidenceIndex = 0;
+
+        const showEvidence = index => {
+          evidenceIndex = (index + evidenceItems.length) % evidenceItems.length;
+          const item = evidenceItems[evidenceIndex];
+          const source = item.querySelector('img');
+          const caption = item.querySelector('.atomic-evidence-caption');
+          evidenceImage.src = source.currentSrc || source.src;
+          evidenceImage.alt = source.alt;
+          evidenceCount.textContent = `${String(evidenceIndex + 1).padStart(2,'0')} / ${String(evidenceItems.length).padStart(2,'0')}`;
+          evidenceTitle.textContent = caption ? caption.textContent : source.alt;
+          evidenceFollow.href = item.getAttribute('href');
+          if (!evidenceViewer.open) evidenceViewer.showModal();
+        };
+
+        evidenceItems.forEach((item,index) => item.addEventListener('click', event => {
+          event.preventDefault();
+          showEvidence(index);
+        }));
+        evidencePrev.addEventListener('click', () => showEvidence(evidenceIndex - 1));
+        evidenceNext.addEventListener('click', () => showEvidence(evidenceIndex + 1));
+        evidenceClose.addEventListener('click', () => evidenceViewer.close());
+        evidenceFollow.addEventListener('click', () => evidenceViewer.close());
+        evidenceViewer.addEventListener('click', event => {
+          if (event.target === evidenceViewer) evidenceViewer.close();
+        });
+        evidenceViewer.addEventListener('keydown', event => {
+          if (event.key === 'ArrowLeft') { event.preventDefault(); showEvidence(evidenceIndex - 1); }
+          if (event.key === 'ArrowRight') { event.preventDefault(); showEvidence(evidenceIndex + 1); }
+        });
       }
 
       const healthArchiveTrack = document.querySelector('.health-record-track');
