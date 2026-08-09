@@ -763,14 +763,6 @@
           event.preventDefault();
           healthArchiveTrack.scrollBy({ left:(event.key === 'ArrowRight' ? 1 : -1) * healthArchiveTrack.clientWidth, behavior:'smooth' });
         });
-        healthArchiveTrack.addEventListener('wheel', event => {
-          if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
-          const atStart = healthArchiveTrack.scrollLeft <= 0;
-          const atEnd = healthArchiveTrack.scrollLeft + healthArchiveTrack.clientWidth >= healthArchiveTrack.scrollWidth - 1;
-          if ((atStart && event.deltaY < 0) || (atEnd && event.deltaY > 0)) return;
-          event.preventDefault();
-          healthArchiveTrack.scrollLeft += event.deltaY;
-        }, { passive:false });
         updateHealthProgress();
       }
 
