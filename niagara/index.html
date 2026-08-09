@@ -794,7 +794,7 @@
         page.classList.toggle('niagara-tabs-stuck', stuck);
         if (atomicNiagaraSection) {
           const atomicRect = atomicNiagaraSection.getBoundingClientRect();
-          const atomicAtTabs = stuck && atomicRect.top <= tabbarWrap.offsetHeight && atomicRect.bottom > 0;
+          const atomicAtTabs = stuck && atomicRect.top <= tabbarWrap.offsetHeight;
           page.classList.toggle('niagara-tabs-on-atomic', atomicAtTabs);
         }
       }
