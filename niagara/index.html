@@ -132,9 +132,12 @@
     .health-source-link span { color:var(--niagara-red); font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.15em; }
     .health-source-link strong { font-size:clamp(17px,1.45vw,23px); line-height:1.15; font-weight:400; letter-spacing:-.02em; }
     .health-source-link em { color:rgba(21,23,21,.58); font:9px/1.5 Arial,Helvetica,sans-serif; letter-spacing:.09em; text-transform:uppercase; font-style:normal; }
-    .health-progress { position:absolute; z-index:3; right:clamp(28px,4vw,58px); bottom:24px; display:flex; gap:17px; margin:0; padding:0; list-style:none; pointer-events:none; }
-    .health-progress li { color:rgba(21,23,21,.42); font:11px/1 Arial,Helvetica,sans-serif; letter-spacing:.09em; transition:color .25s ease,transform .25s ease; }
-    .health-progress li.is-current { color:var(--niagara-red); transform:translateY(-3px); }
+    .health-progress { position:absolute; z-index:3; right:clamp(28px,4vw,58px); bottom:15px; display:flex; gap:3px; margin:0; padding:0; list-style:none; }
+    .health-progress li { transition:transform .25s ease; }
+    .health-progress button { appearance:none; min-width:43px; min-height:42px; display:grid; place-items:center; padding:0; border:0; color:rgba(21,23,21,.42); background:transparent; cursor:pointer; font:11px/1 Arial,Helvetica,sans-serif; letter-spacing:.09em; transition:color .25s ease; }
+    .health-progress button:hover,.health-progress button:focus-visible { color:var(--niagara-red); }
+    .health-progress li.is-current { transform:translateY(-3px); }
+    .health-progress li.is-current button { color:var(--niagara-red); }
     .health-next { appearance:none; position:absolute; z-index:4; left:58%; bottom:24px; width:64px; height:42px; padding:0; border:0; color:rgba(21,23,21,.58); background:transparent; cursor:pointer; font-size:0; transition:color .22s ease,opacity .25s ease,transform .25s ease; }
     .health-next::before { content:""; position:absolute; left:8px; top:50%; width:44px; height:1px; background:currentColor; }
     .health-next::after { content:""; position:absolute; right:11px; top:calc(50% - 4px); width:8px; height:8px; border-top:1px solid currentColor; border-right:1px solid currentColor; transform:rotate(45deg); }
@@ -384,12 +387,12 @@
           </div>
 
           <button class="health-next is-hinting" type="button" aria-label="Continue to the next health-record section">→</button>
-          <ol class="health-progress" aria-label="Health record position">
-            <li class="is-current" aria-current="step">01</li>
-            <li>02</li>
-            <li>03</li>
-            <li>04</li>
-            <li>05</li>
+          <ol class="health-progress" aria-label="Choose a health-record section">
+            <li class="is-current"><button type="button" data-health-target="0" aria-label="Go to health-record section 1" aria-current="step">01</button></li>
+            <li><button type="button" data-health-target="1" aria-label="Go to health-record section 2">02</button></li>
+            <li><button type="button" data-health-target="2" aria-label="Go to health-record section 3">03</button></li>
+            <li><button type="button" data-health-target="3" aria-label="Go to health-record section 4">04</button></li>
+            <li><button type="button" data-health-target="4" aria-label="Go to health-record section 5">05</button></li>
           </ol>
         </section>
 
@@ -737,18 +740,18 @@
       const healthArchiveTrack = document.querySelector('.health-record-track');
       if (healthArchiveTrack) {
         const healthSlides = Array.from(healthArchiveTrack.querySelectorAll('.health-slide'));
-        const healthProgress = Array.from(document.querySelectorAll('.health-progress li'));
+        const healthProgress = Array.from(document.querySelectorAll('.health-progress button'));
         const healthNext = document.querySelector('.health-next');
         let healthProgressFrame = 0;
 
         const updateHealthProgress = () => {
           healthProgressFrame = 0;
           const index = Math.max(0, Math.min(healthSlides.length - 1, Math.round(healthArchiveTrack.scrollLeft / healthArchiveTrack.clientWidth)));
-          healthProgress.forEach((item, itemIndex) => {
+          healthProgress.forEach((button, itemIndex) => {
             const current = itemIndex === index;
-            item.classList.toggle('is-current', current);
-            if (current) item.setAttribute('aria-current', 'step');
-            else item.removeAttribute('aria-current');
+            button.parentElement.classList.toggle('is-current', current);
+            if (current) button.setAttribute('aria-current', 'step');
+            else button.removeAttribute('aria-current');
           });
           if (healthNext) {
             healthNext.disabled = index === healthSlides.length - 1;
@@ -759,6 +762,10 @@
         if (healthNext) healthNext.addEventListener('click', () => {
           healthArchiveTrack.scrollBy({ left:healthArchiveTrack.clientWidth, behavior:'smooth' });
         });
+        healthProgress.forEach(button => button.addEventListener('click', () => {
+          const index = Number(button.dataset.healthTarget);
+          healthArchiveTrack.scrollTo({ left:index * healthArchiveTrack.clientWidth, behavior:'smooth' });
+        }));
         healthArchiveTrack.addEventListener('scroll', () => {
           if (!healthProgressFrame) healthProgressFrame = requestAnimationFrame(updateHealthProgress);
         }, { passive:true });
