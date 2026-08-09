@@ -35,11 +35,14 @@
     body.niagara-tabs-solid .niagara-tabbar-wrap::before { background:var(--niagara-paper); backdrop-filter:blur(0); -webkit-backdrop-filter:blur(0); opacity:1; }
     .niagara-tabbar { z-index:1; width:min(1540px,calc(100% - 84px)); margin:0 auto; display:flex; align-items:stretch; overflow:visible; scrollbar-width:none; position:relative; }
     .niagara-tabbar::-webkit-scrollbar { display:none; }
-    .niagara-tab { appearance:none; flex:0 0 auto; min-height:66px; padding:0 27px; position:relative; border:0; background:transparent; color:var(--niagara-ink); cursor:pointer; white-space:nowrap; font:13px/1.2 Georgia,"Times New Roman",serif; opacity:.78; transition:opacity .2s ease,color .22s ease; }
+    .niagara-tab { appearance:none; flex:0 0 auto; min-height:66px; padding:0 27px; position:relative; border:0; background:transparent; color:rgba(241,240,234,.68); cursor:pointer; white-space:nowrap; font:13px/1.2 Georgia,"Times New Roman",serif; opacity:1; transition:opacity .28s ease,color .32s ease; }
     .niagara-tab:first-child { padding-left:0; }
-    .niagara-tab + .niagara-tab::before { content:"|"; position:absolute; left:0; top:50%; transform:translate(-50%,-52%); color:var(--niagara-ink); opacity:.30; pointer-events:none; font:12px/1 Georgia,"Times New Roman",serif; }
-    .niagara-tab:hover,.niagara-tab:focus-visible { opacity:1; color:var(--niagara-red); }
-    .niagara-tab[aria-selected="true"] { opacity:1; color:var(--niagara-red); }
+    .niagara-tab + .niagara-tab::before { content:"|"; position:absolute; left:0; top:50%; transform:translate(-50%,-52%); color:rgba(241,240,234,.52); opacity:1; pointer-events:none; font:12px/1 Georgia,"Times New Roman",serif; transition:color .32s ease,opacity .28s ease; }
+    .niagara-tab:hover,.niagara-tab:focus-visible { color:rgba(241,240,234,.94); }
+    body.niagara-tabs-stuck .niagara-tab { color:var(--niagara-ink); opacity:.78; }
+    body.niagara-tabs-stuck .niagara-tab + .niagara-tab::before { color:var(--niagara-ink); opacity:.30; }
+    body.niagara-tabs-stuck .niagara-tab:hover,body.niagara-tabs-stuck .niagara-tab:focus-visible { opacity:1; color:var(--niagara-red); }
+    body.niagara-tabs-stuck .niagara-tab[aria-selected="true"] { opacity:1; color:var(--niagara-red); }
     .niagara-tab-label { display:inline-block; position:relative; z-index:1; opacity:0; transform:translateY(var(--niagara-enter-y,calc(-100svh + 72px))); animation:niagara-tab-label-in 4.2s linear forwards; animation-delay:var(--niagara-enter-delay,.46s); }
     .niagara-tab[data-tab="investigation"] .niagara-tab-label::before { content:""; position:absolute; z-index:-1; top:-5px; bottom:-5px; left:50%; width:4px; background:var(--niagara-paper); opacity:0; transform:translateX(-50%); transition:opacity .2s ease; pointer-events:none; }
     body.niagara-tabs-stuck .niagara-tab[data-tab="investigation"] .niagara-tab-label::before { opacity:1; }
@@ -406,7 +409,7 @@
       <div class="niagara-hero-copy">
         <p class="niagara-eyebrow">Ongoing investigation</p>
         <h1 id="niagara-title">Greetings from Niagara</h1>
-        <p class="niagara-deck">A research-driven photography and multimedia project tracing the human and environmental consequences of Manhattan Project and Cold War industry across Western New York.</p>
+        <p class="niagara-deck">A research-driven photography and multimedia project tracing the human and environmental consequences of Manhattan Project and Cold War industry across <span class="niagara-thread-origin">Western New York.</span></p>
       </div>
     </section>
 
@@ -1000,6 +1003,7 @@
       const atomicThreadPath = document.querySelector('.atomic-thread-path');
       const atomicThreadEnd = document.querySelector('.atomic-thread-end');
       const investigationTabLabel = document.querySelector('.niagara-tab[data-tab="investigation"] .niagara-tab-label');
+      const niagaraThreadOrigin = document.querySelector('.niagara-thread-origin');
       const investigationStory = document.querySelector('.investigation-story');
       const atomicThreadReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
       let atomicThreadLength = 0;
@@ -1033,10 +1037,11 @@
         if (!atomicThread || !atomicThreadPath || !atomicThreadEnd || !investigationTabLabel || !investigationStory) return;
         const articleRect = investigationStory.getBoundingClientRect();
         const tabLabelRect = investigationTabLabel.getBoundingClientRect();
+        const threadOriginRect = niagaraThreadOrigin ? niagaraThreadOrigin.getBoundingClientRect() : null;
         const threadHeight = investigationStory.scrollHeight;
         if (articleRect.width < 1 || tabLabelRect.width < 1 || threadHeight < 1) return;
         atomicThreadX = tabLabelRect.left + tabLabelRect.width / 2 - articleRect.left;
-        atomicThreadStartY = tabbarWrap ? -tabbarWrap.offsetHeight + 13.5 : -52.5;
+        atomicThreadStartY = threadOriginRect ? threadOriginRect.bottom - articleRect.top + 10 : (tabbarWrap ? -tabbarWrap.offsetHeight + 13.5 : -52.5);
         const endY = threadHeight - 2;
         atomicThread.style.height = `${threadHeight}px`;
         atomicThread.setAttribute('viewBox', `0 0 ${articleRect.width} ${threadHeight}`);
