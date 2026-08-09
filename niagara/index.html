@@ -652,6 +652,7 @@
           if (active) loadPanel(panel);
         });
         requestAnimationFrame(() => moveIndicator(activeTab, animateIndicator));
+        if (name === 'investigation') requestAnimationFrame(layoutHealthThread);
         if (updateHash) history.replaceState(null, '', `#${name}`);
         if (scrollToContent) requestAnimationFrame(scrollTabsToTop);
       }
@@ -687,6 +688,7 @@
         const anchorRect = healthThreadAnchor.getBoundingClientRect();
         const targetRect = healthThreadTarget.getBoundingClientRect();
         const threadHeight = investigationStory.scrollHeight;
+        if (articleRect.width < 1 || targetRect.width < 1 || threadHeight < 1) return;
         const startX = anchorRect.right - articleRect.left + 2;
         const startY = anchorRect.bottom - articleRect.top + 4;
         const endX = Math.max(12, targetRect.left - articleRect.left - 18);
@@ -694,6 +696,7 @@
         const distance = Math.max(120, endY - startY);
         const bendY = startY + Math.min(280, Math.max(95, distance * .46));
 
+        healthThread.style.height = `${threadHeight}px`;
         healthThread.setAttribute('viewBox', `0 0 ${articleRect.width} ${threadHeight}`);
         healthThread.setAttribute('preserveAspectRatio', 'none');
         healthThreadPath.setAttribute('d', `M ${startX} ${startY} V ${bendY} H ${endX} V ${endY}`);
