@@ -9,7 +9,7 @@
   <link rel="shortcut icon" href="../favicon.svg" />
   <link rel="icon" href="../favicon.svg" />
   <style>
-    :root { --niagara-paper:#f1f0ea; --niagara-ink:#151715; --niagara-line:rgba(21,23,21,.22); --niagara-red:#440806; }
+    :root { --niagara-paper:#f1f0ea; --niagara-ink:#151715; --niagara-line:rgba(21,23,21,.22); --niagara-red:#440806; --niagara-cancer:#77736f; --niagara-atomic:#363636; }
     * { box-sizing:border-box; }
     html { scroll-behavior:smooth; }
     body.niagara-page { margin:0; color:var(--niagara-ink); background:var(--niagara-paper); min-height:100svh; overflow-x:hidden; }
@@ -67,15 +67,11 @@
     .investigation-opening .niagara-heading { top:132px; }
     .investigation-lede { margin:0 0 1.25em; font-size:clamp(24px,2.35vw,38px); line-height:1.2; letter-spacing:-.027em; }
     .investigation-body p { max-width:900px; margin:0 0 1.25em; font-size:clamp(18px,1.35vw,23px); line-height:1.47; letter-spacing:-.012em; }
-    .investigation-cancer-bridge { appearance:none; width:min(430px,56%); margin:clamp(28px,4svh,48px) 0 0 auto !important; padding:18px 0 17px; display:grid; grid-template-columns:1fr auto; gap:7px 22px; align-items:end; color:inherit; background:transparent; border:0; border-top:1px solid var(--niagara-line); border-bottom:1px solid var(--niagara-line); text-align:left; font-family:inherit; cursor:pointer; opacity:.58; transition:opacity .3s ease; }
-    .investigation-cancer-kicker { grid-column:1 / -1; color:rgba(21,23,21,.48); font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.18em; text-transform:uppercase; }
+    .investigation-cancer-bridge { appearance:none; width:min(430px,56%); margin:clamp(28px,4svh,48px) 0 0 auto !important; padding:18px 0 17px; display:grid; grid-template-columns:1fr auto; gap:7px 22px; align-items:end; color:inherit; background:transparent; border:0; border-top:1px solid var(--niagara-line); border-bottom:1px solid var(--niagara-line); text-align:left; font-family:inherit; cursor:pointer; }
     .investigation-cancer-title { color:var(--niagara-red); font-size:clamp(35px,3.4vw,53px); line-height:.9; letter-spacing:-.045em; }
     .investigation-cancer-arrow { color:var(--niagara-red); font:26px/1 Arial,Helvetica,sans-serif; transition:transform .3s ease; }
-    .investigation-cancer-note { grid-column:1 / -1; color:rgba(21,23,21,.58); font:10px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.06em; }
+    .investigation-cancer-note { grid-column:1 / -1; color:rgba(21,23,21,.68); font:10px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.06em; }
     .investigation-cancer-bridge:hover .investigation-cancer-arrow,.investigation-cancer-bridge:focus-visible .investigation-cancer-arrow { transform:translateX(8px); }
-    .investigation-cancer-bridge.is-ready { opacity:0; transform:translateX(-42px); transition:opacity .9s ease,transform 1.15s cubic-bezier(.22,.7,.25,1); }
-    .investigation-cancer-bridge.is-ready.is-visible { opacity:.58; transform:translateX(0); }
-    .investigation-cancer-bridge.is-ready.is-visible:hover,.investigation-cancer-bridge.is-ready.is-visible:focus-visible { opacity:1; }
     .investigation-chapter { border-top:1px solid var(--niagara-line); padding:clamp(86px,12svh,150px) 0; }
     .investigation-chapter-grid { display:grid; grid-template-columns:minmax(220px,.48fr) minmax(560px,1.52fr); gap:clamp(60px,9vw,150px); align-items:start; }
     .investigation-chapter-meta { position:sticky; top:132px; }
@@ -113,7 +109,11 @@
     .health-record-track { width:100%; height:calc(100svh - 66px); min-height:640px; display:flex; overflow-x:auto; overflow-y:hidden; overscroll-behavior-inline:contain; scroll-snap-type:x mandatory; scrollbar-width:none; cursor:default; }
     .health-record-track::-webkit-scrollbar { display:none; }
     .health-slide { flex:0 0 100%; width:100%; height:100%; min-width:0; padding:clamp(38px,4.8vw,70px); padding-bottom:clamp(78px,8svh,104px); scroll-snap-align:start; scroll-snap-stop:always; display:grid; align-items:center; background:#9d9d9d; border-right:1px solid rgba(21,23,21,.20); }
-    .health-slide--waterfalls,.health-slide--lead { background:var(--niagara-paper); }
+    .health-slide--waterfalls { position:relative; background:var(--niagara-paper); }
+    .health-slide--waterfalls::after { content:""; position:absolute; top:0; right:0; width:clamp(42px,4vw,66px); height:100%; background:var(--niagara-cancer); box-shadow:-1px 0 rgba(21,23,21,.12); pointer-events:none; }
+    .health-slide--lead { color:var(--niagara-paper); background:var(--niagara-cancer); }
+    .health-slide--lead .health-slide-meta .investigation-number { color:rgba(241,240,234,.58); }
+    .health-slide--lead .health-slide-quote figcaption { color:rgba(241,240,234,.66); }
     .waterfalls-slide-inner { width:min(1540px,calc(100% - 84px)); margin:0 auto; display:grid; grid-template-columns:minmax(260px,.72fr) minmax(500px,1.28fr); gap:clamp(70px,11vw,190px); align-items:center; }
     .waterfalls-slide-meta h2 { margin:0; letter-spacing:-.048em; font-size:clamp(52px,6vw,96px); font-weight:400; line-height:.9; }
     .health-slide-inner { width:min(1220px,100%); margin:0 auto; display:grid; grid-template-columns:minmax(210px,.42fr) minmax(470px,1.18fr); gap:clamp(44px,7vw,112px); align-items:center; }
@@ -152,11 +152,15 @@
     .health-progress button:hover,.health-progress button:focus-visible { color:var(--niagara-red); }
     .health-progress li.is-current { transform:translateY(-3px); }
     .health-progress li.is-current button { color:var(--niagara-red); }
+    .health-record.is-on-dark .health-progress button { color:rgba(241,240,234,.56); }
+    .health-record.is-on-dark .health-progress button:hover,.health-record.is-on-dark .health-progress button:focus-visible,.health-record.is-on-dark .health-progress li.is-current button { color:var(--niagara-paper); }
     .health-prev { appearance:none; position:absolute; z-index:4; left:42%; bottom:24px; width:64px; height:42px; padding:0; border:0; color:rgba(21,23,21,.58); background:transparent; cursor:pointer; font-size:0; opacity:0; pointer-events:none; transition:color .22s ease,opacity .25s ease,transform .25s ease; }
     .health-prev::before { content:""; position:absolute; right:8px; top:50%; width:44px; height:1px; background:currentColor; }
     .health-prev::after { content:""; position:absolute; left:11px; top:calc(50% - 4px); width:8px; height:8px; border-top:1px solid currentColor; border-left:1px solid currentColor; transform:rotate(-45deg); }
     .health-prev:hover,.health-prev:focus-visible { color:var(--niagara-red); transform:translateX(-5px); }
     .health-prev.is-visible { opacity:1; pointer-events:auto; }
+    .health-record.is-on-dark .health-prev,.health-record.is-on-dark .health-next { color:rgba(241,240,234,.72); }
+    .health-record.is-on-dark .health-prev:hover,.health-record.is-on-dark .health-prev:focus-visible,.health-record.is-on-dark .health-next:hover,.health-record.is-on-dark .health-next:focus-visible { color:var(--niagara-paper); }
     .health-next { appearance:none; position:absolute; z-index:4; left:58%; bottom:24px; width:64px; height:42px; padding:0; border:0; color:rgba(21,23,21,.58); background:transparent; cursor:pointer; font-size:0; transition:color .22s ease,opacity .25s ease,transform .25s ease; }
     .health-next::before { content:""; position:absolute; left:8px; top:50%; width:44px; height:1px; background:currentColor; }
     .health-next::after { content:""; position:absolute; right:11px; top:calc(50% - 4px); width:8px; height:8px; border-top:1px solid currentColor; border-right:1px solid currentColor; transform:rotate(45deg); }
@@ -201,9 +205,9 @@
 
     /* Atomic Niagara video chapter */
     .atomic-niagara-chapter { border-top:0; padding-top:0; }
-    .atomic-niagara-hero { width:100vw; height:calc(100svh - 66px); min-height:640px; margin-left:calc(50% - 50vw); display:grid; grid-template-columns:minmax(340px,.44fr) minmax(0,.56fr); overflow:hidden; background:var(--niagara-paper); }
-    .atomic-niagara-title { min-width:0; padding:clamp(44px,5vw,86px); display:flex; flex-direction:column; justify-content:center; color:var(--niagara-ink); background:var(--niagara-paper); pointer-events:none; }
-    .atomic-niagara-title .investigation-number { color:rgba(21,23,21,.48); }
+    .atomic-niagara-hero { width:100vw; height:calc(100svh - 66px); min-height:640px; margin-left:calc(50% - 50vw); display:grid; grid-template-columns:minmax(340px,.44fr) minmax(0,.56fr); overflow:hidden; background:var(--niagara-atomic); }
+    .atomic-niagara-title { min-width:0; padding:clamp(44px,5vw,86px); display:flex; flex-direction:column; justify-content:center; color:var(--niagara-paper); background:var(--niagara-atomic); pointer-events:none; }
+    .atomic-niagara-title .investigation-number { color:rgba(241,240,234,.58); }
     .atomic-niagara-title h3 { margin:0; max-width:720px; font-size:clamp(58px,7vw,112px); line-height:.86; font-weight:400; letter-spacing:-.055em; }
     .atomic-niagara-media { min-width:0; position:relative; overflow:hidden; background:#111; }
     .atomic-niagara-video { width:100%; height:100%; border:0; display:block; object-fit:cover; object-position:center; background:#111; }
@@ -347,8 +351,7 @@
                   <p class="investigation-lede">The unfortunate demise of Niagara Falls is actually based on what attracts its tourists year after year: its waterfalls. Niagara Falls has been the source of abundant and cheap hydroelectric power. The city’s industrialization began as early as 1875, when the first hydroelectric mill began operating. By 1892, the city had undergone considerable industrialization, resulting in significant pollution as a direct consequence.</p>
                   <p>Since 1942, Niagara Falls industry became central to Manhattan Project and Cold War production, including the nation’s largest production center for uranium metal-from-ore. That work left a radioactive scar whose consequences remain embedded in the region. For thousands of years, this area will face the consequences of radioactive contamination. No other area in the world, not even Chornobyl’s exclusion zone, is comparable. It’s no accident that cancer rates in this area of western New York have remained disturbingly high for the past 40 years and are the highest in the U.S.</p>
                   <button class="investigation-cancer-bridge" type="button" aria-label="Continue right to the health record">
-                    <span class="investigation-cancer-kicker">Explore the health record</span>
-                    <strong class="investigation-cancer-title">Cancer</strong>
+                    <strong class="investigation-cancer-title">cancer</strong>
                     <span class="investigation-cancer-arrow" aria-hidden="true">→</span>
                     <span class="investigation-cancer-note">Four decades of studies, surveys, and archival findings</span>
                   </button>
@@ -759,15 +762,6 @@
       });
 
       const cancerBridge = document.querySelector('.investigation-cancer-bridge');
-      if (cancerBridge) {
-        cancerBridge.classList.add('is-ready');
-        const cancerBridgeObserver = new IntersectionObserver(entries => {
-          if (!entries.some(entry => entry.isIntersecting)) return;
-          cancerBridge.classList.add('is-visible');
-          cancerBridgeObserver.disconnect();
-        }, { threshold:.35 });
-        cancerBridgeObserver.observe(cancerBridge);
-      }
 
       const atomicThread = document.querySelector('.atomic-thread');
       const atomicThreadPath = document.querySelector('.atomic-thread-path');
@@ -816,6 +810,7 @@
         const healthProgress = Array.from(document.querySelectorAll('.health-progress button'));
         const healthPrev = document.querySelector('.health-prev');
         const healthNext = document.querySelector('.health-next');
+        const healthRecord = healthArchiveTrack.closest('.health-record');
         let healthProgressFrame = 0;
 
         const updateHealthProgress = () => {
@@ -834,6 +829,7 @@
             healthNext.classList.toggle('is-hinting', index === 1);
           }
           if (atomicThread) atomicThread.classList.toggle('is-offscreen', index !== 0);
+          if (healthRecord) healthRecord.classList.toggle('is-on-dark', index === 1);
         };
 
         if (healthPrev) healthPrev.addEventListener('click', () => {
