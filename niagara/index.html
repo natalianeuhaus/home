@@ -93,7 +93,7 @@
     .health-thread-anchor { display:inline-block; width:1px; height:1em; vertical-align:baseline; }
     .health-thread { position:absolute; inset:0 auto auto 0; z-index:4; width:100%; height:100%; overflow:visible; pointer-events:none; opacity:0; transition:opacity .2s ease; }
     .health-thread.is-ready { opacity:1; }
-    .health-thread-path { fill:none; stroke:var(--niagara-red); stroke-width:2; stroke-linecap:square; stroke-linejoin:miter; vector-effect:non-scaling-stroke; stroke-dasharray:var(--health-thread-length,1); stroke-dashoffset:var(--health-thread-length,1); }
+    .health-thread-path { fill:none; stroke:var(--niagara-red); stroke-width:1; stroke-linecap:square; stroke-linejoin:miter; vector-effect:non-scaling-stroke; stroke-dasharray:var(--health-thread-length,1); stroke-dashoffset:var(--health-thread-length,1); }
     .health-thread-end { fill:var(--niagara-red); opacity:0; transform-box:fill-box; transform-origin:center; }
     .health-thread.is-drawing .health-thread-path { animation:health-thread-draw 2.45s cubic-bezier(.65,0,.35,1) forwards; }
     .health-thread.is-drawing .health-thread-end { animation:health-thread-end 1s ease-in-out 2.35s 3 both; }
