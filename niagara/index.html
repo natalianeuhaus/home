@@ -125,6 +125,7 @@
     .waterfalls-archive-frame { width:100%; height:min(66svh,640px); min-height:360px; position:relative; margin:0; display:grid; place-items:center; overflow:hidden; color:rgba(21,23,21,.42); background:#c9c8c2; border:1px solid var(--niagara-line); }
     .waterfalls-archive-frame > span { font:8px/1 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
     .waterfalls-archive-frame img { width:100%; height:100%; display:block; object-fit:cover; }
+    .waterfalls-archive-frame--contain img { object-fit:contain; background:#f2eed6; }
     .waterfalls-archive-frame figcaption { position:absolute; z-index:1; left:14px; bottom:12px; color:rgba(21,23,21,.55); font:8px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.1em; text-transform:uppercase; }
     .waterfalls-progress { position:absolute; z-index:6; right:clamp(28px,4vw,58px); bottom:15px; display:flex; gap:3px; margin:0; padding:0; list-style:none; }
     .waterfalls-progress li { transition:transform .25s ease; }
@@ -466,8 +467,8 @@
                   <h3>Industrial archive</h3>
                 </header>
                 <figure class="waterfalls-archive-frame">
-                  <span>Image 01</span>
-                  <figcaption>Photograph placeholder</figcaption>
+                  <img src="./archive/adams-power-station-machinery-1896.jpg" alt="Interior of the Adams Power Station generating room in Niagara Falls, May 7, 1896" loading="lazy" />
+                  <figcaption>Adams Power Station, May 7, 1896 · Daniel Dumych Collection, Niagara County Historical Society</figcaption>
                 </figure>
               </div>
             </article>
@@ -479,8 +480,8 @@
                   <h3>Archive image 02</h3>
                 </header>
                 <figure class="waterfalls-archive-frame">
-                  <span>Image 02</span>
-                  <figcaption>Factory archive placeholder</figcaption>
+                  <img src="./archive/adams-power-station-aerial.jpg" alt="Aerial view of the Adams Power Station and surrounding Niagara Falls industrial landscape" loading="lazy" />
+                  <figcaption>Adams Power Station and the surrounding industrial landscape</figcaption>
                 </figure>
               </div>
             </article>
@@ -491,9 +492,9 @@
                   <span class="investigation-number">I</span>
                   <h3>Archive image 03</h3>
                 </header>
-                <figure class="waterfalls-archive-frame">
-                  <span>Image 03</span>
-                  <figcaption>Document placeholder</figcaption>
+                <figure class="waterfalls-archive-frame waterfalls-archive-frame--contain">
+                  <img src="./archive/niagara-power-circuit-diagram.jpg" alt="Historical diagram of the Niagara Falls Power Company electrical circuits" loading="lazy" />
+                  <figcaption>Niagara Falls Power Company circuit diagram, 1897</figcaption>
                 </figure>
               </div>
             </article>
