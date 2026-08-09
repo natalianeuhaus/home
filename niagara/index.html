@@ -69,7 +69,7 @@
     .investigation-body p { max-width:900px; margin:0 0 1.25em; font-size:clamp(18px,1.35vw,23px); line-height:1.47; letter-spacing:-.012em; }
     .investigation-chapter { border-top:1px solid var(--niagara-line); padding:clamp(86px,12svh,150px) 0; }
     .investigation-chapter-grid { display:grid; grid-template-columns:minmax(220px,.48fr) minmax(560px,1.52fr); gap:clamp(60px,9vw,150px); align-items:start; }
-    .investigation-chapter-meta { position:sticky; top:132px; }
+    .investigation-chapter-meta { position:sticky; z-index:5; top:132px; }
     .investigation-number { display:block; margin:0 0 20px; color:rgba(21,23,21,.42); font:10px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.24em; text-transform:uppercase; }
     .investigation-chapter h3 { position:relative; z-index:5; margin:0; max-width:350px; font-size:clamp(38px,4.5vw,76px); line-height:.94; font-weight:400; letter-spacing:-.045em; }
     .waterfalls-slide-meta .niagara-kicker,.atomic-niagara-title .investigation-number,.investigation-chapter-meta .investigation-number,.health-slide-meta .investigation-number { position:relative; z-index:5; }
@@ -299,7 +299,8 @@
       .niagara-section,.niagara-iframe-intro,.niagara-photo-intro,.investigation-story { width:calc(100% - 48px); }
       .niagara-section { padding:84px 0 110px; }
       .niagara-two-col,.niagara-iframe-intro,.niagara-photo-intro,.investigation-opening,.investigation-chapter-grid { grid-template-columns:1fr; gap:48px; }
-      .niagara-heading,.investigation-chapter-meta { position:static; }
+      .niagara-heading { position:static; }
+      .investigation-chapter-meta { position:relative; z-index:5; top:auto; }
       .niagara-heading h2,.niagara-iframe-intro h2,.niagara-photo-intro h2 { font-size:clamp(48px,15vw,74px); }
       .niagara-copy p { font-size:18px; line-height:1.46; }
       .investigation-story { padding:0 0 130px; }
