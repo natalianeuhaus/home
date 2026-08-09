@@ -90,6 +90,7 @@
     .investigation-end { margin-top:clamp(72px,10svh,130px); max-width:1080px; font-size:clamp(34px,4.4vw,72px); line-height:1.05; letter-spacing:-.045em; }
 
     /* Health record */
+    .health-thread-anchor { display:inline-block; width:1px; height:1em; vertical-align:baseline; }
     .health-thread { position:absolute; inset:0 auto auto 0; z-index:4; width:100%; height:100%; overflow:visible; pointer-events:none; opacity:0; transition:opacity .2s ease; }
     .health-thread.is-ready { opacity:1; }
     .health-thread-path { fill:none; stroke:var(--niagara-red); stroke-width:2; stroke-linecap:square; stroke-linejoin:miter; vector-effect:non-scaling-stroke; stroke-dasharray:var(--health-thread-length,1); stroke-dashoffset:var(--health-thread-length,1); }
@@ -276,7 +277,7 @@
           </div>
           <div class="investigation-body">
             <p class="investigation-lede">The unfortunate demise of Niagara Falls is actually based on what attracts its tourists year after year: its waterfalls. Niagara Falls has been the source of abundant and cheap hydroelectric power. The city’s industrialization began as early as 1875, when the first hydroelectric mill began operating. By 1892, the city had undergone considerable industrialization, resulting in significant pollution as a direct consequence.</p>
-            <p>Since 1942, throughout the Manhattan Project and into the Cold War era, Niagara Falls was the premier city for experimentation, research, development, and production of atomic bomb materials (i.e. radioactive.) According to U.S. Department of Energy records, Niagara Falls industry during that period was the largest production center for uranium metal-from-ore in the nation. The city’s involvement in the Manhattan Project and the nuclear buildup that came after left a radioactive scar on the region. For thousands of years, this area will face the consequences of radioactive contamination. No other area in the world, not even Chornobyl’s exclusion zone, is comparable. It’s no accident that <span class="health-thread-anchor">cancer</span> rates in this area of western New York have remained disturbingly high for the past 40 years and are the highest in the U.S.</p>
+            <p>Since 1942, throughout the Manhattan Project and into the Cold War era, Niagara Falls was the premier city for experimentation, research, development, and production of atomic bomb materials (i.e. radioactive.) According to U.S. Department of Energy records, Niagara Falls industry during that period was the largest production center for uranium metal-from-ore in the nation. The city’s involvement in the Manhattan Project and the nuclear buildup that came after left a radioactive scar on the region. For thousands of years, this area will face the consequences of radioactive contamination. No other area in the world, not even Chornobyl’s exclusion zone, is comparable. It’s no accident that cancer rates in this area of western New York have remained disturbingly high for the past 40 years and are the highest in the U.S.<span class="health-thread-anchor" aria-hidden="true"></span></p>
           </div>
         </section>
 
@@ -689,8 +690,8 @@
         const targetRect = healthThreadTarget.getBoundingClientRect();
         const threadHeight = investigationStory.scrollHeight;
         if (articleRect.width < 1 || targetRect.width < 1 || threadHeight < 1) return;
-        const startX = anchorRect.right - articleRect.left + 2;
-        const startY = anchorRect.bottom - articleRect.top + 4;
+        const startX = anchorRect.right - articleRect.left + 10;
+        const startY = anchorRect.bottom - articleRect.top + 2;
         const endX = Math.max(12, targetRect.left - articleRect.left - 18);
         const endY = targetRect.top - articleRect.top + 8;
         const distance = Math.max(120, endY - startY);
