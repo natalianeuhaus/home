@@ -32,7 +32,7 @@
     .niagara-tabbar-wrap { position:sticky; top:0; z-index:24; margin-top:-66px; background:transparent; animation:niagara-tabbar-in 1.35s cubic-bezier(.22,.7,.25,1) both; }
     .niagara-tabbar-wrap::before { content:""; position:absolute; z-index:0; inset:0; background:rgb(241 240 234 / 24%); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom:1px solid rgba(21,23,21,.18); box-shadow:0 -1px 0 rgba(255,255,255,.16); opacity:0; pointer-events:none; transition:opacity .45s ease,background-color .35s ease,backdrop-filter .35s ease,-webkit-backdrop-filter .35s ease; }
     body.niagara-tabs-stuck .niagara-tabbar-wrap::before { opacity:1; }
-    body.niagara-tabs-on-atomic .niagara-tabbar-wrap::before { background:var(--niagara-paper); backdrop-filter:blur(0); -webkit-backdrop-filter:blur(0); opacity:1; }
+    body.niagara-tabs-solid .niagara-tabbar-wrap::before { background:var(--niagara-paper); backdrop-filter:blur(0); -webkit-backdrop-filter:blur(0); opacity:1; }
     .niagara-tabbar { z-index:1; width:min(1540px,calc(100% - 84px)); margin:0 auto; display:flex; align-items:stretch; overflow:visible; scrollbar-width:none; position:relative; }
     .niagara-tabbar::-webkit-scrollbar { display:none; }
     .niagara-tab { appearance:none; flex:0 0 auto; min-height:66px; padding:0 27px; position:relative; border:0; background:transparent; color:var(--niagara-ink); cursor:pointer; white-space:nowrap; font:13px/1.2 Georgia,"Times New Roman",serif; opacity:.78; transition:opacity .2s ease,color .22s ease; }
@@ -913,7 +913,7 @@
       const validTabs = new Set(tabs.map(tab => tab.dataset.tab));
       const page = document.body;
       const tabbarWrap = document.querySelector('.niagara-tabbar-wrap');
-      const atomicNiagaraSection = document.querySelector('#atomic-niagara');
+      const waterfallsSection = document.querySelector('#waterfalls-chapter');
       const tabbar = document.querySelector('.niagara-tabbar');
       const indicator = document.createElement('span');
       indicator.className = 'niagara-tab-indicator';
@@ -933,10 +933,10 @@
         if (!tabbarWrap) return;
         const stuck = tabbarWrap.getBoundingClientRect().top <= 0 && window.scrollY > 0;
         page.classList.toggle('niagara-tabs-stuck', stuck);
-        if (atomicNiagaraSection) {
-          const atomicRect = atomicNiagaraSection.getBoundingClientRect();
-          const atomicAtTabs = stuck && atomicRect.top <= tabbarWrap.offsetHeight;
-          page.classList.toggle('niagara-tabs-on-atomic', atomicAtTabs);
+        if (waterfallsSection) {
+          const waterfallsRect = waterfallsSection.getBoundingClientRect();
+          const solidAtTabs = stuck && waterfallsRect.top <= tabbarWrap.offsetHeight;
+          page.classList.toggle('niagara-tabs-solid', solidAtTabs);
         }
       }
 
