@@ -179,7 +179,7 @@
     /* Atomic Niagara video chapter */
     .atomic-niagara-chapter { border-top:0; padding-top:0; }
     .atomic-niagara-hero { width:100vw; height:calc(100svh - 66px); min-height:640px; margin-left:calc(50% - 50vw); position:relative; overflow:hidden; background:#111 url("https://drive.google.com/thumbnail?id=1C8VWqPumNSTUgYeL459wV-waOU4siuq-&sz=w1600") center/cover no-repeat; }
-    .atomic-niagara-video { position:absolute; inset:-2px; width:calc(100% + 4px); height:calc(100% + 4px); border:0; display:block; background:#111; }
+    .atomic-niagara-video { position:absolute; inset:-2px; width:calc(100% + 4px); height:calc(100% + 4px); border:0; display:block; object-fit:cover; object-position:center; background:#111; }
     .atomic-niagara-scrim { position:absolute; z-index:1; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.10) 28%,rgba(0,0,0,.62) 100%); pointer-events:none; }
     .atomic-niagara-title { position:absolute; z-index:2; left:50%; bottom:clamp(52px,9svh,108px); width:min(1540px,calc(100% - 84px)); transform:translateX(-50%); color:#f1f0ea; pointer-events:none; text-shadow:0 2px 24px rgba(0,0,0,.34); }
     .atomic-niagara-title .investigation-number { color:rgba(241,240,234,.68); }
@@ -419,7 +419,9 @@
 
         <section class="investigation-chapter atomic-niagara-chapter" id="atomic-niagara">
           <div class="atomic-niagara-hero">
-            <iframe class="atomic-niagara-video" src="https://drive.google.com/file/d/1C8VWqPumNSTUgYeL459wV-waOU4siuq-/preview?autoplay=1" title="Ketchum family archival film" loading="lazy" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            <video class="atomic-niagara-video" autoplay muted loop playsinline preload="auto" aria-label="Ketchum family archival film" poster="https://drive.google.com/thumbnail?id=1Xa-MRHBlHIsZFsfw7v2UTZuj3uqHSx-9&amp;sz=w1600">
+              <source src="https://drive.google.com/uc?export=download&amp;id=1Xa-MRHBlHIsZFsfw7v2UTZuj3uqHSx-9" type="video/mp4" />
+            </video>
             <div class="atomic-niagara-scrim" aria-hidden="true"></div>
             <div class="atomic-niagara-title">
               <span class="investigation-number">01 · 1942</span>
