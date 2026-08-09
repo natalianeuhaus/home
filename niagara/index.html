@@ -211,10 +211,8 @@
     .atomic-niagara-video { width:100%; height:100%; border:0; display:block; object-fit:cover; object-position:center; background:#111; }
     .atomic-niagara-credit { position:absolute; z-index:1; right:18px; bottom:16px; margin:0; max-width:76%; color:rgba(241,240,234,.68); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.08em; text-align:right; text-transform:uppercase; text-shadow:0 1px 8px rgba(0,0,0,.7); }
     .atomic-niagara-copy-grid { grid-template-columns:minmax(500px,900px); justify-content:end; padding-top:clamp(86px,12svh,150px); }
-    .atomic-evidence-mosaic { width:100vw; margin:clamp(72px,10svh,130px) 0 0 calc(50% - 50vw); padding:clamp(16px,2vw,30px); color:var(--niagara-paper); background:var(--niagara-atomic); }
-    .atomic-evidence-heading { display:flex; justify-content:space-between; align-items:baseline; gap:24px; margin:0 0 14px; color:rgba(241,240,234,.66); font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
-    .atomic-evidence-heading strong { color:var(--niagara-paper); font:inherit; }
-    .atomic-evidence-grid { height:min(76svh,790px); min-height:560px; display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); grid-template-rows:repeat(3,minmax(0,1fr)); gap:6px; }
+    .atomic-evidence-mosaic { width:100vw; margin:0 0 0 calc(50% - 50vw); padding:0; color:var(--niagara-paper); background:var(--niagara-atomic); }
+    .atomic-evidence-grid { height:min(76svh,790px); min-height:560px; display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); grid-template-rows:repeat(3,minmax(0,1fr)); gap:0; }
     .atomic-evidence-item { min-width:0; min-height:0; position:relative; overflow:hidden; color:var(--niagara-paper); background:#1d1d1d; }
     .atomic-evidence-item:nth-child(1) { grid-column:1 / 6; grid-row:1 / 4; }
     .atomic-evidence-item:nth-child(2) { grid-column:6 / 10; grid-row:1 / 3; }
@@ -250,8 +248,7 @@
       .atomic-niagara-title h3 { font-size:clamp(54px,17vw,84px); }
       .atomic-niagara-media { min-height:300px; }
       .atomic-niagara-copy-grid { grid-template-columns:1fr; padding-top:82px; }
-      .atomic-evidence-mosaic { margin-top:72px; padding:16px 12px 28px; }
-      .atomic-evidence-heading { align-items:flex-start; flex-direction:column; gap:5px; }
+      .atomic-evidence-mosaic { margin-top:0; padding:0; }
       .atomic-evidence-grid { height:auto; min-height:0; grid-template-columns:1fr 1fr; grid-template-rows:none; grid-auto-rows:minmax(155px,25svh); }
       .atomic-evidence-item:nth-child(n) { grid-column:auto; grid-row:auto; }
       .atomic-evidence-item:nth-child(1) { grid-column:1 / -1; min-height:38svh; }
@@ -408,15 +405,7 @@
               <figcaption class="atomic-niagara-credit">Trinity test · July 16, 1945 · U.S. Department of Energy / Wikimedia Commons · Public domain</figcaption>
             </figure>
           </div>
-          <div class="investigation-chapter-grid atomic-niagara-copy-grid">
-            <div class="investigation-chapter-copy">
-              <p>Hooker Electrochemical Company, Union Carbide and its subsidiaries Linde and Electromet, Carborundum, and other regional companies became part of a wartime production network built around uranium. Factories refined ore, converted uranium compounds into metal, recovered uranium from waste, fabricated rods and components, and experimented with processes designed to maximize yield.</p>
-              <p>General Leslie Groves, who directed the Manhattan Project, cultivated relationships with industrial operators whose existing laboratories, power supply, rail access, and culture of secrecy made Western New York particularly useful. That secrecy also meant that generations of workers handled radioactive materials without a public understanding of the risks or the full scope of the work.</p>
-            </div>
-          </div>
-
           <div class="atomic-evidence-mosaic" aria-label="A visual index of archival and photographic evidence">
-            <div class="atomic-evidence-heading"><strong>Evidence, assembled</strong><span>Select an image to follow the record</span></div>
             <div class="atomic-evidence-grid">
               <a class="atomic-evidence-item" href="#atomic-niagara">
                 <img src="https://natalianeuhaus.com/wp-content/uploads/2024/05/letter_award.jpg" alt="Manhattan Project-era recognition documenting Niagara industry’s wartime involvement" loading="lazy" />
@@ -442,6 +431,14 @@
                 <img src="https://natalianeuhaus.com/wp-content/uploads/2024/05/resultsnf-scaled-copy.jpg" alt="Historical Niagara radiological survey results" loading="lazy" />
                 <span class="atomic-evidence-caption">Survey results · elevated locations</span>
               </a>
+            </div>
+          </div>
+
+
+          <div class="investigation-chapter-grid atomic-niagara-copy-grid">
+            <div class="investigation-chapter-copy">
+              <p>Hooker Electrochemical Company, Union Carbide and its subsidiaries Linde and Electromet, Carborundum, and other regional companies became part of a wartime production network built around uranium. Factories refined ore, converted uranium compounds into metal, recovered uranium from waste, fabricated rods and components, and experimented with processes designed to maximize yield.</p>
+              <p>General Leslie Groves, who directed the Manhattan Project, cultivated relationships with industrial operators whose existing laboratories, power supply, rail access, and culture of secrecy made Western New York particularly useful. That secrecy also meant that generations of workers handled radioactive materials without a public understanding of the risks or the full scope of the work.</p>
             </div>
           </div>
 
