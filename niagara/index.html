@@ -109,8 +109,39 @@
     .health-record-track::-webkit-scrollbar { display:none; }
     .health-slide { flex:0 0 100%; width:100%; height:100%; min-width:0; padding:clamp(38px,4.8vw,70px); padding-bottom:clamp(78px,8svh,104px); scroll-snap-align:start; scroll-snap-stop:always; display:grid; align-items:center; background:#9d9d9d; border-right:1px solid rgba(21,23,21,.20); }
     .waterfalls-record { height:calc(100svh - 66px); min-height:640px; }
+    .waterfalls-record-track { width:100%; height:100%; display:flex; overflow-x:auto; overflow-y:hidden; overscroll-behavior-inline:contain; scroll-snap-type:x mandatory; scrollbar-width:none; }
+    .waterfalls-record-track::-webkit-scrollbar { display:none; }
     .waterfalls-record .health-slide { width:100%; height:100%; border-right:0; }
-    .health-slide--waterfalls { background:var(--niagara-paper); }
+    .health-slide--waterfalls,.waterfalls-slide--text,.waterfalls-slide--archive { background:var(--niagara-paper); }
+    .waterfalls-subslide-inner { width:min(1220px,100%); margin:0 auto; display:grid; grid-template-columns:minmax(210px,.42fr) minmax(470px,1.18fr); gap:clamp(44px,7vw,112px); align-items:center; }
+    .waterfalls-subslide-meta { align-self:start; }
+    .waterfalls-subslide-meta .investigation-number { position:relative; z-index:5; }
+    .waterfalls-subslide-meta h3 { position:relative; z-index:5; margin:0; max-width:370px; color:var(--niagara-ink); background:var(--niagara-paper); box-shadow:0 0 0 7px var(--niagara-paper); font-size:clamp(38px,4.5vw,76px); line-height:.94; font-weight:400; letter-spacing:-.045em; }
+    .waterfalls-subslide-copy p { max-width:820px; margin:0; font-size:clamp(24px,2.35vw,38px); line-height:1.2; letter-spacing:-.027em; }
+    .waterfalls-archive-grid { height:min(58svh,540px); display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); grid-template-rows:repeat(2,minmax(0,1fr)); border-top:1px solid var(--niagara-line); border-left:1px solid var(--niagara-line); }
+    .waterfalls-archive-item { min-width:0; min-height:0; position:relative; margin:0; display:grid; place-items:center; color:rgba(21,23,21,.42); background:#d2d1cb; border-right:1px solid var(--niagara-line); border-bottom:1px solid var(--niagara-line); }
+    .waterfalls-archive-item:nth-child(even) { background:#c5c4be; }
+    .waterfalls-archive-item span { font:8px/1 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
+    .waterfalls-archive-item figcaption { position:absolute; left:12px; bottom:10px; color:rgba(21,23,21,.52); font:8px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.1em; text-transform:uppercase; }
+    .waterfalls-progress { position:absolute; z-index:6; right:clamp(28px,4vw,58px); bottom:15px; display:flex; gap:3px; margin:0; padding:0; list-style:none; }
+    .waterfalls-progress li { transition:transform .25s ease; }
+    .waterfalls-progress button { appearance:none; min-width:43px; min-height:42px; display:grid; place-items:center; padding:0; border:0; color:rgba(21,23,21,.42); background:transparent; cursor:pointer; font:11px/1 Arial,Helvetica,sans-serif; letter-spacing:.09em; transition:color .25s ease; }
+    .waterfalls-progress button:hover,.waterfalls-progress button:focus-visible,.waterfalls-progress li.is-current button { color:var(--niagara-red); }
+    .waterfalls-progress li.is-current { transform:translateY(-3px); }
+    .waterfalls-prev,.waterfalls-next { appearance:none; position:absolute; z-index:6; bottom:24px; width:64px; height:42px; padding:0; border:0; color:rgba(21,23,21,.58); background:transparent; cursor:pointer; font-size:0; transition:color .22s ease,opacity .25s ease,transform .25s ease; }
+    .waterfalls-prev { left:42%; opacity:0; pointer-events:none; }
+    .waterfalls-next { left:58%; }
+    .waterfalls-prev::before,.waterfalls-next::before { content:""; position:absolute; top:50%; width:44px; height:1px; background:currentColor; }
+    .waterfalls-prev::before { right:8px; }
+    .waterfalls-next::before { left:8px; }
+    .waterfalls-prev::after,.waterfalls-next::after { content:""; position:absolute; top:calc(50% - 4px); width:8px; height:8px; }
+    .waterfalls-prev::after { left:11px; border-top:1px solid currentColor; border-left:1px solid currentColor; transform:rotate(-45deg); }
+    .waterfalls-next::after { right:11px; border-top:1px solid currentColor; border-right:1px solid currentColor; transform:rotate(45deg); }
+    .waterfalls-prev:hover,.waterfalls-prev:focus-visible { color:var(--niagara-red); transform:translateX(-5px); }
+    .waterfalls-next:hover,.waterfalls-next:focus-visible { color:var(--niagara-red); transform:translateX(5px); }
+    .waterfalls-prev.is-visible { opacity:1; pointer-events:auto; }
+    .waterfalls-next.is-hinting { animation:health-next-hint 1.15s ease-in-out 3; }
+    .waterfalls-next:disabled { opacity:.18; cursor:default; transform:none; animation:none; }
     .health-slide--lead { position:relative; color:var(--niagara-paper); background:var(--niagara-cancer); }
     .health-slide--lead::after { content:""; position:absolute; top:0; right:0; width:clamp(24px,2.4vw,42px); height:100%; background:#9d9d9d; box-shadow:-1px 0 rgba(21,23,21,.12); pointer-events:none; }
     .health-slide--lead .health-slide-meta .investigation-number { color:rgba(241,240,234,.58); }
@@ -176,8 +207,15 @@
       .health-record { width:100vw; margin-left:calc(50% - 50vw); }
       .health-record-track { height:calc(100svh - 58px); min-height:620px; }
       .health-slide { padding:30px 22px 76px; }
-      .waterfalls-slide-inner { width:100%; grid-template-columns:1fr; gap:28px; align-items:start; }
-      .waterfalls-slide-meta h2 { font-size:clamp(44px,14vw,68px); }
+      .waterfalls-record-track { height:100%; min-height:620px; }
+      .waterfalls-slide-inner,.waterfalls-subslide-inner { width:100%; grid-template-columns:1fr; gap:28px; align-items:start; }
+      .waterfalls-slide-meta h2,.waterfalls-subslide-meta h3 { max-width:none; font-size:clamp(44px,14vw,68px); }
+      .waterfalls-subslide-copy p { font-size:clamp(21px,6vw,30px); }
+      .waterfalls-archive-grid { height:min(56svh,500px); grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:repeat(3,minmax(0,1fr)); }
+      .waterfalls-prev { left:21%; bottom:14px; }
+      .waterfalls-next { left:42%; bottom:14px; }
+      .waterfalls-progress { right:12px; bottom:6px; }
+      .waterfalls-progress button { min-width:36px; min-height:38px; }
       .health-slide-inner { grid-template-columns:1fr; gap:26px; align-items:start; }
       .health-slide-meta { align-self:auto; }
       .health-slide-meta h3 { max-width:none; font-size:clamp(44px,14vw,68px); }
@@ -388,20 +426,57 @@
           <path class="atomic-thread-path"></path>
           <circle class="atomic-thread-end" r="5"></circle>
         </svg>
-        <section class="health-record waterfalls-record" id="waterfalls-chapter" aria-label="The waterfalls">
-          <article class="health-slide health-slide--waterfalls">
+        <section class="health-record waterfalls-record" id="waterfalls-chapter" aria-label="The waterfalls and industry">
+          <div class="waterfalls-record-track" tabindex="0" aria-label="Three sections about the waterfalls and industrialization. Scroll horizontally for more.">
+            <article class="health-slide health-slide--waterfalls" data-waterfalls-section="0">
               <div class="waterfalls-slide-inner">
                 <header class="waterfalls-slide-meta">
                   <p class="niagara-kicker">I</p>
-                  <h2>The waterfalls</h2>
+                  <h2>The waterfalls + industry</h2>
                 </header>
                 <div class="investigation-body">
                   <p class="investigation-lede">The unfortunate demise of Niagara Falls is actually based on what attracts its tourists year after year: its waterfalls. Niagara Falls has been the source of abundant and cheap hydroelectric power. The city’s industrialization began as early as 1875, when the first hydroelectric mill began operating. By 1892, the city had undergone considerable industrialization, resulting in significant pollution as a direct consequence.</p>
-                  <p>Since 1942, Niagara Falls industry became central to Manhattan Project and Cold War production, including the nation’s largest production center for uranium metal-from-ore. That work left a radioactive scar whose consequences remain embedded in the region.</p>
-                  
                 </div>
               </div>
             </article>
+
+            <article class="health-slide waterfalls-slide--text" data-waterfalls-section="1">
+              <div class="waterfalls-subslide-inner">
+                <header class="waterfalls-subslide-meta">
+                  <span class="investigation-number">I</span>
+                  <h3>Toward Atomic Niagara</h3>
+                </header>
+                <div class="waterfalls-subslide-copy">
+                  <p>Since 1942, Niagara Falls industry became central to Manhattan Project and Cold War production, including the nation’s largest production center for uranium metal-from-ore. That work left a radioactive scar whose consequences remain embedded in the region.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="health-slide waterfalls-slide--archive" data-waterfalls-section="2">
+              <div class="waterfalls-subslide-inner">
+                <header class="waterfalls-subslide-meta">
+                  <span class="investigation-number">I</span>
+                  <h3>Industrial archive</h3>
+                </header>
+                <div class="waterfalls-archive-grid" aria-label="Archive image placeholders">
+                  <figure class="waterfalls-archive-item"><span>Image 01</span><figcaption>Photograph placeholder</figcaption></figure>
+                  <figure class="waterfalls-archive-item"><span>Image 02</span><figcaption>Factory archive placeholder</figcaption></figure>
+                  <figure class="waterfalls-archive-item"><span>Image 03</span><figcaption>Document placeholder</figcaption></figure>
+                  <figure class="waterfalls-archive-item"><span>Image 04</span><figcaption>Photograph placeholder</figcaption></figure>
+                  <figure class="waterfalls-archive-item"><span>Image 05</span><figcaption>Advertisement placeholder</figcaption></figure>
+                  <figure class="waterfalls-archive-item"><span>Image 06</span><figcaption>Factory record placeholder</figcaption></figure>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <button class="waterfalls-prev" type="button" aria-label="Return to the previous Waterfalls section">←</button>
+          <button class="waterfalls-next is-hinting" type="button" aria-label="Continue to the next Waterfalls section">→</button>
+          <ol class="waterfalls-progress" aria-label="Choose a Waterfalls section">
+            <li class="is-current"><button type="button" data-waterfalls-target="0" aria-label="Go to Waterfalls section 1" aria-current="step">01</button></li>
+            <li><button type="button" data-waterfalls-target="1" aria-label="Go to Waterfalls section 2">02</button></li>
+            <li><button type="button" data-waterfalls-target="2" aria-label="Go to Waterfalls section 3">03</button></li>
+          </ol>
         </section>
 
         <section class="investigation-chapter atomic-niagara-chapter" id="atomic-niagara">
@@ -908,6 +983,46 @@
         layoutAtomicThread();
         if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutAtomicThread);
         window.addEventListener('load', layoutAtomicThread, { once:true });
+      }
+
+      const waterfallsTrack = document.querySelector('.waterfalls-record-track');
+      if (waterfallsTrack) {
+        const waterfallsSlides = Array.from(waterfallsTrack.querySelectorAll('.health-slide'));
+        const waterfallsProgress = Array.from(document.querySelectorAll('.waterfalls-progress button'));
+        const waterfallsPrev = document.querySelector('.waterfalls-prev');
+        const waterfallsNext = document.querySelector('.waterfalls-next');
+        let waterfallsProgressFrame = 0;
+
+        const updateWaterfallsProgress = () => {
+          waterfallsProgressFrame = 0;
+          const index = Math.max(0, Math.min(waterfallsSlides.length - 1, Math.round(waterfallsTrack.scrollLeft / waterfallsTrack.clientWidth)));
+          waterfallsProgress.forEach((button,itemIndex) => {
+            const current = itemIndex === index;
+            button.parentElement.classList.toggle('is-current', current);
+            if (current) button.setAttribute('aria-current','step');
+            else button.removeAttribute('aria-current');
+          });
+          if (waterfallsPrev) waterfallsPrev.classList.toggle('is-visible', index > 0);
+          if (waterfallsNext) {
+            waterfallsNext.disabled = index === waterfallsSlides.length - 1;
+            waterfallsNext.classList.toggle('is-hinting', index === 0);
+          }
+        };
+
+        if (waterfallsPrev) waterfallsPrev.addEventListener('click', () => waterfallsTrack.scrollBy({ left:-waterfallsTrack.clientWidth, behavior:'smooth' }));
+        if (waterfallsNext) waterfallsNext.addEventListener('click', () => waterfallsTrack.scrollBy({ left:waterfallsTrack.clientWidth, behavior:'smooth' }));
+        waterfallsProgress.forEach(button => button.addEventListener('click', () => {
+          waterfallsTrack.scrollTo({ left:Number(button.dataset.waterfallsTarget) * waterfallsTrack.clientWidth, behavior:'smooth' });
+        }));
+        waterfallsTrack.addEventListener('scroll', () => {
+          if (!waterfallsProgressFrame) waterfallsProgressFrame = requestAnimationFrame(updateWaterfallsProgress);
+        }, { passive:true });
+        waterfallsTrack.addEventListener('keydown', event => {
+          if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+          event.preventDefault();
+          waterfallsTrack.scrollBy({ left:(event.key === 'ArrowRight' ? 1 : -1) * waterfallsTrack.clientWidth, behavior:'smooth' });
+        });
+        updateWaterfallsProgress();
       }
 
       const evidenceItems = Array.from(document.querySelectorAll('.atomic-evidence-item')).filter(item => item.querySelector('img'));
