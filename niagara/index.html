@@ -90,16 +90,11 @@
     .investigation-end { margin-top:clamp(72px,10svh,130px); max-width:1080px; font-size:clamp(34px,4.4vw,72px); line-height:1.05; letter-spacing:-.045em; }
 
     /* Health record */
-    .atomic-thread-anchor { display:inline-block; width:1px; height:.8em; vertical-align:baseline; }
+    .atomic-thread-origin { display:inline-block; }
     .atomic-thread { position:absolute; inset:0 auto auto 0; z-index:4; width:100%; height:100%; overflow:visible; pointer-events:none; opacity:0; transition:opacity .25s ease; }
     .atomic-thread.is-ready { opacity:1; }
-    .atomic-thread.is-offscreen { opacity:0; }
-    .atomic-thread-path { fill:none; stroke:var(--niagara-red); stroke-width:1; stroke-linecap:square; stroke-linejoin:miter; vector-effect:non-scaling-stroke; stroke-dasharray:var(--atomic-thread-length,1); stroke-dashoffset:var(--atomic-thread-length,1); }
-    .atomic-thread-end { fill:var(--niagara-red); opacity:0; transform-box:fill-box; transform-origin:center; }
-    .atomic-thread.is-drawing .atomic-thread-path { animation:atomic-thread-draw 2.45s cubic-bezier(.65,0,.35,1) forwards; }
-    .atomic-thread.is-drawing .atomic-thread-end { animation:atomic-thread-end 1s ease-in-out 2.35s 3 both; }
-    @keyframes atomic-thread-draw { to { stroke-dashoffset:0; } }
-    @keyframes atomic-thread-end { 0% { opacity:0; transform:scale(.65); } 45% { opacity:1; transform:scale(1); } 72% { opacity:.22; transform:scale(.82); } 100% { opacity:1; transform:scale(1); } }
+    .atomic-thread-path { fill:none; stroke:var(--niagara-red); stroke-width:1; stroke-linecap:square; stroke-linejoin:miter; vector-effect:non-scaling-stroke; stroke-dasharray:var(--atomic-thread-length,1); stroke-dashoffset:var(--atomic-thread-length,1); will-change:stroke-dashoffset; }
+    .atomic-thread-end { fill:var(--niagara-red); opacity:0; transition:opacity .16s ease; }
     .health-record { width:100vw; margin-left:calc(50% - 50vw); padding:0; color:var(--niagara-ink); background:var(--niagara-paper); overflow:hidden; position:relative; }
     .health-record-track { width:100%; height:calc(100svh - 66px); min-height:640px; display:flex; overflow-x:auto; overflow-y:hidden; overscroll-behavior-inline:contain; scroll-snap-type:x mandatory; scrollbar-width:none; cursor:default; }
     .health-record-track::-webkit-scrollbar { display:none; }
@@ -388,7 +383,7 @@
               <div class="waterfalls-slide-inner">
                 <header class="waterfalls-slide-meta">
                   <p class="niagara-kicker">Chapter 1</p>
-                  <h2>The waterfalls<span class="atomic-thread-anchor" aria-hidden="true"></span></h2>
+                  <h2><span class="atomic-thread-origin">The</span> waterfalls</h2>
                 </header>
                 <div class="investigation-body">
                   <p class="investigation-lede">The unfortunate demise of Niagara Falls is actually based on what attracts its tourists year after year: its waterfalls. Niagara Falls has been the source of abundant and cheap hydroelectric power. The city’s industrialization began as early as 1875, when the first hydroelectric mill began operating. By 1892, the city had undergone considerable industrialization, resulting in significant pollution as a direct consequence.</p>
@@ -847,38 +842,54 @@
       const atomicThread = document.querySelector('.atomic-thread');
       const atomicThreadPath = document.querySelector('.atomic-thread-path');
       const atomicThreadEnd = document.querySelector('.atomic-thread-end');
-      const atomicThreadAnchor = document.querySelector('.atomic-thread-anchor');
+      const atomicThreadOrigin = document.querySelector('.atomic-thread-origin');
       const investigationStory = document.querySelector('.investigation-story');
+      const atomicThreadReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      let atomicThreadLength = 0;
+      let atomicThreadStartY = 0;
+      let atomicThreadX = 0;
+      let atomicThreadProgressFrame = 0;
+
+      function updateAtomicThreadProgress() {
+        atomicThreadProgressFrame = 0;
+        if (!atomicThread || !atomicThreadPath || !atomicThreadEnd || !investigationStory || atomicThreadLength < 1) return;
+        const articleRect = investigationStory.getBoundingClientRect();
+        const revealY = window.innerHeight * .68 - articleRect.top;
+        const revealed = atomicThreadReducedMotion.matches
+          ? atomicThreadLength
+          : Math.max(0, Math.min(atomicThreadLength, revealY - atomicThreadStartY));
+        atomicThreadPath.style.strokeDashoffset = String(atomicThreadLength - revealed);
+        atomicThreadEnd.setAttribute('cx', atomicThreadX);
+        atomicThreadEnd.setAttribute('cy', atomicThreadStartY + revealed);
+        atomicThreadEnd.style.opacity = revealed > 2 ? '1' : '0';
+      }
+
+      function requestAtomicThreadProgress() {
+        if (!atomicThreadProgressFrame) atomicThreadProgressFrame = requestAnimationFrame(updateAtomicThreadProgress);
+      }
 
       function layoutAtomicThread() {
-        if (!atomicThread || !atomicThreadPath || !atomicThreadEnd || !atomicThreadAnchor || !investigationStory) return;
+        if (!atomicThread || !atomicThreadPath || !atomicThreadEnd || !atomicThreadOrigin || !investigationStory) return;
         const articleRect = investigationStory.getBoundingClientRect();
-        const anchorRect = atomicThreadAnchor.getBoundingClientRect();
+        const originRect = atomicThreadOrigin.getBoundingClientRect();
         const threadHeight = investigationStory.scrollHeight;
-        if (articleRect.width < 1 || threadHeight < 1) return;
-        const startX = anchorRect.right - articleRect.left + 10;
-        const startY = anchorRect.bottom - articleRect.top + 4;
-        const endX = startX;
+        if (articleRect.width < 1 || originRect.width < 1 || threadHeight < 1) return;
+        atomicThreadX = originRect.left + originRect.width / 2 - articleRect.left;
+        atomicThreadStartY = originRect.bottom - articleRect.top + 4;
         const endY = threadHeight - 2;
         atomicThread.style.height = `${threadHeight}px`;
         atomicThread.setAttribute('viewBox', `0 0 ${articleRect.width} ${threadHeight}`);
         atomicThread.setAttribute('preserveAspectRatio', 'none');
-        atomicThreadPath.setAttribute('d', `M ${startX} ${startY} V ${endY}`);
-        const length = atomicThreadPath.getTotalLength();
-        atomicThreadPath.style.setProperty('--atomic-thread-length', length);
-        atomicThreadEnd.setAttribute('cx', endX);
-        atomicThreadEnd.setAttribute('cy', endY);
+        atomicThreadPath.setAttribute('d', `M ${atomicThreadX} ${atomicThreadStartY} V ${endY}`);
+        atomicThreadLength = atomicThreadPath.getTotalLength();
+        atomicThreadPath.style.setProperty('--atomic-thread-length', atomicThreadLength);
+        atomicThreadPath.style.strokeDasharray = String(atomicThreadLength);
         atomicThread.classList.add('is-ready');
+        updateAtomicThreadProgress();
       }
 
-      if (atomicThreadAnchor && atomicThread) {
+      if (atomicThreadOrigin && atomicThread) {
         layoutAtomicThread();
-        const atomicThreadObserver = new IntersectionObserver(entries => {
-          if (!entries.some(entry => entry.isIntersecting)) return;
-          atomicThread.classList.add('is-drawing');
-          atomicThreadObserver.disconnect();
-        }, { threshold:.65, rootMargin:'0px 0px -8% 0px' });
-        atomicThreadObserver.observe(atomicThreadAnchor);
         if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutAtomicThread);
         window.addEventListener('load', layoutAtomicThread, { once:true });
       }
@@ -974,6 +985,7 @@
       }
 
       window.addEventListener('scroll', updateStickyHeader, { passive:true });
+      window.addEventListener('scroll', requestAtomicThreadProgress, { passive:true });
       window.addEventListener('resize', () => {
         const activeTab = tabs.find(tab => tab.getAttribute('aria-selected') === 'true');
         requestAnimationFrame(() => moveIndicator(activeTab, false));
