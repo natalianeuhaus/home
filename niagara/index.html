@@ -71,7 +71,8 @@
     .investigation-chapter-grid { display:grid; grid-template-columns:minmax(220px,.48fr) minmax(560px,1.52fr); gap:clamp(60px,9vw,150px); align-items:start; }
     .investigation-chapter-meta { position:sticky; top:132px; }
     .investigation-number { display:block; margin:0 0 20px; color:rgba(21,23,21,.42); font:10px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.24em; text-transform:uppercase; }
-    .investigation-chapter h3 { margin:0; max-width:350px; font-size:clamp(38px,4.5vw,76px); line-height:.94; font-weight:400; letter-spacing:-.045em; }
+    .investigation-chapter h3 { position:relative; z-index:5; margin:0; max-width:350px; font-size:clamp(38px,4.5vw,76px); line-height:.94; font-weight:400; letter-spacing:-.045em; }
+    .waterfalls-slide-meta .niagara-kicker,.atomic-niagara-title .investigation-number,.investigation-chapter-meta .investigation-number,.health-slide-meta .investigation-number { position:relative; z-index:5; }
     .investigation-chapter-copy { max-width:900px; }
     .investigation-chapter-copy p { margin:0 0 1.2em; font-size:clamp(18px,1.35vw,23px); line-height:1.47; letter-spacing:-.012em; }
     .investigation-stat-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-top:1px solid var(--niagara-line); border-bottom:1px solid var(--niagara-line); margin:clamp(54px,7svh,90px) 0; }
@@ -107,11 +108,11 @@
     .health-slide--lead .health-slide-quote figcaption { color:rgba(241,240,234,.66); }
     .health-slide--lead .health-slide-intro { color:rgba(241,240,234,.82); }
     .waterfalls-slide-inner { width:min(1540px,calc(100% - 84px)); margin:0 auto; display:grid; grid-template-columns:minmax(260px,.72fr) minmax(500px,1.28fr); gap:clamp(70px,11vw,190px); align-items:center; }
-    .waterfalls-slide-meta h2 { margin:0; letter-spacing:-.048em; font-size:clamp(52px,6vw,96px); font-weight:400; line-height:.9; }
+    .waterfalls-slide-meta h2 { position:relative; z-index:5; margin:0; letter-spacing:-.045em; font-size:clamp(38px,4.5vw,76px); font-weight:400; line-height:.94; }
     .health-slide-inner { width:min(1220px,100%); margin:0 auto; display:grid; grid-template-columns:minmax(210px,.42fr) minmax(470px,1.18fr); gap:clamp(44px,7vw,112px); align-items:center; }
     .health-slide-meta { align-self:start; }
     .health-slide-meta .investigation-number { color:rgba(21,23,21,.48); }
-    .health-slide-meta h3 { margin:0; max-width:370px; font-size:clamp(34px,3.8vw,60px); line-height:.96; font-weight:400; letter-spacing:-.043em; }
+    .health-slide-meta h3 { position:relative; z-index:5; margin:0; max-width:370px; font-size:clamp(38px,4.5vw,76px); line-height:.94; font-weight:400; letter-spacing:-.045em; }
     .health-slide-content { min-width:0; }
     .health-slide-quote { margin:0; }
     .health-slide-quote blockquote { margin:0; max-width:850px; font-size:clamp(30px,3.75vw,60px); line-height:1.06; letter-spacing:-.04em; }
@@ -200,7 +201,7 @@
     .atomic-niagara-hero { width:100vw; height:calc(100svh - 66px); min-height:640px; margin-left:calc(50% - 50vw); display:grid; grid-template-columns:minmax(340px,.44fr) minmax(0,.56fr); overflow:hidden; background:var(--niagara-atomic); }
     .atomic-niagara-title { min-width:0; padding:clamp(44px,5vw,86px); display:flex; flex-direction:column; justify-content:center; color:var(--niagara-paper); background:var(--niagara-atomic); pointer-events:none; }
     .atomic-niagara-title .investigation-number { color:rgba(241,240,234,.58); }
-    .atomic-niagara-title h3 { margin:0; max-width:720px; font-size:clamp(58px,7vw,112px); line-height:.86; font-weight:400; letter-spacing:-.055em; }
+    .atomic-niagara-title h3 { position:relative; z-index:5; margin:0; max-width:720px; font-size:clamp(38px,4.5vw,76px); line-height:.94; font-weight:400; letter-spacing:-.045em; }
     .atomic-niagara-media { min-width:0; position:relative; overflow:hidden; background:#111; }
     .atomic-niagara-video { width:100%; height:100%; border:0; display:block; object-fit:cover; object-position:center; background:#111; }
     .atomic-niagara-credit { position:absolute; z-index:1; right:18px; bottom:16px; margin:0; max-width:76%; color:rgba(241,240,234,.68); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.08em; text-align:right; text-transform:uppercase; text-shadow:0 1px 8px rgba(0,0,0,.7); }
@@ -381,7 +382,7 @@
           <article class="health-slide health-slide--waterfalls">
               <div class="waterfalls-slide-inner">
                 <header class="waterfalls-slide-meta">
-                  <p class="niagara-kicker">Chapter 1</p>
+                  <p class="niagara-kicker">I</p>
                   <h2>The waterfalls</h2>
                 </header>
                 <div class="investigation-body">
@@ -396,7 +397,7 @@
         <section class="investigation-chapter atomic-niagara-chapter" id="atomic-niagara">
           <div class="atomic-niagara-hero">
             <div class="atomic-niagara-title">
-              <span class="investigation-number">01 · 1942</span>
+              <span class="investigation-number">II</span>
               <h3>Atomic Niagara</h3>
             </div>
             <figure class="atomic-niagara-media">
@@ -461,7 +462,7 @@
         <section class="investigation-chapter" id="loow-nfss">
           <div class="investigation-chapter-grid">
             <div class="investigation-chapter-meta">
-              <span class="investigation-number">02 · Storage</span>
+              <span class="investigation-number">III</span>
               <h3>LOOW / NFSS</h3>
             </div>
             <div class="investigation-chapter-copy">
@@ -479,7 +480,7 @@
         <section class="investigation-chapter" id="sludge-slag">
           <div class="investigation-chapter-grid">
             <div class="investigation-chapter-meta">
-              <span class="investigation-number">03 · Waste pathways</span>
+              <span class="investigation-number">IV</span>
               <h3>Sludge + slag</h3>
             </div>
             <div class="investigation-chapter-copy">
@@ -520,7 +521,7 @@
         <section class="investigation-chapter" id="uranium-chain">
           <div class="investigation-chapter-grid">
             <div class="investigation-chapter-meta">
-              <span class="investigation-number">04 · Production</span>
+              <span class="investigation-number">V</span>
               <h3>The uranium chain</h3>
             </div>
             <div class="investigation-chapter-copy">
@@ -534,7 +535,7 @@
         <section class="investigation-chapter" id="historical-surveys">
           <div class="investigation-chapter-grid">
             <div class="investigation-chapter-meta">
-              <span class="investigation-number">05 · 1979—present</span>
+              <span class="investigation-number">VI</span>
               <h3>The surveys</h3>
             </div>
             <div class="investigation-chapter-copy">
@@ -559,7 +560,7 @@
         <section class="investigation-chapter" id="fusrap-love-canal">
           <div class="investigation-chapter-grid">
             <div class="investigation-chapter-meta">
-              <span class="investigation-number">06 · Remediation</span>
+              <span class="investigation-number">VII</span>
               <h3>FUSRAP + Love Canal</h3>
             </div>
             <div class="investigation-chapter-copy">
@@ -579,7 +580,7 @@
             <article class="health-slide health-slide--lead" data-health-section="1">
               <div class="health-slide-inner">
                 <header class="health-slide-meta">
-                  <span class="investigation-number">Health record · 01</span>
+                  <span class="investigation-number">VIII</span>
                   <h3 id="health-record-title">Decades of cancer</h3>
                 </header>
                 <div class="health-slide-content">
@@ -595,7 +596,7 @@
             <article class="health-slide" data-health-section="2">
               <div class="health-slide-inner">
                 <header class="health-slide-meta">
-                  <span class="investigation-number">Health record · 02</span>
+                  <span class="investigation-number">IX</span>
                   <h3>Four decades of concern</h3>
                 </header>
                 <div class="health-slide-content">
@@ -614,7 +615,7 @@
             <article class="health-slide" data-health-section="3">
               <div class="health-slide-inner">
                 <header class="health-slide-meta">
-                  <span class="investigation-number">Health record · 03</span>
+                  <span class="investigation-number">X</span>
                   <h3>The findings accumulate</h3>
                 </header>
                 <div class="health-slide-content">
@@ -631,7 +632,7 @@
             <article class="health-slide" data-health-section="4">
               <div class="health-slide-inner">
                 <header class="health-slide-meta">
-                  <span class="investigation-number">Health record · 04</span>
+                  <span class="investigation-number">XI</span>
                   <h3>The Vault</h3>
                 </header>
                 <div class="health-document-grid">
@@ -650,7 +651,7 @@
             <article class="health-slide" data-health-section="5">
               <div class="health-slide-inner">
                 <header class="health-slide-meta">
-                  <span class="investigation-number">Health record · 05</span>
+                  <span class="investigation-number">XII</span>
                   <h3>Studies</h3>
                 </header>
                 <div class="health-source-list">
@@ -678,7 +679,7 @@
         <section class="investigation-chapter" id="federal-connection">
           <div class="investigation-chapter-grid">
             <div class="investigation-chapter-meta">
-              <span class="investigation-number">07 · The record</span>
+              <span class="investigation-number">XIII</span>
               <h3>The Federal Connection</h3>
             </div>
             <div class="investigation-chapter-copy">
