@@ -67,6 +67,10 @@
     .investigation-opening .niagara-heading { top:132px; }
     .investigation-lede { margin:0 0 1.25em; font-size:clamp(24px,2.35vw,38px); line-height:1.2; letter-spacing:-.027em; }
     .investigation-body p { max-width:900px; margin:0 0 1.25em; font-size:clamp(18px,1.35vw,23px); line-height:1.47; letter-spacing:-.012em; }
+    .investigation-cancer-bridge { width:min(790px,88%); margin:clamp(78px,11svh,132px) 0 0 auto !important; text-align:right; font-size:clamp(28px,3vw,48px) !important; line-height:1.12 !important; letter-spacing:-.035em !important; }
+    .investigation-cancer-bridge .investigation-cancer-word { color:var(--niagara-red); }
+    .investigation-cancer-bridge.is-ready { opacity:0; transform:translateX(-54px); transition:opacity 1.15s ease,transform 1.45s cubic-bezier(.22,.7,.25,1); }
+    .investigation-cancer-bridge.is-ready.is-visible { opacity:1; transform:translateX(0); }
     .investigation-chapter { border-top:1px solid var(--niagara-line); padding:clamp(86px,12svh,150px) 0; }
     .investigation-chapter-grid { display:grid; grid-template-columns:minmax(220px,.48fr) minmax(560px,1.52fr); gap:clamp(60px,9vw,150px); align-items:start; }
     .investigation-chapter-meta { position:sticky; top:132px; }
@@ -231,6 +235,7 @@
       .investigation-chapter { padding:82px 0; }
       .investigation-chapter h3 { max-width:none; font-size:clamp(44px,14vw,68px); }
       .investigation-chapter-copy p,.investigation-body p { font-size:18px; line-height:1.48; }
+      .investigation-cancer-bridge { width:100%; margin-top:68px !important; text-align:left; font-size:clamp(28px,9vw,40px) !important; }
       .investigation-stat-grid { grid-template-columns:1fr; }
       .investigation-stat { padding:24px 0; }
       .investigation-stat + .investigation-stat { border-left:0; border-top:1px solid var(--niagara-line); padding-left:0; }
@@ -245,6 +250,7 @@
       .niagara-tabbar-wrap,.niagara-tab-label,.niagara-tab-indicator { animation:none !important; }
       .niagara-tabbar-wrap,.niagara-tab-label,.niagara-tab-indicator { opacity:1; }
       .niagara-tab-label { transform:none; }
+      .investigation-cancer-bridge.is-ready { opacity:1; transform:none; transition:none; }
     }
   </style>
 </head>
@@ -308,11 +314,12 @@
         <section class="investigation-opening">
           <div class="niagara-heading">
             <p class="niagara-kicker">Chapter 1</p>
-            <h2>The investigation</h2>
+            <h2>The waterfalls</h2>
           </div>
           <div class="investigation-body">
             <p class="investigation-lede">The unfortunate demise of Niagara Falls is actually based on what attracts its tourists year after year: its waterfalls. Niagara Falls has been the source of abundant and cheap hydroelectric power. The city’s industrialization began as early as 1875, when the first hydroelectric mill began operating. By 1892, the city had undergone considerable industrialization, resulting in significant pollution as a direct consequence.</p>
-            <p>Since 1942, throughout the Manhattan Project and into the Cold War era, Niagara Falls was the premier city for experimentation, research, development, and production of atomic bomb materials (i.e. radioactive.) According to U.S. Department of Energy records, Niagara Falls industry during that period was the largest production center for uranium metal-from-ore in the nation. The city’s involvement in the Manhattan Project and the nuclear buildup that came after left a radioactive scar on the region. For thousands of years, this area will face the consequences of radioactive contamination. No other area in the world, not even Chornobyl’s exclusion zone, is comparable. It’s no accident that cancer rates in this area of western New York have remained disturbingly high for the past 40 years and are the highest in the U.S.<span class="health-thread-anchor" aria-hidden="true"></span></p>
+            <p>Since 1942, throughout the Manhattan Project and into the Cold War era, Niagara Falls was the premier city for experimentation, research, development, and production of atomic bomb materials (i.e. radioactive.) According to U.S. Department of Energy records, Niagara Falls industry during that period was the largest production center for uranium metal-from-ore in the nation. The city’s involvement in the Manhattan Project and the nuclear buildup that came after left a radioactive scar on the region. For thousands of years, this area will face the consequences of radioactive contamination. No other area in the world, not even Chornobyl’s exclusion zone, is comparable.</p>
+            <p class="investigation-cancer-bridge">It’s no accident that <span class="investigation-cancer-word">cancer</span> rates in this area of western New York have remained disturbingly high for the past 40 years and are the highest in the U.S.<span class="health-thread-anchor" aria-hidden="true"></span></p>
           </div>
         </section>
 
@@ -716,6 +723,17 @@
           activate(tabs[next].dataset.tab, true, true, true);
         });
       });
+
+      const cancerBridge = document.querySelector('.investigation-cancer-bridge');
+      if (cancerBridge) {
+        cancerBridge.classList.add('is-ready');
+        const cancerBridgeObserver = new IntersectionObserver(entries => {
+          if (!entries.some(entry => entry.isIntersecting)) return;
+          cancerBridge.classList.add('is-visible');
+          cancerBridgeObserver.disconnect();
+        }, { threshold:.35 });
+        cancerBridgeObserver.observe(cancerBridge);
+      }
 
       const healthThread = document.querySelector('.health-thread');
       const healthThreadPath = document.querySelector('.health-thread-path');
