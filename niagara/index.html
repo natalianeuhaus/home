@@ -286,6 +286,7 @@
     .atomic-evidence-item:nth-child(5) .atomic-evidence-placeholder { background:#686868; }
     .atomic-evidence-item:nth-child(6) .atomic-evidence-placeholder { background:#565656; }
     .atomic-evidence-placeholder span { padding:8px 10px; border:1px solid rgba(241,240,234,.25); font:8px/1 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
+    .atomic-evidence-item > img { width:100%; height:100%; display:block; object-fit:cover; object-position:center top; }
     .atomic-evidence-item::before { content:"follow"; position:absolute; z-index:2; top:12px; right:12px; width:42px; height:42px; display:grid; place-items:center; border:1px solid rgba(241,240,234,.62); border-radius:50%; color:var(--niagara-paper); background:rgba(0,0,0,.26); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); opacity:0; transform:scale(.82); transition:opacity .25s ease,transform .35s cubic-bezier(.22,.7,.25,1); pointer-events:none; font:7px/1 Arial,Helvetica,sans-serif; letter-spacing:.1em; text-transform:uppercase; }
     .atomic-evidence-item::after { content:""; position:absolute; inset:auto 0 0; height:48%; background:linear-gradient(transparent,rgba(0,0,0,.82)); pointer-events:none; }
     .atomic-evidence-caption { position:absolute; z-index:1; left:14px; right:14px; bottom:12px; color:rgba(241,240,234,.88); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.11em; text-transform:uppercase; }
@@ -586,8 +587,8 @@
           <div class="atomic-evidence-mosaic" aria-label="A visual index of archival and photographic evidence">
             <div class="atomic-evidence-grid">
               <a class="atomic-evidence-item" href="#atomic-niagara">
-                <span class="atomic-evidence-placeholder" aria-hidden="true"><span>Image 01</span></span>
-                <span class="atomic-evidence-caption">Wartime recognition · Niagara industry</span>
+                <img src="./archive/leslie-groves.jpg" alt="Negative portrait of Leslie R. Groves in U.S. Army uniform" loading="lazy" decoding="async" />
+                <span class="atomic-evidence-caption">Leslie R. Groves · Director of the Manhattan Project</span>
               </a>
               <a class="atomic-evidence-item" href="#loow-nfss">
                 <span class="atomic-evidence-placeholder" aria-hidden="true"><span>Image 02</span></span>
