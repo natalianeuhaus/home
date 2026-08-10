@@ -128,11 +128,11 @@
     .waterfalls-archive-frame--crop-top img { object-fit:cover; object-position:center bottom; }
     .waterfalls-archive-frame figcaption { position:absolute; z-index:1; left:14px; bottom:12px; color:rgba(21,23,21,.55); font:8px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.1em; text-transform:uppercase; }
     .waterfalls-factory-parent { position:relative; z-index:5; margin:14px 0 0; color:rgba(21,23,21,.52); font:9px/1.35 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
-    .waterfalls-slide--carborundum .waterfalls-archive-frame { display:block; overflow-x:auto; overflow-y:hidden; scrollbar-width:none; cursor:grab; background:#092330; }
-    .waterfalls-slide--carborundum .waterfalls-archive-frame::-webkit-scrollbar { display:none; }
-    .waterfalls-slide--carborundum .waterfalls-archive-frame:active { cursor:grabbing; }
-    .waterfalls-slide--carborundum .waterfalls-archive-frame img { width:auto; max-width:none; height:100%; object-fit:initial; }
+    .waterfalls-slide--carborundum { position:relative; z-index:2; overflow:visible; }
+    .waterfalls-slide--carborundum .waterfalls-archive-frame { width:clamp(1132px,207.68svh,2013px); max-width:none; height:clamp(360px,66svh,640px); justify-self:start; overflow:visible; background:#092330; }
+    .waterfalls-slide--carborundum .waterfalls-archive-frame img { width:100%; max-width:none; height:100%; object-fit:cover; }
     .waterfalls-slide--carborundum .waterfalls-archive-frame figcaption { color:rgba(241,240,234,.72); text-shadow:0 1px 8px rgba(0,0,0,.75); }
+    .waterfalls-panorama-tail { flex:0 0 var(--carborundum-tail,0px); width:var(--carborundum-tail,0px); height:100%; position:relative; z-index:1; scroll-snap-align:end; scroll-snap-stop:always; pointer-events:none; background:transparent; }
     .waterfalls-progress { position:absolute; z-index:6; right:clamp(28px,4vw,58px); bottom:15px; display:flex; gap:3px; margin:0; padding:0; list-style:none; }
     .waterfalls-progress li { transition:transform .25s ease; }
     .waterfalls-progress button { appearance:none; min-width:43px; min-height:42px; display:grid; place-items:center; padding:0; border:0; color:rgba(21,23,21,.42); background:transparent; cursor:pointer; font:11px/1 Arial,Helvetica,sans-serif; letter-spacing:.09em; transition:color .25s ease; }
@@ -221,6 +221,7 @@
       .waterfalls-slide-inner,.waterfalls-subslide-inner { width:100%; grid-template-columns:1fr; gap:28px; align-items:start; }
       .waterfalls-slide-meta h2,.waterfalls-subslide-meta h3 { max-width:none; font-size:clamp(44px,14vw,68px); }
       .waterfalls-archive-frame { height:min(48svh,380px); min-height:260px; }
+      .waterfalls-slide--carborundum .waterfalls-archive-frame { width:clamp(818px,150.99svh,1195px); height:clamp(260px,48svh,380px); }
       .waterfalls-progress button { min-width:28px; }
       .waterfalls-prev { left:21%; bottom:14px; }
       .waterfalls-next { left:42%; bottom:14px; }
@@ -543,6 +544,7 @@
                 </figure>
               </div>
             </article>
+            <div class="waterfalls-panorama-tail" aria-hidden="true"></div>
           </div>
 
           <button class="waterfalls-prev" type="button" aria-label="Return to the previous Waterfalls section">←</button>
@@ -1092,7 +1094,19 @@
         const waterfallsProgress = Array.from(document.querySelectorAll('.waterfalls-progress button'));
         const waterfallsPrev = document.querySelector('.waterfalls-prev');
         const waterfallsNext = document.querySelector('.waterfalls-next');
+        const carborundumSlide = waterfallsTrack.querySelector('.waterfalls-slide--carborundum');
+        const carborundumFrame = carborundumSlide && carborundumSlide.querySelector('.waterfalls-archive-frame');
+        const carborundumTail = waterfallsTrack.querySelector('.waterfalls-panorama-tail');
         let waterfallsProgressFrame = 0;
+
+        const layoutCarborundumSpread = () => {
+          if (!carborundumSlide || !carborundumFrame || !carborundumTail) return;
+          carborundumTail.style.setProperty('--carborundum-tail','0px');
+          const slideRect = carborundumSlide.getBoundingClientRect();
+          const frameRect = carborundumFrame.getBoundingClientRect();
+          const spill = Math.max(0,Math.ceil(frameRect.right - slideRect.right));
+          carborundumTail.style.setProperty('--carborundum-tail',`${spill}px`);
+        };
 
         const updateWaterfallsProgress = () => {
           waterfallsProgressFrame = 0;
@@ -1105,13 +1119,26 @@
           });
           if (waterfallsPrev) waterfallsPrev.classList.toggle('is-visible', index > 0);
           if (waterfallsNext) {
-            waterfallsNext.disabled = index === waterfallsSlides.length - 1;
+            const trackEnd = Math.max(0,waterfallsTrack.scrollWidth - waterfallsTrack.clientWidth);
+            waterfallsNext.disabled = waterfallsTrack.scrollLeft >= trackEnd - 2;
             waterfallsNext.classList.toggle('is-hinting', index === 0);
           }
         };
 
-        if (waterfallsPrev) waterfallsPrev.addEventListener('click', () => waterfallsTrack.scrollBy({ left:-waterfallsTrack.clientWidth, behavior:'smooth' }));
-        if (waterfallsNext) waterfallsNext.addEventListener('click', () => waterfallsTrack.scrollBy({ left:waterfallsTrack.clientWidth, behavior:'smooth' }));
+        const moveWaterfalls = direction => {
+          const lastSlideStart = (waterfallsSlides.length - 1) * waterfallsTrack.clientWidth;
+          const trackEnd = Math.max(0,waterfallsTrack.scrollWidth - waterfallsTrack.clientWidth);
+          if (direction > 0 && waterfallsTrack.scrollLeft >= lastSlideStart - 2) {
+            waterfallsTrack.scrollTo({ left:trackEnd, behavior:'smooth' });
+          } else if (direction < 0 && waterfallsTrack.scrollLeft > lastSlideStart + 2) {
+            waterfallsTrack.scrollTo({ left:lastSlideStart, behavior:'smooth' });
+          } else {
+            waterfallsTrack.scrollBy({ left:direction * waterfallsTrack.clientWidth, behavior:'smooth' });
+          }
+        };
+
+        if (waterfallsPrev) waterfallsPrev.addEventListener('click', () => moveWaterfalls(-1));
+        if (waterfallsNext) waterfallsNext.addEventListener('click', () => moveWaterfalls(1));
         waterfallsProgress.forEach(button => button.addEventListener('click', () => {
           waterfallsTrack.scrollTo({ left:Number(button.dataset.waterfallsTarget) * waterfallsTrack.clientWidth, behavior:'smooth' });
         }));
@@ -1121,9 +1148,16 @@
         waterfallsTrack.addEventListener('keydown', event => {
           if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
           event.preventDefault();
-          waterfallsTrack.scrollBy({ left:(event.key === 'ArrowRight' ? 1 : -1) * waterfallsTrack.clientWidth, behavior:'smooth' });
+          moveWaterfalls(event.key === 'ArrowRight' ? 1 : -1);
         });
+        layoutCarborundumSpread();
         updateWaterfallsProgress();
+        window.addEventListener('resize', () => {
+          requestAnimationFrame(() => {
+            layoutCarborundumSpread();
+            updateWaterfallsProgress();
+          });
+        });
       }
 
       const evidenceItems = Array.from(document.querySelectorAll('.atomic-evidence-item')).filter(item => item.querySelector('img'));
