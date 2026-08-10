@@ -7,6 +7,40 @@
   const enterButton = document.querySelector('.burlesque-enter-series');
   if (!page || !scroller || !film || !stage) return;
 
+  const backstoryTrigger = document.querySelector("[data-burlesque-backstory-open]");
+  const backstoryDialog = document.querySelector(".burlesque-backstory");
+  const backstoryClose = backstoryDialog?.querySelector("[data-burlesque-backstory-close]");
+  let backstoryPreviousOverflow = "";
+
+  const closeBackstory = () => {
+    if (!backstoryDialog || !backstoryTrigger) return;
+    backstoryDialog.classList.remove("is-visible");
+    backstoryDialog.setAttribute("aria-hidden", "true");
+    backstoryTrigger.setAttribute("aria-expanded", "false");
+    html.style.overflow = backstoryPreviousOverflow;
+    window.setTimeout(() => {
+      if (!backstoryDialog.classList.contains("is-visible")) backstoryDialog.hidden = true;
+    }, 480);
+    backstoryTrigger.focus();
+  };
+
+  backstoryTrigger?.addEventListener("click", () => {
+    if (!backstoryDialog || !backstoryClose) return;
+    backstoryPreviousOverflow = html.style.overflow;
+    backstoryDialog.hidden = false;
+    backstoryDialog.setAttribute("aria-hidden", "false");
+    backstoryTrigger.setAttribute("aria-expanded", "true");
+    html.style.overflow = "hidden";
+    requestAnimationFrame(() => {
+      backstoryDialog.classList.add("is-visible");
+      backstoryClose.focus();
+    });
+  });
+  backstoryClose?.addEventListener("click", closeBackstory);
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && backstoryDialog?.classList.contains("is-visible")) closeBackstory();
+  });
+
   const localSlides = [
     { src: 'images/5O9A0248.jpg', full: 'images/5O9A0248.jpg', alt: 'Burlesque Mon Amour photograph 1', width: 1200, height: 800 },
     { src: 'images/5O9A0351.jpg', full: 'images/5O9A0351.jpg', alt: 'Burlesque Mon Amour photograph 2', width: 1200, height: 800 },
