@@ -333,13 +333,28 @@
     .waste-document { margin:clamp(42px,6svh,76px) 0 0; }
     .waste-document img { width:100%; height:auto; display:block; background:#151515; }
     .waste-document figcaption,.waste-video-caption { margin-top:11px; color:rgba(21,23,21,.56); font:11px/1.48 Arial,Helvetica,sans-serif; }
-    .federal-pdf-viewer { width:calc(100vw - 84px); margin:clamp(52px,7svh,86px) 0 0 calc(100% - (100vw - 84px)); border-top:1px solid var(--niagara-line); border-bottom:1px solid var(--niagara-line); background:#2a2927; }
-    .federal-pdf-viewer-header { min-height:76px; padding:18px clamp(22px,3vw,40px); display:flex; align-items:center; justify-content:space-between; gap:28px; color:var(--niagara-paper); background:var(--niagara-red); }
-    .federal-pdf-viewer-header h5 { margin:0; font-size:clamp(24px,2.5vw,40px); line-height:1; font-weight:400; letter-spacing:-.035em; }
-    .federal-pdf-viewer-header a { flex:0 0 auto; padding-bottom:4px; border-bottom:1px solid currentColor; color:inherit; font:9px/1.3 Arial,Helvetica,sans-serif; letter-spacing:.13em; text-transform:uppercase; }
-    .federal-pdf-viewer-frame { width:100%; height:82svh; min-height:720px; display:block; border:0; background:#2a2927; }
-    .federal-pdf-viewer-fallback { margin:0; padding:14px clamp(22px,3vw,40px); color:rgba(241,240,234,.66); font:10px/1.4 Arial,Helvetica,sans-serif; }
-    .federal-pdf-viewer-fallback a { color:inherit; border-bottom:1px solid currentColor; }
+    .federal-record { width:calc(100vw - 84px); margin:clamp(54px,8svh,92px) 0 0 calc(100% - (100vw - 84px)); border-top:1px solid var(--niagara-line); border-bottom:1px solid var(--niagara-line); background:#d8d5cd; overflow:hidden; }
+    .federal-record-header { min-height:86px; padding:20px clamp(22px,3vw,42px); display:flex; align-items:center; justify-content:space-between; gap:28px; color:var(--niagara-paper); background:#383836; }
+    .federal-record-title { display:flex; align-items:baseline; gap:18px; }
+    .federal-record-title span { font:9px/1.3 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; opacity:.66; }
+    .federal-record-title h5 { margin:0; font-size:clamp(26px,2.8vw,44px); line-height:1; font-weight:400; letter-spacing:-.035em; }
+    .federal-record-source { flex:0 0 auto; padding-bottom:4px; border-bottom:1px solid currentColor; color:inherit; font:9px/1.3 Arial,Helvetica,sans-serif; letter-spacing:.13em; text-transform:uppercase; }
+    .federal-record-stage { min-height:690px; display:grid; grid-template-columns:minmax(180px,.46fr) minmax(390px,1.2fr) minmax(290px,.72fr); }
+    .federal-record-nav { margin:0; padding:clamp(20px,3vw,38px) 0; list-style:none; border-right:1px solid rgba(21,23,21,.20); }
+    .federal-record-nav button { appearance:none; width:100%; min-height:70px; padding:14px clamp(18px,2.3vw,32px); display:grid; grid-template-columns:28px minmax(0,1fr); gap:10px; align-items:start; border:0; border-bottom:1px solid rgba(21,23,21,.14); color:rgba(21,23,21,.55); background:transparent; text-align:left; cursor:pointer; font:10px/1.35 Arial,Helvetica,sans-serif; letter-spacing:.08em; text-transform:uppercase; transition:color .22s ease,background-color .22s ease; }
+    .federal-record-nav li:first-child button { border-top:1px solid rgba(21,23,21,.14); }
+    .federal-record-nav button:hover,.federal-record-nav button:focus-visible { color:#383836; }
+    .federal-record-nav button[aria-selected="true"] { color:var(--niagara-paper); background:#383836; }
+    .federal-record-nav-number { opacity:.55; }
+    .federal-record-page { min-width:0; margin:0; padding:clamp(28px,4vw,60px); display:grid; place-items:center; background:#52514d; }
+    .federal-record-page img { width:auto; max-width:100%; height:auto; max-height:720px; display:block; box-shadow:0 22px 54px rgba(0,0,0,.38); transition:opacity .18s ease,transform .28s ease; }
+    .federal-record.is-changing .federal-record-page img { opacity:.25; transform:translateY(7px); }
+    .federal-record-note { min-width:0; padding:clamp(30px,4vw,58px); display:flex; flex-direction:column; justify-content:space-between; background:var(--niagara-paper); }
+    .federal-record-page-number { display:block; margin-bottom:32px; color:#383836; font:9px/1.3 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
+    .federal-record-quote { margin:0; font-size:clamp(24px,2.25vw,38px); line-height:1.12; letter-spacing:-.032em; }
+    .federal-record-why { margin-top:42px; padding-top:20px; border-top:1px solid var(--niagara-line); }
+    .federal-record-why span { display:block; margin-bottom:10px; color:rgba(21,23,21,.48); font:9px/1.3 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
+    .federal-record-why p { margin:0 !important; font-size:clamp(14px,1.1vw,17px) !important; line-height:1.46 !important; }
     .waste-video-block { margin:clamp(48px,7svh,86px) 0 0; display:grid; grid-template-columns:minmax(260px,.75fr) minmax(0,1.25fr); color:var(--niagara-paper); background:#202020; }
     .waste-video-copy { padding:clamp(28px,4vw,52px); display:flex; flex-direction:column; justify-content:space-between; }
     .waste-video-copy .waste-year { color:rgba(241,240,234,.58); }
@@ -451,9 +466,17 @@
       .love-canal-threshold figcaption { width:calc(100% - 72px); margin-left:72px; grid-template-columns:1fr; gap:7px; }
       .love-canal-transition { margin-left:72px !important; }
       .love-canal-range .investigation-stat-grid { margin-left:72px; }
-      .federal-pdf-viewer { width:calc(100vw - 48px); margin-left:0; }
-      .federal-pdf-viewer-header { align-items:flex-start; }
-      .federal-pdf-viewer-frame { height:72svh; min-height:560px; }
+      .federal-record { width:calc(100vw - 48px); margin-left:0; }
+      .federal-record-header { align-items:flex-start; }
+      .federal-record-title { display:block; }
+      .federal-record-title span { display:block; margin-bottom:7px; }
+      .federal-record-stage { min-height:0; grid-template-columns:1fr; }
+      .federal-record-nav { display:flex; padding:0; overflow-x:auto; border-right:0; border-bottom:1px solid rgba(21,23,21,.20); scrollbar-width:thin; }
+      .federal-record-nav li { flex:0 0 178px; }
+      .federal-record-nav button { height:100%; min-height:76px; border-top:0 !important; border-right:1px solid rgba(21,23,21,.14); }
+      .federal-record-page { min-height:520px; }
+      .federal-record-page img { max-height:660px; }
+      .federal-record-note { min-height:420px; }
       .waste-section-header { grid-template-columns:1fr; gap:10px; }
       .waste-year { padding-top:0; }
       .waste-section-copy { margin-left:0; }
@@ -982,13 +1005,37 @@
                   <p>The task force’s final report connected Love Canal to a broader federal and industrial system. It centered on the former Lake Ontario Ordnance Works and the Manhattan Project uranium network linking Linde, Electromet, Hooker, military agencies, contractors, rail lines, disposal wells, and storage areas.</p>
                   <p>The report concluded that government-related chemical production contributed to the region’s contamination, that the Army’s earlier inquiry had not adequately examined federal involvement, and that Manhattan Project operations had disposed of 37 million gallons of radioactively contaminated chemical waste in underground wells that were not adequately identified or monitored.</p>
 
-                  <section class="federal-pdf-viewer" aria-labelledby="federal-pdf-viewer-title">
-                    <header class="federal-pdf-viewer-header">
-                      <h5 id="federal-pdf-viewer-title"><em>The Federal Connection</em></h5>
-                      <a href="https://natalianeuhaus.com/wp-content/uploads/2026/07/the_federal_connection.pdf" target="_blank" rel="noopener noreferrer">Open full screen ↗</a>
+                  <section class="federal-record" data-federal-record aria-labelledby="federal-record-title">
+                    <header class="federal-record-header">
+                      <div class="federal-record-title">
+                        <span>Curated record · 1981</span>
+                        <h5 id="federal-record-title"><em>The Federal Connection</em></h5>
+                      </div>
+                      <a class="federal-record-source" href="https://natalianeuhaus.com/wp-content/uploads/2026/07/the_federal_connection.pdf" target="_blank" rel="noopener noreferrer">Open the complete 293-page report ↗</a>
                     </header>
-                    <iframe class="federal-pdf-viewer-frame" src="https://natalianeuhaus.com/wp-content/uploads/2026/07/the_federal_connection.pdf#page=1&amp;view=FitH" title="Browse the complete 293-page report The Federal Connection" loading="lazy"></iframe>
-                    <p class="federal-pdf-viewer-fallback">If the report does not appear in your browser, <a href="https://natalianeuhaus.com/wp-content/uploads/2026/07/the_federal_connection.pdf" target="_blank" rel="noopener noreferrer">open the complete PDF</a>.</p>
+                    <div class="federal-record-stage">
+                      <ol class="federal-record-nav" aria-label="Evidence sequence">
+                        <li><button type="button" data-federal-record-index="0" aria-selected="true"><span class="federal-record-nav-number">01</span><span>The inquiry expands</span></button></li>
+                        <li><button type="button" data-federal-record-index="1" aria-selected="false"><span class="federal-record-nav-number">02</span><span>Radioactive waste</span></button></li>
+                        <li><button type="button" data-federal-record-index="2" aria-selected="false"><span class="federal-record-nav-number">03</span><span>Liquid pathways</span></button></li>
+                        <li><button type="button" data-federal-record-index="3" aria-selected="false"><span class="federal-record-nav-number">04</span><span>Slag &amp; gravel</span></button></li>
+                        <li><button type="button" data-federal-record-index="4" aria-selected="false"><span class="federal-record-nav-number">05</span><span>Federal facilities</span></button></li>
+                        <li><button type="button" data-federal-record-index="5" aria-selected="false"><span class="federal-record-nav-number">06</span><span>Company / agency links</span></button></li>
+                      </ol>
+                      <figure class="federal-record-page">
+                        <img src="./archive/federal-record-020.webp" alt="Introduction page of The Federal Connection report" loading="lazy" />
+                      </figure>
+                      <aside class="federal-record-note" aria-live="polite">
+                        <div>
+                          <span class="federal-record-page-number">Introduction · printed page 1</span>
+                          <blockquote class="federal-record-quote">“The scope of the inquiry expanded radically as it became apparent that Love Canal and federal involvement there was merely the proverbial ‘tip of the iceberg.’”</blockquote>
+                        </div>
+                        <div class="federal-record-why">
+                          <span>Why it matters</span>
+                          <p>Investigators entered Love Canal looking for a single history of dumping. The inquiry opened onto the entire Niagara–Erie defense-production system.</p>
+                        </div>
+                      </aside>
+                    </div>
                   </section>
                 </div>
                 <div class="waste-video-block" id="waste-loow-film">
@@ -1776,6 +1823,76 @@
         archivePlaceholder.addEventListener('click', event => {
           if (event.target === archivePlaceholder) archivePlaceholder.close();
         });
+      }
+
+      const federalRecord = document.querySelector('[data-federal-record]');
+      if (federalRecord) {
+        const federalRecordItems = [
+          {
+            image:'./archive/federal-record-020.webp',
+            alt:'Introduction page of The Federal Connection report',
+            page:'Introduction · printed page 1',
+            quote:'“The scope of the inquiry expanded radically as it became apparent that Love Canal and federal involvement there was merely the proverbial ‘tip of the iceberg.’”',
+            why:'Investigators entered Love Canal looking for a single history of dumping. The inquiry opened onto the entire Niagara–Erie defense-production system.'
+          },
+          {
+            image:'./archive/federal-record-010.webp',
+            alt:'Finding III in The Federal Connection concerning 37 million gallons of radioactive waste',
+            page:'Finding III · printed page IV',
+            quote:'“The Army’s ‘Manhattan Project’ disposed of 37 million gallons of radioactively contaminated chemical wastes in underground wells.”',
+            why:'The report placed radioactive waste inside the same regional history that Love Canal had exposed—not as a separate legacy, but as another part of it.'
+          },
+          {
+            image:'./archive/federal-record-139.webp',
+            alt:'Page 120 of The Federal Connection describing the underground wells at Linde',
+            page:'Linde wells · printed page 120',
+            quote:'“This method of disposal was selected precisely because the source of the underground contamination could not readily be traced back to Linde or the Army.”',
+            why:'The underground wells were not merely convenient. According to the report, their very invisibility made responsibility harder to trace.'
+          },
+          {
+            image:'./archive/federal-record-262.webp',
+            alt:'Page 243 of The Federal Connection describing rock slag taken from the federal site',
+            page:'Security problems at LOOW · printed page 243',
+            quote:'Workers used an AEC truck to transport “rock slag” from the site to their homes “for driveway paving, clean fill, etc.”',
+            why:'Material did not remain within the federal reservation. The report recorded an almost routine pathway by which slag could move into private property.'
+          },
+          {
+            image:'./archive/federal-record-014.webp',
+            alt:'Finding VI in The Federal Connection concerning radioactive contamination at LOOW',
+            page:'Finding VI · printed page VIII',
+            quote:'“Radioactive materials buried and stored at the site have been migrating off the site through the air and through the surface drainage system.”',
+            why:'LOOW was not a sealed endpoint. Its climate, drainage and storage practices allowed radioactive contamination to cross the federal boundary.'
+          },
+          {
+            image:'./archive/federal-record-288.webp',
+            alt:'Finding VII in The Federal Connection concerning Carborundum and the Niagara River',
+            page:'Finding VII · printed page 269',
+            quote:'The Atomic Energy Commission permitted Carborundum Metals to discharge untreated thiocyanate waste “directly into the Niagara River through the outfall sewers” at LOOW.',
+            why:'The records connect a private contractor, federal approval and a disposal route to the river—showing how responsibility was distributed across companies and agencies.'
+          }
+        ];
+        const federalRecordButtons = Array.from(federalRecord.querySelectorAll('[data-federal-record-index]'));
+        const federalRecordImage = federalRecord.querySelector('.federal-record-page img');
+        const federalRecordPage = federalRecord.querySelector('.federal-record-page-number');
+        const federalRecordQuote = federalRecord.querySelector('.federal-record-quote');
+        const federalRecordWhy = federalRecord.querySelector('.federal-record-why p');
+
+        federalRecordItems.forEach(item => { const image = new Image(); image.src = item.image; });
+        federalRecordButtons.forEach(button => button.addEventListener('click', () => {
+          const index = Number(button.dataset.federalRecordIndex);
+          const item = federalRecordItems[index];
+          if (!item) return;
+          federalRecordButtons.forEach((candidate,candidateIndex) => candidate.setAttribute('aria-selected',String(candidateIndex === index)));
+          federalRecord.classList.add('is-changing');
+          window.setTimeout(() => {
+            federalRecordImage.src = item.image;
+            federalRecordImage.alt = item.alt;
+            federalRecordPage.textContent = item.page;
+            federalRecordQuote.textContent = item.quote;
+            federalRecordWhy.textContent = item.why;
+            requestAnimationFrame(() => federalRecord.classList.remove('is-changing'));
+          },140);
+        }));
       }
 
       const healthArchiveTrack = document.querySelector('.health-record-track');
