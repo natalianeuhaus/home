@@ -703,3 +703,15 @@ body.burlesque-horizontal-body{overflow:hidden}
   border-color:#1517151f;
   box-shadow:none;
 }
+
+
+/* burlesque-backstory-always-clear-v1: no visible rectangle, including hover and focus */
+.burlesque-page + .healers-backstory-trigger,
+.burlesque-page + .healers-backstory-trigger:hover,
+.burlesque-page + .healers-backstory-trigger:focus-visible{
+  background:transparent;
+  border-color:transparent;
+  box-shadow:none;
+}
+.burlesque-page + .healers-backstory-trigger:hover strong,
+.burlesque-page + .healers-backstory-trigger:focus-visible strong{opacity:.62}
