@@ -66,6 +66,9 @@
     .niagara-copy { max-width:900px; }
     .niagara-copy p { margin:0 0 1.2em; letter-spacing:-.012em; font-size:clamp(18px,1.4vw,23px); line-height:1.43; }
     .niagara-copy p:last-child { margin-bottom:0; }
+    .niagara-project-link { display:inline-flex; align-items:center; gap:14px; margin-top:34px; padding:15px 20px; border:1px solid var(--niagara-ink); color:var(--niagara-ink); text-decoration:none; text-transform:uppercase; letter-spacing:.16em; font:10px/1.2 Arial,Helvetica,sans-serif; transition:background-color .22s ease,color .22s ease; }
+    .niagara-project-link::after { content:"↗"; font-size:15px; line-height:1; }
+    .niagara-project-link:hover,.niagara-project-link:focus-visible { color:var(--niagara-paper); background:var(--niagara-red); border-color:var(--niagara-red); }
     .niagara-rule { width:100%; height:1px; background:var(--niagara-line); margin:62px 0; }
     .niagara-copy h3 { margin:0 0 26px; font-size:clamp(26px,2.4vw,40px); font-weight:400; line-height:1.08; letter-spacing:-.03em; }
 
@@ -580,11 +583,11 @@
 
     <div class="niagara-tabbar-wrap" id="niagara-tabs">
       <div class="niagara-tabbar" role="tablist" aria-label="Greetings from Niagara sections">
-        <button class="niagara-tab" role="tab" id="tab-investigation" aria-controls="panel-investigation" aria-selected="true" data-tab="investigation"><span class="niagara-tab-label">The Investigation</span></button>
-        <button class="niagara-tab" role="tab" id="tab-evidence" aria-controls="panel-evidence" aria-selected="false" data-tab="evidence"><span class="niagara-tab-label">Evidence</span></button>
-        <button class="niagara-tab" role="tab" id="tab-surveys" aria-controls="panel-surveys" aria-selected="false" data-tab="surveys"><span class="niagara-tab-label">Surveys</span></button>
-        <button class="niagara-tab" role="tab" id="tab-photographs" aria-controls="panel-photographs" aria-selected="false" data-tab="photographs"><span class="niagara-tab-label">Photographs</span></button>
+        <button class="niagara-tab" role="tab" id="tab-investigation" aria-controls="panel-investigation" aria-selected="true" data-tab="investigation"><span class="niagara-tab-label">Investigation</span></button>
         <button class="niagara-tab" role="tab" id="tab-map" aria-controls="panel-map" aria-selected="false" data-tab="map"><span class="niagara-tab-label">Interactive Map</span></button>
+        <button class="niagara-tab" role="tab" id="tab-evidence" aria-controls="panel-evidence" aria-selected="false" data-tab="evidence"><span class="niagara-tab-label">Evidence</span></button>
+        <button class="niagara-tab" role="tab" id="tab-photographs" aria-controls="panel-photographs" aria-selected="false" data-tab="photographs"><span class="niagara-tab-label">Photograph</span></button>
+        <button class="niagara-tab" role="tab" id="tab-greetings" aria-controls="panel-greetings" aria-selected="false" data-tab="greetings"><span class="niagara-tab-label">Greetings from Niagara</span></button>
       </div>
     </div>
 
@@ -1293,6 +1296,17 @@
       </article>
     </section>
 
+    <section class="niagara-panel" id="panel-map" role="tabpanel" aria-labelledby="tab-map" data-panel="map" hidden>
+      <div class="niagara-iframe-intro">
+        <h2>Interactive Map</h2>
+        <p>The research map brings together factories, FUSRAP sites, historical radiological anomalies, survey footprints, waterways, documented findings, remediation records, and the archival evidence behind them.</p>
+      </div>
+      <div class="niagara-frame-shell" data-frame-shell>
+        <div class="niagara-frame-placeholder">Interactive map loads when this tab is opened</div>
+        <iframe title="Greetings from Niagara interactive map" data-src="https://natalianeuhaus.github.io/GreetingsFromNiagaraProject/" loading="lazy" allow="fullscreen"></iframe>
+      </div>
+    </section>
+
     <section class="niagara-panel" id="panel-evidence" role="tabpanel" aria-labelledby="tab-evidence" data-panel="evidence" hidden>
       <div class="niagara-iframe-intro">
         <h2>Evidence</h2>
@@ -1304,20 +1318,9 @@
       </div>
     </section>
 
-    <section class="niagara-panel" id="panel-surveys" role="tabpanel" aria-labelledby="tab-surveys" data-panel="surveys" hidden>
-      <div class="niagara-iframe-intro">
-        <h2>Surveys</h2>
-        <p>Historical and current radiological surveys, property screening information, road investigations, agency updates, and resources for residents. This section points directly to the living survey record.</p>
-      </div>
-      <div class="niagara-frame-shell" data-frame-shell>
-        <div class="niagara-frame-placeholder">Survey record loads when this tab is opened</div>
-        <iframe title="Greetings from Niagara survey updates and resources" data-src="https://natalianeuhaus.github.io/GreetingsFromNiagaraProject/necra.html" loading="lazy"></iframe>
-      </div>
-    </section>
-
     <section class="niagara-panel" id="panel-photographs" role="tabpanel" aria-labelledby="tab-photographs" data-panel="photographs" hidden>
       <div class="niagara-photo-intro">
-        <h2>Photographs</h2>
+        <h2>Photograph</h2>
         <p>The photographic record of the landscape, neighborhoods, industrial remains, and people whose lives intersect with this history. Images load only when this tab is opened.</p>
       </div>
       <div class="niagara-photo-grid">
@@ -1330,14 +1333,18 @@
       </div>
     </section>
 
-    <section class="niagara-panel" id="panel-map" role="tabpanel" aria-labelledby="tab-map" data-panel="map" hidden>
-      <div class="niagara-iframe-intro">
-        <h2>Interactive Map</h2>
-        <p>The research map brings together factories, FUSRAP sites, historical radiological anomalies, survey footprints, waterways, documented findings, remediation records, and the archival evidence behind them.</p>
-      </div>
-      <div class="niagara-frame-shell" data-frame-shell>
-        <div class="niagara-frame-placeholder">Interactive map loads when this tab is opened</div>
-        <iframe title="Greetings from Niagara interactive map" data-src="https://natalianeuhaus.github.io/GreetingsFromNiagaraProject/" loading="lazy" allow="fullscreen"></iframe>
+    <section class="niagara-panel" id="panel-greetings" role="tabpanel" aria-labelledby="tab-greetings" data-panel="greetings" hidden>
+      <div class="niagara-section niagara-two-col">
+        <header class="niagara-heading">
+          <p class="niagara-kicker">Living research platform</p>
+          <h2>Greetings from Niagara</h2>
+        </header>
+        <div class="niagara-copy">
+          <p><em>Greetings from Niagara</em> exists as a separate public research website because this investigation is larger than a single portfolio story. It is a living platform where the project’s evidence, historical surveys, interactive map, agency updates, resident resources, and continuing research can remain connected and accessible in one place.</p>
+          <p>While this page presents the investigation as a visual narrative, the separate website holds the working archive behind it. It is continually updated as records surface, government investigations develop, and new information becomes available.</p>
+          <p>The website is intended for residents, workers and their families, researchers, journalists, and anyone trying to understand how the Manhattan Project and Cold War nuclear industry shaped Western New York—and what that history continues to mean today.</p>
+          <a class="niagara-project-link" href="https://natalianeuhaus.github.io/GreetingsFromNiagaraProject/" target="_blank" rel="noopener noreferrer">Enter the research website</a>
+        </div>
       </div>
     </section>
   </main>
