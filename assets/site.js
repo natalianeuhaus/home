@@ -36,7 +36,9 @@
     toggle.addEventListener("click", () => {
       setOpen(!panel.classList.contains("is-open"));
     });
-    links.forEach((link) => link.addEventListener("click", () => setOpen(false)));
+    links.forEach((link) =>
+      link.addEventListener("click", () => setOpen(false)),
+    );
     window.addEventListener("keydown", (event) => {
       if (event.key === "Escape") setOpen(false);
     });
@@ -79,6 +81,29 @@
       { rootMargin: "0px 0px -8%", threshold: 0.08 },
     );
     items.forEach((item) => observer.observe(item));
+  }
+
+  function initializeHealersHeaderTransition() {
+    const page = document.querySelector(".healers-page");
+    const hero = document.querySelector(".healers-hero");
+    if (!page || !hero) return;
+
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      page.classList.toggle(
+        "nav-on-light",
+        hero.getBoundingClientRect().bottom <= 96,
+      );
+    };
+    const requestUpdate = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
   }
 
   function createLightbox({ slides, startIndex, className }) {
@@ -143,7 +168,8 @@
         const isActive = index === activeIndex;
         item.figure.setAttribute("aria-hidden", String(!isActive));
         item.image.alt = isActive ? item.alt : "";
-        item.image.loading = Math.abs(index - activeIndex) <= 1 ? "eager" : "lazy";
+        item.image.loading =
+          Math.abs(index - activeIndex) <= 1 ? "eager" : "lazy";
       });
     };
 
@@ -225,7 +251,8 @@
 
     const open = (image) => {
       const index = Number(image.dataset.healersSlideIndex);
-      if (!Number.isInteger(index) || index < 0 || index >= slides.length) return;
+      if (!Number.isInteger(index) || index < 0 || index >= slides.length)
+        return;
       createLightbox({
         slides,
         startIndex: index,
@@ -243,13 +270,175 @@
     });
   }
 
+  function initializeHealersBackstory() {
+    const trigger = document.querySelector("[data-healers-backstory-open]");
+    const dialog = document.querySelector(".healers-backstory");
+    const close = dialog?.querySelector("[data-healers-backstory-close]");
+    const viewport = dialog?.querySelector(".healers-backstory-viewport");
+    const track = dialog?.querySelector(".healers-backstory-track");
+    const slides = Array.from(
+      dialog?.querySelectorAll(".healers-backstory-slide") || [],
+    );
+    const previous = dialog?.querySelector(".healers-backstory-previous");
+    const next = dialog?.querySelector(".healers-backstory-next");
+    const current = dialog?.querySelector("[data-healers-backstory-current]");
+    if (
+      !trigger ||
+      !dialog ||
+      !close ||
+      !viewport ||
+      !track ||
+      !slides.length ||
+      !previous ||
+      !next ||
+      !current
+    )
+      return;
+
+    let activeIndex = 0;
+    let isOpen = false;
+    let previousOverflow = "";
+    let wheelLockedUntil = 0;
+    let touchStartX = null;
+
+    const revealTrigger = () => {
+      window.setTimeout(() => {
+        trigger.disabled = false;
+        trigger.setAttribute("aria-hidden", "false");
+        trigger.classList.add("is-ready");
+      }, 900);
+    };
+
+    if (document.readyState === "complete") {
+      revealTrigger();
+    } else {
+      window.addEventListener("load", revealTrigger, { once: true });
+    }
+
+    const render = (index) => {
+      activeIndex = Math.max(0, Math.min(index, slides.length - 1));
+      track.style.transform = `translate3d(-${activeIndex * 100}%, 0, 0)`;
+      current.textContent = String(activeIndex + 1).padStart(2, "0");
+      previous.disabled = activeIndex === 0;
+      next.disabled = activeIndex === slides.length - 1;
+      slides.forEach((slide, slideIndex) => {
+        const active = slideIndex === activeIndex;
+        slide.setAttribute("aria-hidden", String(!active));
+        slide.querySelectorAll("a, button").forEach((element) => {
+          element.tabIndex = active ? 0 : -1;
+        });
+      });
+    };
+
+    const show = (index) => render(index);
+
+    const open = () => {
+      if (isOpen) return;
+      isOpen = true;
+      previousOverflow = html.style.overflow;
+      dialog.hidden = false;
+      dialog.setAttribute("aria-hidden", "false");
+      trigger.setAttribute("aria-expanded", "true");
+      html.style.overflow = "hidden";
+      render(0);
+      requestAnimationFrame(() => {
+        dialog.classList.add("is-visible");
+        close.focus();
+      });
+    };
+
+    const hide = () => {
+      if (!isOpen) return;
+      isOpen = false;
+      dialog.classList.remove("is-visible");
+      dialog.setAttribute("aria-hidden", "true");
+      trigger.setAttribute("aria-expanded", "false");
+      html.style.overflow = previousOverflow;
+      window.setTimeout(() => {
+        if (!isOpen) dialog.hidden = true;
+      }, 480);
+      trigger.focus();
+    };
+
+    const onWheel = (event) => {
+      if (!isOpen) return;
+      const delta =
+        Math.abs(event.deltaX) >= Math.abs(event.deltaY)
+          ? event.deltaX
+          : event.deltaY;
+      if (Math.abs(delta) < 18) return;
+      event.preventDefault();
+      const now = performance.now();
+      if (now < wheelLockedUntil) return;
+      if (delta > 0 && activeIndex < slides.length - 1) {
+        show(activeIndex + 1);
+        wheelLockedUntil = now + 925;
+      } else if (delta < 0 && activeIndex > 0) {
+        show(activeIndex - 1);
+        wheelLockedUntil = now + 925;
+      }
+    };
+
+    const onKeyDown = (event) => {
+      if (!isOpen) return;
+      if (event.key === "Escape") hide();
+      if (event.key === "ArrowLeft") show(activeIndex - 1);
+      if (event.key === "ArrowRight") show(activeIndex + 1);
+      if (event.key !== "Tab") return;
+
+      const focusable = [close, previous, next].filter(
+        (element) => !element.disabled,
+      );
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    trigger.addEventListener("click", open);
+    close.addEventListener("click", hide);
+    previous.addEventListener("click", () => show(activeIndex - 1));
+    next.addEventListener("click", () => show(activeIndex + 1));
+    viewport.addEventListener("wheel", onWheel, { passive: false });
+    viewport.addEventListener(
+      "touchstart",
+      (event) => {
+        touchStartX = event.touches[0]?.clientX ?? null;
+      },
+      { passive: true },
+    );
+    viewport.addEventListener(
+      "touchend",
+      (event) => {
+        if (touchStartX === null) return;
+        const touchEndX = event.changedTouches[0]?.clientX ?? touchStartX;
+        const distance = touchStartX - touchEndX;
+        touchStartX = null;
+        if (Math.abs(distance) < 48) return;
+        show(activeIndex + (distance > 0 ? 1 : -1));
+      },
+      { passive: true },
+    );
+    window.addEventListener("keydown", onKeyDown);
+    render(0);
+  }
+
   function initializeIntermissionChapters() {
     const tabs = Array.from(
       document.querySelectorAll(".intermission-chapter-tabs button"),
     );
-    const description = document.querySelector(".intermission-chapter-description");
+    const description = document.querySelector(
+      ".intermission-chapter-description",
+    );
     const chapterIndex = document.querySelector(".intermission-chapter-index");
-    const scrollIndicator = document.querySelector(".intermission-chapter-scroll span");
+    const scrollIndicator = document.querySelector(
+      ".intermission-chapter-scroll span",
+    );
     if (!tabs.length || !description || !chapterIndex) return;
 
     const chapters = [
@@ -270,9 +459,13 @@
       if (!title) return;
       const offset = Math.max(
         0,
-        title.getBoundingClientRect().top - chapterIndex.getBoundingClientRect().top,
+        title.getBoundingClientRect().top -
+          chapterIndex.getBoundingClientRect().top,
       );
-      description.style.setProperty("--chapter-description-offset", `${offset}px`);
+      description.style.setProperty(
+        "--chapter-description-offset",
+        `${offset}px`,
+      );
     };
 
     const render = (index, focus = false) => {
@@ -297,7 +490,10 @@
       const enter = document.createElement("button");
       enter.className = "intermission-enter-series";
       enter.type = "button";
-      enter.setAttribute("aria-label", "Scroll down to the photographic series");
+      enter.setAttribute(
+        "aria-label",
+        "Scroll down to the photographic series",
+      );
       enter.innerHTML = "<span>↓</span>";
       enter.addEventListener("click", () => {
         document.getElementById("chapter-1")?.scrollIntoView({
@@ -323,7 +519,9 @@
       });
     });
     window.addEventListener("resize", () => {
-      const index = tabs.findIndex((tab) => tab.classList.contains("is-active"));
+      const index = tabs.findIndex((tab) =>
+        tab.classList.contains("is-active"),
+      );
       alignDescription(Math.max(index, 0));
     });
     render(0);
@@ -334,7 +532,9 @@
     if (!film) return;
 
     const slides = Array.from(film.querySelectorAll(".intermission-slide"));
-    const triggers = Array.from(film.querySelectorAll("[data-intermission-trigger]"));
+    const triggers = Array.from(
+      film.querySelectorAll("[data-intermission-trigger]"),
+    );
     const controls = film.querySelector(".intermission-navigation-controls");
     const progress = film.querySelector(".intermission-progress");
     const statement = document.querySelector(".intermission-statement");
@@ -365,9 +565,14 @@
       });
       if (buttons[0]) buttons[0].disabled = index === 0;
       if (buttons[1]) buttons[1].disabled = index === slides.length - 1;
-      if (counters[0]) counters[0].textContent = String(index + 1).padStart(2, "0");
-      if (counters[1]) counters[1].textContent = String(slides.length).padStart(2, "0");
-      progress?.style.setProperty("--progress", String((index + 1) / slides.length));
+      if (counters[0])
+        counters[0].textContent = String(index + 1).padStart(2, "0");
+      if (counters[1])
+        counters[1].textContent = String(slides.length).padStart(2, "0");
+      progress?.style.setProperty(
+        "--progress",
+        String((index + 1) / slides.length),
+      );
     };
 
     const updateFromScroll = () => {
@@ -439,7 +644,8 @@
 
     if (statement && page && "IntersectionObserver" in window) {
       const observer = new IntersectionObserver(
-        ([entry]) => page.classList.toggle("nav-on-light", entry.isIntersecting),
+        ([entry]) =>
+          page.classList.toggle("nav-on-light", entry.isIntersecting),
         { threshold: 0.05 },
       );
       observer.observe(statement);
@@ -449,7 +655,9 @@
   initializeNavigation();
   initializeHomeVideo();
   initializeReveals();
+  initializeHealersHeaderTransition();
   initializeHealersSlideshow();
+  initializeHealersBackstory();
   initializeIntermissionChapters();
   initializeIntermissionSequence();
 })();
