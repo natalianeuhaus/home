@@ -1567,10 +1567,10 @@
         });
       }
 
-      function scrollTabsToTop() {
+      function scrollTabsToTop(behavior = 'smooth') {
         if (!tabbarWrap) return;
         const top = window.scrollY + tabbarWrap.getBoundingClientRect().top;
-        window.scrollTo({ top, behavior:'smooth' });
+        window.scrollTo({ top, behavior });
       }
 
       function activate(name, updateHash = true, animateIndicator = true, scrollToContent = false) {
@@ -1591,7 +1591,7 @@
         requestAnimationFrame(() => moveIndicator(activeTab, animateIndicator));
         if (name === 'investigation') requestAnimationFrame(layoutAtomicThread);
         if (updateHash) history.replaceState(null, '', `#${name}`);
-        if (scrollToContent) requestAnimationFrame(scrollTabsToTop);
+        if (scrollToContent) requestAnimationFrame(() => scrollTabsToTop());
       }
 
       const activeTab = () => tabs.find(tab => tab.getAttribute('aria-selected') === 'true') || tabs[0];
@@ -1963,7 +1963,9 @@
         updateStickyHeader();
       });
       window.addEventListener('hashchange', () => activate(location.hash.slice(1), false));
-      activate(location.hash.slice(1) || 'investigation', false, false, false);
+      const initialTab = archiveSearchTerm ? 'evidence' : (location.hash.slice(1) || 'investigation');
+      activate(initialTab, false, false, false);
+      if (archiveSearchTerm) requestAnimationFrame(() => scrollTabsToTop('auto'));
       requestAnimationFrame(updateStickyHeader);
       requestAnimationFrame(updateLoveCanalState);
     })();
