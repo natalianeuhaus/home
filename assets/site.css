@@ -670,3 +670,16 @@ body.burlesque-horizontal-body{overflow:hidden}
   .burlesque-backstory .healers-backstory-opening-copy{width:100%}
   .burlesque-backstory .healers-backstory-opening-copy>span{width:100%;font-size:17px}
 }
+
+
+/* burlesque-backstory-second-slide-v1: reveal the floating card after the introduction */
+.burlesque-page:not(.is-in-series) + .healers-backstory-trigger{
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(12px);
+}
+.burlesque-page.is-in-series + .healers-backstory-trigger{
+  opacity:1;
+  pointer-events:auto;
+  transform:translateY(0);
+}
