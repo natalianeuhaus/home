@@ -683,3 +683,7 @@ body.burlesque-horizontal-body{overflow:hidden}
   pointer-events:auto;
   transform:translateY(0);
 }
+
+
+/* burlesque-backstory-white-margin-v1: keep the floating card clear of the photographs */
+.burlesque-page + .healers-backstory-trigger{right:20px}
