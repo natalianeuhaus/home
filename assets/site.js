@@ -300,7 +300,7 @@
     let previousOverflow = "";
     let wheelLockedUntil = 0;
     let touchStartX = null;
-    const revealAnchor = document.querySelector(".healers-goldie");
+    const revealAnchor = document.querySelector(".healers-final-photo");
 
     const revealTrigger = () => {
       if (trigger.classList.contains("is-ready")) return;
