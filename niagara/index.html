@@ -1379,11 +1379,35 @@
         }
       }
 
+      function hideRedundantEmbeddedMapChrome(frame) {
+        try {
+          const frameDocument = frame.contentDocument;
+          if (!frameDocument || !frameDocument.head) return;
+          if (frameDocument.getElementById('niagara-portfolio-embed-style')) return;
+          const style = frameDocument.createElement('style');
+          style.id = 'niagara-portfolio-embed-style';
+          style.textContent = `
+            html body .site-brand-control,
+            html body:not(.site-page) .global-menu-button--map,
+            html body #globalSiteMenu {
+              display: none !important;
+            }
+          `;
+          frameDocument.head.appendChild(style);
+        } catch (error) {
+          /* The standalone map remains unchanged if it is served elsewhere. */
+        }
+      }
+
       function loadPanel(panel) {
         panel.querySelectorAll('iframe[data-src]').forEach(frame => {
           if (!frame.src) frame.src = frame.dataset.src;
           const placeholder = frame.parentElement.querySelector('.niagara-frame-placeholder');
           if (placeholder) frame.addEventListener('load', () => placeholder.remove(), { once:true });
+          if (panel.dataset.panel === 'map') {
+            frame.addEventListener('load', () => hideRedundantEmbeddedMapChrome(frame));
+            hideRedundantEmbeddedMapChrome(frame);
+          }
         });
         panel.querySelectorAll('img[data-src]').forEach(image => {
           if (!image.src) image.src = image.dataset.src;
