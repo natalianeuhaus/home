@@ -9,7 +9,7 @@
   <link rel="shortcut icon" href="../favicon.svg" />
   <link rel="icon" href="../favicon.svg" />
   <style>
-    :root { --niagara-paper:#f1f0ea; --niagara-ink:#151715; --niagara-line:rgba(21,23,21,.22); --niagara-red:#440806; --niagara-cancer:#77736f; --niagara-atomic:#363636; }
+    :root { --niagara-paper:#f1f0ea; --niagara-ink:#151715; --niagara-line:rgba(21,23,21,.22); --niagara-red:#440806; --love-canal-red:#f6540c; --niagara-cancer:#77736f; --niagara-atomic:#363636; }
     * { box-sizing:border-box; }
     html { scroll-behavior:smooth; }
     body.niagara-page { margin:0; color:var(--niagara-ink); background:var(--niagara-paper); min-height:100svh; overflow-x:hidden; }
@@ -308,6 +308,20 @@
     .radioactive-waste-copy-grid { padding-top:clamp(86px,12svh,150px); }
     .waste-story { max-width:900px; }
     .waste-lede { margin-bottom:1.35em !important; font-size:clamp(25px,2.25vw,37px) !important; line-height:1.23 !important; letter-spacing:-.027em !important; }
+    .love-canal-range { position:relative; }
+    .love-canal-threshold { width:calc(100vw - 84px); margin:clamp(90px,13svh,160px) 0 0 calc(100% - (100vw - 84px)); }
+    .love-canal-image-shell { height:calc(100svh - 66px); min-height:640px; display:grid; place-items:center; overflow:hidden; background:#e5d8bd; }
+    .love-canal-image-shell img { width:100%; height:100%; display:block; object-fit:contain; }
+    .love-canal-threshold figcaption { width:min(900px,calc(100% - 84px)); margin:18px 0 0 auto; display:grid; grid-template-columns:112px minmax(0,1fr); gap:clamp(22px,4vw,54px); color:rgba(21,23,21,.62); font:13px/1.5 Arial,Helvetica,sans-serif; }
+    .love-canal-threshold-date { padding-top:2px; color:var(--love-canal-red); font:10px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.15em; text-transform:uppercase; }
+    .love-canal-threshold-copy { max-width:650px; }
+    .love-canal-section { margin-top:clamp(82px,12svh,150px); border-top-color:rgba(246,84,12,.52); }
+    .love-canal-section .waste-year { color:var(--love-canal-red); }
+    .love-canal-transition { margin:clamp(54px,8svh,92px) 0 0 calc(112px + clamp(22px,4vw,54px)) !important; padding:clamp(26px,3.5vw,42px) 0; border-top:1px solid var(--love-canal-red); border-bottom:1px solid var(--love-canal-red); font-size:clamp(26px,3.1vw,46px) !important; line-height:1.14 !important; letter-spacing:-.035em !important; }
+    body.niagara-love-canal-active .atomic-thread-path { stroke:var(--love-canal-red); }
+    body.niagara-love-canal-active .atomic-thread-end { fill:var(--love-canal-red); }
+    body.niagara-love-canal-active .atomic-thread-path { transition:stroke .38s ease; }
+    body.niagara-love-canal-active .atomic-thread-end { transition:opacity .16s ease,fill .38s ease; }
     .waste-section { margin-top:clamp(78px,11svh,142px); padding-top:clamp(30px,4.5svh,58px); border-top:1px solid var(--niagara-line); }
     .waste-section-header { display:grid; grid-template-columns:112px minmax(0,1fr); gap:clamp(22px,4vw,54px); align-items:start; margin-bottom:30px; }
     .waste-year { padding-top:7px; color:var(--niagara-red); font:10px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
@@ -422,6 +436,10 @@
       .atomic-process-reference-media { min-height:260px; }
       .radioactive-waste-title { padding:48px 24px 40px; }
       .radioactive-waste-copy-grid { padding-top:82px; }
+      .love-canal-threshold { width:calc(100vw - 48px); margin-left:0; }
+      .love-canal-image-shell { height:auto; min-height:0; aspect-ratio:2048 / 1329; }
+      .love-canal-threshold figcaption { width:100%; grid-template-columns:1fr; gap:7px; }
+      .love-canal-transition { margin-left:0 !important; }
       .waste-section-header { grid-template-columns:1fr; gap:10px; }
       .waste-year { padding-top:0; }
       .waste-section-copy { margin-left:0; }
@@ -914,16 +932,32 @@
                 <div class="investigation-stat"><strong>37M</strong><span>gallons of radioactively contaminated chemical waste identified by the report</span></div>
               </div>
 
-              <section class="waste-section" id="waste-love-canal">
-                <div class="waste-section-header">
-                  <span class="waste-year">1978–1981</span>
-                  <h4>Love Canal opened a larger investigation</h4>
-                </div>
-                <div class="waste-section-copy">
-                  <p>Love Canal forced the government to look. By 1978, corroded chemical drums, contamination, residents’ illnesses, and mounting public pressure had produced a state health emergency. On June 1, 1979, New York State Assembly Speaker Stanley Fink formed a task force to investigate allegations that the Army and military contractors had dumped toxic waste at Love Canal beginning in the 1940s.</p>
-                  <p>The inquiry did not remain confined to the canal. Investigators collected defense contracts, disposal records, contamination surveys, and testimony from residents, workers, military personnel, and industry. Their early findings widened the investigation from one neighborhood to the entire Niagara–Erie industrial region.</p>
-                </div>
-              </section>
+              <div class="love-canal-range" id="love-canal-range">
+                <figure class="love-canal-threshold">
+                  <div class="love-canal-image-shell">
+                    <img src="./archive/love-canal-public-health-time-bomb.webp" alt="Cover spread of the 1978 report Love Canal: Public Health Time Bomb over an aerial photograph of the neighborhood" loading="lazy" />
+                  </div>
+                  <figcaption>
+                    <span class="love-canal-threshold-date">September 1978</span>
+                    <span class="love-canal-threshold-copy">The report that transformed a neighborhood’s crisis into a public investigation. <em>Love Canal: Public Health Time Bomb</em>, prepared for the Governor and New York State Legislature.</span>
+                  </figcaption>
+                </figure>
+
+                <section class="waste-section love-canal-section" id="waste-love-canal">
+                  <div class="waste-section-header">
+                    <span class="waste-year">1978–1981</span>
+                    <h4>The canal was only the beginning.</h4>
+                  </div>
+                  <div class="waste-section-copy">
+                    <p>Love Canal was not a working canal. It was the unfinished remains of a nineteenth-century project intended to generate hydroelectric power for a planned industrial city. By the 1920s, the abandoned trench had become a municipal and industrial dumping ground. Hooker Chemical later used the property to dispose of chemical waste. In 1953, the company covered the canal with soil and sold the land to the city for one dollar. A school and hundreds of homes were eventually built around it.</p>
+                    <p>By the 1970s, buried chemical drums were corroding and their contents were rising through the soil into yards, basements, sewers, and school grounds. Residents reported foul odors, chemical burns, illnesses, miscarriages, and birth defects. Their organizing and public pressure forced government agencies to investigate. In August 1978, New York declared a public-health emergency, and families began to be evacuated.</p>
+                    <p>But the investigation began to reveal that Love Canal was not solely the story of Hooker Chemical. Residents and former workers alleged that the United States Army and military contractors had also dumped waste there during and after World War II. On June 1, 1979, New York State Assembly Speaker Stanley Fink created the Task Force on Toxic Substances to investigate those allegations, determine who had used the canal, and identify what had been buried there.</p>
+                    <p>Investigators collected military contracts, disposal records, contamination surveys, and testimony from residents, workers, military personnel, and industry representatives. Their preliminary findings showed that the federal government had directed extensive wartime and postwar chemical production across the Niagara–Erie region, that wastes from those programs had been improperly disposed of, and that federal properties had been transferred without adequate decontamination.</p>
+                    <p>What began as an investigation of one contaminated neighborhood opened onto a much larger history—one involving the Manhattan Project, Niagara’s uranium-processing factories, the Lake Ontario Ordnance Works, and the movement of radioactive waste across an entire region.</p>
+                  </div>
+                  <p class="love-canal-transition">Investigators entered Love Canal looking for one history of disposal. What they uncovered was an entire regional system.</p>
+                </section>
+              </div>
 
               <section class="waste-section" id="waste-federal-connection">
                 <div class="waste-section-header">
@@ -1663,17 +1697,35 @@
         updateHealthProgress();
       }
 
+      const loveCanalRange = document.querySelector('#love-canal-range');
+      let loveCanalFrame = 0;
+
+      function updateLoveCanalState() {
+        loveCanalFrame = 0;
+        if (!loveCanalRange) return;
+        const rect = loveCanalRange.getBoundingClientRect();
+        const active = rect.top <= window.innerHeight * .56 && rect.bottom >= window.innerHeight * .44;
+        page.classList.toggle('niagara-love-canal-active', active);
+      }
+
+      function requestLoveCanalState() {
+        if (!loveCanalFrame) loveCanalFrame = requestAnimationFrame(updateLoveCanalState);
+      }
+
       window.addEventListener('scroll', updateStickyHeader, { passive:true });
       window.addEventListener('scroll', requestAtomicThreadProgress, { passive:true });
+      window.addEventListener('scroll', requestLoveCanalState, { passive:true });
       window.addEventListener('resize', () => {
         const activeTab = tabs.find(tab => tab.getAttribute('aria-selected') === 'true');
         requestAnimationFrame(() => moveIndicator(activeTab, false));
         requestAnimationFrame(layoutAtomicThread);
+        requestAnimationFrame(updateLoveCanalState);
         updateStickyHeader();
       });
       window.addEventListener('hashchange', () => activate(location.hash.slice(1), false));
       activate(location.hash.slice(1) || 'investigation', false, false, false);
       requestAnimationFrame(updateStickyHeader);
+      requestAnimationFrame(updateLoveCanalState);
     })();
   </script>
 </body>
