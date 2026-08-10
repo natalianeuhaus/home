@@ -1539,10 +1539,13 @@
           const frameDocument = frame.contentDocument;
           const searchInput = frameDocument && frameDocument.getElementById('archiveSearch');
           if (!searchInput) return;
+          const searchSection = searchInput.closest('.archive-search');
           searchInput.value = archiveSearchTerm;
           searchInput.dispatchEvent(new frame.contentWindow.Event('input', { bubbles:true }));
           frame.contentWindow.requestAnimationFrame(() => {
-            searchInput.scrollIntoView({ block:'start' });
+            if (!searchSection) return;
+            const searchTop = searchSection.getBoundingClientRect().top + frame.contentWindow.scrollY;
+            frame.contentWindow.scrollTo({ top:Math.max(0,searchTop - 24), behavior:'auto' });
           });
         } catch (error) {
           /* Evidence still opens if its embedded search is unavailable. */
