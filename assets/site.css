@@ -733,18 +733,3 @@ body.burlesque-horizontal-body{overflow:hidden}
   padding-left:10px;
   padding-right:8px;
 }
-
-
-/* burlesque-backstory-plus-v1: quiet open indicator beside the stacked title */
-.burlesque-backstory-plus{
-  align-self:center;
-  color:#1517158f;
-  font:24px/1 Georgia,Times New Roman,serif;
-  font-weight:300;
-  transition:transform .35s ease,color .35s ease;
-}
-.burlesque-page + .healers-backstory-trigger:hover .burlesque-backstory-plus,
-.burlesque-page + .healers-backstory-trigger:focus-visible .burlesque-backstory-plus{
-  color:#151715;
-  transform:rotate(90deg);
-}
