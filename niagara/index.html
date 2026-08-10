@@ -289,8 +289,11 @@
     .atomic-evidence-item > img { width:100%; height:100%; display:block; object-fit:cover; object-position:center top; }
     .atomic-evidence-item--profile > img { transform:scale(1.14); transform-origin:center center; }
     .atomic-evidence-item--ore { background:var(--niagara-paper); }
-    .atomic-evidence-item--ore > img { width:84%; height:84%; margin:8%; object-fit:contain; object-position:center; }
-    .atomic-evidence-item::before { content:"follow"; position:absolute; z-index:2; top:12px; right:12px; width:42px; height:42px; display:grid; place-items:center; border:1px solid rgba(241,240,234,.62); border-radius:50%; color:var(--niagara-paper); background:rgba(0,0,0,.26); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); opacity:0; transform:scale(.82); transition:opacity .25s ease,transform .35s cubic-bezier(.22,.7,.25,1); pointer-events:none; font:7px/1 Arial,Helvetica,sans-serif; letter-spacing:.1em; text-transform:uppercase; }
+    .atomic-evidence-item--ore > img { width:84%; height:84%; margin:1% 8% 15%; object-fit:contain; object-position:center top; }
+    .atomic-evidence-item--ore::after { display:none; }
+    .atomic-evidence-item--ore::before { color:var(--niagara-ink); border-color:rgba(21,23,21,.45); background:rgba(241,240,234,.74); }
+    .atomic-evidence-item--ore .atomic-evidence-caption { color:rgba(21,23,21,.76); }
+    .atomic-evidence-item::before { content:"open"; position:absolute; z-index:2; top:12px; right:12px; width:42px; height:42px; display:grid; place-items:center; border:1px solid rgba(241,240,234,.62); border-radius:50%; color:var(--niagara-paper); background:rgba(0,0,0,.26); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); opacity:0; transform:scale(.82); transition:opacity .25s ease,transform .35s cubic-bezier(.22,.7,.25,1); pointer-events:none; font:7px/1 Arial,Helvetica,sans-serif; letter-spacing:.1em; text-transform:uppercase; }
     .atomic-evidence-item::after { content:""; position:absolute; inset:auto 0 0; height:48%; background:linear-gradient(transparent,rgba(0,0,0,.82)); pointer-events:none; }
     .atomic-evidence-caption { position:absolute; z-index:1; left:14px; right:14px; bottom:12px; color:rgba(241,240,234,.88); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.11em; text-transform:uppercase; }
     .atomic-evidence-item:hover::before,.atomic-evidence-item:focus-visible::before { opacity:1; transform:scale(1); }
