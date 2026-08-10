@@ -510,11 +510,10 @@
     .niagara-frame-shell iframe { width:100%; height:calc(100svh - 66px); min-height:720px; border:0; display:block; background:#fff; }
     .niagara-frame-placeholder { min-height:76svh; display:grid; place-items:center; padding:40px; color:rgba(21,23,21,.55); font:12px/1.5 Arial,Helvetica,sans-serif; text-transform:uppercase; letter-spacing:.2em; }
 
-    .niagara-photo-intro { padding-bottom:52px; }
-    .niagara-photo-story { --photo-panel-height:calc(100svh - 66px); min-height:var(--photo-panel-height); color:#f4f0e8; background:#080908; border-top:1px solid var(--niagara-line); }
-    .niagara-photo-layout { min-height:var(--photo-panel-height); display:grid; grid-template-columns:minmax(0,1.72fr) minmax(330px,.58fr); }
-    .niagara-photo-stage { min-width:0; height:var(--photo-panel-height); display:grid; grid-template-rows:minmax(0,1fr) 96px; background:#050605; }
-    .niagara-photo-viewport { position:relative; min-height:0; overflow:hidden; display:grid; place-items:center; outline:none; }
+    .niagara-photo-story { --photo-panel-height:calc(100svh - 66px); position:relative; min-height:var(--photo-panel-height); color:#f4f0e8; background:#050605; overflow:hidden; }
+    .niagara-photo-layout,.niagara-photo-stage { min-height:var(--photo-panel-height); height:var(--photo-panel-height); }
+    .niagara-photo-stage { min-width:0; background:#050605; }
+    .niagara-photo-viewport { position:relative; width:100%; height:100%; overflow:hidden; display:grid; place-items:center; outline:none; cursor:pointer; }
     .niagara-photo-viewport::before { content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(circle at 50% 45%,rgba(255,255,255,.04),transparent 62%); }
     .niagara-photo-main { position:relative; z-index:1; width:100%; height:100%; object-fit:contain; display:block; opacity:1; transform:scale(1); transition:opacity .24s ease,transform .5s cubic-bezier(.2,.7,.2,1); }
     .niagara-photo-main.is-changing { opacity:.18; transform:scale(.992); }
@@ -522,19 +521,16 @@
     .niagara-photo-control:hover,.niagara-photo-control:focus-visible { background:var(--niagara-red); border-color:var(--niagara-red); outline:none; }
     .niagara-photo-prev { left:22px; }
     .niagara-photo-next { right:22px; }
-    .niagara-photo-strip { min-width:0; display:flex; align-items:center; gap:10px; overflow-x:auto; overflow-y:hidden; padding:11px 18px 12px; border-top:1px solid rgba(255,255,255,.16); scrollbar-color:#9b958a #161715; scrollbar-width:auto; scroll-snap-type:x proximity; }
-    .niagara-photo-strip::-webkit-scrollbar { height:10px; }
-    .niagara-photo-strip::-webkit-scrollbar-track { background:#161715; }
-    .niagara-photo-strip::-webkit-scrollbar-thumb { background:#9b958a; border:3px solid #161715; border-radius:999px; }
-    .niagara-photo-thumb { position:relative; flex:0 0 108px; height:66px; padding:0; overflow:hidden; border:1px solid transparent; color:#fff; background:#1a1b19; cursor:pointer; opacity:.42; scroll-snap-align:center; transition:opacity .2s ease,border-color .2s ease,transform .2s ease; }
-    .niagara-photo-thumb:hover,.niagara-photo-thumb:focus-visible { opacity:.78; outline:none; }
-    .niagara-photo-thumb.is-active { opacity:1; border-color:#f4f0e8; transform:translateY(-2px); }
-    .niagara-photo-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
-    .niagara-photo-thumb span { position:absolute; left:6px; bottom:5px; min-width:24px; padding:3px 5px 2px; color:#fff; background:rgba(8,9,8,.76); letter-spacing:.12em; font:9px/1 Arial,Helvetica,sans-serif; }
-    .niagara-photo-caption { height:var(--photo-panel-height); box-sizing:border-box; overflow-x:hidden; overflow-y:auto; padding:clamp(34px,4vw,68px) clamp(28px,3.7vw,60px) 48px; border-left:1px solid rgba(255,255,255,.18); background:#10110f; scrollbar-color:#9b958a #1b1c1a; scrollbar-width:auto; }
+    .niagara-photo-caption-toggle,.niagara-photo-caption-close { border:1px solid rgba(255,255,255,.26); color:#fff; background:rgba(8,9,8,.58); backdrop-filter:blur(9px); cursor:pointer; text-transform:uppercase; letter-spacing:.16em; font:10px/1 Arial,Helvetica,sans-serif; }
+    .niagara-photo-caption-toggle { position:absolute; z-index:4; left:22px; bottom:22px; padding:14px 16px 13px; }
+    .niagara-photo-caption-toggle:hover,.niagara-photo-caption-toggle:focus-visible,.niagara-photo-caption-close:hover,.niagara-photo-caption-close:focus-visible { background:var(--niagara-red); border-color:var(--niagara-red); outline:none; }
+    .niagara-photo-index { position:absolute; z-index:4; right:22px; bottom:22px; padding:12px 14px 11px; color:rgba(255,255,255,.82); background:rgba(8,9,8,.58); backdrop-filter:blur(9px); letter-spacing:.17em; font:10px/1 Arial,Helvetica,sans-serif; }
+    .niagara-photo-caption { position:absolute; z-index:6; inset:0 0 0 auto; width:clamp(390px,34vw,620px); height:var(--photo-panel-height); box-sizing:border-box; overflow-x:hidden; overflow-y:auto; padding:clamp(58px,6vw,96px) clamp(32px,4vw,66px) 52px; border-left:1px solid rgba(255,255,255,.18); background:rgba(16,17,15,.97); box-shadow:-24px 0 70px rgba(0,0,0,.36); transform:translateX(100%); visibility:hidden; pointer-events:none; transition:transform .34s cubic-bezier(.2,.7,.2,1),visibility 0s linear .34s; scrollbar-color:#9b958a #1b1c1a; scrollbar-width:auto; }
+    .niagara-photo-story.is-caption-open .niagara-photo-caption { transform:translateX(0); visibility:visible; pointer-events:auto; transition-delay:0s; }
     .niagara-photo-caption::-webkit-scrollbar { width:11px; }
     .niagara-photo-caption::-webkit-scrollbar-track { background:#1b1c1a; }
     .niagara-photo-caption::-webkit-scrollbar-thumb { background:#9b958a; border:3px solid #1b1c1a; border-radius:999px; }
+    .niagara-photo-caption-close { position:absolute; top:20px; right:20px; width:42px; height:42px; padding:0; font-size:18px; letter-spacing:0; }
     .niagara-photo-caption-meta { display:flex; align-items:center; gap:12px; margin:0 0 24px; color:rgba(244,240,232,.62); letter-spacing:.18em; text-transform:uppercase; font:10px/1.2 Arial,Helvetica,sans-serif; }
     .niagara-photo-progress { position:relative; flex:1 1 auto; height:1px; overflow:hidden; background:rgba(244,240,232,.22); }
     .niagara-photo-progress span { position:absolute; inset:0 auto 0 0; width:3.57%; background:#b3322b; transition:width .35s ease; }
@@ -577,17 +573,16 @@
       .investigation-pair { grid-template-columns:1fr; gap:44px; }
       .investigation-figure--narrow { width:100%; }
       .niagara-frame-shell iframe { height:calc(100svh - 58px); min-height:620px; }
-      .niagara-photo-intro { padding-bottom:42px; }
-      .niagara-photo-story { --photo-panel-height:auto; min-height:0; }
-      .niagara-photo-layout { min-height:0; display:block; }
-      .niagara-photo-stage { height:auto; grid-template-rows:minmax(420px,62svh) 88px; }
+      .niagara-photo-story { --photo-panel-height:calc(100svh - 58px); }
+      .niagara-photo-layout,.niagara-photo-stage { min-height:var(--photo-panel-height); height:var(--photo-panel-height); }
       .niagara-photo-control { width:44px; height:62px; font-size:25px; }
       .niagara-photo-prev { left:12px; }
       .niagara-photo-next { right:12px; }
-      .niagara-photo-strip { padding:10px 12px 11px; }
-      .niagara-photo-thumb { flex-basis:92px; height:58px; }
-      .niagara-photo-caption { height:auto; max-height:none; padding:42px 24px 58px; border-left:0; border-top:1px solid rgba(255,255,255,.18); }
-      .niagara-photo-caption h3 { font-size:clamp(31px,9vw,46px); }
+      .niagara-photo-caption-toggle { left:12px; bottom:12px; }
+      .niagara-photo-index { right:12px; bottom:12px; }
+      .niagara-photo-caption { inset:auto 0 0; width:100%; height:auto; max-height:min(68svh,620px); padding:58px 24px 42px; border-left:0; border-top:1px solid rgba(255,255,255,.18); box-shadow:0 -24px 70px rgba(0,0,0,.42); transform:translateY(100%); }
+      .niagara-photo-story.is-caption-open .niagara-photo-caption { transform:translateY(0); }
+      .niagara-photo-caption h3 { font-size:clamp(29px,8vw,44px); }
       .niagara-photo-caption-copy { font-size:15px; }
       .niagara-footer { width:calc(100% - 48px); flex-direction:column; }
     }
@@ -595,7 +590,7 @@
       .niagara-tabbar-wrap,.niagara-tab-label,.niagara-tab-indicator,.niagara-tabbar-wrap::before { animation:none !important; }
       .niagara-tabbar-wrap,.niagara-tab-label,.niagara-tab-indicator,.niagara-tabbar-wrap::before { opacity:1; }
       .niagara-tab-label { transform:none; }
-      .niagara-photo-main,.niagara-photo-thumb,.niagara-photo-progress span { transition:none !important; }
+      .niagara-photo-main,.niagara-photo-caption,.niagara-photo-progress span { transition:none !important; }
     }
   </style>
 </head>
@@ -1357,10 +1352,6 @@
     </section>
 
     <section class="niagara-panel" id="panel-map" role="tabpanel" aria-labelledby="tab-map" data-panel="map" hidden>
-      <div class="niagara-iframe-intro">
-        <h2>Interactive Map</h2>
-        <p>The research map brings together factories, FUSRAP sites, historical radiological anomalies, survey footprints, waterways, documented findings, remediation records, and the archival evidence behind them.</p>
-      </div>
       <div class="niagara-frame-shell" data-frame-shell>
         <div class="niagara-frame-placeholder">Interactive map loads when this tab is opened</div>
         <iframe title="Greetings from Niagara interactive map" data-src="https://natalianeuhaus.github.io/GreetingsFromNiagaraProject/" loading="lazy" allow="fullscreen"></iframe>
@@ -1375,10 +1366,6 @@
     </section>
 
     <section class="niagara-panel" id="panel-photographs" role="tabpanel" aria-labelledby="tab-photographs" data-panel="photographs" hidden>
-      <div class="niagara-photo-intro">
-        <h2>Photograph</h2>
-        <p>The photographic record of the landscape, neighborhoods, industrial remains, and people whose lives intersect with this history.</p>
-      </div>
       <div class="niagara-photo-story" data-photo-story>
         <div class="niagara-photo-layout">
           <div class="niagara-photo-stage">
@@ -1386,19 +1373,21 @@
               <img class="niagara-photo-main" data-photo-main src="https://drive.google.com/thumbnail?id=1UiUedeF9j365cxpT9GrTv2wREb7dhidS&amp;sz=w2400" alt="Rainbow Bridge and waterfalls from the Maid of the Mist" />
               <button class="niagara-photo-control niagara-photo-prev" type="button" data-photo-prev aria-label="Previous photograph">←</button>
               <button class="niagara-photo-control niagara-photo-next" type="button" data-photo-next aria-label="Next photograph">→</button>
+              <button class="niagara-photo-caption-toggle" type="button" data-photo-caption-toggle aria-expanded="false" aria-controls="niagara-photo-caption">Caption</button>
+              <span class="niagara-photo-index"><span data-photo-current>01</span> / <span data-photo-total>28</span></span>
             </div>
-            <div class="niagara-photo-strip" data-photo-strip aria-label="Choose a photograph"></div>
           </div>
-          <aside class="niagara-photo-caption" data-photo-caption-panel aria-live="polite">
+          <aside class="niagara-photo-caption" id="niagara-photo-caption" data-photo-caption-panel aria-live="polite" aria-hidden="true" tabindex="-1">
+            <button class="niagara-photo-caption-close" type="button" data-photo-caption-close aria-label="Close caption">×</button>
             <div class="niagara-photo-caption-meta">
-              <span data-photo-current>01</span>
+              <span>Photograph</span>
               <div class="niagara-photo-progress" aria-hidden="true"><span data-photo-progress></span></div>
-              <span data-photo-total>28</span>
+              <span data-photo-caption-number>01</span>
             </div>
             <h3 data-photo-title>Rainbow Bridge and waterfalls from the Maid of the Mist. October 6th, 2023.</h3>
             <div class="niagara-photo-caption-rule" aria-hidden="true"></div>
             <p class="niagara-photo-caption-copy" data-photo-caption></p>
-            <p class="niagara-photo-instructions">Use the arrow keys, swipe, or select a frame below the image.</p>
+            <p class="niagara-photo-instructions">Use the arrow keys or swipe to move through the photographs.</p>
           </aside>
         </div>
       </div>
@@ -1655,41 +1644,28 @@
       if (photoStory && photographs.length) {
         const photoViewport = photoStory.querySelector('[data-photo-viewport]');
         const photoMain = photoStory.querySelector('[data-photo-main]');
-        const photoStrip = photoStory.querySelector('[data-photo-strip]');
         const photoCaptionPanel = photoStory.querySelector('[data-photo-caption-panel]');
         const photoTitle = photoStory.querySelector('[data-photo-title]');
         const photoCaption = photoStory.querySelector('[data-photo-caption]');
         const photoCurrent = photoStory.querySelector('[data-photo-current]');
         const photoTotal = photoStory.querySelector('[data-photo-total]');
+        const photoCaptionNumber = photoStory.querySelector('[data-photo-caption-number]');
         const photoProgress = photoStory.querySelector('[data-photo-progress]');
         const photoPrev = photoStory.querySelector('[data-photo-prev]');
         const photoNext = photoStory.querySelector('[data-photo-next]');
-        const photoThumbs = [];
+        const photoCaptionToggle = photoStory.querySelector('[data-photo-caption-toggle]');
+        const photoCaptionClose = photoStory.querySelector('[data-photo-caption-close]');
         let photoIndex = 0;
         let photoRenderToken = 0;
         let photoPointerStart = null;
+        let photoSuppressClick = false;
 
-        photographs.forEach((photo, index) => {
-          const thumb = document.createElement('button');
-          const image = document.createElement('img');
-          const number = document.createElement('span');
-          thumb.type = 'button';
-          thumb.className = 'niagara-photo-thumb';
-          thumb.setAttribute('aria-label', `View photograph ${index + 1}: ${photo.title}`);
-          image.dataset.src = photo.src;
-          image.alt = '';
-          image.loading = 'lazy';
-          number.textContent = photo.number;
-          thumb.append(image, number);
-          thumb.addEventListener('click', () => showPhotograph(index));
-          photoStrip.appendChild(thumb);
-          photoThumbs.push(thumb);
-        });
-
-        function centerPhotoThumb(thumb, animate = true) {
-          if (!thumb || !photoStrip) return;
-          const left = thumb.offsetLeft - (photoStrip.clientWidth - thumb.offsetWidth) / 2;
-          photoStrip.scrollTo({ left:Math.max(0,left), behavior:animate ? 'smooth' : 'auto' });
+        function setPhotoCaption(open, moveFocus = false) {
+          photoStory.classList.toggle('is-caption-open', open);
+          photoCaptionPanel.setAttribute('aria-hidden', open ? 'false' : 'true');
+          photoCaptionToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+          photoCaptionToggle.textContent = open ? 'Hide caption' : 'Caption';
+          if (open && moveFocus) photoCaptionPanel.focus({ preventScroll:true });
         }
 
         function preloadPhotograph(index) {
@@ -1709,16 +1685,9 @@
           photoCaption.hidden = !photo.caption;
           photoCurrent.textContent = photo.number;
           photoTotal.textContent = String(photographs.length).padStart(2, '0');
+          photoCaptionNumber.textContent = photo.number;
           photoProgress.style.width = `${((photoIndex + 1) / photographs.length) * 100}%`;
           photoCaptionPanel.scrollTop = 0;
-
-          photoThumbs.forEach((thumb, thumbIndex) => {
-            const active = thumbIndex === photoIndex;
-            thumb.classList.toggle('is-active', active);
-            thumb.setAttribute('aria-current', active ? 'true' : 'false');
-            thumb.tabIndex = active ? 0 : -1;
-          });
-          centerPhotoThumb(photoThumbs[photoIndex], !instant);
 
           const commitImage = () => {
             if (token !== photoRenderToken) return;
@@ -1742,9 +1711,35 @@
         }
 
         const advancePhotograph = direction => showPhotograph(photoIndex + direction);
-        photoPrev.addEventListener('click', () => advancePhotograph(-1));
-        photoNext.addEventListener('click', () => advancePhotograph(1));
+        photoPrev.addEventListener('click', event => {
+          event.stopPropagation();
+          advancePhotograph(-1);
+        });
+        photoNext.addEventListener('click', event => {
+          event.stopPropagation();
+          advancePhotograph(1);
+        });
+        photoCaptionToggle.addEventListener('click', event => {
+          event.stopPropagation();
+          setPhotoCaption(!photoStory.classList.contains('is-caption-open'), true);
+        });
+        photoCaptionClose.addEventListener('click', () => {
+          setPhotoCaption(false);
+          photoViewport.focus({ preventScroll:true });
+        });
+        photoViewport.addEventListener('click', event => {
+          if (event.target.closest('button')) return;
+          if (photoSuppressClick) {
+            photoSuppressClick = false;
+            return;
+          }
+          setPhotoCaption(!photoStory.classList.contains('is-caption-open'));
+        });
         photoViewport.addEventListener('keydown', event => {
+          if (event.key === 'Escape') {
+            setPhotoCaption(false);
+            return;
+          }
           if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
           event.preventDefault();
           advancePhotograph(event.key === 'ArrowRight' ? 1 : -1);
@@ -1757,10 +1752,19 @@
           if (photoPointerStart === null || !event.isPrimary) return;
           const distance = event.clientX - photoPointerStart;
           photoPointerStart = null;
-          if (Math.abs(distance) > 48) advancePhotograph(distance < 0 ? 1 : -1);
+          if (Math.abs(distance) > 48) {
+            photoSuppressClick = true;
+            advancePhotograph(distance < 0 ? 1 : -1);
+          }
         });
         photoViewport.addEventListener('pointercancel', () => { photoPointerStart = null; });
+        photoCaptionPanel.addEventListener('keydown', event => {
+          if (event.key !== 'Escape') return;
+          setPhotoCaption(false);
+          photoViewport.focus({ preventScroll:true });
+        });
 
+        setPhotoCaption(false);
         showPhotograph(0, true);
       }
 
