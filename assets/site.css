@@ -660,3 +660,13 @@ body.burlesque-horizontal-body{overflow:hidden}
   .healers-page .wordmark,
   .healers-page .menu-toggle{transition:none}
 }
+
+
+/* burlesque-backstory-v1: uses the established Healers floating-backstory design */
+.burlesque-backstory .healers-backstory-slide{overflow-y:auto}
+.burlesque-backstory .healers-backstory-opening-copy{width:min(1180px,88vw)}
+.burlesque-backstory .healers-backstory-opening-copy>span{width:min(760px,64vw);font-size:clamp(17px,1.35vw,23px);line-height:1.45}
+@media (max-width:760px){
+  .burlesque-backstory .healers-backstory-opening-copy{width:100%}
+  .burlesque-backstory .healers-backstory-opening-copy>span{width:100%;font-size:17px}
+}
