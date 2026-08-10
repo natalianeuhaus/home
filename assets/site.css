@@ -406,12 +406,12 @@ body.burlesque-horizontal-body{overflow:hidden}
   font:9px/1.4 Arial,Helvetica,sans-serif;
 }
 .healers-backstory-opening-copy h2{
-  letter-spacing:-.06em;
+  letter-spacing:-.045em;
   max-width:1150px;
   margin:0;
-  font-size:clamp(72px,10vw,160px);
+  font-size:clamp(56px,6.8vw,108px);
   font-weight:400;
-  line-height:.8;
+  line-height:.84;
 }
 .healers-backstory-opening-copy>span{
   letter-spacing:-.012em;
@@ -603,7 +603,7 @@ body.burlesque-horizontal-body{overflow:hidden}
   .healers-backstory-slide-number{display:none}
   .healers-backstory-opening-copy,
   .healers-backstory-closing-copy{width:100%}
-  .healers-backstory-opening-copy h2{font-size:clamp(66px,22vw,96px)}
+  .healers-backstory-opening-copy h2{font-size:clamp(52px,17vw,74px)}
   .healers-backstory-opening-copy>span,
   .healers-backstory-closing-copy>span{
     width:88%;
