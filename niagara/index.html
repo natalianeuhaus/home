@@ -290,6 +290,15 @@
     .atomic-process-reference-media:hover img,.atomic-process-reference-media:focus-visible img { transform:scale(1.025); filter:grayscale(.2) contrast(1.04); }
     .atomic-process-reference-play { position:absolute; z-index:2; left:50%; top:50%; width:58px; height:58px; display:grid; place-items:center; border:1px solid rgba(255,255,255,.78); border-radius:50%; background:rgba(0,0,0,.34); backdrop-filter:blur(5px); -webkit-backdrop-filter:blur(5px); transform:translate(-50%,-50%); font:15px/1 Arial,Helvetica,sans-serif; }
     .atomic-process-reference-caption { position:absolute; z-index:2; left:18px; right:18px; bottom:16px; color:rgba(255,255,255,.78); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.1em; text-transform:uppercase; }
+    .atomic-process-archive-link { appearance:none; margin:10px 0 0; padding:0 0 4px; border:0; border-bottom:1px solid currentColor; color:var(--niagara-red); background:transparent; cursor:pointer; font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
+    .atomic-process-archive-link:hover,.atomic-process-archive-link:focus-visible { color:var(--niagara-ink); }
+    .atomic-archive-placeholder { width:min(620px,calc(100vw - 40px)); max-width:none; margin:auto; padding:0; border:0; color:var(--niagara-ink); background:var(--niagara-paper); box-shadow:0 28px 90px rgba(0,0,0,.34); }
+    .atomic-archive-placeholder::backdrop { background:rgba(0,0,0,.72); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); }
+    .atomic-archive-placeholder-inner { position:relative; padding:clamp(38px,6vw,72px); }
+    .atomic-archive-placeholder-kicker { display:block; margin:0 0 17px; color:var(--niagara-red); font:9px/1.3 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
+    .atomic-archive-placeholder h4 { margin:0 54px 18px 0; font-size:clamp(32px,4.5vw,58px); line-height:.96; font-weight:400; letter-spacing:-.04em; }
+    .atomic-archive-placeholder p { margin:0; max-width:440px; color:rgba(21,23,21,.68); font-size:clamp(16px,1.3vw,20px); line-height:1.48; }
+    .atomic-archive-placeholder-close { appearance:none; position:absolute; top:18px; right:18px; width:40px; height:40px; display:grid; place-items:center; border:1px solid rgba(21,23,21,.24); border-radius:50%; color:var(--niagara-ink); background:transparent; cursor:pointer; font:20px/1 Arial,Helvetica,sans-serif; }
     .radioactive-waste-chapter { border-top:0; padding-top:0; }
     .radioactive-waste-hero { background:#26211f; }
     .radioactive-waste-title { background:var(--niagara-red); }
@@ -699,6 +708,7 @@
                   <div class="atomic-process-copy">
                     <p>Before the Manhattan Project, Linde’s ceramics business used uranium compounds to produce black, yellow, green, and brown salts for coloring ceramic glazes. This is the origin of the name Linde Ceramics. That chemical experience is also why the Army selected Linde for large-scale uranium separation.</p>
                     <p>Linde Air Products was a division of Union Carbide and Carbon Corporation. During the war, its Tonawanda plant processed high-grade uranium ore—much of it mined in the Belgian Congo—through three stages: ore into black uranium oxide (U3O8), black oxide into brown uranium oxide (UO2), and brown oxide into uranium tetrafluoride (UF4). The final product was the green, salt-like powder known as <em>“green salt,”</em> which was shipped by train to Electromet in Niagara Falls.</p>
+                    <button class="atomic-process-archive-link" type="button" data-archive-title="Linde Ceramics Plant">View Linde archive →</button>
                   </div>
                 </li>
 
@@ -711,6 +721,7 @@
                   <div class="atomic-process-copy">
                     <p>Electro Metallurgical Company, known as Electromet, was another Union Carbide company. Before uranium, its electric furnaces produced calcium carbide, ferroalloys, tungsten, titanium, and other specialty metals. This high-temperature metallurgical expertise made Electromet suited to convert green salt into uranium metal.</p>
                     <p>Workers mixed uranium tetrafluoride with magnesium inside a dolomite-lined steel vessel known as a “bomb.” When heated, the mixture underwent a violent thermite reaction. The uranium separated, pooled at the bottom, and was cast into 110–135-kilogram ingots, then recast into billets. The process left uranium-bearing C-1 and C-2 slag.</p>
+                    <button class="atomic-process-archive-link" type="button" data-archive-title="Electromet">View Electromet archive →</button>
                   </div>
                 </li>
 
@@ -725,6 +736,7 @@
                     <p>Under its Manhattan Engineer District contract, Hooker also manufactured fluorinated and chlorinated organic chemicals. One product, xylene hexafluoride, was known by the wartime code P-45. Although P-45 itself was not radioactive, its production generated waste hydrochloric acid.</p>
                     <p>Hooker used this acid in a separate uranium-recovery operation, treating C-2 slag delivered from Electromet’s uranium-metal reduction vessels. The slag consisted largely of magnesium-fluoride residue and spent dolomite liners—materials that still retained recoverable uranium. Workers opened and screened the barrels, separated uranium-rich pieces, conveyed the remaining material to digest tanks, treated it with acid, neutralized it with lime, filtered and washed the slurry, and rebarreled the concentrate. The process increased the uranium concentration from roughly 0.2 percent in the incoming material to approximately 1–2 percent in the resulting concentrate.</p>
                     <p>The recovered uranium concentrate was shipped by rail back to Linde in Tonawanda, where it reentered the production cycle—refined again into green salt and returned to Electromet for conversion into uranium metal. The process then began again.</p>
+                    <button class="atomic-process-archive-link" type="button" data-archive-title="Hooker Electrochemical">View Hooker archive →</button>
                   </div>
                 </li>
 
@@ -737,6 +749,7 @@
                   <div class="atomic-process-copy">
                     <p>Bethlehem Steel in Lackawanna and Simonds Saw and Steel in Lockport—the plant later known as Guterl Specialty Steel—formed the rolling and finishing stage of the regional uranium chain. Simonds became the program’s principal rod manufacturer, rolling uranium metal billets into long rods from 1948 through 1956. Bethlehem finish-rolled some bars rough-rolled at Simonds, heat-treated and ground uranium rods, and helped develop continuous-rolling methods later used at Fernald.</p>
                     <p>The finished rods were shipped to Hanford in Washington State, where they were cut and machined into short fuel slugs, canned, loaded into production reactors, and irradiated to produce plutonium for nuclear weapons.</p>
+                    <button class="atomic-process-archive-link" type="button" data-archive-title="Steel and rolling mills">View steel-mill archive →</button>
                   </div>
                 </li>
 
@@ -750,6 +763,7 @@
                     <p>In 1943, DuPont sent Carborundum ten unfinished uranium slugs—about thirty pounds of metal—to determine which abrasive wheels and grinding speeds should be used to finish reactor fuel. These centerless-grinding experiments supported the production of uranium slugs for the Clinton and Hanford reactors. The surviving records do not establish whether this work occurred at the Buffalo Avenue site or the Globar Plant.</p>
                     <p>Carborundum’s nuclear work expanded dramatically from 1959 through 1967 at its Central Research Laboratory on Buffalo Avenue. There, researchers developed uranium nitride, uranium carbide, and uranium silicide as possible alternatives to uranium dioxide and devised methods for synthesizing, forming, and testing these materials as reactor fuels.</p>
                     <p>Beginning in 1960, plutonium shipped from Hanford arrived at Carborundum for the AEC’s Carbide Fuel Development Program. Inside a classified fourth-floor laboratory, workers mixed uranium and plutonium compounds, heated them in furnaces, pressed and sintered the material, and ground it into experimental uranium–plutonium carbide fuel pellets. The program investigated fuels capable of longer burnups and higher power in advanced reactors.</p>
+                    <button class="atomic-process-archive-link" type="button" data-archive-title="Carborundum">View Carborundum archive →</button>
                   </div>
                 </li>
 
@@ -763,6 +777,7 @@
                     <p>At the same time, Bell Aerospace was developing the RASCAL, the United States Air Force’s first nuclear-armed standoff missile—an air-to-surface, supersonic guided missile designed to deliver a nuclear warhead.</p>
                     <p>Bell and the Atomic Energy Commission operated a test center north of Balmer Road on the former Lake Ontario Ordnance Works (LOOW), a 7,567-acre federal site in Lewiston and Porter originally built during World War II to manufacture TNT. The facility became known as the Bell Test Center.</p>
                     <p>In 1967, the site was temporarily used to house the Lewiston-Porter School while a new school building was under construction and scheduled for completion in 1970. During that time, 275 students, along with their teachers and administrative staff, attended classes at the site.</p>
+                    <button class="atomic-process-archive-link" type="button" data-archive-title="Bell">View Bell archive →</button>
                   </div>
                 </li>
 
@@ -774,6 +789,7 @@
                   </div>
                   <div class="atomic-process-copy">
                     <p>Much of the radioactive waste generated by the regional uranium program was transported to the Lake Ontario Ordnance Works, or LOOW. After its wartime TNT operations ended, sections of the vast federal reservation were used for the storage, handling, burial, repackaging, and disposal of radioactive residues and contaminated equipment from Manhattan Project and Atomic Energy Commission operations.</p>
+                    <button class="atomic-process-archive-link" type="button" data-archive-title="Lake Ontario Ordnance Works">View LOOW archive →</button>
                   </div>
                 </li>
               </ol>
@@ -809,6 +825,15 @@
                 </figcaption>
               </figure>
               <button class="atomic-evidence-viewer-nav atomic-evidence-viewer-next" type="button" aria-label="Next piece of evidence">→</button>
+            </div>
+          </dialog>
+
+          <dialog class="atomic-archive-placeholder" aria-labelledby="atomic-archive-placeholder-title">
+            <div class="atomic-archive-placeholder-inner">
+              <button class="atomic-archive-placeholder-close" type="button" aria-label="Close archive placeholder">×</button>
+              <span class="atomic-archive-placeholder-kicker">Archive in progress</span>
+              <h4 id="atomic-archive-placeholder-title">Site archive</h4>
+              <p>Documents, photographs, and records for this location will appear here as the archive is assembled.</p>
             </div>
           </dialog>
         </section>
@@ -1385,6 +1410,21 @@
         evidenceViewer.addEventListener('keydown', event => {
           if (event.key === 'ArrowLeft') { event.preventDefault(); showEvidence(evidenceIndex - 1); }
           if (event.key === 'ArrowRight') { event.preventDefault(); showEvidence(evidenceIndex + 1); }
+        });
+      }
+
+      const archiveLinks = Array.from(document.querySelectorAll('.atomic-process-archive-link'));
+      const archivePlaceholder = document.querySelector('.atomic-archive-placeholder');
+      if (archiveLinks.length && archivePlaceholder && typeof archivePlaceholder.showModal === 'function') {
+        const archivePlaceholderTitle = archivePlaceholder.querySelector('#atomic-archive-placeholder-title');
+        const archivePlaceholderClose = archivePlaceholder.querySelector('.atomic-archive-placeholder-close');
+        archiveLinks.forEach(link => link.addEventListener('click', () => {
+          archivePlaceholderTitle.textContent = link.dataset.archiveTitle || 'Site archive';
+          archivePlaceholder.showModal();
+        }));
+        archivePlaceholderClose.addEventListener('click', () => archivePlaceholder.close());
+        archivePlaceholder.addEventListener('click', event => {
+          if (event.target === archivePlaceholder) archivePlaceholder.close();
         });
       }
 
