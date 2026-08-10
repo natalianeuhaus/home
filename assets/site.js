@@ -300,19 +300,34 @@
     let previousOverflow = "";
     let wheelLockedUntil = 0;
     let touchStartX = null;
+    const revealAnchor = document.querySelector(".healers-goldie");
 
     const revealTrigger = () => {
-      window.setTimeout(() => {
-        trigger.disabled = false;
-        trigger.setAttribute("aria-hidden", "false");
-        trigger.classList.add("is-ready");
-      }, 900);
+      if (trigger.classList.contains("is-ready")) return;
+      trigger.disabled = false;
+      trigger.setAttribute("aria-hidden", "false");
+      trigger.classList.add("is-ready");
     };
 
-    if (document.readyState === "complete") {
-      revealTrigger();
-    } else {
-      window.addEventListener("load", revealTrigger, { once: true });
+    if (revealAnchor && "IntersectionObserver" in window) {
+      const revealObserver = new IntersectionObserver(
+        ([entry]) => {
+          if (!entry.isIntersecting) return;
+          revealTrigger();
+          revealObserver.disconnect();
+        },
+        { rootMargin: "0px 0px -14% 0px", threshold: 0 },
+      );
+      revealObserver.observe(revealAnchor);
+    } else if (revealAnchor) {
+      const revealFromScroll = () => {
+        if (revealAnchor.getBoundingClientRect().top > window.innerHeight * 0.86)
+          return;
+        revealTrigger();
+        window.removeEventListener("scroll", revealFromScroll);
+      };
+      window.addEventListener("scroll", revealFromScroll, { passive: true });
+      revealFromScroll();
     }
 
     const render = (index) => {
