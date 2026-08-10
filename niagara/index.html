@@ -1465,6 +1465,30 @@
         }
       }
 
+      function hideRedundantEmbeddedEvidenceChrome(frame) {
+        try {
+          const frameDocument = frame.contentDocument;
+          if (!frameDocument || !frameDocument.head) return;
+          if (frameDocument.getElementById('niagara-portfolio-evidence-embed-style')) return;
+          const style = frameDocument.createElement('style');
+          style.id = 'niagara-portfolio-evidence-embed-style';
+          style.textContent = `
+            html body .global-menu-button,
+            html body #globalSiteMenu,
+            html body .site-header {
+              display: none !important;
+            }
+
+            html body .site-main {
+              min-height: 100vh !important;
+            }
+          `;
+          frameDocument.head.appendChild(style);
+        } catch (error) {
+          /* The standalone evidence archive remains unchanged. */
+        }
+      }
+
       function loadPanel(panel) {
         panel.querySelectorAll('iframe[data-src]').forEach(frame => {
           if (!frame.src) frame.src = frame.dataset.src;
@@ -1473,6 +1497,10 @@
           if (panel.dataset.panel === 'map') {
             frame.addEventListener('load', () => hideRedundantEmbeddedMapChrome(frame));
             hideRedundantEmbeddedMapChrome(frame);
+          }
+          if (panel.dataset.panel === 'evidence') {
+            frame.addEventListener('load', () => hideRedundantEmbeddedEvidenceChrome(frame));
+            hideRedundantEmbeddedEvidenceChrome(frame);
           }
         });
         panel.querySelectorAll('img[data-src]').forEach(image => {
