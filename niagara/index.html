@@ -286,6 +286,13 @@
     .atomic-evidence-item:nth-child(5) .atomic-evidence-placeholder { background:#686868; }
     .atomic-evidence-item:nth-child(6) .atomic-evidence-placeholder { background:#565656; }
     .atomic-evidence-placeholder span { padding:8px 10px; border:1px solid rgba(241,240,234,.25); font:8px/1 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
+    .atomic-evidence-item--text { padding:clamp(16px,1.7vw,26px); display:flex; flex-direction:column; justify-content:flex-end; color:var(--niagara-paper); background:#686868; text-decoration:none; transition:background-color .28s ease; }
+    .atomic-evidence-item--text::before,.atomic-evidence-item--text::after { display:none; }
+    .atomic-evidence-item--text:hover,.atomic-evidence-item--text:focus-visible { background:#747474; }
+    .atomic-evidence-text-number { position:absolute; top:16px; left:clamp(16px,1.7vw,26px); color:rgba(241,240,234,.48); font:8px/1 Arial,Helvetica,sans-serif; letter-spacing:.16em; }
+    .atomic-evidence-text-title { margin:0 0 10px; color:var(--niagara-paper); font:400 clamp(20px,1.7vw,29px)/.96 Georgia,"Times New Roman",serif; letter-spacing:-.035em; }
+    .atomic-evidence-text-copy { margin:0 0 13px; max-width:240px; color:rgba(241,240,234,.74); font:9px/1.42 Arial,Helvetica,sans-serif; letter-spacing:.02em; }
+    .atomic-evidence-text-link { color:var(--niagara-paper); font:8px/1.2 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
     .atomic-evidence-item > img { width:100%; height:100%; display:block; object-fit:cover; object-position:center top; }
     .atomic-evidence-item--profile > img { transform:scale(1.14); transform-origin:center center; }
     .atomic-evidence-item--ore { background:var(--niagara-paper); }
@@ -627,9 +634,11 @@
                 <img src="./archive/uranium-metal-rods.jpg" alt="Finished uranium metal rods and tubes arranged on a green surface" loading="lazy" decoding="async" />
                 <span class="atomic-evidence-caption">Uranium metal rods · final product</span>
               </a>
-              <a class="atomic-evidence-item" href="#historical-surveys">
-                <span class="atomic-evidence-placeholder" aria-hidden="true"><span>Image 05</span></span>
-                <span class="atomic-evidence-caption">Evidence placeholder</span>
+              <a class="atomic-evidence-item atomic-evidence-item--text" href="https://en.wikipedia.org/wiki/Ames_Project#Production" target="_blank" rel="noopener noreferrer" aria-label="Read about uranium recovery in the Ames Project on Wikipedia">
+                <span class="atomic-evidence-text-number">05</span>
+                <h4 class="atomic-evidence-text-title">Uranium recovery</h4>
+                <p class="atomic-evidence-text-copy">Uranium turnings and scrap were cleaned, pressed into briquettes, and remelted.</p>
+                <span class="atomic-evidence-text-link">Read on Wikipedia →</span>
               </a>
               <a class="atomic-evidence-item atomic-evidence-item--ore" href="https://en.wikipedia.org/wiki/Shinkolobwe#Manhattan_Project" data-evidence-number="08" data-evidence-link-label="Read on Wikipedia →" data-evidence-summary="This uranium ore specimen was collected at Shinkolobwe in November 1965. During World War II, the mine—then in the Belgian Congo—supplied exceptionally rich uranium ore to the Manhattan Project. Congolese ores eventually accounted for about 72 percent of the uranium oxides acquired by the Manhattan District. Photograph by Andrew Silver, USGS.">
                 <img src="./archive/uranium-ore-shinkolobwe.jpg" alt="Bright green uranium ore specimen collected at Shinkolobwe in the Belgian Congo" loading="lazy" decoding="async" />
