@@ -444,6 +444,27 @@ body.burlesque-horizontal-body{overflow:hidden}
   line-height:1.42;
   display:block;
 }
+.healers-backstory-pdf-link{
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:#151715bd;
+  border-bottom:1px solid #15171566;
+  align-items:center;
+  gap:16px;
+  width:fit-content;
+  margin-top:28px;
+  padding-bottom:7px;
+  font:9px/1.4 Arial,Helvetica,sans-serif;
+  display:flex;
+  transition:opacity .25s;
+}
+.healers-backstory-pdf-link small{
+  color:#7f2e28a8;
+  font:inherit;
+}
+.healers-backstory-pdf-link:hover,
+.healers-backstory-pdf-link:focus-visible{opacity:.5}
+.healers-backstory-pdf-link:focus-visible{outline:1px solid #151715;outline-offset:4px}
 .healers-backstory-paper{
   background:#f7f5ef;
   border:1px solid #15171524;
@@ -598,6 +619,7 @@ body.burlesque-horizontal-body{overflow:hidden}
   .healers-backstory-slide-heading>p{margin-bottom:18px}
   .healers-backstory-slide-heading h2{font-size:clamp(52px,17vw,74px)}
   .healers-backstory-slide-heading>span{margin-top:22px;font-size:16px}
+  .healers-backstory-pdf-link{margin-top:22px}
   .healers-backstory-paper{
     height:auto;
     min-height:300px;
