@@ -687,3 +687,19 @@ body.burlesque-horizontal-body{overflow:hidden}
 
 /* burlesque-backstory-white-margin-v1: keep the floating card clear of the photographs */
 .burlesque-page + .healers-backstory-trigger{right:20px}
+
+
+/* burlesque-backstory-clear-v1: keep the Backstory link active without a visible card */
+.burlesque-page + .healers-backstory-trigger{
+  background:transparent;
+  border-color:transparent;
+  box-shadow:none;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+}
+.burlesque-page + .healers-backstory-trigger:hover,
+.burlesque-page + .healers-backstory-trigger:focus-visible{
+  background:#f4f3ef8c;
+  border-color:#1517151f;
+  box-shadow:none;
+}
