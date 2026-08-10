@@ -756,3 +756,17 @@ body.burlesque-horizontal-body{overflow:hidden}
   box-shadow:none;
 }
 .healers-page + .healers-backstory-trigger strong{line-height:1.08}
+
+
+/* healers-backstory-center-white-space-v1: center the final Backstory link in the empty left field */
+.healers-page + .healers-backstory-trigger{
+  left:calc(25vw - 82.5px);
+  right:auto;
+  bottom:12vh;
+}
+@media (max-width:760px){
+  .healers-page + .healers-backstory-trigger{
+    left:calc(50vw - 82.5px);
+    bottom:32px;
+  }
+}
