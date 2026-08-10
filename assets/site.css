@@ -454,6 +454,7 @@ body.burlesque-horizontal-body{overflow:hidden}
   max-height:none;
   margin:0;
   padding:clamp(28px,4.2vw,66px);
+  transform:translateY(-30px);
   overflow:hidden;
 }
 .healers-backstory-paper header{
@@ -602,6 +603,7 @@ body.burlesque-horizontal-body{overflow:hidden}
     min-height:300px;
     max-height:none;
     padding:25px 22px;
+    transform:none;
     overflow:visible;
   }
   .healers-backstory-paper>p{margin:40px 0;font-size:23px}
