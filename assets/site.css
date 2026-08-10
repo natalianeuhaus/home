@@ -424,7 +424,7 @@ body.burlesque-horizontal-body{overflow:hidden}
 .healers-backstory-slide--document{
   grid-template-columns:minmax(260px,.72fr) minmax(480px,1.28fr);
   align-items:center;
-  gap:clamp(70px,10vw,180px);
+  gap:clamp(56px,8vw,140px);
   display:grid;
 }
 .healers-backstory-slide-heading{align-self:center}
@@ -448,8 +448,8 @@ body.burlesque-horizontal-body{overflow:hidden}
   background:#f7f5ef;
   border:1px solid #15171524;
   box-shadow:0 24px 70px #15171514;
-  width:min(720px,100%);
-  height:min(68svh,720px);
+  width:min(820px,100%);
+  height:min(74svh,780px);
   min-height:0;
   max-height:none;
   margin:0;
