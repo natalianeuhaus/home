@@ -715,3 +715,12 @@ body.burlesque-horizontal-body{overflow:hidden}
 }
 .burlesque-page + .healers-backstory-trigger:hover strong,
 .burlesque-page + .healers-backstory-trigger:focus-visible strong{opacity:.62}
+
+
+/* burlesque-backstory-stacked-title-v1: three-line label anchored at the far right */
+.burlesque-page + .healers-backstory-trigger{
+  width:190px;
+  min-height:116px;
+  right:20px;
+}
+.burlesque-page + .healers-backstory-trigger strong{line-height:1.08}
