@@ -287,6 +287,7 @@
     .atomic-evidence-item:nth-child(6) .atomic-evidence-placeholder { background:#565656; }
     .atomic-evidence-placeholder span { padding:8px 10px; border:1px solid rgba(241,240,234,.25); font:8px/1 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
     .atomic-evidence-item > img { width:100%; height:100%; display:block; object-fit:cover; object-position:center top; }
+    .atomic-evidence-item--profile > img { transform:scale(1.14); transform-origin:center center; }
     .atomic-evidence-item::before { content:"follow"; position:absolute; z-index:2; top:12px; right:12px; width:42px; height:42px; display:grid; place-items:center; border:1px solid rgba(241,240,234,.62); border-radius:50%; color:var(--niagara-paper); background:rgba(0,0,0,.26); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); opacity:0; transform:scale(.82); transition:opacity .25s ease,transform .35s cubic-bezier(.22,.7,.25,1); pointer-events:none; font:7px/1 Arial,Helvetica,sans-serif; letter-spacing:.1em; text-transform:uppercase; }
     .atomic-evidence-item::after { content:""; position:absolute; inset:auto 0 0; height:48%; background:linear-gradient(transparent,rgba(0,0,0,.82)); pointer-events:none; }
     .atomic-evidence-caption { position:absolute; z-index:1; left:14px; right:14px; bottom:12px; color:rgba(241,240,234,.88); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.11em; text-transform:uppercase; }
@@ -296,12 +297,15 @@
     .atomic-evidence-viewer { width:min(1180px,calc(100vw - 42px)); height:min(88svh,850px); max-width:none; max-height:none; margin:auto; padding:0; border:0; color:var(--niagara-paper); background:#101010; box-shadow:0 28px 90px rgba(0,0,0,.58); overflow:hidden; }
     .atomic-evidence-viewer::backdrop { background:rgba(0,0,0,.84); backdrop-filter:blur(5px); -webkit-backdrop-filter:blur(5px); }
     .atomic-evidence-viewer-shell { height:100%; display:grid; grid-template-columns:58px minmax(0,1fr) 58px; }
-    .atomic-evidence-viewer figure { min-width:0; min-height:0; margin:0; display:grid; grid-template-rows:minmax(0,1fr) auto; }
+    .atomic-evidence-viewer figure { min-width:0; min-height:0; margin:0; display:grid; grid-template-rows:minmax(0,1fr) auto; overflow:hidden; }
     .atomic-evidence-viewer-image { width:100%; height:100%; min-height:0; display:block; object-fit:contain; background:#090909; }
+    .atomic-evidence-viewer.is-profile .atomic-evidence-viewer-image { transform:scale(1.11); transform-origin:center center; }
     .atomic-evidence-viewer-caption { min-height:84px; padding:17px 22px 18px; display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:18px; align-items:center; border-top:1px solid rgba(241,240,234,.18); }
     .atomic-evidence-viewer-count { color:rgba(241,240,234,.5); font:8px/1 Arial,Helvetica,sans-serif; letter-spacing:.14em; }
     .atomic-evidence-viewer-title { font-size:clamp(17px,1.6vw,24px); line-height:1.08; font-weight:400; letter-spacing:-.02em; }
-    .atomic-evidence-follow { padding-bottom:3px; border-bottom:1px solid rgba(241,240,234,.5); color:var(--niagara-paper); font:8px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
+    .atomic-evidence-viewer-summary { grid-column:2 / 3; grid-row:2; margin:0; max-width:780px; color:rgba(241,240,234,.68); font:12px/1.45 Arial,Helvetica,sans-serif; }
+    .atomic-evidence-viewer-summary:empty { display:none; }
+    .atomic-evidence-follow { grid-column:3; grid-row:1 / span 2; padding-bottom:3px; border-bottom:1px solid rgba(241,240,234,.5); color:var(--niagara-paper); font:8px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; white-space:nowrap; }
     .atomic-evidence-viewer-nav,.atomic-evidence-viewer-close { appearance:none; border:0; color:rgba(241,240,234,.76); background:transparent; cursor:pointer; font-family:Arial,Helvetica,sans-serif; transition:color .2s ease,background .2s ease; }
     .atomic-evidence-viewer-nav { font-size:18px; }
     .atomic-evidence-viewer-nav:hover,.atomic-evidence-viewer-nav:focus-visible,.atomic-evidence-viewer-close:hover,.atomic-evidence-viewer-close:focus-visible { color:#fff; background:rgba(255,255,255,.07); }
@@ -586,8 +590,8 @@
           </div>
           <div class="atomic-evidence-mosaic" aria-label="A visual index of archival and photographic evidence">
             <div class="atomic-evidence-grid">
-              <a class="atomic-evidence-item" href="#atomic-niagara">
-                <img src="./archive/leslie-groves.jpg" alt="Negative portrait of Leslie R. Groves in U.S. Army uniform" loading="lazy" decoding="async" />
+              <a class="atomic-evidence-item atomic-evidence-item--profile" href="https://en.wikipedia.org/wiki/Leslie_Groves" data-evidence-link-label="Read on Wikipedia →" data-evidence-summary="Leslie Richard Groves Jr. (1896–1970) was a U.S. Army Corps of Engineers officer who oversaw construction of the Pentagon and directed the Manhattan Project. From 1942, he managed its construction, raw-material acquisition, security, intelligence, and the selection of research and production sites.">
+                <img src="./archive/leslie-groves.jpg?v=2" alt="Negative portrait of Leslie R. Groves in U.S. Army uniform" loading="eager" fetchpriority="high" decoding="async" />
                 <span class="atomic-evidence-caption">Leslie R. Groves · Director of the Manhattan Project</span>
               </a>
               <a class="atomic-evidence-item" href="#loow-nfss">
@@ -630,6 +634,7 @@
                 <figcaption class="atomic-evidence-viewer-caption">
                   <span class="atomic-evidence-viewer-count"></span>
                   <strong class="atomic-evidence-viewer-title"></strong>
+                  <p class="atomic-evidence-viewer-summary"></p>
                   <a class="atomic-evidence-follow" href="#">Follow this evidence →</a>
                 </figcaption>
               </figure>
@@ -1178,6 +1183,7 @@
         const evidenceImage = evidenceViewer.querySelector('.atomic-evidence-viewer-image');
         const evidenceCount = evidenceViewer.querySelector('.atomic-evidence-viewer-count');
         const evidenceTitle = evidenceViewer.querySelector('.atomic-evidence-viewer-title');
+        const evidenceSummary = evidenceViewer.querySelector('.atomic-evidence-viewer-summary');
         const evidenceFollow = evidenceViewer.querySelector('.atomic-evidence-follow');
         const evidenceClose = evidenceViewer.querySelector('.atomic-evidence-viewer-close');
         const evidencePrev = evidenceViewer.querySelector('.atomic-evidence-viewer-prev');
@@ -1193,7 +1199,13 @@
           evidenceImage.alt = source.alt;
           evidenceCount.textContent = `${String(evidenceIndex + 1).padStart(2,'0')} / ${String(evidenceItems.length).padStart(2,'0')}`;
           evidenceTitle.textContent = caption ? caption.textContent : source.alt;
+          evidenceSummary.textContent = item.dataset.evidenceSummary || '';
           evidenceFollow.href = item.getAttribute('href');
+          evidenceFollow.textContent = item.dataset.evidenceLinkLabel || 'Follow this evidence →';
+          const externalEvidence = /^https?:/i.test(evidenceFollow.href);
+          evidenceFollow.target = externalEvidence ? '_blank' : '';
+          evidenceFollow.rel = externalEvidence ? 'noopener noreferrer' : '';
+          evidenceViewer.classList.toggle('is-profile', item.classList.contains('atomic-evidence-item--profile'));
           if (!evidenceViewer.open) evidenceViewer.showModal();
         };
 
