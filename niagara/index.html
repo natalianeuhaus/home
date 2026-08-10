@@ -332,19 +332,19 @@
     .federal-record-title span { font:9px/1.3 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; opacity:.66; }
     .federal-record-title h5 { margin:0; font-size:clamp(26px,2.8vw,44px); line-height:1; font-weight:400; letter-spacing:-.035em; }
     .federal-record-source { flex:0 0 auto; padding-bottom:4px; border-bottom:1px solid currentColor; color:inherit; font:9px/1.3 Arial,Helvetica,sans-serif; letter-spacing:.13em; text-transform:uppercase; }
-    .federal-record-stage { height:min(82svh,860px); min-height:690px; display:grid; grid-template-columns:minmax(200px,.38fr) minmax(0,1.62fr); }
-    .federal-record-nav { margin:0; padding:clamp(20px,3vw,38px) 0; overflow-y:auto; list-style:none; border-right:1px solid rgba(21,23,21,.20); scrollbar-width:thin; }
+    .federal-record-stage { min-height:690px; display:grid; grid-template-columns:minmax(200px,.38fr) minmax(0,1.62fr); }
+    .federal-record-nav { margin:0; padding:clamp(20px,3vw,38px) 0; list-style:none; border-right:1px solid rgba(21,23,21,.20); }
     .federal-record-nav button { appearance:none; width:100%; min-height:70px; padding:14px clamp(18px,2.3vw,32px); display:grid; grid-template-columns:28px minmax(0,1fr); gap:10px; align-items:start; border:0; border-bottom:1px solid rgba(21,23,21,.14); color:rgba(21,23,21,.55); background:transparent; text-align:left; cursor:pointer; font:10px/1.35 Arial,Helvetica,sans-serif; letter-spacing:.08em; text-transform:uppercase; transition:color .22s ease,background-color .22s ease; }
     .federal-record-nav li:first-child button { border-top:1px solid rgba(21,23,21,.14); }
     .federal-record-nav button:hover,.federal-record-nav button:focus-visible { color:#383836; }
     .federal-record-nav button[aria-selected="true"] { color:var(--niagara-paper); background:#383836; }
     .federal-record-nav-number { opacity:.55; }
-    .federal-record-page { min-width:0; height:100%; margin:0; overflow-y:auto; overscroll-behavior:contain; background:#52514d; scrollbar-color:rgba(241,240,234,.45) transparent; }
-    .federal-record-page-meta { position:sticky; z-index:2; top:0; min-height:48px; padding:14px clamp(20px,3vw,36px); display:flex; align-items:center; justify-content:space-between; gap:22px; color:rgba(241,240,234,.76); background:#454440; border-bottom:1px solid rgba(241,240,234,.16); font:9px/1.35 Arial,Helvetica,sans-serif; letter-spacing:.13em; text-transform:uppercase; }
+    .federal-record-page { min-width:0; margin:0; display:grid; grid-template-rows:auto 1fr; background:#52514d; }
+    .federal-record-page-meta { min-height:48px; padding:14px clamp(20px,3vw,36px); display:flex; align-items:center; justify-content:space-between; gap:22px; color:rgba(241,240,234,.76); background:#454440; border-bottom:1px solid rgba(241,240,234,.16); font:9px/1.35 Arial,Helvetica,sans-serif; letter-spacing:.13em; text-transform:uppercase; }
     .federal-record-section-label { color:var(--niagara-paper); }
     .federal-record-page-number { text-align:right; }
-    .federal-record-page-sheet { min-height:100%; padding:clamp(28px,4vw,60px); display:flex; justify-content:center; align-items:flex-start; }
-    .federal-record-page img { width:min(100%,900px); height:auto; max-height:none; display:block; box-shadow:0 22px 54px rgba(0,0,0,.38); transition:opacity .18s ease,transform .28s ease; }
+    .federal-record-page-sheet { min-height:640px; padding:clamp(28px,4vw,60px); display:grid; place-items:center; }
+    .federal-record-page img { width:auto; max-width:100%; height:auto; max-height:720px; display:block; box-shadow:0 22px 54px rgba(0,0,0,.38); transition:opacity .18s ease,transform .28s ease; }
     .federal-record.is-changing .federal-record-page img { opacity:.25; transform:translateY(7px); }
     .waste-video-block { margin:clamp(48px,7svh,86px) 0 0; display:grid; grid-template-columns:minmax(260px,.75fr) minmax(0,1.25fr); color:var(--niagara-paper); background:#202020; }
     .waste-video-copy { padding:clamp(28px,4vw,52px); display:flex; flex-direction:column; justify-content:space-between; }
@@ -461,14 +461,14 @@
       .federal-record-header { align-items:flex-start; }
       .federal-record-title { display:block; }
       .federal-record-title span { display:block; margin-bottom:7px; }
-      .federal-record-stage { height:auto; min-height:0; grid-template-columns:1fr; }
-      .federal-record-nav { display:flex; padding:0; overflow-x:auto; overflow-y:hidden; border-right:0; border-bottom:1px solid rgba(21,23,21,.20); scrollbar-width:thin; }
+      .federal-record-stage { min-height:0; grid-template-columns:1fr; }
+      .federal-record-nav { display:flex; padding:0; overflow-x:auto; border-right:0; border-bottom:1px solid rgba(21,23,21,.20); scrollbar-width:thin; }
       .federal-record-nav li { flex:0 0 178px; }
       .federal-record-nav button { height:100%; min-height:76px; border-top:0 !important; border-right:1px solid rgba(21,23,21,.14); }
-      .federal-record-page { height:72svh; min-height:520px; }
       .federal-record-page-meta { align-items:flex-start; flex-direction:column; gap:5px; }
       .federal-record-page-number { text-align:left; }
-      .federal-record-page img { width:min(100%,760px); }
+      .federal-record-page-sheet { min-height:520px; }
+      .federal-record-page img { max-height:660px; }
       .waste-section-header { grid-template-columns:1fr; gap:10px; }
       .waste-year { padding-top:0; }
       .waste-section-copy { margin-left:0; }
@@ -994,10 +994,10 @@
                       <figure class="federal-record-page">
                         <figcaption class="federal-record-page-meta" aria-live="polite">
                           <span class="federal-record-section-label">01 · The inquiry expands</span>
-                          <span class="federal-record-page-number">Introduction · printed page 1</span>
+                          <span class="federal-record-page-number">Introduction · printed pages 1–2</span>
                         </figcaption>
                         <div class="federal-record-page-sheet">
-                          <img src="./archive/federal-record-020.webp" alt="Introduction page of The Federal Connection report" loading="lazy" />
+                          <img src="./archive/federal-record-intro-spread.webp" alt="Introduction pages 1 and 2 of The Federal Connection report" loading="lazy" />
                         </div>
                       </figure>
                     </div>
@@ -1803,9 +1803,9 @@
       if (federalRecord) {
         const federalRecordItems = [
           {
-            image:'./archive/federal-record-020.webp',
-            alt:'Introduction page of The Federal Connection report',
-            page:'Introduction · printed page 1',
+            image:'./archive/federal-record-intro-spread.webp',
+            alt:'Introduction pages 1 and 2 of The Federal Connection report',
+            page:'Introduction · printed pages 1–2',
           },
           {
             image:'./archive/federal-record-053.webp',
@@ -1839,7 +1839,6 @@
           }
         ];
         const federalRecordButtons = Array.from(federalRecord.querySelectorAll('[data-federal-record-index]'));
-        const federalRecordPageView = federalRecord.querySelector('.federal-record-page');
         const federalRecordImage = federalRecord.querySelector('.federal-record-page img');
         const federalRecordLabel = federalRecord.querySelector('.federal-record-section-label');
         const federalRecordPage = federalRecord.querySelector('.federal-record-page-number');
@@ -1858,7 +1857,6 @@
             federalRecordImage.alt = item.alt;
             federalRecordLabel.textContent = `${sectionNumber} · ${sectionTitle}`;
             federalRecordPage.textContent = item.page;
-            federalRecordPageView.scrollTo({ top:0, behavior:'smooth' });
             requestAnimationFrame(() => federalRecord.classList.remove('is-changing'));
           },140);
         }));
