@@ -306,6 +306,47 @@
     .radioactive-waste-media { background:#171717; }
     .radioactive-waste-image { object-position:center right; filter:saturate(.94) contrast(1.02); }
     .radioactive-waste-copy-grid { padding-top:clamp(86px,12svh,150px); }
+    .waste-story { max-width:900px; }
+    .waste-lede { margin-bottom:1.35em !important; font-size:clamp(25px,2.25vw,37px) !important; line-height:1.23 !important; letter-spacing:-.027em !important; }
+    .waste-section { margin-top:clamp(78px,11svh,142px); padding-top:clamp(30px,4.5svh,58px); border-top:1px solid var(--niagara-line); }
+    .waste-section-header { display:grid; grid-template-columns:112px minmax(0,1fr); gap:clamp(22px,4vw,54px); align-items:start; margin-bottom:30px; }
+    .waste-year { padding-top:7px; color:var(--niagara-red); font:10px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
+    .waste-section h4 { margin:0; font-size:clamp(34px,4.1vw,62px); line-height:.98; font-weight:400; letter-spacing:-.043em; }
+    .waste-section-copy { margin-left:calc(112px + clamp(22px,4vw,54px)); }
+    .waste-document { margin:clamp(42px,6svh,76px) 0 0; }
+    .waste-document img { width:100%; height:auto; display:block; background:#151515; }
+    .waste-document figcaption,.waste-video-caption { margin-top:11px; color:rgba(21,23,21,.56); font:11px/1.48 Arial,Helvetica,sans-serif; }
+    .waste-video-block { margin:clamp(48px,7svh,86px) 0 0; display:grid; grid-template-columns:minmax(260px,.75fr) minmax(0,1.25fr); color:var(--niagara-paper); background:#202020; }
+    .waste-video-copy { padding:clamp(28px,4vw,52px); display:flex; flex-direction:column; justify-content:space-between; }
+    .waste-video-copy .waste-year { color:rgba(241,240,234,.58); }
+    .waste-video-copy h5 { margin:18px 0 20px; font-size:clamp(28px,3vw,45px); line-height:1; font-weight:400; letter-spacing:-.038em; }
+    .waste-video-copy p { margin:0; color:rgba(241,240,234,.78); font:15px/1.52 Arial,Helvetica,sans-serif; letter-spacing:0; }
+    .waste-video-link { width:max-content; margin-top:32px; padding-bottom:5px; border-bottom:1px solid rgba(241,240,234,.52); color:var(--niagara-paper); text-decoration:none; font:9px/1.3 Arial,Helvetica,sans-serif; letter-spacing:.14em; text-transform:uppercase; }
+    .waste-video-frame { min-height:390px; position:relative; background:#080808; }
+    .waste-video-frame iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+    .waste-trail { margin:36px 0; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border-top:1px solid var(--niagara-line); border-bottom:1px solid var(--niagara-line); }
+    .waste-trail span { min-height:92px; display:grid; place-items:center; padding:18px 10px; position:relative; text-align:center; color:rgba(21,23,21,.66); font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
+    .waste-trail span + span { border-left:1px solid var(--niagara-line); }
+    .waste-trail span + span::before { content:"→"; position:absolute; left:0; top:50%; transform:translate(-50%,-50%); padding:3px; color:var(--niagara-red); background:var(--niagara-paper); }
+    .waste-split { margin-top:clamp(42px,6svh,76px); display:grid; grid-template-columns:minmax(0,1fr) minmax(280px,.78fr); gap:clamp(36px,6vw,82px); align-items:start; }
+    .waste-split .waste-document { margin:0; }
+    .waste-callout { padding:28px 0; border-top:1px solid var(--niagara-line); border-bottom:1px solid var(--niagara-line); }
+    .waste-callout strong { display:block; margin-bottom:10px; color:var(--niagara-red); font:10px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.14em; text-transform:uppercase; }
+    .waste-callout p { margin:0 !important; font-size:clamp(21px,2vw,30px) !important; line-height:1.3 !important; }
+    .waste-survey-timeline { margin-top:44px; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-top:1px solid var(--niagara-line); border-left:1px solid var(--niagara-line); }
+    .waste-survey-item { min-height:196px; padding:25px 22px 28px; border-right:1px solid var(--niagara-line); border-bottom:1px solid var(--niagara-line); }
+    .waste-survey-item time { display:block; margin-bottom:30px; color:var(--niagara-red); font:10px/1 Arial,Helvetica,sans-serif; letter-spacing:.14em; }
+    .waste-survey-item p { margin:0 !important; color:rgba(21,23,21,.72); font:14px/1.48 Arial,Helvetica,sans-serif !important; letter-spacing:0 !important; }
+    .waste-district-grid { margin:38px 0; display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--niagara-line); border:1px solid var(--niagara-line); }
+    .waste-district { padding:clamp(25px,3.5vw,42px); background:var(--niagara-paper); }
+    .waste-district span { display:block; margin-bottom:17px; color:var(--niagara-red); font:9px/1.3 Arial,Helvetica,sans-serif; letter-spacing:.14em; text-transform:uppercase; }
+    .waste-district h5 { margin:0 0 14px; font-size:clamp(25px,2.6vw,39px); line-height:1; font-weight:400; letter-spacing:-.035em; }
+    .waste-district p { margin:0 !important; color:rgba(21,23,21,.7); font:14px/1.5 Arial,Helvetica,sans-serif !important; letter-spacing:0 !important; }
+    .waste-coda { margin:clamp(72px,10svh,125px) 0 0 !important; font-size:clamp(34px,4.8vw,72px) !important; line-height:1.04 !important; letter-spacing:-.047em !important; }
+    .waste-sources { margin-top:clamp(60px,8svh,96px); padding-top:24px; border-top:1px solid var(--niagara-line); }
+    .waste-sources-label { display:block; margin-bottom:15px; color:rgba(21,23,21,.5); font:9px/1.3 Arial,Helvetica,sans-serif; letter-spacing:.15em; text-transform:uppercase; }
+    .waste-sources-list { display:flex; flex-wrap:wrap; gap:10px 22px; }
+    .waste-sources-list a { color:var(--niagara-red); font:11px/1.45 Arial,Helvetica,sans-serif; text-underline-offset:4px; }
     .atomic-evidence-mosaic { width:100vw; margin:0 0 0 calc(50% - 50vw); padding:0; color:var(--niagara-paper); background:var(--niagara-atomic); }
     .atomic-evidence-grid { height:min(76svh,790px); min-height:560px; display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); grid-template-rows:repeat(3,minmax(0,1fr)); gap:0; }
     .atomic-evidence-item { min-width:0; min-height:0; position:relative; overflow:hidden; color:var(--niagara-paper); background:#1d1d1d; }
@@ -381,6 +422,18 @@
       .atomic-process-reference-media { min-height:260px; }
       .radioactive-waste-title { padding:48px 24px 40px; }
       .radioactive-waste-copy-grid { padding-top:82px; }
+      .waste-section-header { grid-template-columns:1fr; gap:10px; }
+      .waste-year { padding-top:0; }
+      .waste-section-copy { margin-left:0; }
+      .waste-video-block,.waste-split { grid-template-columns:1fr; }
+      .waste-video-frame { min-height:54vw; }
+      .waste-trail { grid-template-columns:1fr 1fr; }
+      .waste-trail span:nth-child(3) { border-left:0; border-top:1px solid var(--niagara-line); }
+      .waste-trail span:nth-child(4) { border-top:1px solid var(--niagara-line); }
+      .waste-trail span:nth-child(3)::before { display:none; }
+      .waste-survey-timeline { grid-template-columns:1fr; }
+      .waste-survey-item { min-height:0; }
+      .waste-district-grid { grid-template-columns:1fr; }
       .atomic-evidence-mosaic { margin-top:0; padding:0; }
       .atomic-evidence-grid { height:auto; min-height:0; grid-template-columns:1fr 1fr; grid-template-rows:none; grid-auto-rows:minmax(155px,25svh); }
       .atomic-evidence-item:nth-child(n) { grid-column:auto; grid-row:auto; }
@@ -851,36 +904,169 @@
           </div>
 
           <div class="investigation-chapter-grid atomic-niagara-copy-grid radioactive-waste-copy-grid">
-            <div class="investigation-chapter-copy">
-              <p>The waste did not remain neatly contained inside federal storage or factory boundaries. A New York State Assembly investigation following Love Canal documented millions of gallons of radioactively contaminated chemical waste entering wells, sewers, and drainage systems connected to the region’s waterways.</p>
-              <p>Solid radioactive residues created another pathway. Slag and contaminated fill accumulated at factories and storage areas. Historical testimony and later investigations describe workers taking material home for driveways and foundations, while trucking and construction practices allowed similar material to move through the region as inexpensive fill.</p>
+            <div class="investigation-chapter-copy waste-story">
+              <p class="waste-lede">Radioactive waste is not a separate story from uranium production. It is what the process left behind—and in Western New York, it moved far beyond the places where it was made.</p>
+              <p>Liquid waste entered industrial disposal systems. Solid residues became slag, gravel, road bedding, and fill. Some material went to the federal reservation at the Lake Ontario Ordnance Works; some was buried at industrial dumps; some travelled with contractors and government trucks into parking lots, streets, driveways, and yards. Decades later, each excavation can expose another part of that geography.</p>
 
-              <div class="investigation-stat-grid" aria-label="Key findings from the investigation">
-                <div class="investigation-stat"><strong>37M</strong><span>gallons of contaminated chemical waste documented in the state investigation</span></div>
-                <div class="investigation-stat"><strong>1940s+</strong><span>decades during which radioactive material moved through industrial and federal sites</span></div>
-                <div class="investigation-stat"><strong>Regional</strong><span>roads, homes, waterways and construction fill became part of the disposal story</span></div>
+              <div class="investigation-stat-grid" aria-label="The Federal Connection investigation">
+                <div class="investigation-stat"><strong>20</strong><span>months of investigation by the Assembly Task Force on Toxic Substances</span></div>
+                <div class="investigation-stat"><strong>67,000</strong><span>Department of Energy records obtained through information requests</span></div>
+                <div class="investigation-stat"><strong>37M</strong><span>gallons of radioactively contaminated chemical waste identified by the report</span></div>
               </div>
 
-              <div class="investigation-pair">
-                <figure>
-                  <img src="https://natalianeuhaus.com/wp-content/uploads/2024/05/l2-e1715296165424-711x1024.jpg" alt="Archival correspondence concerning waste disposal" loading="lazy" />
-                  <figcaption>Correspondence between Manhattan Project regional personnel and Linde management concerning waste disposal.</figcaption>
-                </figure>
-                <figure>
-                  <img src="https://natalianeuhaus.com/wp-content/uploads/2024/05/l1-e1715296057999-689x1024.jpg" alt="Archival correspondence concerning waste disposal" loading="lazy" />
-                  <figcaption>Archival correspondence, continued.</figcaption>
-                </figure>
-              </div>
+              <section class="waste-section" id="waste-love-canal">
+                <div class="waste-section-header">
+                  <span class="waste-year">1978–1981</span>
+                  <h4>Love Canal opened a larger investigation</h4>
+                </div>
+                <div class="waste-section-copy">
+                  <p>Love Canal forced the government to look. By 1978, corroded chemical drums, contamination, residents’ illnesses, and mounting public pressure had produced a state health emergency. On June 1, 1979, New York State Assembly Speaker Stanley Fink formed a task force to investigate allegations that the Army and military contractors had dumped toxic waste at Love Canal beginning in the 1940s.</p>
+                  <p>The inquiry did not remain confined to the canal. Investigators collected defense contracts, disposal records, contamination surveys, and testimony from residents, workers, military personnel, and industry. Their early findings widened the investigation from one neighborhood to the entire Niagara–Erie industrial region.</p>
+                </div>
+              </section>
 
-              <div class="investigation-pair">
-                <figure>
-                  <img src="https://natalianeuhaus.com/wp-content/uploads/2024/05/gravy-scaled-copy.jpg" alt="Federal Connection Report material about radioactive gravel" loading="lazy" />
-                  <figcaption><em>The Federal Connection Report</em> documented accounts of workers taking radioactive gravel from LOOW for home improvements.</figcaption>
+              <section class="waste-section" id="waste-federal-connection">
+                <div class="waste-section-header">
+                  <span class="waste-year">January 29, 1981</span>
+                  <h4><em>The Federal Connection</em></h4>
+                </div>
+                <div class="waste-section-copy">
+                  <p>The task force’s final report connected Love Canal to a broader federal and industrial system. It centered on the former Lake Ontario Ordnance Works and the Manhattan Project uranium network linking Linde, Electromet, Hooker, military agencies, contractors, rail lines, disposal wells, and storage areas.</p>
+                  <p>The report concluded that government-related chemical production contributed to the region’s contamination, that the Army’s earlier inquiry had not adequately examined federal involvement, and that Manhattan Project operations had disposed of 37 million gallons of radioactively contaminated chemical waste in underground wells that were not adequately identified or monitored.</p>
+                </div>
+                <figure class="waste-document">
+                  <img src="./archive/federal-connection-gravy.webp" alt="Cover of The Federal Connection beside testimony about workers carrying rock slag from the Lake Ontario Storage Area to their homes" loading="lazy" />
+                  <figcaption><em>The Federal Connection</em>, Volume I. Testimony described an almost routine practice in which workers used an AEC truck to take “rock slag” from the Lake Ontario Storage Area for driveway paving and clean fill—a local benefit referred to as “getting in on the gravy.”</figcaption>
                 </figure>
-                <figure>
-                  <img src="https://natalianeuhaus.com/wp-content/uploads/2024/05/detective-scaled-copy-1971x1024-copy.jpg" alt="Private investigator report about radioactive construction fill" loading="lazy" />
-                  <figcaption>A private investigator’s report traced radioactive slag into commercial construction fill.</figcaption>
+
+                <div class="waste-video-block" id="waste-loow-film">
+                  <div class="waste-video-copy">
+                    <div>
+                      <span class="waste-year">1985 · Archival film</span>
+                      <h5>Before containment</h5>
+                      <p>U.S. Army Corps of Engineers footage records the silo and facilities at the former LOOW as they remained in 1985. The images were made before construction of the interim waste containment structure in 1986.</p>
+                    </div>
+                    <a class="waste-video-link" href="https://www.youtube.com/watch?v=s5bQBNp9ffY" target="_blank" rel="noopener noreferrer">Watch on YouTube →</a>
+                  </div>
+                  <div class="waste-video-frame">
+                    <iframe src="https://www.youtube.com/embed/s5bQBNp9ffY?start=2&amp;rel=0" title="NFSS Summary — archival footage of the former Lake Ontario Ordnance Works" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                  </div>
+                </div>
+              </section>
+
+              <section class="waste-section" id="waste-union-carbide">
+                <div class="waste-section-header">
+                  <span class="waste-year">1979 · Recovered records</span>
+                  <h4>The Union Carbide trail</h4>
+                </div>
+                <div class="waste-section-copy">
+                  <p>Two reports prepared in 1979 by a private investigator for the owner of the Pine Bowl parking lot recorded interviews with contractors about where industrial slag went. The May 10 report said contractors described Friona Trucking hauling waste and slag from Union Carbide’s Niagara Falls property to the company dump, then known as Newco. It also recorded that untreated slag was sold or used as inexpensive fill.</p>
+                  <p>The report was a lead, not a final attribution. Its own last lines state that the interviewee did not know whether Union Carbide slag had actually been used at Pine Bowl. Decades later, reporter Dan Telvock brought these records back into public view and showed how much of the disposal chain remained unresolved.</p>
+                </div>
+                <div class="waste-trail" aria-label="Trail described in the private investigator records">
+                  <span>Union Carbide</span><span>Haulers</span><span>Slag and waste</span><span>Dump or fill site</span>
+                </div>
+                <figure class="waste-document">
+                  <img src="./archive/private-investigator-union-carbide.webp" alt="May 10, 1979 private investigator report concerning Union Carbide slag, haulers, a company dump, and fill use" loading="lazy" />
+                  <figcaption>Probe International report to the Pine Bowl owner, May 10, 1979. The document records contractor statements and preserves uncertainty about whether Union Carbide material was present at the parking lot.</figcaption>
                 </figure>
+                <div class="waste-section-copy">
+                  <p>Telvock also reported that in 1965 New York granted Union Carbide an exemption to bury radioactive waste on company property later incorporated into the closed CECOS landfill at 5600 Niagara Falls Boulevard. The costly alternative was to ship the material to an out-of-state facility authorized to accept it.</p>
+                </div>
+              </section>
+
+              <section class="waste-section" id="waste-upper-mountain">
+                <div class="waste-section-header">
+                  <span class="waste-year">1984–1985</span>
+                  <h4>Upper Mountain Road</h4>
+                </div>
+                <div class="waste-section-copy">
+                  <p>An Oak Ridge National Laboratory mobile gamma scan conducted October 3–16, 1984 identified 100 radiation anomalies across the Niagara Falls area. Field teams returned July 15–17, 1985 for onsite measurements intended to determine which anomalies might be connected to the movement of radioactive waste to LOOW.</p>
+                  <p>The survey listed separate anomalies at 789 and 738 Upper Mountain Road. At 738, investigators measured the survey’s highest recorded surface gamma exposure rate in the Lewiston group: 710 microroentgens per hour along a ditch and gravel driveway. The report also found elevated uranium and thorium in a biased soil sample there. At 789, the report recorded another thorium-bearing slag anomaly.</p>
+                </div>
+                <div class="waste-split">
+                  <div>
+                    <div class="waste-callout">
+                      <strong>One report, two properties</strong>
+                      <p>The 1985 table distinguishes anomaly 42 at 789 Upper Mountain Road from anomaly 43 at 738. Later reporting and EPA work focused particularly on the driveway adjoining 738.</p>
+                    </div>
+                    <p>Dan Telvock’s 2016 investigation returned public attention to the driveway and to dozens of other properties left outside the earlier federal cleanup. EPA later removed contaminated material from portions of the Upper Mountain Road driveway and culvert in 2020, followed by work at adjacent residential properties between 2021 and 2023.</p>
+                  </div>
+                  <figure class="waste-document">
+                    <img src="./archive/ornl-1985-upper-mountain.webp" alt="Table 4 from the 1985 Oak Ridge radiological survey listing gamma exposure measurements in Lewiston, including 789 and 738 Upper Mountain Road" loading="lazy" />
+                    <figcaption>ORNL/TM-10076, Table 4. Field measurements were taken in July 1985; the report was issued in 1986.</figcaption>
+                  </figure>
+                </div>
+              </section>
+
+              <section class="waste-section" id="waste-survey-years">
+                <div class="waste-section-header">
+                  <span class="waste-year">Decades of measurement</span>
+                  <h4>The 1985 survey was one of many</h4>
+                </div>
+                <div class="waste-section-copy">
+                  <p>No single survey defines the extent of Niagara’s radioactive fill. Agencies repeatedly returned with different instruments, boundaries, cleanup criteria, and questions. Some surveys looked for material associated with transport to LOOW; others examined commercial slag, individual properties, construction debris, or the wider region.</p>
+                </div>
+                <div class="waste-survey-timeline" aria-label="Selected radiological surveys and follow-up work">
+                  <article class="waste-survey-item"><time>1978–1979</time><p>Federal aerial and follow-up work identified radiological anomalies at residential, commercial, and roadside locations.</p></article>
+                  <article class="waste-survey-item"><time>1984</time><p>An ORNL vehicle survey scanned selected roads and identified 100 elevated gamma anomalies for follow-up.</p></article>
+                  <article class="waste-survey-item"><time>1985–1986</time><p>Onsite measurements and soil sampling separated 38 FUSRAP-related anomalies from 62 associated principally with industrial slag.</p></article>
+                  <article class="waste-survey-item"><time>2006–2013</time><p>State agencies resurveyed locations including Niagara Falls Boulevard and referred priority properties to EPA.</p></article>
+                  <article class="waste-survey-item"><time>2016–2023</time><p>EPA assessment and removal work reached parking lots, driveways, homes, a cemetery vicinity, and a children’s facility.</p></article>
+                  <article class="waste-survey-item"><time>2023–2025</time><p>DEC and EPA began new aerial, vehicle-based, and ground-level regional surveys to update the earlier record.</p></article>
+                </div>
+              </section>
+
+              <section class="waste-section" id="waste-construction">
+                <div class="waste-section-header">
+                  <span class="waste-year">The present</span>
+                  <h4>Every excavation can reopen the archive</h4>
+                </div>
+                <div class="waste-section-copy">
+                  <p>This buried history changes how the region builds. When the city repairs streets or utilities, undertakes construction, or prepares a former industrial property for brownfield redevelopment, the environmental investigation must include radiological conditions. What once looked like ordinary gravel can become an exposure, handling, transport, and disposal problem as soon as it is disturbed.</p>
+                  <p>The American Falls Bridges project makes the requirement visible. Its environmental screening noted that TENORM slag had been widely used in Niagara Falls roadway and driveway projects, found slag in earlier test pits, and recommended a full radiological survey across the project’s areas of potential impact. At Donovan Head Start, low-level radiological material discovered in construction waste and soil debris triggered state referral and an EPA assessment.</p>
+                </div>
+              </section>
+
+              <section class="waste-section" id="waste-industrial-districts">
+                <div class="waste-section-header">
+                  <span class="waste-year">A citywide and regional problem</span>
+                  <h4>Two industrial districts. Multiple possible sources.</h4>
+                </div>
+                <div class="waste-section-copy">
+                  <p>Within Niagara Falls, this legacy repeatedly surfaces in the city’s two principal former-industrial redevelopment areas: the Buffalo Avenue corridor and the Highland Avenue corridor. These districts are part of a larger production landscape that also extended through Tonawanda, Lackawanna, Lockport, Lewiston, and Porter.</p>
+                </div>
+                <div class="waste-district-grid">
+                  <article class="waste-district">
+                    <span>Industrial district 01</span>
+                    <h5>Buffalo Avenue corridor</h5>
+                    <p>A riverfront manufacturing and infrastructure corridor where industrial sites, imported fill, roads, and later redevelopment overlap.</p>
+                  </article>
+                  <article class="waste-district">
+                    <span>Industrial district 02</span>
+                    <h5>Highland Avenue corridor</h5>
+                    <p>A second major former-industrial and brownfield planning area, distinct from the Buffalo Avenue corridor and embedded beside residential neighborhoods.</p>
+                  </article>
+                </div>
+                <div class="waste-section-copy">
+                  <p>A radioactive reading does not, by itself, identify the company that produced the material. The Oak Ridge report attributed many of the 62 non-NFSS anomalies to phosphate-production slag and pointed to the former Oldbury Furnace, while leaving the origin of some thorium-bearing material unresolved. The 1979 investigator’s records named Union Carbide, Oldbury, Pittsburgh Metallurgical, and contractors as possible parts of the wider disposal history.</p>
+                  <p>Because several factories generated slag, furnace waste, and other radiological residues—and because those materials were sold, hauled, mixed, and reused—the waste at a later property could have come from more than one industrial source. Attribution requires both radiological analysis and a documented chain of movement.</p>
+                </div>
+              </section>
+
+              <p class="waste-coda">The factories were regional. The waste became regional. Every new survey adds another page to an unfinished record.</p>
+
+              <div class="waste-sources" aria-label="Sources for the radioactive waste chapter">
+                <span class="waste-sources-label">Selected sources</span>
+                <div class="waste-sources-list">
+                  <a href="https://www.archives.nysed.gov/creator-authority/new-york-state-legislature-assembly-task-force-toxic" target="_blank" rel="noopener noreferrer">New York State Archives · Task Force history</a>
+                  <a href="https://natalianeuhaus.com/wp-content/uploads/2026/07/ORNL_1985_Niagara_Falls_Radiological_Survey_18050447.pdf" target="_blank" rel="noopener noreferrer">ORNL/TM-10076 · 1985 field survey</a>
+                  <a href="https://www.investigativepost.org/2016/07/05/radioactive-hot-spots-pepper-niagara-county/" target="_blank" rel="noopener noreferrer">Dan Telvock · Radioactive hot spots</a>
+                  <a href="https://www.investigativepost.org/2017/02/09/paying-price-for-radioactive-hotspots-in-niagara/" target="_blank" rel="noopener noreferrer">Dan Telvock · Private-investigator records</a>
+                  <a href="https://www.epa.gov/ny/niagara-county-radiation-removal-sites" target="_blank" rel="noopener noreferrer">EPA · Niagara County removal sites</a>
+                  <a href="https://dec.ny.gov/news/press-releases/2025/7/dec-and-us-epa-announce-july-7-start-of-vehicle-based-survey-of-erie-and-niagara-counties" target="_blank" rel="noopener noreferrer">DEC/EPA · 2025 regional survey</a>
+                  <a href="https://parks.ny.gov/documents/inside-our-agency/PublicDocuments/AmericanFallsBridgesProject/AmericanFallsBridgeDraftDesignReportAppendices.pdf" target="_blank" rel="noopener noreferrer">American Falls Bridges · environmental screening</a>
+                </div>
               </div>
             </div>
           </div>
