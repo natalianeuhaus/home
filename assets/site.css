@@ -724,3 +724,12 @@ body.burlesque-horizontal-body{overflow:hidden}
   right:20px;
 }
 .burlesque-page + .healers-backstory-trigger strong{line-height:1.08}
+
+
+/* burlesque-backstory-tight-arrow-v1: bring the title and diagonal arrow together */
+.burlesque-page + .healers-backstory-trigger{
+  width:165px;
+  column-gap:8px;
+  padding-left:10px;
+  padding-right:8px;
+}
