@@ -326,26 +326,10 @@
     .waste-document { margin:clamp(42px,6svh,76px) 0 0; }
     .waste-document img { width:100%; height:auto; display:block; background:#151515; }
     .waste-document figcaption,.waste-video-caption { margin-top:11px; color:rgba(21,23,21,.56); font:11px/1.48 Arial,Helvetica,sans-serif; }
-    .federal-record { width:calc(100vw - 84px); margin:clamp(54px,8svh,92px) 0 0 calc(100% - (100vw - 84px)); border-top:1px solid var(--niagara-line); border-bottom:1px solid var(--niagara-line); background:#d8d5cd; overflow:hidden; }
-    .federal-record-header { min-height:86px; padding:20px clamp(22px,3vw,42px); display:flex; align-items:center; justify-content:space-between; gap:28px; color:var(--niagara-paper); background:#383836; }
-    .federal-record-title { display:flex; align-items:baseline; gap:18px; }
-    .federal-record-title span { font:9px/1.3 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; opacity:.66; }
-    .federal-record-title h5 { margin:0; font-size:clamp(26px,2.8vw,44px); line-height:1; font-weight:400; letter-spacing:-.035em; }
-    .federal-record-source { flex:0 0 auto; padding-bottom:4px; border-bottom:1px solid currentColor; color:inherit; font:9px/1.3 Arial,Helvetica,sans-serif; letter-spacing:.13em; text-transform:uppercase; }
-    .federal-record-stage { min-height:690px; display:grid; grid-template-columns:minmax(200px,.38fr) minmax(0,1.62fr); }
-    .federal-record-nav { margin:0; padding:clamp(20px,3vw,38px) 0; list-style:none; border-right:1px solid rgba(21,23,21,.20); }
-    .federal-record-nav button { appearance:none; width:100%; min-height:70px; padding:14px clamp(18px,2.3vw,32px); display:grid; grid-template-columns:28px minmax(0,1fr); gap:10px; align-items:start; border:0; border-bottom:1px solid rgba(21,23,21,.14); color:rgba(21,23,21,.55); background:transparent; text-align:left; cursor:pointer; font:10px/1.35 Arial,Helvetica,sans-serif; letter-spacing:.08em; text-transform:uppercase; transition:color .22s ease,background-color .22s ease; }
-    .federal-record-nav li:first-child button { border-top:1px solid rgba(21,23,21,.14); }
-    .federal-record-nav button:hover,.federal-record-nav button:focus-visible { color:#383836; }
-    .federal-record-nav button[aria-selected="true"] { color:var(--niagara-paper); background:#383836; }
-    .federal-record-nav-number { opacity:.55; }
-    .federal-record-page { min-width:0; margin:0; display:grid; grid-template-rows:auto 1fr; background:#52514d; }
-    .federal-record-page-meta { min-height:48px; padding:14px clamp(20px,3vw,36px); display:flex; align-items:center; justify-content:space-between; gap:22px; color:rgba(241,240,234,.76); background:#454440; border-bottom:1px solid rgba(241,240,234,.16); font:9px/1.35 Arial,Helvetica,sans-serif; letter-spacing:.13em; text-transform:uppercase; }
-    .federal-record-section-label { color:var(--niagara-paper); }
-    .federal-record-page-number { text-align:right; }
-    .federal-record-page-sheet { min-height:640px; padding:clamp(28px,4vw,60px); display:grid; place-items:center; }
-    .federal-record-page img { width:auto; max-width:100%; height:auto; max-height:720px; display:block; box-shadow:0 22px 54px rgba(0,0,0,.38); transition:opacity .18s ease,transform .28s ease; }
-    .federal-record.is-changing .federal-record-page img { opacity:.25; transform:translateY(7px); }
+    .federal-record { width:calc(100vw - 84px); margin:clamp(58px,8svh,96px) 0 0 calc(100% - (100vw - 84px)); }
+    .federal-record-heading { margin:0 0 clamp(24px,3.5vw,42px); padding-top:clamp(24px,3.5vw,42px); border-top:1px solid var(--niagara-line); font-size:clamp(34px,4.3vw,68px); line-height:.95; font-weight:400; letter-spacing:-.045em; }
+    .federal-record-spread { margin:0; }
+    .federal-record-spread img { width:100%; height:auto; display:block; }
     .waste-video-block { margin:clamp(48px,7svh,86px) 0 0; display:grid; grid-template-columns:minmax(260px,.75fr) minmax(0,1.25fr); color:var(--niagara-paper); background:#202020; }
     .waste-video-copy { padding:clamp(28px,4vw,52px); display:flex; flex-direction:column; justify-content:space-between; }
     .waste-video-copy .waste-year { color:rgba(241,240,234,.58); }
@@ -458,17 +442,6 @@
       .love-canal-transition { margin-left:72px !important; }
       .love-canal-range .investigation-stat-grid { margin-left:72px; }
       .federal-record { width:calc(100vw - 48px); margin-left:0; }
-      .federal-record-header { align-items:flex-start; }
-      .federal-record-title { display:block; }
-      .federal-record-title span { display:block; margin-bottom:7px; }
-      .federal-record-stage { min-height:0; grid-template-columns:1fr; }
-      .federal-record-nav { display:flex; padding:0; overflow-x:auto; border-right:0; border-bottom:1px solid rgba(21,23,21,.20); scrollbar-width:thin; }
-      .federal-record-nav li { flex:0 0 178px; }
-      .federal-record-nav button { height:100%; min-height:76px; border-top:0 !important; border-right:1px solid rgba(21,23,21,.14); }
-      .federal-record-page-meta { align-items:flex-start; flex-direction:column; gap:5px; }
-      .federal-record-page-number { text-align:left; }
-      .federal-record-page-sheet { min-height:520px; }
-      .federal-record-page img { max-height:660px; }
       .waste-section-header { grid-template-columns:1fr; gap:10px; }
       .waste-year { padding-top:0; }
       .waste-section-copy { margin-left:0; }
@@ -973,34 +946,11 @@
 
               <section class="waste-section" id="waste-federal-connection">
                 <div class="waste-section-copy">
-                  <section class="federal-record" data-federal-record aria-labelledby="federal-record-title">
-                    <header class="federal-record-header">
-                      <div class="federal-record-title">
-                        <span>Curated record · 1981</span>
-                        <h5 id="federal-record-title"><em>The Federal Connection</em></h5>
-                      </div>
-                      <a class="federal-record-source" href="https://natalianeuhaus.com/wp-content/uploads/2026/07/the_federal_connection.pdf" target="_blank" rel="noopener noreferrer">Open the complete 293-page report ↗</a>
-                    </header>
-                    <div class="federal-record-stage">
-                      <ol class="federal-record-nav" aria-label="Evidence sequence">
-                        <li><button type="button" data-federal-record-index="0" aria-selected="true"><span class="federal-record-nav-number">01</span><span>The inquiry expands</span></button></li>
-                        <li><button type="button" data-federal-record-index="1" aria-selected="false"><span class="federal-record-nav-number">02</span><span>Production process</span></button></li>
-                        <li><button type="button" data-federal-record-index="2" aria-selected="false"><span class="federal-record-nav-number">03</span><span>Radioactive waste</span></button></li>
-                        <li><button type="button" data-federal-record-index="3" aria-selected="false"><span class="federal-record-nav-number">04</span><span>Liquid pathways</span></button></li>
-                        <li><button type="button" data-federal-record-index="4" aria-selected="false"><span class="federal-record-nav-number">05</span><span>Slag &amp; gravel</span></button></li>
-                        <li><button type="button" data-federal-record-index="5" aria-selected="false"><span class="federal-record-nav-number">06</span><span>Federal facilities</span></button></li>
-                        <li><button type="button" data-federal-record-index="6" aria-selected="false"><span class="federal-record-nav-number">07</span><span>Company / agency links</span></button></li>
-                      </ol>
-                      <figure class="federal-record-page">
-                        <figcaption class="federal-record-page-meta" aria-live="polite">
-                          <span class="federal-record-section-label">01 · The inquiry expands</span>
-                          <span class="federal-record-page-number">Introduction · printed pages 1–2</span>
-                        </figcaption>
-                        <div class="federal-record-page-sheet">
-                          <img src="./archive/federal-record-intro-spread.webp" alt="Introduction pages 1 and 2 of The Federal Connection report" loading="lazy" />
-                        </div>
-                      </figure>
-                    </div>
+                  <section class="federal-record" aria-labelledby="federal-record-title">
+                    <h5 class="federal-record-heading" id="federal-record-title"><em>The Federal Connection</em></h5>
+                    <figure class="federal-record-spread">
+                      <img src="./archive/federal-record-intro-spread.webp" alt="Introduction pages 1 and 2 of The Federal Connection report" loading="lazy" />
+                    </figure>
                   </section>
                 </div>
                 <div class="waste-video-block" id="waste-loow-film">
@@ -1797,69 +1747,6 @@
           if (event.key === 'ArrowLeft') { event.preventDefault(); showEvidence(evidenceIndex - 1); }
           if (event.key === 'ArrowRight') { event.preventDefault(); showEvidence(evidenceIndex + 1); }
         });
-      }
-
-      const federalRecord = document.querySelector('[data-federal-record]');
-      if (federalRecord) {
-        const federalRecordItems = [
-          {
-            image:'./archive/federal-record-intro-spread.webp',
-            alt:'Introduction pages 1 and 2 of The Federal Connection report',
-            page:'Introduction · printed pages 1–2',
-          },
-          {
-            image:'./archive/federal-record-053.webp',
-            alt:'Page 34 of The Federal Connection introducing government-related chemical production in Niagara Falls',
-            page:'Government-related chemical production · printed page 34',
-          },
-          {
-            image:'./archive/federal-record-010.webp',
-            alt:'Finding III in The Federal Connection concerning 37 million gallons of radioactive waste',
-            page:'Finding III · printed page IV',
-          },
-          {
-            image:'./archive/federal-record-139.webp',
-            alt:'Page 120 of The Federal Connection describing the underground wells at Linde',
-            page:'Linde wells · printed page 120',
-          },
-          {
-            image:'./archive/federal-record-262.webp',
-            alt:'Page 243 of The Federal Connection describing rock slag taken from the federal site',
-            page:'Security problems at LOOW · printed page 243',
-          },
-          {
-            image:'./archive/federal-record-014.webp',
-            alt:'Finding VI in The Federal Connection concerning radioactive contamination at LOOW',
-            page:'Finding VI · printed page VIII',
-          },
-          {
-            image:'./archive/federal-record-288.webp',
-            alt:'Finding VII in The Federal Connection concerning Carborundum and the Niagara River',
-            page:'Finding VII · printed page 269',
-          }
-        ];
-        const federalRecordButtons = Array.from(federalRecord.querySelectorAll('[data-federal-record-index]'));
-        const federalRecordImage = federalRecord.querySelector('.federal-record-page img');
-        const federalRecordLabel = federalRecord.querySelector('.federal-record-section-label');
-        const federalRecordPage = federalRecord.querySelector('.federal-record-page-number');
-
-        federalRecordItems.forEach(item => { const image = new Image(); image.src = item.image; });
-        federalRecordButtons.forEach(button => button.addEventListener('click', () => {
-          const index = Number(button.dataset.federalRecordIndex);
-          const item = federalRecordItems[index];
-          if (!item) return;
-          federalRecordButtons.forEach((candidate,candidateIndex) => candidate.setAttribute('aria-selected',String(candidateIndex === index)));
-          const sectionNumber = button.querySelector('.federal-record-nav-number').textContent;
-          const sectionTitle = button.querySelector('span:last-child').textContent;
-          federalRecord.classList.add('is-changing');
-          window.setTimeout(() => {
-            federalRecordImage.src = item.image;
-            federalRecordImage.alt = item.alt;
-            federalRecordLabel.textContent = `${sectionNumber} · ${sectionTitle}`;
-            federalRecordPage.textContent = item.page;
-            requestAnimationFrame(() => federalRecord.classList.remove('is-changing'));
-          },140);
-        }));
       }
 
       const healthArchiveTrack = document.querySelector('.health-record-track');
