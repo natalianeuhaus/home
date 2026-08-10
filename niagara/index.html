@@ -278,11 +278,25 @@
     .atomic-process-location { display:block; margin-top:13px; color:rgba(21,23,21,.54); font:9px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
     .atomic-process-copy p { margin:0 0 1.2em; }
     .atomic-process-copy p:last-child { margin-bottom:0; }
-    .atomic-process-reference { margin:clamp(48px,7svh,82px) 0 0; padding:clamp(28px,4vw,48px); background:rgba(68,8,6,.055); }
+    .atomic-process-reference { margin:clamp(48px,7svh,82px) 0 0; display:grid; grid-template-columns:minmax(0,1.08fr) minmax(280px,.92fr); align-items:stretch; background:rgba(68,8,6,.055); overflow:hidden; }
+    .atomic-process-reference-copy { min-width:0; padding:clamp(28px,4vw,48px); }
     .atomic-process-reference-label { display:block; margin:0 0 16px; color:var(--niagara-red); font:9px/1.3 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
     .atomic-process-reference h4 { margin:0 0 17px; font-size:clamp(27px,3vw,44px); line-height:.98; font-weight:400; letter-spacing:-.038em; }
     .atomic-process-reference p { margin:0 0 24px; max-width:720px; }
-    .atomic-process-reference a { display:inline-block; padding-bottom:4px; border-bottom:1px solid currentColor; color:var(--niagara-red); font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
+    .atomic-process-reference-link { display:inline-block; padding-bottom:4px; border-bottom:1px solid currentColor; color:var(--niagara-red); font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
+    .atomic-process-reference-media { min-width:0; min-height:430px; position:relative; display:block; overflow:hidden; color:var(--niagara-paper); background:#171717; }
+    .atomic-process-reference-media img { width:100%; height:100%; display:block; object-fit:cover; object-position:center; filter:grayscale(1) contrast(1.08); transition:transform .55s cubic-bezier(.22,.7,.25,1),filter .35s ease; }
+    .atomic-process-reference-media::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 52%,rgba(0,0,0,.78)); pointer-events:none; }
+    .atomic-process-reference-media:hover img,.atomic-process-reference-media:focus-visible img { transform:scale(1.025); filter:grayscale(.2) contrast(1.04); }
+    .atomic-process-reference-play { position:absolute; z-index:2; left:50%; top:50%; width:58px; height:58px; display:grid; place-items:center; border:1px solid rgba(255,255,255,.78); border-radius:50%; background:rgba(0,0,0,.34); backdrop-filter:blur(5px); -webkit-backdrop-filter:blur(5px); transform:translate(-50%,-50%); font:15px/1 Arial,Helvetica,sans-serif; }
+    .atomic-process-reference-caption { position:absolute; z-index:2; left:18px; right:18px; bottom:16px; color:rgba(255,255,255,.78); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.1em; text-transform:uppercase; }
+    .radioactive-waste-chapter { border-top:0; padding-top:0; }
+    .radioactive-waste-hero { background:#26211f; }
+    .radioactive-waste-title { background:var(--niagara-red); }
+    .radioactive-waste-title h3 { background:var(--niagara-red); box-shadow:0 0 0 7px var(--niagara-red); }
+    .radioactive-waste-media { background:#171717; }
+    .radioactive-waste-image { object-position:center; filter:grayscale(1) contrast(1.06); }
+    .radioactive-waste-copy-grid { padding-top:clamp(86px,12svh,150px); }
     .atomic-evidence-mosaic { width:100vw; margin:0 0 0 calc(50% - 50vw); padding:0; color:var(--niagara-paper); background:var(--niagara-atomic); }
     .atomic-evidence-grid { height:min(76svh,790px); min-height:560px; display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); grid-template-rows:repeat(3,minmax(0,1fr)); gap:0; }
     .atomic-evidence-item { min-width:0; min-height:0; position:relative; overflow:hidden; color:var(--niagara-paper); background:#1d1d1d; }
@@ -354,6 +368,10 @@
       .atomic-process-number { grid-column:1; grid-row:1 / 3; margin:7px 0 0; }
       .atomic-process-title,.atomic-process-location { grid-column:2; }
       .atomic-process-location { margin-top:9px; }
+      .atomic-process-reference { grid-template-columns:1fr; }
+      .atomic-process-reference-media { min-height:260px; }
+      .radioactive-waste-title { padding:48px 24px 40px; }
+      .radioactive-waste-copy-grid { padding-top:82px; }
       .atomic-evidence-mosaic { margin-top:0; padding:0; }
       .atomic-evidence-grid { height:auto; min-height:0; grid-template-columns:1fr 1fr; grid-template-rows:none; grid-auto-rows:minmax(155px,25svh); }
       .atomic-evidence-item:nth-child(n) { grid-column:auto; grid-row:auto; }
@@ -761,11 +779,18 @@
               </ol>
 
               <aside class="atomic-process-reference" aria-label="Historical Fernald uranium-production film">
-                <span class="atomic-process-reference-label">Reference film</span>
-                <h4>One site. An entire region.</h4>
-                <p>The Fernald Feed Materials Production Center was a 1,050-acre federal uranium-processing complex near Cincinnati, Ohio. Built in the early 1950s for the United States nuclear-weapons production system, it converted uranium ore concentrates into uranium metal and fabricated the metal into reactor fuel components. Refining, green-salt production, conversion to metal, fabrication, and scrap recovery were brought together within this single site.</p>
-                <p>In Western New York, this work was never contained by one boundary. The production chain—and the related research, weapons development, transportation, storage, and waste—extended across Tonawanda, Lackawanna, Niagara Falls, Lockport, Lewiston, and Porter, linking private factories, laboratories, rail lines, and federal property. The historical Atomic Energy Commission film <em>Production of Uranium Feed Materials</em> makes this sequence visible; Niagara reveals what happened when that sequence encompassed an entire region.</p>
-                <a href="https://youtu.be/VOm7_Lf8PVo" target="_blank" rel="noopener noreferrer">Watch the historical film →</a>
+                <div class="atomic-process-reference-copy">
+                  <span class="atomic-process-reference-label">Reference film</span>
+                  <h4>One site. An entire region.</h4>
+                  <p>The Fernald Feed Materials Production Center was a 1,050-acre federal uranium-processing complex near Cincinnati, Ohio. Built in the early 1950s for the United States nuclear-weapons production system, it converted uranium ore concentrates into uranium metal and fabricated the metal into reactor fuel components. Refining, green-salt production, conversion to metal, fabrication, and scrap recovery were brought together within this single site.</p>
+                  <p>In Western New York, this work was never contained by one boundary. The production chain—and the related research, weapons development, transportation, storage, and waste—extended across Tonawanda, Lackawanna, Niagara Falls, Lockport, Lewiston, and Porter, linking private factories, laboratories, rail lines, and federal property. The historical Atomic Energy Commission film <em>Production of Uranium Feed Materials</em> makes this sequence visible; Niagara reveals what happened when that sequence encompassed an entire region.</p>
+                  <a class="atomic-process-reference-link" href="https://youtu.be/VOm7_Lf8PVo" target="_blank" rel="noopener noreferrer">Watch the historical film →</a>
+                </div>
+                <a class="atomic-process-reference-media" href="https://youtu.be/VOm7_Lf8PVo" target="_blank" rel="noopener noreferrer" aria-label="Watch Production of Uranium Feed Materials">
+                  <img src="https://i.ytimg.com/vi/VOm7_Lf8PVo/hq2.jpg" alt="Still from the historical film Production of Uranium Feed Materials" loading="lazy" />
+                  <span class="atomic-process-reference-play" aria-hidden="true">▶</span>
+                  <span class="atomic-process-reference-caption">Production of Uranium Feed Materials · USAEC Oak Ridge Operations · 1959</span>
+                </a>
               </aside>
             </div>
           </div>
@@ -788,12 +813,19 @@
           </dialog>
         </section>
 
-        <section class="investigation-chapter" id="sludge-slag">
-          <div class="investigation-chapter-grid">
-            <div class="investigation-chapter-meta">
+        <section class="investigation-chapter radioactive-waste-chapter" id="radioactive-waste">
+          <div class="atomic-niagara-hero radioactive-waste-hero">
+            <div class="atomic-niagara-title radioactive-waste-title">
               <span class="investigation-number">III</span>
-              <h3>Sludge + slag</h3>
+              <h3>Radioactive waste</h3>
             </div>
+            <figure class="atomic-niagara-media radioactive-waste-media">
+              <img class="atomic-niagara-video radioactive-waste-image" src="https://natalianeuhaus.com/wp-content/uploads/2024/05/gravy-scaled-copy.jpg" alt="Federal Connection Report material documenting radioactive gravel removed from the Lake Ontario Ordnance Works" loading="lazy" />
+              <figcaption class="atomic-niagara-credit">The Federal Connection Report · Accounts of radioactive gravel taken from LOOW for private use</figcaption>
+            </figure>
+          </div>
+
+          <div class="investigation-chapter-grid atomic-niagara-copy-grid radioactive-waste-copy-grid">
             <div class="investigation-chapter-copy">
               <p>The waste did not remain neatly contained inside federal storage or factory boundaries. A New York State Assembly investigation following Love Canal documented millions of gallons of radioactively contaminated chemical waste entering wells, sewers, and drainage systems connected to the region’s waterways.</p>
               <p>Solid radioactive residues created another pathway. Slag and contaminated fill accumulated at factories and storage areas. Historical testimony and later investigations describe workers taking material home for driveways and foundations, while trucking and construction practices allowed similar material to move through the region as inexpensive fill.</p>
@@ -815,16 +847,10 @@
                 </figure>
               </div>
 
-              <div class="investigation-pair">
-                <figure>
-                  <img src="https://natalianeuhaus.com/wp-content/uploads/2024/05/gravy-scaled-copy.jpg" alt="Federal Connection Report material about radioactive gravel" loading="lazy" />
-                  <figcaption><em>The Federal Connection Report</em> documented accounts of workers taking radioactive gravel from LOOW for home improvements.</figcaption>
-                </figure>
-                <figure>
-                  <img src="https://natalianeuhaus.com/wp-content/uploads/2024/05/detective-scaled-copy-1971x1024-copy.jpg" alt="Private investigator report about radioactive construction fill" loading="lazy" />
-                  <figcaption>A private investigator’s report traced radioactive slag into commercial construction fill.</figcaption>
-                </figure>
-              </div>
+              <figure class="investigation-figure">
+                <img src="https://natalianeuhaus.com/wp-content/uploads/2024/05/detective-scaled-copy-1971x1024-copy.jpg" alt="Private investigator report about radioactive construction fill" loading="lazy" />
+                <figcaption>A private investigator’s report traced radioactive slag into commercial construction fill.</figcaption>
+              </figure>
             </div>
           </div>
         </section>
