@@ -1080,7 +1080,7 @@ body.burlesque-horizontal-body{overflow:hidden}
 
 /* Burlesque arrows: muted at rest, strong on hover — v1. */
 .burlesque-enter-series{
-  color:rgba(21,23,21,.5);
+  color:rgba(21,23,21,.24);
   opacity:1;
   transition:color .3s ease,opacity .3s ease,transform .25s ease;
 }
@@ -1090,7 +1090,7 @@ body.burlesque-horizontal-body{overflow:hidden}
   opacity:1;
 }
 .burlesque-horizontal-controls button{
-  color:rgba(21,23,21,.48);
+  color:rgba(21,23,21,.24);
   opacity:1;
   transition:color .25s ease,opacity .25s ease,transform .25s ease;
 }
@@ -1104,7 +1104,7 @@ body.burlesque-horizontal-body{overflow:hidden}
   opacity:.18;
 }
 .burlesque-lightbox .intermission-lightbox-arrow{
-  color:rgba(241,239,231,.48);
+  color:rgba(241,239,231,.24);
   opacity:1;
   transition:color .25s ease,opacity .25s ease,transform .25s ease;
 }
