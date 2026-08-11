@@ -783,3 +783,11 @@ body.burlesque-horizontal-body{overflow:hidden}
   pointer-events:none;
   transform:translateY(12px);
 }
+
+
+/* Chronological work menu */
+.menu-group--work{grid-column:1/-1;border-right:0!important}
+.menu-group--work:after{display:none!important}
+.menu-links--numbered a{display:grid;grid-template-columns:clamp(28px,3vw,44px) minmax(0,1fr);align-items:baseline;column-gap:18px}
+.menu-project-number{opacity:.5;font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:.18em}
+@media(max-width:760px){.menu-links--numbered a{grid-template-columns:26px minmax(0,1fr);column-gap:12px}}
