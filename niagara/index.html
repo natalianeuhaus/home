@@ -1723,6 +1723,7 @@
         let photoControlsTimer = 0;
         let photoWheelGestureActive = false;
         let photoWheelGestureTimer = 0;
+        let photoReturnScrollY = 0;
 
         function revealPhotoControls() {
           photoStory.classList.add('is-controls-visible');
@@ -1733,12 +1734,17 @@
         }
 
         function setPhotoFullscreen(open, moveFocus = false) {
+          const wasFullscreen = photoStory.classList.contains('is-fullscreen');
+          if (open && !wasFullscreen) photoReturnScrollY = window.scrollY;
           photoStory.classList.toggle('is-fullscreen', open);
           page.classList.toggle('niagara-photo-lightbox-open', open);
           photoCaptionPanel.setAttribute('aria-hidden', open ? 'false' : 'true');
           photoCaptionToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
           photoCaptionPanel.scrollTop = 0;
           if (open && moveFocus) photoCaptionClose.focus({ preventScroll:true });
+          if (!open && wasFullscreen) {
+            requestAnimationFrame(() => window.scrollTo({ top:photoReturnScrollY, behavior:'auto' }));
+          }
         }
 
         photographs.forEach((photo, index) => {
