@@ -613,6 +613,10 @@
     @media (hover:none) {
       .niagara-photo-control,.niagara-photo-caption-toggle,.niagara-photo-index { opacity:1; pointer-events:auto; }
     }
+  
+    /* niagara-content-mode-v1: section tabs have their own top; the video remains the main-page entrance */
+    body.niagara-content-mode .niagara-hero { display:none; }
+    body.niagara-content-mode .niagara-tabbar-wrap { margin-top:0; }
   </style>
 </head>
 <body class="niagara-page">
@@ -1623,6 +1627,7 @@
 
       function activate(name, updateHash = true, animateIndicator = true, scrollToContent = false) {
         if (!validTabs.has(name)) name = 'investigation';
+        if (scrollToContent) page.classList.add('niagara-content-mode');
         page.classList.toggle('niagara-photographs-active', name === 'photographs');
         if (name !== 'photographs') {
           page.classList.remove('niagara-photo-lightbox-open');
@@ -2175,10 +2180,13 @@
         requestAnimationFrame(updateLoveCanalState);
         updateStickyHeader();
       });
-      window.addEventListener('hashchange', () => activate(location.hash.slice(1), false));
-      const initialTab = archiveSearchTerm ? 'evidence' : (location.hash.slice(1) || 'investigation');
+      window.addEventListener('hashchange', () => activate(location.hash.slice(1), false, true, true));
+      const initialHash = location.hash.slice(1);
+      const initialTab = archiveSearchTerm ? 'evidence' : (initialHash || 'investigation');
+      const initialContentMode = Boolean(archiveSearchTerm || initialHash);
+      if (initialContentMode) page.classList.add('niagara-content-mode');
       activate(initialTab, false, false, false);
-      if (archiveSearchTerm) requestAnimationFrame(() => scrollTabsToTop('auto'));
+      if (initialContentMode) requestAnimationFrame(() => scrollTabsToTop('auto'));
       requestAnimationFrame(updateStickyHeader);
       requestAnimationFrame(updateLoveCanalState);
     })();
