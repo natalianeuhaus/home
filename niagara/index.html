@@ -640,6 +640,8 @@
     .niagara-iframe-intro p,.niagara-photo-intro p { max-width:780px; margin:0; font-size:clamp(17px,1.25vw,21px); line-height:1.46; }
     .niagara-frame-shell { width:100%; min-height:76svh; border-top:1px solid var(--niagara-line); background:#fff; position:relative; }
     .niagara-frame-shell iframe { width:100%; height:calc(100svh - 66px); min-height:720px; border:0; display:block; background:#fff; }
+    [data-panel="evidence"] .niagara-frame-shell,
+    [data-panel="evidence"] .niagara-frame-shell iframe { background:var(--niagara-paper); }
     .niagara-frame-placeholder { min-height:76svh; display:grid; place-items:center; padding:40px; color:rgba(21,23,21,.55); font:12px/1.5 Arial,Helvetica,sans-serif; text-transform:uppercase; letter-spacing:.2em; }
 
     body.niagara-photographs-active .niagara-footer { display:none; }
@@ -1844,8 +1846,6 @@
     </section>
   </main>
 
-  <footer class="niagara-footer"><span>© Natalia Neuhaus</span><a href="#niagara-title">Back to top</a></footer>
-
   <script defer src="../assets/site.js"></script>
   <script src="./photographs/slides.js"></script>
   <script>
@@ -1972,12 +1972,23 @@
           style.textContent = `
             html body .global-menu-button,
             html body #globalSiteMenu,
-            html body .site-header {
+            html body .site-header,
+            html body footer,
+            html body .site-footer,
+            html body .footer {
               display: none !important;
             }
 
             html body .site-main {
               min-height: 100vh !important;
+              color: #151715 !important;
+              background: #f1f0ea !important;
+            }
+
+            html,
+            html body {
+              color: #151715 !important;
+              background: #f1f0ea !important;
             }
           `;
           frameDocument.head.appendChild(style);
