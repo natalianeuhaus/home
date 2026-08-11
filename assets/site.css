@@ -1015,7 +1015,6 @@ body.burlesque-horizontal-body{overflow:hidden}
   color:var(--paper);
   opacity:1;
 }
-.menu-links a::after{display:none}
 .menu-footer a{
   color:var(--paper);
   opacity:.42;
