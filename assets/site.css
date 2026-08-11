@@ -1121,12 +1121,12 @@ body.burlesque-horizontal-body{overflow:hidden}
 
 /* Burlesque Backstory: lighter at rest, darker on hover — v1. */
 .burlesque-page + .healers-backstory-trigger strong{
-  color:rgba(21,23,21,.45);
+  color:rgba(21,23,21,.55);
   opacity:1;
   transition:color .28s ease,opacity .28s ease;
 }
 .burlesque-page + .healers-backstory-trigger .healers-backstory-trigger-kicker{
-  color:rgba(21,23,21,.38);
+  color:rgba(21,23,21,.46);
   transition:color .28s ease;
 }
 .burlesque-page + .healers-backstory-trigger:hover strong,
