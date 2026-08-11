@@ -1075,4 +1075,4 @@ body.burlesque-horizontal-body{overflow:hidden}
   bottom:-4px;
 }
 .menu-links--numbered a:hover > span:last-child::after,
-.menu-links--numbered a:focus-visible > span:last-child::after{width:100%}
+.menu-links--numbered a:focus-visible > span:last-child::after{width:calc(100% + 14px)}
