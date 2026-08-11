@@ -2018,6 +2018,7 @@
 
       function loadPanel(panel) {
         panel.querySelectorAll('iframe[data-src]').forEach(frame => {
+          if (frame.closest('.atomic-reference-viewer')) return;
           if (!frame.src) frame.src = frame.dataset.src;
           const placeholder = frame.parentElement.querySelector('.niagara-frame-placeholder');
           if (placeholder) frame.addEventListener('load', () => placeholder.remove(), { once:true });
@@ -2506,6 +2507,7 @@
         document.querySelectorAll('.atomic-reference-viewer[open]').forEach(viewer => viewer.close());
       };
 
+      stopAllFilmPlayback();
       tabs.forEach(tab => tab.addEventListener('click', stopAllFilmPlayback));
       document.addEventListener('visibilitychange', () => {
         if (document.hidden) stopAllFilmPlayback();
