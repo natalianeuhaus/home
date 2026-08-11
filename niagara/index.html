@@ -16,6 +16,8 @@
     .niagara-page .wordmark,.niagara-page .menu-toggle { color:#fff; mix-blend-mode:difference; text-shadow:none; }
     .niagara-page .site-header { transition:padding .32s cubic-bezier(.65,0,.35,1); }
     .niagara-page .wordmark { transition:opacity .24s ease; }
+    .niagara-page .menu-toggle { transition:color .24s ease; }
+    body.niagara-tabs-stuck .menu-toggle[aria-expanded="false"] { color:var(--niagara-ink); mix-blend-mode:normal; }
     body.niagara-tabs-stuck .wordmark { opacity:0; pointer-events:none; }
     body.niagara-tabs-stuck .site-header { padding:14px 42px; }
     .niagara-page .menu-footer { justify-content:space-between; align-items:center; }
