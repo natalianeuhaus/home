@@ -354,7 +354,7 @@
     .love-canal-title h4 { margin:clamp(26px,3.8svh,42px) 0 12px; color:rgba(241,240,234,.95); font-size:clamp(24px,2.35vw,38px); line-height:1.04; font-weight:400; letter-spacing:-.032em; }
     .love-canal-title p { margin:0 !important; max-width:520px; color:rgba(241,240,234,.72); font:clamp(15px,1.15vw,19px)/1.5 Arial,Helvetica,sans-serif !important; letter-spacing:0 !important; }
     .love-canal-media { min-width:0; margin:0; position:relative; display:grid; place-items:center; overflow:hidden; background:#e5d8bd; }
-    .love-canal-media img { width:100%; height:100%; display:block; object-fit:cover; object-position:center; }
+    .love-canal-media img { width:100%; height:100%; display:block; object-fit:cover; object-position:right center; }
     .love-canal-media figcaption { display:none; position:absolute; z-index:1; left:18px; right:18px; bottom:16px; justify-content:space-between; gap:24px; color:rgba(241,240,234,.82); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.08em; text-transform:uppercase; text-shadow:0 1px 8px rgba(0,0,0,.8); }
     .love-canal-media figcaption::before { content:""; position:absolute; z-index:-1; inset:-42px -18px -16px; background:linear-gradient(transparent,rgba(0,0,0,.58)); }
     .love-canal-media .love-canal-threshold-copy { max-width:520px; text-align:right; }
@@ -706,6 +706,8 @@
     body.niagara-content-mode .niagara-tab[aria-selected="true"] { color:var(--niagara-red); opacity:1; }
     body.niagara-content-mode .niagara-tab-label { opacity:1; transform:none; animation:none; }
     body.niagara-content-mode .niagara-tab-indicator { animation:none; opacity:1; }
+    body.niagara-love-canal-hero-active .niagara-tabbar-wrap { max-height:0; margin-top:0; overflow:hidden; opacity:0; pointer-events:none; }
+    body.niagara-love-canal-hero-active .site-header { opacity:0; pointer-events:none; }
   </style>
 
   <style id="compact-unified-navigation-arrows">
@@ -2488,6 +2490,7 @@
       }
 
       const loveCanalRange = document.querySelector('#love-canal-range');
+      const loveCanalHero = document.querySelector('.love-canal-hero');
       let loveCanalFrame = 0;
 
       function updateLoveCanalState() {
@@ -2496,6 +2499,11 @@
         const rect = loveCanalRange.getBoundingClientRect();
         const active = rect.top <= window.innerHeight * .56 && rect.bottom >= window.innerHeight * .44;
         page.classList.toggle('niagara-love-canal-active', active);
+        if (loveCanalHero) {
+          const heroRect = loveCanalHero.getBoundingClientRect();
+          const heroActive = heroRect.top <= window.innerHeight * .16 && heroRect.bottom >= window.innerHeight * .35;
+          page.classList.toggle('niagara-love-canal-hero-active', heroActive);
+        }
       }
 
       function requestLoveCanalState() {
