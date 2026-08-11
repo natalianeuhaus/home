@@ -1055,3 +1055,24 @@ body.burlesque-horizontal-body{overflow:hidden}
     line-height:38px;
   }
 }
+
+
+/* Menu underline limited to project-title text — v1. */
+.menu-links--numbered a::after{display:none}
+.menu-links--numbered a > span:last-child{
+  position:relative;
+  width:fit-content;
+}
+.menu-links--numbered a > span:last-child::after{
+  content:"";
+  opacity:.72;
+  background:currentColor;
+  width:0;
+  height:1px;
+  transition:width .42s cubic-bezier(.65,0,.35,1);
+  position:absolute;
+  left:0;
+  bottom:-4px;
+}
+.menu-links--numbered a:hover > span:last-child::after,
+.menu-links--numbered a:focus-visible > span:last-child::after{width:100%}
