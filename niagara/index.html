@@ -369,6 +369,10 @@
     .love-canal-section { margin-top:clamp(82px,12svh,150px); border-top-color:rgba(68,8,6,.52); }
     .love-canal-section .waste-year { color:var(--love-canal-red); }
     .love-canal-transition { max-width:780px; margin:clamp(54px,8svh,92px) 0 0 clamp(-340px,-18vw,-180px) !important; padding:clamp(26px,3.5vw,42px) 0; border-top:1px solid var(--love-canal-red); border-bottom:1px solid var(--love-canal-red); font-size:clamp(26px,3.1vw,46px) !important; line-height:1.14 !important; letter-spacing:-.035em !important; }
+    .love-canal-gravy { width:100%; margin:clamp(70px,10svh,120px) 0 0; overflow:hidden; background:#050505; }
+    .love-canal-gravy img { width:100%; height:auto; display:block; }
+    .love-canal-gravy figcaption { padding:14px 16px 16px; display:flex; justify-content:space-between; gap:30px; color:rgba(241,240,234,.62); background:#050505; font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.1em; text-transform:uppercase; }
+    .love-canal-gravy figcaption span:last-child { max-width:560px; text-align:right; }
     .atomic-thread-path { transition:stroke .38s ease; }
     .atomic-thread-end { transition:opacity .16s ease,fill .38s ease; }
     body.niagara-love-canal-active .atomic-thread-path { stroke:var(--love-canal-red); }
@@ -524,6 +528,9 @@
       .love-canal-threshold figcaption { width:calc(100% - 72px); margin-left:72px; grid-template-columns:1fr; gap:7px; }
       .love-canal-transition { margin-left:72px !important; }
       .love-canal-range .investigation-stat-grid { margin-left:72px; }
+      .love-canal-gravy { width:calc(100% - 72px); margin-left:72px; }
+      .love-canal-gravy figcaption { align-items:flex-start; flex-direction:column; gap:5px; }
+      .love-canal-gravy figcaption span:last-child { text-align:left; }
       .federal-record { width:calc(100vw - 48px); margin-left:0; }
       .federal-record-header { align-items:flex-start; }
       .federal-record-title { display:block; }
@@ -1315,6 +1322,14 @@
                   <div class="investigation-stat"><strong>67,000</strong><span>Department of Energy records obtained through information requests</span></div>
                   <div class="investigation-stat"><strong>37M</strong><span>gallons of radioactively contaminated chemical waste identified by the report</span></div>
                 </div>
+
+                <figure class="love-canal-gravy">
+                  <img src="./archive/federal-connection-gravy.webp" alt="The Federal Connection report beside testimony describing workers using Atomic Energy Commission trucks to take rock slag from LOSA for driveways and fill" loading="lazy" />
+                  <figcaption>
+                    <span>The Federal Connection · 1981</span>
+                    <span>“Getting in on the gravy at LOSA” meant taking rock slag home in government trucks for driveways and fill.</span>
+                  </figcaption>
+                </figure>
               </section>
             </div>
           </div>
