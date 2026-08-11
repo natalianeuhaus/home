@@ -567,6 +567,8 @@
     .niagara-photo-story.is-fullscreen .niagara-photo-layout { display:grid; grid-template-columns:minmax(0,1fr) clamp(380px,32vw,610px); width:100%; min-height:100svh; height:100svh; }
     .niagara-photo-story.is-fullscreen .niagara-photo-stage { min-height:100svh; height:100svh; background:#10110f; }
     .niagara-photo-story.is-fullscreen .niagara-photo-viewport { cursor:default; background:#10110f; }
+    .niagara-photo-story.is-fullscreen.is-controls-visible .niagara-photo-control,.niagara-photo-story.is-fullscreen:focus-within .niagara-photo-control { opacity:0; pointer-events:none; }
+    .niagara-photo-story.is-fullscreen .niagara-photo-stage:has(.niagara-photo-main:hover) .niagara-photo-control,.niagara-photo-story.is-fullscreen .niagara-photo-control:hover,.niagara-photo-story.is-fullscreen .niagara-photo-control:focus-visible { opacity:1; pointer-events:auto; }
     .niagara-photo-story.is-fullscreen .niagara-photo-caption-toggle { display:none; }
     .niagara-photo-story.is-fullscreen .niagara-photo-caption { position:relative; display:block; min-width:0; height:100svh; }
 
@@ -1439,7 +1441,7 @@
             <h3 data-photo-title>Rainbow Bridge and waterfalls from the Maid of the Mist. October 6th, 2023.</h3>
             <div class="niagara-photo-caption-rule" aria-hidden="true"></div>
             <p class="niagara-photo-caption-copy" data-photo-caption></p>
-            <p class="niagara-photo-instructions">Use the arrow keys or swipe to move through the photographs.</p>
+            <p class="niagara-photo-instructions">Use the arrow keys, scroll, or swipe to move through the photographs.</p>
           </aside>
         </div>
       </div>
@@ -1720,6 +1722,8 @@
         let photoPointerStart = null;
         let photoSuppressClick = false;
         let photoControlsTimer = 0;
+        let photoWheelGestureActive = false;
+        let photoWheelGestureTimer = 0;
 
         function revealPhotoControls() {
           photoStory.classList.add('is-controls-visible');
@@ -1845,6 +1849,17 @@
           }
           if (!photoStory.classList.contains('is-fullscreen')) setPhotoFullscreen(true);
         });
+        photoViewport.addEventListener('wheel', event => {
+          if (!photoStory.classList.contains('is-fullscreen')) return;
+          const movement = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+          if (Math.abs(movement) < 8) return;
+          event.preventDefault();
+          window.clearTimeout(photoWheelGestureTimer);
+          photoWheelGestureTimer = window.setTimeout(() => { photoWheelGestureActive = false; }, 180);
+          if (photoWheelGestureActive) return;
+          photoWheelGestureActive = true;
+          advancePhotograph(movement > 0 ? 1 : -1);
+        }, { passive:false });
         photoViewport.addEventListener('keydown', event => {
           if (event.key === 'Escape') {
             setPhotoFullscreen(false);
