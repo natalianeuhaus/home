@@ -108,8 +108,7 @@
     .investigation-end { margin-top:clamp(72px,10svh,130px); max-width:1080px; font-size:clamp(34px,4.4vw,72px); line-height:1.05; letter-spacing:-.045em; }
 
     .microfilm-hero-media { position:relative; overflow:hidden; background:#111; }
-    .microfilm-hero-frame { position:absolute; top:10px; left:0; width:100%; height:calc(100% + 10px); display:block; border:0; background:#111; pointer-events:none; }
-    .microfilm-hero-media::after { content:""; position:absolute; z-index:2; top:0; right:0; width:72px; height:68px; background:#111; pointer-events:auto; }
+    .microfilm-hero-video { position:absolute; inset:0; width:100%; height:100%; display:block; object-fit:cover; background:#111; pointer-events:none; }
 
     /* Health record */
     .atomic-thread { position:absolute; inset:0 auto auto 0; z-index:4; width:100%; height:100%; overflow:visible; pointer-events:none; opacity:0; transition:opacity .25s ease; }
@@ -995,7 +994,7 @@
               <h3>Radioactive waste</h3>
             </div>
             <figure class="atomic-niagara-media radioactive-waste-media microfilm-hero-media" aria-label="Niagara Gazette microfilm footage">
-              <iframe class="microfilm-hero-frame" src="https://drive.google.com/file/d/1a4p4B2L1owYliDCQHYnNhjAyxfLabLn-/preview?autoplay=1&amp;rm=minimal" title="Niagara Microfilm Inverted" allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe>
+              <video class="microfilm-hero-video" src="./micro3.mp4" autoplay muted loop playsinline preload="auto" aria-label="Niagara Gazette microfilm footage"></video>
             </figure>
           </div>
 
