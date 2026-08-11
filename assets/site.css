@@ -1007,7 +1007,7 @@ body.burlesque-horizontal-body{overflow:hidden}
 /* Menu alignment and muted interaction — v1. */
 .menu-links a{
   color:var(--paper);
-  opacity:.42;
+  opacity:.62;
   transition:opacity .25s ease;
 }
 .menu-links a:hover,
