@@ -1141,3 +1141,24 @@ body.burlesque-horizontal-body{overflow:hidden}
 .burlesque-page + .healers-backstory-trigger:focus-visible .healers-backstory-trigger-kicker{
   color:rgba(21,23,21,.76);
 }
+
+
+
+/* Healers fullscreen controls: muted on light, dark on hover — v1. */
+.healers-lightbox .healers-lightbox-arrow,
+.healers-lightbox .healers-lightbox-close{
+  color:rgba(21,23,21,.36);
+  opacity:1;
+  transition:color .25s ease,opacity .25s ease,transform .25s ease;
+}
+.healers-lightbox .healers-lightbox-arrow:hover,
+.healers-lightbox .healers-lightbox-arrow:focus-visible,
+.healers-lightbox .healers-lightbox-close:hover,
+.healers-lightbox .healers-lightbox-close:focus-visible{
+  color:#151715;
+  opacity:1;
+}
+.healers-lightbox .healers-lightbox-arrow:disabled{
+  color:#151715;
+  opacity:.18;
+}
