@@ -1103,13 +1103,16 @@ body.burlesque-horizontal-body{overflow:hidden}
   color:#151715;
   opacity:.18;
 }
-.burlesque-lightbox .intermission-lightbox-arrow{
-  color:rgba(241,239,231,.24);
+.burlesque-lightbox .intermission-lightbox-arrow,
+.burlesque-lightbox .intermission-lightbox-close{
+  color:rgba(241,239,231,.36);
   opacity:1;
   transition:color .25s ease,opacity .25s ease,transform .25s ease;
 }
 .burlesque-lightbox .intermission-lightbox-arrow:hover,
-.burlesque-lightbox .intermission-lightbox-arrow:focus-visible{
+.burlesque-lightbox .intermission-lightbox-arrow:focus-visible,
+.burlesque-lightbox .intermission-lightbox-close:hover,
+.burlesque-lightbox .intermission-lightbox-close:focus-visible{
   color:#f1efe7;
   opacity:1;
 }
