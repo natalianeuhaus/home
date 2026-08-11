@@ -546,7 +546,7 @@
     .niagara-photo-thumb img { width:100%; height:100%; object-fit:contain; display:block; }
     .niagara-photo-thumb span { position:absolute; left:5px; bottom:4px; min-width:20px; padding:3px 4px 2px; color:#fff; background:rgba(8,9,8,.76); letter-spacing:.12em; font:8px/1 Arial,Helvetica,sans-serif; }
     .niagara-photo-story.is-controls-visible .niagara-photo-control,.niagara-photo-story:focus-within .niagara-photo-control,.niagara-photo-story.is-controls-visible .niagara-photo-caption-toggle,.niagara-photo-story:focus-within .niagara-photo-caption-toggle,.niagara-photo-story.is-controls-visible .niagara-photo-index,.niagara-photo-story:focus-within .niagara-photo-index { opacity:1; pointer-events:auto; }
-    .niagara-photo-story.is-controls-visible .niagara-photo-strip,.niagara-photo-story:focus-within .niagara-photo-strip { opacity:1; pointer-events:auto; transform:translate(-50%,0); }
+    .niagara-photo-story.is-controls-visible .niagara-photo-strip { opacity:1; pointer-events:auto; transform:translate(-50%,0); }
     .niagara-photo-caption { display:none; box-sizing:border-box; overflow-x:hidden; overflow-y:auto; padding:clamp(58px,6vw,96px) clamp(32px,4vw,66px) 52px; border-left:1px solid rgba(255,255,255,.18); background:#10110f; scrollbar-color:#9b958a #1b1c1a; scrollbar-width:auto; }
     .niagara-photo-caption::-webkit-scrollbar { width:11px; }
     .niagara-photo-caption::-webkit-scrollbar-track { background:#1b1c1a; }
@@ -1718,7 +1718,7 @@
           photoStory.classList.add('is-controls-visible');
           window.clearTimeout(photoControlsTimer);
           photoControlsTimer = window.setTimeout(() => {
-            if (!photoStory.matches(':focus-within')) photoStory.classList.remove('is-controls-visible');
+            photoStory.classList.remove('is-controls-visible');
           }, 2200);
         }
 
@@ -1810,7 +1810,7 @@
         photoStory.addEventListener('focusin', revealPhotoControls);
         photoStory.addEventListener('pointerleave', () => {
           window.clearTimeout(photoControlsTimer);
-          if (!photoStory.matches(':focus-within')) photoStory.classList.remove('is-controls-visible');
+          photoStory.classList.remove('is-controls-visible');
         });
 
         const advancePhotograph = direction => showPhotograph(photoIndex + direction);
