@@ -1076,3 +1076,44 @@ body.burlesque-horizontal-body{overflow:hidden}
 }
 .menu-links--numbered a:hover > span:last-child::after,
 .menu-links--numbered a:focus-visible > span:last-child::after{width:calc(100% + 14px)}
+
+
+/* Burlesque arrows: muted at rest, strong on hover — v1. */
+.burlesque-enter-series{
+  color:rgba(21,23,21,.5);
+  opacity:1;
+  transition:color .3s ease,opacity .3s ease,transform .25s ease;
+}
+.burlesque-enter-series:hover,
+.burlesque-enter-series:focus-visible{
+  color:#151715;
+  opacity:1;
+}
+.burlesque-horizontal-controls button{
+  color:rgba(241,239,231,.48);
+  opacity:1;
+  transition:color .25s ease,opacity .25s ease,transform .25s ease;
+}
+.burlesque-horizontal-controls button:hover,
+.burlesque-horizontal-controls button:focus-visible{
+  color:#f1efe7;
+  opacity:1;
+}
+.burlesque-horizontal-controls button:disabled{
+  color:#f1efe7;
+  opacity:.18;
+}
+.burlesque-lightbox .intermission-lightbox-arrow{
+  color:rgba(241,239,231,.48);
+  opacity:1;
+  transition:color .25s ease,opacity .25s ease,transform .25s ease;
+}
+.burlesque-lightbox .intermission-lightbox-arrow:hover,
+.burlesque-lightbox .intermission-lightbox-arrow:focus-visible{
+  color:#f1efe7;
+  opacity:1;
+}
+.burlesque-lightbox .intermission-lightbox-arrow:disabled{
+  color:#f1efe7;
+  opacity:.18;
+}
