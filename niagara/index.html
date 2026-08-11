@@ -617,6 +617,14 @@
     /* niagara-content-mode-v1: section tabs have their own top; the video remains the main-page entrance */
     body.niagara-content-mode .niagara-hero { display:none; }
     body.niagara-content-mode .niagara-tabbar-wrap { margin-top:0; }
+    body.niagara-content-mode .niagara-tabbar-wrap::before { opacity:1; background:var(--niagara-paper); backdrop-filter:blur(0); -webkit-backdrop-filter:blur(0); }
+    body.niagara-content-mode .niagara-tab { color:var(--niagara-ink); opacity:.78; }
+    body.niagara-content-mode .niagara-tab + .niagara-tab::before { color:var(--niagara-ink); opacity:.30; }
+    body.niagara-content-mode .niagara-tab:hover,
+    body.niagara-content-mode .niagara-tab:focus-visible,
+    body.niagara-content-mode .niagara-tab[aria-selected="true"] { color:var(--niagara-red); opacity:1; }
+    body.niagara-content-mode .niagara-tab-label { opacity:1; transform:none; animation:none; }
+    body.niagara-content-mode .niagara-tab-indicator { animation:none; opacity:1; }
   </style>
 </head>
 <body class="niagara-page">
