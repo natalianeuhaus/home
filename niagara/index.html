@@ -264,6 +264,7 @@
       .atomic-thread-path { stroke-dashoffset:0; }
       .atomic-thread-end { opacity:1; }
       .atomic-thread.is-drawing .atomic-thread-path,.atomic-thread.is-drawing .atomic-thread-end { animation:none; }
+      .radioactive-waste-image,.radioactive-waste-credit { opacity:1; transform:none; transition:none; }
     }
 
     /* Atomic Niagara video chapter */
@@ -312,10 +313,15 @@
     .radioactive-waste-title { background:var(--niagara-red); }
     .radioactive-waste-title h3 { background:var(--niagara-red); box-shadow:0 0 0 7px var(--niagara-red); }
     .radioactive-waste-media { background:#171717; }
-    .radioactive-waste-image { object-position:center right; filter:saturate(.94) contrast(1.02); }
+    .radioactive-waste-image { object-position:center right; opacity:0; filter:saturate(.94) contrast(1.02); transform:scale(1.028); transition:opacity 1.55s cubic-bezier(.22,.7,.25,1),transform 2.1s cubic-bezier(.22,.7,.25,1); }
+    .radioactive-waste-credit { opacity:0; transform:translateY(7px); transition:opacity .8s 1s ease,transform .8s 1s ease; }
+    .radioactive-waste-hero.is-visible .radioactive-waste-image { opacity:1; transform:scale(1); }
+    .radioactive-waste-hero.is-visible .radioactive-waste-credit { opacity:1; transform:translateY(0); }
     .radioactive-waste-copy-grid { padding-top:clamp(86px,12svh,150px); }
     .waste-story { max-width:900px; }
     .waste-lede { margin-bottom:1.35em !important; font-size:clamp(25px,2.25vw,37px) !important; line-height:1.23 !important; letter-spacing:-.027em !important; }
+    .waste-chapter-bridge { margin:clamp(42px,6svh,72px) 0 0 !important; padding-top:24px; border-top:1px solid var(--niagara-line); color:var(--niagara-red); font-size:clamp(21px,1.8vw,29px) !important; line-height:1.3 !important; letter-spacing:-.02em !important; }
+    .waste-chapter-bridge + .waste-era-marker { margin-top:clamp(72px,10svh,120px); }
     .waste-era-marker { --era-accent:var(--niagara-red); width:calc(100vw - 84px); min-height:72svh; margin:clamp(100px,15svh,190px) 0 0 calc(100% - (100vw - 84px)); position:relative; display:grid; align-items:center; overflow:hidden; border-top:1px solid var(--niagara-line); border-bottom:1px solid var(--niagara-line); background:var(--niagara-paper); }
     .waste-era-marker::after { content:""; position:absolute; z-index:0; left:0; right:0; top:50%; height:1px; background:color-mix(in srgb,var(--era-accent) 34%,transparent); transform:scaleX(0); transform-origin:left center; transition:transform 1.2s cubic-bezier(.22,1,.36,1); }
     .waste-era-inner { width:100%; min-height:inherit; padding:clamp(48px,7vw,104px); position:relative; z-index:1; display:grid; grid-template-columns:minmax(270px,.82fr) minmax(380px,1fr); gap:clamp(54px,8vw,140px); align-items:center; }
@@ -1264,16 +1270,15 @@
             </div>
             <figure class="atomic-niagara-media radioactive-waste-media">
               <img class="atomic-niagara-video radioactive-waste-image" src="./archive/radioactive-slag-2015.webp" alt="A gloved person holds a radioactive slag sample on August 12, 2015" loading="lazy" decoding="async" />
-              <figcaption class="atomic-niagara-credit">Slag sample · August 12, 2015</figcaption>
+              <figcaption class="atomic-niagara-credit radioactive-waste-credit">Slag sample · August 12, 2015</figcaption>
             </figure>
           </div>
 
           <div class="investigation-chapter-grid atomic-niagara-copy-grid radioactive-waste-copy-grid">
             <div class="investigation-chapter-copy waste-story">
               <p class="waste-lede">Radioactive waste is not a separate story from uranium production. It is what the process left behind—and in Western New York, it moved far beyond the places where it was made.</p>
-              <p>From the 1940s through the early Cold War, liquid radioactive waste entered industrial disposal systems while solid residues became slag, gravel, road bedding, and fill. Beginning in 1944, some material was transported to the federal reservation at the Lake Ontario Ordnance Works. Other waste was buried at industrial dumps or carried by contractors and government trucks into parking lots, streets, driveways, and yards. Decades later, each excavation can expose another part of that geography.</p>
-              <p>Love Canal made this hidden geography impossible to ignore. Between 1942 and 1953, Hooker Chemical buried thousands of tons of industrial waste in the abandoned canal. By 1978, chemicals were surfacing in yards, basements, sewers, and school grounds. Residents organized, demanded answers, and forced the government to investigate.</p>
-              <p>What began in 1979 as an inquiry by the New York State Assembly Task Force on Toxic Substances into allegations of military dumping at Love Canal uncovered a federal connection. Its 1981 report revealed an entire regional system of wartime production—and the movement, reuse, and disposal of the chemical and radioactive waste it left behind.</p>
+              <p>Every stage of uranium production created a different waste stream. Linde’s refining process left uranium-bearing residues. Electromet’s conversion of green salt into uranium metal produced C-1 and C-2 slag. Hooker’s recovery work left liquid waste, filtered solids, and residual slag. Beginning in 1944, some of this material was transported to the Lake Ontario Ordnance Works, the federal government’s official regional repository. But not all of it went there. Waste remained on industrial property, entered waterways and company dumps, or moved through contractors as inexpensive fill beneath parking lots, streets, driveways, and yards.</p>
+              <p class="waste-chapter-bridge">For decades, those routes remained largely hidden. Love Canal forced the government to look—and revealed that one contaminated neighborhood was only the beginning.</p>
 
               <section class="waste-era-marker waste-era-marker--love" data-waste-era id="era-love-canal" aria-labelledby="era-love-canal-title">
                 <div class="waste-era-inner">
@@ -2483,6 +2488,27 @@
 
       function requestLoveCanalState() {
         if (!loveCanalFrame) loveCanalFrame = requestAnimationFrame(updateLoveCanalState);
+      }
+
+      const radioactiveWasteHero = document.querySelector('.radioactive-waste-hero');
+      if (radioactiveWasteHero) {
+        const radioactiveWasteImage = radioactiveWasteHero.querySelector('.radioactive-waste-image');
+        const revealRadioactiveWasteHero = () => {
+          const reveal = () => requestAnimationFrame(() => radioactiveWasteHero.classList.add('is-visible'));
+          if (!radioactiveWasteImage || radioactiveWasteImage.complete) reveal();
+          else radioactiveWasteImage.addEventListener('load', reveal, { once:true });
+        };
+
+        if ('IntersectionObserver' in window) {
+          const radioactiveWasteObserver = new IntersectionObserver(entries => {
+            if (!entries.some(entry => entry.isIntersecting)) return;
+            revealRadioactiveWasteHero();
+            radioactiveWasteObserver.disconnect();
+          }, { rootMargin:'0px 0px -12% 0px', threshold:.22 });
+          radioactiveWasteObserver.observe(radioactiveWasteHero);
+        } else {
+          revealRadioactiveWasteHero();
+        }
       }
 
       const wasteEraMarkers = Array.from(document.querySelectorAll('[data-waste-era]'));
