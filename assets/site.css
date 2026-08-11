@@ -794,44 +794,211 @@ body.burlesque-horizontal-body{overflow:hidden}
 
 @media(min-width:761px){.menu-panel{padding-top:65px}}
 
-
-/* Burlesque intro arrow — match the photograph navigation. */
-.burlesque-enter-series{
-  color:#1517159c;
-  cursor:pointer;
-  background:transparent;
-  border:0;
-  width:74px;
-  height:52px;
-  margin:34px 0 0;
+/* Compact unified navigation arrows — v1. */
+:is(
+  .burlesque-enter-series,
+  .burlesque-horizontal-controls button,
+  .intermission-navigation-controls button,
+  .healers-backstory-navigation button,
+  .healers-lightbox-arrow,
+  .intermission-lightbox-arrow
+){
+  width:62px;
+  height:42px;
   padding:0;
-  display:block;
-  position:relative;
-  transition:opacity .25s;
+  font-size:0;
 }
-.burlesque-enter-series span{display:none}
-.burlesque-enter-series::before{
+:is(
+  .burlesque-enter-series,
+  .burlesque-horizontal-controls button,
+  .intermission-navigation-controls button,
+  .healers-backstory-navigation button,
+  .healers-lightbox-arrow,
+  .intermission-lightbox-arrow
+)::before{
   content:"";
-  width:52px;
+  width:44px;
   height:1px;
   background:currentColor;
   position:absolute;
-  left:5px;
   top:50%;
+  transform:translateY(-50%);
 }
-.burlesque-enter-series::after{
+:is(
+  .burlesque-enter-series,
+  .burlesque-horizontal-controls button,
+  .intermission-navigation-controls button,
+  .healers-backstory-navigation button,
+  .healers-lightbox-arrow,
+  .intermission-lightbox-arrow
+)::after{
   content:"";
   width:7px;
   height:7px;
   border-top:1px solid currentColor;
   border-right:1px solid currentColor;
   position:absolute;
-  right:9px;
   top:50%;
+}
+:is(
+  .burlesque-horizontal-previous,
+  .intermission-navigation-controls button:first-of-type,
+  .healers-backstory-navigation button:first-of-type,
+  .healers-lightbox-arrow--previous,
+  .intermission-lightbox-arrow--previous
+)::before{right:7px;left:auto}
+:is(
+  .burlesque-horizontal-previous,
+  .intermission-navigation-controls button:first-of-type,
+  .healers-backstory-navigation button:first-of-type,
+  .healers-lightbox-arrow--previous,
+  .intermission-lightbox-arrow--previous
+)::after{
+  left:7px;
+  right:auto;
+  transform:translateY(-50%) rotate(-135deg);
+}
+:is(
+  .burlesque-enter-series,
+  .burlesque-horizontal-next,
+  .intermission-navigation-controls button:last-of-type,
+  .healers-backstory-navigation button:last-of-type,
+  .healers-lightbox-arrow--next,
+  .intermission-lightbox-arrow--next
+)::before{left:7px;right:auto}
+:is(
+  .burlesque-enter-series,
+  .burlesque-horizontal-next,
+  .intermission-navigation-controls button:last-of-type,
+  .healers-backstory-navigation button:last-of-type,
+  .healers-lightbox-arrow--next,
+  .intermission-lightbox-arrow--next
+)::after{
+  right:7px;
+  left:auto;
   transform:translateY(-50%) rotate(45deg);
 }
+.burlesque-enter-series{
+  color:#1517159c;
+  cursor:pointer;
+  background:transparent;
+  border:0;
+  margin:34px 0 0;
+  display:block;
+  position:relative;
+  transition:opacity .25s;
+}
+.burlesque-enter-series span,
+.healers-backstory-navigation button span{display:none}
 .burlesque-enter-series:hover,
 .burlesque-enter-series:focus-visible{
   color:#1517159c;
   opacity:.48;
+}
+.healers-backstory-navigation button{position:relative}
+.intermission-enter-series{
+  width:42px;
+  height:62px;
+  font-size:0;
+  display:block;
+  position:relative;
+}
+.intermission-enter-series span{display:none}
+.intermission-enter-series::before{
+  content:"";
+  width:1px;
+  height:44px;
+  background:currentColor;
+  position:absolute;
+  top:7px;
+  left:50%;
+  transform:translateX(-50%);
+}
+.intermission-enter-series::after{
+  content:"";
+  width:7px;
+  height:7px;
+  border-right:1px solid currentColor;
+  border-bottom:1px solid currentColor;
+  position:absolute;
+  left:50%;
+  bottom:7px;
+  transform:translateX(-50%) rotate(45deg);
+}
+.intermission-enter-series:hover,
+.intermission-enter-series:focus-visible{opacity:.48}
+@media (max-width:760px){
+  :is(
+    .burlesque-enter-series,
+    .burlesque-horizontal-controls button,
+    .intermission-navigation-controls button,
+    .healers-backstory-navigation button,
+    .healers-lightbox-arrow,
+    .intermission-lightbox-arrow
+  ){
+    width:52px;
+    height:38px;
+  }
+  :is(
+    .burlesque-enter-series,
+    .burlesque-horizontal-controls button,
+    .intermission-navigation-controls button,
+    .healers-backstory-navigation button,
+    .healers-lightbox-arrow,
+    .intermission-lightbox-arrow
+  )::before{width:34px}
+  :is(
+    .burlesque-enter-series,
+    .burlesque-horizontal-controls button,
+    .intermission-navigation-controls button,
+    .healers-backstory-navigation button,
+    .healers-lightbox-arrow,
+    .intermission-lightbox-arrow
+  )::after{
+    width:6px;
+    height:6px;
+  }
+  :is(
+    .burlesque-horizontal-previous,
+    .intermission-navigation-controls button:first-of-type,
+    .healers-backstory-navigation button:first-of-type,
+    .healers-lightbox-arrow--previous,
+    .intermission-lightbox-arrow--previous
+  )::before{right:6px}
+  :is(
+    .burlesque-horizontal-previous,
+    .intermission-navigation-controls button:first-of-type,
+    .healers-backstory-navigation button:first-of-type,
+    .healers-lightbox-arrow--previous,
+    .intermission-lightbox-arrow--previous
+  )::after{left:6px}
+  :is(
+    .burlesque-enter-series,
+    .burlesque-horizontal-next,
+    .intermission-navigation-controls button:last-of-type,
+    .healers-backstory-navigation button:last-of-type,
+    .healers-lightbox-arrow--next,
+    .intermission-lightbox-arrow--next
+  )::before{left:6px}
+  :is(
+    .burlesque-enter-series,
+    .burlesque-horizontal-next,
+    .intermission-navigation-controls button:last-of-type,
+    .healers-backstory-navigation button:last-of-type,
+    .healers-lightbox-arrow--next,
+    .intermission-lightbox-arrow--next
+  )::after{right:6px}
+  .intermission-enter-series{
+    width:38px;
+    height:52px;
+  }
+  .intermission-enter-series::before{
+    height:34px;
+    top:6px;
+  }
+  .intermission-enter-series::after{
+    width:6px;
+    height:6px;
+    bottom:6px;
+  }
 }
