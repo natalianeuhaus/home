@@ -64,21 +64,13 @@
     { src: 'images/5O9A8496.jpg', full: 'images/5O9A8496.jpg', alt: 'Burlesque Mon Amour photograph 20', width: 1200, height: 800 }
   ];
 
-  function installScrubberStyles() {
-    if (document.getElementById('burlesque-scrubber-styles')) return;
+  function installProgressStyles() {
+    if (document.getElementById('burlesque-progress-styles')) return;
     const style = document.createElement('style');
-    style.id = 'burlesque-scrubber-styles';
+    style.id = 'burlesque-progress-styles';
     style.textContent = `
-      .burlesque-scrubber{position:absolute;z-index:8;left:0;right:0;bottom:0;height:30px;color:#151715;opacity:1;transition:opacity .35s ease}
-      .burlesque-scrubber__input{position:absolute;z-index:2;left:0;right:0;bottom:0;width:100%;height:30px;margin:0;opacity:0;cursor:ew-resize}
-      .burlesque-scrubber__track{position:absolute;left:0;right:0;bottom:0;height:1px;background:#15171529;pointer-events:none}
-      .burlesque-scrubber__fill{position:absolute;inset:0;background:#15171580;transform:scaleX(var(--scrub-progress,.05));transform-origin:left center;transition:transform .8s cubic-bezier(.22,1,.36,1)}
-      .burlesque-scrubber__marker{position:absolute;left:clamp(4px,calc(var(--scrub-position,0) * 100%),calc(100% - 4px));bottom:-3px;width:7px;height:7px;border-radius:50%;background:#151715;transform:translateX(-50%);transition:left .8s cubic-bezier(.22,1,.36,1),transform .2s ease;box-shadow:0 0 0 3px #f0efe9b8}
-      .burlesque-scrubber.is-dragging .burlesque-scrubber__fill,.burlesque-scrubber.is-dragging .burlesque-scrubber__marker{transition-duration:.12s}
-      .burlesque-scrubber.is-dragging .burlesque-scrubber__marker{transform:translateX(-50%) scale(1.35)}
-      .burlesque-scrubber__input:focus-visible + .burlesque-scrubber__track .burlesque-scrubber__marker{outline:1px solid #151715;outline-offset:4px}
-      @media (max-width:760px){.burlesque-scrubber,.burlesque-scrubber__input{height:36px}}
-      @media (prefers-reduced-motion:reduce){.burlesque-scrubber__fill,.burlesque-scrubber__marker{transition:none}}
+      .burlesque-progress{--progress:0;position:absolute;z-index:8;left:0;bottom:0;width:100%;height:1px;background:#15171570;transform:scaleX(var(--progress));transform-origin:0;transition:transform .8s cubic-bezier(.22,1,.36,1);pointer-events:none}
+      @media (prefers-reduced-motion:reduce){.burlesque-progress{transition:none}}
     `;
     document.head.append(style);
   }
@@ -194,7 +186,7 @@
   }
 
   function buildSequence(slides) {
-    installScrubberStyles();
+    installProgressStyles();
     stage.replaceChildren();
     const slideEls = [];
 
@@ -243,22 +235,10 @@
       controls.querySelector('.burlesque-horizontal-next')?.addEventListener('click', () => goToSlide(index + 1));
     });
 
-    const scrubber = document.createElement('div');
-    scrubber.className = 'burlesque-scrubber';
-    scrubber.setAttribute('aria-label', 'Photograph progress');
-    const scrubberInput = document.createElement('input');
-    scrubberInput.className = 'burlesque-scrubber__input';
-    scrubberInput.type = 'range';
-    scrubberInput.min = '0';
-    scrubberInput.max = String(slides.length - 1);
-    scrubberInput.step = '1';
-    scrubberInput.value = '0';
-    scrubberInput.setAttribute('aria-label', 'Jump to a photograph');
-    const scrubberTrack = document.createElement('span');
-    scrubberTrack.className = 'burlesque-scrubber__track';
-    scrubberTrack.innerHTML = '<i class="burlesque-scrubber__fill"></i><b class="burlesque-scrubber__marker"></b>';
-    scrubber.append(scrubberInput, scrubberTrack);
-    film.append(scrubber);
+    const progress = document.createElement('div');
+    progress.className = 'burlesque-progress';
+    progress.setAttribute('aria-hidden', 'true');
+    film.append(progress);
 
     let activeIndex = 0;
     let wheelLockedUntil = 0;
@@ -273,13 +253,8 @@
       scroller.setAttribute('data-view', open ? 'series' : 'intro');
     }
 
-    function updateScrubber() {
-      const progress = (activeIndex + 1) / slides.length;
-      const position = slides.length > 1 ? activeIndex / (slides.length - 1) : 0;
-      scrubber.style.setProperty('--scrub-progress', String(progress));
-      scrubber.style.setProperty('--scrub-position', String(position));
-      scrubberInput.value = String(activeIndex);
-      scrubberInput.setAttribute('aria-valuetext', `Photograph ${activeIndex + 1} of ${slides.length}`);
+    function updateProgress() {
+      progress.style.setProperty('--progress', String((activeIndex + 1) / slides.length));
     }
 
     function renderSlide() {
@@ -294,7 +269,7 @@
           image.loading = 'eager';
         }
       });
-      updateScrubber();
+      updateProgress();
     }
 
     function goToSlide(index) {
@@ -304,17 +279,10 @@
       renderSlide();
     }
 
-    scrubberInput.addEventListener('input', () => goToSlide(Number(scrubberInput.value)));
-    scrubberInput.addEventListener('pointerdown', () => scrubber.classList.add('is-dragging'));
-    scrubberInput.addEventListener('pointerup', () => scrubber.classList.remove('is-dragging'));
-    scrubberInput.addEventListener('pointercancel', () => scrubber.classList.remove('is-dragging'));
-    scrubber.addEventListener('click', (event) => event.stopPropagation());
-
     enterButton?.addEventListener('click', () => setSeriesOpen(true));
 
     window.addEventListener('keydown', (event) => {
       if (document.querySelector('.intermission-lightbox') || document.querySelector('.menu-panel.is-open')) return;
-      if (event.target === scrubberInput) return;
       if (event.key === 'ArrowRight') {
         event.preventDefault();
         if (!isSeriesOpen()) setSeriesOpen(true);
