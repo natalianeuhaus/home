@@ -152,10 +152,13 @@
       });
     };
 
+    let wheelGestureActive = false;
+    let wheelGestureTimer = 0;
     let isClosing = false;
     const destroy = () => {
       if (isClosing) return;
       isClosing = true;
+      window.clearTimeout(wheelGestureTimer);
       window.removeEventListener('keydown', onKeyDown);
       dialog.classList.remove('is-visible');
       dialog.classList.add('is-closing');
@@ -177,6 +180,28 @@
     close.addEventListener('click', destroy);
     dialog.addEventListener('click', destroy);
     viewport.addEventListener('click', (event) => event.stopPropagation());
+    viewport.addEventListener('wheel', (event) => {
+      const movement = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+      if (Math.abs(movement) < 8) return;
+      event.preventDefault();
+      event.stopPropagation();
+
+      window.clearTimeout(wheelGestureTimer);
+      wheelGestureTimer = window.setTimeout(() => {
+        wheelGestureActive = false;
+      }, 180);
+
+      if (wheelGestureActive) return;
+      wheelGestureActive = true;
+
+      if (movement > 0 && activeIndex < slides.length - 1) {
+        activeIndex += 1;
+        render();
+      } else if (movement < 0 && activeIndex > 0) {
+        activeIndex -= 1;
+        render();
+      }
+    }, { passive: false });
     previous.addEventListener('click', (event) => { event.stopPropagation(); activeIndex = Math.max(0, activeIndex - 1); render(); });
     next.addEventListener('click', (event) => { event.stopPropagation(); activeIndex = Math.min(slides.length - 1, activeIndex + 1); render(); });
     window.addEventListener('keydown', onKeyDown);
