@@ -337,6 +337,16 @@
     .waste-era-marker.is-visible .waste-era-year { opacity:1; transform:translate3d(0,0,0); }
     .waste-era-marker.is-visible .waste-era-copy { opacity:1; transform:translate3d(0,0,0); }
     .waste-era-marker--love { --era-accent:var(--love-canal-red); }
+    .waste-era-marker--survey-map { width:100vw; min-height:100svh; margin-left:calc(100% - 100vw); border:0; background:#090909; }
+    .waste-era-marker--survey-map::after { display:none; }
+    .waste-era-inner--survey-map { min-height:100svh; padding:0; grid-template-columns:minmax(340px,.38fr) minmax(0,.62fr); gap:0; align-items:stretch; }
+    .waste-era-survey-copy { padding:clamp(52px,6vw,96px); display:flex; flex-direction:column; justify-content:center; background:var(--niagara-paper); }
+    .waste-era-survey-copy .waste-era-copy { margin-top:clamp(58px,8svh,92px); }
+    .waste-era-survey-copy .waste-era-year { font-size:clamp(54px,6.3vw,112px); }
+    .waste-era-survey-map { min-width:0; margin:0; padding:clamp(24px,3vw,50px) 0; position:relative; display:grid; place-items:center; overflow:hidden; background:#090909; }
+    .waste-era-survey-map img { width:100%; height:auto; display:block; object-fit:contain; }
+    .waste-era-survey-map figcaption { position:absolute; left:18px; right:18px; bottom:14px; display:flex; justify-content:space-between; gap:24px; color:rgba(241,240,234,.58); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.1em; text-transform:uppercase; }
+    .waste-era-survey-map figcaption span:last-child { text-align:right; }
     .waste-era-marker--dark { --era-accent:var(--niagara-paper); color:var(--niagara-paper); background:#101312; border-color:rgba(241,240,234,.22); }
     .waste-era-marker--dark::after { background:rgba(241,240,234,.25); }
     .waste-era-marker--dark .waste-era-copy p { color:rgba(241,240,234,.7); }
@@ -428,15 +438,15 @@
     .federal-record-page-sheet { min-height:640px; padding:clamp(28px,4vw,60px); display:grid; place-items:center; }
     .federal-record-page img { width:auto; max-width:100%; height:auto; max-height:720px; display:block; box-shadow:0 22px 54px rgba(0,0,0,.38); transition:opacity .18s ease,transform .28s ease; }
     .federal-record.is-changing .federal-record-page img { opacity:.25; transform:translateY(7px); }
-    .waste-video-block { margin:clamp(48px,7svh,86px) 0 0; display:grid; grid-template-columns:minmax(260px,.75fr) minmax(0,1.25fr); color:var(--niagara-paper); background:#202020; }
-    .waste-video-copy { padding:clamp(28px,4vw,52px); display:flex; flex-direction:column; justify-content:space-between; }
-    .waste-video-copy .waste-year { color:rgba(241,240,234,.58); }
-    .waste-video-copy h5 { margin:18px 0 20px; font-size:clamp(28px,3vw,45px); line-height:1; font-weight:400; letter-spacing:-.038em; }
-    .waste-video-copy p { margin:0; color:rgba(241,240,234,.78); font:15px/1.52 Arial,Helvetica,sans-serif; letter-spacing:0; }
-    .waste-video-link { width:max-content; margin-top:32px; padding-bottom:5px; border-bottom:1px solid rgba(241,240,234,.52); color:var(--niagara-paper); text-decoration:none; font:9px/1.3 Arial,Helvetica,sans-serif; letter-spacing:.14em; text-transform:uppercase; }
-    .waste-video-frame { min-height:390px; position:relative; background:#080808; }
+    .waste-video-block { margin:0; display:grid; grid-template-columns:minmax(0,1.34fr) minmax(320px,.66fr); grid-template-areas:"media copy"; align-items:stretch; color:var(--niagara-ink); background:rgba(68,8,6,.055); overflow:hidden; }
+    .waste-video-copy { min-width:0; padding:clamp(32px,4vw,58px); grid-area:copy; display:flex; flex-direction:column; justify-content:center; background:rgba(68,8,6,.035); }
+    .waste-video-copy .waste-year { color:var(--niagara-red); }
+    .waste-video-copy h5 { margin:18px 0 24px; font-size:clamp(34px,3.5vw,58px); line-height:.96; font-weight:400; letter-spacing:-.043em; }
+    .waste-video-copy p { margin:0; max-width:520px; color:rgba(21,23,21,.72); font:clamp(15px,1.12vw,19px)/1.52 Arial,Helvetica,sans-serif; letter-spacing:0; }
+    .waste-video-frame { min-height:clamp(420px,42vw,720px); position:relative; grid-area:media; background:#080808; }
     .waste-video-frame iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
-    .waste-section--loow-film { margin-top:clamp(58px,8svh,92px); padding-top:0; border-top:0; }
+    .waste-video-frame .waste-video-caption { position:absolute; z-index:2; left:18px; right:18px; bottom:14px; color:rgba(241,240,234,.7); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.1em; text-transform:uppercase; pointer-events:none; }
+    .waste-section--loow-film { width:calc(100vw - 84px); margin:clamp(58px,8svh,92px) 0 0 calc(100% - (100vw - 84px)); padding-top:0; border-top:0; }
     .waste-section--loow-film .waste-video-block { margin-top:0; }
     .waste-trail { margin:36px 0; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border-top:1px solid var(--niagara-line); border-bottom:1px solid var(--niagara-line); }
     .waste-trail span { min-height:92px; display:grid; place-items:center; padding:18px 10px; position:relative; text-align:center; color:rgba(21,23,21,.66); font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
@@ -549,6 +559,14 @@
       .waste-era-year { font-size:clamp(82px,25vw,150px); white-space:normal; }
       .waste-era-year--range { font-size:clamp(48px,14vw,86px); }
       .waste-era-copy h4 { font-size:clamp(42px,12vw,62px); }
+      .waste-era-marker--survey-map { width:100vw; min-height:0; margin-left:-24px; }
+      .waste-era-inner--survey-map { min-height:0; padding:0; grid-template-columns:1fr; gap:0; }
+      .waste-era-survey-copy { padding:58px 24px 64px; }
+      .waste-era-survey-copy .waste-era-copy { margin-top:48px; }
+      .waste-era-survey-map { padding:28px 0 42px; }
+      .waste-era-survey-map figcaption { position:relative; left:auto; right:auto; bottom:auto; margin:14px 16px 0; display:block; }
+      .waste-era-survey-map figcaption span { display:block; }
+      .waste-era-survey-map figcaption span:last-child { margin-top:5px; text-align:left; }
       .love-canal-threshold { width:calc(100vw - 48px); margin-left:0; }
       .love-canal-image-shell { height:auto; min-height:0; aspect-ratio:2048 / 1329; }
       .love-canal-threshold figcaption { width:calc(100% - 72px); margin-left:72px; grid-template-columns:1fr; gap:7px; }
@@ -584,7 +602,9 @@
       .waste-year { padding-top:0; }
       .waste-section-copy { margin-left:0; }
       .waste-video-block,.waste-split { grid-template-columns:1fr; }
+      .waste-video-block { grid-template-areas:"media" "copy"; }
       .waste-video-frame { min-height:54vw; }
+      .waste-section--loow-film { width:calc(100vw - 48px); margin-left:0; }
       .waste-trail { grid-template-columns:1fr 1fr; }
       .waste-trail span:nth-child(3) { border-left:0; border-top:1px solid var(--niagara-line); }
       .waste-trail span:nth-child(4) { border-top:1px solid var(--niagara-line); }
@@ -1424,25 +1444,29 @@
                       <h5>Before containment</h5>
                       <p>U.S. Army Corps of Engineers footage records the silo and facilities at the former LOOW as they remained in 1985. The images were made before construction of the interim waste containment structure in 1986.</p>
                     </div>
-                    <a class="waste-video-link" href="https://www.youtube.com/watch?v=s5bQBNp9ffY" target="_blank" rel="noopener noreferrer">Watch on YouTube →</a>
                   </div>
                   <div class="waste-video-frame">
                     <iframe src="https://www.youtube.com/embed/s5bQBNp9ffY?start=2&amp;rel=0" title="NFSS Summary — archival footage of the former Lake Ontario Ordnance Works" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <span class="waste-video-caption">Lake Ontario Ordnance Works · U.S. Army Corps of Engineers · 1985</span>
                   </div>
                 </div>
               </section>
 
-              <section class="waste-era-marker" data-waste-era id="era-surveys" aria-labelledby="era-surveys-title">
-                <div class="waste-era-inner">
-                  <div>
+              <section class="waste-era-marker waste-era-marker--survey-map" data-waste-era id="era-surveys" aria-labelledby="era-surveys-title">
+                <div class="waste-era-inner waste-era-inner--survey-map">
+                  <div class="waste-era-survey-copy">
                     <span class="waste-era-chapter">Chapter III</span>
                     <p class="waste-era-year waste-era-year--range">1979–1985</p>
+                    <div class="waste-era-copy">
+                      <span class="waste-era-kicker">The surveys</span>
+                      <h4 id="era-surveys-title">The geography becomes visible</h4>
+                      <p>Aerial, vehicle, and ground surveys began documenting radiological anomalies across roads, properties, and industrial districts.</p>
+                    </div>
                   </div>
-                  <div class="waste-era-copy">
-                    <span class="waste-era-kicker">The surveys</span>
-                    <h4 id="era-surveys-title">The geography becomes visible</h4>
-                    <p>Aerial, vehicle, and ground surveys began documenting radiological anomalies across roads, properties, and industrial districts.</p>
-                  </div>
+                  <figure class="waste-era-survey-map">
+                    <img src="./archive/ornl-1986-survey-maps.webp" alt="Two black-and-white Oak Ridge National Laboratory maps showing the Niagara Falls mobile gamma scan area and radiological anomaly locations near Lewiston and the Lake Ontario Ordnance Works" loading="lazy" decoding="async" />
+                    <figcaption><span>ORNL/TM-10076 · Figures 1–2</span><span>Mobile gamma-scan area and anomaly locations · printed pages 11–12</span></figcaption>
+                  </figure>
                 </div>
               </section>
 
