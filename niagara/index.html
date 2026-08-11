@@ -494,6 +494,8 @@
     .atomic-evidence-text-copy { margin:0 0 13px; max-width:240px; color:rgba(241,240,234,.74); font:9px/1.42 Arial,Helvetica,sans-serif; letter-spacing:.02em; }
     .atomic-evidence-text-link { color:var(--niagara-paper); font:8px/1.2 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
     .atomic-evidence-item > img { width:100%; height:100%; display:block; object-fit:cover; object-position:center top; }
+    .atomic-evidence-item--text > .atomic-evidence-viewer-source { position:absolute; width:1px; height:1px; inset:0 auto auto 0; opacity:0; pointer-events:none; }
+    .atomic-evidence-item--text > .atomic-evidence-caption { display:none; }
     .atomic-evidence-item--profile > img { transform:scale(1.14); transform-origin:center center; }
     .atomic-evidence-item--ore { background:var(--niagara-paper); }
     .atomic-evidence-item--ore > img { width:84%; height:84%; margin:1% 8% 15%; object-fit:contain; object-position:center top; }
@@ -638,8 +640,6 @@
     .niagara-iframe-intro p,.niagara-photo-intro p { max-width:780px; margin:0; font-size:clamp(17px,1.25vw,21px); line-height:1.46; }
     .niagara-frame-shell { width:100%; min-height:76svh; border-top:1px solid var(--niagara-line); background:#fff; position:relative; }
     .niagara-frame-shell iframe { width:100%; height:calc(100svh - 66px); min-height:720px; border:0; display:block; background:#fff; }
-    [data-panel="evidence"] .niagara-frame-shell,
-    [data-panel="evidence"] .niagara-frame-shell iframe { background:var(--niagara-paper); }
     .niagara-frame-placeholder { min-height:76svh; display:grid; place-items:center; padding:40px; color:rgba(21,23,21,.55); font:12px/1.5 Arial,Helvetica,sans-serif; text-transform:uppercase; letter-spacing:.2em; }
 
     body.niagara-photographs-active .niagara-footer { display:none; }
@@ -857,6 +857,8 @@
     }
     .atomic-evidence-viewer-nav{
       position:relative;
+      align-self:center;
+      justify-self:center;
       border:0;
       background:transparent;
     }
@@ -1181,10 +1183,12 @@
                 <img src="./archive/green-salt-uranium-tetrafluoride.jpg" alt="Worker handling green uranium tetrafluoride powder at a processing facility" loading="lazy" decoding="async" />
                 <span class="atomic-evidence-caption">Uranium tetrafluoride · “green salt” · U.S. Department of Energy</span>
               </a>
-              <a class="atomic-evidence-item atomic-evidence-item--text" href="https://en.wikipedia.org/wiki/Ames_Project#Production" target="_blank" rel="noopener noreferrer" aria-label="Read about uranium recovery in the Ames Project on Wikipedia">
+              <a class="atomic-evidence-item atomic-evidence-item--text" href="https://en.wikipedia.org/wiki/Ames_Project#Production" target="_blank" rel="noopener noreferrer" aria-label="Open archival evidence about uranium recovery" data-evidence-number="03" data-evidence-link-label="Read about uranium recovery on Wikipedia →" data-evidence-summary="From 1943 through 1945, Hooker used waste hydrochloric acid to strip uranium from slag sent by rail from Linde. This report page states that the liquid waste was discharged to sewers, was not monitored for radioactivity, and was handled by Hooker personnel who had not been told the material was uranium.">
+                <img class="atomic-evidence-viewer-source" src="./archive/uranium-recovery-hooker-report-p90.webp" alt="Highlighted page 90 of The Federal Connection report describing Hooker’s uranium-slag recovery process and unmonitored radioactive effluent" loading="eager" decoding="async" />
                 <span class="atomic-evidence-text-number">03</span>
                 <h4 class="atomic-evidence-text-title">Uranium recovery</h4>
-                <p class="atomic-evidence-text-copy">Uranium turnings and scrap were cleaned, pressed into briquettes, and remelted.</p>
+                <p class="atomic-evidence-text-copy">At Hooker, uranium-bearing slag was treated with acid; the unmonitored liquid waste went to the sewers.</p>
+                <span class="atomic-evidence-caption">Processing of uranium slag · Hooker · 1943–1945</span>
               </a>
               <a class="atomic-evidence-item" href="https://en.wikipedia.org/wiki/Ames_Project" data-evidence-number="04" data-evidence-link-label="Read on Wikipedia →" data-evidence-summary="After reduction, uranium metal was remelted and cast into ingots, then forged, extruded, or rolled into billets and rods for the atomic program.">
                 <img src="./archive/uranium-metal-rods.jpg" alt="Finished uranium metal rods and tubes arranged on a green surface" loading="lazy" decoding="async" />
@@ -1285,7 +1289,7 @@
                   <div class="atomic-process-copy">
                     <p>At the same time, Bell Aerospace was developing the RASCAL, the United States Air Force’s first nuclear-armed standoff missile—an air-to-surface, supersonic guided missile designed to deliver a nuclear warhead.</p>
                     <p>Bell and the Atomic Energy Commission operated a test center north of Balmer Road on the former Lake Ontario Ordnance Works (LOOW), a 7,567-acre federal site in Lewiston and Porter originally built during World War II to manufacture TNT. The facility became known as the Bell Test Center.</p>
-                    <p>In 1967, the site was temporarily used to house the Lewiston-Porter School while a new school building was under construction and scheduled for completion in 1970. During that time, 275 students, along with their teachers and administrative staff, attended classes at the site.</p>
+                    <p>In 1967, the site was temporarily used to house the Lewiston-Porter School while a new school building was under construction and scheduled for completion in 1970. During that time, 275 students, along with their teachers and administrative staff, attended classes at the site. This matters because children and staff were placed on a former military-industrial reservation where radioactive materials had already been stored and buried, without the site’s full history being publicly legible.</p>
                     <a class="atomic-process-archive-link" href="./?archive=Bell#evidence" target="_blank" rel="noopener noreferrer">View Bell archive →</a>
                   </div>
                 </li>
@@ -1358,9 +1362,9 @@
             <div class="atomic-niagara-title love-canal-title">
               <span class="investigation-chapter-label">Chapter II</span>
               <span class="investigation-number">1978–1981</span>
-              <h3 id="era-love-canal-title">Love Canal</h3>
-              <h4>The investigation opens</h4>
-              <p>Residents forced the government to look beyond one neighborhood. The chemical-waste disaster opened a wider investigation—one that would soon uncover radioactive contamination across the region.</p>
+              <h3 id="era-love-canal-title">The Federal Connection</h3>
+              <h4>The investigation widens</h4>
+              <p>A chemical-waste disaster opened the archive of an entire region. The Assembly inquiry revealed that Niagara’s hidden contamination was not only chemical, but radioactive.</p>
             </div>
             <figure class="love-canal-media">
               <img src="./archive/love-canal-public-health-time-bomb.webp" alt="Cover spread of the 1978 report Love Canal: Public Health Time Bomb over an aerial photograph of the neighborhood" loading="lazy" />
@@ -1840,6 +1844,8 @@
     </section>
   </main>
 
+  <footer class="niagara-footer"><span>© Natalia Neuhaus</span><a href="#niagara-title">Back to top</a></footer>
+
   <script defer src="../assets/site.js"></script>
   <script src="./photographs/slides.js"></script>
   <script>
@@ -1972,14 +1978,6 @@
 
             html body .site-main {
               min-height: 100vh !important;
-              color: #151715 !important;
-              background: #f1f0ea !important;
-            }
-
-            html,
-            html body {
-              color: #151715 !important;
-              background: #f1f0ea !important;
             }
           `;
           frameDocument.head.appendChild(style);
@@ -2445,7 +2443,10 @@
       if (referenceFilmViewer && referenceFilmOpeners.length && typeof referenceFilmViewer.showModal === 'function') {
         const referenceFilmFrame = referenceFilmViewer.querySelector('iframe');
         const referenceFilmClose = referenceFilmViewer.querySelector('.atomic-reference-viewer-close');
-        const stopReferenceFilm = () => { referenceFilmFrame.src = ''; };
+        const stopReferenceFilm = () => {
+          referenceFilmFrame.src = 'about:blank';
+          referenceFilmFrame.removeAttribute('src');
+        };
 
         referenceFilmOpeners.forEach(opener => opener.addEventListener('click', () => {
           referenceFilmFrame.src = referenceFilmFrame.dataset.src;
@@ -2463,7 +2464,10 @@
       if (loowFilmViewer && loowFilmOpener && typeof loowFilmViewer.showModal === 'function') {
         const loowFilmFrame = loowFilmViewer.querySelector('iframe');
         const loowFilmClose = loowFilmViewer.querySelector('.atomic-reference-viewer-close');
-        const stopLoowFilm = () => { loowFilmFrame.src = ''; };
+        const stopLoowFilm = () => {
+          loowFilmFrame.src = 'about:blank';
+          loowFilmFrame.removeAttribute('src');
+        };
 
         loowFilmOpener.addEventListener('click', () => {
           loowFilmFrame.src = loowFilmFrame.dataset.src;
@@ -2475,6 +2479,27 @@
           if (event.target === loowFilmViewer) loowFilmViewer.close();
         });
       }
+
+      const introFilm = document.querySelector('.niagara-hero-video');
+      if (introFilm) {
+        introFilm.defaultMuted = true;
+        introFilm.muted = true;
+        introFilm.volume = 0;
+      }
+
+      const stopAllFilmPlayback = () => {
+        document.querySelectorAll('.atomic-reference-viewer iframe').forEach(frame => {
+          frame.src = 'about:blank';
+          frame.removeAttribute('src');
+        });
+        document.querySelectorAll('.atomic-reference-viewer[open]').forEach(viewer => viewer.close());
+      };
+
+      tabs.forEach(tab => tab.addEventListener('click', stopAllFilmPlayback));
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) stopAllFilmPlayback();
+      });
+      window.addEventListener('pagehide', stopAllFilmPlayback);
 
       const evidenceItems = Array.from(document.querySelectorAll('.atomic-evidence-item')).filter(item => item.querySelector('img'));
       const evidenceViewer = document.querySelector('.atomic-evidence-viewer');
