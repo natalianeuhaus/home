@@ -315,14 +315,6 @@
     .atomic-process-archive-link { appearance:none; display:inline-block; margin:10px 0 0; padding:0 0 4px; border:0; border-bottom:1px solid currentColor; color:var(--niagara-red); background:transparent; cursor:pointer; font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-decoration:none; text-transform:uppercase; }
     .atomic-process-archive-link:hover,.atomic-process-archive-link:focus-visible { color:var(--niagara-ink); }
     .radioactive-waste-chapter { border-top:0; padding-top:0; }
-    .radioactive-waste-hero { background:#26211f; }
-    .radioactive-waste-title { background:var(--niagara-red); }
-    .radioactive-waste-title h3 { background:var(--niagara-red); box-shadow:0 0 0 7px var(--niagara-red); }
-    .radioactive-waste-media { background:#171717; }
-    .radioactive-waste-image { object-position:center right; opacity:0; filter:saturate(.94) contrast(1.02); transform:scale(1.028); transition:opacity 1.55s cubic-bezier(.22,.7,.25,1),transform 2.1s cubic-bezier(.22,.7,.25,1); }
-    .radioactive-waste-credit { opacity:0; transform:translateY(7px); transition:opacity .8s 1s ease,transform .8s 1s ease; }
-    .radioactive-waste-hero.is-visible .radioactive-waste-image { opacity:1; transform:scale(1); }
-    .radioactive-waste-hero.is-visible .radioactive-waste-credit { opacity:1; transform:translateY(0); }
     .radioactive-waste-copy-grid { padding-top:clamp(86px,12svh,150px); }
     .waste-story { max-width:900px; }
     .waste-lede { width:900px; max-width:100%; margin-bottom:1.35em !important; margin-left:min(0px,max(-640px,calc(984px - 100vw))) !important; font-size:clamp(25px,2.25vw,37px) !important; line-height:1.23 !important; letter-spacing:-.027em !important; }
@@ -544,7 +536,6 @@
       .atomic-process-reference-transfer { transform:rotate(90deg); text-align:left; }
       .atomic-reference-viewer { width:100vw; max-height:100svh; }
       .atomic-reference-viewer-caption { padding:14px 54px 16px 16px; }
-      .radioactive-waste-title { padding:48px 24px 40px; }
       .radioactive-waste-copy-grid { padding-top:82px; }
       .love-canal-hero { width:100vw; height:auto; min-height:100svh; margin-left:-24px; grid-template-columns:1fr; grid-template-rows:auto auto; box-shadow:none; }
       .love-canal-title { padding:48px 24px 44px; }
@@ -1416,18 +1407,6 @@
         </section>
 
         <section class="investigation-chapter radioactive-waste-chapter" id="radioactive-waste">
-          <div class="atomic-niagara-hero radioactive-waste-hero">
-            <div class="atomic-niagara-title radioactive-waste-title">
-              <span class="investigation-chapter-label">Chapter II · Continued</span>
-              <span class="investigation-number">1944–1981</span>
-              <h3>Radioactive waste</h3>
-            </div>
-            <figure class="atomic-niagara-media radioactive-waste-media">
-              <img class="atomic-niagara-video radioactive-waste-image" src="./archive/radioactive-slag-2015.webp" alt="A gloved person holds a radioactive slag sample on August 12, 2015" loading="lazy" decoding="async" />
-              <figcaption class="atomic-niagara-credit radioactive-waste-credit">Slag sample · August 12, 2015</figcaption>
-            </figure>
-          </div>
-
           <div class="investigation-chapter-grid atomic-niagara-copy-grid radioactive-waste-copy-grid">
             <div class="investigation-chapter-copy waste-story">
               <p class="waste-lede">Radioactive waste is part of the Love Canal chapter—not because it came from that landfill, but because the investigation Love Canal triggered exposed how uranium-production waste had moved across the same region.</p>
@@ -2614,27 +2593,6 @@
 
       function requestLoveCanalState() {
         if (!loveCanalFrame) loveCanalFrame = requestAnimationFrame(updateLoveCanalState);
-      }
-
-      const radioactiveWasteHero = document.querySelector('.radioactive-waste-hero');
-      if (radioactiveWasteHero) {
-        const radioactiveWasteImage = radioactiveWasteHero.querySelector('.radioactive-waste-image');
-        const revealRadioactiveWasteHero = () => {
-          const reveal = () => requestAnimationFrame(() => radioactiveWasteHero.classList.add('is-visible'));
-          if (!radioactiveWasteImage || radioactiveWasteImage.complete) reveal();
-          else radioactiveWasteImage.addEventListener('load', reveal, { once:true });
-        };
-
-        if ('IntersectionObserver' in window) {
-          const radioactiveWasteObserver = new IntersectionObserver(entries => {
-            if (!entries.some(entry => entry.isIntersecting)) return;
-            revealRadioactiveWasteHero();
-            radioactiveWasteObserver.disconnect();
-          }, { rootMargin:'0px 0px -12% 0px', threshold:.22 });
-          radioactiveWasteObserver.observe(radioactiveWasteHero);
-        } else {
-          revealRadioactiveWasteHero();
-        }
       }
 
       const loowArchiveDiptych = document.querySelector('.loow-archive-diptych');
