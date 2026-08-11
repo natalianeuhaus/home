@@ -793,3 +793,45 @@ body.burlesque-horizontal-body{overflow:hidden}
 @media(max-width:760px){.menu-links--numbered a{grid-template-columns:26px minmax(0,1fr);column-gap:12px}}
 
 @media(min-width:761px){.menu-panel{padding-top:65px}}
+
+
+/* Burlesque intro arrow — match the photograph navigation. */
+.burlesque-enter-series{
+  color:#1517159c;
+  cursor:pointer;
+  background:transparent;
+  border:0;
+  width:74px;
+  height:52px;
+  margin:34px 0 0;
+  padding:0;
+  display:block;
+  position:relative;
+  transition:opacity .25s;
+}
+.burlesque-enter-series span{display:none}
+.burlesque-enter-series::before{
+  content:"";
+  width:52px;
+  height:1px;
+  background:currentColor;
+  position:absolute;
+  left:5px;
+  top:50%;
+}
+.burlesque-enter-series::after{
+  content:"";
+  width:7px;
+  height:7px;
+  border-top:1px solid currentColor;
+  border-right:1px solid currentColor;
+  position:absolute;
+  right:9px;
+  top:50%;
+  transform:translateY(-50%) rotate(45deg);
+}
+.burlesque-enter-series:hover,
+.burlesque-enter-series:focus-visible{
+  color:#1517159c;
+  opacity:.48;
+}
