@@ -1469,7 +1469,7 @@
     (() => {
       const tabs = Array.from(document.querySelectorAll('.niagara-tab'));
       const panels = Array.from(document.querySelectorAll('.niagara-panel'));
-      const validTabs = new Set(tabs.map(tab => tab.dataset.tab));
+      const validTabs = new Set(panels.map(panel => panel.dataset.panel));
       const page = document.body;
       const tabbarWrap = document.querySelector('.niagara-tabbar-wrap');
       const waterfallsSection = document.querySelector('#waterfalls-chapter');
