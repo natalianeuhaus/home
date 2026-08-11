@@ -770,3 +770,16 @@ body.burlesque-horizontal-body{overflow:hidden}
     bottom:32px;
   }
 }
+
+
+/* burlesque-backstory-first-slide-only-v1: show Backstory only on the opening slide */
+.burlesque-page:not(.is-in-series) + .healers-backstory-trigger{
+  opacity:1;
+  pointer-events:auto;
+  transform:translateY(0);
+}
+.burlesque-page.is-in-series + .healers-backstory-trigger{
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(12px);
+}
