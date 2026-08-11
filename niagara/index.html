@@ -523,6 +523,17 @@
     .niagara-photo-control:hover,.niagara-photo-control:focus-visible { background:var(--niagara-red); border-color:var(--niagara-red); outline:none; }
     .niagara-photo-prev { left:22px; }
     .niagara-photo-next { right:22px; }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control { width:86px; height:42px; border:0; color:rgba(21,23,21,.58); background:transparent; backdrop-filter:none; font-size:0; }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control::before { content:""; position:absolute; top:50%; width:58px; height:1px; background:currentColor; }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control::after { content:""; position:absolute; top:50%; width:8px; height:8px; border-top:1px solid currentColor; border-right:1px solid currentColor; }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-prev { left:20px; }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-prev::before { right:8px; }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-prev::after { left:13px; transform:translateY(-50%) rotate(-135deg); }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-next { right:20px; }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-next::before { left:8px; }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-next::after { right:13px; transform:translateY(-50%) rotate(45deg); }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control:hover,
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control:focus-visible { color:var(--niagara-red); background:transparent; border-color:transparent; }
     .niagara-photo-caption-toggle,.niagara-photo-caption-close { border:1px solid rgba(255,255,255,.26); color:#fff; background:rgba(8,9,8,.58); backdrop-filter:blur(9px); cursor:pointer; text-transform:uppercase; letter-spacing:.16em; font:10px/1 Arial,Helvetica,sans-serif; }
     .niagara-photo-caption-toggle { position:absolute; z-index:5; left:22px; top:22px; padding:14px 16px 13px; opacity:0; pointer-events:none; transition:opacity .22s ease,background-color .2s ease,border-color .2s ease; }
     .niagara-photo-caption-toggle:hover,.niagara-photo-caption-toggle:focus-visible,.niagara-photo-caption-close:hover,.niagara-photo-caption-close:focus-visible { background:var(--niagara-red); border-color:var(--niagara-red); outline:none; }
