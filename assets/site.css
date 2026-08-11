@@ -1090,17 +1090,17 @@ body.burlesque-horizontal-body{overflow:hidden}
   opacity:1;
 }
 .burlesque-horizontal-controls button{
-  color:rgba(241,239,231,.48);
+  color:rgba(21,23,21,.48);
   opacity:1;
   transition:color .25s ease,opacity .25s ease,transform .25s ease;
 }
 .burlesque-horizontal-controls button:hover,
 .burlesque-horizontal-controls button:focus-visible{
-  color:#f1efe7;
+  color:#151715;
   opacity:1;
 }
 .burlesque-horizontal-controls button:disabled{
-  color:#f1efe7;
+  color:#151715;
   opacity:.18;
 }
 .burlesque-lightbox .intermission-lightbox-arrow{
@@ -1116,4 +1116,25 @@ body.burlesque-horizontal-body{overflow:hidden}
 .burlesque-lightbox .intermission-lightbox-arrow:disabled{
   color:#f1efe7;
   opacity:.18;
+}
+
+
+/* Burlesque Backstory: lighter at rest, darker on hover — v1. */
+.burlesque-page + .healers-backstory-trigger strong{
+  color:rgba(21,23,21,.45);
+  opacity:1;
+  transition:color .28s ease,opacity .28s ease;
+}
+.burlesque-page + .healers-backstory-trigger .healers-backstory-trigger-kicker{
+  color:rgba(21,23,21,.38);
+  transition:color .28s ease;
+}
+.burlesque-page + .healers-backstory-trigger:hover strong,
+.burlesque-page + .healers-backstory-trigger:focus-visible strong{
+  color:#151715;
+  opacity:1;
+}
+.burlesque-page + .healers-backstory-trigger:hover .healers-backstory-trigger-kicker,
+.burlesque-page + .healers-backstory-trigger:focus-visible .healers-backstory-trigger-kicker{
+  color:rgba(21,23,21,.76);
 }
