@@ -2054,6 +2054,7 @@
       function activate(name, updateHash = true, animateIndicator = true, scrollToContent = false) {
         if (!validTabs.has(name)) name = 'investigation';
         const internalArchiveMode = name === 'evidence' || name === 'map';
+        const returningToPhotographs = page.classList.contains('niagara-content-mode') && name === 'photographs';
         if (scrollToContent) page.classList.toggle('niagara-content-mode', internalArchiveMode);
         page.classList.toggle('niagara-photographs-active', name === 'photographs');
         if (name !== 'photographs') {
@@ -2076,7 +2077,10 @@
         requestAnimationFrame(() => moveIndicator(activeTab, animateIndicator));
         if (name === 'investigation') requestAnimationFrame(layoutAtomicThread);
         if (updateHash) history.replaceState(null, '', `#${name}`);
-        if (scrollToContent) requestAnimationFrame(() => scrollTabsToTop());
+        if (scrollToContent) requestAnimationFrame(() => {
+          scrollTabsToTop(returningToPhotographs ? 'auto' : 'smooth');
+          if (returningToPhotographs) requestAnimationFrame(updateStickyHeader);
+        });
       }
 
       const activeTab = () => tabs.find(tab => tab.getAttribute('aria-selected') === 'true') || tabs[0];
