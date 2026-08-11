@@ -1211,3 +1211,13 @@ body.burlesque-horizontal-body{overflow:hidden}
   outline:1px solid rgba(241,239,231,.42);
   outline-offset:3px;
 }
+
+
+
+/* Intermission chevrons: clear legacy first/last borders — v2. */
+.intermission-navigation-controls button:first-child::after,
+.intermission-navigation-controls button:last-child::after{
+  border:0;
+  border-top:1px solid currentColor;
+  border-right:1px solid currentColor;
+}
