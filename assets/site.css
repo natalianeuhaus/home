@@ -1002,3 +1002,57 @@ body.burlesque-horizontal-body{overflow:hidden}
     bottom:6px;
   }
 }
+
+
+/* Menu alignment and muted interaction — v1. */
+.menu-links a{
+  color:var(--paper);
+  opacity:.42;
+  transition:opacity .25s ease;
+}
+.menu-links a:hover,
+.menu-links a:focus-visible{
+  color:var(--paper);
+  opacity:1;
+}
+.menu-links a::after{display:none}
+.menu-footer a{
+  color:var(--paper);
+  opacity:.42;
+  transition:opacity .25s ease;
+}
+.menu-footer a:hover,
+.menu-footer a:focus-visible{
+  color:var(--paper);
+  opacity:1;
+}
+.menu-toggle.menu-toggle.is-open{
+  color:rgba(241,240,234,.55);
+}
+.menu-toggle.menu-toggle.is-open:hover,
+.menu-toggle.menu-toggle.is-open:focus-visible{
+  color:var(--paper);
+}
+.menu-toggle.menu-toggle.is-open:focus-visible{
+  outline:1px solid rgba(241,240,234,.5);
+  outline-offset:3px;
+}
+@media (min-width:761px){
+  .menu-panel{padding-top:34px}
+  .menu-group{padding-top:0}
+  .menu-label{
+    margin-bottom:42px;
+    font-size:12px;
+    line-height:38px;
+  }
+  .menu-groups::before{top:68px}
+}
+@media (max-width:760px){
+  .menu-panel{padding-top:22px}
+  .menu-group{padding-top:0}
+  .menu-label{
+    margin-bottom:18px;
+    font-size:11px;
+    line-height:38px;
+  }
+}
