@@ -303,28 +303,33 @@
     const revealAnchor = document.querySelector(".healers-final-photo");
 
     const revealTrigger = () => {
-      if (trigger.classList.contains("is-ready")) return;
       trigger.disabled = false;
       trigger.setAttribute("aria-hidden", "false");
       trigger.classList.add("is-ready");
     };
 
+    const hideTrigger = () => {
+      if (isOpen) return;
+      trigger.disabled = true;
+      trigger.setAttribute("aria-hidden", "true");
+      trigger.classList.remove("is-ready");
+    };
+
     if (revealAnchor && "IntersectionObserver" in window) {
       const revealObserver = new IntersectionObserver(
         ([entry]) => {
-          if (!entry.isIntersecting) return;
-          revealTrigger();
-          revealObserver.disconnect();
+          if (entry.isIntersecting) revealTrigger();
+          else hideTrigger();
         },
         { rootMargin: "0px 0px -14% 0px", threshold: 0 },
       );
       revealObserver.observe(revealAnchor);
     } else if (revealAnchor) {
       const revealFromScroll = () => {
-        if (revealAnchor.getBoundingClientRect().top > window.innerHeight * 0.86)
-          return;
-        revealTrigger();
-        window.removeEventListener("scroll", revealFromScroll);
+        const rect = revealAnchor.getBoundingClientRect();
+        const visible = rect.top < window.innerHeight * 0.86 && rect.bottom > 0;
+        if (visible) revealTrigger();
+        else hideTrigger();
       };
       window.addEventListener("scroll", revealFromScroll, { passive: true });
       revealFromScroll();
