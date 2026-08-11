@@ -348,14 +348,14 @@
     .telvock-return .telvock-return-statement { margin:0 !important; font-size:clamp(27px,3.4vw,50px) !important; line-height:1.1 !important; letter-spacing:-.038em !important; }
     .telvock-return p { margin:28px 0 0 !important; color:rgba(241,240,234,.72); font:15px/1.52 Arial,Helvetica,sans-serif !important; letter-spacing:0 !important; }
     .love-canal-range { position:relative; }
-    .love-canal-hero { width:calc(100vw - 84px); height:calc(100svh - 66px); min-height:640px; margin-left:calc(100% - (100vw - 84px)); grid-template-columns:minmax(340px,.44fr) minmax(0,.56fr); background:#e5d8bd; }
-    .love-canal-title { padding:clamp(44px,5vw,86px); color:var(--niagara-paper); background:var(--love-canal-red); }
+    .love-canal-hero { width:calc(100vw - 96px); height:calc(100svh - 96px); min-height:640px; margin-left:calc(100% - 50vw - min(770px,calc(50vw - 42px)) + 48px); grid-template-columns:minmax(340px,.41fr) minmax(0,.59fr); background:#e5d8bd; box-shadow:0 0 0 48px #252726,0 20px 42px rgba(0,0,0,.28); }
+    .love-canal-title { padding:clamp(44px,4vw,72px); color:var(--niagara-paper); background:var(--love-canal-red); }
     .love-canal-title h3 { max-width:100%; background:var(--love-canal-red); box-shadow:0 0 0 7px var(--love-canal-red); }
     .love-canal-title h4 { margin:clamp(26px,3.8svh,42px) 0 12px; color:rgba(241,240,234,.95); font-size:clamp(24px,2.35vw,38px); line-height:1.04; font-weight:400; letter-spacing:-.032em; }
     .love-canal-title p { margin:0 !important; max-width:520px; color:rgba(241,240,234,.72); font:clamp(15px,1.15vw,19px)/1.5 Arial,Helvetica,sans-serif !important; letter-spacing:0 !important; }
     .love-canal-media { min-width:0; margin:0; position:relative; display:grid; place-items:center; overflow:hidden; background:#e5d8bd; }
-    .love-canal-media img { width:100%; height:100%; display:block; object-fit:contain; }
-    .love-canal-media figcaption { position:absolute; z-index:1; left:18px; right:18px; bottom:16px; display:flex; justify-content:space-between; gap:24px; color:rgba(241,240,234,.82); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.08em; text-transform:uppercase; text-shadow:0 1px 8px rgba(0,0,0,.8); }
+    .love-canal-media img { width:100%; height:100%; display:block; object-fit:cover; object-position:center; }
+    .love-canal-media figcaption { display:none; position:absolute; z-index:1; left:18px; right:18px; bottom:16px; justify-content:space-between; gap:24px; color:rgba(241,240,234,.82); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.08em; text-transform:uppercase; text-shadow:0 1px 8px rgba(0,0,0,.8); }
     .love-canal-media figcaption::before { content:""; position:absolute; z-index:-1; inset:-42px -18px -16px; background:linear-gradient(transparent,rgba(0,0,0,.58)); }
     .love-canal-media .love-canal-threshold-copy { max-width:520px; text-align:right; }
     .love-canal-threshold { width:calc(100vw - 84px); margin:clamp(90px,13svh,160px) 0 0 calc(100% - (100vw - 84px)); }
@@ -507,7 +507,7 @@
       .atomic-reference-viewer-caption { padding:14px 54px 16px 16px; }
       .radioactive-waste-title { padding:48px 24px 40px; }
       .radioactive-waste-copy-grid { padding-top:82px; }
-      .love-canal-hero { width:calc(100vw - 48px); height:auto; min-height:calc(100svh - 58px); margin-left:0; grid-template-columns:1fr; grid-template-rows:auto auto; }
+      .love-canal-hero { width:calc(100vw - 48px); height:auto; min-height:calc(100svh - 48px); margin-left:0; grid-template-columns:1fr; grid-template-rows:auto auto; box-shadow:0 0 0 24px #252726,0 16px 30px rgba(0,0,0,.25); }
       .love-canal-title { padding:48px 24px 44px; }
       .love-canal-title h4 { margin-top:28px; }
       .love-canal-media { min-height:0; aspect-ratio:2048 / 1329; }
@@ -1297,7 +1297,7 @@
               <p>Some solid residues were transported to the Lake Ontario Ordnance Works, the federal government’s official regional repository. But LOOW did not contain the whole story. The disposal system was fragmented and poorly controlled: federal agencies relied on private contractors, subcontractors, and haulers, while records, maps, and monitoring remained incomplete. Wartime secrecy made those failures worse. Workers handled radioactive materials without a full understanding of the danger, and slag could leave the factories as if it were ordinary industrial waste—sold or given away as inexpensive fill beneath parking lots, streets, driveways, and yards.</p>
               <p>For decades, much of this history remained hidden. It began to surface only after the crisis at Love Canal. Love Canal was a working-class Niagara Falls neighborhood built around an unfinished canal that Hooker Chemical had used as a hazardous-waste landfill. From 1942 to 1952, the company buried more than 21,000 tons of chemical waste there. The canal was covered with earth. An elementary school was built on the middle third of the landfill, while homes were built directly along its edges, many with backyards abutting the buried waste. By the late 1970s, chemicals were surfacing in yards, basements, sewers, and school grounds. Residents organized and forced state and federal officials to respond.</p>
               <p>What began as an investigation into one chemical landfill widened into a review of defense production and waste disposal across Niagara and Erie Counties. In 1981, the New York State Assembly Task Force reported that Linde’s wells had not been adequately identified or monitored and documented a much larger system of federal factories, contractors, disposal sites, and radioactive waste.</p>
-              <p class="waste-chapter-bridge">Love Canal did not expose only one buried landfill. It opened the archive of an entire region.</p>
+              <p class="waste-chapter-bridge">Love Canal exposed more than one buried landfill. It forced investigators to trace an entire regional system of federal production, contracting, and reckless waste disposal.</p>
 
               <div class="love-canal-range" id="love-canal-range">
                 <div class="atomic-niagara-hero love-canal-hero" id="era-love-canal" aria-labelledby="era-love-canal-title">
