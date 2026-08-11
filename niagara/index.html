@@ -1653,7 +1653,8 @@
 
       function activate(name, updateHash = true, animateIndicator = true, scrollToContent = false) {
         if (!validTabs.has(name)) name = 'investigation';
-        if (scrollToContent) page.classList.add('niagara-content-mode');
+        const internalArchiveMode = name === 'evidence' || name === 'map';
+        if (scrollToContent) page.classList.toggle('niagara-content-mode', internalArchiveMode);
         page.classList.toggle('niagara-photographs-active', name === 'photographs');
         if (name !== 'photographs') {
           page.classList.remove('niagara-photo-lightbox-open');
@@ -2240,7 +2241,7 @@
       window.addEventListener('hashchange', () => activate(location.hash.slice(1), false, true, true));
       const initialHash = location.hash.slice(1);
       const initialTab = archiveSearchTerm ? 'evidence' : (initialHash || 'investigation');
-      const initialContentMode = Boolean(archiveSearchTerm || initialHash);
+      const initialContentMode = Boolean(archiveSearchTerm || initialHash === 'evidence' || initialHash === 'map');
       if (initialContentMode) page.classList.add('niagara-content-mode');
       activate(initialTab, false, false, false);
       if (initialContentMode) requestAnimationFrame(() => scrollTabsToTop('auto'));
