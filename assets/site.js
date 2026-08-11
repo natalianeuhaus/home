@@ -470,8 +470,8 @@
           "Chapter I moves from lockdown and shutdown through the beginning of 2021.",
         ],
       },
-      { label: "Chapter II", paragraphs: ["XXXX"] },
-      { label: "Chapter III", paragraphs: ["XXXX"] },
+      { label: "Chapter II", paragraphs: ["Coming soon"] },
+      { label: "Chapter III", paragraphs: ["Coming soon"] },
     ];
 
     const alignDescription = (index) => {
