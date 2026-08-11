@@ -1162,3 +1162,25 @@ body.burlesque-horizontal-body{overflow:hidden}
   color:#151715;
   opacity:.18;
 }
+
+
+
+/* Healers Backstory: match Burlesque muted-to-dark interaction — v1. */
+.healers-page + .healers-backstory-trigger strong{
+  color:rgba(21,23,21,.55);
+  opacity:1;
+  transition:color .28s ease,opacity .28s ease;
+}
+.healers-page + .healers-backstory-trigger .healers-backstory-trigger-kicker{
+  color:rgba(21,23,21,.46);
+  transition:color .28s ease;
+}
+.healers-page + .healers-backstory-trigger:hover strong,
+.healers-page + .healers-backstory-trigger:focus-visible strong{
+  color:#151715;
+  opacity:1;
+}
+.healers-page + .healers-backstory-trigger:hover .healers-backstory-trigger-kicker,
+.healers-page + .healers-backstory-trigger:focus-visible .healers-backstory-trigger-kicker{
+  color:rgba(21,23,21,.76);
+}
