@@ -520,7 +520,7 @@
     .niagara-photo-main { position:relative; z-index:1; width:auto !important; height:var(--photo-panel-height) !important; max-width:100% !important; max-height:none !important; object-fit:contain !important; object-position:center center; display:block; opacity:1; transform:scale(1); transition:opacity .24s ease,transform .5s cubic-bezier(.2,.7,.2,1); }
     .niagara-photo-main.is-changing { opacity:.18; transform:scale(.992); }
     .niagara-photo-control { position:absolute; z-index:5; top:50%; width:52px; height:74px; border:1px solid rgba(255,255,255,.24); color:#fff; background:rgba(8,9,8,.52); backdrop-filter:blur(9px); cursor:pointer; opacity:0; pointer-events:none; transform:translateY(-50%); font:30px/1 Georgia,"Times New Roman",serif; transition:opacity .22s ease,background-color .2s ease,border-color .2s ease; }
-    .niagara-photo-control:hover,.niagara-photo-control:focus-visible { background:var(--niagara-red); border-color:var(--niagara-red); outline:none; }
+    .niagara-photo-control:hover,.niagara-photo-control:focus-visible { background:#30312f; border-color:#30312f; outline:none; }
     .niagara-photo-prev { left:22px; }
     .niagara-photo-next { right:22px; }
     .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control { width:86px; height:42px; border:0; color:rgba(21,23,21,.58); background:transparent; backdrop-filter:none; font-size:0; }
@@ -533,10 +533,10 @@
     .niagara-photo-story:not(.is-fullscreen) .niagara-photo-next::before { left:8px; }
     .niagara-photo-story:not(.is-fullscreen) .niagara-photo-next::after { right:13px; transform:translateY(-50%) rotate(45deg); }
     .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control:hover,
-    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control:focus-visible { color:var(--niagara-red); background:transparent; border-color:transparent; }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control:focus-visible { color:rgba(21,23,21,.95); background:transparent; border-color:transparent; }
     .niagara-photo-caption-toggle,.niagara-photo-caption-close { border:1px solid rgba(255,255,255,.26); color:#fff; background:rgba(8,9,8,.58); backdrop-filter:blur(9px); cursor:pointer; text-transform:uppercase; letter-spacing:.16em; font:10px/1 Arial,Helvetica,sans-serif; }
     .niagara-photo-caption-toggle { position:absolute; z-index:5; left:22px; top:22px; padding:14px 16px 13px; opacity:0; pointer-events:none; transition:opacity .22s ease,background-color .2s ease,border-color .2s ease; }
-    .niagara-photo-caption-toggle:hover,.niagara-photo-caption-toggle:focus-visible,.niagara-photo-caption-close:hover,.niagara-photo-caption-close:focus-visible { background:var(--niagara-red); border-color:var(--niagara-red); outline:none; }
+    .niagara-photo-caption-toggle:hover,.niagara-photo-caption-toggle:focus-visible,.niagara-photo-caption-close:hover,.niagara-photo-caption-close:focus-visible { background:#30312f; border-color:#30312f; outline:none; }
     .niagara-photo-index { position:absolute; z-index:5; right:22px; top:22px; padding:12px 14px 11px; color:rgba(255,255,255,.82); background:rgba(8,9,8,.58); backdrop-filter:blur(9px); opacity:0; pointer-events:none; letter-spacing:.17em; font:10px/1 Arial,Helvetica,sans-serif; transition:opacity .22s ease; }
     .niagara-photo-strip { position:absolute; z-index:5; left:50%; bottom:18px; width:min(980px,calc(100% - 180px)); box-sizing:border-box; display:flex; align-items:center; gap:9px; overflow-x:auto; overflow-y:hidden; padding:10px; border:1px solid rgba(255,255,255,.18); background:rgba(5,6,5,.74); backdrop-filter:blur(12px); opacity:0; pointer-events:none; transform:translate(-50%,calc(100% + 32px)); transition:opacity .22s ease,transform .3s cubic-bezier(.2,.7,.2,1); scrollbar-width:none; }
     .niagara-photo-strip::-webkit-scrollbar { display:none; }
@@ -1417,7 +1417,7 @@
               <img class="niagara-photo-main" data-photo-main src="https://drive.google.com/thumbnail?id=1UiUedeF9j365cxpT9GrTv2wREb7dhidS&amp;sz=w2400" alt="Rainbow Bridge and waterfalls from the Maid of the Mist" style="width:auto;height:var(--photo-panel-height);max-width:100%;max-height:none;object-fit:contain;object-position:center center;" />
               <button class="niagara-photo-control niagara-photo-prev" type="button" data-photo-prev aria-label="Previous photograph">←</button>
               <button class="niagara-photo-control niagara-photo-next" type="button" data-photo-next aria-label="Next photograph">→</button>
-              <button class="niagara-photo-caption-toggle" type="button" data-photo-caption-toggle aria-expanded="false" aria-controls="niagara-photo-caption">Full screen</button>
+              <button class="niagara-photo-caption-toggle" type="button" data-photo-caption-toggle aria-expanded="false" aria-controls="niagara-photo-caption">Captions</button>
               <span class="niagara-photo-index"><span data-photo-current>01</span> / <span data-photo-total>28</span></span>
             </div>
             <div class="niagara-photo-strip" data-photo-strip aria-label="Choose a photograph"></div>
