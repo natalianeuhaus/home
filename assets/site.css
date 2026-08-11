@@ -1184,3 +1184,30 @@ body.burlesque-horizontal-body{overflow:hidden}
 .healers-page + .healers-backstory-trigger:focus-visible .healers-backstory-trigger-kicker{
   color:rgba(21,23,21,.76);
 }
+
+
+
+/* Intermission navigation arrows: clean geometry and dark-page interaction — v1. */
+.intermission-navigation-controls button{
+  color:rgba(241,239,231,.36);
+  opacity:1;
+  transition:color .25s ease,opacity .25s ease,transform .25s ease;
+}
+.intermission-navigation-controls button::after{
+  border:0;
+  border-top:1px solid currentColor;
+  border-right:1px solid currentColor;
+}
+.intermission-navigation-controls button:hover:not(:disabled),
+.intermission-navigation-controls button:focus-visible:not(:disabled){
+  color:#f1efe7;
+  opacity:1;
+}
+.intermission-navigation-controls button:disabled{
+  color:#f1efe7;
+  opacity:.18;
+}
+.intermission-navigation-controls button:focus-visible{
+  outline:1px solid rgba(241,239,231,.42);
+  outline-offset:3px;
+}
