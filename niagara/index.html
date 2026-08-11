@@ -321,7 +321,7 @@
     .waste-story { max-width:900px; }
     .waste-lede { width:900px; max-width:100%; margin-bottom:1.35em !important; margin-left:min(0px,max(-640px,calc(984px - 100vw))) !important; font-size:clamp(25px,2.25vw,37px) !important; line-height:1.23 !important; letter-spacing:-.027em !important; }
     .waste-chapter-bridge { margin:clamp(42px,6svh,72px) 0 0 !important; padding-top:24px; border-top:1px solid var(--niagara-line); color:var(--niagara-red); font-size:clamp(21px,1.8vw,29px) !important; line-height:1.3 !important; letter-spacing:-.02em !important; }
-    .waste-chapter-bridge + .waste-era-marker { margin-top:clamp(72px,10svh,120px); }
+    .waste-chapter-bridge + .waste-era-marker,.waste-chapter-bridge + .love-canal-range { margin-top:clamp(72px,10svh,120px); }
     .waste-era-marker { --era-accent:var(--niagara-red); width:calc(100vw - 84px); min-height:72svh; margin:clamp(100px,15svh,190px) 0 0 calc(100% - (100vw - 84px)); position:relative; display:grid; align-items:center; overflow:hidden; border-top:1px solid var(--niagara-line); border-bottom:1px solid var(--niagara-line); background:var(--niagara-paper); }
     .waste-era-marker::after { content:""; position:absolute; z-index:0; left:0; right:0; top:50%; height:1px; background:color-mix(in srgb,var(--era-accent) 34%,transparent); transform:scaleX(0); transform-origin:left center; transition:transform 1.2s cubic-bezier(.22,1,.36,1); }
     .waste-era-inner { width:100%; min-height:inherit; padding:clamp(48px,7vw,104px); position:relative; z-index:1; display:grid; grid-template-columns:minmax(270px,.82fr) minmax(380px,1fr); gap:clamp(54px,8vw,140px); align-items:center; }
@@ -348,6 +348,16 @@
     .telvock-return .telvock-return-statement { margin:0 !important; font-size:clamp(27px,3.4vw,50px) !important; line-height:1.1 !important; letter-spacing:-.038em !important; }
     .telvock-return p { margin:28px 0 0 !important; color:rgba(241,240,234,.72); font:15px/1.52 Arial,Helvetica,sans-serif !important; letter-spacing:0 !important; }
     .love-canal-range { position:relative; }
+    .love-canal-hero { width:calc(100vw - 84px); height:calc(100svh - 66px); min-height:640px; margin-left:calc(100% - (100vw - 84px)); grid-template-columns:minmax(340px,.44fr) minmax(0,.56fr); background:#e5d8bd; }
+    .love-canal-title { padding:clamp(44px,5vw,86px); color:var(--niagara-paper); background:var(--love-canal-red); }
+    .love-canal-title h3 { max-width:100%; background:var(--love-canal-red); box-shadow:0 0 0 7px var(--love-canal-red); }
+    .love-canal-title h4 { margin:clamp(26px,3.8svh,42px) 0 12px; color:rgba(241,240,234,.95); font-size:clamp(24px,2.35vw,38px); line-height:1.04; font-weight:400; letter-spacing:-.032em; }
+    .love-canal-title p { margin:0 !important; max-width:520px; color:rgba(241,240,234,.72); font:clamp(15px,1.15vw,19px)/1.5 Arial,Helvetica,sans-serif !important; letter-spacing:0 !important; }
+    .love-canal-media { min-width:0; margin:0; position:relative; display:grid; place-items:center; overflow:hidden; background:#e5d8bd; }
+    .love-canal-media img { width:100%; height:100%; display:block; object-fit:contain; }
+    .love-canal-media figcaption { position:absolute; z-index:1; left:18px; right:18px; bottom:16px; display:flex; justify-content:space-between; gap:24px; color:rgba(241,240,234,.82); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.08em; text-transform:uppercase; text-shadow:0 1px 8px rgba(0,0,0,.8); }
+    .love-canal-media figcaption::before { content:""; position:absolute; z-index:-1; inset:-42px -18px -16px; background:linear-gradient(transparent,rgba(0,0,0,.58)); }
+    .love-canal-media .love-canal-threshold-copy { max-width:520px; text-align:right; }
     .love-canal-threshold { width:calc(100vw - 84px); margin:clamp(90px,13svh,160px) 0 0 calc(100% - (100vw - 84px)); }
     .love-canal-image-shell { height:calc(100svh - 66px); min-height:640px; display:grid; place-items:center; overflow:hidden; background:#e5d8bd; }
     .love-canal-image-shell img { width:100%; height:100%; display:block; object-fit:contain; }
@@ -497,6 +507,11 @@
       .atomic-reference-viewer-caption { padding:14px 54px 16px 16px; }
       .radioactive-waste-title { padding:48px 24px 40px; }
       .radioactive-waste-copy-grid { padding-top:82px; }
+      .love-canal-hero { width:calc(100vw - 48px); height:auto; min-height:calc(100svh - 58px); margin-left:0; grid-template-columns:1fr; grid-template-rows:auto auto; }
+      .love-canal-title { padding:48px 24px 44px; }
+      .love-canal-title h4 { margin-top:28px; }
+      .love-canal-media { min-height:0; aspect-ratio:2048 / 1329; }
+      .love-canal-media figcaption { display:none; }
       .waste-era-marker { width:calc(100vw - 48px); min-height:66svh; margin-left:0; }
       .waste-era-inner { padding:54px 24px; grid-template-columns:1fr; gap:42px; }
       .waste-era-year { font-size:clamp(82px,25vw,150px); white-space:normal; }
@@ -1280,34 +1295,27 @@
               <p>Every stage of uranium production created a different waste stream. Linde’s refining process left uranium-bearing liquid and solid residues. Electromet’s conversion of green salt into uranium metal produced C-1 and C-2 slag. Hooker then treated part of that slag to recover more uranium, creating additional liquid waste, filtered solids, and residual material.</p>
               <p>From 1944 to 1946, with the approval and knowledge of Army officials, Linde disposed of more than 37 million gallons of radioactively contaminated, highly caustic liquid waste in five wells beneath its Tonawanda property. Wastewater was also discharged through the public sewer system and a storm sewer into Two Mile Creek, which flows to the Niagara River.</p>
               <p>Some solid residues were transported to the Lake Ontario Ordnance Works, the federal government’s official regional repository. But LOOW did not contain the whole story. The disposal system was fragmented and poorly controlled: federal agencies relied on private contractors, subcontractors, and haulers, while records, maps, and monitoring remained incomplete. Wartime secrecy made those failures worse. Workers handled radioactive materials without a full understanding of the danger, and slag could leave the factories as if it were ordinary industrial waste—sold or given away as inexpensive fill beneath parking lots, streets, driveways, and yards.</p>
-              <p>For decades, much of this history remained hidden. It began to surface only after the crisis at Love Canal. Love Canal was a working-class Niagara Falls neighborhood built beside an unfinished canal that Hooker Chemical had used as a hazardous-waste landfill. From 1942 to 1952, the company buried more than 21,000 tons of chemical waste there. The canal was covered, and an elementary school and homes were built nearby. By the late 1970s, chemicals were surfacing in yards, basements, sewers, and school grounds. Residents organized and forced state and federal officials to respond.</p>
+              <p>For decades, much of this history remained hidden. It began to surface only after the crisis at Love Canal. Love Canal was a working-class Niagara Falls neighborhood built around an unfinished canal that Hooker Chemical had used as a hazardous-waste landfill. From 1942 to 1952, the company buried more than 21,000 tons of chemical waste there. The canal was covered with earth. An elementary school was built on the middle third of the landfill, while homes were built directly along its edges, many with backyards abutting the buried waste. By the late 1970s, chemicals were surfacing in yards, basements, sewers, and school grounds. Residents organized and forced state and federal officials to respond.</p>
               <p>What began as an investigation into one chemical landfill widened into a review of defense production and waste disposal across Niagara and Erie Counties. In 1981, the New York State Assembly Task Force reported that Linde’s wells had not been adequately identified or monitored and documented a much larger system of federal factories, contractors, disposal sites, and radioactive waste.</p>
               <p class="waste-chapter-bridge">Love Canal did not expose only one buried landfill. It opened the archive of an entire region.</p>
 
-              <section class="waste-era-marker waste-era-marker--love" data-waste-era id="era-love-canal" aria-labelledby="era-love-canal-title">
-                <div class="waste-era-inner">
-                  <div>
-                    <span class="waste-era-chapter">Chapter IV</span>
-                    <p class="waste-era-year waste-era-year--range">1978–1981</p>
-                  </div>
-                  <div class="waste-era-copy">
-                    <span class="waste-era-kicker">Love Canal</span>
-                    <h4 id="era-love-canal-title">The investigation opens</h4>
+              <div class="love-canal-range" id="love-canal-range">
+                <div class="atomic-niagara-hero love-canal-hero" id="era-love-canal" aria-labelledby="era-love-canal-title">
+                  <div class="atomic-niagara-title love-canal-title">
+                    <span class="investigation-chapter-label">Chapter IV</span>
+                    <span class="investigation-number">1978–1981</span>
+                    <h3 id="era-love-canal-title">Love Canal</h3>
+                    <h4>The investigation opens</h4>
                     <p>Residents forced the government to look beyond one neighborhood. The inquiry exposed a regional system of wartime production and waste.</p>
                   </div>
-                </div>
-              </section>
-
-              <div class="love-canal-range" id="love-canal-range">
-                <figure class="love-canal-threshold">
-                  <div class="love-canal-image-shell">
+                  <figure class="love-canal-media">
                     <img src="./archive/love-canal-public-health-time-bomb.webp" alt="Cover spread of the 1978 report Love Canal: Public Health Time Bomb over an aerial photograph of the neighborhood" loading="lazy" />
-                  </div>
-                  <figcaption>
-                    <span class="love-canal-threshold-date">September 1978</span>
-                    <span class="love-canal-threshold-copy">The report that transformed a neighborhood’s crisis into a public investigation. <em>Love Canal: Public Health Time Bomb</em>, prepared for the Governor and New York State Legislature.</span>
-                  </figcaption>
-                </figure>
+                    <figcaption>
+                      <span>September 1978</span>
+                      <span class="love-canal-threshold-copy">The report that transformed a neighborhood’s crisis into a public investigation.</span>
+                    </figcaption>
+                  </figure>
+                </div>
 
                 <section class="waste-section love-canal-section" id="waste-love-canal">
                   <p class="love-canal-transition">Investigators entered Love Canal looking for one history of disposal. What they uncovered was an entire regional system of wartime production—and the movement, reuse, and disposal of what it left behind.</p>
