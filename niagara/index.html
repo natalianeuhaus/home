@@ -83,6 +83,7 @@
     .investigation-chapter { border-top:1px solid var(--niagara-line); padding:clamp(86px,12svh,150px) 0; }
     .investigation-chapter-grid { display:grid; grid-template-columns:minmax(220px,.48fr) minmax(560px,1.52fr); gap:clamp(60px,9vw,150px); align-items:start; }
     .investigation-chapter-meta { position:sticky; z-index:5; top:132px; }
+    .investigation-chapter-label { display:block; margin:0 0 6px; color:rgba(21,23,21,.42); font:8px/1.35 Arial,Helvetica,sans-serif; letter-spacing:.2em; text-transform:uppercase; }
     .investigation-number { display:block; margin:0 0 20px; color:rgba(21,23,21,.42); font:10px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.24em; text-transform:uppercase; }
     .investigation-chapter h3 { position:relative; z-index:5; margin:0; max-width:350px; font-size:clamp(38px,4.5vw,76px); line-height:.94; font-weight:400; letter-spacing:-.045em; }
     .waterfalls-slide-meta .niagara-kicker,.atomic-niagara-title .investigation-number,.investigation-chapter-meta .investigation-number,.health-slide-meta .investigation-number { position:relative; z-index:5; }
@@ -272,6 +273,7 @@
     .atomic-niagara-chapter { border-top:0; padding-top:0; }
     .atomic-niagara-hero { width:100vw; height:calc(100svh - 66px); min-height:640px; margin-left:calc(50% - 50vw); display:grid; grid-template-columns:minmax(340px,.44fr) minmax(0,.56fr); overflow:hidden; background:var(--niagara-atomic); }
     .atomic-niagara-title { min-width:0; padding:clamp(44px,5vw,86px); display:flex; flex-direction:column; justify-content:center; color:var(--niagara-paper); background:var(--niagara-atomic); pointer-events:none; }
+    .atomic-niagara-title .investigation-chapter-label { color:rgba(241,240,234,.48); }
     .atomic-niagara-title .investigation-number { color:rgba(241,240,234,.58); }
     .atomic-niagara-title h3 { position:relative; z-index:5; margin:0; max-width:720px; font-size:clamp(38px,4.5vw,76px); line-height:.94; font-weight:400; letter-spacing:-.045em; }
     .atomic-niagara-media { min-width:0; position:relative; overflow:hidden; background:#111; }
@@ -312,6 +314,7 @@
     .waste-era-marker { --era-accent:var(--niagara-red); width:calc(100vw - 84px); min-height:72svh; margin:clamp(100px,15svh,190px) 0 0 calc(100% - (100vw - 84px)); position:relative; display:grid; align-items:center; overflow:hidden; border-top:1px solid var(--niagara-line); border-bottom:1px solid var(--niagara-line); background:var(--niagara-paper); }
     .waste-era-marker::after { content:""; position:absolute; z-index:0; left:0; right:0; top:50%; height:1px; background:color-mix(in srgb,var(--era-accent) 34%,transparent); transform:scaleX(0); transform-origin:left center; transition:transform 1.2s cubic-bezier(.22,1,.36,1); }
     .waste-era-inner { width:100%; min-height:inherit; padding:clamp(48px,7vw,104px); position:relative; z-index:1; display:grid; grid-template-columns:minmax(270px,.82fr) minmax(380px,1fr); gap:clamp(54px,8vw,140px); align-items:center; }
+    .waste-era-chapter { display:block; margin:0 0 28px; color:var(--era-accent); font:9px/1.35 Arial,Helvetica,sans-serif; letter-spacing:.22em; text-transform:uppercase; opacity:0; transform:translate3d(0,24px,0); transition:opacity .65s ease,transform .8s cubic-bezier(.22,1,.36,1); }
     .waste-era-year { margin:0; color:var(--era-accent); font-size:clamp(90px,15vw,245px); line-height:.74; font-weight:400; letter-spacing:-.085em; white-space:nowrap; opacity:.08; transform:translate3d(0,68px,0); transition:opacity .85s ease,transform 1.05s cubic-bezier(.22,1,.36,1); }
     .waste-era-year--range { font-size:clamp(58px,7.6vw,132px); }
     .waste-era-copy { max-width:660px; opacity:0; transform:translate3d(0,44px,0); transition:opacity .72s .16s ease,transform .9s .16s cubic-bezier(.22,1,.36,1); }
@@ -319,6 +322,7 @@
     .waste-era-copy h4 { margin:0 0 22px; font-size:clamp(38px,4.8vw,72px); line-height:.94; font-weight:400; letter-spacing:-.047em; }
     .waste-era-copy p { margin:0 !important; max-width:620px; color:rgba(21,23,21,.7); font-size:clamp(17px,1.25vw,21px) !important; line-height:1.48 !important; letter-spacing:-.008em !important; }
     .waste-era-marker.is-visible::after { transform:scaleX(1); }
+    .waste-era-marker.is-visible .waste-era-chapter { opacity:1; transform:translate3d(0,0,0); }
     .waste-era-marker.is-visible .waste-era-year { opacity:1; transform:translate3d(0,0,0); }
     .waste-era-marker.is-visible .waste-era-copy { opacity:1; transform:translate3d(0,0,0); }
     .waste-era-marker--love { --era-accent:var(--love-canal-red); }
@@ -655,9 +659,9 @@
       .niagara-tabbar-wrap,.niagara-tab-label,.niagara-tab-indicator,.niagara-tabbar-wrap::before { opacity:1; }
       .niagara-tab-label { transform:none; }
       .niagara-photo-main,.niagara-photo-strip,.niagara-photo-thumb,.niagara-photo-progress span { transition:none !important; }
-      .waste-era-marker::after,.waste-era-year,.waste-era-copy { transition:none !important; }
+      .waste-era-marker::after,.waste-era-chapter,.waste-era-year,.waste-era-copy { transition:none !important; }
       .waste-era-marker::after { transform:scaleX(1); }
-      .waste-era-year,.waste-era-copy { opacity:1; transform:none; }
+      .waste-era-chapter,.waste-era-year,.waste-era-copy { opacity:1; transform:none; }
     }
     @media (hover:none) {
       .niagara-photo-control,.niagara-photo-caption-toggle,.niagara-photo-index { opacity:1; pointer-events:auto; }
@@ -924,7 +928,7 @@
             <article class="health-slide health-slide--waterfalls" data-waterfalls-section="0">
               <div class="waterfalls-slide-inner">
                 <header class="waterfalls-slide-meta">
-                  <p class="niagara-kicker">1895</p>
+                  <p class="niagara-kicker"><span class="investigation-chapter-label">Chapter I</span>1895</p>
                   <h2>The waterfalls + industry</h2>
                 </header>
                 <div class="investigation-body">
@@ -937,6 +941,7 @@
             <article class="health-slide waterfalls-slide--archive" data-waterfalls-section="1">
               <div class="waterfalls-subslide-inner">
                 <header class="waterfalls-subslide-meta">
+                  <span class="investigation-chapter-label">Chapter I</span>
                   <span class="investigation-number">1895</span>
                   <h3>Adams Power Station</h3>
                 </header>
@@ -950,6 +955,7 @@
             <article class="health-slide waterfalls-slide--archive" data-waterfalls-section="2">
               <div class="waterfalls-subslide-inner">
                 <header class="waterfalls-subslide-meta">
+                  <span class="investigation-chapter-label">Chapter I</span>
                   <span class="investigation-number">1896</span>
                   <h3>Inside Adams Power Station</h3>
                 </header>
@@ -963,6 +969,7 @@
             <article class="health-slide waterfalls-slide--text" data-waterfalls-section="3">
               <div class="waterfalls-subslide-inner">
                 <header class="waterfalls-subslide-meta">
+                  <span class="investigation-chapter-label">Chapter I</span>
                   <span class="investigation-number">1895–1942</span>
                   <h3>Electro<wbr>chemistry + electro<wbr>metallurgy</h3>
                 </header>
@@ -976,6 +983,7 @@
             <article class="health-slide waterfalls-slide--archive" data-waterfalls-section="4">
               <div class="waterfalls-subslide-inner">
                 <header class="waterfalls-subslide-meta">
+                  <span class="investigation-chapter-label">Chapter I</span>
                   <span class="investigation-number">1937</span>
                   <h3>Linde</h3>
                   <p class="waterfalls-factory-parent">Union Carbide division</p>
@@ -991,6 +999,7 @@
             <article class="health-slide waterfalls-slide--archive" data-waterfalls-section="5">
               <div class="waterfalls-subslide-inner">
                 <header class="waterfalls-subslide-meta">
+                  <span class="investigation-chapter-label">Chapter I</span>
                   <span class="investigation-number">Before 1942</span>
                   <h3>Electromet</h3>
                   <p class="waterfalls-factory-parent">Union Carbide division</p>
@@ -1006,6 +1015,7 @@
             <article class="health-slide waterfalls-slide--archive" data-waterfalls-section="6">
               <div class="waterfalls-subslide-inner">
                 <header class="waterfalls-subslide-meta">
+                  <span class="investigation-chapter-label">Chapter I</span>
                   <span class="investigation-number">Before 1942</span>
                   <h3>Hooker</h3>
                   <p class="waterfalls-factory-parent">Electrochemical Company</p>
@@ -1021,6 +1031,7 @@
             <article class="health-slide waterfalls-slide--archive waterfalls-slide--carborundum" data-waterfalls-section="7">
               <div class="waterfalls-subslide-inner">
                 <header class="waterfalls-subslide-meta">
+                  <span class="investigation-chapter-label">Chapter I</span>
                   <span class="investigation-number">Before 1942</span>
                   <h3>Carborundum</h3>
                   <p class="waterfalls-factory-location">Niagara Falls, NY</p>
@@ -1051,6 +1062,7 @@
         <section class="investigation-chapter atomic-niagara-chapter" id="atomic-niagara">
           <div class="atomic-niagara-hero">
             <div class="atomic-niagara-title">
+              <span class="investigation-chapter-label">Chapter II</span>
               <span class="investigation-number">1942</span>
               <h3>Atomic Niagara</h3>
             </div>
@@ -1230,6 +1242,7 @@
         <section class="investigation-chapter radioactive-waste-chapter" id="radioactive-waste">
           <div class="atomic-niagara-hero radioactive-waste-hero">
             <div class="atomic-niagara-title radioactive-waste-title">
+              <span class="investigation-chapter-label">Chapter III</span>
               <span class="investigation-number">1944</span>
               <h3>Radioactive waste</h3>
             </div>
@@ -1247,7 +1260,10 @@
 
               <section class="waste-era-marker waste-era-marker--love" data-waste-era id="era-love-canal" aria-labelledby="era-love-canal-title">
                 <div class="waste-era-inner">
-                  <p class="waste-era-year waste-era-year--range">1978–1981</p>
+                  <div>
+                    <span class="waste-era-chapter">Chapter IV</span>
+                    <p class="waste-era-year waste-era-year--range">1978–1981</p>
+                  </div>
                   <div class="waste-era-copy">
                     <span class="waste-era-kicker">Love Canal</span>
                     <h4 id="era-love-canal-title">The investigation opens</h4>
@@ -1280,7 +1296,10 @@
 
               <section class="waste-era-marker" data-waste-era id="era-surveys" aria-labelledby="era-surveys-title">
                 <div class="waste-era-inner">
-                  <p class="waste-era-year waste-era-year--range">1979–1985</p>
+                  <div>
+                    <span class="waste-era-chapter">Chapter V</span>
+                    <p class="waste-era-year waste-era-year--range">1979–1985</p>
+                  </div>
                   <div class="waste-era-copy">
                     <span class="waste-era-kicker">The surveys</span>
                     <h4 id="era-surveys-title">The geography becomes visible</h4>
@@ -1346,7 +1365,10 @@
 
               <section class="waste-era-marker waste-era-marker--dark" data-waste-era id="era-telvock" aria-labelledby="era-telvock-title">
                 <div class="waste-era-inner">
-                  <p class="waste-era-year">2016</p>
+                  <div>
+                    <span class="waste-era-chapter">Chapter VI</span>
+                    <p class="waste-era-year">2016</p>
+                  </div>
                   <div class="waste-era-copy">
                     <span class="waste-era-kicker">The records return</span>
                     <h4 id="era-telvock-title">Dan Telvock reopens the file</h4>
@@ -1384,7 +1406,10 @@
 
               <section class="waste-era-marker" data-waste-era id="era-cleanup" aria-labelledby="era-cleanup-title">
                 <div class="waste-era-inner">
-                  <p class="waste-era-year waste-era-year--range">2018–2023</p>
+                  <div>
+                    <span class="waste-era-chapter">Chapter VII</span>
+                    <p class="waste-era-year waste-era-year--range">2018–2023</p>
+                  </div>
                   <div class="waste-era-copy">
                     <span class="waste-era-kicker">It resurfaces</span>
                     <h4 id="era-cleanup-title">The archive becomes physical again</h4>
@@ -1443,7 +1468,10 @@
 
               <section class="waste-era-marker waste-era-marker--final" data-waste-era id="era-ongoing" aria-labelledby="era-ongoing-title">
                 <div class="waste-era-inner">
-                  <p class="waste-era-year waste-era-year--range">2023–2026</p>
+                  <div>
+                    <span class="waste-era-chapter">Chapter VIII</span>
+                    <p class="waste-era-year waste-era-year--range">2023–2026</p>
+                  </div>
                   <div class="waste-era-copy">
                     <span class="waste-era-kicker">Ongoing investigation</span>
                     <h4 id="era-ongoing-title">The survey expands again</h4>
@@ -1492,7 +1520,7 @@
             <article class="health-slide health-slide--lead" data-health-section="1">
               <div class="health-slide-inner">
                 <header class="health-slide-meta">
-                  <span class="investigation-number">VII</span>
+                  <span class="investigation-number">IX</span>
                   <h3 id="health-record-title">Decades of cancer</h3>
                 </header>
                 <div class="health-slide-content">
@@ -1508,7 +1536,7 @@
             <article class="health-slide" data-health-section="2">
               <div class="health-slide-inner">
                 <header class="health-slide-meta">
-                  <span class="investigation-number">VIII</span>
+                  <span class="investigation-number">X</span>
                   <h3>Four decades of concern</h3>
                 </header>
                 <div class="health-slide-content">
@@ -1527,7 +1555,7 @@
             <article class="health-slide" data-health-section="3">
               <div class="health-slide-inner">
                 <header class="health-slide-meta">
-                  <span class="investigation-number">IX</span>
+                  <span class="investigation-number">XI</span>
                   <h3>The findings accumulate</h3>
                 </header>
                 <div class="health-slide-content">
@@ -1544,7 +1572,7 @@
             <article class="health-slide" data-health-section="4">
               <div class="health-slide-inner">
                 <header class="health-slide-meta">
-                  <span class="investigation-number">X</span>
+                  <span class="investigation-number">XII</span>
                   <h3>The Vault</h3>
                 </header>
                 <div class="health-document-grid">
@@ -1563,7 +1591,7 @@
             <article class="health-slide" data-health-section="5">
               <div class="health-slide-inner">
                 <header class="health-slide-meta">
-                  <span class="investigation-number">XI</span>
+                  <span class="investigation-number">XIII</span>
                   <h3>Studies</h3>
                 </header>
                 <div class="health-source-list">
