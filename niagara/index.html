@@ -675,6 +675,215 @@
     body.niagara-content-mode .niagara-tab-label { opacity:1; transform:none; animation:none; }
     body.niagara-content-mode .niagara-tab-indicator { animation:none; opacity:1; }
   </style>
+
+  <style id="compact-unified-navigation-arrows">
+    /* Compact unified navigation arrows — v1. */
+    :is(
+      .waterfalls-prev,
+      .waterfalls-next,
+      .health-prev,
+      .health-next,
+      .atomic-evidence-viewer-nav
+    ){
+      width:62px;
+      height:42px;
+      padding:0;
+      font-size:0;
+    }
+    :is(
+      .waterfalls-prev,
+      .waterfalls-next,
+      .health-prev,
+      .health-next,
+      .atomic-evidence-viewer-nav
+    )::before{
+      content:"";
+      width:44px;
+      height:1px;
+      background:currentColor;
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+    }
+    :is(
+      .waterfalls-prev,
+      .waterfalls-next,
+      .health-prev,
+      .health-next,
+      .atomic-evidence-viewer-nav
+    )::after{
+      content:"";
+      width:7px;
+      height:7px;
+      border-top:1px solid currentColor;
+      border-right:1px solid currentColor;
+      position:absolute;
+      top:50%;
+    }
+    :is(
+      .waterfalls-prev,
+      .health-prev,
+      .atomic-evidence-viewer-prev
+    )::before{right:7px;left:auto}
+    :is(
+      .waterfalls-prev,
+      .health-prev,
+      .atomic-evidence-viewer-prev
+    )::after{
+      left:7px;
+      right:auto;
+      border-left:0;
+      border-bottom:0;
+      transform:translateY(-50%) rotate(-135deg);
+    }
+    :is(
+      .waterfalls-next,
+      .health-next,
+      .atomic-evidence-viewer-next
+    )::before{left:7px;right:auto}
+    :is(
+      .waterfalls-next,
+      .health-next,
+      .atomic-evidence-viewer-next
+    )::after{
+      right:7px;
+      left:auto;
+      border-left:0;
+      border-bottom:0;
+      transform:translateY(-50%) rotate(45deg);
+    }
+    .atomic-evidence-viewer-nav{
+      position:relative;
+      border:0;
+      background:transparent;
+    }
+    .atomic-evidence-viewer-nav:hover,
+    .atomic-evidence-viewer-nav:focus-visible{background:transparent}
+
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control,
+    .niagara-photo-story.is-fullscreen .niagara-photo-control{
+      width:62px;
+      height:42px;
+      padding:0;
+      border:0;
+      background:transparent;
+      backdrop-filter:none;
+      font-size:0;
+    }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control::before,
+    .niagara-photo-story.is-fullscreen .niagara-photo-control::before{
+      content:"";
+      width:44px;
+      height:1px;
+      background:currentColor;
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+    }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control::after,
+    .niagara-photo-story.is-fullscreen .niagara-photo-control::after{
+      content:"";
+      width:7px;
+      height:7px;
+      border-top:1px solid currentColor;
+      border-right:1px solid currentColor;
+      position:absolute;
+      top:50%;
+    }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-prev::before,
+    .niagara-photo-story.is-fullscreen .niagara-photo-prev::before{right:7px;left:auto}
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-prev::after,
+    .niagara-photo-story.is-fullscreen .niagara-photo-prev::after{
+      left:7px;
+      right:auto;
+      transform:translateY(-50%) rotate(-135deg);
+    }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-next::before,
+    .niagara-photo-story.is-fullscreen .niagara-photo-next::before{left:7px;right:auto}
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-next::after,
+    .niagara-photo-story.is-fullscreen .niagara-photo-next::after{
+      right:7px;
+      left:auto;
+      transform:translateY(-50%) rotate(45deg);
+    }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control:hover,
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control:focus-visible,
+    .niagara-photo-story.is-fullscreen .niagara-photo-control:hover,
+    .niagara-photo-story.is-fullscreen .niagara-photo-control:focus-visible{
+      background:transparent;
+      border-color:transparent;
+    }
+    @media (max-width:820px){
+      :is(
+        .waterfalls-prev,
+        .waterfalls-next,
+        .health-prev,
+        .health-next,
+        .atomic-evidence-viewer-nav
+      ){
+        width:52px;
+        height:38px;
+      }
+      :is(
+        .waterfalls-prev,
+        .waterfalls-next,
+        .health-prev,
+        .health-next,
+        .atomic-evidence-viewer-nav
+      )::before{width:34px}
+      :is(
+        .waterfalls-prev,
+        .waterfalls-next,
+        .health-prev,
+        .health-next,
+        .atomic-evidence-viewer-nav
+      )::after{
+        width:6px;
+        height:6px;
+      }
+      :is(
+        .waterfalls-prev,
+        .health-prev,
+        .atomic-evidence-viewer-prev
+      )::before{right:6px}
+      :is(
+        .waterfalls-prev,
+        .health-prev,
+        .atomic-evidence-viewer-prev
+      )::after{left:6px}
+      :is(
+        .waterfalls-next,
+        .health-next,
+        .atomic-evidence-viewer-next
+      )::before{left:6px}
+      :is(
+        .waterfalls-next,
+        .health-next,
+        .atomic-evidence-viewer-next
+      )::after{right:6px}
+      .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control,
+      .niagara-photo-story.is-fullscreen .niagara-photo-control{
+        width:52px;
+        height:38px;
+      }
+      .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control::before,
+      .niagara-photo-story.is-fullscreen .niagara-photo-control::before{width:34px}
+      .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control::after,
+      .niagara-photo-story.is-fullscreen .niagara-photo-control::after{
+        width:6px;
+        height:6px;
+      }
+      .niagara-photo-story:not(.is-fullscreen) .niagara-photo-prev::before,
+      .niagara-photo-story.is-fullscreen .niagara-photo-prev::before{right:6px}
+      .niagara-photo-story:not(.is-fullscreen) .niagara-photo-prev::after,
+      .niagara-photo-story.is-fullscreen .niagara-photo-prev::after{left:6px}
+      .niagara-photo-story:not(.is-fullscreen) .niagara-photo-next::before,
+      .niagara-photo-story.is-fullscreen .niagara-photo-next::before{left:6px}
+      .niagara-photo-story:not(.is-fullscreen) .niagara-photo-next::after,
+      .niagara-photo-story.is-fullscreen .niagara-photo-next::after{right:6px}
+    }
+  </style>
+
 </head>
 <body class="niagara-page">
   <header class="site-header">
