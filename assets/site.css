@@ -1221,3 +1221,24 @@ body.burlesque-horizontal-body{overflow:hidden}
   border-top:1px solid currentColor;
   border-right:1px solid currentColor;
 }
+
+
+
+/* Intermission fullscreen controls: muted at rest, bright on hover — v1. */
+.intermission-lightbox:not(.burlesque-lightbox) .intermission-lightbox-arrow,
+.intermission-lightbox:not(.burlesque-lightbox) .intermission-lightbox-close{
+  color:rgba(241,239,231,.36);
+  opacity:1;
+  transition:color .25s ease,opacity .25s ease,transform .25s ease;
+}
+.intermission-lightbox:not(.burlesque-lightbox) .intermission-lightbox-arrow:hover,
+.intermission-lightbox:not(.burlesque-lightbox) .intermission-lightbox-arrow:focus-visible,
+.intermission-lightbox:not(.burlesque-lightbox) .intermission-lightbox-close:hover,
+.intermission-lightbox:not(.burlesque-lightbox) .intermission-lightbox-close:focus-visible{
+  color:#f1efe7;
+  opacity:1;
+}
+.intermission-lightbox:not(.burlesque-lightbox) .intermission-lightbox-arrow:disabled{
+  color:#f1efe7;
+  opacity:.18;
+}
