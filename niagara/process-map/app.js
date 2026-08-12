@@ -13,7 +13,9 @@ const P = {
   ashland1: [42.993, -78.917],
   ashland2: [43.000, -78.916],
   seaway: [42.997, -78.915],
-  tonawandaLandfill: [42.985, -78.901]
+  tonawandaLandfill: [42.985, -78.901],
+  bliss: [42.8368, -78.8529],
+  guterl: [43.16948064711221, -78.6929769560219]
 };
 
 const SHINKOLOBWE_OVERVIEW = [-11.06492, 26.52854];
@@ -173,6 +175,56 @@ const steps = [
         path: [P.hooker, [43.082, -79.025], P.river]
       }
     ]
+  },
+  {
+    id: "guterl",
+    number: "5",
+    role: "Rod rolling",
+    date: "1948–1956",
+    title: "Simonds Saw and Steel",
+    shortTitle: "Simonds",
+    location: "Lockport, New York — later Guterl Specialty Steel",
+    point: P.guterl,
+    received: "Uranium-metal billets produced within the Atomic Energy Commission supply network.",
+    process: "Simonds heated and rolled uranium billets into rods. Federal records document more than 25 million pounds of uranium metal handled here.",
+    mainDestination: "Further machining and reactor-fuel fabrication",
+    mainDetail: "The rolled rods continued through a multi-site fabrication network rather than ending at the metal-production factories.",
+    routeKind: "material",
+    route: [P.electromet, [43.1205, -78.875], P.guterl],
+    cameraZoom: 14,
+    cameraDuration: 2.1,
+    caption: "Returning to the uranium metal produced at Electromet, the line follows the fabrication network to rod rolling at Simonds Saw and Steel in Lockport.",
+    wasteRoutes: []
+  },
+  {
+    id: "bliss",
+    number: "6",
+    role: "Rod finishing",
+    date: "1951–1952",
+    title: "Bliss & Laughlin Steel",
+    shortTitle: "Bliss & Laughlin",
+    location: "110 Hopkins Street, Buffalo, New York",
+    point: P.bliss,
+    received: "Rough-rolled uranium rods sent through the Atomic Energy Commission fabrication network.",
+    process: "Bliss & Laughlin machined and straightened uranium rods to improve their diameter tolerance and prepared them for further weapons-production work.",
+    mainDestination: "Fernald and the wider weapons-production network",
+    mainDetail: "Finished rods moved onward; radioactive turnings and waste cuttings were routed through the Lake Ontario Ordnance Works.",
+    routeKind: "material",
+    route: [P.loow, [43.08, -78.90], P.bliss],
+    cameraZoom: 14,
+    cameraDuration: 2.1,
+    caption: "A separate AEC fabrication route carried rough-rolled rods through the Lake Ontario Ordnance Works to Bliss & Laughlin for machining and straightening.",
+    wasteRoutes: [
+      {
+        id: "bliss-loow",
+        title: "Lake Ontario Ordnance Works",
+        location: "Lewiston and Porter, New York",
+        point: P.loow,
+        detail: "Machining produced radioactive turnings and waste cuttings.",
+        fromThere: "Federal records state that these residues were shipped to the Lake Ontario Ordnance Works for packaging and handling.",
+        path: [P.bliss, [43.02, -78.88], P.loow]
+      }
+    ]
   }
 ];
 
@@ -231,6 +283,8 @@ preloadSatellite(SHINKOLOBWE_OVERVIEW, 14, 3);
 preloadSatellite(P.linde, 11);
 preloadSatellite(P.electromet, 13);
 preloadSatellite(P.hooker, 14);
+preloadSatellite(P.guterl, 14);
+preloadSatellite(P.bliss, 14);
 
 const activeRouteLayer = L.layerGroup().addTo(map);
 const stepMarkers = {};
@@ -295,7 +349,7 @@ function routeOptions(kind, waste = false) {
     };
   }
   return {
-    color: "#440806",
+    color: "#285f86",
     weight: 4,
     opacity: .98,
     className: "network-route-line is-active-route"
@@ -493,7 +547,9 @@ function selectStep(id, options = {}) {
   const activeIndex = steps.findIndex(item => item.id === id);
   const markerCaption = step.id === "linde"
     ? "Linde processed uranium ore here. The FUSRAP sites below trace where its radioactive residues went."
-    : "This marker opens the factory process. Open the waste section below to see where its residues went.";
+    : step.wasteRoutes?.length
+      ? "This marker opens the factory process. Open the waste section below to see where its residues went."
+      : "This marker opens the documented factory process and the legacy that remained at this site.";
   const currentCaption = selectionSource === "marker" ? markerCaption : step.caption;
 
   document.getElementById("discovery-card").hidden = true;
@@ -520,12 +576,16 @@ function selectStep(id, options = {}) {
   next.setAttribute("aria-label", isLast ? "Restart at the mine" : "Next step");
 
   document.querySelectorAll(".linear-stepper button").forEach(button => {
+    const buttonIndex = steps.findIndex(item => item.id === button.dataset.nodeId);
     const selected = button.dataset.nodeId === id;
     button.classList.toggle("is-active", selected);
+    button.classList.toggle("is-past", buttonIndex < activeIndex);
     if (selected) {
       button.setAttribute("aria-current", "step");
       const stepper = document.getElementById("network-index");
-      const targetLeft = activeIndex === 0 ? 0 : Math.max(0, button.offsetLeft - 24);
+      const targetLeft = activeIndex === 0
+        ? 0
+        : Math.max(0, button.offsetLeft - ((stepper.clientWidth - button.offsetWidth) / 2));
       stepper.scrollTo({ left: targetLeft, behavior: "smooth" });
     } else {
       button.removeAttribute("aria-current");
