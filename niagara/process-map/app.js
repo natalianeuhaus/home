@@ -3,6 +3,7 @@
 const P = {
   shinkolobwe: [-11.055, 26.547],
   staten: [40.6402778, -74.1419444],
+  seneca: [42.716, -76.889],
   linde: [42.97441030070138, -78.8930735242712],
   electromet: [43.08744037093125, -79.00690488493662],
   hooker: [43.07958422985608, -79.00831731578447],
@@ -27,7 +28,9 @@ const steps = [
     mainDetail: "More than 1,000 tons crossed the Atlantic in steel drums and were held at the African Metals Corporation warehouse near the Bayonne Bridge. On November 2, 1942, the Army moved the drums to the Seneca Ordnance Depot for safekeeping. The story next enters Linde as part of Western New York’s processing network—not as a claim that every Staten Island drum went directly to Linde.",
     routeKind: "material",
     route: [P.shinkolobwe, [-7.5, 20], [-5.8, 13.2], [4, -12], [24, -43], [38, -68], P.staten],
-    caption: "The map shows the documented shipment from Shinkolobwe to Staten Island. The Army then moved the drums to Seneca Depot; the narrative next enters Linde’s regional processing network."
+    cameraZoom: 8.5,
+    cameraDuration: 1.8,
+    caption: "The route begins here. Select Linde when you are ready to follow the material across the Atlantic and into Western New York."
   },
   {
     id: "linde",
@@ -43,7 +46,10 @@ const steps = [
     mainDestination: "Electromet, Niagara Falls",
     mainDetail: "Green salt moved onward for reduction into uranium metal.",
     routeKind: "material",
-    route: [P.linde, [43.021, -78.925], P.electromet],
+    route: [P.shinkolobwe, [-7.5, 20], [-5.8, 13.2], [4, -12], [24, -43], [38, -68], P.staten, [41.15, -74.72], [42.05, -75.72], P.seneca, [42.87, -77.61], P.linde],
+    cameraZoom: 11,
+    cameraDuration: 4.8,
+    caption: "The camera follows the connected route from Shinkolobwe and settles at Linde. Staten Island and Seneca Depot remain part of the journey described in step 1.",
     wasteRoutes: [
       {
         id: "linde-loow",
@@ -70,7 +76,10 @@ const steps = [
     mainDestination: "Hooker Chemical",
     mainDetail: "C-2 slag still contained recoverable uranium, so it moved to Hooker for chemical treatment.",
     routeKind: "material",
-    route: [P.electromet, [43.0838, -79.0115], P.hooker],
+    route: [P.linde, [43.021, -78.925], P.electromet],
+    cameraZoom: 12.5,
+    cameraDuration: 2.4,
+    caption: "The line brings green salt from Linde to Electromet.",
     wasteRoutes: [
       {
         id: "electromet-loow",
@@ -106,7 +115,10 @@ const steps = [
     mainDestination: "Linde",
     mainDetail: "Recovered uranium-bearing material returned to the refining network, closing the regional recovery loop.",
     routeKind: "material",
-    route: [P.hooker, [43.018, -78.972], P.linde],
+    route: [P.electromet, [43.0838, -79.0115], P.hooker],
+    cameraZoom: 14,
+    cameraDuration: 2.1,
+    caption: "The line brings uranium-bearing C-2 slag from Electromet to Hooker for recovery.",
     wasteRoutes: [
       {
         id: "hooker-water",
@@ -131,6 +143,8 @@ const map = L.map("map", {
   zoom: 2.4,
   minZoom: 2,
   maxZoom: 18,
+  zoomSnap: .25,
+  zoomDelta: .5,
   zoomControl: false,
   attributionControl: false
 });
@@ -264,11 +278,18 @@ function drawActiveRoute() {
   if (!(!wasteRoute && step.routeKind === "context")) addArrow(route, Boolean(wasteRoute));
   if (wasteRoute) addWasteDestinationMarker(wasteRoute);
 
-  map.flyToBounds(L.latLngBounds(route), {
-    padding: [78, 78],
-    maxZoom: step.id === "shinkolobwe" ? 3.2 : 12.5,
-    duration: 1.2
-  });
+  if (wasteRoute) {
+    map.flyToBounds(L.latLngBounds(route), {
+      padding: [78, 78],
+      maxZoom: 12.5,
+      duration: 1.6
+    });
+  } else {
+    map.flyTo(step.point, step.cameraZoom, {
+      duration: step.cameraDuration,
+      easeLinearity: .22
+    });
+  }
 
   steps.forEach(item => {
     const marker = stepMarkers[item.id];
