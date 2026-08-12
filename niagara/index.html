@@ -392,8 +392,9 @@
     .atomic-reference-viewer-close:hover,.atomic-reference-viewer-close:focus-visible { color:#fff; background:rgba(255,255,255,.13); }
     .atomic-process-archive-link { appearance:none; display:inline-block; margin:10px 0 0; padding:0 0 4px; border:0; border-bottom:1px solid currentColor; color:var(--niagara-red); background:transparent; cursor:pointer; font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-decoration:none; text-transform:uppercase; }
     .atomic-process-archive-link:hover,.atomic-process-archive-link:focus-visible { color:var(--niagara-ink); }
+    .love-canal-range { padding-bottom:0; }
     .radioactive-waste-chapter { border-top:0; padding-top:0; }
-    .radioactive-waste-copy-grid { padding-top:clamp(86px,12svh,150px); }
+    .radioactive-waste-copy-grid { padding-top:clamp(52px,7svh,84px); }
     .waste-story { max-width:900px; }
     .waste-lede { width:900px; max-width:100%; margin-bottom:1.35em !important; margin-left:min(0px,max(-640px,calc(984px - 100vw))) !important; font-size:clamp(25px,2.25vw,37px) !important; line-height:1.23 !important; letter-spacing:-.027em !important; }
     .waste-chapter-bridge { margin:clamp(42px,6svh,72px) 0 0 !important; padding-top:24px; border-top:1px solid var(--niagara-line); color:var(--niagara-red); font-size:clamp(21px,1.8vw,29px) !important; line-height:1.3 !important; letter-spacing:-.02em !important; }
@@ -542,6 +543,7 @@
     .iwcs-afterword p + p { margin-top:1em; }
     .iwcs-afterword-link { width:max-content; max-width:100%; margin-top:26px; padding-bottom:5px; display:inline-block; color:var(--niagara-red); border-bottom:1px solid rgba(68,8,6,.42); text-decoration:none; font:10px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.14em; text-transform:uppercase; transition:color .22s ease,border-color .22s ease; }
     .iwcs-afterword-link:hover,.iwcs-afterword-link:focus-visible { color:var(--niagara-ink); border-color:var(--niagara-ink); }
+    .waste-survey-timeline + .iwcs-afterword { margin-top:clamp(50px,7svh,88px); }
     .waste-trail { margin:36px 0; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border-top:1px solid var(--niagara-line); border-bottom:1px solid var(--niagara-line); }
     .waste-trail span { min-height:92px; display:grid; place-items:center; padding:18px 10px; position:relative; text-align:center; color:rgba(21,23,21,.66); font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
     .waste-trail span + span { border-left:1px solid var(--niagara-line); }
@@ -651,7 +653,7 @@
       .atomic-process-reference-transfer { transform:rotate(90deg); text-align:left; }
       .atomic-reference-viewer { width:100vw; max-height:100svh; }
       .atomic-reference-viewer-caption { padding:14px 54px 16px 16px; }
-      .radioactive-waste-copy-grid { padding-top:82px; }
+      .radioactive-waste-copy-grid { padding-top:54px; }
       .love-canal-hero { width:100vw; height:auto; min-height:100svh; margin-left:-24px; grid-template-columns:1fr; grid-template-rows:auto auto; box-shadow:none; }
       .love-canal-title { padding:48px 24px 44px; }
       .love-canal-title h4 { margin-top:28px; }
@@ -1589,15 +1591,7 @@
                     <span class="atomic-process-reference-caption">Lake Ontario Ordnance Works · U.S. Army Corps of Engineers · 1985</span>
                   </button>
                 </div>
-                <aside class="iwcs-afterword" aria-labelledby="iwcs-afterword-title">
-                  <span class="waste-year">1986–present</span>
-                  <div class="iwcs-afterword-copy">
-                    <h5 id="iwcs-afterword-title">An “interim” structure</h5>
-                    <p>Only in 1986 did the U.S. Department of Energy complete the interim waste containment structure (IWCS), consolidating radioactive residues, contaminated soil, rubble, and demolition debris inside a ten-acre earthen cell. Federal planning documents later estimated that it held approximately 193,230 cubic yards of radioactive residues and waste.</p>
-                    <p>“Interim” matters. The cell has a compacted-clay cover, but no constructed liner beneath it. For comparison—not equivalence—the sarcophagus enclosing Chornobyl’s destroyed Unit 4 contains an estimated 200 tonnes of nuclear fuel.</p>
-                    <a class="iwcs-afterword-link" href="./archive/nfss-iwcs-conceptual-design.jpg" data-iwcs-diagram-open aria-haspopup="dialog">View the interim waste containment structure →</a>
-                  </div>
-                </aside>
+
               </section>
 
               <dialog class="atomic-reference-viewer loow-reference-viewer" aria-label="Lake Ontario Ordnance Works archival film">
@@ -1646,6 +1640,15 @@
                   <article class="waste-survey-item"><time>1984</time><p>An ORNL vehicle survey scanned selected roads and identified 100 elevated gamma anomalies for follow-up.</p></article>
                   <article class="waste-survey-item"><time>1985</time><p>Onsite measurements and soil sampling classified 38 anomalies as exceeding FUSRAP guidelines and associated 62 principally with industrial slag. ORNL published the findings in 1986.</p></article>
                 </div>
+                <aside class="iwcs-afterword" aria-labelledby="iwcs-afterword-title">
+                  <span class="waste-year">1986–present</span>
+                  <div class="iwcs-afterword-copy">
+                    <h5 id="iwcs-afterword-title">An “interim” structure</h5>
+                    <p>Only in 1986 did the U.S. Department of Energy complete the interim waste containment structure (IWCS), consolidating radioactive residues, contaminated soil, rubble, and demolition debris inside a ten-acre earthen cell. Federal planning documents later estimated that it held approximately 193,230 cubic yards of radioactive residues and waste.</p>
+                    <p>“Interim” matters. The cell has a compacted-clay cover, but no constructed liner beneath it. For comparison—not equivalence—the sarcophagus enclosing Chornobyl’s destroyed Unit 4 contains an estimated 200 tonnes of nuclear fuel.</p>
+                    <a class="iwcs-afterword-link" href="./archive/nfss-iwcs-conceptual-design.jpg" data-iwcs-diagram-open aria-haspopup="dialog">View the interim waste containment structure →</a>
+                  </div>
+                </aside>
               </section>
 
               <section class="waste-era-marker waste-era-marker--dark" data-waste-era id="era-telvock" aria-labelledby="era-telvock-title">
