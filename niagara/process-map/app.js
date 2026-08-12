@@ -3,7 +3,6 @@
 const P = {
   shinkolobwe: [-11.055, 26.547],
   staten: [40.6402778, -74.1419444],
-  seneca: [42.716, -76.889],
   linde: [42.97441030070138, -78.8930735242712],
   electromet: [43.08744037093125, -79.00690488493662],
   hooker: [43.07958422985608, -79.00831731578447],
@@ -24,47 +23,15 @@ const steps = [
     point: P.shinkolobwe,
     received: "Uranium-bearing rock from one of the richest known deposits in the world.",
     process: "Workers mined extremely high-grade pitchblende. The ore entered an international supply chain controlled by Union Minière du Haut-Katanga.",
-    mainDestination: "African Metals Corporation warehouse, Staten Island",
-    mainDetail: "More than 1,000 tons were shipped across the Atlantic in steel drums and held near the Bayonne Bridge.",
+    mainDestination: "Staten Island → Seneca Depot",
+    mainDetail: "More than 1,000 tons crossed the Atlantic in steel drums and were held at the African Metals Corporation warehouse near the Bayonne Bridge. On November 2, 1942, the Army moved the drums to the Seneca Ordnance Depot for safekeeping. The story next enters Linde as part of Western New York’s processing network—not as a claim that every Staten Island drum went directly to Linde.",
     routeKind: "material",
-    route: [P.shinkolobwe, [-7.5, 20], [-5.8, 13.2], [4, -12], [24, -43], [38, -68], P.staten]
-  },
-  {
-    id: "staten-island",
-    number: "2",
-    role: "Stockpiling",
-    date: "1940–1942",
-    title: "African Metals Corporation warehouse",
-    shortTitle: "Staten Island",
-    location: "2351 Richmond Terrace, Port Richmond, Staten Island",
-    point: P.staten,
-    received: "High-grade pitchblende shipped from Shinkolobwe in the Belgian Congo.",
-    process: "The ore remained in 1,823 steel drums at the waterfront warehouse until the Manhattan Engineer District acquired its uranium content.",
-    mainDestination: "Seneca Ordnance Depot, Romulus",
-    mainDetail: "The Army loaded the drums onto Lehigh Valley Railroad lighters and sent them to Seneca for safekeeping on November 2, 1942.",
-    routeKind: "material",
-    route: [P.staten, [41.15, -74.72], [42.05, -75.72], P.seneca]
-  },
-  {
-    id: "seneca",
-    number: "3",
-    role: "Army custody",
-    date: "November 1942",
-    title: "Seneca Ordnance Depot",
-    shortTitle: "Seneca Depot",
-    location: "Romulus, New York",
-    point: P.seneca,
-    received: "The Staten Island stockpile of Congolese uranium ore.",
-    process: "The Army placed the drums in secure wartime storage. This is the documented destination of the Staten Island stockpile.",
-    mainDestination: "Western New York’s uranium-processing network",
-    mainDetail: "The story next enters Linde, which processed African and American ores. This is a narrative transition—not a claim that every Staten Island drum went directly to Linde.",
-    routeKind: "context",
-    route: [P.seneca, [42.87, -77.61], P.linde],
-    caption: "Dotted line: narrative transition into the regional processing network."
+    route: [P.shinkolobwe, [-7.5, 20], [-5.8, 13.2], [4, -12], [24, -43], [38, -68], P.staten],
+    caption: "The map shows the documented shipment from Shinkolobwe to Staten Island. The Army then moved the drums to Seneca Depot; the narrative next enters Linde’s regional processing network."
   },
   {
     id: "linde",
-    number: "4",
+    number: "2",
     role: "Refining",
     date: "Full-scale operation by July 1943",
     title: "Linde Air Products",
@@ -91,7 +58,7 @@ const steps = [
   },
   {
     id: "electromet",
-    number: "5",
+    number: "3",
     role: "Reduction",
     date: "Manhattan Project and Cold War",
     title: "Electromet",
@@ -127,7 +94,7 @@ const steps = [
   },
   {
     id: "hooker",
-    number: "6",
+    number: "4",
     role: "Uranium recovery",
     date: "Wartime production",
     title: "Hooker Chemical",
@@ -299,7 +266,7 @@ function drawActiveRoute() {
 
   map.flyToBounds(L.latLngBounds(route), {
     padding: [78, 78],
-    maxZoom: ["electromet", "hooker"].includes(step.id) || wasteRoute ? 12.5 : 10.8,
+    maxZoom: step.id === "shinkolobwe" ? 3.2 : 12.5,
     duration: 1.2
   });
 
