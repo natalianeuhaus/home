@@ -286,7 +286,7 @@ function addWasteDestinationMarker(route) {
   L.marker(route.point, { icon, interactive: false }).addTo(activeRouteLayer);
 }
 
-function drawRouteProgressively(polyline, duration = 1900) {
+function drawRouteProgressively(polyline, duration = 3200) {
   window.requestAnimationFrame(() => {
     const path = polyline.getElement();
     if (!path) return;
@@ -346,7 +346,7 @@ function drawActiveRoute() {
       map.setView(step.point, step.cameraZoom, { animate: false });
       window.requestAnimationFrame(() => resetRouteProgress(routeLine));
       routeTransitionTimer = null;
-    }, 2150);
+    }, 3550);
   } else {
     map.flyTo(step.cameraPoint || step.point, step.cameraZoom, {
       duration: step.cameraDuration,
