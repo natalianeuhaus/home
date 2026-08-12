@@ -1140,7 +1140,7 @@
         </svg>
         <div class="chapter-scroll-marker" aria-hidden="true">
           <span class="chapter-scroll-marker-copy">
-            <span class="chapter-scroll-marker-label">Chapter I</span>
+            <span class="chapter-scroll-marker-label">Origins</span>
             <span class="chapter-scroll-marker-year">1895</span>
           </span>
         </div>
@@ -1149,7 +1149,7 @@
             <article class="health-slide health-slide--waterfalls" data-waterfalls-section="0">
               <div class="waterfalls-slide-inner">
                 <header class="waterfalls-slide-meta">
-                  <p class="niagara-kicker"><span class="investigation-chapter-label">Chapter I</span>1895</p>
+                  <p class="niagara-kicker"><span class="investigation-chapter-label">Origins</span>1895</p>
                   <h2>The waterfalls + industry</h2>
                 </header>
                 <div class="investigation-body">
@@ -1162,7 +1162,7 @@
             <article class="health-slide waterfalls-slide--archive" data-waterfalls-section="1">
               <div class="waterfalls-subslide-inner">
                 <header class="waterfalls-subslide-meta">
-                  <span class="investigation-chapter-label">Chapter I</span>
+                  <span class="investigation-chapter-label">Origins</span>
                   <span class="investigation-number">1895</span>
                   <h3>Adams Power Station</h3>
                 </header>
@@ -1176,7 +1176,7 @@
             <article class="health-slide waterfalls-slide--archive" data-waterfalls-section="2">
               <div class="waterfalls-subslide-inner">
                 <header class="waterfalls-subslide-meta">
-                  <span class="investigation-chapter-label">Chapter I</span>
+                  <span class="investigation-chapter-label">Origins</span>
                   <span class="investigation-number">1896</span>
                   <h3>Inside Adams Power Station</h3>
                 </header>
@@ -1190,7 +1190,7 @@
             <article class="health-slide waterfalls-slide--text" data-waterfalls-section="3">
               <div class="waterfalls-subslide-inner">
                 <header class="waterfalls-subslide-meta">
-                  <span class="investigation-chapter-label">Chapter I</span>
+                  <span class="investigation-chapter-label">Origins</span>
                   <span class="investigation-number">1895–1942</span>
                   <h3>Electro<wbr>chemistry + electro<wbr>metallurgy</h3>
                 </header>
@@ -1204,7 +1204,7 @@
             <article class="health-slide waterfalls-slide--archive" data-waterfalls-section="4">
               <div class="waterfalls-subslide-inner">
                 <header class="waterfalls-subslide-meta">
-                  <span class="investigation-chapter-label">Chapter I</span>
+                  <span class="investigation-chapter-label">Origins</span>
                   <span class="investigation-number">1937</span>
                   <h3>Linde</h3>
                   <p class="waterfalls-factory-parent">Union Carbide division</p>
@@ -1220,7 +1220,7 @@
             <article class="health-slide waterfalls-slide--archive" data-waterfalls-section="5">
               <div class="waterfalls-subslide-inner">
                 <header class="waterfalls-subslide-meta">
-                  <span class="investigation-chapter-label">Chapter I</span>
+                  <span class="investigation-chapter-label">Origins</span>
                   <span class="investigation-number">Before 1942</span>
                   <h3>Electromet</h3>
                   <p class="waterfalls-factory-parent">Union Carbide division</p>
@@ -1236,7 +1236,7 @@
             <article class="health-slide waterfalls-slide--archive" data-waterfalls-section="6">
               <div class="waterfalls-subslide-inner">
                 <header class="waterfalls-subslide-meta">
-                  <span class="investigation-chapter-label">Chapter I</span>
+                  <span class="investigation-chapter-label">Origins</span>
                   <span class="investigation-number">Before 1942</span>
                   <h3>Hooker</h3>
                   <p class="waterfalls-factory-parent">Electrochemical Company</p>
@@ -1252,7 +1252,7 @@
             <article class="health-slide waterfalls-slide--archive waterfalls-slide--carborundum" data-waterfalls-section="7">
               <div class="waterfalls-subslide-inner">
                 <header class="waterfalls-subslide-meta">
-                  <span class="investigation-chapter-label">Chapter I</span>
+                  <span class="investigation-chapter-label">Origins</span>
                   <span class="investigation-number">Before 1942</span>
                   <h3>Carborundum</h3>
                   <p class="waterfalls-factory-location">Niagara Falls, NY</p>
@@ -1494,7 +1494,7 @@
               <span class="investigation-chapter-label">Chapter II</span>
               <span class="investigation-number">1978–1981</span>
               <h3 id="era-love-canal-title">Love Canal &amp; The Federal Connection Report</h3>
-              <p>A chemical-waste disaster opened the archive of an entire region. The Assembly inquiry revealed that Niagara’s hidden contamination was not only chemical, but radioactive.</p>
+              <p>Love Canal forced officials to look beyond one contaminated neighborhood. Following allegations of Army dumping, the Assembly investigation traced a regional system of defense production and radioactive waste across Niagara and Erie Counties.</p>
             </div>
             <figure class="love-canal-media">
               <img src="./archive/love-canal-public-health-time-bomb.webp" alt="Cover spread of the 1978 report Love Canal: Public Health Time Bomb over an aerial photograph of the neighborhood" loading="lazy" />
@@ -2967,29 +2967,30 @@
       const waterfallsLeadKicker = waterfallsChapter ? waterfallsChapter.querySelector('.waterfalls-slide-meta .niagara-kicker') : null;
       const waterfallsLeadLabel = waterfallsLeadKicker ? waterfallsLeadKicker.querySelector('.investigation-chapter-label') : null;
       const waterfallsChapterAnchor = waterfallsChapter && waterfallsLeadLabel && waterfallsLeadKicker
-        ? { element:waterfallsChapter, label:'Chapter I', year:'1895', arrival:waterfallsLeadLabel, handoff:waterfallsLeadKicker }
+        ? { element:waterfallsChapter, label:'Origins', year:'1895', arrival:waterfallsLeadLabel, handoff:waterfallsLeadKicker }
         : null;
-      const atomicYearAnchor = chapterAnchorFromElement(document.querySelector('#atomic-niagara'));
+      const atomicChapterAnchor = chapterAnchorFromElement(document.querySelector('#atomic-niagara'));
       const loveCanalChapterAnchor = chapterAnchorFromElement(document.querySelector('#love-canal-range'));
       const laterChapterAnchors = wasteEraMarkers.map(chapterAnchorFromElement).filter(Boolean);
 
-      // These are the real chapter boundaries in the page structure.
-      // Atomic Niagara is a year change inside Chapter I; the radioactive-waste
-      // introduction and LOOW remain in Chapter II until #era-surveys begins.
+      // Origins is the prologue. The numbered chapters begin with Atomic Niagara;
+      // the radioactive-waste introduction and LOOW remain in Chapter II until
+      // #era-surveys begins.
       const chapterScrollChapters = [
         waterfallsChapterAnchor,
+        atomicChapterAnchor,
         loveCanalChapterAnchor,
         ...laterChapterAnchors
       ].filter(Boolean);
       const chapterScrollYearStops = [
         waterfallsChapterAnchor,
-        atomicYearAnchor,
+        atomicChapterAnchor,
         loveCanalChapterAnchor,
         ...laterChapterAnchors
       ].filter(Boolean);
 
       const waterfallsMarkerMeta = () => {
-        if (!waterfallsMarkerTrack || !waterfallsMarkerSlides.length) return { label:'Chapter I', year:'1895' };
+        if (!waterfallsMarkerTrack || !waterfallsMarkerSlides.length) return { label:'Origins', year:'1895' };
         const index = Math.max(0,Math.min(
           waterfallsMarkerSlides.length - 1,
           Math.round(waterfallsMarkerTrack.scrollLeft / Math.max(1,waterfallsMarkerTrack.clientWidth))
@@ -2998,7 +2999,7 @@
         const labelNode = slide.querySelector('.investigation-chapter-label');
         const numberNode = slide.querySelector('.investigation-number');
         const kicker = slide.querySelector('.niagara-kicker');
-        const label = labelNode ? labelNode.textContent.trim() : 'Chapter I';
+        const label = labelNode ? labelNode.textContent.trim() : 'Origins';
         const year = numberNode
           ? numberNode.textContent.trim()
           : (kicker ? kicker.textContent.replace(label,'').trim() : '1895');
