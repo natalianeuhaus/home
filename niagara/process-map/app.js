@@ -470,7 +470,7 @@ function closeDetailBubble() {
 
 function openDetailBubble(point, className, content) {
   closeDetailBubble();
-  const opensRight = map.getSize().x >= 760;
+  const opensRight = map.getSize().x >= 900;
   detailBubble = L.tooltip({
     className: `detail-bubble ${className}`,
     direction: opensRight ? "right" : "top",
