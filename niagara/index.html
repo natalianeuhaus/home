@@ -3022,8 +3022,11 @@
         if (!visible) return;
 
         let activeYearStop = chapterScrollYearStops[0];
-        chapterScrollYearStops.forEach(stop => {
-          if (stop.handoff && stop.handoff.getBoundingClientRect().bottom <= handoffY) activeYearStop = stop;
+        chapterScrollYearStops.forEach((stop,index) => {
+          const reached = index === 0
+            ? stop.handoff && stop.handoff.getBoundingClientRect().bottom <= handoffY
+            : stop.element && stop.element.getBoundingClientRect().top <= handoffY;
+          if (reached) activeYearStop = stop;
         });
         const meta = activeChapter.element === waterfallsChapter && activeYearStop.element === waterfallsChapter
           ? waterfallsMarkerMeta()
