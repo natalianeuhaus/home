@@ -464,7 +464,8 @@ function selectStep(id) {
     if (selected) {
       button.setAttribute("aria-current", "step");
       const stepper = document.getElementById("network-index");
-      stepper.scrollTo({ left: Math.max(0, button.offsetLeft - 24), behavior: "smooth" });
+      const targetLeft = activeIndex === 0 ? 0 : Math.max(0, button.offsetLeft - 24);
+      stepper.scrollTo({ left: targetLeft, behavior: "smooth" });
     } else {
       button.removeAttribute("aria-current");
     }
