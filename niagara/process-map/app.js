@@ -429,8 +429,17 @@ function addWasteDestinationMarker(route, routeNumber) {
   }).addTo(activeRouteLayer);
 
   marker.on("click", () => {
-    if (route.popup) openHistoryPopup(route.point, route.popup);
-    else openWastePopup(route, routeNumber);
+    if (popupTimer) window.clearTimeout(popupTimer);
+    map.closePopup();
+    map.stop();
+    map.flyTo(route.point, route.focusZoom || 14, {
+      duration: 1.25,
+      easeLinearity: .22
+    });
+    popupTimer = window.setTimeout(() => {
+      openWastePopup(route, routeNumber);
+      popupTimer = null;
+    }, 1650);
   });
   return marker;
 }
