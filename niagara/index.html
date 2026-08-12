@@ -455,6 +455,8 @@
     .iwcs-afterword p + p { margin-top:1em; }
     .iwcs-afterword-link { width:max-content; max-width:100%; margin-top:26px; padding-bottom:5px; display:inline-block; color:var(--niagara-red); border-bottom:1px solid rgba(68,8,6,.42); text-decoration:none; font:10px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.14em; text-transform:uppercase; transition:color .22s ease,border-color .22s ease; }
     .iwcs-afterword-link:hover,.iwcs-afterword-link:focus-visible { color:var(--niagara-ink); border-color:var(--niagara-ink); }
+    .iwcs-chapter-bridge { padding:clamp(68px,8vw,124px) clamp(34px,4.5vw,70px); display:grid; grid-template-columns:minmax(130px,.28fr) minmax(0,1fr); gap:clamp(30px,5vw,82px); border-top:1px solid rgba(68,8,6,.18); background:rgba(241,240,234,.94); }
+    .iwcs-chapter-bridge p { grid-column:2; max-width:930px; margin:0; color:var(--niagara-ink); font-size:clamp(27px,3vw,48px); line-height:1.12; letter-spacing:-.035em; }
     .waste-trail { margin:36px 0; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border-top:1px solid var(--niagara-line); border-bottom:1px solid var(--niagara-line); }
     .waste-trail span { min-height:92px; display:grid; place-items:center; padding:18px 10px; position:relative; text-align:center; color:rgba(21,23,21,.66); font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
     .waste-trail span + span { border-left:1px solid var(--niagara-line); }
@@ -623,6 +625,8 @@
       .waste-section--loow-film { width:calc(100vw - 48px); margin-left:0; }
       .iwcs-afterword { padding:30px 24px 36px; grid-template-columns:1fr; gap:18px; }
       .iwcs-afterword .waste-year { padding-top:0; }
+      .iwcs-chapter-bridge { padding:62px 24px 74px; grid-template-columns:1fr; gap:0; }
+      .iwcs-chapter-bridge p { grid-column:1; font-size:clamp(27px,8vw,38px); }
       .waste-trail { grid-template-columns:1fr 1fr; }
       .waste-trail span:nth-child(3) { border-left:0; border-top:1px solid var(--niagara-line); }
       .waste-trail span:nth-child(4) { border-top:1px solid var(--niagara-line); }
@@ -1499,6 +1503,9 @@
                     <a class="iwcs-afterword-link" href="./archive/nfss-iwcs-conceptual-design.jpg" data-iwcs-diagram-open aria-haspopup="dialog">View the interim waste containment structure →</a>
                   </div>
                 </aside>
+                <div class="iwcs-chapter-bridge" aria-label="Transition to Chapter III">
+                  <p>The IWCS enclosed what remained at the federal site. But the gravel that had already left—taken home by workers, sold commercially, and reused throughout the region—was another story. Finding it meant looking far beyond the reservation.</p>
+                </div>
               </section>
 
               <dialog class="atomic-reference-viewer loow-reference-viewer" aria-label="Lake Ontario Ordnance Works archival film">
