@@ -640,6 +640,8 @@
     .niagara-iframe-intro p,.niagara-photo-intro p { max-width:780px; margin:0; font-size:clamp(17px,1.25vw,21px); line-height:1.46; }
     .niagara-frame-shell { width:100%; min-height:76svh; border-top:1px solid var(--niagara-line); background:#fff; position:relative; }
     .niagara-frame-shell iframe { width:100%; height:calc(100svh - 66px); min-height:720px; border:0; display:block; background:#fff; }
+    [data-panel="map"] .niagara-frame-shell { padding-top:14px; background:var(--niagara-paper); }
+    [data-panel="map"] .niagara-frame-shell iframe { height:calc(100svh - 80px); }
     [data-panel="evidence"] .niagara-frame-shell,
     [data-panel="evidence"] .niagara-frame-shell iframe { background:var(--niagara-paper); }
     .niagara-frame-placeholder { min-height:76svh; display:grid; place-items:center; padding:40px; color:rgba(21,23,21,.55); font:12px/1.5 Arial,Helvetica,sans-serif; text-transform:uppercase; letter-spacing:.2em; }
@@ -776,6 +778,7 @@
     body.niagara-content-mode .niagara-tab:focus-visible,
     body.niagara-content-mode .niagara-tab[aria-selected="true"] { color:var(--niagara-red); opacity:1; }
     body.niagara-content-mode .niagara-tab-label { opacity:1; transform:none; animation:none; }
+    body.niagara-tabs-navigated .niagara-tab-label { opacity:1; transform:none; animation:none; }
     body.niagara-content-mode .niagara-tab-indicator { animation:none; opacity:1; }
     body.niagara-content-mode .site-header { opacity:1 !important; pointer-events:none !important; }
     body.niagara-content-mode .wordmark { opacity:0 !important; visibility:hidden; pointer-events:none; }
@@ -2055,6 +2058,7 @@
         if (!validTabs.has(name)) name = 'investigation';
         const internalArchiveMode = name === 'evidence' || name === 'map';
         const returningToPhotographs = page.classList.contains('niagara-content-mode') && name === 'photographs';
+        if (scrollToContent) page.classList.add('niagara-tabs-navigated');
         if (scrollToContent) page.classList.toggle('niagara-content-mode', internalArchiveMode);
         page.classList.toggle('niagara-photographs-active', name === 'photographs');
         if (name !== 'photographs') {
