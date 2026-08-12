@@ -117,7 +117,7 @@
     .chapter-scroll-marker { --chapter-scroll-x:42px; width:1px; height:70px; position:fixed; z-index:23; top:96px; left:var(--chapter-scroll-x); color:var(--niagara-red); opacity:0; transform:translate3d(0,-10px,0); pointer-events:none; transition:opacity .25s ease,transform .35s cubic-bezier(.22,1,.36,1); }
     .chapter-scroll-marker.is-visible { opacity:1; transform:translate3d(0,0,0); }
     .chapter-scroll-marker::before,.chapter-scroll-marker::after { content:none; }
-    .chapter-scroll-marker-copy { width:max-content; min-width:112px; position:absolute; left:14px; top:-7px; padding:8px 12px 9px; color:var(--niagara-red); background:rgba(241,240,234,.92); box-shadow:0 0 18px rgba(241,240,234,.78); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
+    .chapter-scroll-marker-copy { width:max-content; min-width:112px; position:absolute; left:14px; top:-7px; padding:8px 12px 9px; color:var(--niagara-red); background:rgba(241,240,234,.92); box-shadow:none; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
     .chapter-scroll-marker-label,.chapter-scroll-marker-year { display:block; text-transform:uppercase; font-family:Arial,Helvetica,sans-serif; white-space:nowrap; }
     .chapter-scroll-marker-label { margin-bottom:5px; font-size:10px; line-height:1.3; letter-spacing:.2em; }
     .chapter-scroll-marker-year { font-size:13px; line-height:1.3; letter-spacing:.18em; }
@@ -2937,6 +2937,8 @@
       const waterfallsChapter = document.querySelector('#waterfalls-chapter');
       const waterfallsMarkerTrack = waterfallsChapter ? waterfallsChapter.querySelector('.waterfalls-record-track') : null;
       const waterfallsMarkerSlides = waterfallsMarkerTrack ? Array.from(waterfallsMarkerTrack.querySelectorAll('[data-waterfalls-section]')) : [];
+      const chapterScrollEntryLabel = waterfallsChapter ? waterfallsChapter.querySelector('.investigation-chapter-label') : null;
+      const chapterScrollTabbar = document.querySelector('.niagara-tabbar-wrap');
 
       const chapterMetaFromElement = element => {
         if (!element) return null;
@@ -2982,7 +2984,9 @@
         const storyRect = investigationStory.getBoundingClientRect();
         const panelActive = chapterScrollPanel && chapterScrollPanel.classList.contains('is-active');
         const probeY = Math.min(window.innerHeight * .36,320);
-        const visible = Boolean(panelActive && storyRect.top <= probeY && storyRect.bottom >= probeY);
+        const entryBoundary = chapterScrollTabbar ? chapterScrollTabbar.getBoundingClientRect().bottom : 0;
+        const entryComplete = !chapterScrollEntryLabel || chapterScrollEntryLabel.getBoundingClientRect().bottom <= entryBoundary;
+        const visible = Boolean(panelActive && entryComplete && storyRect.bottom >= probeY);
         chapterScrollMarker.classList.toggle('is-visible',visible);
         if (!visible) return;
 
