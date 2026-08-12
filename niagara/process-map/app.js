@@ -110,9 +110,7 @@ const steps = [
         point: P.loow,
         detail: "Linde’s radioactive residues entered the federal storage system at LOOW.",
         fromThere: "The map opens the 1985 site history after arriving at the storage area.",
-        path: [P.linde, [43.106, -78.91], P.loow],
-        focusZoom: 14,
-        popup: LOOW_BEFORE_CONTAINMENT
+        path: [P.linde, [43.038, -78.874], [43.112, -78.884], [43.175, -78.918], P.loow]
       }
     ]
   },
@@ -142,9 +140,7 @@ const steps = [
         point: P.loow,
         detail: "Radioactive waste from uranium-metal production moved north to LOOW.",
         fromThere: "The map opens the 1985 site history after arriving at the storage area.",
-        path: [P.electromet, [43.151, -78.989], P.loow],
-        focusZoom: 14,
-        popup: LOOW_BEFORE_CONTAINMENT
+        path: [P.electromet, [43.151, -78.989], P.loow]
       },
       {
         id: "electromet-landfill",
@@ -233,11 +229,30 @@ const steps = [
         point: P.loow,
         detail: "Machining produced radioactive turnings and waste cuttings that were shipped to LOOW.",
         fromThere: "The map opens the 1985 site history after arriving at the storage area.",
-        path: [P.bliss, [43.02, -78.88], P.loow],
-        focusZoom: 14,
-        popup: LOOW_BEFORE_CONTAINMENT
+        path: [P.bliss, [43.02, -78.88], P.loow]
       }
     ]
+  },
+  {
+    id: "loow",
+    number: "7",
+    role: "Storage and disposal",
+    date: "1944–1986",
+    title: "Lake Ontario Ordnance Works",
+    shortTitle: "LOOW",
+    location: "Lewiston and Porter, New York",
+    point: P.loow,
+    received: "Radioactive residues from Western New York’s uranium-processing and fabrication network.",
+    process: "The reservation was used for storage, repackaging, transshipment, burial, and disposal.",
+    mainDestination: "Interim waste containment structure",
+    mainDetail: "In 1986, radioactive materials were consolidated into the interim containment structure.",
+    routeKind: "material",
+    route: [P.bliss, [43.02, -78.88], [43.11, -78.89], P.loow],
+    cameraZoom: 14,
+    cameraDuration: 1.8,
+    popup: LOOW_BEFORE_CONTAINMENT,
+    caption: "The map lands on the Lake Ontario Storage Area first; its 1985 history then opens from marker 7.",
+    wasteRoutes: []
   }
 ];
 
@@ -406,13 +421,21 @@ function addWasteDestinationMarker(route, routeNumber) {
     title: route.title
   }).addTo(activeRouteLayer);
 
-  if (route.popup) {
-    marker.bindPopup(
-      `<article class="loow-popup-copy"><span>${route.popup.eyebrow}</span><h3>${route.popup.title}</h3><p>${route.popup.body}</p><p>${route.popup.note}</p></article>`,
-      { className: "loow-history-popup", maxWidth: 370, minWidth: 300, offset: [0, -16], autoPan: false }
-    );
-  }
+  if (route.popup) marker.on("click", () => openHistoryPopup(route.point, route.popup));
   return marker;
+}
+
+function openHistoryPopup(point, copy) {
+  L.popup({
+    className: "loow-history-popup",
+    maxWidth: 370,
+    minWidth: 300,
+    offset: [0, -16],
+    autoPan: false
+  })
+    .setLatLng(point)
+    .setContent(`<article class="loow-popup-copy"><span>${copy.eyebrow}</span><h3>${copy.title}</h3><p>${copy.body}</p><p>${copy.note}</p></article>`)
+    .openOn(map);
 }
 
 function drawRouteProgressively(polyline, duration = 3200) {
@@ -448,6 +471,7 @@ function drawActiveRoute() {
     window.clearTimeout(popupTimer);
     popupTimer = null;
   }
+  map.closePopup();
   activeRouteLayer.clearLayers();
   if (!activeId) return;
 
@@ -467,6 +491,13 @@ function drawActiveRoute() {
       marker.setOpacity(selected ? 1 : .32);
       marker.getElement()?.classList.toggle("is-active-marker", selected);
     });
+    if (step.popup) {
+      popupTimer = window.setTimeout(() => {
+        if (activeId !== step.id) return;
+        openHistoryPopup(step.point, step.popup);
+        popupTimer = null;
+      }, 1650);
+    }
     return;
   }
 
@@ -500,6 +531,26 @@ function drawActiveRoute() {
     return;
   }
 
+  if (!wasteRoute && step.popup) {
+    map.stop();
+    map.flyTo(step.point, step.cameraZoom, {
+      duration: step.cameraDuration,
+      easeLinearity: .22
+    });
+    steps.forEach(item => {
+      const marker = stepMarkers[item.id];
+      const selected = item.id === activeId;
+      marker.setOpacity(selected ? 1 : .32);
+      marker.getElement()?.classList.toggle("is-active-marker", selected);
+    });
+    popupTimer = window.setTimeout(() => {
+      if (activeId !== step.id) return;
+      openHistoryPopup(step.point, step.popup);
+      popupTimer = null;
+    }, 2200);
+    return;
+  }
+
   const routeLine = L.polyline(route, routeOptions(step.routeKind, Boolean(wasteRoute))).addTo(activeRouteLayer);
   if (!(!wasteRoute && step.routeKind === "context")) addArrow(route, Boolean(wasteRoute));
   const wasteRouteNumber = wasteRoute ? step.wasteRoutes.findIndex(item => item.id === wasteRoute.id) + 1 : null;
@@ -521,7 +572,7 @@ function drawActiveRoute() {
     if (wasteRoute.popup && wasteMarker) {
       popupTimer = window.setTimeout(() => {
         if (activeId !== step.id || selectedWasteId !== wasteRoute.id) return;
-        wasteMarker.openPopup();
+        openHistoryPopup(wasteRoute.point, wasteRoute.popup);
         popupTimer = null;
       }, 2100);
     }
