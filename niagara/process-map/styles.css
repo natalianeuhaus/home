@@ -69,7 +69,7 @@ button { font: inherit; }
   border-bottom: 1px solid var(--line);
   background: #ece9e2;
   scroll-behavior: smooth;
-  scroll-snap-type: x proximity;
+  scroll-snap-type: none;
   scrollbar-width: none;
 }
 .linear-stepper::-webkit-scrollbar { display: none; }
