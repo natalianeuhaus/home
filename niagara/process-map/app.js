@@ -29,7 +29,7 @@ const steps = [
     routeKind: "material",
     route: [P.shinkolobwe, [-7.5, 20], [-5.8, 13.2], [4, -12], [24, -43], [38, -68], P.staten],
     cameraPoint: P.shinkolobwe,
-    cameraZoom: 13,
+    cameraZoom: 15,
     cameraDuration: 1.25,
     caption: "The route begins here. Select Linde when you are ready to follow the material across the Atlantic and into Western New York."
   },
@@ -143,7 +143,7 @@ let routeResetTimer = null;
 
 const map = L.map("map", {
   center: P.shinkolobwe,
-  zoom: 13,
+  zoom: 15,
   minZoom: 2,
   maxZoom: 18,
   zoomSnap: .25,
@@ -185,7 +185,7 @@ function preloadSatellite(point, zoom, radius = 2) {
   }
 }
 preloadSatellite([18, -24], 3, 2);
-preloadSatellite(P.shinkolobwe, 13);
+preloadSatellite(P.shinkolobwe, 15, 3);
 preloadSatellite(P.linde, 11);
 preloadSatellite(P.electromet, 13);
 preloadSatellite(P.hooker, 14);
