@@ -19,6 +19,8 @@ const P = {
 };
 
 const SHINKOLOBWE_OVERVIEW = [-11.06492, 26.52854];
+const WESTERN_NEW_YORK_ZOOM = 12.25;
+const WESTERN_NEW_YORK_MARKER_OFFSET = .11;
 const LOOW_BEFORE_CONTAINMENT = {
   eyebrow: "Before containment",
   title: "Lake Ontario Storage Area · 1985",
@@ -65,7 +67,7 @@ const steps = [
     routeKind: "material",
     route: [],
     cameraPoint: [42.967, -78.935],
-    cameraZoom: 12.25,
+    cameraZoom: WESTERN_NEW_YORK_ZOOM,
     cameraDuration: 2.7,
     caption: "The narrative now enters Western New York at Linde. Staten Island and Seneca Depot remain part of the journey described in step 1.",
     wasteRoutes: [
@@ -132,7 +134,7 @@ const steps = [
     mainDetail: "Uranium-bearing C-2 slag moved to Hooker for chemical treatment, while uranium metal entered the rod-fabrication network, including Bliss & Laughlin.",
     routeKind: "material",
     route: [P.linde, [43.021, -78.925], P.electromet],
-    cameraZoom: 14,
+    cameraZoom: WESTERN_NEW_YORK_ZOOM,
     cameraDuration: 2.4,
     caption: "The line brings green salt from Linde to Electromet.",
     wasteRoutes: [
@@ -172,7 +174,7 @@ const steps = [
     mainDetail: "Recovered uranium-bearing material returned to the refining network, closing the regional recovery loop.",
     routeKind: "material",
     route: [P.electromet, [43.0838, -79.0115], P.hooker],
-    cameraZoom: 14,
+    cameraZoom: WESTERN_NEW_YORK_ZOOM,
     cameraDuration: 2.1,
     caption: "The line brings uranium-bearing C-2 slag from Electromet to Hooker for recovery.",
     wasteRoutes: [
@@ -203,7 +205,7 @@ const steps = [
     mainDetail: "The rolled rods continued through a multi-site fabrication network. Radioactive contamination also remained in buildings, soil, and groundwater, leading to FUSRAP cleanup.",
     routeKind: "material",
     route: [P.electromet, [43.1205, -78.875], P.guterl],
-    cameraZoom: 14,
+    cameraZoom: WESTERN_NEW_YORK_ZOOM,
     cameraDuration: 2.1,
     caption: "Returning to the uranium metal produced at Electromet, the line follows the fabrication network to rod rolling at Simonds Saw and Steel in Lockport.",
     wasteRoutes: []
@@ -224,7 +226,7 @@ const steps = [
     mainDetail: "Finished rods returned to the wider production network; radioactive turnings and waste cuttings were routed through the Lake Ontario Ordnance Works.",
     routeKind: "material",
     route: [P.electromet, [42.96, -78.92], P.bliss],
-    cameraZoom: 14,
+    cameraZoom: WESTERN_NEW_YORK_ZOOM,
     cameraDuration: 2.1,
     caption: "The line follows uranium metal from Electromet to Bliss & Laughlin for machining and straightening into rods.",
     wasteRoutes: [
@@ -255,7 +257,7 @@ const steps = [
     mainDetail: "In 1986, radioactive materials were consolidated into the interim containment structure.",
     routeKind: "material",
     route: [P.bliss, [43.02, -78.88], [43.11, -78.89], P.loow],
-    cameraZoom: 14,
+    cameraZoom: WESTERN_NEW_YORK_ZOOM,
     cameraDuration: 1.8,
     popup: LOOW_BEFORE_CONTAINMENT,
     caption: "The map lands on the Lake Ontario Storage Area first; its 1985 history then opens from marker 7.",
@@ -270,6 +272,7 @@ let selectedWasteId = null;
 let routeTransitionTimer = null;
 let popupTimer = null;
 let selectionSource = "initial";
+let detailBubble = null;
 
 const map = L.map("map", {
   center: SHINKOLOBWE_OVERVIEW,
@@ -325,6 +328,12 @@ preloadSatellite(P.loow, 14, 3);
 
 const activeRouteLayer = L.layerGroup().addTo(map);
 const stepMarkers = {};
+
+function westernNewYorkCameraPoint(point) {
+  const projected = map.project(L.latLng(point), WESTERN_NEW_YORK_ZOOM);
+  const markerOffset = map.getSize().x * WESTERN_NEW_YORK_MARKER_OFFSET;
+  return map.unproject(projected.subtract([markerOffset, 0]), WESTERN_NEW_YORK_ZOOM);
+}
 
 steps.forEach(step => {
   const icon = L.divIcon({
@@ -431,8 +440,9 @@ function addWasteDestinationMarker(route, routeNumber) {
   marker.on("click", () => {
     if (popupTimer) window.clearTimeout(popupTimer);
     map.closePopup();
+    closeDetailBubble();
     map.stop();
-    map.flyTo(route.point, route.focusZoom || 14, {
+    map.flyTo(westernNewYorkCameraPoint(route.point), WESTERN_NEW_YORK_ZOOM, {
       duration: 1.25,
       easeLinearity: .22
     });
@@ -445,16 +455,37 @@ function addWasteDestinationMarker(route, routeNumber) {
 }
 
 function openHistoryPopup(point, copy) {
-  L.popup({
-    className: "loow-history-popup",
-    maxWidth: 370,
-    minWidth: 300,
-    offset: [0, -16],
-    autoPan: false
+  openDetailBubble(
+    point,
+    "loow-history-popup",
+    `<article class="loow-popup-copy"><span>${copy.eyebrow}</span><h3>${copy.title}</h3><p>${copy.body}</p><p>${copy.note}</p></article>`
+  );
+}
+
+function closeDetailBubble() {
+  if (!detailBubble) return;
+  map.removeLayer(detailBubble);
+  detailBubble = null;
+}
+
+function openDetailBubble(point, className, content) {
+  closeDetailBubble();
+  const opensRight = map.getSize().x >= 760;
+  detailBubble = L.tooltip({
+    className: `detail-bubble ${className}`,
+    direction: opensRight ? "right" : "top",
+    offset: opensRight ? [24, 0] : [0, -34],
+    permanent: true,
+    interactive: true,
+    opacity: 1
   })
     .setLatLng(point)
-    .setContent(`<article class="loow-popup-copy"><span>${copy.eyebrow}</span><h3>${copy.title}</h3><p>${copy.body}</p><p>${copy.note}</p></article>`)
-    .openOn(map);
+    .setContent(`<button type="button" class="detail-bubble-close" aria-label="Close details">×</button>${content}`)
+    .addTo(map);
+
+  window.requestAnimationFrame(() => {
+    detailBubble?.getElement()?.querySelector(".detail-bubble-close")?.addEventListener("click", closeDetailBubble);
+  });
 }
 
 function openStepPopup(step) {
@@ -463,15 +494,7 @@ function openStepPopup(step) {
     return;
   }
 
-  L.popup({
-    className: "number-history-popup",
-    maxWidth: 390,
-    minWidth: 310,
-    offset: [0, -36],
-    autoPan: false
-  })
-    .setLatLng(step.point)
-    .setContent(`
+  openDetailBubble(step.point, "number-history-popup", `
       <article class="number-popup-copy">
         <span>${step.number} · ${step.role} · ${step.date}</span>
         <h3>${step.title}</h3>
@@ -482,20 +505,11 @@ function openStepPopup(step) {
           <div><dt>What moved next</dt><dd><strong>${step.mainDestination}</strong>${step.mainDetail}</dd></div>
         </dl>
       </article>
-    `)
-    .openOn(map);
+    `);
 }
 
 function openWastePopup(route, routeNumber) {
-  L.popup({
-    className: "number-history-popup waste-history-popup",
-    maxWidth: 370,
-    minWidth: 300,
-    offset: [0, -16],
-    autoPan: false
-  })
-    .setLatLng(route.point)
-    .setContent(`
+  openDetailBubble(route.point, "number-history-popup waste-history-popup", `
       <article class="number-popup-copy">
         <span>Waste route ${routeNumber}</span>
         <h3>${route.title}</h3>
@@ -503,8 +517,7 @@ function openWastePopup(route, routeNumber) {
         <p>${route.detail}</p>
         <p>${route.fromThere}</p>
       </article>
-    `)
-    .openOn(map);
+    `);
 }
 
 function drawRouteProgressively(polyline, duration = 3200) {
@@ -541,6 +554,7 @@ function drawActiveRoute() {
     popupTimer = null;
   }
   map.closePopup();
+  closeDetailBubble();
   activeRouteLayer.clearLayers();
   if (!activeId) return;
 
@@ -550,7 +564,10 @@ function drawActiveRoute() {
 
   if (!wasteRoute && selectionSource === "marker") {
     map.stop();
-    map.flyTo(step.cameraPoint || step.point, step.cameraZoom, {
+    const cameraPoint = step.id === "shinkolobwe"
+      ? step.cameraPoint || step.point
+      : westernNewYorkCameraPoint(step.point);
+    map.flyTo(cameraPoint, step.cameraZoom, {
       duration: 1.25,
       easeLinearity: .22
     });
@@ -592,7 +609,7 @@ function drawActiveRoute() {
 
   if (!wasteRoute && step.id === "linde") {
     map.stop();
-    map.flyTo(step.cameraPoint || step.point, step.cameraZoom, {
+    map.flyTo(westernNewYorkCameraPoint(step.point), step.cameraZoom, {
       duration: 2.4,
       easeLinearity: .2
     });
@@ -612,7 +629,7 @@ function drawActiveRoute() {
 
   if (!wasteRoute && step.popup) {
     map.stop();
-    map.flyTo(step.point, step.cameraZoom, {
+    map.flyTo(westernNewYorkCameraPoint(step.point), step.cameraZoom, {
       duration: step.cameraDuration,
       easeLinearity: .22
     });
@@ -636,24 +653,28 @@ function drawActiveRoute() {
   const wasteMarker = wasteRoute ? addWasteDestinationMarker(wasteRoute, wasteRouteNumber) : null;
 
   if (wasteRoute) {
-    if (wasteRoute.focusZoom) {
-      map.flyTo(wasteRoute.point, wasteRoute.focusZoom, {
-        duration: 1.8,
-        easeLinearity: .22
-      });
-    } else {
-      map.flyToBounds(L.latLngBounds(route), {
-        padding: [78, 78],
-        maxZoom: 12.5,
-        duration: 1.6
-      });
-    }
+    map.stop();
+    map.fitBounds(L.latLngBounds(route), {
+      padding: [78, 78],
+      maxZoom: WESTERN_NEW_YORK_ZOOM,
+      animate: false
+    });
+    drawRouteProgressively(routeLine, 1200);
     if (wasteMarker) {
-      popupTimer = window.setTimeout(() => {
+      routeTransitionTimer = window.setTimeout(() => {
         if (activeId !== step.id || selectedWasteId !== wasteRoute.id) return;
-        openWastePopup(wasteRoute, wasteRouteNumber);
-        popupTimer = null;
-      }, 2100);
+        map.stop();
+        map.flyTo(westernNewYorkCameraPoint(wasteRoute.point), WESTERN_NEW_YORK_ZOOM, {
+          duration: 1.5,
+          easeLinearity: .22
+        });
+        popupTimer = window.setTimeout(() => {
+          if (activeId !== step.id || selectedWasteId !== wasteRoute.id) return;
+          openWastePopup(wasteRoute, wasteRouteNumber);
+          popupTimer = null;
+        }, 1700);
+        routeTransitionTimer = null;
+      }, 1350);
     }
   } else {
     map.stop();
@@ -667,7 +688,7 @@ function drawActiveRoute() {
       if (activeId !== step.id || selectedWasteId) return;
       map.stop();
       activeRouteLayer.clearLayers();
-      map.flyTo(step.cameraPoint || step.point, step.cameraZoom, {
+      map.flyTo(westernNewYorkCameraPoint(step.point), step.cameraZoom, {
         duration: 1.5,
         easeLinearity: .22
       });
