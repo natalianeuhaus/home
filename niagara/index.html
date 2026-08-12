@@ -282,18 +282,21 @@
     .atomic-niagara-credit { position:absolute; z-index:1; right:18px; bottom:16px; margin:0; max-width:76%; color:rgba(241,240,234,.68); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.08em; text-align:right; text-transform:uppercase; text-shadow:0 1px 8px rgba(0,0,0,.7); }
 
     /* Atomic Niagara X-ray entrance */
-    #atomic-niagara > .atomic-niagara-hero.is-xray-ready {
+    #atomic-niagara > .atomic-xray-sequence {
       position:relative;
       isolation:isolate;
+    }
+    #atomic-niagara > .atomic-xray-sequence.is-xray-ready > .atomic-niagara-hero,
+    #atomic-niagara > .atomic-xray-sequence.is-xray-ready > .atomic-evidence-mosaic {
       filter:invert(1) grayscale(.9) sepia(.18) hue-rotate(150deg) saturate(2.4) contrast(1.55) brightness(.75);
       will-change:filter;
     }
-    #atomic-niagara > .atomic-niagara-hero.is-xray-ready::after {
+    #atomic-niagara > .atomic-xray-sequence.is-xray-ready::after {
       content:"";
       position:absolute;
       z-index:12;
-      top:-6%;
-      bottom:-6%;
+      top:-3%;
+      bottom:-3%;
       left:-45%;
       width:42%;
       pointer-events:none;
@@ -303,35 +306,38 @@
       mix-blend-mode:screen;
       will-change:transform,opacity;
     }
-    #atomic-niagara > .atomic-niagara-hero.is-xray-ready.is-xray-revealed {
-      animation:atomic-xray-resolve 3.4s cubic-bezier(.22,.72,.18,1) forwards;
+    #atomic-niagara > .atomic-xray-sequence.is-xray-ready.is-xray-revealed > .atomic-niagara-hero,
+    #atomic-niagara > .atomic-xray-sequence.is-xray-ready.is-xray-revealed > .atomic-evidence-mosaic {
+      animation:atomic-xray-resolve 8s cubic-bezier(.22,.72,.18,1) forwards;
     }
-    #atomic-niagara > .atomic-niagara-hero.is-xray-ready.is-xray-revealed::after {
-      animation:atomic-xray-scan 2.9s cubic-bezier(.25,.7,.2,1) both;
+    #atomic-niagara > .atomic-xray-sequence.is-xray-ready.is-xray-revealed::after {
+      animation:atomic-xray-scan 7.2s cubic-bezier(.25,.7,.2,1) both;
     }
     @keyframes atomic-xray-resolve {
       0% { filter:invert(1) grayscale(.9) sepia(.18) hue-rotate(150deg) saturate(2.4) contrast(1.55) brightness(.75); }
-      10% { filter:invert(.95) grayscale(.94) sepia(.12) hue-rotate(142deg) saturate(2.65) contrast(1.72) brightness(.9); }
-      16% { filter:invert(1) grayscale(.86) sepia(.2) hue-rotate(155deg) saturate(2.25) contrast(1.48) brightness(.7); }
-      45% { filter:invert(.72) grayscale(.7) sepia(.12) hue-rotate(112deg) saturate(1.95) contrast(1.35) brightness(.84); }
-      72% { filter:invert(.18) grayscale(.22) sepia(.03) hue-rotate(24deg) saturate(1.2) contrast(1.08) brightness(.97); }
+      8% { filter:invert(.95) grayscale(.94) sepia(.12) hue-rotate(142deg) saturate(2.65) contrast(1.72) brightness(.9); }
+      14% { filter:invert(1) grayscale(.86) sepia(.2) hue-rotate(155deg) saturate(2.25) contrast(1.48) brightness(.7); }
+      54% { filter:invert(.72) grayscale(.7) sepia(.12) hue-rotate(112deg) saturate(1.95) contrast(1.35) brightness(.84); }
+      82% { filter:invert(.18) grayscale(.22) sepia(.03) hue-rotate(24deg) saturate(1.2) contrast(1.08) brightness(.97); }
       100% { filter:invert(0) grayscale(0) sepia(0) hue-rotate(0deg) saturate(1) contrast(1) brightness(1); }
     }
     @keyframes atomic-xray-scan {
       0% { opacity:0; transform:translate3d(-30%,0,0); }
-      12% { opacity:.9; }
-      72% { opacity:.68; }
+      9% { opacity:.9; }
+      82% { opacity:.68; }
       100% { opacity:0; transform:translate3d(410%,0,0); }
     }
     @media (prefers-reduced-motion:reduce) {
-      #atomic-niagara > .atomic-niagara-hero.is-xray-ready,
-      #atomic-niagara > .atomic-niagara-hero.is-xray-ready.is-xray-revealed {
+      #atomic-niagara > .atomic-xray-sequence.is-xray-ready > .atomic-niagara-hero,
+      #atomic-niagara > .atomic-xray-sequence.is-xray-ready > .atomic-evidence-mosaic,
+      #atomic-niagara > .atomic-xray-sequence.is-xray-ready.is-xray-revealed > .atomic-niagara-hero,
+      #atomic-niagara > .atomic-xray-sequence.is-xray-ready.is-xray-revealed > .atomic-evidence-mosaic {
         filter:none;
         animation:none;
         will-change:auto;
       }
-      #atomic-niagara > .atomic-niagara-hero.is-xray-ready::after,
-      #atomic-niagara > .atomic-niagara-hero.is-xray-ready.is-xray-revealed::after {
+      #atomic-niagara > .atomic-xray-sequence.is-xray-ready::after,
+      #atomic-niagara > .atomic-xray-sequence.is-xray-ready.is-xray-revealed::after {
         content:none;
         animation:none;
       }
@@ -1258,6 +1264,7 @@
           </figure>
 
         <section class="investigation-chapter atomic-niagara-chapter" id="atomic-niagara">
+          <div class="atomic-xray-sequence">
           <div class="atomic-niagara-hero">
             <div class="atomic-niagara-title">
               <span class="investigation-chapter-label">Chapter I</span>
@@ -1299,6 +1306,7 @@
                 <span class="atomic-evidence-caption">From green salt to uranium metal</span>
               </a>
             </div>
+          </div>
           </div>
 
 
@@ -2822,18 +2830,19 @@
         if (!loveCanalFrame) loveCanalFrame = requestAnimationFrame(updateLoveCanalState);
       }
 
-      const atomicXrayHero = document.querySelector('#atomic-niagara > .atomic-niagara-hero');
-      if (atomicXrayHero && !atomicThreadReducedMotion.matches) {
-        atomicXrayHero.classList.add('is-xray-ready');
+      const atomicXraySequence = document.querySelector('#atomic-niagara > .atomic-xray-sequence');
+      const atomicXrayHero = atomicXraySequence ? atomicXraySequence.querySelector('.atomic-niagara-hero') : null;
+      if (atomicXraySequence && atomicXrayHero && !atomicThreadReducedMotion.matches) {
+        atomicXraySequence.classList.add('is-xray-ready');
 
         const finishAtomicXray = () => {
-          atomicXrayHero.classList.remove('is-xray-ready','is-xray-revealed');
+          atomicXraySequence.classList.remove('is-xray-ready','is-xray-revealed');
         };
         const revealAtomicXray = () => {
-          atomicXrayHero.classList.add('is-xray-revealed');
+          atomicXraySequence.classList.add('is-xray-revealed');
           atomicXrayHero.addEventListener('animationend', event => {
             if (event.animationName === 'atomic-xray-resolve') finishAtomicXray();
-          });
+          }, { once:true });
         };
 
         if ('IntersectionObserver' in window) {
