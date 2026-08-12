@@ -28,6 +28,7 @@ const steps = [
     mainDetail: "More than 1,000 tons crossed the Atlantic in steel drums and were held at the African Metals Corporation warehouse near the Bayonne Bridge. On November 2, 1942, the Army moved the drums to the Seneca Ordnance Depot for safekeeping. The story next enters Linde as part of Western New York’s processing network—not as a claim that every Staten Island drum went directly to Linde.",
     routeKind: "material",
     route: [P.shinkolobwe, [-7.5, 20], [-5.8, 13.2], [4, -12], [24, -43], [38, -68], P.staten],
+    cameraPoint: [-10.45, 25.75],
     cameraZoom: 8.5,
     cameraDuration: 1.8,
     caption: "The route begins here. Select Linde when you are ready to follow the material across the Atlantic and into Western New York."
@@ -48,7 +49,7 @@ const steps = [
     routeKind: "material",
     route: [P.shinkolobwe, [-7.5, 20], [-5.8, 13.2], [4, -12], [24, -43], [38, -68], P.staten, [41.15, -74.72], [42.05, -75.72], P.seneca, [42.87, -77.61], P.linde],
     cameraZoom: 11,
-    cameraDuration: 4.8,
+    cameraDuration: 2.7,
     caption: "The camera follows the connected route from Shinkolobwe and settles at Linde. Staten Island and Seneca Depot remain part of the journey described in step 1.",
     wasteRoutes: [
       {
@@ -137,6 +138,7 @@ const stepById = Object.fromEntries(steps.map(step => [step.id, step]));
 let activeId = null;
 let wasteOpen = false;
 let selectedWasteId = null;
+let routeTransitionTimer = null;
 
 const map = L.map("map", {
   center: [20, -28],
@@ -152,15 +154,15 @@ L.control.zoom({ position: "bottomright" }).addTo(map);
 
 const satelliteLayer = L.tileLayer(
   "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-  { maxZoom: 18 }
+  { maxZoom: 18, updateWhenZooming: false, keepBuffer: 8 }
 );
 const labelsLayer = L.tileLayer(
   "https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png",
-  { subdomains: "abcd", maxZoom: 19, pane: "overlayPane" }
+  { subdomains: "abcd", maxZoom: 19, pane: "overlayPane", updateWhenZooming: false, keepBuffer: 8 }
 );
 const streetLayer = L.tileLayer(
   "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-  { subdomains: "abcd", maxZoom: 19 }
+  { subdomains: "abcd", maxZoom: 19, updateWhenZooming: false, keepBuffer: 8 }
 );
 satelliteLayer.addTo(map);
 labelsLayer.addTo(map);
@@ -267,6 +269,10 @@ function addWasteDestinationMarker(route) {
 }
 
 function drawActiveRoute() {
+  if (routeTransitionTimer) {
+    window.clearTimeout(routeTransitionTimer);
+    routeTransitionTimer = null;
+  }
   activeRouteLayer.clearLayers();
   if (!activeId) return;
 
@@ -284,8 +290,22 @@ function drawActiveRoute() {
       maxZoom: 12.5,
       duration: 1.6
     });
+  } else if (step.id === "linde") {
+    map.flyToBounds(L.latLngBounds(route), {
+      padding: [56, 56],
+      maxZoom: 2.5,
+      duration: 1.15
+    });
+    routeTransitionTimer = window.setTimeout(() => {
+      if (activeId !== step.id || selectedWasteId) return;
+      map.flyTo(step.point, step.cameraZoom, {
+        duration: step.cameraDuration,
+        easeLinearity: .22
+      });
+      routeTransitionTimer = null;
+    }, 1400);
   } else {
-    map.flyTo(step.point, step.cameraZoom, {
+    map.flyTo(step.cameraPoint || step.point, step.cameraZoom, {
       duration: step.cameraDuration,
       easeLinearity: .22
     });
