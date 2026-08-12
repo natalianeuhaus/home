@@ -337,14 +337,19 @@
     .waste-era-marker.is-visible .waste-era-year { opacity:1; transform:translate3d(0,0,0); }
     .waste-era-marker.is-visible .waste-era-copy { opacity:1; transform:translate3d(0,0,0); }
     .waste-era-marker--love { --era-accent:var(--love-canal-red); }
-    .waste-era-marker--survey-map { width:100vw; min-height:100svh; margin-left:calc(100% - 100vw); border:0; background:#090909; }
+    .waste-era-marker--survey-map { width:100vw; min-height:100svh; margin-left:calc(100% - 100vw); border:0; color:var(--niagara-paper); background:var(--niagara-red); }
     .waste-era-marker--survey-map::after { display:none; }
-    .waste-era-inner--survey-map { min-height:100svh; padding:0; grid-template-columns:minmax(340px,.38fr) minmax(0,.62fr); gap:0; align-items:stretch; }
-    .waste-era-survey-copy { padding:clamp(52px,6vw,96px); display:flex; flex-direction:column; justify-content:center; background:var(--niagara-paper); }
-    .waste-era-survey-copy .waste-era-copy { margin-top:clamp(58px,8svh,92px); }
-    .waste-era-survey-copy .waste-era-year { font-size:clamp(54px,6.3vw,112px); }
-    .waste-era-survey-map { min-width:0; margin:0; padding:clamp(24px,3vw,50px) 0; position:relative; display:grid; place-items:center; overflow:hidden; background:#090909; }
-    .waste-era-survey-map img { width:100%; height:auto; display:block; object-fit:contain; }
+    .waste-era-inner--survey-map { min-height:100svh; padding:0; grid-template-columns:minmax(340px,.41fr) minmax(0,.59fr); gap:0; align-items:stretch; }
+    .waste-era-survey-copy { padding:clamp(44px,4vw,72px); display:flex; flex-direction:column; justify-content:center; color:var(--niagara-paper); background:var(--niagara-red); }
+    .waste-era-survey-copy .waste-era-copy { max-width:560px; margin-top:clamp(30px,4svh,48px); }
+    .waste-era-survey-copy .waste-era-chapter,
+    .waste-era-survey-copy .waste-era-year,
+    .waste-era-survey-copy .waste-era-kicker { color:rgba(241,240,234,.68); }
+    .waste-era-survey-copy .waste-era-year { font:10px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.22em; opacity:1; }
+    .waste-era-survey-copy .waste-era-copy h4 { margin-bottom:clamp(26px,3.8svh,42px); color:var(--niagara-paper); font-size:clamp(58px,5.2vw,92px); line-height:.94; }
+    .waste-era-survey-copy .waste-era-copy p { color:rgba(241,240,234,.72); font:clamp(15px,1.15vw,19px)/1.5 Arial,Helvetica,sans-serif !important; letter-spacing:0 !important; }
+    .waste-era-survey-map { min-width:0; margin:0; padding:0; position:relative; overflow:hidden; background:#090909 url('./archive/chapter-iii-mobile-gamma-survey.png') right center / 280% auto no-repeat; }
+    .waste-era-survey-map img { width:100%; height:100%; display:block; object-fit:cover; opacity:0; }
     .waste-era-survey-map figcaption { position:absolute; left:18px; right:18px; bottom:14px; display:flex; justify-content:space-between; gap:24px; color:rgba(241,240,234,.58); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.1em; text-transform:uppercase; }
     .waste-era-survey-map figcaption span:last-child { text-align:right; }
     .waste-chapter-followup { margin-top:clamp(48px,7svh,88px); display:grid; grid-template-columns:112px minmax(0,1fr); gap:clamp(22px,4vw,54px); }
@@ -1526,8 +1531,8 @@
                     </div>
                   </div>
                   <figure class="waste-era-survey-map">
-                    <img src="./archive/ornl-1986-survey-maps.webp" alt="Two black-and-white Oak Ridge National Laboratory maps showing the Niagara Falls mobile gamma scan area and radiological anomaly locations near Lewiston and the Lake Ontario Ordnance Works" loading="lazy" decoding="async" />
-                    <figcaption><span>ORNL/TM-10076 · Figures 1–2</span><span>Mobile gamma-scan area and anomaly locations · printed pages 11–12</span></figcaption>
+                    <img src="./archive/chapter-iii-mobile-gamma-survey.png" alt="Black-and-white Oak Ridge National Laboratory map showing the area surveyed during the mobile gamma scan of Niagara Falls" loading="lazy" decoding="async" />
+                    <figcaption><span>ORNL/TM-10076 · Figure 1</span><span>Area surveyed during the mobile gamma scan · printed page 11</span></figcaption>
                   </figure>
                 </div>
               </section>
