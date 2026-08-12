@@ -1,7 +1,7 @@
 /* global L */
 
 const P = {
-  shinkolobwe: [-11.055, 26.547],
+  shinkolobwe: [-11.0506, 26.5482],
   staten: [40.6402778, -74.1419444],
   seneca: [42.716, -76.889],
   linde: [42.97441030070138, -78.8930735242712],
@@ -28,9 +28,9 @@ const steps = [
     mainDetail: "More than 1,000 tons crossed the Atlantic in steel drums and were held at the African Metals Corporation warehouse near the Bayonne Bridge. On November 2, 1942, the Army moved the drums to the Seneca Ordnance Depot for safekeeping. The story next enters Linde as part of Western New York’s processing network—not as a claim that every Staten Island drum went directly to Linde.",
     routeKind: "material",
     route: [P.shinkolobwe, [-7.5, 20], [-5.8, 13.2], [4, -12], [24, -43], [38, -68], P.staten],
-    cameraPoint: [-10.45, 25.75],
-    cameraZoom: 8.5,
-    cameraDuration: 1.8,
+    cameraPoint: P.shinkolobwe,
+    cameraZoom: 13,
+    cameraDuration: 1.25,
     caption: "The route begins here. Select Linde when you are ready to follow the material across the Atlantic and into Western New York."
   },
   {
@@ -139,10 +139,11 @@ let activeId = null;
 let wasteOpen = false;
 let selectedWasteId = null;
 let routeTransitionTimer = null;
+let routeResetTimer = null;
 
 const map = L.map("map", {
-  center: [-10.45, 25.75],
-  zoom: 8.5,
+  center: P.shinkolobwe,
+  zoom: 13,
   minZoom: 2,
   maxZoom: 18,
   zoomSnap: .25,
@@ -184,7 +185,10 @@ function preloadSatellite(point, zoom, radius = 2) {
   }
 }
 preloadSatellite([18, -24], 3, 2);
+preloadSatellite(P.shinkolobwe, 13);
 preloadSatellite(P.linde, 11);
+preloadSatellite(P.electromet, 13);
+preloadSatellite(P.hooker, 14);
 
 const activeRouteLayer = L.layerGroup().addTo(map);
 const stepMarkers = {};
@@ -316,12 +320,31 @@ function drawActiveRoute() {
     window.clearTimeout(routeTransitionTimer);
     routeTransitionTimer = null;
   }
+  if (routeResetTimer) {
+    window.clearTimeout(routeResetTimer);
+    routeResetTimer = null;
+  }
   activeRouteLayer.clearLayers();
   if (!activeId) return;
 
   const step = stepById[activeId];
   const wasteRoute = step.wasteRoutes?.find(route => route.id === selectedWasteId);
   const route = wasteRoute ? wasteRoute.path : step.route;
+
+  if (!wasteRoute && step.id === "shinkolobwe") {
+    map.stop();
+    map.flyTo(step.cameraPoint, step.cameraZoom, {
+      duration: step.cameraDuration,
+      easeLinearity: .22
+    });
+    steps.forEach(item => {
+      const marker = stepMarkers[item.id];
+      const selected = item.id === activeId;
+      marker.setOpacity(selected ? 1 : .32);
+      marker.getElement()?.classList.toggle("is-active-marker", selected);
+    });
+    return;
+  }
 
   const routeLine = L.polyline(route, routeOptions(step.routeKind, Boolean(wasteRoute))).addTo(activeRouteLayer);
   if (!(!wasteRoute && step.routeKind === "context")) addArrow(route, Boolean(wasteRoute));
@@ -340,19 +363,41 @@ function drawActiveRoute() {
       maxZoom: 2.5,
       animate: false
     });
-    drawRouteProgressively(routeLine);
+    drawRouteProgressively(routeLine, 3200);
     routeTransitionTimer = window.setTimeout(() => {
       if (activeId !== step.id || selectedWasteId) return;
       map.stop();
-      map.setView(step.point, step.cameraZoom, { animate: false });
-      window.requestAnimationFrame(() => resetRouteProgress(routeLine));
+      map.flyTo(step.point, step.cameraZoom, {
+        duration: 2.4,
+        easeLinearity: .2
+      });
+      routeResetTimer = window.setTimeout(() => {
+        resetRouteProgress(routeLine);
+        routeResetTimer = null;
+      }, 2450);
       routeTransitionTimer = null;
-    }, 3550);
+    }, 3350);
   } else {
-    map.flyTo(step.cameraPoint || step.point, step.cameraZoom, {
-      duration: step.cameraDuration,
-      easeLinearity: .22
+    map.stop();
+    map.fitBounds(L.latLngBounds(route), {
+      padding: [90, 90],
+      maxZoom: Math.max(10, step.cameraZoom - 1.5),
+      animate: false
     });
+    drawRouteProgressively(routeLine, 1200);
+    routeTransitionTimer = window.setTimeout(() => {
+      if (activeId !== step.id || selectedWasteId) return;
+      map.stop();
+      map.flyTo(step.cameraPoint || step.point, step.cameraZoom, {
+        duration: 1.5,
+        easeLinearity: .22
+      });
+      routeResetTimer = window.setTimeout(() => {
+        resetRouteProgress(routeLine);
+        routeResetTimer = null;
+      }, 1550);
+      routeTransitionTimer = null;
+    }, 1350);
   }
 
   steps.forEach(item => {
