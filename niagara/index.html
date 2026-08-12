@@ -308,11 +308,25 @@
     #atomic-niagara > .atomic-xray-sequence.is-xray-revealed::after {
       animation:atomic-xray-scan 7.2s cubic-bezier(.25,.7,.2,1) both;
     }
+    #atomic-niagara > .atomic-xray-sequence.is-xray-reverse::after {
+      left:auto;
+      right:-45%;
+      transform:translate3d(30%,0,0);
+    }
+    #atomic-niagara > .atomic-xray-sequence.is-xray-revealed.is-xray-reverse::after {
+      animation-name:atomic-xray-scan-reverse;
+    }
     @keyframes atomic-xray-scan {
       0% { opacity:0; transform:translate3d(-30%,0,0); }
       9% { opacity:.9; }
       82% { opacity:.68; }
       100% { opacity:0; transform:translate3d(410%,0,0); }
+    }
+    @keyframes atomic-xray-scan-reverse {
+      0% { opacity:0; transform:translate3d(30%,0,0); }
+      9% { opacity:.9; }
+      82% { opacity:.68; }
+      100% { opacity:0; transform:translate3d(-410%,0,0); }
     }
     @media (prefers-reduced-motion:reduce) {
       #atomic-niagara > .atomic-xray-sequence::after,
@@ -2819,12 +2833,13 @@
         const stopAtomicXrayScan = () => {
           window.clearTimeout(atomicXrayTimer);
           atomicXrayTimer = 0;
-          atomicXraySequence.classList.remove('is-xray-revealed');
+          atomicXraySequence.classList.remove('is-xray-revealed','is-xray-reverse');
         };
         const runAtomicXrayScan = () => {
           atomicXrayTimer = 0;
           if (!atomicXrayVisible || document.hidden) return;
-          atomicXraySequence.classList.remove('is-xray-revealed');
+          atomicXraySequence.classList.remove('is-xray-revealed','is-xray-reverse');
+          atomicXraySequence.classList.toggle('is-xray-reverse',Math.random() < .5);
           void atomicXraySequence.offsetWidth;
           atomicXraySequence.classList.add('is-xray-revealed');
         };
@@ -2836,7 +2851,7 @@
 
         atomicXraySequence.addEventListener('animationend', event => {
           if (event.animationName !== 'atomic-xray-scan') return;
-          atomicXraySequence.classList.remove('is-xray-revealed');
+          atomicXraySequence.classList.remove('is-xray-revealed','is-xray-reverse');
           scheduleAtomicXrayScan(false);
         });
 
