@@ -347,6 +347,8 @@
     .waste-era-survey-map img { width:100%; height:auto; display:block; object-fit:contain; }
     .waste-era-survey-map figcaption { position:absolute; left:18px; right:18px; bottom:14px; display:flex; justify-content:space-between; gap:24px; color:rgba(241,240,234,.58); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.1em; text-transform:uppercase; }
     .waste-era-survey-map figcaption span:last-child { text-align:right; }
+    .waste-chapter-followup { margin-top:clamp(48px,7svh,88px); display:grid; grid-template-columns:112px minmax(0,1fr); gap:clamp(22px,4vw,54px); }
+    .waste-chapter-followup p { grid-column:2; max-width:930px; margin:0; color:rgba(21,23,21,.7); font-size:clamp(17px,1.25vw,21px); line-height:1.48; letter-spacing:-.008em; }
     .waste-era-marker--dark { --era-accent:var(--niagara-paper); color:var(--niagara-paper); background:#101312; border-color:rgba(241,240,234,.22); }
     .waste-era-marker--dark::after { background:rgba(241,240,234,.25); }
     .waste-era-marker--dark .waste-era-copy p { color:rgba(241,240,234,.7); }
@@ -583,6 +585,8 @@
       .waste-era-survey-map figcaption { position:relative; left:auto; right:auto; bottom:auto; margin:14px 16px 0; display:block; }
       .waste-era-survey-map figcaption span { display:block; }
       .waste-era-survey-map figcaption span:last-child { margin-top:5px; text-align:left; }
+      .waste-chapter-followup { margin-top:48px; grid-template-columns:1fr; gap:0; }
+      .waste-chapter-followup p { grid-column:1; }
       .love-canal-threshold { width:calc(100vw - 48px); margin-left:0; }
       .love-canal-image-shell { height:auto; min-height:0; aspect-ratio:2048 / 1329; }
       .love-canal-threshold figcaption { width:calc(100% - 72px); margin-left:72px; grid-template-columns:1fr; gap:7px; }
@@ -1519,7 +1523,6 @@
                     <div class="waste-era-copy">
                       <span class="waste-era-kicker">The surveys</span>
                       <h4 id="era-surveys-title">Following the radioactive gravel</h4>
-                      <p>The IWCS enclosed what remained at the former military installation. But the gravel that had already left—taken home by workers, sold commercially, and reused throughout the region—was another story. Records uncovered decades later described trucking companies hauling waste and slag from Union Carbide’s Niagara Falls plant to the company dump, while untreated slag was also sold or used as inexpensive fill. Finding where all that material went meant looking far beyond the military site.</p>
                     </div>
                   </div>
                   <figure class="waste-era-survey-map">
@@ -1528,6 +1531,10 @@
                   </figure>
                 </div>
               </section>
+
+              <div class="waste-chapter-followup">
+                <p>The IWCS enclosed what remained at the former military installation. But the gravel that had already left—taken home by workers, sold commercially, and reused throughout the region—was another story. Records uncovered decades later described trucking companies hauling waste and slag from Union Carbide’s Niagara Falls plant to the company dump, while untreated slag was also sold or used as inexpensive fill. Finding where all that material went meant looking far beyond the military site.</p>
+              </div>
 
               <section class="waste-section" id="waste-survey-years">
                 <div class="waste-section-header">
