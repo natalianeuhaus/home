@@ -476,8 +476,8 @@
     .losa-scroll-definition p { margin:0 !important; max-width:780px; color:rgba(21,23,21,.7); font:13px/1.5 Arial,Helvetica,sans-serif !important; letter-spacing:0 !important; }
     .losa-scroll-definition small { padding-top:1px; color:rgba(21,23,21,.48); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.11em; text-align:right; text-transform:uppercase; white-space:nowrap; }
     .losa-scroll-copy { width:100%; max-width:660px; aspect-ratio:1 / 1; position:sticky; z-index:2; top:84px; right:auto; left:auto; align-self:start; margin:0; padding:clamp(28px,3.2vw,48px); box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; color:var(--niagara-ink); background:rgba(241,240,234,.94); border-left:1px solid var(--love-canal-red); box-shadow:0 18px 54px rgba(24,10,7,.12); }
-    .losa-scroll-copy .losa-scroll-context { margin:0 0 clamp(22px,3svh,34px) !important; padding-bottom:clamp(18px,2.5svh,28px); border-bottom:1px solid rgba(68,8,6,.24); color:rgba(21,23,21,.58); font:9px/1.55 Arial,Helvetica,sans-serif !important; letter-spacing:.1em !important; text-transform:uppercase; }
-    .losa-scroll-copy .losa-scroll-quote { margin:0 !important; color:var(--niagara-ink); font-size:clamp(20px,1.75vw,30px) !important; line-height:1.19 !important; letter-spacing:-.027em !important; }
+    .losa-scroll-copy .losa-scroll-context { margin:0 0 clamp(22px,3svh,34px) !important; padding-bottom:clamp(18px,2.5svh,28px); border-bottom:1px solid rgba(68,8,6,.24); color:rgba(21,23,21,.68); font:clamp(15px,1.15vw,19px)/1.48 Arial,Helvetica,sans-serif !important; letter-spacing:.035em !important; text-transform:none; }
+    .losa-scroll-copy .losa-scroll-quote { margin:0 !important; color:rgba(21,23,21,.78); font-family:Georgia,"Times New Roman",serif !important; font-size:clamp(15px,1.08vw,18px) !important; font-style:italic; line-height:1.48 !important; letter-spacing:-.01em !important; }
     .losa-scroll-report-link { width:max-content; margin-top:clamp(20px,2.5svh,30px); padding:14px 0 4px; color:var(--love-canal-red); border-top:1px solid rgba(68,8,6,.24); border-bottom:1px solid currentColor; font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.14em; text-decoration:none; text-transform:uppercase; }
     .losa-scroll-report-link:hover,.losa-scroll-report-link:focus-visible { color:var(--niagara-ink); }
     .loow-archive-diptych { width:100vw; margin:clamp(96px,14svh,170px) 0 0 calc(100% - 100vw); padding:clamp(68px,9svh,110px) 0 clamp(104px,15svh,180px); position:relative; overflow:hidden; color:var(--niagara-paper); background:#252121; }
@@ -685,7 +685,8 @@
       .losa-scroll-definition { grid-template-columns:1fr; gap:12px; }
       .losa-scroll-definition small { text-align:left; }
       .losa-scroll-copy { width:calc(100% - 24px); max-width:none; aspect-ratio:auto; position:relative; top:auto; right:auto; left:auto; margin:32px 0 0 24px; padding:22px; }
-      .losa-scroll-copy p { font-size:clamp(22px,7vw,30px) !important; }
+      .losa-scroll-copy .losa-scroll-context { font-size:clamp(16px,4.8vw,19px) !important; }
+      .losa-scroll-copy .losa-scroll-quote { font-size:clamp(15px,4.3vw,18px) !important; }
       .loow-archive-diptych { width:100vw; margin:88px 0 0 -24px; padding:62px 24px 82px; }
       .loow-archive-heading { margin:0 0 38px; display:block; }
       .loow-archive-heading h4 { margin-top:12px; font-size:clamp(44px,13vw,66px); text-align:left; }
