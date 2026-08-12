@@ -56,7 +56,8 @@ const steps = [
     mainDetail: "Green salt moved onward for reduction into uranium metal.",
     routeKind: "material",
     route: [P.shinkolobwe, [-7.5, 20], [-5.8, 13.2], [4, -12], [24, -43], [38, -68], P.staten, [41.15, -74.72], [42.05, -75.72], P.seneca, [42.87, -77.61], P.linde],
-    cameraZoom: 14,
+    cameraPoint: [42.958, -78.935],
+    cameraZoom: 12.25,
     cameraDuration: 2.7,
     caption: "The camera follows the connected route from Shinkolobwe and settles at Linde. Staten Island and Seneca Depot remain part of the journey described in step 1.",
     wasteRoutes: [
@@ -475,7 +476,7 @@ function drawActiveRoute() {
       if (activeId !== step.id || selectedWasteId) return;
       map.stop();
       activeRouteLayer.clearLayers();
-      map.flyTo(step.point, step.cameraZoom, {
+      map.flyTo(step.cameraPoint || step.point, step.cameraZoom, {
         duration: 2.4,
         easeLinearity: .2
       });
