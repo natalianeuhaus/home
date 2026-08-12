@@ -83,8 +83,8 @@
     .investigation-chapter { border-top:1px solid var(--niagara-line); padding:clamp(86px,12svh,150px) 0; }
     .investigation-chapter-grid { display:grid; grid-template-columns:minmax(220px,.48fr) minmax(560px,1.52fr); gap:clamp(60px,9vw,150px); align-items:start; }
     .investigation-chapter-meta { position:sticky; z-index:5; top:132px; }
-    .investigation-chapter-label { display:block; margin:0 0 6px; color:rgba(21,23,21,.42); font:8px/1.35 Arial,Helvetica,sans-serif; letter-spacing:.2em; text-transform:uppercase; }
-    .investigation-number { display:block; margin:0 0 20px; color:rgba(21,23,21,.42); font:10px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.24em; text-transform:uppercase; }
+    .investigation-chapter-label { display:block; margin:0 0 6px; color:rgba(21,23,21,.42); font:10px/1.35 Arial,Helvetica,sans-serif; letter-spacing:.2em; text-transform:uppercase; }
+    .investigation-number { display:block; margin:0 0 20px; color:rgba(21,23,21,.42); font:13px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.22em; text-transform:uppercase; }
     .investigation-chapter h3 { position:relative; z-index:5; margin:0; max-width:350px; font-size:clamp(38px,4.5vw,76px); line-height:.94; font-weight:400; letter-spacing:-.045em; }
     .waterfalls-slide-meta .niagara-kicker,.atomic-niagara-title .investigation-number,.investigation-chapter-meta .investigation-number,.health-slide-meta .investigation-number { position:relative; z-index:5; }
     .waterfalls-slide-meta h2,.investigation-chapter-meta h3 { background:var(--niagara-paper); box-shadow:0 0 0 7px var(--niagara-paper); }
@@ -113,6 +113,22 @@
     .atomic-thread.is-ready { opacity:1; }
     .atomic-thread-path { fill:none; stroke:var(--niagara-red); stroke-width:1; stroke-linecap:square; stroke-linejoin:miter; vector-effect:non-scaling-stroke; stroke-dasharray:var(--atomic-thread-length,1); stroke-dashoffset:var(--atomic-thread-length,1); will-change:stroke-dashoffset; }
     .atomic-thread-end { fill:var(--niagara-red); opacity:0; transition:opacity .16s ease; }
+
+    .chapter-scroll-marker { --chapter-scroll-x:42px; width:1px; height:70px; position:fixed; z-index:23; top:96px; left:var(--chapter-scroll-x); color:var(--niagara-red); opacity:0; transform:translate3d(0,-10px,0); pointer-events:none; transition:opacity .25s ease,transform .35s cubic-bezier(.22,1,.36,1); }
+    .chapter-scroll-marker.is-visible { opacity:1; transform:translate3d(0,0,0); }
+    .chapter-scroll-marker::before { content:""; position:absolute; left:0; top:-20px; width:1px; height:90px; background:var(--niagara-red); }
+    .chapter-scroll-marker::after { content:""; position:absolute; left:50%; bottom:-4px; width:9px; height:9px; border-radius:50%; background:var(--niagara-red); transform:translateX(-50%); }
+    .chapter-scroll-marker-copy { width:max-content; min-width:112px; position:absolute; left:14px; top:-7px; padding:8px 12px 9px; color:var(--niagara-red); background:rgba(241,240,234,.92); box-shadow:0 0 18px rgba(241,240,234,.78); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
+    .chapter-scroll-marker-label,.chapter-scroll-marker-year { display:block; text-transform:uppercase; font-family:Arial,Helvetica,sans-serif; white-space:nowrap; }
+    .chapter-scroll-marker-label { margin-bottom:5px; font-size:10px; line-height:1.3; letter-spacing:.2em; }
+    .chapter-scroll-marker-year { font-size:13px; line-height:1.3; letter-spacing:.18em; }
+    .waterfalls-slide-meta > .niagara-kicker { font-size:13px; letter-spacing:.22em; }
+    @media (max-width:820px) {
+      .chapter-scroll-marker { top:84px; }
+      .chapter-scroll-marker-copy { left:10px; min-width:96px; padding:7px 9px 8px; }
+      .chapter-scroll-marker-label { font-size:9px; }
+      .chapter-scroll-marker-year { font-size:11px; }
+    }
     .health-record { width:100vw; margin-left:calc(50% - 50vw); padding:0; color:var(--niagara-ink); background:var(--niagara-paper); overflow:hidden; position:relative; }
     .health-record-track { width:100%; height:calc(100svh - 66px); min-height:640px; display:flex; overflow-x:auto; overflow-y:hidden; overscroll-behavior-inline:contain; scroll-snap-type:x mandatory; scrollbar-width:none; cursor:default; }
     .health-record-track::-webkit-scrollbar { display:none; }
@@ -380,7 +396,7 @@
     .waste-era-inner { width:100%; min-height:inherit; padding:clamp(48px,7vw,104px); position:relative; z-index:1; display:grid; grid-template-columns:minmax(270px,.82fr) minmax(380px,1fr); gap:clamp(54px,8vw,140px); align-items:center; }
     .waste-era-inner > div:first-child { transform:translate3d(0,var(--chapter-parallax-meta,0px),0); will-change:transform; }
     .waste-era-inner > div:last-child { transform:translate3d(0,var(--chapter-parallax-copy,0px),0); will-change:transform; }
-    .waste-era-chapter { display:block; margin:0 0 28px; color:var(--era-accent); font:9px/1.35 Arial,Helvetica,sans-serif; letter-spacing:.22em; text-transform:uppercase; opacity:0; transform:translate3d(0,24px,0); transition:opacity .65s ease,transform .8s cubic-bezier(.22,1,.36,1); }
+    .waste-era-chapter { display:block; margin:0 0 28px; color:var(--era-accent); font:11px/1.35 Arial,Helvetica,sans-serif; letter-spacing:.2em; text-transform:uppercase; opacity:0; transform:translate3d(0,24px,0); transition:opacity .65s ease,transform .8s cubic-bezier(.22,1,.36,1); }
     .waste-era-year { margin:0; color:var(--era-accent); font-size:clamp(90px,15vw,245px); line-height:.74; font-weight:400; letter-spacing:-.085em; white-space:nowrap; opacity:.08; transform:translate3d(0,68px,0); transition:opacity .85s ease,transform 1.05s cubic-bezier(.22,1,.36,1); }
     .waste-era-year--range { font-size:clamp(58px,7.6vw,132px); }
     .waste-era-copy { max-width:660px; opacity:0; transform:translate3d(0,44px,0); transition:opacity .72s .16s ease,transform .9s .16s cubic-bezier(.22,1,.36,1); }
@@ -400,7 +416,7 @@
     .waste-era-survey-copy .waste-era-chapter,
     .waste-era-survey-copy .waste-era-year,
     .waste-era-survey-copy .waste-era-kicker { color:rgba(241,240,234,.68); }
-    .waste-era-survey-copy .waste-era-year { font:10px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.22em; opacity:1; }
+    .waste-era-survey-copy .waste-era-year { font:13px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.2em; opacity:1; }
     .waste-era-survey-copy .waste-era-copy h4 { margin-bottom:clamp(24px,3.2svh,36px); color:var(--niagara-paper); font-size:clamp(58px,5.2vw,92px); line-height:.94; }
     .waste-era-survey-copy .waste-era-copy h5 { margin:0 0 12px; color:rgba(241,240,234,.95); font-size:clamp(24px,2.35vw,38px); line-height:1.04; font-weight:400; letter-spacing:-.032em; }
     .waste-era-survey-copy .waste-era-copy p { max-width:570px; color:rgba(241,240,234,.72); font:clamp(15px,1.15vw,19px)/1.5 Arial,Helvetica,sans-serif !important; letter-spacing:0 !important; }
@@ -1115,6 +1131,12 @@
           <path class="atomic-thread-path"></path>
           <circle class="atomic-thread-end" r="5"></circle>
         </svg>
+        <div class="chapter-scroll-marker" aria-hidden="true">
+          <span class="chapter-scroll-marker-copy">
+            <span class="chapter-scroll-marker-label">Chapter I</span>
+            <span class="chapter-scroll-marker-year">1895</span>
+          </span>
+        </div>
         <section class="health-record waterfalls-record" id="waterfalls-chapter" aria-label="The waterfalls and industry">
           <div class="waterfalls-record-track" tabindex="0" aria-label="Waterfalls and industrialization text, photographs, and archive placeholders. Scroll horizontally for more.">
             <article class="health-slide health-slide--waterfalls" data-waterfalls-section="0">
@@ -2909,6 +2931,86 @@
         wasteEraMarkers.forEach(marker => marker.classList.add('is-visible'));
       }
 
+      const chapterScrollMarker = document.querySelector('.chapter-scroll-marker');
+      const chapterScrollMarkerLabel = chapterScrollMarker ? chapterScrollMarker.querySelector('.chapter-scroll-marker-label') : null;
+      const chapterScrollMarkerYear = chapterScrollMarker ? chapterScrollMarker.querySelector('.chapter-scroll-marker-year') : null;
+      const chapterScrollPanel = document.querySelector('#panel-investigation');
+      const waterfallsChapter = document.querySelector('#waterfalls-chapter');
+      const waterfallsMarkerTrack = waterfallsChapter ? waterfallsChapter.querySelector('.waterfalls-record-track') : null;
+      const waterfallsMarkerSlides = waterfallsMarkerTrack ? Array.from(waterfallsMarkerTrack.querySelectorAll('[data-waterfalls-section]')) : [];
+
+      const chapterMetaFromElement = element => {
+        if (!element) return null;
+        const label = element.querySelector('.investigation-chapter-label,.waste-era-chapter');
+        const year = element.querySelector('.investigation-number,.waste-era-year');
+        if (!label || !year) return null;
+        return { element, label:label.textContent.trim(), year:year.textContent.trim() };
+      };
+      const chapterScrollStops = [
+        waterfallsChapter ? { element:waterfallsChapter, label:'Chapter I', year:'1895' } : null,
+        chapterMetaFromElement(document.querySelector('#atomic-niagara')),
+        chapterMetaFromElement(document.querySelector('#love-canal-range')),
+        ...wasteEraMarkers.map(chapterMetaFromElement)
+      ].filter(Boolean);
+
+      const waterfallsMarkerMeta = () => {
+        if (!waterfallsMarkerTrack || !waterfallsMarkerSlides.length) return { label:'Chapter I', year:'1895' };
+        const index = Math.max(0,Math.min(
+          waterfallsMarkerSlides.length - 1,
+          Math.round(waterfallsMarkerTrack.scrollLeft / Math.max(1,waterfallsMarkerTrack.clientWidth))
+        ));
+        const slide = waterfallsMarkerSlides[index];
+        const labelNode = slide.querySelector('.investigation-chapter-label');
+        const numberNode = slide.querySelector('.investigation-number');
+        const kicker = slide.querySelector('.niagara-kicker');
+        const label = labelNode ? labelNode.textContent.trim() : 'Chapter I';
+        const year = numberNode
+          ? numberNode.textContent.trim()
+          : (kicker ? kicker.textContent.replace(label,'').trim() : '1895');
+        return { label, year };
+      };
+
+      let chapterScrollMarkerFrame = 0;
+      let chapterScrollMarkerKey = '';
+      const updateChapterScrollMarkerPosition = () => {
+        if (!chapterScrollMarker || !investigationTabLabel) return;
+        const labelRect = investigationTabLabel.getBoundingClientRect();
+        chapterScrollMarker.style.setProperty('--chapter-scroll-x',`${(labelRect.left + labelRect.width / 2).toFixed(2)}px`);
+      };
+      const updateChapterScrollMarker = () => {
+        chapterScrollMarkerFrame = 0;
+        if (!chapterScrollMarker || !chapterScrollMarkerLabel || !chapterScrollMarkerYear || !investigationStory || !chapterScrollStops.length) return;
+        const storyRect = investigationStory.getBoundingClientRect();
+        const panelActive = chapterScrollPanel && chapterScrollPanel.classList.contains('is-active');
+        const probeY = Math.min(window.innerHeight * .36,320);
+        const visible = Boolean(panelActive && storyRect.top <= probeY && storyRect.bottom >= probeY);
+        chapterScrollMarker.classList.toggle('is-visible',visible);
+        if (!visible) return;
+
+        let activeStop = chapterScrollStops[0];
+        chapterScrollStops.forEach(stop => {
+          if (stop.element.getBoundingClientRect().top <= probeY) activeStop = stop;
+        });
+        const meta = activeStop.element === waterfallsChapter
+          ? waterfallsMarkerMeta()
+          : { label:activeStop.label, year:activeStop.year };
+        const key = `${meta.label}|${meta.year}`;
+        if (key === chapterScrollMarkerKey) return;
+        chapterScrollMarkerKey = key;
+        chapterScrollMarkerLabel.textContent = meta.label;
+        chapterScrollMarkerYear.textContent = meta.year;
+      };
+      const requestChapterScrollMarker = () => {
+        if (!chapterScrollMarkerFrame) chapterScrollMarkerFrame = requestAnimationFrame(updateChapterScrollMarker);
+      };
+
+      if (waterfallsMarkerTrack) waterfallsMarkerTrack.addEventListener('scroll',requestChapterScrollMarker,{ passive:true });
+      tabs.forEach(tab => tab.addEventListener('click',() => requestAnimationFrame(updateChapterScrollMarker)));
+      requestAnimationFrame(() => {
+        updateChapterScrollMarkerPosition();
+        updateChapterScrollMarker();
+      });
+
       const chapterParallaxTitles = Array.from(document.querySelectorAll('.atomic-niagara-title'));
       let chapterParallaxFrame = 0;
 
@@ -2947,12 +3049,15 @@
       window.addEventListener('scroll', requestAtomicThreadProgress, { passive:true });
       window.addEventListener('scroll', requestLoveCanalState, { passive:true });
       window.addEventListener('scroll', requestChapterParallax, { passive:true });
+      window.addEventListener('scroll', requestChapterScrollMarker, { passive:true });
       window.addEventListener('resize', () => {
         const activeTab = tabs.find(tab => tab.getAttribute('aria-selected') === 'true');
         requestAnimationFrame(() => moveIndicator(activeTab, false));
         requestAnimationFrame(layoutAtomicThread);
         requestAnimationFrame(updateLoveCanalState);
         requestAnimationFrame(updateChapterParallax);
+        requestAnimationFrame(updateChapterScrollMarkerPosition);
+        requestAnimationFrame(updateChapterScrollMarker);
         updateStickyHeader();
       });
       window.addEventListener('hashchange', () => activate(location.hash.slice(1), false, true, true));
@@ -2965,6 +3070,8 @@
       requestAnimationFrame(updateStickyHeader);
       requestAnimationFrame(updateLoveCanalState);
       requestAnimationFrame(updateChapterParallax);
+      requestAnimationFrame(updateChapterScrollMarkerPosition);
+      requestAnimationFrame(updateChapterScrollMarker);
     })();
   </script>
 </body>
