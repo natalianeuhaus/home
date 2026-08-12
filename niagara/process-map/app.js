@@ -9,7 +9,11 @@ const P = {
   hooker: [43.07958422985608, -79.00831731578447],
   loow: [43.2235, -78.9565],
   landfill: [43.091907120818256, -78.99969074065574],
-  river: [43.0905, -79.062]
+  river: [43.0905, -79.062],
+  ashland1: [42.993, -78.917],
+  ashland2: [43.000, -78.916],
+  seaway: [42.997, -78.915],
+  tonawandaLandfill: [42.985, -78.901]
 };
 
 const SHINKOLOBWE_OVERVIEW = [-11.06492, 26.52854];
@@ -50,10 +54,46 @@ const steps = [
     mainDetail: "Green salt moved onward for reduction into uranium metal.",
     routeKind: "material",
     route: [P.shinkolobwe, [-7.5, 20], [-5.8, 13.2], [4, -12], [24, -43], [38, -68], P.staten, [41.15, -74.72], [42.05, -75.72], P.seneca, [42.87, -77.61], P.linde],
-    cameraZoom: 11,
+    cameraZoom: 14,
     cameraDuration: 2.7,
     caption: "The camera follows the connected route from Shinkolobwe and settles at Linde. Staten Island and Seneca Depot remain part of the journey described in step 1.",
     wasteRoutes: [
+      {
+        id: "linde-ashland-1",
+        title: "Ashland 1 / Tonawanda North Unit 1",
+        location: "Tonawanda, New York",
+        point: P.ashland1,
+        detail: "From 1944 to 1946, uranium-processing residues from Linde were taken to the former Haist property for disposal.",
+        fromThere: "Later construction disturbed the buried material and moved contaminated soil onward to Ashland 2 and the Seaway landfill.",
+        path: [P.linde, [42.986, -78.904], P.ashland1]
+      },
+      {
+        id: "linde-ashland-2",
+        title: "Ashland 2 / Tonawanda North Unit 2",
+        location: "Tonawanda, New York",
+        point: P.ashland2,
+        detail: "Radioactive soil displaced from Ashland 1 was transported here during later industrial construction.",
+        fromThere: "The FUSRAP cleanup also included affected portions of Rattlesnake Creek beside the property.",
+        path: [P.linde, [42.987, -78.906], P.ashland2]
+      },
+      {
+        id: "linde-seaway",
+        title: "Seaway Industrial Park / Unit 3",
+        location: "Tonawanda, New York",
+        point: P.seaway,
+        detail: "Linde residues that had first been placed at Ashland 1 were later relocated into areas of the Seaway landfill.",
+        fromThere: "FUSRAP identified radioactive material across several Seaway disposal areas; engineered caps now limit exposure where waste remains.",
+        path: [P.linde, [42.986, -78.905], P.seaway]
+      },
+      {
+        id: "linde-tonawanda-landfill",
+        title: "Tonawanda Landfill vicinity property",
+        location: "Tonawanda, New York",
+        point: P.tonawandaLandfill,
+        detail: "Federal surveys found radioactive material in the landfill and mudflats similar to material at the Linde FUSRAP site.",
+        fromThere: "DOE designated the landfill and mudflats as a vicinity property of Linde in 1992.",
+        path: [P.linde, [42.981, -78.898], P.tonawandaLandfill]
+      },
       {
         id: "linde-loow",
         title: "LOOW / Niagara Falls Storage Site",
@@ -80,7 +120,7 @@ const steps = [
     mainDetail: "C-2 slag still contained recoverable uranium, so it moved to Hooker for chemical treatment.",
     routeKind: "material",
     route: [P.linde, [43.021, -78.925], P.electromet],
-    cameraZoom: 12.5,
+    cameraZoom: 14,
     cameraDuration: 2.4,
     caption: "The line brings green salt from Linde to Electromet.",
     wasteRoutes: [
@@ -141,6 +181,7 @@ let activeId = null;
 let wasteOpen = false;
 let selectedWasteId = null;
 let routeTransitionTimer = null;
+let selectionSource = "initial";
 
 const map = L.map("map", {
   center: SHINKOLOBWE_OVERVIEW,
@@ -211,7 +252,7 @@ steps.forEach(step => {
     `<strong>${step.title}</strong><br><span>${step.location}</span>`,
     { direction: "top", offset: [0, -42], className: "facility-tooltip" }
   );
-  marker.on("click", () => selectStep(step.id));
+  marker.on("click", () => selectStep(step.id, { source: "marker" }));
   stepMarkers[step.id] = marker;
 });
 
@@ -222,7 +263,7 @@ function renderStepper() {
     button.type = "button";
     button.dataset.nodeId = step.id;
     button.innerHTML = `<span>${step.number}</span><b>${step.shortTitle}</b>`;
-    button.addEventListener("click", () => selectStep(step.id));
+    button.addEventListener("click", () => selectStep(step.id, { source: "journey" }));
     stepper.appendChild(button);
   });
 
@@ -328,6 +369,21 @@ function drawActiveRoute() {
   const wasteRoute = step.wasteRoutes?.find(route => route.id === selectedWasteId);
   const route = wasteRoute ? wasteRoute.path : step.route;
 
+  if (!wasteRoute && selectionSource === "marker") {
+    map.stop();
+    map.flyTo(step.cameraPoint || step.point, step.cameraZoom, {
+      duration: 1.25,
+      easeLinearity: .22
+    });
+    steps.forEach(item => {
+      const marker = stepMarkers[item.id];
+      const selected = item.id === activeId;
+      marker.setOpacity(selected ? 1 : .32);
+      marker.getElement()?.classList.toggle("is-active-marker", selected);
+    });
+    return;
+  }
+
   if (!wasteRoute && step.id === "shinkolobwe") {
     map.stop();
     map.flyTo(step.cameraPoint, step.cameraZoom, {
@@ -428,12 +484,17 @@ function renderWasteRoutes(step) {
   });
 }
 
-function selectStep(id) {
+function selectStep(id, options = {}) {
   activeId = id;
-  wasteOpen = false;
-  selectedWasteId = null;
+  selectionSource = options.source || "journey";
   const step = stepById[id];
+  wasteOpen = selectionSource === "marker" && Boolean(step.wasteRoutes?.length);
+  selectedWasteId = null;
   const activeIndex = steps.findIndex(item => item.id === id);
+  const markerCaption = step.id === "linde"
+    ? "Linde processed uranium ore here. The FUSRAP sites below trace where its radioactive residues went."
+    : "This marker opens the factory process. Open the waste section below to see where its residues went.";
+  const currentCaption = selectionSource === "marker" ? markerCaption : step.caption;
 
   document.getElementById("discovery-card").hidden = true;
   document.getElementById("network-card").hidden = false;
@@ -446,12 +507,12 @@ function selectStep(id) {
   document.getElementById("main-destination").textContent = step.mainDestination;
   document.getElementById("main-detail").textContent = step.mainDetail;
   document.getElementById("map-heading-title").textContent = `Step ${step.number} · ${step.shortTitle}`;
-  document.getElementById("map-caption").textContent = step.caption || "Only the current transfer is shown. Use Next to continue the route.";
+  document.getElementById("map-caption").textContent = currentCaption || "Only the current transfer is shown. Use Next to continue the route.";
   document.getElementById("step-count").textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(steps.length).padStart(2, "0")}`;
 
   const caption = document.getElementById("network-caption");
-  caption.hidden = !step.caption;
-  caption.textContent = step.caption || "";
+  caption.hidden = !currentCaption;
+  caption.textContent = currentCaption || "";
 
   const next = document.getElementById("next-button");
   const isLast = activeIndex === steps.length - 1;
@@ -490,12 +551,12 @@ document.getElementById("waste-toggle").addEventListener("click", () => {
 
 document.getElementById("previous-button").addEventListener("click", () => {
   const current = activeId ? steps.findIndex(step => step.id === activeId) : 0;
-  selectStep(steps[current <= 0 ? steps.length - 1 : current - 1].id);
+  selectStep(steps[current <= 0 ? steps.length - 1 : current - 1].id, { source: "journey" });
 });
 
 document.getElementById("next-button").addEventListener("click", () => {
   const current = activeId ? steps.findIndex(step => step.id === activeId) : -1;
-  selectStep(steps[current < 0 || current === steps.length - 1 ? 0 : current + 1].id);
+  selectStep(steps[current < 0 || current === steps.length - 1 ? 0 : current + 1].id, { source: "journey" });
 });
 
 document.getElementById("satellite-button").addEventListener("click", () => {
@@ -515,5 +576,5 @@ document.getElementById("map-button").addEventListener("click", () => {
 });
 
 renderStepper();
-selectStep("shinkolobwe");
+selectStep("shinkolobwe", { source: "initial" });
 window.setTimeout(() => map.invalidateSize(), 120);
