@@ -12,7 +12,7 @@ const P = {
   river: [43.0905, -79.062]
 };
 
-const SHINKOLOBWE_OVERVIEW = [-11.06694, 26.51850];
+const SHINKOLOBWE_OVERVIEW = [-11.06492, 26.52854];
 
 const steps = [
   {
