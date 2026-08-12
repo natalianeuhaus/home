@@ -167,6 +167,24 @@ const streetLayer = L.tileLayer(
 satelliteLayer.addTo(map);
 labelsLayer.addTo(map);
 
+const tilePreloads = [];
+function preloadSatellite(point, zoom, radius = 2) {
+  const latitude = point[0] * (Math.PI / 180);
+  const tileCount = 2 ** zoom;
+  const centerX = Math.floor(((point[1] + 180) / 360) * tileCount);
+  const centerY = Math.floor((1 - (Math.asinh(Math.tan(latitude)) / Math.PI)) / 2 * tileCount);
+
+  for (let xOffset = -radius; xOffset <= radius; xOffset += 1) {
+    for (let yOffset = -radius; yOffset <= radius; yOffset += 1) {
+      const image = new Image();
+      image.decoding = "async";
+      image.src = `https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${zoom}/${centerY + yOffset}/${centerX + xOffset}`;
+      tilePreloads.push(image);
+    }
+  }
+}
+preloadSatellite(P.linde, 11);
+
 const activeRouteLayer = L.layerGroup().addTo(map);
 const stepMarkers = {};
 
@@ -268,6 +286,30 @@ function addWasteDestinationMarker(route) {
   L.marker(route.point, { icon, interactive: false }).addTo(activeRouteLayer);
 }
 
+function drawRouteProgressively(polyline, duration = 1900) {
+  window.requestAnimationFrame(() => {
+    const path = polyline.getElement();
+    if (!path) return;
+    const length = path.getTotalLength();
+    path.style.animation = "none";
+    path.style.transition = "none";
+    path.style.strokeDasharray = `${length} ${length}`;
+    path.style.strokeDashoffset = String(length);
+    path.getBoundingClientRect();
+    path.style.transition = `stroke-dashoffset ${duration}ms linear`;
+    path.style.strokeDashoffset = "0";
+  });
+}
+
+function resetRouteProgress(polyline) {
+  const path = polyline.getElement();
+  if (!path) return;
+  path.style.transition = "none";
+  path.style.strokeDasharray = "";
+  path.style.strokeDashoffset = "";
+  path.style.animation = "";
+}
+
 function drawActiveRoute() {
   if (routeTransitionTimer) {
     window.clearTimeout(routeTransitionTimer);
@@ -280,7 +322,7 @@ function drawActiveRoute() {
   const wasteRoute = step.wasteRoutes?.find(route => route.id === selectedWasteId);
   const route = wasteRoute ? wasteRoute.path : step.route;
 
-  L.polyline(route, routeOptions(step.routeKind, Boolean(wasteRoute))).addTo(activeRouteLayer);
+  const routeLine = L.polyline(route, routeOptions(step.routeKind, Boolean(wasteRoute))).addTo(activeRouteLayer);
   if (!(!wasteRoute && step.routeKind === "context")) addArrow(route, Boolean(wasteRoute));
   if (wasteRoute) addWasteDestinationMarker(wasteRoute);
 
@@ -291,19 +333,20 @@ function drawActiveRoute() {
       duration: 1.6
     });
   } else if (step.id === "linde") {
-    map.flyToBounds(L.latLngBounds(route), {
+    map.stop();
+    map.fitBounds(L.latLngBounds(route), {
       padding: [56, 56],
       maxZoom: 2.5,
-      duration: 1.15
+      animate: false
     });
+    drawRouteProgressively(routeLine);
     routeTransitionTimer = window.setTimeout(() => {
       if (activeId !== step.id || selectedWasteId) return;
-      map.flyTo(step.point, step.cameraZoom, {
-        duration: step.cameraDuration,
-        easeLinearity: .22
-      });
+      map.stop();
+      map.setView(step.point, step.cameraZoom, { animate: false });
+      window.requestAnimationFrame(() => resetRouteProgress(routeLine));
       routeTransitionTimer = null;
-    }, 1400);
+    }, 2150);
   } else {
     map.flyTo(step.cameraPoint || step.point, step.cameraZoom, {
       duration: step.cameraDuration,
