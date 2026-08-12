@@ -2939,7 +2939,7 @@
       const waterfallsMarkerSlides = waterfallsMarkerTrack ? Array.from(waterfallsMarkerTrack.querySelectorAll('[data-waterfalls-section]')) : [];
       const chapterScrollTabbar = document.querySelector('.niagara-tabbar');
 
-      const chapterMetaFromElement = element => {
+      const chapterAnchorFromElement = element => {
         if (!element) return null;
         const labelNode = element.querySelector('.investigation-chapter-label,.waste-era-chapter');
         const yearNode = element.querySelector('.investigation-number,.waste-era-year');
@@ -2954,13 +2954,26 @@
       };
       const waterfallsLeadKicker = waterfallsChapter ? waterfallsChapter.querySelector('.waterfalls-slide-meta .niagara-kicker') : null;
       const waterfallsLeadLabel = waterfallsLeadKicker ? waterfallsLeadKicker.querySelector('.investigation-chapter-label') : null;
-      const chapterScrollStops = [
-        waterfallsChapter && waterfallsLeadLabel && waterfallsLeadKicker
-          ? { element:waterfallsChapter, label:'Chapter I', year:'1895', arrival:waterfallsLeadLabel, handoff:waterfallsLeadKicker }
-          : null,
-        chapterMetaFromElement(document.querySelector('#atomic-niagara')),
-        chapterMetaFromElement(document.querySelector('#love-canal-range')),
-        ...wasteEraMarkers.map(chapterMetaFromElement)
+      const waterfallsChapterAnchor = waterfallsChapter && waterfallsLeadLabel && waterfallsLeadKicker
+        ? { element:waterfallsChapter, label:'Chapter I', year:'1895', arrival:waterfallsLeadLabel, handoff:waterfallsLeadKicker }
+        : null;
+      const atomicYearAnchor = chapterAnchorFromElement(document.querySelector('#atomic-niagara'));
+      const loveCanalChapterAnchor = chapterAnchorFromElement(document.querySelector('#love-canal-range'));
+      const laterChapterAnchors = wasteEraMarkers.map(chapterAnchorFromElement).filter(Boolean);
+
+      // These are the real chapter boundaries in the page structure.
+      // Atomic Niagara is a year change inside Chapter I; the radioactive-waste
+      // introduction and LOOW remain in Chapter II until #era-surveys begins.
+      const chapterScrollChapters = [
+        waterfallsChapterAnchor,
+        loveCanalChapterAnchor,
+        ...laterChapterAnchors
+      ].filter(Boolean);
+      const chapterScrollYearStops = [
+        waterfallsChapterAnchor,
+        atomicYearAnchor,
+        loveCanalChapterAnchor,
+        ...laterChapterAnchors
       ].filter(Boolean);
 
       const waterfallsMarkerMeta = () => {
@@ -2989,26 +3002,35 @@
       };
       const updateChapterScrollMarker = () => {
         chapterScrollMarkerFrame = 0;
-        if (!chapterScrollMarker || !chapterScrollMarkerLabel || !chapterScrollMarkerYear || !investigationStory || !chapterScrollStops.length) return;
+        if (!chapterScrollMarker || !chapterScrollMarkerLabel || !chapterScrollMarkerYear || !investigationStory || !chapterScrollChapters.length || !chapterScrollYearStops.length) return;
         const storyRect = investigationStory.getBoundingClientRect();
         const panelActive = chapterScrollPanel && chapterScrollPanel.classList.contains('is-active');
         const markerTop = chapterScrollMarker.getBoundingClientRect().top;
         const tabbarBottom = chapterScrollTabbar ? chapterScrollTabbar.getBoundingClientRect().bottom : 0;
         const handoffY = Math.max(markerTop,tabbarBottom);
         const arrivalY = Math.min(window.innerHeight * .68,640);
-        let activeIndex = -1;
-        chapterScrollStops.forEach((stop,index) => {
-          if (stop.handoff && stop.handoff.getBoundingClientRect().bottom <= handoffY) activeIndex = index;
+
+        let activeChapterIndex = -1;
+        chapterScrollChapters.forEach((chapter,index) => {
+          if (chapter.handoff && chapter.handoff.getBoundingClientRect().bottom <= handoffY) activeChapterIndex = index;
         });
-        const activeStop = activeIndex >= 0 ? chapterScrollStops[activeIndex] : null;
-        const upcomingStop = chapterScrollStops[activeIndex + 1] || null;
-        const upcomingArriving = Boolean(upcomingStop && upcomingStop.arrival && upcomingStop.arrival.getBoundingClientRect().top <= arrivalY);
-        const visible = Boolean(panelActive && activeStop && !upcomingArriving && storyRect.bottom >= handoffY);
+        const activeChapter = activeChapterIndex >= 0 ? chapterScrollChapters[activeChapterIndex] : null;
+        const upcomingChapter = chapterScrollChapters[activeChapterIndex + 1] || null;
+        const upcomingArriving = Boolean(upcomingChapter && upcomingChapter.arrival && upcomingChapter.arrival.getBoundingClientRect().top <= arrivalY);
+        const visible = Boolean(panelActive && activeChapter && !upcomingArriving && storyRect.bottom >= handoffY);
         chapterScrollMarker.classList.toggle('is-visible',visible);
         if (!visible) return;
-        const meta = activeStop.element === waterfallsChapter
+
+        let activeYearStop = chapterScrollYearStops[0];
+        chapterScrollYearStops.forEach(stop => {
+          if (stop.handoff && stop.handoff.getBoundingClientRect().bottom <= handoffY) activeYearStop = stop;
+        });
+        const meta = activeChapter.element === waterfallsChapter && activeYearStop.element === waterfallsChapter
           ? waterfallsMarkerMeta()
-          : { label:activeStop.label, year:activeStop.year };
+          : {
+              label:activeChapter.label,
+              year:activeYearStop && activeYearStop.label === activeChapter.label ? activeYearStop.year : activeChapter.year
+            };
         const key = `${meta.label}|${meta.year}`;
         if (key === chapterScrollMarkerKey) return;
         chapterScrollMarkerKey = key;
