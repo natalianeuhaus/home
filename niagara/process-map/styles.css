@@ -3,7 +3,7 @@
   --ink: #11110f;
   --muted: #68645e;
   --line: #c9c3b8;
-  --red: #440806;
+  --red: #285f86;
   --waste: #d8c08b;
   --context: #9d9d9d;
   --map-black: #0c0c0b;
@@ -61,11 +61,12 @@ button { font: inherit; }
 }
 
 .linear-stepper {
+  position: relative;
   display: flex;
-  gap: 0;
+  gap: 18px;
   overflow-x: auto;
   overflow-y: hidden;
-  padding: 12px clamp(26px, 3.6vw, 60px);
+  padding: 17px clamp(26px, 3.6vw, 60px) 16px;
   border-bottom: 1px solid var(--line);
   background: #ece9e2;
   scroll-behavior: smooth;
@@ -76,46 +77,63 @@ button { font: inherit; }
 
 .linear-stepper button {
   position: relative;
-  display: flex;
-  min-width: 142px;
-  flex: 0 0 142px;
-  align-items: center;
+  display: grid;
+  min-width: 108px;
+  flex: 1 0 108px;
+  grid-template-rows: 24px auto;
   gap: 8px;
-  padding: 6px 25px 6px 0;
+  align-items: start;
+  justify-items: start;
+  padding: 0;
   border: 0;
   background: transparent;
   color: #5c5750;
-  font-size: 8px;
+  font-size: 8.5px;
   font-weight: 700;
   line-height: 1.2;
   text-align: left;
   text-transform: uppercase;
   cursor: pointer;
-  scroll-snap-align: start;
+  scroll-snap-align: none;
 }
-.linear-stepper button:not(:last-child)::after {
+.linear-stepper button b {
+  position: relative;
+  z-index: 1;
+  display: block;
+  max-width: 100%;
+  padding-right: 5px;
+  overflow: visible;
+  font-weight: 700;
+  line-height: 1.25;
+  white-space: normal;
+}
+.linear-stepper button::before {
   position: absolute;
-  top: 50%;
-  right: 10px;
-  color: #918b82;
-  font: 400 15px/1 Georgia, "Times New Roman", serif;
-  content: "→";
-  transform: translateY(-52%);
+  top: 11px;
+  left: 23px;
+  z-index: 1;
+  width: calc(100% + 18px);
+  height: 1px;
+  background: #bdb8af;
+  content: "";
 }
-.linear-stepper button b { overflow: hidden; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+.linear-stepper button:last-child::before { display: none; }
 
 .linear-stepper button:hover,
 .linear-stepper button:focus-visible,
 .linear-stepper button.is-active { color: var(--red); }
+.linear-stepper button.is-past::before { background: var(--red); }
+.linear-stepper button.is-past span { border-color: var(--red); color: var(--red); }
 
 .linear-stepper button span {
+  position: relative;
+  z-index: 2;
   display: inline-flex;
-  width: 22px;
-  height: 22px;
-  flex: 0 0 22px;
+  width: 24px;
+  height: 24px;
   align-items: center;
   justify-content: center;
-  border: 1px solid #5c5750;
+  border: 1px solid #68645e;
   border-radius: 50%;
   background: var(--paper);
   color: var(--ink);
@@ -296,6 +314,7 @@ button { font: inherit; }
 
 .map-panel { position: relative; min-width: 0; height: 100dvh; overflow: hidden; background: var(--map-black); }
 .leaflet-map { position: absolute; inset: 0; background: var(--map-black); }
+.leaflet-tile-pane { filter: grayscale(1) contrast(1.08) brightness(.91); }
 .leaflet-container { background: var(--map-black); font-family: Arial, Helvetica, sans-serif; }
 .map-heading, .basemap-toggle, .receiver-card, .dispersal-overlay, .water-route-overlay, .map-caption { position: absolute; z-index: 700; }
 
@@ -341,7 +360,7 @@ button { font: inherit; }
 }
 .receiver-card span { display: block; margin-bottom: 6px; color: var(--red); font: 700 8px/1 Arial,sans-serif; letter-spacing: .13em; text-transform: uppercase; }
 .receiver-workers { top: 34%; right: 11%; }
-.dispersal-overlay { inset: 0; pointer-events: none; background: rgba(68,8,6,.08); }
+.dispersal-overlay { inset: 0; pointer-events: none; background: rgba(40,95,134,.08); }
 .reuse-label {
   position: absolute;
   padding: 8px 11px;
@@ -471,7 +490,7 @@ button { font: inherit; }
   .map-panel { order: 1; height: 46dvh; min-height: 370px; }
   .story-header { padding: 23px 24px 19px; }
   .project-line { margin-bottom: 20px; }
-  .linear-stepper { padding: 12px 24px; }
+  .linear-stepper { padding: 17px 24px 16px; }
   .story-scroll { overflow: visible; padding: 21px 24px 23px; }
   .story-footer { padding: 0 24px; }
   .story-header h1 { font-size: clamp(45px,12vw,66px); }
