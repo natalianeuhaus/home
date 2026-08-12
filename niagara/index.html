@@ -2076,7 +2076,7 @@
       function activate(name, updateHash = true, animateIndicator = true, scrollToContent = false) {
         if (!validTabs.has(name)) name = 'investigation';
         const internalArchiveMode = name === 'evidence' || name === 'map';
-        const returningToPhotographs = page.classList.contains('niagara-content-mode') && name === 'photographs';
+        const returningFromArchive = page.classList.contains('niagara-content-mode') && name !== 'investigation';
         if (scrollToContent) page.classList.add('niagara-tabs-navigated');
         if (scrollToContent) page.classList.toggle('niagara-content-mode', internalArchiveMode);
         page.classList.toggle('niagara-photographs-active', name === 'photographs');
@@ -2101,8 +2101,8 @@
         if (name === 'investigation') requestAnimationFrame(layoutAtomicThread);
         if (updateHash) history.replaceState(null, '', `#${name}`);
         if (scrollToContent) requestAnimationFrame(() => {
-          scrollTabsToTop(returningToPhotographs ? 'auto' : 'smooth');
-          if (returningToPhotographs) requestAnimationFrame(updateStickyHeader);
+          scrollTabsToTop(returningFromArchive ? 'auto' : 'smooth');
+          if (returningFromArchive) requestAnimationFrame(updateStickyHeader);
         });
       }
 
