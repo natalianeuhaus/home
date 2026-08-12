@@ -141,8 +141,8 @@ let selectedWasteId = null;
 let routeTransitionTimer = null;
 
 const map = L.map("map", {
-  center: [20, -28],
-  zoom: 2.4,
+  center: [-10.45, 25.75],
+  zoom: 8.5,
   minZoom: 2,
   maxZoom: 18,
   zoomSnap: .25,
@@ -183,6 +183,7 @@ function preloadSatellite(point, zoom, radius = 2) {
     }
   }
 }
+preloadSatellite([18, -24], 3, 2);
 preloadSatellite(P.linde, 11);
 
 const activeRouteLayer = L.layerGroup().addTo(map);
@@ -477,5 +478,5 @@ document.getElementById("map-button").addEventListener("click", () => {
 });
 
 renderStepper();
-steps.forEach(step => stepMarkers[step.id].setOpacity(.78));
+selectStep("shinkolobwe");
 window.setTimeout(() => map.invalidateSize(), 120);
