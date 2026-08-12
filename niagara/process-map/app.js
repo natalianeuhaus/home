@@ -12,6 +12,8 @@ const P = {
   river: [43.0905, -79.062]
 };
 
+const SHINKOLOBWE_OVERVIEW = [-11.06694, 26.51850];
+
 const steps = [
   {
     id: "shinkolobwe",
@@ -28,8 +30,8 @@ const steps = [
     mainDetail: "More than 1,000 tons crossed the Atlantic in steel drums and were held at the African Metals Corporation warehouse near the Bayonne Bridge. On November 2, 1942, the Army moved the drums to the Seneca Ordnance Depot for safekeeping. The story next enters Linde as part of Western New York’s processing network—not as a claim that every Staten Island drum went directly to Linde.",
     routeKind: "material",
     route: [P.shinkolobwe, [-7.5, 20], [-5.8, 13.2], [4, -12], [24, -43], [38, -68], P.staten],
-    cameraPoint: P.shinkolobwe,
-    cameraZoom: 15,
+    cameraPoint: SHINKOLOBWE_OVERVIEW,
+    cameraZoom: 14,
     cameraDuration: 1.25,
     caption: "The route begins here. Select Linde when you are ready to follow the material across the Atlantic and into Western New York."
   },
@@ -142,8 +144,8 @@ let routeTransitionTimer = null;
 let routeResetTimer = null;
 
 const map = L.map("map", {
-  center: P.shinkolobwe,
-  zoom: 15,
+  center: SHINKOLOBWE_OVERVIEW,
+  zoom: 14,
   minZoom: 2,
   maxZoom: 18,
   zoomSnap: .25,
@@ -185,7 +187,7 @@ function preloadSatellite(point, zoom, radius = 2) {
   }
 }
 preloadSatellite([18, -24], 3, 2);
-preloadSatellite(P.shinkolobwe, 15, 3);
+preloadSatellite(SHINKOLOBWE_OVERVIEW, 14, 3);
 preloadSatellite(P.linde, 11);
 preloadSatellite(P.electromet, 13);
 preloadSatellite(P.hooker, 14);
