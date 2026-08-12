@@ -1,7 +1,7 @@
 /* global L */
 
 const P = {
-  shinkolobwe: [-11.0506, 26.5482],
+  shinkolobwe: [-11.06804, 26.54193],
   staten: [40.6402778, -74.1419444],
   seneca: [42.716, -76.889],
   linde: [42.97441030070138, -78.8930735242712],
@@ -141,7 +141,6 @@ let activeId = null;
 let wasteOpen = false;
 let selectedWasteId = null;
 let routeTransitionTimer = null;
-let routeResetTimer = null;
 
 const map = L.map("map", {
   center: SHINKOLOBWE_OVERVIEW,
@@ -322,10 +321,6 @@ function drawActiveRoute() {
     window.clearTimeout(routeTransitionTimer);
     routeTransitionTimer = null;
   }
-  if (routeResetTimer) {
-    window.clearTimeout(routeResetTimer);
-    routeResetTimer = null;
-  }
   activeRouteLayer.clearLayers();
   if (!activeId) return;
 
@@ -369,14 +364,11 @@ function drawActiveRoute() {
     routeTransitionTimer = window.setTimeout(() => {
       if (activeId !== step.id || selectedWasteId) return;
       map.stop();
+      activeRouteLayer.clearLayers();
       map.flyTo(step.point, step.cameraZoom, {
         duration: 2.4,
         easeLinearity: .2
       });
-      routeResetTimer = window.setTimeout(() => {
-        resetRouteProgress(routeLine);
-        routeResetTimer = null;
-      }, 2450);
       routeTransitionTimer = null;
     }, 3350);
   } else {
@@ -390,14 +382,11 @@ function drawActiveRoute() {
     routeTransitionTimer = window.setTimeout(() => {
       if (activeId !== step.id || selectedWasteId) return;
       map.stop();
+      activeRouteLayer.clearLayers();
       map.flyTo(step.cameraPoint || step.point, step.cameraZoom, {
         duration: 1.5,
         easeLinearity: .22
       });
-      routeResetTimer = window.setTimeout(() => {
-        resetRouteProgress(routeLine);
-        routeResetTimer = null;
-      }, 1550);
       routeTransitionTimer = null;
     }, 1350);
   }
