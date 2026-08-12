@@ -453,7 +453,7 @@
     .love-canal-title { padding:clamp(44px,4vw,72px); color:var(--niagara-paper); background:var(--love-canal-red); }
     .love-canal-title h3 { max-width:100%; background:var(--love-canal-red); box-shadow:0 0 0 7px var(--love-canal-red); }
     .love-canal-title h4 { margin:clamp(26px,3.8svh,42px) 0 12px; color:rgba(241,240,234,.95); font-size:clamp(24px,2.35vw,38px); line-height:1.04; font-weight:400; letter-spacing:-.032em; }
-    .love-canal-title p { margin:0 !important; max-width:520px; color:rgba(241,240,234,.72); font:clamp(15px,1.15vw,19px)/1.5 Arial,Helvetica,sans-serif !important; letter-spacing:0 !important; }
+    .love-canal-title p { margin:clamp(34px,5svh,56px) 0 0 !important; max-width:520px; color:rgba(241,240,234,.72); font:clamp(15px,1.15vw,19px)/1.5 Arial,Helvetica,sans-serif !important; letter-spacing:0 !important; }
     .love-canal-media { min-width:0; margin:0; position:relative; display:grid; place-items:center; overflow:hidden; background:#e5d8bd; }
     .love-canal-media img { width:100%; height:100%; display:block; object-fit:cover; object-position:right center; }
     .love-canal-media figcaption { display:none; position:absolute; z-index:1; left:18px; right:18px; bottom:16px; justify-content:space-between; gap:24px; color:rgba(241,240,234,.82); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.08em; text-transform:uppercase; text-shadow:0 1px 8px rgba(0,0,0,.8); }
@@ -1499,7 +1499,7 @@
               <span class="investigation-chapter-label">Chapter II</span>
               <span class="investigation-number">1978–1981</span>
               <h3 id="era-love-canal-title">Love Canal &amp; The Federal Connection Report</h3>
-              <p>Love Canal forced officials to look beyond one contaminated neighborhood. Following allegations of Army dumping, the New York State Assembly investigation traced a regional system of defense production and radioactive waste across Niagara and Erie Counties.</p>
+              <p>Love Canal forced officials to look beyond one contaminated neighborhood. Following allegations of Army dumping, the New York State Assembly created a special task force to investigate. Its inquiry traced a regional system of defense production and radioactive waste across Niagara and Erie Counties.</p>
             </div>
             <figure class="love-canal-media">
               <img src="./archive/love-canal-public-health-time-bomb.webp" alt="Cover spread of the 1978 report Love Canal: Public Health Time Bomb over an aerial photograph of the neighborhood" loading="lazy" />
@@ -3058,7 +3058,7 @@
         updateChapterScrollMarker();
       });
 
-      const chapterParallaxTitles = Array.from(document.querySelectorAll('.atomic-niagara-title'));
+      const chapterParallaxTitles = Array.from(document.querySelectorAll('.atomic-niagara-title:not(.love-canal-title)'));
       let chapterParallaxFrame = 0;
 
       function updateChapterParallax() {
