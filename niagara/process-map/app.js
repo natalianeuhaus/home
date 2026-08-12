@@ -56,7 +56,7 @@ const steps = [
     mainDetail: "Green salt moved onward for reduction into uranium metal.",
     routeKind: "material",
     route: [P.shinkolobwe, [-7.5, 20], [-5.8, 13.2], [4, -12], [24, -43], [38, -68], P.staten, [41.15, -74.72], [42.05, -75.72], P.seneca, [42.87, -77.61], P.linde],
-    cameraPoint: [42.958, -78.935],
+    cameraPoint: [42.967, -78.935],
     cameraZoom: 12.25,
     cameraDuration: 2.7,
     caption: "The camera follows the connected route from Shinkolobwe and settles at Linde. Staten Island and Seneca Depot remain part of the journey described in step 1.",
@@ -281,7 +281,7 @@ function preloadSatellite(point, zoom, radius = 2) {
 }
 preloadSatellite([18, -24], 3, 2);
 preloadSatellite(SHINKOLOBWE_OVERVIEW, 14, 3);
-preloadSatellite(P.linde, 11);
+preloadSatellite([42.967, -78.935], 12, 3);
 preloadSatellite(P.electromet, 13);
 preloadSatellite(P.hooker, 14);
 preloadSatellite(P.guterl, 14);
