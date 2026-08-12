@@ -536,15 +536,14 @@
     .waste-video-media { min-height:0; aspect-ratio:16 / 9; grid-area:media; }
     .waste-section--loow-film { width:calc(100vw - (50vw - 50%)); max-width:none; margin:clamp(58px,8svh,92px) 0 0; padding-top:0; border-top:0; }
     .waste-section--loow-film .waste-video-block { margin-top:0; }
-    .iwcs-afterword { padding:clamp(34px,4.5vw,70px); display:grid; grid-template-columns:minmax(130px,.28fr) minmax(0,1fr); gap:clamp(30px,5vw,82px); align-items:start; border-top:1px solid rgba(68,8,6,.18); background:rgba(241,240,234,.94); }
-    .iwcs-afterword .waste-year { padding-top:8px; }
-    .iwcs-afterword-copy { max-width:930px; }
+    .iwcs-afterword { padding:0; display:grid; grid-template-columns:minmax(340px,.72fr) minmax(0,1.28fr); gap:0; align-items:stretch; border-top:1px solid rgba(68,8,6,.18); background:rgba(241,240,234,.94); }
+    .iwcs-afterword-copy { max-width:none; padding:clamp(38px,4.8vw,72px); display:flex; flex-direction:column; justify-content:center; }
     .iwcs-afterword h5 { margin:0 0 22px; font-size:clamp(32px,3.3vw,54px); line-height:.98; font-weight:400; letter-spacing:-.043em; }
     .iwcs-afterword p { margin:0; color:rgba(21,23,21,.76); font-size:clamp(17px,1.26vw,21px); line-height:1.48; letter-spacing:-.01em; }
     .iwcs-afterword p + p { margin-top:1em; }
-    .iwcs-afterword-link { width:max-content; max-width:100%; margin-top:26px; padding-bottom:5px; display:inline-block; color:var(--niagara-red); border-bottom:1px solid rgba(68,8,6,.42); text-decoration:none; font:10px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.14em; text-transform:uppercase; transition:color .22s ease,border-color .22s ease; }
-    .iwcs-afterword-link:hover,.iwcs-afterword-link:focus-visible { color:var(--niagara-ink); border-color:var(--niagara-ink); }
-    .waste-survey-timeline + .iwcs-afterword { margin-top:clamp(50px,7svh,88px); }
+    .iwcs-afterword-figure { min-width:0; margin:0; padding:clamp(24px,3vw,46px); display:flex; flex-direction:column; justify-content:center; color:var(--niagara-paper); background:#050505; }
+    .iwcs-afterword-figure img { width:100%; height:auto; display:block; object-fit:contain; }
+    .iwcs-afterword-figure figcaption { margin-top:14px; color:rgba(241,240,234,.55); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.1em; text-transform:uppercase; }
     .waste-trail { margin:36px 0; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border-top:1px solid var(--niagara-line); border-bottom:1px solid var(--niagara-line); }
     .waste-trail span { min-height:92px; display:grid; place-items:center; padding:18px 10px; position:relative; text-align:center; color:rgba(21,23,21,.66); font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
     .waste-trail span + span { border-left:1px solid var(--niagara-line); }
@@ -554,7 +553,7 @@
     .waste-callout { padding:28px 0; border-top:1px solid var(--niagara-line); border-bottom:1px solid var(--niagara-line); }
     .waste-callout strong { display:block; margin-bottom:10px; color:var(--niagara-red); font:10px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.14em; text-transform:uppercase; }
     .waste-callout p { margin:0 !important; font-size:clamp(21px,2vw,30px) !important; line-height:1.3 !important; }
-    .waste-survey-timeline { margin-top:44px; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-top:1px solid var(--niagara-line); border-left:1px solid var(--niagara-line); }
+    .waste-survey-timeline { margin-top:44px; display:grid; grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr); border-top:1px solid var(--niagara-line); border-left:1px solid var(--niagara-line); }
     .waste-survey-item { min-height:196px; padding:25px 22px 28px; border-right:1px solid var(--niagara-line); border-bottom:1px solid var(--niagara-line); }
     .waste-survey-item time { display:block; margin-bottom:30px; color:var(--niagara-red); font:10px/1 Arial,Helvetica,sans-serif; letter-spacing:.14em; }
     .waste-survey-item p { margin:0 !important; color:rgba(21,23,21,.72); font:14px/1.48 Arial,Helvetica,sans-serif !important; letter-spacing:0 !important; }
@@ -712,9 +711,9 @@
       .waste-video-block { grid-template-areas:"media" "copy"; }
       .waste-video-media { min-height:54vw; }
       .waste-section--loow-film { width:calc(100vw - 24px); margin-left:0; }
-      .iwcs-afterword { padding:30px 24px 36px; grid-template-columns:1fr; gap:18px; }
-      .iwcs-afterword .waste-year { padding-top:0; }
-      .iwcs-afterword .waste-year:empty { display:none; }
+      .iwcs-afterword { grid-template-columns:1fr; gap:0; }
+      .iwcs-afterword-copy { padding:32px 24px 38px; }
+      .iwcs-afterword-figure { padding:24px; }
       .waste-trail { grid-template-columns:1fr 1fr; }
       .waste-trail span:nth-child(3) { border-left:0; border-top:1px solid var(--niagara-line); }
       .waste-trail span:nth-child(4) { border-top:1px solid var(--niagara-line); }
@@ -1614,8 +1613,7 @@
                 </div>
                 <div class="waste-survey-timeline" aria-label="Early radiological surveys and follow-up work">
                   <article class="waste-survey-item"><time>1978–1979</time><p>Federal aerial and follow-up work identified radiological anomalies at residential, commercial, and roadside locations.</p></article>
-                  <article class="waste-survey-item"><time>1984</time><p>An ORNL vehicle survey scanned selected roads and identified 100 elevated gamma anomalies for follow-up.</p></article>
-                  <article class="waste-survey-item"><time>1985</time><p>Onsite measurements and soil sampling classified 38 anomalies as exceeding FUSRAP guidelines and associated 62 principally with industrial slag. ORNL published the findings in 1986.</p></article>
+                  <article class="waste-survey-item"><time>1984–1985</time><p>One ORNL investigation unfolded in two phases. A 1984 vehicle survey identified 100 elevated gamma anomalies for follow-up; onsite measurements and soil sampling in 1985 classified 38 as exceeding FUSRAP guidelines and associated the remaining 62 principally with industrial slag. ORNL published the findings in 1986.</p></article>
                 </div>
                 
               </section>
@@ -1638,13 +1636,15 @@
                 </div>
 
 <aside class="iwcs-afterword" aria-labelledby="iwcs-afterword-title">
-                  <span class="waste-year" aria-hidden="true"></span>
                   <div class="iwcs-afterword-copy">
                     <h5 id="iwcs-afterword-title">An “interim” structure</h5>
                     <p>At the Lake Ontario Ordnance Works, radioactive residues and waste remained stored in buildings, a silo, and open fields until the U.S. Department of Energy consolidated them inside the interim waste containment structure (IWCS) in 1986. Federal planning documents later estimated that the ten-acre cell held approximately 193,230 cubic yards of radioactive residues and waste.</p>
                     <p>“Interim” matters. The cell was given an anticipated 25-year life, carrying it only to about 2011. In 2026, it remains in use—approximately 15 years beyond that original horizon. It has a compacted-clay cover, but no constructed liner beneath it. For comparison—not equivalence—the sarcophagus enclosing Chornobyl’s destroyed Unit 4 contains an estimated 200 tonnes of nuclear fuel.</p>
-                    <a class="iwcs-afterword-link" href="./archive/nfss-iwcs-conceptual-design.jpg" data-iwcs-diagram-open aria-haspopup="dialog">View the interim waste containment structure →</a>
                   </div>
+                  <figure class="iwcs-afterword-figure">
+                    <img src="./archive/nfss-iwcs-conceptual-design.jpg" alt="Conceptual cross-section of the Niagara Falls Storage Site interim waste containment structure, showing its clay cover, sand and riprap layers, dikes, cutoff walls, buried wastes, residues, and contamination beneath the original grade" loading="lazy" decoding="async" />
+                    <figcaption>Conceptual cross-section for long-term management of NFSS wastes and residues · Figure 2.3 · vertical scale exaggerated.</figcaption>
+                  </figure>
                 </aside>
       </section>
 
@@ -2654,7 +2654,6 @@
 
       const evidenceItems = Array.from(document.querySelectorAll('.atomic-evidence-item')).filter(item => item.querySelector('img'));
       const evidenceViewer = document.querySelector('.atomic-evidence-viewer');
-      const iwcsDiagramOpener = document.querySelector('[data-iwcs-diagram-open]');
       if (evidenceItems.length && evidenceViewer && typeof evidenceViewer.showModal === 'function') {
         const evidenceImage = evidenceViewer.querySelector('.atomic-evidence-viewer-image');
         const evidenceCount = evidenceViewer.querySelector('.atomic-evidence-viewer-count');
@@ -2693,23 +2692,6 @@
           event.preventDefault();
           showEvidence(index);
         }));
-        if (iwcsDiagramOpener) {
-          iwcsDiagramOpener.addEventListener('click', event => {
-            event.preventDefault();
-            evidenceImage.src = iwcsDiagramOpener.href;
-            evidenceImage.alt = 'Cross-section diagram of the Niagara Falls Storage Site interim waste containment structure';
-            evidenceCount.textContent = 'NFSS / IWCS';
-            evidenceTitle.textContent = 'Interim Waste Containment Structure';
-            evidenceSummary.textContent = 'Conceptual cross-section for long-term management of NFSS wastes and residues · Figure 2.3 · vertical scale exaggerated.';
-            evidenceFollow.removeAttribute('href');
-            evidenceFollow.textContent = '';
-            evidenceFollow.target = '';
-            evidenceFollow.rel = '';
-            evidenceViewer.classList.remove('is-profile');
-            evidenceViewer.classList.add('is-single');
-            if (!evidenceViewer.open) evidenceViewer.showModal();
-          });
-        }
         evidencePrev.addEventListener('click', () => showEvidence(evidenceIndex - 1));
         evidenceNext.addEventListener('click', () => showEvidence(evidenceIndex + 1));
         evidenceClose.addEventListener('click', () => evidenceViewer.close());
