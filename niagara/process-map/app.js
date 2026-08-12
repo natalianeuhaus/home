@@ -19,6 +19,12 @@ const P = {
 };
 
 const SHINKOLOBWE_OVERVIEW = [-11.06492, 26.52854];
+const LOOW_BEFORE_CONTAINMENT = {
+  eyebrow: "Before containment",
+  title: "Lake Ontario Storage Area · 1985",
+  body: "This is the Lake Ontario Storage Area within the former Lake Ontario Ordnance Works reservation in 1985—before radioactive materials were consolidated into the interim waste containment structure built in 1986.",
+  note: "U.S. Army Corps of Engineers footage records the silo, buildings, roads, and storage grounds that had received uranium-processing residues from Western New York since 1944."
+};
 
 const steps = [
   {
@@ -55,11 +61,11 @@ const steps = [
     mainDestination: "Electromet, Niagara Falls",
     mainDetail: "Green salt moved onward for reduction into uranium metal.",
     routeKind: "material",
-    route: [P.shinkolobwe, [-7.5, 20], [-5.8, 13.2], [4, -12], [24, -43], [38, -68], P.staten, [41.15, -74.72], [42.05, -75.72], P.seneca, [42.87, -77.61], P.linde],
+    route: [],
     cameraPoint: [42.967, -78.935],
     cameraZoom: 12.25,
     cameraDuration: 2.7,
-    caption: "The camera follows the connected route from Shinkolobwe and settles at Linde. Staten Island and Seneca Depot remain part of the journey described in step 1.",
+    caption: "The narrative now enters Western New York at Linde. Staten Island and Seneca Depot remain part of the journey described in step 1.",
     wasteRoutes: [
       {
         id: "linde-ashland-1",
@@ -102,9 +108,11 @@ const steps = [
         title: "LOOW / Niagara Falls Storage Site",
         location: "Lewiston, New York",
         point: P.loow,
-        detail: "Radioactive residues and contaminated materials from Linde entered the federal storage and disposal system.",
-        fromThere: "At LOOW, material was stored, repackaged, moved, buried, or disposed. Accounts later described gravel and fill leaving with workers for destinations that were never completely recorded.",
-        path: [P.linde, [43.106, -78.91], P.loow]
+        detail: "Linde’s radioactive residues entered the federal storage system at LOOW.",
+        fromThere: "The map opens the 1985 site history after arriving at the storage area.",
+        path: [P.linde, [43.106, -78.91], P.loow],
+        focusZoom: 14,
+        popup: LOOW_BEFORE_CONTAINMENT
       }
     ]
   },
@@ -119,8 +127,8 @@ const steps = [
     point: P.electromet,
     received: "Uranium tetrafluoride—green salt—from Linde.",
     process: "Electromet used magnesium to reduce UF₄ into uranium metal. The reaction also produced uranium-bearing C-2 slag.",
-    mainDestination: "Hooker Chemical",
-    mainDetail: "C-2 slag still contained recoverable uranium, so it moved to Hooker for chemical treatment.",
+    mainDestination: "Hooker Chemical + rod fabrication",
+    mainDetail: "Uranium-bearing C-2 slag moved to Hooker for chemical treatment, while uranium metal entered the rod-fabrication network, including Bliss & Laughlin.",
     routeKind: "material",
     route: [P.linde, [43.021, -78.925], P.electromet],
     cameraZoom: 14,
@@ -132,9 +140,11 @@ const steps = [
         title: "LOOW / Niagara Falls Storage Site",
         location: "Lewiston, New York",
         point: P.loow,
-        detail: "Radioactive waste from uranium-metal production moved north into the federal storage and disposal system.",
-        fromThere: "LOOW became a site of storage, repackaging, transshipment, burial, and disposal. Some material later left the reservation with workers or private recipients.",
-        path: [P.electromet, [43.151, -78.989], P.loow]
+        detail: "Radioactive waste from uranium-metal production moved north to LOOW.",
+        fromThere: "The map opens the 1985 site history after arriving at the storage area.",
+        path: [P.electromet, [43.151, -78.989], P.loow],
+        focusZoom: 14,
+        popup: LOOW_BEFORE_CONTAINMENT
       },
       {
         id: "electromet-landfill",
@@ -206,24 +216,26 @@ const steps = [
     shortTitle: "Bliss & Laughlin",
     location: "110 Hopkins Street, Buffalo, New York",
     point: P.bliss,
-    received: "Rough-rolled uranium rods sent through the Atomic Energy Commission fabrication network.",
+    received: "Uranium metal sent from Electromet through the Atomic Energy Commission fabrication network.",
     process: "Bliss & Laughlin machined and straightened uranium rods to improve their diameter tolerance and prepared them for further weapons-production work.",
     mainDestination: "Further AEC fabrication",
     mainDetail: "Finished rods returned to the wider production network; radioactive turnings and waste cuttings were routed through the Lake Ontario Ordnance Works.",
     routeKind: "material",
-    route: [P.loow, [43.08, -78.90], P.bliss],
+    route: [P.electromet, [42.96, -78.92], P.bliss],
     cameraZoom: 14,
     cameraDuration: 2.1,
-    caption: "A separate AEC fabrication route carried rough-rolled rods through the Lake Ontario Ordnance Works to Bliss & Laughlin for machining and straightening.",
+    caption: "The line follows uranium metal from Electromet to Bliss & Laughlin for machining and straightening into rods.",
     wasteRoutes: [
       {
         id: "bliss-loow",
         title: "Lake Ontario Ordnance Works",
         location: "Lewiston and Porter, New York",
         point: P.loow,
-        detail: "Machining produced radioactive turnings and waste cuttings.",
-        fromThere: "Federal records state that these residues were shipped to the Lake Ontario Ordnance Works for packaging and handling.",
-        path: [P.bliss, [43.02, -78.88], P.loow]
+        detail: "Machining produced radioactive turnings and waste cuttings that were shipped to LOOW.",
+        fromThere: "The map opens the 1985 site history after arriving at the storage area.",
+        path: [P.bliss, [43.02, -78.88], P.loow],
+        focusZoom: 14,
+        popup: LOOW_BEFORE_CONTAINMENT
       }
     ]
   }
@@ -234,6 +246,7 @@ let activeId = null;
 let wasteOpen = false;
 let selectedWasteId = null;
 let routeTransitionTimer = null;
+let popupTimer = null;
 let selectionSource = "initial";
 
 const map = L.map("map", {
@@ -286,6 +299,7 @@ preloadSatellite(P.electromet, 13);
 preloadSatellite(P.hooker, 14);
 preloadSatellite(P.guterl, 14);
 preloadSatellite(P.bliss, 14);
+preloadSatellite(P.loow, 14, 3);
 
 const activeRouteLayer = L.layerGroup().addTo(map);
 const stepMarkers = {};
@@ -378,14 +392,27 @@ function addArrow(path, waste = false) {
   L.marker(midpoint(path), { icon, interactive: false }).addTo(activeRouteLayer);
 }
 
-function addWasteDestinationMarker(route) {
+function addWasteDestinationMarker(route, routeNumber) {
   const icon = L.divIcon({
     className: "waste-marker-wrap",
-    html: '<span class="waste-marker">W</span>',
+    html: `<span class="waste-marker">${routeNumber}</span>`,
     iconSize: [38, 38],
     iconAnchor: [19, 19]
   });
-  L.marker(route.point, { icon, interactive: false }).addTo(activeRouteLayer);
+  const marker = L.marker(route.point, {
+    icon,
+    interactive: true,
+    keyboard: true,
+    title: route.title
+  }).addTo(activeRouteLayer);
+
+  if (route.popup) {
+    marker.bindPopup(
+      `<article class="loow-popup-copy"><span>${route.popup.eyebrow}</span><h3>${route.popup.title}</h3><p>${route.popup.body}</p><p>${route.popup.note}</p></article>`,
+      { className: "loow-history-popup", maxWidth: 370, minWidth: 300, offset: [0, -16], autoPan: false }
+    );
+  }
+  return marker;
 }
 
 function drawRouteProgressively(polyline, duration = 3200) {
@@ -416,6 +443,10 @@ function drawActiveRoute() {
   if (routeTransitionTimer) {
     window.clearTimeout(routeTransitionTimer);
     routeTransitionTimer = null;
+  }
+  if (popupTimer) {
+    window.clearTimeout(popupTimer);
+    popupTimer = null;
   }
   activeRouteLayer.clearLayers();
   if (!activeId) return;
@@ -454,34 +485,46 @@ function drawActiveRoute() {
     return;
   }
 
+  if (!wasteRoute && step.id === "linde") {
+    map.stop();
+    map.flyTo(step.cameraPoint || step.point, step.cameraZoom, {
+      duration: 2.4,
+      easeLinearity: .2
+    });
+    steps.forEach(item => {
+      const marker = stepMarkers[item.id];
+      const selected = item.id === activeId;
+      marker.setOpacity(selected ? 1 : .32);
+      marker.getElement()?.classList.toggle("is-active-marker", selected);
+    });
+    return;
+  }
+
   const routeLine = L.polyline(route, routeOptions(step.routeKind, Boolean(wasteRoute))).addTo(activeRouteLayer);
   if (!(!wasteRoute && step.routeKind === "context")) addArrow(route, Boolean(wasteRoute));
-  if (wasteRoute) addWasteDestinationMarker(wasteRoute);
+  const wasteRouteNumber = wasteRoute ? step.wasteRoutes.findIndex(item => item.id === wasteRoute.id) + 1 : null;
+  const wasteMarker = wasteRoute ? addWasteDestinationMarker(wasteRoute, wasteRouteNumber) : null;
 
   if (wasteRoute) {
-    map.flyToBounds(L.latLngBounds(route), {
-      padding: [78, 78],
-      maxZoom: 12.5,
-      duration: 1.6
-    });
-  } else if (step.id === "linde") {
-    map.stop();
-    map.fitBounds(L.latLngBounds(route), {
-      padding: [56, 56],
-      maxZoom: 2.5,
-      animate: false
-    });
-    drawRouteProgressively(routeLine, 3200);
-    routeTransitionTimer = window.setTimeout(() => {
-      if (activeId !== step.id || selectedWasteId) return;
-      map.stop();
-      activeRouteLayer.clearLayers();
-      map.flyTo(step.cameraPoint || step.point, step.cameraZoom, {
-        duration: 2.4,
-        easeLinearity: .2
+    if (wasteRoute.focusZoom) {
+      map.flyTo(wasteRoute.point, wasteRoute.focusZoom, {
+        duration: 1.8,
+        easeLinearity: .22
       });
-      routeTransitionTimer = null;
-    }, 3350);
+    } else {
+      map.flyToBounds(L.latLngBounds(route), {
+        padding: [78, 78],
+        maxZoom: 12.5,
+        duration: 1.6
+      });
+    }
+    if (wasteRoute.popup && wasteMarker) {
+      popupTimer = window.setTimeout(() => {
+        if (activeId !== step.id || selectedWasteId !== wasteRoute.id) return;
+        wasteMarker.openPopup();
+        popupTimer = null;
+      }, 2100);
+    }
   } else {
     map.stop();
     map.fitBounds(L.latLngBounds(route), {
