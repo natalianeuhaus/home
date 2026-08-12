@@ -337,7 +337,7 @@
     .waste-era-marker.is-visible .waste-era-year { opacity:1; transform:translate3d(0,0,0); }
     .waste-era-marker.is-visible .waste-era-copy { opacity:1; transform:translate3d(0,0,0); }
     .waste-era-marker--love { --era-accent:var(--love-canal-red); }
-    .waste-era-marker--survey-map { width:100vw; min-height:100svh; margin-left:calc(100% - 100vw); border:0; color:var(--niagara-paper); background:#090909; }
+    .waste-era-marker--survey-map { width:100vw; min-height:100svh; margin-left:calc(100% - 50vw - min(770px,calc(50vw - 42px))); border:0; color:var(--niagara-paper); background:#090909; }
     .waste-era-marker--survey-map::after { display:none; }
     .waste-era-inner--survey-map { min-height:100svh; padding:0; position:relative; display:block; overflow:hidden; }
     .waste-era-survey-copy { width:46%; position:absolute; z-index:2; inset:0 auto 0 0; padding:clamp(44px,4vw,72px); display:flex; flex-direction:column; justify-content:center; color:var(--niagara-paper); background:transparent; }
@@ -585,7 +585,7 @@
       .waste-era-inner--survey-map { min-height:0; padding:0; display:flex; flex-direction:column; overflow:hidden; background:#090909; }
       .waste-era-survey-copy { width:100%; min-height:70svh; position:relative; inset:auto; padding:58px 24px 64px; background:#090909; }
       .waste-era-survey-copy .waste-era-copy { margin-top:48px; }
-      .waste-era-survey-map { width:100%; min-height:58svh; position:relative; inset:auto; background:#090909 url('./archive/chapter-iii-mobile-gamma-survey.png') right center / auto 100% no-repeat; }
+      .waste-era-survey-map { width:100%; min-height:58svh; position:relative; inset:auto; background:#090909 url('./archive/chapter-iii-mobile-gamma-survey.webp') right center / auto 100% no-repeat; }
       .waste-era-survey-map img { opacity:0; }
       .waste-era-survey-map figcaption { display:none; }
       .waste-chapter-followup { margin-top:48px; grid-template-columns:1fr; gap:0; }
@@ -1529,7 +1529,7 @@
                     </div>
                   </div>
                   <figure class="waste-era-survey-map">
-                    <img src="./archive/chapter-iii-mobile-gamma-survey.png" alt="Black-and-white Oak Ridge National Laboratory map showing the area surveyed during the mobile gamma scan of Niagara Falls" loading="lazy" decoding="async" />
+                    <img src="./archive/chapter-iii-mobile-gamma-survey.webp" alt="Black-and-white Oak Ridge National Laboratory map showing the area surveyed during the mobile gamma scan of Niagara Falls" loading="lazy" decoding="async" />
                     <figcaption><span>ORNL/TM-10076 · Figure 1</span><span>Area surveyed during the mobile gamma scan · printed page 11</span></figcaption>
                   </figure>
                 </div>
