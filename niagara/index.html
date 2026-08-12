@@ -447,6 +447,14 @@
     .waste-video-media { min-height:clamp(340px,32vw,540px); grid-area:media; }
     .waste-section--loow-film { width:calc(100vw - 168px); margin:clamp(58px,8svh,92px) 0 0 calc(100% - (100vw - 126px)); padding-top:0; border-top:0; }
     .waste-section--loow-film .waste-video-block { margin-top:0; }
+    .iwcs-afterword { padding:clamp(34px,4.5vw,70px); display:grid; grid-template-columns:minmax(130px,.28fr) minmax(0,1fr); gap:clamp(30px,5vw,82px); align-items:start; border-top:1px solid rgba(68,8,6,.18); background:rgba(241,240,234,.94); }
+    .iwcs-afterword .waste-year { padding-top:8px; }
+    .iwcs-afterword-copy { max-width:930px; }
+    .iwcs-afterword h5 { margin:0 0 22px; font-size:clamp(32px,3.3vw,54px); line-height:.98; font-weight:400; letter-spacing:-.043em; }
+    .iwcs-afterword p { margin:0; color:rgba(21,23,21,.76); font-size:clamp(17px,1.26vw,21px); line-height:1.48; letter-spacing:-.01em; }
+    .iwcs-afterword p + p { margin-top:1em; }
+    .iwcs-afterword-link { width:max-content; max-width:100%; margin-top:26px; padding-bottom:5px; display:inline-block; color:var(--niagara-red); border-bottom:1px solid rgba(68,8,6,.42); text-decoration:none; font:10px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.14em; text-transform:uppercase; transition:color .22s ease,border-color .22s ease; }
+    .iwcs-afterword-link:hover,.iwcs-afterword-link:focus-visible { color:var(--niagara-ink); border-color:var(--niagara-ink); }
     .waste-trail { margin:36px 0; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border-top:1px solid var(--niagara-line); border-bottom:1px solid var(--niagara-line); }
     .waste-trail span { min-height:92px; display:grid; place-items:center; padding:18px 10px; position:relative; text-align:center; color:rgba(21,23,21,.66); font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
     .waste-trail span + span { border-left:1px solid var(--niagara-line); }
@@ -606,6 +614,8 @@
       .waste-video-block { grid-template-areas:"media" "copy"; }
       .waste-video-media { min-height:54vw; }
       .waste-section--loow-film { width:calc(100vw - 48px); margin-left:0; }
+      .iwcs-afterword { padding:30px 24px 36px; grid-template-columns:1fr; gap:18px; }
+      .iwcs-afterword .waste-year { padding-top:0; }
       .waste-trail { grid-template-columns:1fr 1fr; }
       .waste-trail span:nth-child(3) { border-left:0; border-top:1px solid var(--niagara-line); }
       .waste-trail span:nth-child(4) { border-top:1px solid var(--niagara-line); }
@@ -1468,6 +1478,15 @@
                     <span class="atomic-process-reference-caption">Lake Ontario Ordnance Works · U.S. Army Corps of Engineers · 1985</span>
                   </button>
                 </div>
+                <aside class="iwcs-afterword" aria-labelledby="iwcs-afterword-title">
+                  <span class="waste-year">1986–present</span>
+                  <div class="iwcs-afterword-copy">
+                    <h5 id="iwcs-afterword-title">An “interim” structure</h5>
+                    <p>Only in 1986 did the U.S. Department of Energy complete the interim waste containment structure (IWCS), consolidating radioactive residues, contaminated soil, rubble, and demolition debris inside a ten-acre earthen cell. Federal planning documents later estimated that it held approximately 193,230 cubic yards of radioactive residues and waste.</p>
+                    <p>“Interim” matters. The cell has a compacted-clay cover, but no constructed liner beneath it. For comparison—not equivalence—the sarcophagus enclosing Chornobyl’s destroyed Unit 4 contains an estimated 200 tonnes of nuclear fuel.</p>
+                    <a class="iwcs-afterword-link" href="https://www.youtube.com/watch?v=2eiFiMA5BiE" target="_blank" rel="noopener noreferrer">View the interim waste containment structure →</a>
+                  </div>
+                </aside>
               </section>
 
               <dialog class="atomic-reference-viewer loow-reference-viewer" aria-label="Lake Ontario Ordnance Works archival film">
