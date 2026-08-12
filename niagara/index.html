@@ -2937,7 +2937,6 @@
       const waterfallsChapter = document.querySelector('#waterfalls-chapter');
       const waterfallsMarkerTrack = waterfallsChapter ? waterfallsChapter.querySelector('.waterfalls-record-track') : null;
       const waterfallsMarkerSlides = waterfallsMarkerTrack ? Array.from(waterfallsMarkerTrack.querySelectorAll('[data-waterfalls-section]')) : [];
-      const chapterScrollEntryLabel = waterfallsChapter ? waterfallsChapter.querySelector('.investigation-chapter-label') : null;
       const chapterScrollTabbar = document.querySelector('.niagara-tabbar-wrap');
 
       const chapterMetaFromElement = element => {
@@ -2945,10 +2944,10 @@
         const label = element.querySelector('.investigation-chapter-label,.waste-era-chapter');
         const year = element.querySelector('.investigation-number,.waste-era-year');
         if (!label || !year) return null;
-        return { element, label:label.textContent.trim(), year:year.textContent.trim() };
+        return { element, label:label.textContent.trim(), year:year.textContent.trim(), handoff:year };
       };
       const chapterScrollStops = [
-        waterfallsChapter ? { element:waterfallsChapter, label:'Chapter I', year:'1895' } : null,
+        waterfallsChapter ? { element:waterfallsChapter, label:'Chapter I', year:'1895', handoff:waterfallsChapter.querySelector('.investigation-number') } : null,
         chapterMetaFromElement(document.querySelector('#atomic-niagara')),
         chapterMetaFromElement(document.querySelector('#love-canal-range')),
         ...wasteEraMarkers.map(chapterMetaFromElement)
@@ -2984,16 +2983,15 @@
         const storyRect = investigationStory.getBoundingClientRect();
         const panelActive = chapterScrollPanel && chapterScrollPanel.classList.contains('is-active');
         const probeY = Math.min(window.innerHeight * .36,320);
-        const entryBoundary = chapterScrollTabbar ? chapterScrollTabbar.getBoundingClientRect().bottom : 0;
-        const entryComplete = !chapterScrollEntryLabel || chapterScrollEntryLabel.getBoundingClientRect().bottom <= entryBoundary;
-        const visible = Boolean(panelActive && entryComplete && storyRect.bottom >= probeY);
-        chapterScrollMarker.classList.toggle('is-visible',visible);
-        if (!visible) return;
-
         let activeStop = chapterScrollStops[0];
         chapterScrollStops.forEach(stop => {
           if (stop.element.getBoundingClientRect().top <= probeY) activeStop = stop;
         });
+        const entryBoundary = chapterScrollTabbar ? chapterScrollTabbar.getBoundingClientRect().bottom : 0;
+        const handoffComplete = !activeStop.handoff || activeStop.handoff.getBoundingClientRect().bottom <= entryBoundary;
+        const visible = Boolean(panelActive && handoffComplete && storyRect.bottom >= probeY);
+        chapterScrollMarker.classList.toggle('is-visible',visible);
+        if (!visible) return;
         const meta = activeStop.element === waterfallsChapter
           ? waterfallsMarkerMeta()
           : { label:activeStop.label, year:activeStop.year };
