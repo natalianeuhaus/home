@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Follow the Material — Greetings from Niagara</title>
+  <meta name="description" content="An interactive explanation of how uranium and its waste moved through the Niagara region.">
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="process-shell">
+    <section class="story-panel" aria-label="Material route explanation">
+      <header class="story-header">
+        <div class="project-line">
+          <span>Greetings from Niagara</span>
+          <span>Interactive process map · Preview</span>
+        </div>
+        <h1>Follow the Material</h1>
+        <p class="dek">Production and waste were one connected system. Select any point to see what arrived, what changed, and where everything went next.</p>
+      </header>
+
+      <nav class="network-index" id="network-index" aria-label="Locations in the material network"></nav>
+
+      <div class="story-scroll">
+        <article class="discovery-card" id="discovery-card" aria-live="polite">
+          <p class="route-eyebrow">One network · no required order</p>
+          <h2>Choose any numbered point.</h2>
+          <p>The mine, warehouses, factories, dumps, waterways, and places of reuse belong to the same explanation. Each point keeps production and its waste together.</p>
+          <p class="discovery-note">Start wherever you are curious. The map will move to that part of the system without automatically taking control.</p>
+        </article>
+
+        <article class="network-card" id="network-card" aria-live="polite" hidden>
+          <div class="network-kicker">
+            <span id="node-kicker"></span>
+            <time id="node-date"></time>
+          </div>
+          <h2 id="node-title"></h2>
+          <p class="network-location" id="node-location"></p>
+
+          <div class="process-facts">
+            <section>
+              <span class="field-label">What arrived</span>
+              <p id="node-received"></p>
+            </section>
+            <section>
+              <span class="field-label">What happened here</span>
+              <p id="node-process"></p>
+            </section>
+          </div>
+
+          <div class="outcomes-block">
+            <span class="field-label">Where it went next</span>
+            <div class="outcome-list" id="outcome-list"></div>
+          </div>
+          <p class="network-caption" id="network-caption" hidden></p>
+        </article>
+
+        <div class="story-controls">
+          <button type="button" id="previous-button" aria-label="Previous location"><span aria-hidden="true">←</span> Previous</button>
+          <span id="step-count">Explore freely</span>
+          <button type="button" id="next-button" aria-label="Begin at the mine">Begin <span aria-hidden="true">→</span></button>
+        </div>
+      </div>
+
+      <footer class="story-footer">
+        <span class="legend-line material"></span><span>Processed material</span>
+        <span class="legend-line waste"></span><span>Residue / waste</span>
+        <span class="legend-line context"></span><span>Narrative connection</span>
+      </footer>
+    </section>
+
+    <section class="map-panel" aria-label="Interactive map of the complete material network">
+      <div id="map" class="leaflet-map"></div>
+      <div class="map-heading">
+        <span>One connected system</span>
+        <strong id="map-heading-title">Select any numbered point</strong>
+      </div>
+      <div class="basemap-toggle" aria-label="Map background">
+        <button type="button" class="is-active" id="satellite-button">Satellite</button>
+        <button type="button" id="map-button">Map</button>
+      </div>
+
+      <div class="receiver-card receiver-workers" id="workers-overlay" aria-hidden="true" hidden>
+        <span>Material left with</span>Workers and<br>private recipients
+      </div>
+      <div class="receiver-card receiver-haulers" id="haulers-overlay" aria-hidden="true" hidden>
+        <span>Material moved with</span>Trucking companies<br>and contractors
+      </div>
+      <div class="dispersal-overlay" id="reuse-overlay" aria-hidden="true" hidden>
+        <span class="reuse-label reuse-roads">Roads</span>
+        <span class="reuse-label reuse-parking">Parking lots</span>
+        <span class="reuse-label reuse-driveways">Driveways</span>
+        <span class="reuse-label reuse-yards">Yards</span>
+        <span class="reuse-label reuse-businesses">Businesses</span>
+        <span class="reuse-label reuse-homes">Homes</span>
+        <small>Reuse categories · not mapped properties</small>
+      </div>
+      <div class="water-route-overlay" id="water-overlay" aria-hidden="true" hidden>
+        <span>Industrial drains</span><i>→</i><strong>Niagara River</strong>
+      </div>
+      <div class="map-caption" id="map-caption">Pan, zoom, or choose a location from the index</div>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="app.js"></script>
+</body>
+</html>
