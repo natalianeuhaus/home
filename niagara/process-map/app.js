@@ -9,185 +9,249 @@ const P = {
   hooker: [43.07958422985608, -79.00831731578447],
   loow: [43.2235, -78.9565],
   landfill: [43.091907120818256, -78.99969074065574],
-  river: [43.0905, -79.062],
-  region: [43.105, -78.925]
+  river: [43.0905, -79.062]
 };
 
-const nodes = [
+const steps = [
   {
-    id: "shinkolobwe", number: "1", role: "Extraction", date: "Before 1940",
-    title: "Shinkolobwe mine", shortTitle: "Shinkolobwe",
-    location: "Katanga, Belgian Congo — now the Democratic Republic of the Congo", point: P.shinkolobwe,
+    id: "shinkolobwe",
+    number: "1",
+    role: "Extraction",
+    date: "Before 1940",
+    title: "Shinkolobwe mine",
+    shortTitle: "Shinkolobwe",
+    location: "Katanga, Belgian Congo — now the Democratic Republic of the Congo",
+    point: P.shinkolobwe,
     received: "Uranium-bearing rock from one of the richest known deposits in the world.",
     process: "Workers mined extremely high-grade pitchblende. The ore entered an international supply chain controlled by Union Minière du Haut-Katanga.",
-    outcomes: [{ kind: "material", destination: "African Metals Corporation warehouse, Staten Island", detail: "More than 1,000 tons were shipped across the Atlantic in steel drums and held near the Bayonne Bridge." }]
+    mainDestination: "African Metals Corporation warehouse, Staten Island",
+    mainDetail: "More than 1,000 tons were shipped across the Atlantic in steel drums and held near the Bayonne Bridge.",
+    routeKind: "material",
+    route: [P.shinkolobwe, [-7.5, 20], [-5.8, 13.2], [4, -12], [24, -43], [38, -68], P.staten]
   },
   {
-    id: "staten-island", number: "2", role: "Stockpiling", date: "1940–1942",
-    title: "African Metals Corporation warehouse", shortTitle: "Staten Island",
-    location: "2351 Richmond Terrace, Port Richmond, Staten Island", point: P.staten,
+    id: "staten-island",
+    number: "2",
+    role: "Stockpiling",
+    date: "1940–1942",
+    title: "African Metals Corporation warehouse",
+    shortTitle: "Staten Island",
+    location: "2351 Richmond Terrace, Port Richmond, Staten Island",
+    point: P.staten,
     received: "High-grade pitchblende shipped from Shinkolobwe in the Belgian Congo.",
     process: "The ore remained in 1,823 steel drums at the waterfront warehouse until the Manhattan Engineer District acquired its uranium content.",
-    outcomes: [{ kind: "material", destination: "Seneca Ordnance Depot, Romulus", detail: "The Army loaded the drums onto Lehigh Valley Railroad lighters and sent them to Seneca for safekeeping on November 2, 1942." }]
+    mainDestination: "Seneca Ordnance Depot, Romulus",
+    mainDetail: "The Army loaded the drums onto Lehigh Valley Railroad lighters and sent them to Seneca for safekeeping on November 2, 1942.",
+    routeKind: "material",
+    route: [P.staten, [41.15, -74.72], [42.05, -75.72], P.seneca]
   },
   {
-    id: "seneca", number: "3", role: "Army custody", date: "November 1942",
-    title: "Seneca Ordnance Depot", shortTitle: "Seneca Depot", location: "Romulus, New York", point: P.seneca,
+    id: "seneca",
+    number: "3",
+    role: "Army custody",
+    date: "November 1942",
+    title: "Seneca Ordnance Depot",
+    shortTitle: "Seneca Depot",
+    location: "Romulus, New York",
+    point: P.seneca,
     received: "The Staten Island stockpile of Congolese uranium ore.",
     process: "The Army placed the drums in secure wartime storage. This is the documented destination of the Staten Island stockpile.",
-    outcomes: [{ kind: "context", destination: "Western New York’s uranium-processing network", detail: "The map next enters Linde, which processed African and American ores. The dotted line is a narrative connection, not a claim that every Staten Island drum went directly to Linde." }]
+    mainDestination: "Western New York’s uranium-processing network",
+    mainDetail: "The story next enters Linde, which processed African and American ores. This is a narrative transition—not a claim that every Staten Island drum went directly to Linde.",
+    routeKind: "context",
+    route: [P.seneca, [42.87, -77.61], P.linde],
+    caption: "Dotted line: narrative transition into the regional processing network."
   },
   {
-    id: "linde", number: "4", role: "Refining and waste", date: "Full-scale operation by July 1943",
-    title: "Linde Air Products", shortTitle: "Linde", location: "Tonawanda, New York", point: P.linde,
+    id: "linde",
+    number: "4",
+    role: "Refining",
+    date: "Full-scale operation by July 1943",
+    title: "Linde Air Products",
+    shortTitle: "Linde",
+    location: "Tonawanda, New York",
+    point: P.linde,
     received: "African and American uranium ores entering the Manhattan Project supply network.",
-    process: "Linde converted ore into black oxide, brown oxide, and uranium tetrafluoride—UF₄, known as “green salt.” Refining also left radioactive residues and contaminated materials.",
-    outcomes: [
-      { kind: "material", destination: "Electromet, Niagara Falls", detail: "Green salt moved onward for reduction into uranium metal." },
-      { kind: "waste", destination: "LOOW / Niagara Falls Storage Site", detail: "Radioactive residues and contaminated materials entered the federal storage and disposal system." }
+    process: "Linde converted ore into black oxide, brown oxide, and uranium tetrafluoride—UF₄, known as “green salt.”",
+    mainDestination: "Electromet, Niagara Falls",
+    mainDetail: "Green salt moved onward for reduction into uranium metal.",
+    routeKind: "material",
+    route: [P.linde, [43.021, -78.925], P.electromet],
+    wasteRoutes: [
+      {
+        id: "linde-loow",
+        title: "LOOW / Niagara Falls Storage Site",
+        location: "Lewiston, New York",
+        point: P.loow,
+        detail: "Radioactive residues and contaminated materials from Linde entered the federal storage and disposal system.",
+        fromThere: "At LOOW, material was stored, repackaged, moved, buried, or disposed. Accounts later described gravel and fill leaving with workers for destinations that were never completely recorded.",
+        path: [P.linde, [43.106, -78.91], P.loow]
+      }
     ]
   },
   {
-    id: "electromet", number: "5", role: "Reduction and waste", date: "Manhattan Project and Cold War",
-    title: "Electromet", shortTitle: "Electromet", location: "Niagara Falls, New York", point: P.electromet,
+    id: "electromet",
+    number: "5",
+    role: "Reduction",
+    date: "Manhattan Project and Cold War",
+    title: "Electromet",
+    shortTitle: "Electromet",
+    location: "Niagara Falls, New York",
+    point: P.electromet,
     received: "Uranium tetrafluoride—green salt—from Linde.",
-    process: "Electromet used magnesium to reduce UF₄ into uranium metal. The reaction also produced uranium-bearing C-2 slag and other radioactive waste.",
-    outcomes: [
-      { kind: "material", destination: "The wider federal production network", detail: "Uranium metal moved into fabrication, component production, and research." },
-      { kind: "waste", destination: "Hooker Chemical", detail: "Uranium-bearing C-2 slag was sent for chemical recovery." },
-      { kind: "waste", destination: "LOOW and the Union Carbide landfill", detail: "Other residues moved into federal and company disposal systems." }
+    process: "Electromet used magnesium to reduce UF₄ into uranium metal. The reaction also produced uranium-bearing C-2 slag.",
+    mainDestination: "Hooker Chemical",
+    mainDetail: "C-2 slag still contained recoverable uranium, so it moved to Hooker for chemical treatment.",
+    routeKind: "material",
+    route: [P.electromet, [43.0838, -79.0115], P.hooker],
+    wasteRoutes: [
+      {
+        id: "electromet-loow",
+        title: "LOOW / Niagara Falls Storage Site",
+        location: "Lewiston, New York",
+        point: P.loow,
+        detail: "Radioactive waste from uranium-metal production moved north into the federal storage and disposal system.",
+        fromThere: "LOOW became a site of storage, repackaging, transshipment, burial, and disposal. Some material later left the reservation with workers or private recipients.",
+        path: [P.electromet, [43.151, -78.989], P.loow]
+      },
+      {
+        id: "electromet-landfill",
+        title: "Union Carbide company landfill",
+        location: "Niagara Falls Boulevard, Niagara Falls",
+        point: P.landfill,
+        detail: "Industrial waste, slag, and contaminated material were also hauled to the company landfill.",
+        fromThere: "Trucking records describe waste and slag moving through private carriers and contractors. Untreated slag could be sold or reused as inexpensive fill.",
+        path: [P.electromet, [43.0902, -79.0037], P.landfill]
+      }
     ]
   },
   {
-    id: "hooker", number: "6", role: "Recovery and waste", date: "Wartime production",
-    title: "Hooker Chemical", shortTitle: "Hooker", location: "Niagara Falls, New York", point: P.hooker,
+    id: "hooker",
+    number: "6",
+    role: "Uranium recovery",
+    date: "Wartime production",
+    title: "Hooker Chemical",
+    shortTitle: "Hooker",
+    location: "Niagara Falls, New York",
+    point: P.hooker,
     received: "Uranium-bearing C-2 slag generated by Electromet’s reduction process.",
     process: "Hooker treated the slag with hydrochloric acid to recover uranium. The recovery process produced another layer of solid and liquid residues.",
-    outcomes: [
-      { kind: "material", destination: "Linde", detail: "Recovered uranium-bearing material returned to the refining network." },
-      { kind: "waste", destination: "Industrial drains, disposal systems, and waterways", detail: "Material that could not be recovered entered the region’s larger waste geography." }
+    mainDestination: "Linde",
+    mainDetail: "Recovered uranium-bearing material returned to the refining network, closing the regional recovery loop.",
+    routeKind: "material",
+    route: [P.hooker, [43.018, -78.972], P.linde],
+    wasteRoutes: [
+      {
+        id: "hooker-water",
+        title: "Industrial drains and waterways",
+        location: "Niagara Falls factory districts and the Niagara River",
+        point: P.river,
+        detail: "Liquid, chemically contaminated, and radioactive waste entered industrial disposal systems.",
+        fromThere: "Sewers, storm drains, and industrial waterways carried contamination through another route—one that left no neat boundary around a factory or dump.",
+        path: [P.hooker, [43.082, -79.025], P.river]
+      }
     ]
-  },
-  {
-    id: "loow", number: "7", role: "Federal storage and disposal", date: "1940s onward",
-    title: "LOOW / Niagara Falls Storage Site", shortTitle: "LOOW / NFSS", location: "Lewiston, New York", point: P.loow,
-    received: "Radioactive residues and contaminated materials from Linde, Electromet, and other federal work.",
-    process: "The former Lake Ontario Ordnance Works became a place of storage, repackaging, transshipment, burial, and disposal. Material did not remain inside a single stable boundary.",
-    outcomes: [
-      { kind: "waste", destination: "Workers and private recipients", detail: "Accounts described gravel and fill leaving the reservation for destinations that were never completely recorded." },
-      { kind: "waste", destination: "Roads, driveways, yards, businesses, and homes", detail: "Once reused, the material became part of the built environment." }
-    ],
-    caption: "Reuse labels describe categories—not mapped properties or hotspots."
-  },
-  {
-    id: "uc-landfill", number: "8", role: "Company disposal and reuse", date: "Industrial operations",
-    title: "Union Carbide company landfill", shortTitle: "Company landfill", location: "Niagara Falls Boulevard, Niagara Falls", point: P.landfill,
-    received: "Industrial waste, slag, and contaminated material from Union Carbide’s Niagara Falls operation.",
-    process: "The landfill was part of the company’s disposal chain. Trucking records also show waste and slag moving through private carriers and contractors.",
-    outcomes: [
-      { kind: "waste", destination: "Trucking companies and contractors", detail: "Once material entered private movement, its chain of custody became difficult to reconstruct." },
-      { kind: "waste", destination: "Commercial sale and regional reuse", detail: "Untreated slag could be sold or used as inexpensive fill." }
-    ],
-    caption: "This map explains movement; it does not identify individual contaminated properties."
-  },
-  {
-    id: "regional-reuse", number: "9", role: "Dispersal through reuse", date: "Destinations incompletely recorded",
-    title: "The built environment", shortTitle: "Regional reuse", location: "Across Niagara and Erie Counties", point: P.region,
-    received: "Slag, gravel, road bedding, and fill from workers, trucking companies, contractors, and industrial sites.",
-    process: "Material was reused because it was available and inexpensive. Official records could follow only part of this dispersed, partly private network.",
-    outcomes: [{ kind: "waste", destination: "Roads, parking lots, driveways, yards, businesses, and homes", detail: "The waste ceased to look like factory residue and became ordinary construction material beneath everyday places." }],
-    caption: "The labels are reuse categories—not hotspots or individual addresses."
-  },
-  {
-    id: "waterways", number: "10", role: "Liquid disposal", date: "Industrial operations",
-    title: "Industrial drains and waterways", shortTitle: "Waterways", location: "Niagara Falls factory districts and the Niagara River", point: P.river,
-    received: "Liquid, chemically contaminated, and radioactive waste from industrial processing and recovery.",
-    process: "Liquid waste followed sewers, storm drains, and industrial waterways. Unlike barrels or slag, it left no neat boundary around a factory or dump.",
-    outcomes: [{ kind: "waste", destination: "The Niagara River and connected waters", detail: "Water carried contamination through another route in the same industrial system." }]
-  },
-  {
-    id: "wider-network", number: "11", role: "Fabrication and research", date: "Manhattan Project and Cold War",
-    title: "The wider federal network", shortTitle: "Other factories", location: "Buffalo · Lackawanna · Lockport · Niagara Falls · Wheatfield", point: [43.02, -78.91],
-    received: "Uranium metal, rods, components, and research materials moving through federal contracts.",
-    process: "Bliss & Laughlin, Bethlehem Steel, Guterl, Carborundum, and Bell Aerospace participated in different stages of fabrication, testing, or weapons research.",
-    outcomes: [{ kind: "context", destination: "Multiple production and waste histories", detail: "These sites are shown as one connected federal network—not as a single direct shipment chain. A direct route is drawn only where the evidence supports one." }]
   }
 ];
 
-const markersData = nodes
-  .filter(node => !["regional-reuse", "wider-network"].includes(node.id))
-  .map(node => ({ id: node.id, nodeId: node.id, number: node.number, title: node.title, location: node.location, point: node.point }))
-  .concat([
-    { id: "bliss", nodeId: "wider-network", number: "11a", title: "Bliss & Laughlin Steel", location: "Buffalo, New York", point: [42.8407270474549, -78.8332865770902], secondary: true },
-    { id: "bethlehem", nodeId: "wider-network", number: "11b", title: "Bethlehem Steel", location: "Lackawanna, New York", point: [42.82158, -78.85913], secondary: true },
-    { id: "guterl", nodeId: "wider-network", number: "11c", title: "Guterl Specialty Steel", location: "Lockport, New York", point: [43.15669017990897, -78.71166549727371], secondary: true },
-    { id: "carborundum", nodeId: "wider-network", number: "11d", title: "Carborundum", location: "Niagara Falls, New York", point: [43.08319964804595, -79.03875564160806], secondary: true },
-    { id: "bell", nodeId: "wider-network", number: "11e", title: "Bell Aerospace", location: "Wheatfield, New York", point: [43.10091759197571, -78.93205624524674], secondary: true }
-  ]);
-
-const edges = [
-  { id: "congo-staten", nodeIds: ["shinkolobwe", "staten-island"], kind: "material", path: [P.shinkolobwe, [-7.5,20], [-5.8,13.2], [4,-12], [24,-43], [38,-68], P.staten] },
-  { id: "staten-seneca", nodeIds: ["staten-island", "seneca"], kind: "material", path: [P.staten, [41.15,-74.72], [42.05,-75.72], P.seneca] },
-  { id: "seneca-linde", nodeIds: ["seneca", "linde"], kind: "context", path: [P.seneca, [42.87,-77.61], P.linde] },
-  { id: "linde-electromet", nodeIds: ["linde", "electromet"], kind: "material", path: [P.linde, [43.021,-78.925], P.electromet] },
-  { id: "electromet-hooker", nodeIds: ["electromet", "hooker"], kind: "waste", path: [P.electromet, [43.0838,-79.0115], P.hooker] },
-  { id: "hooker-linde", nodeIds: ["hooker", "linde"], kind: "material", path: [P.hooker, [43.018,-78.972], P.linde] },
-  { id: "linde-loow", nodeIds: ["linde", "loow"], kind: "waste", path: [P.linde, [43.106,-78.91], P.loow] },
-  { id: "electromet-loow", nodeIds: ["electromet", "loow"], kind: "waste", path: [P.electromet, [43.151,-78.989], P.loow] },
-  { id: "electromet-landfill", nodeIds: ["electromet", "uc-landfill"], kind: "waste", path: [P.electromet, [43.0902,-79.0037], P.landfill] },
-  { id: "hooker-water", nodeIds: ["hooker", "waterways"], kind: "waste", path: [P.hooker, [43.082,-79.025], P.river] }
-];
-
-const nodeById = Object.fromEntries(nodes.map(node => [node.id, node]));
+const stepById = Object.fromEntries(steps.map(step => [step.id, step]));
 let activeId = null;
+let wasteOpen = false;
+let selectedWasteId = null;
 
 const map = L.map("map", {
-  center: [20, -28], zoom: 2.4, minZoom: 2, maxZoom: 18, zoomControl: false, attributionControl: false
+  center: [20, -28],
+  zoom: 2.4,
+  minZoom: 2,
+  maxZoom: 18,
+  zoomControl: false,
+  attributionControl: false
 });
 L.control.zoom({ position: "bottomright" }).addTo(map);
 
-const satelliteLayer = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", { maxZoom: 18 });
-const labelsLayer = L.tileLayer("https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png", { subdomains: "abcd", maxZoom: 19, pane: "overlayPane" });
-const streetLayer = L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", { subdomains: "abcd", maxZoom: 19 });
+const satelliteLayer = L.tileLayer(
+  "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+  { maxZoom: 18 }
+);
+const labelsLayer = L.tileLayer(
+  "https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png",
+  { subdomains: "abcd", maxZoom: 19, pane: "overlayPane" }
+);
+const streetLayer = L.tileLayer(
+  "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+  { subdomains: "abcd", maxZoom: 19 }
+);
 satelliteLayer.addTo(map);
 labelsLayer.addTo(map);
 
-const routeLayer = L.layerGroup().addTo(map);
-const markers = {};
+const activeRouteLayer = L.layerGroup().addTo(map);
+const stepMarkers = {};
 
-markersData.forEach(data => {
+steps.forEach(step => {
   const icon = L.divIcon({
-    className: `facility-marker-wrap${data.secondary ? " is-secondary-marker" : ""}`,
-    html: `<span class="facility-marker" aria-hidden="true"><span>${data.number}</span><i></i></span>`,
-    iconSize: data.secondary ? [38,52] : [42,58], iconAnchor: data.secondary ? [19,45] : [21,50]
+    className: "facility-marker-wrap",
+    html: `<span class="facility-marker" aria-hidden="true"><span>${step.number}</span><i></i></span>`,
+    iconSize: [42, 58],
+    iconAnchor: [21, 50]
   });
-  const marker = L.marker(data.point, { icon, keyboard: true, title: `${data.title} — ${data.location}`, riseOnHover: true }).addTo(map);
-  marker.bindTooltip(`<strong>${data.title}</strong><br><span>${data.location}</span>`, { direction: "top", offset: [0,-42], className: "facility-tooltip" });
-  marker.on("click", () => selectNode(data.nodeId));
-  markers[data.id] = marker;
+  const marker = L.marker(step.point, {
+    icon,
+    keyboard: true,
+    title: `${step.title} — ${step.location}`,
+    riseOnHover: true
+  }).addTo(map);
+  marker.bindTooltip(
+    `<strong>${step.title}</strong><br><span>${step.location}</span>`,
+    { direction: "top", offset: [0, -42], className: "facility-tooltip" }
+  );
+  marker.on("click", () => selectStep(step.id));
+  stepMarkers[step.id] = marker;
 });
 
-function renderIndex() {
-  const index = document.getElementById("network-index");
-  nodes.forEach(node => {
+function renderStepper() {
+  const stepper = document.getElementById("network-index");
+  steps.forEach(step => {
     const button = document.createElement("button");
     button.type = "button";
-    button.dataset.nodeId = node.id;
-    button.innerHTML = `<span>${node.number}</span>${node.shortTitle}`;
-    button.addEventListener("click", () => selectNode(node.id));
-    index.appendChild(button);
+    button.dataset.nodeId = step.id;
+    button.innerHTML = `<span>${step.number}</span><b>${step.shortTitle}</b>`;
+    button.addEventListener("click", () => selectStep(step.id));
+    stepper.appendChild(button);
   });
+
+  stepper.addEventListener("wheel", event => {
+    if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
+      stepper.scrollLeft += event.deltaY;
+      event.preventDefault();
+    }
+  }, { passive: false });
 }
 
-function routeColor(kind) {
-  if (kind === "material") return "#440806";
-  if (kind === "waste") return "#e8d9b6";
-  return "#9d9d9d";
-}
-
-function routeDash(kind) {
-  if (kind === "material") return null;
-  return kind === "waste" ? "8 7" : "3 8";
+function routeOptions(kind, waste = false) {
+  if (waste) {
+    return {
+      color: "#e8d9b6",
+      weight: 4,
+      opacity: .98,
+      dashArray: "8 7",
+      className: "network-route-line is-active-route"
+    };
+  }
+  if (kind === "context") {
+    return {
+      color: "#9d9d9d",
+      weight: 3,
+      opacity: .95,
+      dashArray: "3 8",
+      className: "network-route-line is-active-route"
+    };
+  }
+  return {
+    color: "#440806",
+    weight: 4,
+    opacity: .98,
+    className: "network-route-line is-active-route"
+  };
 }
 
 function midpoint(path) {
@@ -201,127 +265,148 @@ function bearing(path) {
   return Math.atan2(end[0] - start[0], end[1] - start[1]) * (180 / Math.PI) * -1;
 }
 
-function drawNetwork() {
-  routeLayer.clearLayers();
-  edges.forEach(edge => {
-    const isActive = activeId && edge.nodeIds.includes(activeId);
-    L.polyline(edge.path, {
-      color: routeColor(edge.kind),
-      weight: isActive ? 4 : 1.7,
-      opacity: isActive ? .98 : .42,
-      dashArray: routeDash(edge.kind),
-      className: `network-route-line${isActive ? " is-active-route" : ""}`
-    }).addTo(routeLayer);
+function addArrow(path, waste = false) {
+  const icon = L.divIcon({
+    className: `route-arrow-wrap${waste ? " is-waste" : ""}`,
+    html: `<span class="route-arrow" style="transform:rotate(${bearing(path)}deg)">➜</span>`,
+    iconSize: [32, 32],
+    iconAnchor: [16, 16]
+  });
+  L.marker(midpoint(path), { icon, interactive: false }).addTo(activeRouteLayer);
+}
 
-    if (isActive && edge.kind !== "context") {
-      const icon = L.divIcon({
-        className: `route-arrow-wrap is-${edge.kind}`,
-        html: `<span class="route-arrow" style="transform:rotate(${bearing(edge.path)}deg)">➜</span>`,
-        iconSize: [32,32], iconAnchor: [16,16]
-      });
-      L.marker(midpoint(edge.path), { icon, interactive: false }).addTo(routeLayer);
-    }
+function addWasteDestinationMarker(route) {
+  const icon = L.divIcon({
+    className: "waste-marker-wrap",
+    html: '<span class="waste-marker">W</span>',
+    iconSize: [38, 38],
+    iconAnchor: [19, 19]
+  });
+  L.marker(route.point, { icon, interactive: false }).addTo(activeRouteLayer);
+}
+
+function drawActiveRoute() {
+  activeRouteLayer.clearLayers();
+  if (!activeId) return;
+
+  const step = stepById[activeId];
+  const wasteRoute = step.wasteRoutes?.find(route => route.id === selectedWasteId);
+  const route = wasteRoute ? wasteRoute.path : step.route;
+
+  L.polyline(route, routeOptions(step.routeKind, Boolean(wasteRoute))).addTo(activeRouteLayer);
+  if (!(!wasteRoute && step.routeKind === "context")) addArrow(route, Boolean(wasteRoute));
+  if (wasteRoute) addWasteDestinationMarker(wasteRoute);
+
+  map.flyToBounds(L.latLngBounds(route), {
+    padding: [78, 78],
+    maxZoom: ["electromet", "hooker"].includes(step.id) || wasteRoute ? 12.5 : 10.8,
+    duration: 1.2
   });
 
-  markersData.forEach(data => {
-    const marker = markers[data.id];
-    const selected = data.nodeId === activeId;
-    marker.setOpacity(activeId ? (selected ? 1 : .46) : .9);
-    const element = marker.getElement();
-    if (element) element.classList.toggle("is-active-marker", selected);
+  steps.forEach(item => {
+    const marker = stepMarkers[item.id];
+    const selected = item.id === activeId;
+    marker.setOpacity(selected ? 1 : .32);
+    marker.getElement()?.classList.toggle("is-active-marker", selected);
   });
 }
 
-function renderOutcomes(node) {
-  const list = document.getElementById("outcome-list");
+function renderWasteRoutes(step) {
+  const explorer = document.getElementById("waste-explorer");
+  const destinations = document.getElementById("waste-destinations");
+  const list = document.getElementById("waste-list");
+  const toggle = document.getElementById("waste-toggle");
+
+  explorer.hidden = !step.wasteRoutes?.length;
+  destinations.hidden = !wasteOpen;
+  toggle.setAttribute("aria-expanded", String(wasteOpen));
+  toggle.querySelector("i").textContent = wasteOpen ? "↑" : "↓";
   list.replaceChildren();
-  node.outcomes.forEach(outcome => {
-    const section = document.createElement("section");
-    section.className = `outcome is-${outcome.kind}`;
-    const type = outcome.kind === "material" ? "Material" : outcome.kind === "waste" ? "Residue / waste" : "Connection";
-    const label = document.createElement("span");
-    label.textContent = type;
-    const heading = document.createElement("h3");
-    heading.textContent = outcome.destination;
-    const detail = document.createElement("p");
-    detail.textContent = outcome.detail;
-    section.append(label, heading, detail);
-    list.appendChild(section);
+
+  if (!step.wasteRoutes) return;
+  step.wasteRoutes.forEach((route, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `waste-destination${selectedWasteId === route.id ? " is-active" : ""}`;
+    button.innerHTML = `<span>Waste route ${index + 1}</span><h3>${route.title}</h3><p>${route.detail}</p><small>${route.fromThere}</small>`;
+    button.addEventListener("click", () => {
+      selectedWasteId = route.id;
+      renderWasteRoutes(step);
+      document.getElementById("map-heading-title").textContent = `${step.shortTitle} waste → ${route.title}`;
+      document.getElementById("map-caption").textContent = route.fromThere;
+      drawActiveRoute();
+    });
+    list.appendChild(button);
   });
 }
 
-function showOverlays(node) {
-  document.getElementById("workers-overlay").hidden = node.id !== "loow";
-  document.getElementById("haulers-overlay").hidden = node.id !== "uc-landfill";
-  document.getElementById("reuse-overlay").hidden = node.id !== "regional-reuse";
-  document.getElementById("water-overlay").hidden = node.id !== "waterways";
-}
-
-function moveMap(node) {
-  if (node.id === "regional-reuse") {
-    map.flyTo(P.region, 10.2, { duration: 1.2 });
-    return;
-  }
-  if (node.id === "wider-network") {
-    const points = markersData.filter(item => item.nodeId === "wider-network").map(item => item.point);
-    map.flyToBounds(L.latLngBounds(points), { padding: [70,70], maxZoom: 10.2, duration: 1.2 });
-    return;
-  }
-  const activeEdges = edges.filter(edge => edge.nodeIds.includes(node.id));
-  const points = activeEdges.length ? activeEdges.flatMap(edge => edge.path) : [node.point];
-  map.flyToBounds(L.latLngBounds(points), {
-    padding: [76,76],
-    maxZoom: ["electromet", "hooker", "uc-landfill", "waterways"].includes(node.id) ? 13 : 11,
-    duration: 1.25
-  });
-}
-
-function selectNode(id) {
+function selectStep(id) {
   activeId = id;
-  const node = nodeById[id];
-  const activeIndex = nodes.findIndex(item => item.id === id);
+  wasteOpen = false;
+  selectedWasteId = null;
+  const step = stepById[id];
+  const activeIndex = steps.findIndex(item => item.id === id);
 
   document.getElementById("discovery-card").hidden = true;
   document.getElementById("network-card").hidden = false;
-  document.getElementById("node-kicker").textContent = `${node.number} · ${node.role}`;
-  document.getElementById("node-date").textContent = node.date;
-  document.getElementById("node-title").textContent = node.title;
-  document.getElementById("node-location").textContent = node.location;
-  document.getElementById("node-received").textContent = node.received;
-  document.getElementById("node-process").textContent = node.process;
-  document.getElementById("map-heading-title").textContent = node.shortTitle;
-  document.getElementById("step-count").textContent = `${String(activeIndex + 1).padStart(2,"0")} / ${String(nodes.length).padStart(2,"0")}`;
-
-  const next = document.getElementById("next-button");
-  next.innerHTML = 'Next <span aria-hidden="true">→</span>';
-  next.setAttribute("aria-label", "Next location");
+  document.getElementById("node-kicker").textContent = `${step.number} · ${step.role}`;
+  document.getElementById("node-date").textContent = step.date;
+  document.getElementById("node-title").textContent = step.title;
+  document.getElementById("node-location").textContent = step.location;
+  document.getElementById("node-received").textContent = step.received;
+  document.getElementById("node-process").textContent = step.process;
+  document.getElementById("main-destination").textContent = step.mainDestination;
+  document.getElementById("main-detail").textContent = step.mainDetail;
+  document.getElementById("map-heading-title").textContent = `Step ${step.number} · ${step.shortTitle}`;
+  document.getElementById("map-caption").textContent = step.caption || "Only the current transfer is shown. Use Next to continue the route.";
+  document.getElementById("step-count").textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(steps.length).padStart(2, "0")}`;
 
   const caption = document.getElementById("network-caption");
-  caption.hidden = !node.caption;
-  caption.textContent = node.caption || "";
-  document.getElementById("map-caption").textContent = node.caption || "Select another number to follow a different branch of the same system";
+  caption.hidden = !step.caption;
+  caption.textContent = step.caption || "";
 
-  document.querySelectorAll(".network-index button").forEach(button => {
+  const next = document.getElementById("next-button");
+  const isLast = activeIndex === steps.length - 1;
+  next.innerHTML = `${isLast ? "Restart" : "Next"} <span aria-hidden="true">→</span>`;
+  next.setAttribute("aria-label", isLast ? "Restart at the mine" : "Next step");
+
+  document.querySelectorAll(".linear-stepper button").forEach(button => {
     const selected = button.dataset.nodeId === id;
     button.classList.toggle("is-active", selected);
-    if (selected) button.setAttribute("aria-current", "step");
-    else button.removeAttribute("aria-current");
+    if (selected) {
+      button.setAttribute("aria-current", "step");
+      const stepper = document.getElementById("network-index");
+      stepper.scrollTo({ left: Math.max(0, button.offsetLeft - 24), behavior: "smooth" });
+    } else {
+      button.removeAttribute("aria-current");
+    }
   });
 
-  renderOutcomes(node);
-  showOverlays(node);
-  drawNetwork();
-  moveMap(node);
+  renderWasteRoutes(step);
+  drawActiveRoute();
 }
 
+document.getElementById("waste-toggle").addEventListener("click", () => {
+  if (!activeId) return;
+  wasteOpen = !wasteOpen;
+  if (!wasteOpen) {
+    selectedWasteId = null;
+    const step = stepById[activeId];
+    document.getElementById("map-heading-title").textContent = `Step ${step.number} · ${step.shortTitle}`;
+    document.getElementById("map-caption").textContent = step.caption || "Only the current transfer is shown. Use Next to continue the route.";
+    drawActiveRoute();
+  }
+  renderWasteRoutes(stepById[activeId]);
+});
+
 document.getElementById("previous-button").addEventListener("click", () => {
-  const current = activeId ? nodes.findIndex(node => node.id === activeId) : 0;
-  selectNode(nodes[current <= 0 ? nodes.length - 1 : current - 1].id);
+  const current = activeId ? steps.findIndex(step => step.id === activeId) : 0;
+  selectStep(steps[current <= 0 ? steps.length - 1 : current - 1].id);
 });
 
 document.getElementById("next-button").addEventListener("click", () => {
-  const current = activeId ? nodes.findIndex(node => node.id === activeId) : -1;
-  selectNode(nodes[current < 0 || current === nodes.length - 1 ? 0 : current + 1].id);
+  const current = activeId ? steps.findIndex(step => step.id === activeId) : -1;
+  selectStep(steps[current < 0 || current === steps.length - 1 ? 0 : current + 1].id);
 });
 
 document.getElementById("satellite-button").addEventListener("click", () => {
@@ -340,6 +425,6 @@ document.getElementById("map-button").addEventListener("click", () => {
   document.getElementById("satellite-button").classList.remove("is-active");
 });
 
-renderIndex();
-drawNetwork();
+renderStepper();
+steps.forEach(step => stepMarkers[step.id].setOpacity(.78));
 window.setTimeout(() => map.invalidateSize(), 120);
