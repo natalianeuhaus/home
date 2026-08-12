@@ -18,17 +18,17 @@
           <span>Interactive process map · Preview</span>
         </div>
         <h1>Follow the Material</h1>
-        <p class="dek">Production and waste were one connected system. Select any point to see what arrived, what changed, and where everything went next.</p>
+        <p class="dek">Follow the uranium step by step—from the mine to Western New York. At each factory, open the waste route only when you want to see where the residues went.</p>
       </header>
 
-      <nav class="network-index" id="network-index" aria-label="Locations in the material network"></nav>
+      <nav class="linear-stepper" id="network-index" aria-label="Steps in the uranium route"></nav>
 
       <div class="story-scroll">
         <article class="discovery-card" id="discovery-card" aria-live="polite">
-          <p class="route-eyebrow">One network · no required order</p>
-          <h2>Choose any numbered point.</h2>
-          <p>The mine, warehouses, factories, dumps, waterways, and places of reuse belong to the same explanation. Each point keeps production and its waste together.</p>
-          <p class="discovery-note">Start wherever you are curious. The map will move to that part of the system without automatically taking control.</p>
+          <p class="route-eyebrow">A linear material journey</p>
+          <h2>Begin with the mine.</h2>
+          <p>Move through the numbered route from extraction to refining and uranium recovery. The map shows only the current transfer, so the process remains easy to follow.</p>
+          <p class="discovery-note">Waste is part of the same story, but its routes stay hidden until you open them inside a factory’s description.</p>
         </article>
 
         <article class="network-card" id="network-card" aria-live="polite" hidden>
@@ -50,24 +50,37 @@
             </section>
           </div>
 
-          <div class="outcomes-block">
-            <span class="field-label">Where it went next</span>
-            <div class="outcome-list" id="outcome-list"></div>
+          <div class="main-outcome-block">
+            <span class="field-label">What moved next</span>
+            <section class="main-outcome">
+              <h3 id="main-destination"></h3>
+              <p id="main-detail"></p>
+            </section>
           </div>
+
+          <section class="waste-explorer" id="waste-explorer" hidden>
+            <button type="button" class="waste-toggle" id="waste-toggle" aria-expanded="false">
+              <span>Where did the waste go?</span><i aria-hidden="true">↓</i>
+            </button>
+            <div class="waste-destinations" id="waste-destinations" hidden>
+              <p class="waste-instruction">Select a destination to reveal only that waste route on the map.</p>
+              <div class="waste-list" id="waste-list"></div>
+            </div>
+          </section>
           <p class="network-caption" id="network-caption" hidden></p>
         </article>
 
         <div class="story-controls">
           <button type="button" id="previous-button" aria-label="Previous location"><span aria-hidden="true">←</span> Previous</button>
-          <span id="step-count">Explore freely</span>
+          <span id="step-count">Step by step</span>
           <button type="button" id="next-button" aria-label="Begin at the mine">Begin <span aria-hidden="true">→</span></button>
         </div>
       </div>
 
       <footer class="story-footer">
-        <span class="legend-line material"></span><span>Processed material</span>
-        <span class="legend-line waste"></span><span>Residue / waste</span>
-        <span class="legend-line context"></span><span>Narrative connection</span>
+        <span class="legend-line material"></span><span>Current material transfer</span>
+        <span class="legend-line waste"></span><span>Revealed waste route</span>
+        <span class="legend-line context"></span><span>Narrative transition</span>
       </footer>
     </section>
 
@@ -75,32 +88,14 @@
       <div id="map" class="leaflet-map"></div>
       <div class="map-heading">
         <span>One connected system</span>
-        <strong id="map-heading-title">Select any numbered point</strong>
+        <strong id="map-heading-title">Begin with step 1</strong>
       </div>
       <div class="basemap-toggle" aria-label="Map background">
         <button type="button" class="is-active" id="satellite-button">Satellite</button>
         <button type="button" id="map-button">Map</button>
       </div>
 
-      <div class="receiver-card receiver-workers" id="workers-overlay" aria-hidden="true" hidden>
-        <span>Material left with</span>Workers and<br>private recipients
-      </div>
-      <div class="receiver-card receiver-haulers" id="haulers-overlay" aria-hidden="true" hidden>
-        <span>Material moved with</span>Trucking companies<br>and contractors
-      </div>
-      <div class="dispersal-overlay" id="reuse-overlay" aria-hidden="true" hidden>
-        <span class="reuse-label reuse-roads">Roads</span>
-        <span class="reuse-label reuse-parking">Parking lots</span>
-        <span class="reuse-label reuse-driveways">Driveways</span>
-        <span class="reuse-label reuse-yards">Yards</span>
-        <span class="reuse-label reuse-businesses">Businesses</span>
-        <span class="reuse-label reuse-homes">Homes</span>
-        <small>Reuse categories · not mapped properties</small>
-      </div>
-      <div class="water-route-overlay" id="water-overlay" aria-hidden="true" hidden>
-        <span>Industrial drains</span><i>→</i><strong>Niagara River</strong>
-      </div>
-      <div class="map-caption" id="map-caption">Pan, zoom, or choose a location from the index</div>
+      <div class="map-caption" id="map-caption">Use Begin or select step 1 above</div>
     </section>
   </main>
 
