@@ -2810,20 +2810,58 @@
       }
 
       const atomicXraySequence = document.querySelector('#atomic-niagara > .atomic-xray-sequence');
-      const atomicXrayHero = atomicXraySequence ? atomicXraySequence.querySelector('.atomic-niagara-hero') : null;
-      if (atomicXraySequence && atomicXrayHero && !atomicThreadReducedMotion.matches) {
-        const revealAtomicXray = () => atomicXraySequence.classList.add('is-xray-revealed');
+      if (atomicXraySequence && !atomicThreadReducedMotion.matches) {
+        let atomicXrayTimer = 0;
+        let atomicXrayVisible = false;
+        let atomicXrayFirstPass = true;
+
+        const atomicXrayRandomDelay = () => 6000 + Math.random() * 12000;
+        const stopAtomicXrayScan = () => {
+          window.clearTimeout(atomicXrayTimer);
+          atomicXrayTimer = 0;
+          atomicXraySequence.classList.remove('is-xray-revealed');
+        };
+        const runAtomicXrayScan = () => {
+          atomicXrayTimer = 0;
+          if (!atomicXrayVisible || document.hidden) return;
+          atomicXraySequence.classList.remove('is-xray-revealed');
+          void atomicXraySequence.offsetWidth;
+          atomicXraySequence.classList.add('is-xray-revealed');
+        };
+        const scheduleAtomicXrayScan = immediate => {
+          window.clearTimeout(atomicXrayTimer);
+          if (!atomicXrayVisible || document.hidden) return;
+          atomicXrayTimer = window.setTimeout(runAtomicXrayScan, immediate ? 350 : atomicXrayRandomDelay());
+        };
+
+        atomicXraySequence.addEventListener('animationend', event => {
+          if (event.animationName !== 'atomic-xray-scan') return;
+          atomicXraySequence.classList.remove('is-xray-revealed');
+          scheduleAtomicXrayScan(false);
+        });
 
         if ('IntersectionObserver' in window) {
           const atomicXrayObserver = new IntersectionObserver(entries => {
-            if (!entries.some(entry => entry.isIntersecting)) return;
-            revealAtomicXray();
-            atomicXrayObserver.disconnect();
-          }, { rootMargin:'0px 0px -14% 0px', threshold:.24 });
-          atomicXrayObserver.observe(atomicXrayHero);
+            const entry = entries[0];
+            atomicXrayVisible = Boolean(entry && entry.isIntersecting);
+            if (!atomicXrayVisible) {
+              stopAtomicXrayScan();
+              return;
+            }
+            scheduleAtomicXrayScan(atomicXrayFirstPass);
+            atomicXrayFirstPass = false;
+          }, { rootMargin:'0px 0px -8% 0px', threshold:.01 });
+          atomicXrayObserver.observe(atomicXraySequence);
         } else {
-          revealAtomicXray();
+          atomicXrayVisible = true;
+          scheduleAtomicXrayScan(true);
+          atomicXrayFirstPass = false;
         }
+
+        document.addEventListener('visibilitychange', () => {
+          if (document.hidden) stopAtomicXrayScan();
+          else if (atomicXrayVisible) scheduleAtomicXrayScan(false);
+        });
       }
 
       const loowArchiveDiptych = document.querySelector('.loow-archive-diptych');
