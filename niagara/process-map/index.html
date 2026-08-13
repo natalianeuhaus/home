@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Follow the Material — Greetings from Niagara</title>
-  <meta name="description" content="An interactive explanation of how uranium and its waste moved through the Niagara region.">
+  <meta name="description" content="An interactive map tracing uranium through the Western New York production network.">
   <link rel="preconnect" href="https://unpkg.com">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
-  <link rel="stylesheet" href="styles.css?v=right-bubbles-v24">
+  <link rel="stylesheet" href="styles.css?v=process-with-loow-v26">
 </head>
 <body>
   <main class="process-shell">
@@ -18,7 +18,7 @@
           <span>Interactive process map · Preview</span>
         </div>
         <h1>Follow the Material</h1>
-        <p class="dek">Follow the uranium step by step—from the mine to Western New York’s refining and rod-fabrication network. At each factory, open the waste route only when you want to see where the residues went.</p>
+        <p class="dek">Follow the uranium step by step—from the mine to Western New York’s refining, reduction, recovery, and rod-fabrication network.</p>
       </header>
 
       <nav class="linear-stepper" id="network-index" aria-label="Steps in the uranium route"></nav>
@@ -27,8 +27,7 @@
         <article class="discovery-card" id="discovery-card" aria-live="polite">
           <p class="route-eyebrow">A linear material journey</p>
           <h2>Begin with the mine.</h2>
-          <p>Move through the numbered route from extraction and refining to uranium recovery, rod rolling, and machining. The map shows only the transfer attached to the step you select.</p>
-          <p class="discovery-note">Waste is part of the same story, but its routes stay hidden until you open them inside a factory’s description.</p>
+          <p>Move through the numbered route from extraction and refining to uranium recovery, rod rolling, and machining. Select a number to follow the material to its next stage.</p>
         </article>
 
         <article class="network-card" id="network-card" aria-live="polite" hidden>
@@ -39,17 +38,6 @@
           <h2 id="node-title"></h2>
           <p class="network-location" id="node-location"></p>
 
-          <p class="network-summary" id="node-summary"></p>
-
-          <section class="waste-explorer" id="waste-explorer" hidden>
-            <button type="button" class="waste-toggle" id="waste-toggle" aria-expanded="false">
-              <span>Where did the waste go?</span><i aria-hidden="true">↓</i>
-            </button>
-            <div class="waste-destinations" id="waste-destinations" hidden>
-              <p class="waste-instruction">Select a destination to reveal only that waste route on the map.</p>
-              <div class="waste-list" id="waste-list"></div>
-            </div>
-          </section>
           <p class="network-caption" id="network-caption" hidden></p>
         </article>
 
@@ -62,7 +50,6 @@
 
       <footer class="story-footer">
         <span class="legend-line material"></span><span>Current material transfer</span>
-        <span class="legend-line waste"></span><span>Revealed waste route</span>
       </footer>
     </section>
 
@@ -82,6 +69,6 @@
   </main>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-  <script src="app.js?v=right-bubbles-v24"></script>
+  <script src="app.js?v=process-with-loow-v26"></script>
 </body>
 </html>
