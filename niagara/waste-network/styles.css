@@ -88,7 +88,7 @@ body { overflow: hidden; color: var(--ink); background: var(--paper); font-famil
 .waste-film[data-scene="water"] .regional-field { opacity: .18; transform: scale(1); }
 .waste-film[data-scene="final"] .regional-field { opacity: .08; transform: scale(1); }
 
-.water-pathways { width: min(40vw,560px); position: absolute; z-index: 540; right: 6%; top: 22%; opacity: 0; pointer-events: none; transition: opacity .8s ease; }
+.water-pathways { width: min(40vw,560px); position: absolute; z-index: 540; right: 6%; top: 50%; opacity: 0; pointer-events: none; transform: translateY(-50%); transition: opacity .8s ease; }
 .water-heading { margin: 0 0 30px; padding: 0 0 17px 18px; border-left: 2px solid var(--ink); }
 .water-heading span,.water-heading strong { display: block; }
 .water-heading span { color: var(--muted); font-size: 8px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
@@ -112,7 +112,7 @@ body { overflow: hidden; color: var(--ink); background: var(--paper); font-famil
 .waste-film[data-scene="water"] .water-kind:nth-of-type(2) { transition-delay: .18s; }
 .waste-film[data-scene="water"] .water-kind:nth-of-type(3) { transition-delay: .36s; }
 
-.screening-vignette { width: min(42vw,610px); height: 230px; position: absolute; z-index: 600; right: 5%; bottom: 9%; opacity: 0; pointer-events: none; transform: translateY(20px); transition: opacity .7s ease,transform .9s cubic-bezier(.22,1,.36,1); }
+.screening-vignette { width: min(42vw,610px); height: 230px; position: absolute; z-index: 600; right: 5%; top: 50%; opacity: 0; pointer-events: none; transform: translateY(calc(-50% + 20px)); transition: opacity .7s ease,transform .9s cubic-bezier(.22,1,.36,1); }
 .screening-title { position: absolute; left: 0; top: 0; }
 .screening-title span,.screening-title strong { display: block; }
 .screening-title span { color: var(--muted); font-size: 8px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
@@ -130,12 +130,12 @@ body { overflow: hidden; color: var(--ink); background: var(--paper); font-famil
 .waste-truck span:nth-of-type(1) { left: 16px; }.waste-truck span:nth-of-type(2) { right: -16px; }
 .detector-signal { position: absolute; right: calc(22% + 38px); bottom: 142px; }
 .detector-signal i { width: 18px; height: 18px; position: absolute; left: 50%; top: 50%; border: 1px solid var(--ink); border-radius: 50%; opacity: 0; transform: translate(-50%,-50%) scale(.2); }
-.waste-film[data-scene="screening"] .screening-vignette { opacity: 1; transform: translateY(0); }
+.waste-film[data-scene="screening"] .screening-vignette { opacity: 1; transform: translateY(-50%); }
 .waste-film[data-scene="screening"] .waste-truck { animation: screened-truck 7s .5s cubic-bezier(.24,.68,.25,1) both; }
 .waste-film[data-scene="screening"] .detector-signal i { animation: detector-pulse 1.8s 3.7s ease-out 2; }
 .waste-film[data-scene="screening"] .detector-signal i:nth-child(2) { animation-delay: 4s; }.waste-film[data-scene="screening"] .detector-signal i:nth-child(3) { animation-delay: 4.3s; }
 
-.reuse-vignette { width: min(46vw,760px); min-height: 246px; position: absolute; z-index: 650; right: 4%; bottom: 8%; padding: 22px 26px 24px; border-top: 2px solid var(--ink); opacity: 0; pointer-events: none; background: rgba(241,240,234,.96); transform: translateY(24px); transition: opacity .8s ease,transform 1s cubic-bezier(.22,1,.36,1); }
+.reuse-vignette { width: min(46vw,760px); min-height: 246px; position: absolute; z-index: 650; right: 4%; top: 50%; padding: 22px 26px 24px; border-top: 2px solid var(--ink); opacity: 0; pointer-events: none; background: rgba(241,240,234,.96); transform: translateY(calc(-50% + 24px)); transition: opacity .8s ease,transform 1s cubic-bezier(.22,1,.36,1); }
 .reuse-heading { margin: 0 0 24px; color: var(--muted); font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
 .reuse-flow { display: grid; grid-template-columns:minmax(145px,1fr) minmax(190px,1.4fr) minmax(165px,1fr); gap: 24px; align-items: center; }
 .reuse-stop { min-width: 0; text-align: left; }
@@ -151,7 +151,7 @@ body { overflow: hidden; color: var(--ink); background: var(--paper); font-famil
 .reuse-transfer > small { margin-top: 14px; padding: 7px 6px 6px; color: var(--ink); background: rgba(216,192,139,.58); font-size: 8px; letter-spacing: .08em; }
 .reuse-route { height: 3px; position: relative; background: var(--ink); transform: scaleX(0); transform-origin: left center; }
 .reuse-route i { width: 13px; height: 13px; position: absolute; right: -1px; top: -5px; border-top: 3px solid var(--ink); border-right: 3px solid var(--ink); transform: rotate(45deg); }
-.waste-film[data-scene="final"] .reuse-vignette { opacity: 1; transform: translateY(0); }
+.waste-film[data-scene="final"] .reuse-vignette { opacity: 1; transform: translateY(-50%); }
 .waste-film[data-scene="final"] .reuse-route { animation: reveal-reuse-route 4.2s .8s cubic-bezier(.22,1,.36,1) both; }
 .waste-film.is-paused .waste-truck,.waste-film.is-paused .detector-signal i,.waste-film.is-paused .reuse-route { animation-play-state: paused !important; }
 
@@ -167,9 +167,10 @@ body { overflow: hidden; color: var(--ink); background: var(--paper); font-famil
   .scene-copy { max-width: 650px; font-size: 16px; }
   .regional-field { width: 82%; height: 43%; right: 5%; top: 52%; }
   .water-pathways { width: 78vw; right: 5%; top: 58%; transform: scale(.82); transform-origin: right top; }
-  .screening-vignette { width: 78vw; right: 5%; bottom: 6%; transform: scale(.84); transform-origin: right bottom; }
+  .screening-vignette { width: 78vw; right: 5%; top: auto; bottom: 6%; transform: scale(.84); transform-origin: right bottom; }
   .waste-film[data-scene="screening"] .screening-vignette { transform: scale(.84); }
-  .reuse-vignette { width: 88vw; right: 5%; bottom: 8%; }
+  .reuse-vignette { width: 88vw; right: 5%; top: auto; bottom: 8%; transform: translateY(24px); }
+  .waste-film[data-scene="final"] .reuse-vignette { transform: translateY(0); }
   .reuse-flow { grid-template-columns:minmax(125px,1fr) minmax(170px,1.2fr) minmax(145px,1fr); gap: 18px; }
   .film-footer { left: 24px; right: 24px; grid-template-columns:minmax(100px,1fr) auto auto; }
   .film-source { display: none; }
