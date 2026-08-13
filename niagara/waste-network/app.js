@@ -54,6 +54,8 @@ const sites = [
 const map = L.map("waste-map", {
   zoomControl: false,
   attributionControl: false,
+  zoomSnap: 0.25,
+  zoomDelta: 0.25,
   dragging: false,
   scrollWheelZoom: false,
   doubleClickZoom: false,
@@ -64,6 +66,14 @@ const map = L.map("waste-map", {
   preferCanvas: true
 });
 
+const regionalBounds = L.latLngBounds([
+  [42.91, -79.18],
+  [43.29, -78.76]
+]);
+const niagaraFocus = window.innerWidth < 900
+  ? [43.095, -79.005]
+  : [43.095, -79.04];
+
 L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
   subdomains: "abcd",
   maxZoom: 19,
@@ -71,11 +81,14 @@ L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
   keepBuffer: 6
 }).addTo(map);
 
-map.fitBounds([[42.91, -79.18], [43.29, -78.76]], {
+map.fitBounds(regionalBounds, {
   paddingTopLeft: [window.innerWidth < 900 ? 20 : Math.round(window.innerWidth * .43), 80],
   paddingBottomRight: [30, 40],
   animate: false
 });
+
+const regionalZoom = map.getZoom();
+const niagaraZoom = Math.min(regionalZoom + Math.log2(10), 15);
 
 sites.forEach((site, index) => {
   const label = site.label ? `<b>${site.name}<small>${site.detail}</small></b>` : "";
@@ -97,13 +110,13 @@ const niagaraFactoriesIcon = L.divIcon({
 L.marker([43.0834, -79.023], { icon: niagaraFactoriesIcon, interactive: false }).addTo(map);
 
 const scenes = [
-  { name: "intro", duration: 4200 },
-  { name: "sources", duration: 4500 },
-  { name: "solid", duration: 4500 },
-  { name: "water", duration: 4800 },
-  { name: "screening", duration: 5200 },
-  { name: "gap", duration: 5200 },
-  { name: "final", duration: 6500 }
+  { name: "intro", duration: 8000 },
+  { name: "sources", duration: 9500 },
+  { name: "solid", duration: 10000 },
+  { name: "water", duration: 10000 },
+  { name: "screening", duration: 10500 },
+  { name: "gap", duration: 10500 },
+  { name: "final", duration: 11000 }
 ];
 
 const totalDuration = scenes.reduce((sum, scene) => sum + scene.duration, 0);
@@ -121,6 +134,13 @@ function showScene(index) {
     element.classList.toggle("is-active", element.dataset.sceneName === scene.name);
   });
   sceneCounter.textContent = `${String(sceneIndex + 1).padStart(2, "0")} / ${String(scenes.length).padStart(2, "0")}`;
+
+  if (scene.name === "solid" && !reducedMotion) {
+    map.flyTo(niagaraFocus, niagaraZoom, {
+      duration: 6,
+      easeLinearity: 0.16
+    });
+  }
 }
 
 function updateProgress(timestamp) {
