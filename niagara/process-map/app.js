@@ -11,8 +11,8 @@ const P = {
 };
 
 const SHINKOLOBWE_OVERVIEW = [-11.06492, 26.52854];
-const WESTERN_NEW_YORK_ZOOM = 12.25;
-const WESTERN_NEW_YORK_MARKER_OFFSET = .11;
+const FACTORY_ZOOM = 16;
+const LOOW_ZOOM = 14;
 const steps = [
   {
     id: "shinkolobwe",
@@ -39,7 +39,7 @@ const steps = [
     point: P.linde,
     process: "Linde refined uranium ore into oxides and uranium tetrafluoride—UF₄, known as ‘green salt.’",
     cameraPoint: [42.967, -78.935],
-    cameraZoom: WESTERN_NEW_YORK_ZOOM,
+    cameraZoom: FACTORY_ZOOM,
     cameraDuration: 2.4
   },
   {
@@ -52,7 +52,7 @@ const steps = [
     location: "Niagara Falls, New York",
     point: P.electromet,
     process: "Electromet reduced green salt with magnesium to produce uranium metal, leaving uranium-bearing C-2 slag.",
-    cameraZoom: WESTERN_NEW_YORK_ZOOM,
+    cameraZoom: FACTORY_ZOOM,
     cameraDuration: 2.1
   },
   {
@@ -65,7 +65,7 @@ const steps = [
     location: "Niagara Falls, New York",
     point: P.hooker,
     process: "Hooker treated C-2 slag from Electromet to recover uranium that remained in the residue.",
-    cameraZoom: WESTERN_NEW_YORK_ZOOM,
+    cameraZoom: FACTORY_ZOOM,
     cameraDuration: 2.1
   },
   {
@@ -78,7 +78,7 @@ const steps = [
     location: "Lockport, New York — later Guterl Specialty Steel",
     point: P.guterl,
     process: "Simonds heated and rolled uranium metal into rods at its Lockport plant.",
-    cameraZoom: WESTERN_NEW_YORK_ZOOM,
+    cameraZoom: FACTORY_ZOOM,
     cameraDuration: 2.1
   },
   {
@@ -91,7 +91,7 @@ const steps = [
     location: "110 Hopkins Street, Buffalo, New York",
     point: P.bliss,
     process: "Bliss & Laughlin machined, straightened, and finished uranium rods in Buffalo.",
-    cameraZoom: WESTERN_NEW_YORK_ZOOM,
+    cameraZoom: FACTORY_ZOOM,
     cameraDuration: 2.1
   },
   {
@@ -104,7 +104,7 @@ const steps = [
     location: "Lewiston and Porter, New York",
     point: P.loow,
     process: "LOOW was the designated federal destination for radioactive residues from Western New York’s uranium-production network.",
-    cameraZoom: WESTERN_NEW_YORK_ZOOM,
+    cameraZoom: LOOW_ZOOM,
     cameraDuration: 1.8
   }
 ];
@@ -166,12 +166,6 @@ preloadSatellite(P.loow, 14, 3);
 
 const stepMarkers = {};
 
-function westernNewYorkCameraPoint(point) {
-  const projected = map.project(L.latLng(point), WESTERN_NEW_YORK_ZOOM);
-  const markerOffset = map.getSize().x * WESTERN_NEW_YORK_MARKER_OFFSET;
-  return map.unproject(projected.subtract([markerOffset, 0]), WESTERN_NEW_YORK_ZOOM);
-}
-
 steps.forEach(step => {
   const icon = L.divIcon({
     className: "facility-marker-wrap",
@@ -215,7 +209,7 @@ function drawActiveRoute() {
   map.stop();
   const cameraPoint = step.id === "shinkolobwe"
     ? step.cameraPoint || step.point
-    : westernNewYorkCameraPoint(step.point);
+    : step.cameraPoint || step.point;
   map.flyTo(cameraPoint, step.cameraZoom, {
     duration: step.cameraDuration,
     easeLinearity: .22
