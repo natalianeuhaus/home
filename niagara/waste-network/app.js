@@ -149,8 +149,8 @@ let isFinished = false;
 
 function focusSources(duration = 2.8) {
   map.flyToBounds(sourceBounds, {
-    paddingTopLeft: [window.innerWidth < 900 ? 24 : Math.round(window.innerWidth * .43), 85],
-    paddingBottomRight: [window.innerWidth < 900 ? 34 : 250, 70],
+    paddingTopLeft: [window.innerWidth < 900 ? 24 : Math.round(window.innerWidth * .5), 85],
+    paddingBottomRight: [window.innerWidth < 900 ? 34 : 150, 70],
     maxZoom: sourceZoom,
     duration,
     easeLinearity: 0.18
