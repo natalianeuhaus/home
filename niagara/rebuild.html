@@ -1658,6 +1658,10 @@
                   <div class="investigation-stat"><strong>37M</strong><span>gallons of radioactively contaminated chemical waste identified by the report</span></div>
                 </div>
 
+                <figure class="waste-network-embed" aria-label="Animated map of liquid radioactive-waste pathways">
+                  <iframe class="waste-network-embed-frame" title="Where the Waste Moved: liquid waste" data-waste-network-src="./waste-network/?slide=2" loading="lazy" allow="fullscreen"></iframe>
+                </figure>
+
                 <div class="federal-connection-connector">
                   <p>While the “sludge” was disposed of through waterways like creeks, wells, and the city’s storm drains, the solid waste, known as “slag,” piled up unsupervised and unaccounted for in factories and at the Lake Ontario Ordnance Works storage site. Unaware of the dangers, workers brought this material home and used it as filler for home improvements like paving driveways. Since it was free, readily available, and abundant in the area, construction and trucking companies began commercializing it and spreading it throughout the region, transforming a once idyllic city into a radioactive minefield and a cancer factory in the making.</p>
                 </div>
@@ -1824,7 +1828,7 @@
                 </div>
                 <p class="waste-survey-expansion">Over the years, however, radiological surveys expanded beyond the suspected routes to LOOW. Investigators repeatedly encountered contamination within Niagara Falls’s two principal industrial districts: the Buffalo Avenue corridor along the river and the Highland Avenue corridor beside residential neighborhoods. These areas contained former factories, rail lines, roads, imported fill, and redevelopment sites—overlapping landscapes where radioactive material could have come from more than one industrial source.</p>
                 <figure class="waste-network-embed" aria-label="Animated map tracing the movement of radioactive waste across Niagara and Erie Counties">
-                  <iframe class="waste-network-embed-frame" title="Where the Waste Moved animated map" data-waste-network-src="./waste-network/" loading="lazy" allow="fullscreen"></iframe>
+                  <iframe class="waste-network-embed-frame" title="Where the Waste Moved: production, storage, and disposal sites" data-waste-network-src="./waste-network/?slide=1" loading="lazy" allow="fullscreen"></iframe>
                 </figure>
               </section>
 
@@ -2178,14 +2182,14 @@
       const tabbarWrap = document.querySelector('.niagara-tabbar-wrap');
       const waterfallsSection = document.querySelector('#waterfalls-chapter');
       const tabbar = document.querySelector('.niagara-tabbar');
-      const wasteNetworkFrame = document.querySelector('[data-waste-network-src]');
+      const wasteNetworkFrames = Array.from(document.querySelectorAll('[data-waste-network-src]'));
       const archiveSearchTerm = new URLSearchParams(window.location.search).get('archive');
       const indicator = document.createElement('span');
       indicator.className = 'niagara-tab-indicator';
       indicator.setAttribute('aria-hidden', 'true');
       tabbar.appendChild(indicator);
 
-      if (wasteNetworkFrame) {
+      wasteNetworkFrames.forEach(wasteNetworkFrame => {
         const loadWasteNetwork = () => {
           if (!wasteNetworkFrame.getAttribute('src')) {
             wasteNetworkFrame.setAttribute('src',wasteNetworkFrame.dataset.wasteNetworkSrc);
@@ -2201,7 +2205,7 @@
         } else {
           loadWasteNetwork();
         }
-      }
+      });
 
       function moveIndicator(tab, animate = true) {
         if (!tab) return;
