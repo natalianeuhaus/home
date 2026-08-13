@@ -63,9 +63,7 @@ body { overflow: hidden; color: var(--ink); background: var(--paper); font-famil
 .waste-site[data-order="13"] { --site-color: #8d5e48; }
 .waste-site--loow i { border-radius: 2px; }
 .waste-film[data-scene="sources"] .waste-site { opacity: 1; transform: translate3d(0,0,0); }
-.waste-film[data-scene="solid"] .waste-site { opacity: .5; transform: translate3d(0,0,0); }
 .waste-film[data-scene="water"] .waste-site,
-.waste-film[data-scene="history"] .waste-site,
 .waste-film[data-scene="screening"] .waste-site,
 .waste-film[data-scene="final"] .waste-site { opacity: .16; transform: translate3d(0,0,0); }
 .waste-film[data-scene="sources"] .waste-site[data-order="1"] { transition-delay: .7s; }
@@ -87,9 +85,7 @@ body { overflow: hidden; color: var(--ink); background: var(--paper); font-famil
 .regional-field span,.regional-field small { position: absolute; right: 8%; display: block; padding: 4px 6px; background: rgba(241,240,234,.9); text-transform: uppercase; }
 .regional-field span { bottom: 12%; font-size: 9px; font-weight: 700; letter-spacing: .12em; }
 .regional-field small { bottom: 7%; color: var(--muted); font-size: 7px; letter-spacing: .08em; }
-.waste-film[data-scene="solid"] .regional-field { opacity: .88; transform: scale(1); }
 .waste-film[data-scene="water"] .regional-field { opacity: .18; transform: scale(1); }
-.waste-film[data-scene="history"] .regional-field { opacity: .58; transform: scale(1); }
 .waste-film[data-scene="final"] .regional-field { opacity: .08; transform: scale(1); }
 
 .water-pathways { width: min(40vw,560px); position: absolute; z-index: 540; right: 6%; top: 22%; opacity: 0; pointer-events: none; transition: opacity .8s ease; }

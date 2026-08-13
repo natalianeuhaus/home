@@ -167,11 +167,9 @@ sites.forEach((site, index) => {
 
 const scenes = [
   { name: "sources", duration: 28000 },
-  { name: "solid", duration: 10000 },
   { name: "water", duration: 10000 },
-  { name: "history", duration: 10500 },
   { name: "screening", duration: 10500 },
-  { name: "final", duration: 11000 }
+  { name: "final", duration: 11500 }
 ];
 
 const totalDuration = scenes.reduce((sum, scene) => sum + scene.duration, 0);
@@ -227,7 +225,7 @@ function showScene(index) {
 
   if (!reducedMotion) {
     if (scene.name === "sources") focusSources();
-    if (scene.name === "solid") focusNiagara();
+    if (scene.name === "water") focusNiagara();
   }
 }
 
@@ -290,7 +288,7 @@ function resumeFilm() {
   if (currentScene.name === "sources" && map.getZoom() < sourceZoom - 0.01) {
     focusSources(Math.min(2.8, remainingSeconds));
   }
-  if (currentScene.name === "solid" && map.getZoom() < niagaraZoom - 0.01) {
+  if (currentScene.name === "water" && map.getZoom() < niagaraZoom - 0.01) {
     focusNiagara(Math.min(6, remainingSeconds));
   }
 

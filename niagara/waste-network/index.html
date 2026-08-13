@@ -7,7 +7,7 @@
   <meta name="description" content="A short animated map of solid and liquid radioactive-waste pathways across Niagara and Erie Counties.">
   <link rel="preconnect" href="https://unpkg.com">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
-  <link rel="stylesheet" href="styles.css?v=waste-network-v22">
+  <link rel="stylesheet" href="styles.css?v=waste-network-v24">
 </head>
 <body>
   <main class="waste-film" id="waste-film" data-scene="loading">
@@ -57,7 +57,7 @@
 
     <header class="film-header">
       <span>Greetings from Niagara</span>
-      <span>Waste movement · 80-second animated map</span>
+      <span>Waste movement · 60-second animated map</span>
     </header>
 
     <section class="scene-stage" aria-live="polite">
@@ -67,22 +67,10 @@
         <p class="scene-copy">These sites produced, handled, stored, or received radioactive material. Later findings cannot always be traced to one source.</p>
       </article>
 
-      <article class="scene" data-scene-name="solid">
-        <p class="scene-kicker">Solid waste</p>
-        <h2>Slag and contaminated fill moved outward.</h2>
-        <p class="scene-copy">This gravel-like industrial residue was reused throughout the region and later found beneath roads, driveways, parking lots, and properties across parts of Niagara and Erie Counties. In many places, the surviving record cannot identify a single source.</p>
-      </article>
-
       <article class="scene" data-scene-name="water">
         <p class="scene-kicker">Liquid waste</p>
         <h2>Liquid radioactive waste entered sewers, waterways, and disposal wells.</h2>
         <p class="scene-copy">Records describe liquid and process wastes entering disposal wells, sewers, creeks, and rivers—pathways that could carry contamination beyond the place where it was produced.</p>
-      </article>
-
-      <article class="scene" data-scene-name="history">
-        <p class="scene-kicker">Historical movement</p>
-        <h2>Radioactive slag was excavated, transported, and reused as ordinary fill.</h2>
-        <p class="scene-copy">Records describe slag leaving industrial and federal sites by truck. Some was sold, taken home, buried, or used beneath driveways, roads, and other construction.</p>
       </article>
 
       <article class="scene" data-scene-name="screening">
@@ -100,7 +88,7 @@
 
     <footer class="film-footer">
       <div class="film-progress"><i id="film-progress-bar"></i></div>
-      <p id="scene-counter">01 / 06</p>
+      <p id="scene-counter">01 / 04</p>
       <div class="film-controls" aria-label="Animation controls">
         <button class="film-arrow" id="film-previous" type="button" aria-label="Previous scene" disabled>←</button>
         <button class="film-pause" id="film-pause" type="button" aria-label="Pause animation" aria-pressed="false" disabled>Pause</button>
@@ -110,11 +98,11 @@
     </footer>
 
     <div class="sr-only">
-      This animation begins with thirteen production, research, storage, and disposal sites connected to the regional radioactive-waste investigation, then follows overlapping solid and liquid pathways before explaining New York’s 2017 landfill radiation-monitoring rule and the gap for fill that does not enter a covered landfill.
+      This animation begins with thirteen production, research, storage, and disposal sites connected to the regional radioactive-waste investigation, then follows liquid waste pathways before explaining New York’s 2017 landfill radiation-monitoring rule and the gap for fill that does not enter a covered landfill.
     </div>
   </main>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-  <script src="app.js?v=waste-network-v22"></script>
+  <script src="app.js?v=waste-network-v24"></script>
 </body>
 </html>
