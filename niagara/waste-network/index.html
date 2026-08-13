@@ -7,7 +7,7 @@
   <meta name="description" content="A short animated map of solid and liquid radioactive-waste pathways across Niagara and Erie Counties.">
   <link rel="preconnect" href="https://unpkg.com">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
-  <link rel="stylesheet" href="styles.css?v=waste-network-v4">
+  <link rel="stylesheet" href="styles.css?v=waste-network-v5">
 </head>
 <body>
   <main class="waste-film" id="waste-film" data-scene="intro">
@@ -85,22 +85,22 @@
         <p class="scene-copy">Records describe liquid and process wastes entering disposal wells, sewers, creeks, and rivers—pathways that could carry contamination beyond the place where it was produced.</p>
       </article>
 
+      <article class="scene" data-scene-name="history">
+        <p class="scene-kicker">Historical movement</p>
+        <h2>Radioactive slag was excavated, transported, and reused as ordinary fill.</h2>
+        <p class="scene-copy">Records describe slag leaving industrial and federal sites by truck. Some was sold, taken home, buried, or used beneath driveways, roads, and other construction.</p>
+      </article>
+
       <article class="scene" data-scene-name="screening">
         <p class="scene-kicker">November 4, 2017</p>
         <h2>New York required radiation screening at covered landfills.</h2>
         <p class="scene-copy">Landfills accepting municipal solid waste or drilling and production waste—public or private—must monitor incoming loads with fixed radiation detectors.</p>
       </article>
 
-      <article class="scene" data-scene-name="gap">
-        <p class="scene-kicker">The present-day gap</p>
-        <h2>Not every movement of fill passes through a detector.</h2>
-        <p class="scene-copy">Construction debris, excavated material, slag, and reused fill may move through other pathways. New York’s routine fill analysis lists chemical contaminants and asbestos, but not radionuclides.</p>
-      </article>
-
       <article class="scene scene--final" data-scene-name="final">
-        <p class="scene-kicker">The pathway has not necessarily disappeared</p>
-        <h2>Radioactive slag can be excavated, transported, and reused again.</h2>
-        <p class="scene-copy">If the material never passes through a radiation detector, its radioactivity may remain invisible.</p>
+        <p class="scene-kicker">The present-day gap</p>
+        <h2>Reused fill may never pass through a radiation detector.</h2>
+        <p class="scene-copy">Covered landfills must screen incoming loads. But excavated material, slag, and reused fill can move directly to another property or project—and New York’s routine fill analysis does not list radionuclides.</p>
       </article>
     </section>
 
@@ -121,6 +121,6 @@
   </main>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-  <script src="app.js?v=waste-network-v4"></script>
+  <script src="app.js?v=waste-network-v5"></script>
 </body>
 </html>

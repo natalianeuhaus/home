@@ -120,8 +120,8 @@ const scenes = [
   { name: "sources", duration: 9500 },
   { name: "solid", duration: 10000 },
   { name: "water", duration: 10000 },
+  { name: "history", duration: 10500 },
   { name: "screening", duration: 10500 },
-  { name: "gap", duration: 10500 },
   { name: "final", duration: 11000 }
 ];
 

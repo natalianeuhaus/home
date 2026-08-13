@@ -64,17 +64,17 @@ body { overflow: hidden; color: var(--ink); background: var(--paper); font-famil
 .waste-film[data-scene="solid"] .waste-site,
 .waste-film[data-scene="solid"] .niagara-factory-cluster { opacity: .5; transform: translate3d(0,0,0); }
 .waste-film[data-scene="water"] .waste-site,
+.waste-film[data-scene="history"] .waste-site,
 .waste-film[data-scene="screening"] .waste-site,
-.waste-film[data-scene="gap"] .waste-site,
 .waste-film[data-scene="final"] .waste-site,
 .waste-film[data-scene="water"] .niagara-factory-cluster,
+.waste-film[data-scene="history"] .niagara-factory-cluster,
 .waste-film[data-scene="screening"] .niagara-factory-cluster,
-.waste-film[data-scene="gap"] .niagara-factory-cluster,
 .waste-film[data-scene="final"] .niagara-factory-cluster { opacity: .16; transform: translate3d(0,0,0); }
 .waste-film[data-scene="solid"] .waste-site[data-order="6"] b,
 .waste-film[data-scene="water"] .waste-site[data-order="6"] b,
+.waste-film[data-scene="history"] .waste-site[data-order="6"] b,
 .waste-film[data-scene="screening"] .waste-site[data-order="6"] b,
-.waste-film[data-scene="gap"] .waste-site[data-order="6"] b,
 .waste-film[data-scene="final"] .waste-site[data-order="6"] b { left: auto; right: 22px; text-align: right; }
 .waste-site[data-order="1"] { transition-delay: .12s; }
 .waste-site[data-order="2"] { transition-delay: .28s; }
@@ -90,6 +90,7 @@ body { overflow: hidden; color: var(--ink); background: var(--paper); font-famil
 .regional-field small { bottom: 7%; color: var(--muted); font-size: 7px; letter-spacing: .08em; }
 .waste-film[data-scene="solid"] .regional-field { opacity: .88; transform: scale(1); }
 .waste-film[data-scene="water"] .regional-field { opacity: .18; transform: scale(1); }
+.waste-film[data-scene="history"] .regional-field { opacity: .58; transform: scale(1); }
 .waste-film[data-scene="final"] .regional-field { opacity: .08; transform: scale(1); }
 
 .water-pathways { width: min(40vw,560px); position: absolute; z-index: 540; right: 6%; top: 22%; opacity: 0; pointer-events: none; transition: opacity .8s ease; }
@@ -155,9 +156,8 @@ body { overflow: hidden; color: var(--ink); background: var(--paper); font-famil
 .reuse-transfer > small { margin-top: 14px; padding: 7px 6px 6px; color: var(--ink); background: rgba(216,192,139,.58); font-size: 8px; letter-spacing: .08em; }
 .reuse-route { height: 3px; position: relative; background: var(--ink); transform: scaleX(0); transform-origin: left center; }
 .reuse-route i { width: 13px; height: 13px; position: absolute; right: -1px; top: -5px; border-top: 3px solid var(--ink); border-right: 3px solid var(--ink); transform: rotate(45deg); }
-.waste-film[data-scene="gap"] .reuse-vignette,.waste-film[data-scene="final"] .reuse-vignette { opacity: 1; transform: translateY(0); }
-.waste-film[data-scene="gap"] .reuse-route { animation: reveal-reuse-route 4.2s .8s cubic-bezier(.22,1,.36,1) both; }
-.waste-film[data-scene="final"] .reuse-route { transform: scaleX(1); }
+.waste-film[data-scene="final"] .reuse-vignette { opacity: 1; transform: translateY(0); }
+.waste-film[data-scene="final"] .reuse-route { animation: reveal-reuse-route 4.2s .8s cubic-bezier(.22,1,.36,1) both; }
 .waste-film.is-paused .waste-truck,.waste-film.is-paused .detector-signal i,.waste-film.is-paused .reuse-route { animation-play-state: paused !important; }
 
 @keyframes screened-truck { 0% { transform:translateX(0); } 65%,100% { transform:translateX(clamp(280px,26vw,395px)); } }
