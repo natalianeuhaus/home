@@ -153,7 +153,7 @@ sites.forEach((site, index) => {
 });
 
 const scenes = [
-  { name: "sources", duration: 10000 },
+  { name: "sources", duration: 18000 },
   { name: "solid", duration: 10000 },
   { name: "water", duration: 10000 },
   { name: "history", duration: 10500 },
