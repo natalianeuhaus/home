@@ -86,6 +86,20 @@ const sites = [
     point: [43.118994, -79.033652],
     type: "factory",
     label: "bottom-right"
+  },
+  {
+    name: "TAM Ceramics",
+    detail: "Hyde Park Blvd · titanium and ceramics",
+    point: [43.128731, -79.035639],
+    type: "factory",
+    label: "top-right"
+  },
+  {
+    name: "Vanadium Corporation of America",
+    detail: "Witmer Rd · ferroalloy plant",
+    point: [43.124241, -79.026944],
+    type: "factory",
+    label: "bottom-right"
   }
 ];
 
@@ -153,7 +167,7 @@ sites.forEach((site, index) => {
 });
 
 const scenes = [
-  { name: "sources", duration: 18000 },
+  { name: "sources", duration: 28000 },
   { name: "solid", duration: 10000 },
   { name: "water", duration: 10000 },
   { name: "history", duration: 10500 },
