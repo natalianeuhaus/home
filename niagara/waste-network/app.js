@@ -307,6 +307,10 @@ function updateProgress(timestamp) {
   if (elapsed < totalDuration && !isPaused) {
     progressFrame = window.requestAnimationFrame(updateProgress);
   } else if (elapsed >= totalDuration) {
+    if (embeddedSlideIndex >= 0) {
+      restartFilm();
+      return;
+    }
     isFinished = true;
     isPaused = true;
     startTime = 0;
