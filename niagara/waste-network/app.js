@@ -164,10 +164,13 @@ const niagaraZoom = Math.min(Math.max(
   window.innerWidth < 900 ? 13.25 : 14.25
 ), 15);
 
+const siteRevealDelays = [.7, 2, 3.3, 4.6, 5.9, 7.2, 8.5, 9.8, 11.6, 13.4, 15.2, 17, 18.8];
+
 sites.forEach((site, index) => {
+  const revealDelay = siteRevealDelays[index];
   const icon = L.divIcon({
     className: "waste-site-wrap",
-    html: `<span class="waste-site waste-site--${site.type}" data-order="${index + 1}"><i></i></span>`,
+    html: `<span class="waste-site waste-site--${site.type}" data-order="${index + 1}" style="--site-delay:${revealDelay}s"><i></i><b class="waste-site-label waste-site-label--${site.label}"><strong>${site.name}</strong><small>${site.detail}</small></b></span>`,
     iconSize: [18, 18],
     iconAnchor: [8, 8]
   });
