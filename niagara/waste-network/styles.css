@@ -47,6 +47,9 @@ body { overflow: hidden; color: var(--ink); background: var(--paper); font-famil
 .waste-film[data-embedded-slide] .film-footer { grid-template-columns:minmax(140px,280px) auto 1fr; }
 .waste-film[data-embedded-slide] #scene-counter,
 .waste-film[data-embedded-slide] .film-arrow { display:none; }
+.waste-film[data-embedded-slide="2"] .waste-site,
+.waste-film[data-embedded-slide="2"] .waste-site-label,
+.waste-film[data-embedded-slide="2"] .industrial-district { opacity:0 !important; visibility:hidden; }
 
 .waste-site-wrap { overflow: visible !important; border: 0 !important; background: transparent !important; }
 .waste-site { position: relative; display: block; opacity: 0; transform: scale(.2); transition: opacity 1s ease,transform 1.25s cubic-bezier(.22,1,.36,1); }
