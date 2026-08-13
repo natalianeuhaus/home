@@ -7,7 +7,7 @@
   <meta name="description" content="An interactive map tracing uranium through the Western New York production network.">
   <link rel="preconnect" href="https://unpkg.com">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
-  <link rel="stylesheet" href="styles.css?v=process-with-loow-v26">
+  <link rel="stylesheet" href="styles.css?v=quiet-process-v27">
 </head>
 <body>
   <main class="process-shell">
@@ -37,8 +37,7 @@
           </div>
           <h2 id="node-title"></h2>
           <p class="network-location" id="node-location"></p>
-
-          <p class="network-caption" id="network-caption" hidden></p>
+          <p class="network-process" id="node-process"></p>
         </article>
 
         <div class="story-controls">
@@ -48,9 +47,6 @@
         </div>
       </div>
 
-      <footer class="story-footer">
-        <span class="legend-line material"></span><span>Current material transfer</span>
-      </footer>
     </section>
 
     <section class="map-panel" aria-label="Interactive map of the complete material network">
@@ -63,12 +59,10 @@
         <button type="button" class="is-active" id="satellite-button">Satellite</button>
         <button type="button" id="map-button">Map</button>
       </div>
-
-      <div class="map-caption" id="map-caption">Use Begin or select step 1 above</div>
     </section>
   </main>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-  <script src="app.js?v=process-with-loow-v26"></script>
+  <script src="app.js?v=quiet-process-v27"></script>
 </body>
 </html>
