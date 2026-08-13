@@ -15,28 +15,42 @@ const sites = [
     detail: "Tonawanda · refining",
     point: [42.9744103, -78.8930735],
     type: "factory",
-    label: "top-right"
+    label: "top-left"
   },
   {
     name: "Electromet",
     detail: "Niagara Falls · uranium metal",
     point: [43.0874404, -79.0069049],
     type: "factory",
-    label: null
+    label: "top-right"
   },
   {
     name: "Hooker",
     detail: "Niagara Falls · uranium recovery",
     point: [43.0795842, -79.0083173],
     type: "factory",
-    label: null
+    label: "bottom-left"
   },
   {
     name: "Carborundum",
     detail: "Niagara Falls · industrial research",
     point: [43.0832908, -79.0385277],
     type: "factory",
-    label: null
+    label: "top-left"
+  },
+  {
+    name: "Simonds Saw and Steel",
+    detail: "Lockport · uranium rod rolling",
+    point: [43.16948064711221, -78.6929769560219],
+    type: "factory",
+    label: "top-left"
+  },
+  {
+    name: "Bliss & Laughlin Steel",
+    detail: "Buffalo · uranium rod finishing",
+    point: [42.8368, -78.8529],
+    type: "factory",
+    label: "top-left"
   },
   {
     name: "LOOW",
@@ -50,7 +64,7 @@ const sites = [
     detail: "Later incorporated into CECOS",
     point: [43.091845, -78.9996943],
     type: "disposal",
-    label: "top-right"
+    label: "bottom-right"
   }
 ];
 
@@ -70,8 +84,8 @@ const map = L.map("waste-map", {
 });
 
 const regionalBounds = L.latLngBounds([
-  [42.91, -79.18],
-  [43.29, -78.76]
+  [42.79, -79.18],
+  [43.29, -78.61]
 ]);
 const sourceBounds = L.latLngBounds(sites.map(site => site.point)).pad(0.1);
 const niagaraFocus = window.innerWidth < 900
@@ -92,9 +106,11 @@ map.fitBounds(regionalBounds, {
 });
 
 const regionalZoom = map.getZoom();
-const regionalCenter = map.getCenter();
 const sourceZoom = regionalZoom + 0.75;
-const niagaraZoom = Math.min(regionalZoom + Math.log2(10), 15);
+const niagaraZoom = Math.min(Math.max(
+  regionalZoom + Math.log2(10),
+  window.innerWidth < 900 ? 13.25 : 14.25
+), 15);
 
 sites.forEach((site, index) => {
   const label = site.label ? `<b>${site.name}<small>${site.detail}</small></b>` : "";
@@ -104,20 +120,15 @@ sites.forEach((site, index) => {
     iconSize: [210, 42],
     iconAnchor: [8, 8]
   });
-  L.marker(site.point, { icon, interactive: false }).addTo(map);
+  L.marker(site.point, {
+    icon,
+    interactive: false,
+    zIndexOffset: site.name === "Union Carbide landfill" ? 1200 : index * 20
+  }).addTo(map);
 });
-
-const niagaraFactoriesIcon = L.divIcon({
-  className: "niagara-factory-cluster-wrap",
-  html: '<span class="niagara-factory-cluster"><i></i><b>Niagara Falls factories<small>Electromet · Hooker · Carborundum</small></b></span>',
-  iconSize: [260, 42],
-  iconAnchor: [30, 8]
-});
-L.marker([43.0834, -79.023], { icon: niagaraFactoriesIcon, interactive: false }).addTo(map);
 
 const scenes = [
-  { name: "intro", duration: 8000 },
-  { name: "sources", duration: 9500 },
+  { name: "sources", duration: 10000 },
   { name: "solid", duration: 10000 },
   { name: "water", duration: 10000 },
   { name: "history", duration: 10500 },
@@ -135,13 +146,6 @@ let startTime = 0;
 let elapsedBeforeStart = 0;
 let isPaused = false;
 let isFinished = false;
-
-function focusRegional(duration = 2.2) {
-  map.flyTo(regionalCenter, regionalZoom, {
-    duration,
-    easeLinearity: 0.2
-  });
-}
 
 function focusSources(duration = 2.8) {
   map.flyToBounds(sourceBounds, {
@@ -166,7 +170,6 @@ function updateNavigationButtons() {
 }
 
 function showScene(index) {
-  const previousSceneIndex = sceneIndex;
   sceneIndex = Math.max(0, Math.min(index, scenes.length - 1));
   const scene = scenes[sceneIndex];
   film.dataset.scene = scene.name;
@@ -177,7 +180,6 @@ function showScene(index) {
   updateNavigationButtons();
 
   if (!reducedMotion) {
-    if (scene.name === "intro" && previousSceneIndex >= 0) focusRegional();
     if (scene.name === "sources") focusSources();
     if (scene.name === "solid") focusNiagara();
   }

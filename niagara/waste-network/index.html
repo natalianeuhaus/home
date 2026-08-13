@@ -7,10 +7,10 @@
   <meta name="description" content="A short animated map of solid and liquid radioactive-waste pathways across Niagara and Erie Counties.">
   <link rel="preconnect" href="https://unpkg.com">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
-  <link rel="stylesheet" href="styles.css?v=waste-network-v5">
+  <link rel="stylesheet" href="styles.css?v=waste-network-v6">
 </head>
 <body>
-  <main class="waste-film" id="waste-film" data-scene="intro">
+  <main class="waste-film" id="waste-film" data-scene="sources">
     <div class="map-stage" aria-hidden="true">
       <div id="waste-map" class="waste-map"></div>
       <div class="map-wash"></div>
@@ -57,26 +57,20 @@
 
     <header class="film-header">
       <span>Greetings from Niagara</span>
-      <span>Waste movement · 70-second animated map</span>
+      <span>Waste movement · 60-second animated map</span>
     </header>
 
     <section class="scene-stage" aria-live="polite">
-      <article class="scene is-active" data-scene-name="intro">
-        <p class="scene-kicker">Niagara and Erie Counties</p>
-        <h1>Radioactive waste did not move by one route.</h1>
-        <p class="scene-copy">It left factories as solid residues and liquid effluent, entered storage and disposal sites, and moved through systems that were fragmented, poorly documented, and difficult to reconstruct.</p>
-      </article>
-
-      <article class="scene" data-scene-name="sources">
+      <article class="scene is-active" data-scene-name="sources">
         <p class="scene-kicker">Production, storage, and disposal</p>
-        <h2>A regional network—not a single source.</h2>
-        <p class="scene-copy">Linde, Electromet, Hooker, Carborundum, LOOW, and Union Carbide’s company landfill are known points in that network. They are not proven origins for every later finding.</p>
+        <h1>The radioactive slag could have come from any of these sites.</h1>
+        <p class="scene-copy">Linde, Electromet, Hooker, Carborundum, Simonds, Bliss &amp; Laughlin, LOOW, and Union Carbide’s landfill all handled, produced, stored, or received radioactive material. The surviving record cannot identify one source for every later finding.</p>
       </article>
 
       <article class="scene" data-scene-name="solid">
         <p class="scene-kicker">Solid waste</p>
         <h2>Slag and contaminated fill moved outward.</h2>
-        <p class="scene-copy">Radioactive material was later found beneath roads, driveways, parking lots, and properties across parts of Niagara and Erie Counties. In many places, the surviving record cannot identify one source.</p>
+        <p class="scene-copy">Radioactive material was later found beneath roads, driveways, parking lots, and properties across parts of Niagara and Erie Counties—far beyond the facilities that generated, handled, stored, or received it.</p>
       </article>
 
       <article class="scene" data-scene-name="water">
@@ -106,21 +100,21 @@
 
     <footer class="film-footer">
       <div class="film-progress"><i id="film-progress-bar"></i></div>
-      <p id="scene-counter">01 / 07</p>
+      <p id="scene-counter">01 / 06</p>
       <div class="film-controls" aria-label="Animation controls">
         <button class="film-arrow" id="film-previous" type="button" aria-label="Previous scene" disabled>←</button>
         <button class="film-pause" id="film-pause" type="button" aria-label="Pause animation" aria-pressed="false" disabled>Pause</button>
         <button class="film-arrow" id="film-next" type="button" aria-label="Next scene" disabled>→</button>
       </div>
-      <p class="film-source">Sources: 6 NYCRR 363-7.1(a)(5) and 360.13(e) · Locations shown for regional context</p>
+      <p class="film-source">Sources: DOE FUSRAP site records · 6 NYCRR 363-7.1(a)(5) and 360.13(e)</p>
     </footer>
 
     <div class="sr-only">
-      This animation explains that Western New York’s radioactive waste moved through overlapping solid and liquid pathways. It identifies known production, storage, and disposal locations, then explains New York’s 2017 landfill radiation-monitoring rule and the gap for fill that does not enter a covered landfill.
+      This animation begins with eight possible production, storage, and disposal sources for later radioactive-slag findings, then follows overlapping solid and liquid pathways before explaining New York’s 2017 landfill radiation-monitoring rule and the gap for fill that does not enter a covered landfill.
     </div>
   </main>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-  <script src="app.js?v=waste-network-v5"></script>
+  <script src="app.js?v=waste-network-v6"></script>
 </body>
 </html>
