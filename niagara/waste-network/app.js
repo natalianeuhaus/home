@@ -65,6 +65,27 @@ const sites = [
     point: [43.091845, -78.9996943],
     type: "disposal",
     label: "bottom-right"
+  },
+  {
+    name: "National Carbon",
+    detail: "Highland Ave · graphite works",
+    point: [43.120214, -79.044351],
+    type: "factory",
+    label: "top-left"
+  },
+  {
+    name: "Pittsburgh Metallurgical / Globe",
+    detail: "Highland Ave · alloy furnaces",
+    point: [43.123489, -79.043109],
+    type: "factory",
+    label: "top-right"
+  },
+  {
+    name: "Carborundum Globar",
+    detail: "Hyde Park Blvd · Globar plant",
+    point: [43.118994, -79.033652],
+    type: "factory",
+    label: "bottom-right"
   }
 ];
 
