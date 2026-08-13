@@ -229,7 +229,7 @@ function selectStep(id) {
 
   document.getElementById("discovery-card").hidden = true;
   document.getElementById("network-card").hidden = false;
-  document.getElementById("node-kicker").textContent = `${step.number} · ${step.role}`;
+  document.getElementById("node-kicker").textContent = step.role;
   document.getElementById("node-date").textContent = step.date;
   document.getElementById("node-title").textContent = step.title;
   document.getElementById("node-location").textContent = step.location;
