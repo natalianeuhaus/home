@@ -468,7 +468,7 @@
     .waste-chapter-followup--loow-history p { max-width:900px; margin:0 0 1.2em; font-size:clamp(18px,1.35vw,23px); font-style:normal; line-height:1.47; letter-spacing:-.012em; }
     .waste-chapter-followup--loow-history p.loow-history-connector { max-width:760px; margin-left:clamp(24px,6vw,80px); }
     .waste-chapter-followup--loow-history p.loow-history-coda { max-width:680px; margin:clamp(42px,6svh,68px) 0 0 clamp(52px,13vw,180px); }
-    .loow-health-card { width:min(540px,calc(100% - 80px)); margin:clamp(50px,7svh,80px) 0 0 auto; border-top:1px solid rgba(21,23,21,.42); border-bottom:1px solid rgba(21,23,21,.42); }
+    .loow-health-card { width:min(540px,calc(100% - 80px)); margin:clamp(50px,7svh,80px) auto 0 0; border-top:1px solid rgba(21,23,21,.42); border-bottom:1px solid rgba(21,23,21,.42); }
     .loow-health-card summary { padding:20px 44px 20px 0; position:relative; cursor:pointer; list-style:none; color:var(--niagara-ink); }
     .loow-health-card summary::-webkit-details-marker { display:none; }
     .loow-health-card summary::after { content:'+'; position:absolute; top:20px; right:2px; font:24px/1 Arial,Helvetica,sans-serif; transition:transform .25s ease; }
@@ -490,6 +490,9 @@
     .loow-evidence-card-title { display:block; font:400 clamp(19px,1.6vw,25px)/1.12 Georgia,"Times New Roman",serif; letter-spacing:-.022em; }
     .loow-evidence-card-body { padding:0 0 22px; }
     .waste-chapter-followup--loow-history .loow-evidence-card-body p { margin:0; font:15px/1.55 Arial,Helvetica,sans-serif; letter-spacing:0; color:rgba(21,23,21,.74); }
+    .loow-deer-card { width:min(620px,calc(100% - 120px)); margin:clamp(100px,13svh,160px) auto 0; }
+    .loow-deer-card .loow-evidence-card-body p { margin:0; color:rgba(21,23,21,.74); font:15px/1.55 Arial,Helvetica,sans-serif; letter-spacing:0; }
+    .loow-deer-card + .iwcs-afterword { margin-top:clamp(105px,14svh,170px); }
     .loow-evidence-grid { margin:42px 0 62px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px; }
     .loow-evidence-grid .loow-evidence-card { width:100%; margin:0; }
     .waste-chapter-followup.waste-chapter-followup--loow-history-lead { margin-bottom:0; }
@@ -756,6 +759,8 @@
       .waste-chapter-followup--loow-history p { font-size:clamp(18px,1.35vw,23px); font-style:normal; line-height:1.47; letter-spacing:-.012em; }
       .loow-health-card { width:100%; margin-top:54px; }
       .loow-evidence-card { width:100%; margin:32px 0 46px; }
+      .loow-deer-card { width:100%; margin:72px 0 0; }
+      .loow-deer-card + .iwcs-afterword { margin-top:76px; }
       .loow-evidence-grid { grid-template-columns:1fr; gap:26px; }
       .waste-chapter-followup--loow-history p.loow-history-coda { margin-left:0; }
       
@@ -1694,7 +1699,12 @@
                     </div>
                   </aside>
 
-<aside class="iwcs-afterword" aria-labelledby="iwcs-afterword-title">
+                  <details class="loow-evidence-card loow-deer-card">
+                    <summary><span class="loow-evidence-card-kicker">1981</span><span class="loow-evidence-card-title">Radioactive deer near LOOW</span></summary>
+                    <div class="loow-evidence-card-body"><p>Tests conducted for the <em>Niagara Gazette</em> found elevated cesium-137 and radium in the liver of a deer shot near LOOW. A separate study that year reported abnormalities in 15 of 20 deer captured nearby and elevated radium and cesium in four deer livers.</p></div>
+                  </details>
+
+                  <aside class="iwcs-afterword" aria-labelledby="iwcs-afterword-title">
                     <div class="iwcs-afterword-copy">
                       <h5 id="iwcs-afterword-title">An “interim” structure</h5>
                       <p>“Interim” matters. The containment structure was given an anticipated 25-year life, carrying it only to about 2011. In 2026, it remains in use—approximately 15 years beyond that original horizon. Its compacted-clay cover is intended to limit water infiltration and slow contaminant migration, while drainage ditches carry surface water away from the containment area.</p>
@@ -1729,10 +1739,6 @@
                       <div class="loow-evidence-card-body"><p>Modern Disposal operates a separate solid-waste landfill on another former-LOOW tract. After an initial cleanup, a <a href="https://lmpublicsearch.lm.doe.gov/lmsites/2730-s06763_kapl.pdf" target="_blank" rel="noopener">federal survey</a> intentionally tested the places most likely to remain contaminated, so its results describe hotspots rather than average conditions across the property. The highest surface-soil sample contained 1,025 picocuries per gram of cesium-137—roughly 1,000 times the highest local background level measured by DOE. After more soil was removed, the highest remaining sample still measured 69 pCi/g: about 65 times local background and more than twice DOE’s later cleanup guideline of 33 pCi/g.</p></div>
                     </details>
                   </div>
-                  <details class="loow-evidence-card">
-                    <summary><span class="loow-evidence-card-kicker">1981</span><span class="loow-evidence-card-title">Radioactive deer near LOOW</span></summary>
-                    <div class="loow-evidence-card-body"><p>Tests conducted for the <em>Niagara Gazette</em> found elevated cesium-137 and radium in the liver of a deer shot near LOOW. A separate study that year reported abnormalities in 15 of 20 deer captured nearby and elevated radium and cesium in four deer livers.</p></div>
-                  </details>
                   <p>About 1.5 miles west of NFSS, the Lewiston-Porter school campus serves roughly 2,100 students from pre-kindergarten through 12th grade. The campus lies immediately west of the former LOOW boundary. A former 30-inch LOOW outfall line crossed school property. As part of its investigation of the former LOOW property, the Army Corps surveyed the school grounds in 2002. Readings above 8,000 counts per minute required further investigation. One rock behind the elementary school registered 38,222 CPM—nearly five times that trigger.</p>
                   <details class="loow-health-card">
                     <summary>
