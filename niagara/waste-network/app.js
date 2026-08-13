@@ -195,12 +195,29 @@ industrialDistricts.forEach((district, index) => {
   }).addTo(map);
 });
 
-const scenes = [
+const allScenes = [
   { name: "sources", duration: 25500 },
   { name: "water", duration: 10000 },
   { name: "screening", duration: 10500 },
   { name: "final", duration: 11500 }
 ];
+
+const requestedSlide = Number.parseInt(new URLSearchParams(window.location.search).get("slide"), 10);
+const embeddedSlideIndex = Number.isInteger(requestedSlide) && requestedSlide >= 1 && requestedSlide <= allScenes.length
+  ? requestedSlide - 1
+  : -1;
+const scenes = embeddedSlideIndex >= 0 ? [allScenes[embeddedSlideIndex]] : allScenes;
+
+if (embeddedSlideIndex >= 0) {
+  film.dataset.embeddedSlide = String(requestedSlide);
+  film.dataset.scene = allScenes[embeddedSlideIndex].name;
+  sceneElements.forEach(element => {
+    element.classList.toggle("is-active", element.dataset.sceneName === allScenes[embeddedSlideIndex].name);
+  });
+  sceneCounter.textContent = `${String(requestedSlide).padStart(2, "0")} / ${String(allScenes.length).padStart(2, "0")}`;
+  const durationLabel = document.querySelector(".film-header span:last-child");
+  if (durationLabel) durationLabel.textContent = `Waste movement · Slide ${String(requestedSlide).padStart(2, "0")} of ${String(allScenes.length).padStart(2, "0")}`;
+}
 
 const totalDuration = scenes.reduce((sum, scene) => sum + scene.duration, 0);
 const sceneStartTimes = scenes.map((scene, index) => (
@@ -250,7 +267,8 @@ function showScene(index) {
   sceneElements.forEach(element => {
     element.classList.toggle("is-active", element.dataset.sceneName === scene.name);
   });
-  sceneCounter.textContent = `${String(sceneIndex + 1).padStart(2, "0")} / ${String(scenes.length).padStart(2, "0")}`;
+  const globalSceneIndex = allScenes.findIndex(candidate => candidate.name === scene.name);
+  sceneCounter.textContent = `${String(globalSceneIndex + 1).padStart(2, "0")} / ${String(allScenes.length).padStart(2, "0")}`;
   updateNavigationButtons();
 
   if (!reducedMotion) {
