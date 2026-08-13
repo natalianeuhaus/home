@@ -468,7 +468,7 @@
     .waste-chapter-followup--loow-history p { max-width:900px; margin:0 0 1.2em; font-size:clamp(18px,1.35vw,23px); font-style:normal; line-height:1.47; letter-spacing:-.012em; }
     .waste-chapter-followup--loow-history p.loow-history-connector { max-width:760px; margin-left:clamp(24px,6vw,80px); }
     .waste-chapter-followup--loow-history p.loow-history-coda { max-width:680px; margin:clamp(42px,6svh,68px) 0 0 clamp(52px,13vw,180px); }
-    .loow-health-card { width:min(540px,calc(100% - 80px)); margin:clamp(50px,7svh,80px) auto 0 0; border-top:1px solid rgba(21,23,21,.42); border-bottom:1px solid rgba(21,23,21,.42); }
+    .loow-health-card { width:min(540px,calc(100% - 80px)); margin:clamp(50px,7svh,80px) auto 0 0 !important; position:relative; left:0; transform:translateX(-48px); border-top:1px solid rgba(21,23,21,.42); border-bottom:1px solid rgba(21,23,21,.42); }
     .loow-health-card summary { padding:20px 44px 20px 0; position:relative; cursor:pointer; list-style:none; color:var(--niagara-ink); }
     .loow-health-card summary::-webkit-details-marker { display:none; }
     .loow-health-card summary::after { content:'+'; position:absolute; top:20px; right:2px; font:24px/1 Arial,Helvetica,sans-serif; transition:transform .25s ease; }
@@ -757,7 +757,7 @@
       .waste-chapter-followup p { max-width:100%; margin-left:0; font-size:clamp(22px,6.4vw,30px); }
       .waste-chapter-followup--loow-history { margin:86px 0 104px; transform:none; }
       .waste-chapter-followup--loow-history p { font-size:clamp(18px,1.35vw,23px); font-style:normal; line-height:1.47; letter-spacing:-.012em; }
-      .loow-health-card { width:100%; margin-top:54px; }
+      .loow-health-card { width:100%; margin-top:54px !important; transform:none; }
       .loow-evidence-card { width:100%; margin:32px 0 46px; }
       .loow-deer-card { width:100%; margin:72px 0 0; }
       .loow-deer-card + .iwcs-afterword { margin-top:76px; }
