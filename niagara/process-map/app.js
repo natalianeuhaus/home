@@ -38,7 +38,6 @@ const steps = [
     location: "Tonawanda, New York",
     point: P.linde,
     process: "Linde refined uranium ore into oxides and uranium tetrafluoride—UF₄, known as ‘green salt.’",
-    cameraPoint: [42.967, -78.935],
     cameraZoom: FACTORY_ZOOM,
     cameraDuration: 2.4
   },
