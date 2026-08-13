@@ -103,6 +103,19 @@ const sites = [
   }
 ];
 
+const industrialDistricts = [
+  {
+    name: "Buffalo Avenue industrial district",
+    point: [43.0817, -79.0077],
+    position: "bottom-right"
+  },
+  {
+    name: "Highland Avenue industrial district",
+    point: [43.1217, -79.0437],
+    position: "top-right"
+  }
+];
+
 const map = L.map("waste-map", {
   zoomControl: false,
   attributionControl: false,
@@ -165,8 +178,22 @@ sites.forEach((site, index) => {
   }).addTo(map);
 });
 
+industrialDistricts.forEach((district, index) => {
+  const icon = L.divIcon({
+    className: "industrial-district-wrap",
+    html: `<span class="industrial-district industrial-district--${district.position}" data-district-order="${index + 1}"><i></i><b>${district.name}</b></span>`,
+    iconSize: [220, 54],
+    iconAnchor: [8, 27]
+  });
+  L.marker(district.point, {
+    icon,
+    interactive: false,
+    zIndexOffset: 1800 + index * 20
+  }).addTo(map);
+});
+
 const scenes = [
-  { name: "sources", duration: 28000 },
+  { name: "sources", duration: 25500 },
   { name: "water", duration: 10000 },
   { name: "screening", duration: 10500 },
   { name: "final", duration: 11500 }
