@@ -513,8 +513,10 @@
     .loow-chapter-marker { margin-top:clamp(96px,14svh,170px); }
     .loow-chapter-marker .waste-era-survey-copy { width:42%; background:#090909; }
     .loow-chapter-marker .waste-era-survey-copy .waste-era-copy h4 { max-width:520px; }
-    .loow-chapter-marker .waste-era-survey-map { width:auto; inset:0 0 0 42%; background:#090909; }
-    .loow-chapter-marker .waste-era-survey-map img { width:calc(100% + 24px); max-width:none; margin-left:-24px; object-fit:cover; object-position:center 24%; filter:grayscale(1) contrast(1.04); }
+    .loow-chapter-marker .loow-chapter-history { position:absolute; z-index:1; inset:0 0 0 42%; padding:clamp(54px,5.5vw,86px); display:flex; align-items:center; color:var(--niagara-paper); background:#090909; }
+    .loow-chapter-marker .loow-chapter-history p { width:min(680px,100%); margin:0; color:rgba(241,240,234,.84); font-family:Georgia,"Times New Roman",serif; font-size:clamp(16px,1.35vw,20px); line-height:1.55; letter-spacing:-.008em; }
+    .loow-chapter-marker .loow-chapter-history a { color:inherit; text-decoration-line:underline; text-decoration-thickness:1px; text-underline-offset:.16em; }
+    .loow-chapter-marker .loow-chapter-history a:hover,.loow-chapter-marker .loow-chapter-history a:focus-visible { color:#fff; }
     .loow-archive-followup { width:100vw; margin:0 0 0 calc(100% - 50vw - min(770px,calc(50vw - 42px))); padding:clamp(88px,12svh,150px) 42px clamp(112px,16svh,190px); color:var(--niagara-ink); background:var(--niagara-paper); }
     .loow-archive-followup img { width:min(1100px,calc(100% - 84px)); max-height:78svh; margin:0 auto; display:block; object-fit:contain; filter:grayscale(1) contrast(1.04); }
     .loow-archive-followup figcaption { width:min(1100px,calc(100% - 84px)); margin:12px auto 0; display:flex; justify-content:space-between; gap:24px; color:rgba(21,23,21,.48); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
@@ -721,8 +723,8 @@
       .losa-scroll-copy .losa-scroll-quote { font-size:clamp(22px,6.4vw,30px) !important; }
       .loow-chapter-marker { margin-top:88px; }
       .loow-chapter-marker .waste-era-survey-copy { width:100%; min-height:52svh; }
-      .loow-chapter-marker .waste-era-survey-map { width:100%; min-height:62svh; inset:auto; background:#090909; }
-      .loow-chapter-marker .waste-era-survey-map img { opacity:1; object-fit:contain; object-position:center; }
+      .loow-chapter-marker .loow-chapter-history { width:100%; min-height:0; position:relative; inset:auto; padding:0 24px 76px; display:block; }
+      .loow-chapter-marker .loow-chapter-history p { width:100%; font-size:clamp(16px,4.3vw,19px); line-height:1.5; }
       .loow-archive-followup { width:100vw; margin:0 0 0 -24px; padding:64px 24px 92px; }
       .loow-archive-followup img,.loow-archive-followup figcaption { width:100%; max-height:none; }
       .federal-record { width:calc(100vw - 48px); margin-left:0; }
@@ -1607,14 +1609,12 @@
                         <h4 id="loow-archive-title">Lake Ontario Ordnance Works</h4>
                       </div>
                     </div>
-                    <figure class="waste-era-survey-map">
-                      <img src="./archive/loow-aerial-01.webp" alt="Black-and-white aerial photograph of buildings, rail lines, and open land at the Lake Ontario Ordnance Works" loading="lazy" decoding="async" />
-                    </figure>
+                    <div class="loow-chapter-history">
+                      <p>Radioactive waste began arriving at LOOW in 1944. For more than four decades, residues remained exposed or loosely stored across buildings, a silo, open grounds, burial areas, and drainage routes. The danger was not confined to the storage area. Part of the former LOOW property housed 275 Lewiston-Porter students, teachers, and staff from 1967 until 1970. A <a href="https://estrip.org/articles/read/libertad/01-2009" target="_blank" rel="noopener noreferrer">published account of a 2002 SAIC survey</a> says the contractor used 8,000 counts per minute as its threshold for further investigation and found one rock behind the elementary school measuring 38,222 CPM. Counts per minute are instrument-dependent, so these figures should not be treated as a universal measure of background radiation. In 1981, tests conducted for the <em>Niagara Gazette</em> found elevated cesium-137 and radium in the liver of one deer shot near LOOW; <a href="https://www.terrain.org/articles/13/hastings.htm" target="_blank" rel="noopener noreferrer">an account of a separate study</a> that year reported abnormalities in 15 of 20 deer captured near the site and elevated radium and cesium in four deer livers. By 1985—one year before the interim containment structure was completed—radioactive residues and contaminated material were still exposed across the site.</p>
+                    </div>
                   </div>
                 </section>
-                <div class="waste-chapter-followup waste-chapter-followup--loow-history">
-                  <p>Radioactive waste began arriving at LOOW in 1944. For more than four decades, residues remained exposed or loosely stored across buildings, a silo, open grounds, burial areas, and drainage routes. The danger was not confined to the storage area. Part of the former LOOW property housed 275 Lewiston-Porter students, teachers, and staff from 1967 until 1970. A <a href="https://estrip.org/articles/read/libertad/01-2009" target="_blank" rel="noopener noreferrer">published account of a 2002 SAIC survey</a> says the contractor used 8,000 counts per minute as its threshold for further investigation and found one rock behind the elementary school measuring 38,222 CPM. Counts per minute are instrument-dependent, so these figures should not be treated as a universal measure of background radiation. In 1981, tests conducted for the <em>Niagara Gazette</em> found elevated cesium-137 and radium in the liver of one deer shot near LOOW; <a href="https://www.terrain.org/articles/13/hastings.htm" target="_blank" rel="noopener noreferrer">an account of a separate study</a> that year reported abnormalities in 15 of 20 deer captured near the site and elevated radium and cesium in four deer livers. By 1985—one year before the interim containment structure was completed—radioactive residues and contaminated material were still exposed across the site.</p>
-                </div>
+
               </section>
             </div>
           </div>
