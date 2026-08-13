@@ -467,6 +467,17 @@
     .waste-chapter-followup--loow-history p { max-width:900px; margin:0 0 1.2em; font-size:clamp(18px,1.35vw,23px); font-style:normal; line-height:1.47; letter-spacing:-.012em; }
     .waste-chapter-followup--loow-history p.loow-history-connector { max-width:760px; margin-left:clamp(24px,6vw,80px); }
     .waste-chapter-followup--loow-history p.loow-history-coda { max-width:680px; margin:clamp(42px,6svh,68px) 0 0 clamp(52px,13vw,180px); }
+    .loow-health-card { width:min(540px,calc(100% - 80px)); margin:clamp(50px,7svh,80px) 0 0 auto; border-top:1px solid rgba(21,23,21,.42); border-bottom:1px solid rgba(21,23,21,.42); }
+    .loow-health-card summary { padding:20px 44px 20px 0; position:relative; cursor:pointer; list-style:none; color:var(--niagara-ink); }
+    .loow-health-card summary::-webkit-details-marker { display:none; }
+    .loow-health-card summary::after { content:'+'; position:absolute; top:20px; right:2px; font:24px/1 Arial,Helvetica,sans-serif; transition:transform .25s ease; }
+    .loow-health-card[open] summary::after { transform:rotate(45deg); }
+    .loow-health-card summary:hover,.loow-health-card summary:focus-visible { color:var(--niagara-red); }
+    .loow-health-card-label { display:block; margin-bottom:10px; font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
+    .loow-health-card-title { display:block; font:400 clamp(22px,2vw,31px)/1.08 Georgia,"Times New Roman",serif; letter-spacing:-.025em; }
+    .loow-health-card-prompt { display:block; margin-top:12px; font:10px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
+    .waste-chapter-followup--loow-history .loow-health-card-body { margin:0; padding:4px 0 24px; }
+    .waste-chapter-followup--loow-history .loow-health-card-body p { margin:0; font:15px/1.55 Arial,Helvetica,sans-serif; letter-spacing:0; color:rgba(21,23,21,.74); }
     .waste-chapter-followup.waste-chapter-followup--loow-history-lead { margin-bottom:0; }
     .waste-chapter-followup.waste-chapter-followup--loow-history-continuation { margin-top:clamp(76px,10svh,120px); }
     
@@ -729,6 +740,8 @@
       .waste-chapter-followup p { max-width:100%; margin-left:0; font-size:clamp(22px,6.4vw,30px); }
       .waste-chapter-followup--loow-history { margin:86px 0 104px; transform:none; }
       .waste-chapter-followup--loow-history p { font-size:clamp(18px,1.35vw,23px); font-style:normal; line-height:1.47; letter-spacing:-.012em; }
+      .loow-health-card { width:100%; margin-top:54px; }
+      .waste-chapter-followup--loow-history p.loow-history-coda { margin-left:0; }
       
       .loow-history-image-placeholder { width:100%; max-width:none; margin:12px 0 42px; position:relative; left:auto; right:auto; float:none; transform:none; }
       .love-canal-threshold { width:calc(100vw - 48px); margin-left:0; }
@@ -1686,7 +1699,16 @@
                   <figure class="loow-history-image-placeholder" aria-hidden="true"><span>Image placeholder</span></figure>
                   <p>Concern extended beyond the waste facilities. In 1981, tests conducted for the <em>Niagara Gazette</em> found elevated cesium-137 and radium in the liver of a deer shot near LOOW. A separate study that year reported abnormalities in 15 of 20 deer captured nearby and elevated radium and cesium in four deer livers.</p>
                   <p>About 1.5 miles west of NFSS, the Lewiston-Porter school campus serves roughly 2,100 students from pre-kindergarten through 12th grade. The campus lies immediately west of the former LOOW boundary. A former 30-inch LOOW outfall line crossed school property. As part of its investigation of the former LOOW property, the Army Corps surveyed the school grounds in 2002. Readings above 8,000 counts per minute required further investigation. One rock behind the elementary school registered 38,222 CPM—nearly five times that trigger.</p>
-                  <p>A 2008 <a href="https://www.health.ny.gov/environmental/investigations/lewiston/docs/lewiston_cancer_report.pdf" target="_blank" rel="noopener">New York State Department of Health investigation</a> examined cancer incidence in communities surrounding NFSS and the former LOOW property. It found more cases than expected in several categories. Childhood cancer in the Lewiston-Porter School District was about 80 percent higher than expected, a statistically significant excess. The investigation could not identify a cause. It therefore cannot prove that LOOW or CWM caused the excess—but that limitation does not erase the excess the investigation recorded.</p>
+                  <details class="loow-health-card">
+                    <summary>
+                      <span class="loow-health-card-label">2008 health investigation</span>
+                      <span class="loow-health-card-title">Childhood cancer was approximately 80% higher than expected in the Lewiston-Porter School District.</span>
+                      <span class="loow-health-card-prompt">Read the findings</span>
+                    </summary>
+                    <div class="loow-health-card-body">
+                      <p>A 2008 <a href="https://www.health.ny.gov/environmental/investigations/lewiston/docs/lewiston_cancer_report.pdf" target="_blank" rel="noopener">New York State Department of Health investigation</a> examined cancer incidence in communities surrounding NFSS and the former LOOW property. It found more cases than expected in several categories. Childhood cancer in the Lewiston-Porter School District was about 80 percent higher than expected, a statistically significant excess. The investigation could not identify a cause. It therefore cannot prove that LOOW or CWM caused the excess—but that limitation does not erase the excess the investigation recorded.</p>
+                    </div>
+                  </details>
                   <p class="loow-history-coda"><em>But this investigation revealed only a small piece of the larger story.</em></p>
                 </div>
 
