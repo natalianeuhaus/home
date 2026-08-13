@@ -3,6 +3,7 @@
 const film = document.getElementById("waste-film");
 const progressBar = document.getElementById("film-progress-bar");
 const sceneCounter = document.getElementById("scene-counter");
+const pauseButton = document.getElementById("film-pause");
 const sceneElements = Array.from(document.querySelectorAll(".scene"));
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -120,11 +121,19 @@ const scenes = [
 ];
 
 const totalDuration = scenes.reduce((sum, scene) => sum + scene.duration, 0);
-let sceneIndex = 0;
-let sceneTimer = 0;
+let sceneIndex = -1;
 let progressFrame = 0;
 let startTime = 0;
 let elapsedBeforeStart = 0;
+let isPaused = false;
+let isFinished = false;
+
+function focusNiagara(duration = 6) {
+  map.flyTo(niagaraFocus, niagaraZoom, {
+    duration,
+    easeLinearity: 0.16
+  });
+}
 
 function showScene(index) {
   sceneIndex = Math.max(0, Math.min(index, scenes.length - 1));
@@ -136,41 +145,93 @@ function showScene(index) {
   sceneCounter.textContent = `${String(sceneIndex + 1).padStart(2, "0")} / ${String(scenes.length).padStart(2, "0")}`;
 
   if (scene.name === "solid" && !reducedMotion) {
-    map.flyTo(niagaraFocus, niagaraZoom, {
-      duration: 6,
-      easeLinearity: 0.16
-    });
+    focusNiagara();
   }
+}
+
+function getSceneIndex(elapsed) {
+  let sceneEnd = 0;
+  for (let index = 0; index < scenes.length; index += 1) {
+    sceneEnd += scenes[index].duration;
+    if (elapsed < sceneEnd) return index;
+  }
+  return scenes.length - 1;
+}
+
+function getElapsed(timestamp = performance.now()) {
+  const activeElapsed = startTime ? timestamp - startTime : 0;
+  return Math.min(totalDuration, elapsedBeforeStart + activeElapsed);
+}
+
+function setPauseButton(paused) {
+  pauseButton.textContent = paused ? "Play" : "Pause";
+  pauseButton.setAttribute("aria-label", paused ? "Resume animation" : "Pause animation");
+  pauseButton.setAttribute("aria-pressed", String(paused));
 }
 
 function updateProgress(timestamp) {
   if (!startTime) startTime = timestamp;
-  const elapsed = Math.min(totalDuration, elapsedBeforeStart + (timestamp - startTime));
+  const elapsed = getElapsed(timestamp);
   progressBar.style.width = `${(elapsed / totalDuration) * 100}%`;
-  if (elapsed < totalDuration) progressFrame = window.requestAnimationFrame(updateProgress);
+  const nextSceneIndex = getSceneIndex(elapsed);
+  if (nextSceneIndex !== sceneIndex) showScene(nextSceneIndex);
+
+  if (elapsed < totalDuration && !isPaused) {
+    progressFrame = window.requestAnimationFrame(updateProgress);
+  } else if (elapsed >= totalDuration) {
+    isFinished = true;
+    pauseButton.textContent = "Finished";
+    pauseButton.setAttribute("aria-label", "Animation finished");
+    pauseButton.disabled = true;
+  }
 }
 
-function playFrom(index) {
-  window.clearTimeout(sceneTimer);
-  showScene(index);
-  if (index >= scenes.length - 1) return;
-  sceneTimer = window.setTimeout(() => playFrom(index + 1), scenes[index].duration);
+function pauseFilm() {
+  if (isPaused || isFinished || reducedMotion) return;
+  elapsedBeforeStart = getElapsed();
+  startTime = 0;
+  isPaused = true;
+  film.classList.add("is-paused");
+  window.cancelAnimationFrame(progressFrame);
+  map.stop();
+  setPauseButton(true);
+}
+
+function resumeFilm() {
+  if (!isPaused || isFinished || reducedMotion) return;
+  isPaused = false;
+  film.classList.remove("is-paused");
+  setPauseButton(false);
+
+  if (scenes[sceneIndex].name === "solid" && map.getZoom() < niagaraZoom - 0.01) {
+    const solidStart = scenes.slice(0, sceneIndex).reduce((sum, scene) => sum + scene.duration, 0);
+    const remainingSeconds = Math.max(1, (solidStart + scenes[sceneIndex].duration - elapsedBeforeStart) / 1000);
+    focusNiagara(Math.min(6, remainingSeconds));
+  }
+
+  progressFrame = window.requestAnimationFrame(updateProgress);
 }
 
 function startFilm() {
   if (reducedMotion) {
     showScene(scenes.length - 1);
     progressBar.style.width = "100%";
+    pauseButton.hidden = true;
     return;
   }
-  playFrom(0);
+  pauseButton.disabled = false;
+  showScene(0);
   progressFrame = window.requestAnimationFrame(updateProgress);
 }
 
+pauseButton.addEventListener("click", () => {
+  if (isPaused) resumeFilm();
+  else pauseFilm();
+});
+
 document.addEventListener("visibilitychange", () => {
   if (!document.hidden || reducedMotion) return;
-  window.clearTimeout(sceneTimer);
-  window.cancelAnimationFrame(progressFrame);
+  pauseFilm();
 });
 
 window.addEventListener("load", () => {

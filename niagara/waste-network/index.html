@@ -7,7 +7,7 @@
   <meta name="description" content="A short animated map of solid and liquid radioactive-waste pathways across Niagara and Erie Counties.">
   <link rel="preconnect" href="https://unpkg.com">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
-  <link rel="stylesheet" href="styles.css?v=waste-network-v2">
+  <link rel="stylesheet" href="styles.css?v=waste-network-v3">
 </head>
 <body>
   <main class="waste-film" id="waste-film" data-scene="intro">
@@ -36,10 +36,22 @@
         <div class="detector-signal"><i></i><i></i><i></i></div>
       </div>
       <div class="reuse-vignette">
-        <div class="reuse-origin"><i></i><span>Excavated slag or fill</span></div>
-        <div class="reuse-route"><i></i></div>
-        <div class="reuse-destination"><i></i><span>Another property or project</span></div>
-        <p>May never enter a monitored landfill</p>
+        <p class="reuse-heading">One possible unmonitored route</p>
+        <div class="reuse-flow">
+          <div class="reuse-stop reuse-origin">
+            <i></i>
+            <span><b>1</b><strong>Excavated slag or fill</strong></span>
+          </div>
+          <div class="reuse-transfer">
+            <span>Transported directly</span>
+            <div class="reuse-route"><i></i></div>
+            <small>No landfill radiation screen</small>
+          </div>
+          <div class="reuse-stop reuse-destination">
+            <i></i>
+            <span><b>2</b><strong>Reused at another property or project</strong></span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -95,6 +107,7 @@
     <footer class="film-footer">
       <div class="film-progress"><i id="film-progress-bar"></i></div>
       <p id="scene-counter">01 / 07</p>
+      <button class="film-pause" id="film-pause" type="button" aria-label="Pause animation" aria-pressed="false" disabled>Pause</button>
       <p class="film-source">Sources: 6 NYCRR 363-7.1(a)(5) and 360.13(e) · Locations shown for regional context</p>
     </footer>
 
@@ -104,6 +117,6 @@
   </main>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-  <script src="app.js?v=waste-network-v2"></script>
+  <script src="app.js?v=waste-network-v3"></script>
 </body>
 </html>
