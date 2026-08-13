@@ -298,8 +298,25 @@
 
     /* Atomic Niagara permanent X-ray treatment */
     #atomic-niagara > .atomic-xray-sequence {
+      height:100svh;
+      min-height:640px;
       position:relative;
+      display:grid;
+      grid-template-rows:minmax(280px,.52fr) minmax(300px,.48fr);
+      overflow:hidden;
       isolation:isolate;
+    }
+    #atomic-niagara > .atomic-xray-sequence > .atomic-niagara-hero {
+      height:100%;
+      min-height:0;
+    }
+    #atomic-niagara > .atomic-xray-sequence > .atomic-evidence-mosaic {
+      height:100%;
+      min-height:0;
+    }
+    #atomic-niagara > .atomic-xray-sequence > .atomic-evidence-mosaic .atomic-evidence-grid {
+      height:100%;
+      min-height:0;
     }
     #atomic-niagara > .atomic-xray-sequence > .atomic-niagara-hero,
     #atomic-niagara > .atomic-xray-sequence > .atomic-evidence-mosaic {
@@ -645,6 +662,10 @@
     .chapter-one-coda figcaption { padding:10px 0 0; display:flex; justify-content:space-between; gap:24px; color:rgba(21,23,21,.52); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
     body:has(.atomic-evidence-viewer[open]),body:has(.atomic-reference-viewer[open]) { overflow:hidden; }
     @media (max-width:820px) {
+      #atomic-niagara > .atomic-xray-sequence { height:auto; min-height:0; display:block; overflow:visible; }
+      #atomic-niagara > .atomic-xray-sequence > .atomic-niagara-hero { height:auto; min-height:calc(100svh - 58px); }
+      #atomic-niagara > .atomic-xray-sequence > .atomic-evidence-mosaic { height:auto; }
+      #atomic-niagara > .atomic-xray-sequence > .atomic-evidence-mosaic .atomic-evidence-grid { height:auto; }
       .atomic-niagara-hero { height:auto; min-height:calc(100svh - 58px); grid-template-columns:1fr; grid-template-rows:minmax(250px,.42fr) minmax(300px,.58fr); }
       .atomic-niagara-title { padding:48px 24px 40px; }
       .atomic-niagara-title h3 { font-size:clamp(44px,14vw,68px); }
