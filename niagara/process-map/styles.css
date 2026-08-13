@@ -217,10 +217,11 @@ button { font: inherit; }
 
 .story-controls {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 18px;
+  grid-template-columns: auto auto auto;
+  gap: clamp(30px, 3vw, 48px);
   align-items: center;
-  width: min(380px, 100%);
+  justify-content: center;
+  width: 100%;
   margin: 32px auto 0;
   padding-top: 0;
 }
