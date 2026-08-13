@@ -216,7 +216,7 @@ if (embeddedSlideIndex >= 0) {
   });
   sceneCounter.textContent = `${String(requestedSlide).padStart(2, "0")} / ${String(allScenes.length).padStart(2, "0")}`;
   const durationLabel = document.querySelector(".film-header span:last-child");
-  if (durationLabel) durationLabel.textContent = `Waste movement · Slide ${String(requestedSlide).padStart(2, "0")} of ${String(allScenes.length).padStart(2, "0")}`;
+  if (durationLabel) durationLabel.textContent = "Waste movement · Animated map";
 }
 
 const totalDuration = scenes.reduce((sum, scene) => sum + scene.duration, 0);
@@ -308,9 +308,14 @@ function updateProgress(timestamp) {
     progressFrame = window.requestAnimationFrame(updateProgress);
   } else if (elapsed >= totalDuration) {
     isFinished = true;
-    pauseButton.textContent = "Finished";
-    pauseButton.setAttribute("aria-label", "Animation finished");
-    pauseButton.disabled = true;
+    isPaused = true;
+    startTime = 0;
+    elapsedBeforeStart = totalDuration;
+    film.classList.add("is-paused");
+    pauseButton.textContent = "Play";
+    pauseButton.setAttribute("aria-label", "Replay animation");
+    pauseButton.setAttribute("aria-pressed", "true");
+    pauseButton.disabled = false;
   }
 }
 
@@ -343,6 +348,22 @@ function resumeFilm() {
   progressFrame = window.requestAnimationFrame(updateProgress);
 }
 
+function restartFilm() {
+  window.cancelAnimationFrame(progressFrame);
+  elapsedBeforeStart = 0;
+  startTime = 0;
+  isFinished = false;
+  isPaused = false;
+  film.classList.remove("is-paused");
+  film.dataset.scene = "loading";
+  void film.offsetWidth;
+  showScene(0);
+  progressBar.style.width = "0%";
+  pauseButton.disabled = false;
+  setPauseButton(false);
+  progressFrame = window.requestAnimationFrame(updateProgress);
+}
+
 function jumpToScene(index) {
   const targetIndex = Math.max(0, Math.min(index, scenes.length - 1));
   window.cancelAnimationFrame(progressFrame);
@@ -372,7 +393,8 @@ function startFilm() {
 }
 
 pauseButton.addEventListener("click", () => {
-  if (isPaused) resumeFilm();
+  if (isFinished) restartFilm();
+  else if (isPaused) resumeFilm();
   else pauseFilm();
 });
 
