@@ -463,7 +463,7 @@
     .waste-chapter-followup p { max-width:760px; margin:0 0 0 80px; color:rgba(21,23,21,.82); font-family:Georgia,"Times New Roman",serif; font-size:clamp(23px,1.9vw,32px); font-style:italic; line-height:1.36; letter-spacing:-.018em; }
     .waste-chapter-followup--loow-history { width:min(900px,100%); margin:clamp(86px,12svh,150px) 0 clamp(110px,15svh,180px); margin-left:0; position:relative; display:flow-root; transform:translateX(calc(-1 * (min(1540px,calc(100vw - 84px)) - 950px))); }
     .waste-chapter-followup--loow-history p { max-width:900px; margin:0 0 1.2em; font-size:clamp(18px,1.35vw,23px); font-style:normal; line-height:1.47; letter-spacing:-.012em; }
-    .waste-chapter-followup--loow-history p.loow-history-emphasis { max-width:660px; color:rgba(21,23,21,.82); font-family:Georgia,"Times New Roman",serif; font-size:clamp(23px,1.9vw,32px); font-style:italic; line-height:1.36; letter-spacing:-.018em; }
+    
     .loow-history-image-placeholder { width:min(360px,22vw); aspect-ratio:4 / 3; margin:12px 0 48px; position:absolute; z-index:2; left:calc(100% + clamp(12px,1.5vw,28px)); right:auto; float:none; display:grid; transform:translateY(-100px); place-items:center; border:1px solid rgba(21,23,21,.28); background:rgba(21,23,21,.045); color:rgba(21,23,21,.48); font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.15em; text-transform:uppercase; }
     .waste-chapter-followup p a { color:inherit; text-decoration-line:underline; text-decoration-thickness:1px; text-underline-offset:.16em; }
     .waste-chapter-followup p a:hover,.waste-chapter-followup p a:focus-visible { color:var(--niagara-red); }
@@ -514,7 +514,9 @@
     .losa-scroll-definition small { padding-top:1px; color:rgba(21,23,21,.48); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.11em; text-align:right; text-transform:uppercase; white-space:nowrap; }
     .losa-scroll-copy { width:100%; max-width:720px; position:sticky; z-index:2; top:clamp(118px,15svh,168px); right:auto; left:auto; align-self:start; margin:0; padding:clamp(10px,1vw,18px) 0 clamp(18px,2vw,30px) clamp(34px,4vw,66px); box-sizing:border-box; display:flex; flex-direction:column; justify-content:flex-start; color:var(--niagara-ink); background:transparent; border-left:1px solid var(--love-canal-red); box-shadow:none; }
     .losa-scroll-copy .losa-scroll-context { margin:0 0 clamp(26px,3.5svh,40px) !important; padding-bottom:clamp(24px,3svh,34px); border-bottom:1px solid rgba(68,8,6,.24); color:rgba(21,23,21,.64); font:clamp(15px,1.12vw,18px)/1.55 Arial,Helvetica,sans-serif !important; letter-spacing:.005em !important; text-transform:none; }
-    .losa-scroll-copy .losa-scroll-quote { margin:0 !important; max-width:660px; color:rgba(21,23,21,.82); font-family:Georgia,"Times New Roman",serif !important; font-size:clamp(23px,1.9vw,32px) !important; font-style:italic; line-height:1.36 !important; letter-spacing:-.018em !important; }
+    .losa-scroll-copy .losa-scroll-quote,
+    .waste-chapter-followup--loow-history p.loow-history-emphasis { margin:0 !important; max-width:660px; color:rgba(21,23,21,.82); font-family:Georgia,"Times New Roman",serif !important; font-size:clamp(23px,1.9vw,32px) !important; font-style:italic; line-height:1.36 !important; letter-spacing:-.018em !important; }
+    .waste-chapter-followup--loow-history p.loow-history-emphasis { margin-bottom:1.2em !important; }
     .losa-scroll-source { margin-top:clamp(18px,2.4svh,28px); display:block; color:var(--love-canal-red); font:9px/1.4 Arial,Helvetica,sans-serif; font-style:normal; letter-spacing:.14em; text-transform:uppercase; }
     .losa-scroll-report-link { width:max-content; margin-top:clamp(20px,2.5svh,30px); padding:14px 0 4px; color:var(--love-canal-red); border-top:1px solid rgba(68,8,6,.24); border-bottom:1px solid currentColor; font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.14em; text-decoration:none; text-transform:uppercase; }
     .losa-scroll-report-link:hover,.losa-scroll-report-link:focus-visible { color:var(--niagara-ink); }
@@ -720,7 +722,7 @@
       .waste-chapter-followup p { max-width:100%; margin-left:0; font-size:clamp(22px,6.4vw,30px); }
       .waste-chapter-followup--loow-history { margin:86px 0 104px; transform:none; }
       .waste-chapter-followup--loow-history p { font-size:clamp(18px,1.35vw,23px); font-style:normal; line-height:1.47; letter-spacing:-.012em; }
-      .waste-chapter-followup--loow-history p.loow-history-emphasis { font-size:clamp(22px,6.4vw,30px); }
+      
       .loow-history-image-placeholder { width:100%; max-width:none; margin:12px 0 42px; position:relative; left:auto; right:auto; float:none; transform:none; }
       .love-canal-threshold { width:calc(100vw - 48px); margin-left:0; }
       .love-canal-image-shell { height:auto; min-height:0; aspect-ratio:2048 / 1329; }
@@ -736,7 +738,8 @@
       .losa-scroll-definition { grid-template-columns:1fr; gap:12px; }
       .losa-scroll-definition small { text-align:left; }
       .losa-scroll-copy { width:calc(100% - 24px); max-width:none; position:relative; top:auto; right:auto; left:auto; margin:38px 0 0 24px; padding:0 0 10px 22px; }
-      .losa-scroll-copy .losa-scroll-quote { font-size:clamp(22px,6.4vw,30px) !important; }
+      .losa-scroll-copy .losa-scroll-quote,
+      .waste-chapter-followup--loow-history p.loow-history-emphasis { font-size:clamp(22px,6.4vw,30px) !important; }
       .loow-chapter-marker { margin-top:120px; }
       .loow-chapter-marker .waste-era-survey-copy { width:100%; min-height:52svh; }
       .loow-chapter-marker .waste-era-survey-map { width:100%; min-height:62svh; inset:auto; background:#090909; }
