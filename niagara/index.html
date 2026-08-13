@@ -367,6 +367,8 @@
       .atomic-process-reveal { width:calc(100% - 36px); margin:88px 18px 78px; padding-left:22px; }
       .atomic-process-reveal p { font-size:clamp(27px,8vw,40px); }
     }
+    .atomic-process-map { width:calc(100vw - (50vw - 50%)); max-width:none; margin:clamp(74px,10svh,120px) 0 clamp(22px,3svh,38px); }
+    .atomic-process-map-frame { width:100%; height:min(86svh,940px); min-height:720px; display:block; border:1px solid var(--niagara-line); background:var(--niagara-paper); }
     .atomic-process-reference { width:calc(100vw - (50vw - 50%)); max-width:none; margin:clamp(38px,5svh,58px) 0 clamp(192px,calc(13svh + 100px),256px); display:grid; grid-template-columns:minmax(420px,.96fr) minmax(0,1.04fr); align-items:stretch; background:rgba(68,8,6,.055); overflow:hidden; }
     .atomic-process-reference-copy { min-width:0; padding:clamp(28px,3.2vw,46px); display:flex; flex-direction:column; justify-content:center; }
     .atomic-process-reference-label { display:block; margin:0 0 12px; color:var(--niagara-red); font:9px/1.3 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
@@ -648,6 +650,8 @@
       .atomic-process-number { grid-column:1; grid-row:1 / 3; margin:7px 0 0; }
       .atomic-process-title,.atomic-process-location { grid-column:2; }
       .atomic-process-location { margin-top:9px; }
+      .atomic-process-map { width:100%; margin:58px 0 28px; }
+      .atomic-process-map-frame { height:108svh; min-height:900px; }
       .atomic-process-reference { width:100%; margin-bottom:clamp(132px,19svh,182px); grid-template-columns:1fr; }
       .atomic-process-reference-media { min-height:260px; }
       .atomic-process-reference-comparison { grid-template-columns:1fr; gap:12px; }
@@ -1440,6 +1444,16 @@
               </ol>
             </div>
           </div>
+
+          <section class="atomic-process-map" aria-label="Interactive map: The Uranium Route">
+            <iframe
+              class="atomic-process-map-frame"
+              src="./process-map/?embed=chapter-one"
+              title="The Uranium Route interactive map"
+              loading="lazy"
+              allowfullscreen
+            ></iframe>
+          </section>
 
           <aside class="atomic-process-reference" aria-label="Historical Fernald uranium-production film">
             <button class="atomic-process-reference-media" type="button" data-reference-film-open aria-label="Watch Production of Uranium Feed Materials">
