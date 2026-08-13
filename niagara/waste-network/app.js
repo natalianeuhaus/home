@@ -108,7 +108,8 @@ const regionalBounds = L.latLngBounds([
   [42.79, -79.18],
   [43.29, -78.61]
 ]);
-const sourceBounds = L.latLngBounds(sites.map(site => site.point)).pad(0.1);
+const sourceBounds = L.latLngBounds(sites.map(site => site.point)).pad(0.02);
+const sourceFocus = [43.03, window.innerWidth < 1600 ? -79.13 : -79.07];
 const niagaraFocus = window.innerWidth < 900
   ? [43.095, -79.005]
   : [43.095, -79.04];
@@ -127,7 +128,10 @@ map.fitBounds(regionalBounds, {
 });
 
 const regionalZoom = map.getZoom();
-const sourceZoom = regionalZoom + 0.75;
+const sourceZoom = Math.min(
+  map.getBoundsZoom(sourceBounds, false, [60, 100]) + 0.25,
+  window.innerHeight < 1000 ? 11 : 11.25
+);
 const niagaraZoom = Math.min(Math.max(
   regionalZoom + Math.log2(10),
   window.innerWidth < 900 ? 13.25 : 14.25
@@ -169,9 +173,17 @@ let isPaused = false;
 let isFinished = false;
 
 function focusSources(duration = 2.8) {
+  if (window.innerWidth >= 900) {
+    map.flyTo(sourceFocus, sourceZoom, {
+      duration,
+      easeLinearity: 0.18
+    });
+    return;
+  }
+
   map.flyToBounds(sourceBounds, {
-    paddingTopLeft: [window.innerWidth < 900 ? 24 : Math.round(window.innerWidth * .5), 85],
-    paddingBottomRight: [window.innerWidth < 900 ? 34 : 150, 70],
+    paddingTopLeft: [24, 85],
+    paddingBottomRight: [34, 70],
     maxZoom: sourceZoom,
     duration,
     easeLinearity: 0.18

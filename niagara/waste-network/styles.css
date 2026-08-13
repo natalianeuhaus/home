@@ -51,16 +51,16 @@ body { overflow: hidden; color: var(--ink); background: var(--paper); font-famil
 .waste-site--disposal i { border-radius: 2px; background: var(--beige); }
 .waste-site b { min-width: max-content; position: absolute; z-index: 12; left: 22px; top: -3px; padding: 5px 7px; color: var(--ink); background: var(--paper); box-shadow: 0 2px 10px rgba(17,17,15,.12); font-size: 9px; line-height: 1.25; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
 .waste-site small { display: block; margin-top: 3px; color: var(--muted); font-size: 8px; font-weight: 400; letter-spacing: .04em; }
-.waste-site--label-top-left b { left: auto; right: 22px; top: -18px; text-align: right; }
-.waste-site--label-bottom-left b { left: auto; right: 22px; top: 15px; text-align: right; }
+.waste-site--label-top-left b { left: auto; right: calc(100% - 12px); top: -18px; text-align: right; }
+.waste-site--label-bottom-left b { left: auto; right: calc(100% - 12px); top: 15px; text-align: right; }
 .waste-site--label-bottom-right b { left: 22px; top: 15px; }
 .waste-film[data-scene="sources"] .waste-site[data-order="2"] b { left: 28px; right: auto; top: -42px; text-align: left; }
-.waste-film[data-scene="sources"] .waste-site[data-order="3"] b { left: auto; right: 28px; top: 30px; text-align: right; }
-.waste-film[data-scene="sources"] .waste-site[data-order="4"] b { left: auto; right: 28px; top: -42px; text-align: right; }
+.waste-film[data-scene="sources"] .waste-site[data-order="3"] b { left: auto; right: calc(100% - 12px); top: 30px; text-align: right; }
+.waste-film[data-scene="sources"] .waste-site[data-order="4"] b { left: auto; right: calc(100% - 12px); top: -42px; text-align: right; }
 .waste-film[data-scene="sources"] .waste-site[data-order="8"] b { left: 28px; right: auto; top: 30px; text-align: left; }
-.waste-film[data-scene="sources"] .waste-site[data-order="9"] b { left: auto; right: 28px; top: -42px; text-align: right; }
-.waste-film[data-scene="sources"] .waste-site[data-order="10"] b { left: 28px; right: auto; top: -42px; text-align: left; }
-.waste-film[data-scene="sources"] .waste-site[data-order="11"] b { left: 28px; right: auto; top: 30px; text-align: left; }
+.waste-film[data-scene="sources"] .waste-site[data-order="9"] b { left: 28px; right: auto; top: -98px; text-align: left; }
+.waste-film[data-scene="sources"] .waste-site[data-order="10"] b { left: 28px; right: auto; top: -43px; text-align: left; }
+.waste-film[data-scene="sources"] .waste-site[data-order="11"] b { left: 28px; right: auto; top: 18px; text-align: left; }
 .waste-film[data-scene="sources"] .waste-site { opacity: 1; transform: translate3d(0,0,0); }
 .waste-film[data-scene="solid"] .waste-site { opacity: .5; transform: translate3d(0,0,0); }
 .waste-film[data-scene="water"] .waste-site,
