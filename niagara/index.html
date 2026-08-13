@@ -560,9 +560,9 @@
     .waste-video-copy p { margin:0; max-width:520px; color:rgba(21,23,21,.72); font:clamp(15px,1.12vw,19px)/1.52 Arial,Helvetica,sans-serif; letter-spacing:0; }
     .waste-video-copy p + p { margin-top:1em; }
     .waste-video-media { min-height:0; aspect-ratio:16 / 9; grid-area:media; }
-    .waste-section--loow-film { width:100vw; max-width:none; margin:clamp(58px,8svh,92px) 0 0 calc(50% - 50vw); padding-top:0; border-top:0; box-sizing:border-box; }
-    .waste-section--loow-film .atomic-process-reference-label { width:100%; margin:0 0 50px; padding-left:6px; }
-    .waste-section--loow-film .atomic-process-reference { width:100%; margin:0; }
+    .waste-section--loow-film { width:100%; max-width:none; margin:clamp(58px,8svh,92px) 0 0; padding-top:0; border-top:0; box-sizing:border-box; }
+    .waste-section--loow-film .atomic-process-reference-label { margin:0 0 50px; }
+    .waste-section--loow-film .atomic-process-reference { margin-bottom:0; }
     .iwcs-afterword { margin-top:clamp(72px,9svh,112px); padding:0; display:grid; grid-template-columns:minmax(360px,.78fr) minmax(0,1.22fr); gap:0; align-items:stretch; border-top:1px solid rgba(68,8,6,.18); background:rgba(241,240,234,.94); overflow:hidden; }
     .iwcs-afterword-copy { max-width:none; padding:clamp(38px,4.8vw,72px); display:flex; flex-direction:column; justify-content:center; }
     .iwcs-afterword h5 { margin:0 0 22px; font-size:clamp(32px,3.3vw,54px); line-height:.98; font-weight:400; letter-spacing:-.043em; }
@@ -750,7 +750,6 @@
       .waste-video-block { grid-template-areas:"media" "copy"; }
       .waste-video-media { min-height:54vw; }
       .waste-section--loow-film { width:calc(100vw - 48px); margin-left:0; }
-      .waste-section--loow-film .atomic-process-reference-label { padding-left:0; }
       .iwcs-afterword { grid-template-columns:1fr; gap:0; margin-top:48px; }
       .iwcs-afterword-copy { padding:32px 24px 38px; }
       .iwcs-afterword-figure { padding:24px; }
@@ -1626,35 +1625,37 @@
                   <p>Radioactive waste began arriving at LOOW in 1944. For more than four decades, residues remained exposed or loosely stored across buildings, a silo, open grounds, burial areas, and drainage routes. The danger was not confined to the storage area. Part of the former LOOW property housed 275 Lewiston-Porter students, teachers, and staff from 1967 until 1970. A published account of a 2002 SAIC survey says the contractor used 8,000 counts per minute as its threshold for further investigation and found one rock behind the elementary school measuring 38,222 CPM. Counts per minute are instrument-dependent, so these figures should not be treated as a universal measure of background radiation. In 1981, tests conducted for the <em>Niagara Gazette</em> found elevated cesium-137 and radium in the liver of one deer shot near LOOW; an account of a separate study that year reported abnormalities in 15 of 20 deer captured near the site and elevated radium and cesium in four deer livers. By 1985—one year before the interim containment structure was completed—radioactive residues and contaminated material were still exposed across the site.</p>
                 </div>
 
-                <section class="waste-section waste-section--loow-film" id="waste-loow">
-                  <span class="atomic-process-reference-label">Archival film · Lake Ontario Ordnance Works · 1985</span>
-                  <aside class="atomic-process-reference" id="waste-loow-film" aria-label="Historical Lake Ontario Ordnance Works film">
-                    <button class="atomic-process-reference-media" type="button" data-loow-film-open aria-label="Watch archival footage of the Lake Ontario Ordnance Works before containment">
-                      <img src="./archive/loow-1985-restored-poster.webp" alt="Restored archival aerial frame of the former Lake Ontario Ordnance Works in 1985, with an orange arrow marking an area on the grounds" loading="lazy" decoding="async" />
-                      <span class="atomic-process-reference-play" aria-hidden="true">▶</span>
-                      <span class="atomic-process-reference-caption">Lake Ontario Ordnance Works · U.S. Army Corps of Engineers · 1985</span>
-                    </button>
-                    <div class="atomic-process-reference-copy">
-                      <h4>Before containment</h4>
-                      <p>U.S. Army Corps of Engineers footage records LOOW in 1985, one year before the Department of Energy consolidated the material into the interim waste containment structure.</p>
-                    </div>
-                  </aside>
 
-<aside class="iwcs-afterword" aria-labelledby="iwcs-afterword-title">
-                    <div class="iwcs-afterword-copy">
-                      <h5 id="iwcs-afterword-title">An “interim” structure</h5>
-                      <p>At the Lake Ontario Ordnance Works, radioactive residues and waste remained stored in buildings, a silo, and open fields until the U.S. Department of Energy consolidated them inside the interim waste containment structure (IWCS) in 1986. Federal planning documents later estimated that the ten-acre cell held approximately 193,230 cubic yards of radioactive residues and waste.</p>
-                      <p>“Interim” matters. The cell was given an anticipated 25-year life, carrying it only to about 2011. In 2026, it remains in use—approximately 15 years beyond that original horizon. It has a compacted-clay cover, but no constructed liner beneath it. For comparison—not equivalence—the sarcophagus enclosing Chornobyl’s destroyed Unit 4 contains an estimated 200 tonnes of nuclear fuel.</p>
-                    </div>
-                    <figure class="iwcs-afterword-figure">
-                      <img src="./archive/nfss-iwcs-conceptual-design.jpg" alt="Conceptual cross-section of the Niagara Falls Storage Site interim waste containment structure, showing its clay cover, sand and riprap layers, dikes, cutoff walls, buried wastes, residues, and contamination beneath the original grade" loading="lazy" decoding="async" />
-                      <figcaption>Conceptual cross-section for long-term management of NFSS wastes and residues · Figure 2.3 · vertical scale exaggerated.</figcaption>
-                    </figure>
-                  </aside>
-      </section>
               </section>
             </div>
           </div>
+
+          <section class="waste-section waste-section--loow-film" id="waste-loow">
+            <span class="atomic-process-reference-label">Archival film · Lake Ontario Ordnance Works · 1985</span>
+            <aside class="atomic-process-reference" id="waste-loow-film" aria-label="Historical Lake Ontario Ordnance Works film">
+              <button class="atomic-process-reference-media" type="button" data-loow-film-open aria-label="Watch archival footage of the Lake Ontario Ordnance Works before containment">
+                <img src="./archive/loow-1985-restored-poster.webp" alt="Restored archival aerial frame of the former Lake Ontario Ordnance Works in 1985, with an orange arrow marking an area on the grounds" loading="lazy" decoding="async" />
+                <span class="atomic-process-reference-play" aria-hidden="true">▶</span>
+                <span class="atomic-process-reference-caption">Lake Ontario Ordnance Works · U.S. Army Corps of Engineers · 1985</span>
+              </button>
+              <div class="atomic-process-reference-copy">
+                <h4>Before containment</h4>
+                <p>U.S. Army Corps of Engineers footage records LOOW in 1985, one year before the Department of Energy consolidated the material into the interim waste containment structure.</p>
+              </div>
+            </aside>
+
+<aside class="iwcs-afterword" aria-labelledby="iwcs-afterword-title">
+              <div class="iwcs-afterword-copy">
+                <h5 id="iwcs-afterword-title">An “interim” structure</h5>
+                <p>At the Lake Ontario Ordnance Works, radioactive residues and waste remained stored in buildings, a silo, and open fields until the U.S. Department of Energy consolidated them inside the interim waste containment structure (IWCS) in 1986. Federal planning documents later estimated that the ten-acre cell held approximately 193,230 cubic yards of radioactive residues and waste.</p>
+                <p>“Interim” matters. The cell was given an anticipated 25-year life, carrying it only to about 2011. In 2026, it remains in use—approximately 15 years beyond that original horizon. It has a compacted-clay cover, but no constructed liner beneath it. For comparison—not equivalence—the sarcophagus enclosing Chornobyl’s destroyed Unit 4 contains an estimated 200 tonnes of nuclear fuel.</p>
+              </div>
+              <figure class="iwcs-afterword-figure">
+                <img src="./archive/nfss-iwcs-conceptual-design.jpg" alt="Conceptual cross-section of the Niagara Falls Storage Site interim waste containment structure, showing its clay cover, sand and riprap layers, dikes, cutoff walls, buried wastes, residues, and contamination beneath the original grade" loading="lazy" decoding="async" />
+                <figcaption>Conceptual cross-section for long-term management of NFSS wastes and residues · Figure 2.3 · vertical scale exaggerated.</figcaption>
+              </figure>
+            </aside>
+          </section>
         </section>
 
         <section class="investigation-chapter radioactive-waste-chapter" id="radioactive-waste">
