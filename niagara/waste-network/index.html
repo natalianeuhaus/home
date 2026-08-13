@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Where the Waste Moved — Greetings from Niagara</title>
+  <meta name="description" content="A short animated map of solid and liquid radioactive-waste pathways across Niagara and Erie Counties.">
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <link rel="stylesheet" href="styles.css?v=waste-network-v1">
+</head>
+<body>
+  <main class="waste-film" id="waste-film" data-scene="intro">
+    <div class="map-stage" aria-hidden="true">
+      <div id="waste-map" class="waste-map"></div>
+      <div class="map-wash"></div>
+      <div class="regional-field">
+        <span>Parts of Niagara and Erie Counties</span>
+        <small>Regional field—not individual properties</small>
+      </div>
+      <div class="water-pathways">
+        <div class="water-heading">
+          <span>Liquid and process waste</span>
+          <strong>Three disposal pathways</strong>
+        </div>
+        <div class="water-kind water-kind--well"><i></i><p><strong>Disposal wells</strong><span>Waste placed underground</span></p></div>
+        <div class="water-kind water-kind--sewer"><i></i><p><strong>Sewers</strong><span>Industrial effluent left the factory</span></p></div>
+        <div class="water-kind water-kind--surface"><i></i><p><strong>Creeks and rivers</strong><span>Surface water carried releases onward</span></p></div>
+        <small class="water-note">Documented systems—not reconstructed routes</small>
+      </div>
+      <div class="screening-vignette">
+        <div class="screening-title"><span>Covered waste stream</span><strong>Fixed radiation detector</strong></div>
+        <div class="portal-gate"><i></i><b></b><em></em></div>
+        <div class="waste-truck"><i></i><b></b><span></span><span></span></div>
+        <div class="screening-road"></div>
+        <div class="detector-signal"><i></i><i></i><i></i></div>
+      </div>
+      <div class="reuse-vignette">
+        <div class="reuse-origin"><i></i><span>Excavated slag or fill</span></div>
+        <div class="reuse-route"><i></i></div>
+        <div class="reuse-destination"><i></i><span>Another property or project</span></div>
+        <p>May never enter a monitored landfill</p>
+      </div>
+    </div>
+
+    <header class="film-header">
+      <span>Greetings from Niagara</span>
+      <span>Waste movement · Animated map</span>
+    </header>
+
+    <section class="scene-stage" aria-live="polite">
+      <article class="scene is-active" data-scene-name="intro">
+        <p class="scene-kicker">Niagara and Erie Counties</p>
+        <h1>Radioactive waste did not move by one route.</h1>
+        <p class="scene-copy">It left factories as solid residues and liquid effluent, entered storage and disposal sites, and moved through systems that were fragmented, poorly documented, and difficult to reconstruct.</p>
+      </article>
+
+      <article class="scene" data-scene-name="sources">
+        <p class="scene-kicker">Production, storage, and disposal</p>
+        <h2>A regional network—not a single source.</h2>
+        <p class="scene-copy">Linde, Electromet, Hooker, Carborundum, LOOW, and Union Carbide’s company landfill are known points in that network. They are not proven origins for every later finding.</p>
+      </article>
+
+      <article class="scene" data-scene-name="solid">
+        <p class="scene-kicker">Solid waste</p>
+        <h2>Slag and contaminated fill moved outward.</h2>
+        <p class="scene-copy">Radioactive material was later found beneath roads, driveways, parking lots, and properties across parts of Niagara and Erie Counties. In many places, the surviving record cannot identify one source.</p>
+      </article>
+
+      <article class="scene" data-scene-name="water">
+        <p class="scene-kicker">Liquid waste</p>
+        <h2>Other wastes moved through water and underground.</h2>
+        <p class="scene-copy">Records describe liquid and process wastes entering disposal wells, sewers, creeks, and rivers—pathways that could carry contamination beyond the place where it was produced.</p>
+      </article>
+
+      <article class="scene" data-scene-name="screening">
+        <p class="scene-kicker">November 4, 2017</p>
+        <h2>New York required radiation screening at covered landfills.</h2>
+        <p class="scene-copy">Landfills accepting municipal solid waste or drilling and production waste—public or private—must monitor incoming loads with fixed radiation detectors.</p>
+      </article>
+
+      <article class="scene" data-scene-name="gap">
+        <p class="scene-kicker">The present-day gap</p>
+        <h2>Not every movement of fill passes through a detector.</h2>
+        <p class="scene-copy">Construction debris, excavated material, slag, and reused fill may move through other pathways. New York’s routine fill analysis lists chemical contaminants and asbestos, but not radionuclides.</p>
+      </article>
+
+      <article class="scene scene--final" data-scene-name="final">
+        <p class="scene-kicker">The pathway has not necessarily disappeared</p>
+        <h2>Radioactive slag can be excavated, transported, and reused again.</h2>
+        <p class="scene-copy">If the material never passes through a radiation detector, its radioactivity may remain invisible.</p>
+      </article>
+    </section>
+
+    <footer class="film-footer">
+      <div class="film-progress"><i id="film-progress-bar"></i></div>
+      <p id="scene-counter">01 / 07</p>
+      <p class="film-source">Sources: 6 NYCRR 363-7.1(a)(5) and 360.13(e) · Locations shown for regional context</p>
+    </footer>
+
+    <div class="sr-only">
+      This animation explains that Western New York’s radioactive waste moved through overlapping solid and liquid pathways. It identifies known production, storage, and disposal locations, then explains New York’s 2017 landfill radiation-monitoring rule and the gap for fill that does not enter a covered landfill.
+    </div>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="app.js?v=waste-network-v1"></script>
+</body>
+</html>
