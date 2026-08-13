@@ -138,7 +138,7 @@ const niagaraZoom = Math.min(Math.max(
 ), 15);
 
 sites.forEach((site, index) => {
-  const label = site.label ? `<b>${site.name}<small>${site.detail}</small></b>` : "";
+  const label = site.label ? `<b>${site.name}</b>` : "";
   const icon = L.divIcon({
     className: "waste-site-wrap",
     html: `<span class="waste-site waste-site--${site.type}${site.label ? ` waste-site--label-${site.label}` : ""}" data-order="${index + 1}"><i></i>${label}</span>`,
