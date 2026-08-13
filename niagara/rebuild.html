@@ -479,6 +479,19 @@
     .loow-health-card-prompt { display:block; margin-top:12px; font:10px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
     .waste-chapter-followup--loow-history .loow-health-card-body { margin:0; padding:4px 0 24px; }
     .waste-chapter-followup--loow-history .loow-health-card-body p { margin:0; font:15px/1.55 Arial,Helvetica,sans-serif; letter-spacing:0; color:rgba(21,23,21,.74); }
+    .loow-history-subhead { max-width:720px; margin:clamp(72px,9svh,110px) 0 28px; font:400 clamp(38px,4.5vw,66px)/.98 Georgia,"Times New Roman",serif; letter-spacing:-.045em; }
+    .loow-evidence-card { width:min(620px,calc(100% - 80px)); margin:36px 0 52px auto; border-top:1px solid rgba(21,23,21,.32); border-bottom:1px solid rgba(21,23,21,.32); }
+    .loow-evidence-card summary { padding:17px 42px 17px 0; position:relative; cursor:pointer; list-style:none; color:var(--niagara-ink); }
+    .loow-evidence-card summary::-webkit-details-marker { display:none; }
+    .loow-evidence-card summary::after { content:'+'; position:absolute; top:17px; right:2px; font:22px/1 Arial,Helvetica,sans-serif; transition:transform .25s ease; }
+    .loow-evidence-card[open] summary::after { transform:rotate(45deg); }
+    .loow-evidence-card summary:hover,.loow-evidence-card summary:focus-visible { color:var(--niagara-red); }
+    .loow-evidence-card-kicker { display:block; margin-bottom:8px; font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
+    .loow-evidence-card-title { display:block; font:400 clamp(19px,1.6vw,25px)/1.12 Georgia,"Times New Roman",serif; letter-spacing:-.022em; }
+    .loow-evidence-card-body { padding:0 0 22px; }
+    .waste-chapter-followup--loow-history .loow-evidence-card-body p { margin:0; font:15px/1.55 Arial,Helvetica,sans-serif; letter-spacing:0; color:rgba(21,23,21,.74); }
+    .loow-evidence-grid { margin:42px 0 62px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px; }
+    .loow-evidence-grid .loow-evidence-card { width:100%; margin:0; }
     .waste-chapter-followup.waste-chapter-followup--loow-history-lead { margin-bottom:0; }
     .waste-chapter-followup.waste-chapter-followup--loow-history-continuation { margin-top:clamp(76px,10svh,120px); }
     
@@ -742,6 +755,8 @@
       .waste-chapter-followup--loow-history { margin:86px 0 104px; transform:none; }
       .waste-chapter-followup--loow-history p { font-size:clamp(18px,1.35vw,23px); font-style:normal; line-height:1.47; letter-spacing:-.012em; }
       .loow-health-card { width:100%; margin-top:54px; }
+      .loow-evidence-card { width:100%; margin:32px 0 46px; }
+      .loow-evidence-grid { grid-template-columns:1fr; gap:26px; }
       .waste-chapter-followup--loow-history p.loow-history-coda { margin-left:0; }
       
       .loow-history-image-placeholder { width:100%; max-width:none; margin:12px 0 42px; position:relative; left:auto; right:auto; float:none; transform:none; }
@@ -1692,13 +1707,32 @@
                 </section>
 
                 <div class="waste-chapter-followup waste-chapter-followup--loow-history waste-chapter-followup--loow-history-continuation">
-                  <p>Responsibility for NFSS changed again in 1997, when Congress transferred <a href="https://www.usace.army.mil/Missions/Environmental/FUSRAP/" target="_blank" rel="noopener noreferrer">FUSRAP</a> from the Department of Energy to the U.S. Army Corps of Engineers. Under that program, the Corps manages NFSS and eligible properties connected to former Manhattan Project and early Atomic Energy Commission work. It investigates the larger former LOOW property separately through the <a href="https://www.lrd.usace.army.mil/Mission/Projects/Article/3663181/lake-ontario-ordnance-works-loow/" target="_blank" rel="noopener noreferrer">Formerly Used Defense Sites program</a> because LOOW was once military property. The Corps is therefore responsible for this work because Congress assigned it these two cleanup programs—not because LOOW remains an active military base. Those authorities do not extend to every contaminated site in Niagara.</p>
+                  <details class="loow-evidence-card">
+                    <summary>
+                      <span class="loow-evidence-card-kicker">Federal responsibility</span>
+                      <span class="loow-evidence-card-title">Why is the Army Corps responsible?</span>
+                    </summary>
+                    <div class="loow-evidence-card-body">
+                      <p>Responsibility for NFSS changed again in 1997, when Congress transferred <a href="https://www.usace.army.mil/Missions/Environmental/FUSRAP/" target="_blank" rel="noopener noreferrer">FUSRAP</a> from the Department of Energy to the U.S. Army Corps of Engineers. Under that program, the Corps manages NFSS and eligible properties connected to former Manhattan Project and early Atomic Energy Commission work. It investigates the larger former LOOW property separately through the <a href="https://www.lrd.usace.army.mil/Mission/Projects/Article/3663181/lake-ontario-ordnance-works-loow/" target="_blank" rel="noopener noreferrer">Formerly Used Defense Sites program</a> because LOOW was once military property. The Corps is therefore responsible for this work because Congress assigned it these two cleanup programs—not because LOOW remains an active military base. Those authorities do not extend to every contaminated site in Niagara.</p>
+                    </div>
+                  </details>
                   <p>Containment has not ended the need for oversight. The U.S. Army Corps of Engineers continues operations, maintenance, security, and environmental surveillance to verify that the IWCS performs as designed. That monitoring matters because NFSS sits above several water-bearing zones: upper and lower soil aquifers and a weathered, fractured bedrock aquifer in the Queenston Formation. The lower soil aquifer flows northwest and discharges toward Lake Ontario, the Niagara River, local streams, and drainage ditches; the direction of flow in the upper aquifer has historically been less certain.</p>
+                  <h4 class="loow-history-subhead">Beyond the containment boundary</h4>
                   <p>NFSS occupies only part of the original LOOW property. After World War II, the federal government sold or transferred most of the remaining land, creating a patchwork of federal property, private businesses, homes, schools, farms, and waste facilities. According to <a href="https://19january2021snapshot.epa.gov/hwcorrectiveactionsites/hazardous-waste-cleanup-cwm-chemical-services-llc-model-city-new-york_.html" target="_blank" rel="noopener">EPA’s site history</a>, the tract that became the Chemical Waste Management facility passed through several private owners before a Waste Management affiliate acquired it in 1984. CWM has operated the hazardous-waste facility there since 1988.</p>
-                  <p>The CWM property contains active and closed hazardous-waste landfills. A <a href="https://www.nrc.gov/docs/ML0923/ML092360220.pdf" target="_blank" rel="noopener">radiological survey</a> found three radioactive fragments near the closed SLF-12 landfill. Laboratory testing detected radium-226, thorium-230, and uranium; Niagara County later identified the fragments as radioactive slag.</p>
-                  <p>Modern Disposal operates a separate solid-waste landfill on another former-LOOW tract. After an initial cleanup, a <a href="https://lmpublicsearch.lm.doe.gov/lmsites/2730-s06763_kapl.pdf" target="_blank" rel="noopener">federal survey</a> intentionally tested the places most likely to remain contaminated, so its results describe hotspots rather than average conditions across the property. The highest surface-soil sample contained 1,025 picocuries per gram of cesium-137—roughly 1,000 times the highest local background level measured by DOE. After more soil was removed, the highest remaining sample still measured 69 pCi/g: about 65 times local background and more than twice DOE’s later cleanup guideline of 33 pCi/g.</p>
-                  <figure class="loow-history-image-placeholder" aria-hidden="true"><span>Image placeholder</span></figure>
-                  <p>Concern extended beyond the waste facilities. In 1981, tests conducted for the <em>Niagara Gazette</em> found elevated cesium-137 and radium in the liver of a deer shot near LOOW. A separate study that year reported abnormalities in 15 of 20 deer captured nearby and elevated radium and cesium in four deer livers.</p>
+                  <div class="loow-evidence-grid">
+                    <details class="loow-evidence-card">
+                      <summary><span class="loow-evidence-card-kicker">Former LOOW tract</span><span class="loow-evidence-card-title">Radioactive fragments at CWM</span></summary>
+                      <div class="loow-evidence-card-body"><p>The CWM property contains active and closed hazardous-waste landfills. A <a href="https://www.nrc.gov/docs/ML0923/ML092360220.pdf" target="_blank" rel="noopener">radiological survey</a> found three radioactive fragments near the closed SLF-12 landfill. Laboratory testing detected radium-226, thorium-230, and uranium; Niagara County later identified the fragments as radioactive slag.</p></div>
+                    </details>
+                    <details class="loow-evidence-card">
+                      <summary><span class="loow-evidence-card-kicker">Former LOOW tract</span><span class="loow-evidence-card-title">Cesium-137 at Modern Disposal</span></summary>
+                      <div class="loow-evidence-card-body"><p>Modern Disposal operates a separate solid-waste landfill on another former-LOOW tract. After an initial cleanup, a <a href="https://lmpublicsearch.lm.doe.gov/lmsites/2730-s06763_kapl.pdf" target="_blank" rel="noopener">federal survey</a> intentionally tested the places most likely to remain contaminated, so its results describe hotspots rather than average conditions across the property. The highest surface-soil sample contained 1,025 picocuries per gram of cesium-137—roughly 1,000 times the highest local background level measured by DOE. After more soil was removed, the highest remaining sample still measured 69 pCi/g: about 65 times local background and more than twice DOE’s later cleanup guideline of 33 pCi/g.</p></div>
+                    </details>
+                  </div>
+                  <details class="loow-evidence-card">
+                    <summary><span class="loow-evidence-card-kicker">1981</span><span class="loow-evidence-card-title">Radioactive deer near LOOW</span></summary>
+                    <div class="loow-evidence-card-body"><p>Tests conducted for the <em>Niagara Gazette</em> found elevated cesium-137 and radium in the liver of a deer shot near LOOW. A separate study that year reported abnormalities in 15 of 20 deer captured nearby and elevated radium and cesium in four deer livers.</p></div>
+                  </details>
                   <p>About 1.5 miles west of NFSS, the Lewiston-Porter school campus serves roughly 2,100 students from pre-kindergarten through 12th grade. The campus lies immediately west of the former LOOW boundary. A former 30-inch LOOW outfall line crossed school property. As part of its investigation of the former LOOW property, the Army Corps surveyed the school grounds in 2002. Readings above 8,000 counts per minute required further investigation. One rock behind the elementary school registered 38,222 CPM—nearly five times that trigger.</p>
                   <details class="loow-health-card">
                     <summary>
@@ -1885,7 +1919,7 @@
                 <div class="waste-era-inner">
                   <div>
                     <span class="waste-era-chapter">Chapter VII</span>
-                    <p class="waste-era-year waste-era-year--range">2023–2026</p>
+                    <p class="waste-era-year waste-era-year--range">2023–present</p>
                   </div>
                   <div class="waste-era-copy">
                     <span class="waste-era-kicker">Ongoing investigation</span>
@@ -1897,21 +1931,33 @@
 
               <section class="waste-section" id="waste-ongoing">
                 <div class="waste-section-header">
-                  <span class="waste-year">2023–2026</span>
-                  <h4>The investigation is still growing</h4>
+                  <span class="waste-year">2023–present</span>
+                  <h4>The investigation is widening</h4>
                 </div>
                 <div class="waste-section-copy">
                   <p>DEC and EPA began an aerial radiological survey across Erie and Niagara Counties in 2023 and completed that phase in 2024. In July 2025, a sensor-equipped vehicle traveled selected roadways to collect ground-level data and identify areas for possible follow-up surveys and sampling.</p>
-                  <p>EPA’s Niagara County site record, updated in 2026, continues to describe cleanup and investigation work at properties where radioactive slag fill was found. The geography of that fill—and the question of who remains exposed to it—is not a closed chapter.</p>
+                  <p>In 2026, the Niagara and Erie County Radiological Assessment expanded from regional scanning into property-level outreach and follow-up. The number of properties contacted rose rapidly—from roughly 120 in the initial round to approximately 1,000 by early August. Phase II also added roadways to the investigation, recognizing that contaminated fill may move through public infrastructure as well as private land.</p>
+                  <p>FEMA joined the field effort. EPA has not yet publicly released results for the public spaces included in the assessment, and additional findings are expected later in 2026 or in 2027. The geography of the fill—and the question of who remains exposed to it—is therefore not a closed chapter.</p>
                 </div>
                 <div class="waste-survey-timeline" aria-label="Recent radiological surveys and follow-up work">
                   <article class="waste-survey-item"><time>2023–2024</time><p>An aircraft-based survey collected new regional data across Erie and Niagara Counties.</p></article>
                   <article class="waste-survey-item"><time>2025</time><p>A vehicle equipped with radiological sensors traveled selected roadways to supplement the aerial record.</p></article>
-                  <article class="waste-survey-item"><time>2026</time><p>Federal cleanup and investigation records remain active as agencies evaluate properties where radioactive slag fill was found.</p></article>
+                  <article class="waste-survey-item"><time>2026</time><p>Outreach expanded to approximately 1,000 properties, roadways entered Phase II, and federal teams continued field investigation while public-space results remained unreleased.</p></article>
                 </div>
               </section>
 
               <p class="waste-coda">The factories were regional. The waste became regional. Every new survey adds another page to an unfinished record.</p>
+
+              <section class="waste-section" id="investigation-method">
+                <div class="waste-section-header">
+                  <span class="waste-year">Research method</span>
+                  <h4>How this investigation was built</h4>
+                </div>
+                <div class="waste-section-copy">
+                  <p>This project brings together more than 800 linked government documents, radiological surveys, worker-exposure reconstructions, archival films, maps, newspaper records, academic research, and cleanup files. It continues the investigation opened by <em>The Federal Connection</em>, incorporating records that were unavailable—or difficult to locate—when the New York State Assembly published its report in 1981.</p>
+                  <p>The record does not support assigning every later radioactive finding to one source. Instead, it shows why no single survey, agency, cleanup program, or industrial history can explain the whole landscape.</p>
+                </div>
+              </section>
 
               <div class="waste-sources" aria-label="Sources for the Love Canal and radioactive waste chapter">
                 <span class="waste-sources-label">Selected sources</span>
@@ -1938,14 +1984,14 @@
               <div class="health-slide-inner">
                 <header class="health-slide-meta">
                   <span class="investigation-number">IX</span>
-                  <h3 id="health-record-title">Decades of cancer</h3>
+                  <h3 id="health-record-title">The unresolved health record</h3>
                 </header>
                 <div class="health-slide-content">
                   <figure class="health-slide-quote">
                     <blockquote>“Cancer incidence generally remains higher in this region than in the state and nationwide.”</blockquote>
                     <figcaption>Roswell Park Comprehensive Cancer Center · WNY Cancer Snapshot · 2022</figcaption>
                   </figure>
-                  <p class="health-slide-intro health-slide-intro--statement">For thousands of years, this area will face the consequences of radioactive contamination. No other area in the world, not even Chornobyl’s exclusion zone, is comparable. It’s no accident that cancer rates in this area of western New York have remained disturbingly high for the past 40 years and are the highest in the U.S.</p>
+                  <p class="health-slide-intro health-slide-intro--statement">For thousands of years, this area will face the consequences of radioactive contamination. Western New York’s cancer burden is documented. What the available studies have not established is whether—and to what extent—radioactive contamination contributed to it. Most regional health analyses do not reconstruct exposure to radioactive fill dispersed beneath roads, homes, schools, and public spaces.</p>
                 </div>
               </div>
             </article>
