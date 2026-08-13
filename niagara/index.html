@@ -472,8 +472,9 @@
     .telvock-return p { margin:28px 0 0 !important; color:rgba(241,240,234,.72); font:15px/1.52 Arial,Helvetica,sans-serif !important; letter-spacing:0 !important; }
     .love-canal-range { position:relative; }
     .love-canal-chapter { border-top:0; padding-top:0; }
-    .love-canal-copy-grid { justify-content:start; padding-top:clamp(86px,12svh,150px); padding-left:50px; }
+    .love-canal-copy-grid { padding-top:clamp(86px,12svh,150px); }
     .love-canal-story { position:relative; }
+    .love-canal-intro-layout { width:100%; position:relative; transform:translateX(calc(-1 * (min(1540px,calc(100vw - 84px)) - 950px))); }
     .love-canal-health-photo { width:min(430px,25vw); margin:0; position:absolute; z-index:2; top:clamp(250px,20vw,340px); left:calc(100% + clamp(12px,1.5vw,28px)); right:auto; }
     .love-canal-health-photo img { width:100%; height:auto; display:block; opacity:.16; mix-blend-mode:multiply; }
     .love-canal-hero { width:100vw; height:100svh; min-height:640px; margin-left:calc(100% - 50vw - min(770px,calc(50vw - 42px))); grid-template-columns:minmax(340px,.41fr) minmax(0,.59fr); background:#e5d8bd; box-shadow:none; }
@@ -715,6 +716,7 @@
       .love-canal-threshold figcaption { width:calc(100% - 72px); margin-left:72px; grid-template-columns:1fr; gap:7px; }
       .love-canal-transition { margin-left:72px !important; }
       .love-canal-range .investigation-stat-grid { margin-left:72px; }
+      .love-canal-intro-layout { transform:none; }
       .love-canal-health-photo { width:100%; position:relative; top:auto; left:auto; right:auto; margin:38px 0; }
       .losa-scroll-story { width:100vw; min-height:0; margin:100px 0 0 -24px; padding:0 24px 0 0; display:block; }
       .losa-scroll-media { position:relative; top:auto; padding:0; }
@@ -1562,6 +1564,7 @@
 
           <div class="investigation-chapter-grid atomic-niagara-copy-grid love-canal-copy-grid">
             <div class="investigation-chapter-copy waste-story love-canal-story">
+              <div class="love-canal-intro-layout">
               <p>For decades, the waste left by this industrial system remained hidden. It began to surface only after the crisis at Love Canal. Love Canal was a working-class Niagara Falls neighborhood built around an unfinished canal that Hooker Chemical had used as a hazardous-waste landfill. From 1942 to 1952, the company buried more than 21,000 tons of chemical waste there.</p>
               <p>In 1953, as Niagara Falls struggled to accommodate its growing postwar population, Hooker sold the covered landfill to the Niagara Falls Board of Education for one dollar. The deed disclosed the presence of industrial waste and included a liability disclaimer. Despite that warning, the 99th Street School was built on the middle third of the landfill, and the surrounding area was developed with homes and low-income apartments, many directly along the canal’s edges.</p>
               <figure class="love-canal-health-photo">
@@ -1572,6 +1575,7 @@
               <p>Love Canal itself was a chemical-waste disaster. But the Assembly inquiry began with eyewitness allegations that United States Army personnel had dumped toxic waste into the canal—and with questions about whether the Army’s own 1978 investigation had adequately examined those claims. To identify the soldiers witnesses remembered and determine what they might have been transporting, the Task Force had to reconstruct the history of federal defense activity across Niagara and Erie Counties.</p>
               <p>That search expanded far beyond Love Canal and revealed that the region’s contamination was also radioactive. The Task Force traced the uranium-production chain through Linde, Electromet, Hooker, and other federal contractors; documented Linde’s underground disposal wells; and investigated the storage, burial, loss, and reuse of radioactive material at the Lake Ontario Ordnance Works and Lake Ontario Storage Area. The 1981 report concluded that Love Canal and federal involvement there were only the tip of a much larger system of factories, contractors, disposal sites, and radioactive waste.</p>
               <a class="losa-scroll-report-link federal-connection-summary-link" href="https://natalianeuhaus.com/wp-content/uploads/2026/07/the_federal_connection.pdf" target="_blank" rel="noopener noreferrer">View <em>The Federal Connection</em> report →</a>
+              </div>
 
               <section class="waste-section love-canal-section" id="waste-love-canal">
                 <p class="love-canal-transition">Investigators entered Love Canal looking for one history of chemical disposal. The inquiry opened a second archive: a regional system of wartime uranium production and the movement, reuse, and disposal of its radioactive waste.</p>
