@@ -18,7 +18,7 @@ button { font: inherit; }
 
 .process-shell {
   display: grid;
-  grid-template-columns: minmax(420px, 41%) minmax(0, 59%);
+  grid-template-columns: minmax(480px, 46%) minmax(0, 54%);
   min-height: 100dvh;
   background: var(--paper);
 }
