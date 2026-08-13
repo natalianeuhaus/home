@@ -513,7 +513,7 @@
     .losa-scroll-definition { margin:18px 0 0 45px !important; padding:0 25px; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:18px 34px; align-items:start; }
     .losa-scroll-definition div > span { display:block; margin-bottom:7px; color:var(--love-canal-red); font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
     .losa-scroll-definition p { margin:0 !important; max-width:780px; color:rgba(21,23,21,.7); font:13px/1.5 Arial,Helvetica,sans-serif !important; letter-spacing:0 !important; }
-    .losa-scroll-definition small { padding-top:1px; color:rgba(21,23,21,.48); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.11em; text-align:left; text-transform:uppercase; white-space:nowrap; }
+    .losa-scroll-definition small { padding-top:1px; color:rgba(21,23,21,.48); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.11em; text-align:right; text-transform:uppercase; white-space:nowrap; }
     .losa-scroll-copy { width:100%; max-width:720px; position:sticky; z-index:2; top:clamp(118px,15svh,168px); right:auto; left:auto; align-self:start; margin:0; padding:clamp(10px,1vw,18px) 0 clamp(18px,2vw,30px) clamp(34px,4vw,66px); box-sizing:border-box; display:flex; flex-direction:column; justify-content:flex-start; color:var(--niagara-ink); background:transparent; border-left:1px solid var(--love-canal-red); box-shadow:none; }
     .losa-scroll-copy .losa-scroll-context { margin:0 0 clamp(26px,3.5svh,40px) !important; padding-bottom:clamp(24px,3svh,34px); border-bottom:1px solid rgba(68,8,6,.24); color:rgba(21,23,21,.64); font:clamp(15px,1.12vw,18px)/1.55 Arial,Helvetica,sans-serif !important; letter-spacing:.005em !important; text-transform:none; }
     .losa-scroll-copy .losa-scroll-quote { margin:0 !important; max-width:660px; color:rgba(21,23,21,.82); font-family:Georgia,"Times New Roman",serif !important; font-size:clamp(23px,1.9vw,32px) !important; font-style:italic; line-height:1.36 !important; letter-spacing:-.018em !important; }
@@ -521,11 +521,6 @@
     .losa-scroll-report-link { width:max-content; margin-top:clamp(20px,2.5svh,30px); padding:14px 0 4px; color:var(--love-canal-red); border-top:1px solid rgba(68,8,6,.24); border-bottom:1px solid currentColor; font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.14em; text-decoration:none; text-transform:uppercase; }
     .losa-scroll-report-link:hover,.losa-scroll-report-link:focus-visible { color:var(--niagara-ink); }
     .federal-connection-summary-link { display:inline-block; margin-top:clamp(24px,3svh,36px); }
-    .losa-transition-reveal { margin-top:180px; margin-bottom:0; }
-    .losa-transition-reveal .losa-transition-context { margin:0 0 clamp(28px,3.5svh,42px); color:rgba(21,23,21,.76); }
-    .losa-transition-quote { margin:0; padding-top:clamp(25px,3.2svh,38px); border-top:1px solid rgba(68,8,6,.22); }
-    .losa-transition-reveal .losa-transition-quote p { margin:0; color:rgba(21,23,21,.86); font-size:clamp(23px,1.9vw,31px); font-style:italic; line-height:1.38; letter-spacing:-.018em; }
-    .losa-transition-quote cite { margin-top:clamp(18px,2.4svh,28px); display:block; color:var(--love-canal-red); font:9px/1.4 Arial,Helvetica,sans-serif; font-style:normal; letter-spacing:.14em; text-transform:uppercase; }
     .loow-chapter-marker { margin-top:180px; }
     .loow-chapter-marker .waste-era-survey-copy { width:42%; background:#090909; }
     .loow-chapter-marker .waste-era-survey-copy .waste-era-copy h4 { max-width:520px; }
@@ -574,18 +569,15 @@
     .waste-video-copy p + p { margin-top:1em; }
     .waste-video-media { min-height:0; aspect-ratio:16 / 9; grid-area:media; }
     .waste-section--loow-film { width:100%; max-width:none; margin:clamp(58px,8svh,92px) 0 0; padding-top:0; border-top:0; box-sizing:border-box; }
-    .love-canal-section > .waste-section--loow-film { width:calc(50vw + min(770px,calc(50vw - 42px))); transform:translateX(calc(-1 * (min(1540px,calc(100vw - 84px)) - 900px))); }
     .waste-section--loow-film .atomic-process-reference-label { margin:0 0 50px; }
-    .waste-section--loow-film .atomic-process-reference,
-    .waste-section--loow-film .atomic-process-reference-label { width:100%; }
     .waste-section--loow-film .atomic-process-reference { margin-bottom:0; }
     .waste-section--loow-film .atomic-process-reference h4 { margin:0 0 18px; font-size:clamp(30px,2.8vw,44px); line-height:.98; font-weight:400; letter-spacing:-.038em; }
-    .iwcs-afterword { margin-top:clamp(72px,9svh,112px); padding:0; display:grid; grid-template-columns:minmax(400px,.92fr) minmax(0,1.08fr); gap:0; align-items:start; border-top:1px solid rgba(68,8,6,.18); background:rgba(241,240,234,.94); overflow:hidden; }
-    .iwcs-afterword-copy { max-width:none; padding:clamp(34px,3.8vw,56px); display:flex; flex-direction:column; justify-content:flex-start; }
+    .iwcs-afterword { margin-top:clamp(72px,9svh,112px); padding:0; display:grid; grid-template-columns:minmax(360px,.78fr) minmax(0,1.22fr); gap:0; align-items:stretch; border-top:1px solid rgba(68,8,6,.18); background:rgba(241,240,234,.94); overflow:hidden; }
+    .iwcs-afterword-copy { max-width:none; padding:clamp(38px,4.8vw,72px); display:flex; flex-direction:column; justify-content:center; }
     .iwcs-afterword h5 { margin:0 0 22px; font-size:clamp(32px,3.3vw,54px); line-height:.98; font-weight:400; letter-spacing:-.043em; }
     .iwcs-afterword p { margin:0; color:rgba(21,23,21,.76); font-size:clamp(17px,1.26vw,21px); line-height:1.48; letter-spacing:-.01em; }
     .iwcs-afterword p + p { margin-top:1em; }
-    .iwcs-afterword-figure { min-width:0; margin:0; padding:clamp(24px,3vw,46px); display:flex; flex-direction:column; justify-content:flex-start; align-self:start; color:var(--niagara-paper); background:#050505; }
+    .iwcs-afterword-figure { min-width:0; margin:0; padding:clamp(24px,3vw,46px); display:flex; flex-direction:column; justify-content:flex-start; color:var(--niagara-paper); background:#050505; }
     .iwcs-afterword-figure img { width:100%; height:auto; display:block; object-fit:contain; }
     .iwcs-afterword-figure figcaption { margin-top:14px; color:rgba(241,240,234,.55); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.1em; text-transform:uppercase; }
     .iwcs-afterword-notes { width:min(900px,100%); margin:clamp(54px,7svh,88px) 0 0; padding:0; }
@@ -747,7 +739,6 @@
       .losa-scroll-definition small { text-align:left; }
       .losa-scroll-copy { width:calc(100% - 24px); max-width:none; position:relative; top:auto; right:auto; left:auto; margin:38px 0 0 24px; padding:0 0 10px 22px; }
       .losa-scroll-copy .losa-scroll-quote { font-size:clamp(22px,6.4vw,30px) !important; }
-      .losa-transition-reveal { margin-top:120px; }
       .loow-chapter-marker { margin-top:180px; }
       .loow-chapter-marker .waste-era-survey-copy { width:100%; min-height:52svh; }
       .loow-chapter-marker .waste-era-survey-map { width:100%; min-height:62svh; inset:auto; background:#090909; }
@@ -773,7 +764,6 @@
       .waste-video-block { grid-template-areas:"media" "copy"; }
       .waste-video-media { min-height:54vw; }
       .waste-section--loow-film { width:calc(100vw - 48px); margin-left:0; }
-      .love-canal-section > .waste-section--loow-film { width:calc(100vw - 48px); transform:none; }
       .iwcs-afterword { grid-template-columns:1fr; gap:0; margin-top:48px; }
       .iwcs-afterword-copy { padding:32px 24px 38px; }
       .iwcs-afterword-figure { padding:24px; }
@@ -1630,15 +1620,6 @@
                   </blockquote>
                 </section>
 
-                <aside class="atomic-process-reveal losa-transition-reveal" aria-label="How rock slag left the Lake Ontario Storage Area">
-                  <span class="atomic-process-reveal-label">What left LOSA · 1950s</span>
-                  <p class="losa-transition-context">The failure was not only where radioactive waste was stored. Federal records described a breakdown of control that allowed material to leave the reservation and enter the ordinary landscape.</p>
-                  <blockquote class="losa-transition-quote">
-                    <p>“Notable among the problems identified was an almost routine practice whereby the foreman permitted other workers to use an AEC truck to transport ‘rock slag’ from the site to their homes, for driveway paving, clean fill, etc.”</p>
-                    <cite><em>The Federal Connection</em> · page 243</cite>
-                  </blockquote>
-                </aside>
-
                 <section class="waste-era-marker waste-era-marker--survey-map loow-chapter-marker" data-waste-era id="era-loow" aria-labelledby="loow-archive-title">
                   <div class="waste-era-inner waste-era-inner--survey-map">
                     <div class="waste-era-survey-copy">
@@ -1674,7 +1655,7 @@
                       <p>This 1985 U.S. Army Corps of Engineers footage shows LOOW while radioactive residues remained scattered—and in places exposed—across buildings, open ground, burial areas, and storage structures. The following year, the Department of Energy gathered the remaining radioactive waste and contaminated material into one ten-acre containment area and covered it with compacted clay. The government called it the interim waste containment structure.</p>
                       <div class="usace-fusrap-explainer">
                         <span>Why is the Army Corps responsible?</span>
-                        <p>The Army Corps is here because Congress assigned it two cleanup programs—not because LOOW remains an active military base. In 1997, Congress transferred <a href="https://www.usace.army.mil/Missions/Environmental/FUSRAP/" target="_blank" rel="noopener noreferrer">FUSRAP</a> from the Department of Energy to USACE. Under that program, the Corps manages NFSS and eligible properties connected to former Manhattan Project and early Atomic Energy Commission work. It investigates the larger former LOOW property separately through the <a href="https://www.lrd.usace.army.mil/Mission/Projects/Article/3663181/lake-ontario-ordnance-works-loow/" target="_blank" rel="noopener noreferrer">Formerly Used Defense Sites program</a> because LOOW was once military property. Those authorities do not extend to every contaminated site in Niagara.</p>
+                        <p>The Army Corps is here because Congress assigned it the cleanup program—not because LOOW remains an active military base. In 1997, Congress transferred <a href="https://www.usace.army.mil/Missions/Environmental/FUSRAP/" target="_blank" rel="noopener noreferrer">FUSRAP cleanup</a> from the Department of Energy to USACE. DOE determines which former Manhattan Project and early Atomic Energy Commission sites qualify; USACE investigates and, when necessary, cleans them up. That authority applies to NFSS and eligible related properties—not every contaminated site in Niagara.</p>
                       </div>
                     </div>
                   </aside>
@@ -1682,7 +1663,7 @@
 <aside class="iwcs-afterword" aria-labelledby="iwcs-afterword-title">
                     <div class="iwcs-afterword-copy">
                       <h5 id="iwcs-afterword-title">An “interim” structure</h5>
-                      <p>“Interim” matters. The containment structure was given an anticipated 25-year life, carrying it only to about 2011. In 2026, it remains in use—approximately 15 years beyond that original horizon. Its compacted-clay cover is intended to limit water infiltration and slow contaminant migration, while drainage ditches carry surface water away from the containment area.</p>
+                      <p>“Interim” matters. The containment structure was given an anticipated 25-year life, carrying it only to about 2011. In 2026, it remains in use—approximately 15 years beyond that original horizon. Its compacted-clay cover is intended to limit water infiltration and slow contaminant migration, while drainage ditches carry surface water away from the containment area. Roughly 1.5 miles west of the structure, the Southwest Drainage Ditch separates the former LOOW property from the Lewiston-Porter school campus and flows north to Four Mile Creek.</p>
                     </div>
                     <figure class="iwcs-afterword-figure">
                       <img src="./archive/nfss-iwcs-conceptual-design.jpg" alt="Conceptual cross-section of the Niagara Falls Storage Site interim waste containment structure, showing its clay cover, sand and riprap layers, dikes, cutoff walls, buried wastes, residues, and contamination beneath the original grade" loading="lazy" decoding="async" />
@@ -1693,6 +1674,8 @@
 
                 <div class="waste-chapter-followup waste-chapter-followup--loow-history waste-chapter-followup--loow-history-continuation">
                   <p>Containment has not ended the need for oversight. The U.S. Army Corps of Engineers continues operations, maintenance, security, and environmental surveillance to verify that the IWCS performs as designed. That monitoring matters because NFSS sits above several water-bearing zones: upper and lower soil aquifers and a weathered, fractured bedrock aquifer in the Queenston Formation. The lower soil aquifer flows northwest and discharges toward Lake Ontario, the Niagara River, local streams, and drainage ditches; the direction of flow in the upper aquifer has historically been less certain.</p>
+                  <p><strong>Why is the Army Corps responsible now?</strong> The U.S. Atomic Energy Commission created the <a href="https://www.energy.gov/lm/articles/federal-cleanup-program-hits-half-century-mark" target="_blank" rel="noopener">Formerly Utilized Sites Remedial Action Program</a>, or FUSRAP, in March 1974. The program addressed sites used by the Manhattan Engineer District—the Army organization that ran the Manhattan Project—and by the Atomic Energy Commission, the civilian agency that took over the nation’s nuclear program in 1947. Many of those properties had already been released for public or private use under older radiation standards, even though contamination could remain. FUSRAP was created to find those sites, investigate them, and clean up or control any remaining contamination.</p>
+                  <p>The Atomic Energy Commission was abolished in 1974. Its FUSRAP responsibilities passed first to the Energy Research and Development Administration and then, in 1977, to the newly created Department of Energy. In October 1997, Congress transferred the program to the U.S. Army Corps of Engineers, which now manages NFSS. The Corps investigates the larger former LOOW property separately through its <a href="https://www.lrd.usace.army.mil/Mission/Projects/Article/3663181/lake-ontario-ordnance-works-loow/" target="_blank" rel="noopener">Formerly Used Defense Sites</a> program because LOOW was once military property.</p>
                   <p>NFSS occupies only part of the original LOOW property. After World War II, the federal government sold or transferred most of the remaining land, creating a patchwork of federal property, private businesses, homes, schools, farms, and waste facilities. According to <a href="https://19january2021snapshot.epa.gov/hwcorrectiveactionsites/hazardous-waste-cleanup-cwm-chemical-services-llc-model-city-new-york_.html" target="_blank" rel="noopener">EPA’s site history</a>, the tract that became the Chemical Waste Management facility passed through several private owners before a Waste Management affiliate acquired it in 1984. CWM has operated the hazardous-waste facility there since 1988.</p>
                   <p>The CWM property contains active and closed hazardous-waste landfills. A <a href="https://www.nrc.gov/docs/ML0923/ML092360220.pdf" target="_blank" rel="noopener">radiological survey</a> found three radioactive fragments near the closed SLF-12 landfill. Laboratory testing detected radium-226, thorium-230, and uranium; Niagara County later identified the fragments as radioactive slag.</p>
                   <p>Modern Disposal operates a separate solid-waste landfill on another former-LOOW tract. After an initial cleanup, a <a href="https://lmpublicsearch.lm.doe.gov/lmsites/2730-s06763_kapl.pdf" target="_blank" rel="noopener">federal survey</a> intentionally tested the places most likely to remain contaminated, so its results describe hotspots rather than average conditions across the property. The highest surface-soil sample contained 1,025 picocuries per gram of cesium-137—roughly 1,000 times the highest local background level measured by DOE. After more soil was removed, the highest remaining sample still measured 69 pCi/g: about 65 times local background and more than twice DOE’s later cleanup guideline of 33 pCi/g.</p>
