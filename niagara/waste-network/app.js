@@ -56,7 +56,7 @@ const sites = [
     name: "LOOW",
     detail: "Federal storage and disposal",
     point: [43.2235, -78.9565],
-    type: "disposal",
+    type: "loow",
     label: "top-right"
   },
   {
@@ -143,7 +143,7 @@ map.fitBounds(regionalBounds, {
 
 const regionalZoom = map.getZoom();
 const sourceZoom = Math.min(
-  map.getBoundsZoom(sourceBounds, false, [60, 100]) + 0.25,
+  map.getBoundsZoom(sourceBounds, false, [60, 100]) - 0.25,
   window.innerHeight < 1000 ? 11 : 11.25
 );
 const niagaraZoom = Math.min(Math.max(
@@ -152,11 +152,10 @@ const niagaraZoom = Math.min(Math.max(
 ), 15);
 
 sites.forEach((site, index) => {
-  const label = site.label ? `<b>${site.name}</b>` : "";
   const icon = L.divIcon({
     className: "waste-site-wrap",
-    html: `<span class="waste-site waste-site--${site.type}${site.label ? ` waste-site--label-${site.label}` : ""}" data-order="${index + 1}"><i></i>${label}</span>`,
-    iconSize: [210, 42],
+    html: `<span class="waste-site waste-site--${site.type}" data-order="${index + 1}"><i></i></span>`,
+    iconSize: [18, 18],
     iconAnchor: [8, 8]
   });
   L.marker(site.point, {
