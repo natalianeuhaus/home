@@ -7,7 +7,7 @@
   <meta name="description" content="A short animated map of solid and liquid radioactive-waste pathways across Niagara and Erie Counties.">
   <link rel="preconnect" href="https://unpkg.com">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
-  <link rel="stylesheet" href="styles.css?v=waste-network-v3">
+  <link rel="stylesheet" href="styles.css?v=waste-network-v4">
 </head>
 <body>
   <main class="waste-film" id="waste-film" data-scene="intro">
@@ -107,7 +107,11 @@
     <footer class="film-footer">
       <div class="film-progress"><i id="film-progress-bar"></i></div>
       <p id="scene-counter">01 / 07</p>
-      <button class="film-pause" id="film-pause" type="button" aria-label="Pause animation" aria-pressed="false" disabled>Pause</button>
+      <div class="film-controls" aria-label="Animation controls">
+        <button class="film-arrow" id="film-previous" type="button" aria-label="Previous scene" disabled>←</button>
+        <button class="film-pause" id="film-pause" type="button" aria-label="Pause animation" aria-pressed="false" disabled>Pause</button>
+        <button class="film-arrow" id="film-next" type="button" aria-label="Next scene" disabled>→</button>
+      </div>
       <p class="film-source">Sources: 6 NYCRR 363-7.1(a)(5) and 360.13(e) · Locations shown for regional context</p>
     </footer>
 
@@ -117,6 +121,6 @@
   </main>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-  <script src="app.js?v=waste-network-v3"></script>
+  <script src="app.js?v=waste-network-v4"></script>
 </body>
 </html>

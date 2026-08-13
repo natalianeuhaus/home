@@ -4,6 +4,8 @@ const film = document.getElementById("waste-film");
 const progressBar = document.getElementById("film-progress-bar");
 const sceneCounter = document.getElementById("scene-counter");
 const pauseButton = document.getElementById("film-pause");
+const previousButton = document.getElementById("film-previous");
+const nextButton = document.getElementById("film-next");
 const sceneElements = Array.from(document.querySelectorAll(".scene"));
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -71,6 +73,7 @@ const regionalBounds = L.latLngBounds([
   [42.91, -79.18],
   [43.29, -78.76]
 ]);
+const sourceBounds = L.latLngBounds(sites.map(site => site.point)).pad(0.1);
 const niagaraFocus = window.innerWidth < 900
   ? [43.095, -79.005]
   : [43.095, -79.04];
@@ -89,6 +92,8 @@ map.fitBounds(regionalBounds, {
 });
 
 const regionalZoom = map.getZoom();
+const regionalCenter = map.getCenter();
+const sourceZoom = regionalZoom + 0.75;
 const niagaraZoom = Math.min(regionalZoom + Math.log2(10), 15);
 
 sites.forEach((site, index) => {
@@ -121,12 +126,32 @@ const scenes = [
 ];
 
 const totalDuration = scenes.reduce((sum, scene) => sum + scene.duration, 0);
+const sceneStartTimes = scenes.map((scene, index) => (
+  scenes.slice(0, index).reduce((sum, previousScene) => sum + previousScene.duration, 0)
+));
 let sceneIndex = -1;
 let progressFrame = 0;
 let startTime = 0;
 let elapsedBeforeStart = 0;
 let isPaused = false;
 let isFinished = false;
+
+function focusRegional(duration = 2.2) {
+  map.flyTo(regionalCenter, regionalZoom, {
+    duration,
+    easeLinearity: 0.2
+  });
+}
+
+function focusSources(duration = 2.8) {
+  map.flyToBounds(sourceBounds, {
+    paddingTopLeft: [window.innerWidth < 900 ? 24 : Math.round(window.innerWidth * .43), 85],
+    paddingBottomRight: [window.innerWidth < 900 ? 34 : 250, 70],
+    maxZoom: sourceZoom,
+    duration,
+    easeLinearity: 0.18
+  });
+}
 
 function focusNiagara(duration = 6) {
   map.flyTo(niagaraFocus, niagaraZoom, {
@@ -135,7 +160,13 @@ function focusNiagara(duration = 6) {
   });
 }
 
+function updateNavigationButtons() {
+  previousButton.disabled = sceneIndex <= 0;
+  nextButton.disabled = sceneIndex >= scenes.length - 1;
+}
+
 function showScene(index) {
+  const previousSceneIndex = sceneIndex;
   sceneIndex = Math.max(0, Math.min(index, scenes.length - 1));
   const scene = scenes[sceneIndex];
   film.dataset.scene = scene.name;
@@ -143,9 +174,12 @@ function showScene(index) {
     element.classList.toggle("is-active", element.dataset.sceneName === scene.name);
   });
   sceneCounter.textContent = `${String(sceneIndex + 1).padStart(2, "0")} / ${String(scenes.length).padStart(2, "0")}`;
+  updateNavigationButtons();
 
-  if (scene.name === "solid" && !reducedMotion) {
-    focusNiagara();
+  if (!reducedMotion) {
+    if (scene.name === "intro" && previousSceneIndex >= 0) focusRegional();
+    if (scene.name === "sources") focusSources();
+    if (scene.name === "solid") focusNiagara();
   }
 }
 
@@ -203,13 +237,32 @@ function resumeFilm() {
   film.classList.remove("is-paused");
   setPauseButton(false);
 
-  if (scenes[sceneIndex].name === "solid" && map.getZoom() < niagaraZoom - 0.01) {
-    const solidStart = scenes.slice(0, sceneIndex).reduce((sum, scene) => sum + scene.duration, 0);
-    const remainingSeconds = Math.max(1, (solidStart + scenes[sceneIndex].duration - elapsedBeforeStart) / 1000);
+  const currentScene = scenes[sceneIndex];
+  const remainingSeconds = Math.max(1, (sceneStartTimes[sceneIndex] + currentScene.duration - elapsedBeforeStart) / 1000);
+  if (currentScene.name === "sources" && map.getZoom() < sourceZoom - 0.01) {
+    focusSources(Math.min(2.8, remainingSeconds));
+  }
+  if (currentScene.name === "solid" && map.getZoom() < niagaraZoom - 0.01) {
     focusNiagara(Math.min(6, remainingSeconds));
   }
 
   progressFrame = window.requestAnimationFrame(updateProgress);
+}
+
+function jumpToScene(index) {
+  const targetIndex = Math.max(0, Math.min(index, scenes.length - 1));
+  window.cancelAnimationFrame(progressFrame);
+  elapsedBeforeStart = sceneStartTimes[targetIndex];
+  startTime = 0;
+  isFinished = false;
+  showScene(targetIndex);
+  progressBar.style.width = `${(elapsedBeforeStart / totalDuration) * 100}%`;
+
+  if (!reducedMotion) {
+    pauseButton.disabled = false;
+    setPauseButton(isPaused);
+    if (!isPaused) progressFrame = window.requestAnimationFrame(updateProgress);
+  }
 }
 
 function startFilm() {
@@ -228,6 +281,9 @@ pauseButton.addEventListener("click", () => {
   if (isPaused) resumeFilm();
   else pauseFilm();
 });
+
+previousButton.addEventListener("click", () => jumpToScene(sceneIndex - 1));
+nextButton.addEventListener("click", () => jumpToScene(sceneIndex + 1));
 
 document.addEventListener("visibilitychange", () => {
   if (!document.hidden || reducedMotion) return;
