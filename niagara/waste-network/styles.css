@@ -48,6 +48,14 @@ body { overflow: hidden; color: var(--ink); background: var(--paper); font-famil
 .waste-site-wrap { overflow: visible !important; border: 0 !important; background: transparent !important; }
 .waste-site { position: relative; display: block; opacity: 0; transform: scale(.2); transition: opacity 1s ease,transform 1.25s cubic-bezier(.22,1,.36,1); }
 .waste-site i { width: 15px; height: 15px; display: block; position: relative; z-index: 2; border: 2px solid var(--ink); border-radius: 50%; background: var(--site-color,var(--white)); box-shadow: 0 2px 8px rgba(0,0,0,.28); }
+.waste-site-label { width:max-content; max-width:190px; position:absolute; z-index:4; display:block; padding:6px 8px 5px; border-bottom:1px solid var(--ink); opacity:0; color:var(--ink); background:rgba(241,240,234,.94); white-space:normal; pointer-events:none; }
+.waste-site-label strong,.waste-site-label small { display:block; }
+.waste-site-label strong { font:700 8px/1.2 Arial,Helvetica,sans-serif; letter-spacing:.09em; text-transform:uppercase; }
+.waste-site-label small { margin-top:3px; color:var(--muted); font:7px/1.2 Arial,Helvetica,sans-serif; letter-spacing:.05em; text-transform:uppercase; }
+.waste-site-label--top-left { right:14px; bottom:15px; text-align:right; }
+.waste-site-label--top-right { left:14px; bottom:15px; }
+.waste-site-label--bottom-left { right:14px; top:15px; text-align:right; }
+.waste-site-label--bottom-right { left:14px; top:15px; }
 .waste-site[data-order="1"] { --site-color: #3f7f91; }
 .waste-site[data-order="2"] { --site-color: #d27662; }
 .waste-site[data-order="3"] { --site-color: #7467a0; }
@@ -62,7 +70,8 @@ body { overflow: hidden; color: var(--ink); background: var(--paper); font-famil
 .waste-site[data-order="12"] { --site-color: #85894d; }
 .waste-site[data-order="13"] { --site-color: #8d5e48; }
 .waste-site--loow i { border-radius: 2px; }
-.waste-film[data-scene="sources"] .waste-site { opacity: 1; transform: translate3d(0,0,0); }
+.waste-film[data-scene="sources"] .waste-site { opacity: 1; transform: translate3d(0,0,0); transition-delay:var(--site-delay,0s); }
+.waste-film[data-scene="sources"] .waste-site-label { animation:site-label-pop 2.35s calc(var(--site-delay,0s) + .2s) ease both; }
 .waste-film[data-scene="water"] .waste-site,
 .waste-film[data-scene="screening"] .waste-site,
 .waste-film[data-scene="final"] .waste-site { opacity: .16; transform: translate3d(0,0,0); }
@@ -87,7 +96,7 @@ body { overflow: hidden; color: var(--ink); background: var(--paper); font-famil
 .industrial-district b { width: 174px; position: absolute; left: 36px; padding: 6px 8px 5px 15px; border-bottom: 1px solid var(--ink); color: var(--ink); background: rgba(241,240,234,.9); font: 700 8px/1.25 Arial,Helvetica,sans-serif; letter-spacing: .1em; text-transform: uppercase; }
 .industrial-district b::before { width: 15px; height: 1px; position: absolute; left: -15px; top: 50%; background: var(--ink); content: ""; }
 .industrial-district--top-right b { bottom: 27px; }
-.industrial-district--bottom-right b { top: 27px; }
+.industrial-district--bottom-right b { width:260px; top:27px; }
 .waste-film[data-scene="sources"] .industrial-district { opacity: 1; transform: scale(1); }
 .waste-film[data-scene="sources"] .industrial-district[data-district-order="1"] { transition-delay: 20.1s; }
 .waste-film[data-scene="sources"] .industrial-district[data-district-order="2"] { transition-delay: 21.3s; }
@@ -170,6 +179,7 @@ body { overflow: hidden; color: var(--ink); background: var(--paper); font-famil
 @keyframes screened-truck { 0% { transform:translateX(0); } 65%,100% { transform:translateX(clamp(280px,26vw,395px)); } }
 @keyframes detector-pulse { 0% { opacity:.7; transform:translate(-50%,-50%) scale(.2); } 100% { opacity:0; transform:translate(-50%,-50%) scale(3.4); } }
 @keyframes reveal-reuse-route { from { transform:scaleX(0); } to { transform:scaleX(1); } }
+@keyframes site-label-pop { 0% { opacity:0; transform:translateY(5px); } 14%,72% { opacity:1; transform:translateY(0); } 100% { opacity:0; transform:translateY(-3px); } }
 
 @media (max-width: 900px) {
   .waste-film { min-height: 690px; }
@@ -180,6 +190,8 @@ body { overflow: hidden; color: var(--ink); background: var(--paper); font-famil
   .regional-field { width: 82%; height: 43%; right: 5%; top: 52%; }
   .industrial-district { transform-origin: 8px center; }
   .industrial-district b { width: 150px; font-size: 7px; }
+  .industrial-district--bottom-right b { width:210px; }
+  .waste-site-label { max-width:150px; }
   .water-pathways { width: 78vw; right: 5%; top: 58%; transform: scale(.82); transform-origin: right top; }
   .screening-vignette { width: 78vw; right: 5%; top: auto; bottom: 6%; transform: scale(.84); transform-origin: right bottom; }
   .waste-film[data-scene="screening"] .screening-vignette { transform: scale(.84); }
@@ -221,6 +233,6 @@ body { overflow: hidden; color: var(--ink); background: var(--paper); font-famil
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .scene,.waste-site,.industrial-district,.regional-field,.water-pathways,.water-kind,.screening-vignette,.reuse-vignette,.reuse-route { transition: none !important; }
+  .scene,.waste-site,.waste-site-label,.industrial-district,.regional-field,.water-pathways,.water-kind,.screening-vignette,.reuse-vignette,.reuse-route { transition: none !important; }
   .waste-truck,.detector-signal i { animation: none !important; }
 }
