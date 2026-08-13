@@ -527,7 +527,7 @@
     .waste-closing-stop { min-height:155px; padding:22px 20px 24px; border-right:1px solid rgba(241,240,234,.25); border-bottom:1px solid rgba(241,240,234,.25); }
     .waste-closing-stop time { display:block; margin-bottom:34px; color:#d8c08b; font:9px/1.2 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
     .waste-closing-stop p { margin:0 !important; color:rgba(241,240,234,.7); font:12px/1.48 Arial,Helvetica,sans-serif !important; letter-spacing:0 !important; }
-    .waste-record-expansion { width:calc(100vw - 84px); margin:0 0 0 calc(100% - (100vw - 84px)); padding:clamp(76px,10svh,130px) clamp(42px,6.5vw,100px); background:#d8d5cd; border-bottom:1px solid var(--niagara-line); }
+    .waste-record-expansion { width:calc(100vw - 84px); margin:clamp(84px,11svh,130px) 0 0 calc(100% - (100vw - 84px)); padding:clamp(76px,10svh,130px) clamp(42px,6.5vw,100px); background:#d8d5cd; border-bottom:1px solid var(--niagara-line); }
     .waste-record-expansion-header { display:grid; grid-template-columns:minmax(180px,.35fr) minmax(520px,1.15fr); gap:clamp(54px,8vw,140px); align-items:start; }
     .waste-record-expansion-label { padding-top:9px; color:var(--niagara-red); font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.17em; text-transform:uppercase; }
     .waste-record-expansion h4 { margin:0; max-width:980px; font:400 clamp(48px,5.7vw,88px)/.92 Georgia,"Times New Roman",serif; letter-spacing:-.052em; }
@@ -860,7 +860,7 @@
       .waste-closing-copy h4 { font-size:clamp(46px,13.5vw,68px); }
       .waste-closing-timeline { grid-template-columns:1fr; margin-top:28px; }
       .waste-closing-stop { min-height:0; }
-      .waste-record-expansion { padding:64px 24px 78px; }
+      .waste-record-expansion { margin-top:76px; padding:64px 24px 78px; }
       .waste-record-expansion-header,.waste-record-grid { grid-template-columns:1fr; gap:20px; }
       .waste-record-grid { gap:0; }
       .waste-record-card { min-height:0; }
@@ -1862,6 +1862,42 @@
                   <article class="waste-survey-item"><time>1984–1985</time><p>One ORNL investigation unfolded in two phases. A 1984 vehicle survey identified 100 elevated gamma anomalies for follow-up; onsite measurements and soil sampling in 1985 classified 38 as exceeding FUSRAP guidelines and associated the remaining 62 principally with industrial slag. ORNL published the findings in 1986.</p><a class="waste-survey-source" href="https://natalianeuhaus.com/wp-content/uploads/2026/07/ORNL_1985_Niagara_Falls_Radiological_Survey_18050447.pdf" target="_blank" rel="noopener noreferrer">View the 1985 field survey →</a></article>
                 </div>
                 <p class="waste-survey-expansion">Over the years, however, radiological surveys expanded beyond the suspected routes to LOOW. Investigators repeatedly encountered contamination within Niagara Falls’s two principal industrial districts: the Buffalo Avenue corridor along the river and the Highland Avenue corridor beside residential neighborhoods. These areas contained former factories, rail lines, roads, imported fill, and redevelopment sites—overlapping landscapes where radioactive material could have come from more than one industrial source.</p>
+                <section class="waste-record-expansion" aria-labelledby="waste-record-expansion-title">
+                  <header class="waste-record-expansion-header">
+                    <span class="waste-record-expansion-label">The record widens</span>
+                    <h4 id="waste-record-expansion-title">The factory list kept growing.</h4>
+                  </header>
+                  <div class="waste-record-grid">
+                    <article class="waste-record-card">
+                      <span>01</span>
+                      <h5>What the 1981 report established</h5>
+                      <p><em>The Federal Connection</em> traced a federal uranium-production and waste network through Linde, Electromet, Hooker, and LOOW. It revealed a system, but it was not a complete inventory of every Niagara facility connected to radioactive work or contaminated material.</p>
+                    </article>
+                    <article class="waste-record-card">
+                      <span>02</span>
+                      <h5>What later worker records added</h5>
+                      <p>NIOSH dose-reconstruction files and related worker-exposure records preserved facility-level histories of radioactive processes beyond the report’s central narrative. They widened the archive from a few well-known federal contractors to a larger industrial landscape.</p>
+                    </article>
+                    <article class="waste-record-card">
+                      <span>03</span>
+                      <h5>What field investigations found</h5>
+                      <p>Later radiological and brownfield investigations returned to former factories, roads, parking areas, redevelopment parcels, and neighborhoods—places where industrial waste and reused fill had crossed property lines.</p>
+                    </article>
+                  </div>
+                  <div class="waste-facility-band">
+                    <span>Additional facilities appearing in later records and investigations</span>
+                    <div class="waste-facility-list" aria-label="Additional Niagara industrial facilities">
+                      <span>National Carbon</span>
+                      <span>Pittsburgh Metallurgical / Globe</span>
+                      <span>Carborundum Globar</span>
+                      <span>TAM Ceramics</span>
+                      <span>Vanadium Corporation of America</span>
+                      <span>Oldbury Furnace</span>
+                      <span>Union Carbide / Newco–CECOS</span>
+                    </div>
+                    <p class="waste-facility-note">These names do not establish that every later hotspot came from these facilities. They show why Niagara’s radioactive landscape cannot be explained by LOOW—or by any single factory—alone.</p>
+                  </div>
+                </section>
                 <figure class="waste-network-embed" aria-label="Animated map tracing the movement of radioactive waste across Niagara and Erie Counties">
                   <iframe class="waste-network-embed-frame" title="Where the Waste Moved: production, storage, and disposal sites" data-waste-network-src="./waste-network/?slide=1&amp;v=32" loading="lazy" allow="fullscreen"></iframe>
                 </figure>
@@ -1876,7 +1912,6 @@
                   <p class="atomic-reference-viewer-caption">Lake Ontario Storage Area within the former Lake Ontario Ordnance Works site · before construction of the interim waste containment structure · 1985</p>
                 </div>
               </dialog>
-
 
               <section class="waste-closing-hero" aria-labelledby="waste-closing-title">
                 <div class="waste-closing-meta">
@@ -1895,43 +1930,6 @@
                   <article class="waste-closing-stop"><time>2017</time><p>The 1979 private-investigator reports expose another trail through haulers, dumps, and fill.</p></article>
                   <article class="waste-closing-stop"><time>2018–2023</time><p>Cleanup reaches a state park entrance, a driveway, a culvert, and neighboring homes.</p></article>
                   <article class="waste-closing-stop"><time>2023–present</time><p>New aerial, vehicle, and ground surveys reopen the regional map.</p></article>
-                </div>
-              </section>
-
-              <section class="waste-record-expansion" aria-labelledby="waste-record-expansion-title">
-                <header class="waste-record-expansion-header">
-                  <span class="waste-record-expansion-label">The record widens</span>
-                  <h4 id="waste-record-expansion-title">The factory list kept growing.</h4>
-                </header>
-                <div class="waste-record-grid">
-                  <article class="waste-record-card">
-                    <span>01</span>
-                    <h5>What the 1981 report established</h5>
-                    <p><em>The Federal Connection</em> traced a federal uranium-production and waste network through Linde, Electromet, Hooker, and LOOW. It revealed a system, but it was not a complete inventory of every Niagara facility connected to radioactive work or contaminated material.</p>
-                  </article>
-                  <article class="waste-record-card">
-                    <span>02</span>
-                    <h5>What later worker records added</h5>
-                    <p>NIOSH dose-reconstruction files and related worker-exposure records preserved facility-level histories of radioactive processes beyond the report’s central narrative. They widened the archive from a few well-known federal contractors to a larger industrial landscape.</p>
-                  </article>
-                  <article class="waste-record-card">
-                    <span>03</span>
-                    <h5>What field investigations found</h5>
-                    <p>Later radiological and brownfield investigations returned to former factories, roads, parking areas, redevelopment parcels, and neighborhoods—places where industrial waste and reused fill had crossed property lines.</p>
-                  </article>
-                </div>
-                <div class="waste-facility-band">
-                  <span>Additional facilities appearing in later records and investigations</span>
-                  <div class="waste-facility-list" aria-label="Additional Niagara industrial facilities">
-                    <span>National Carbon</span>
-                    <span>Pittsburgh Metallurgical / Globe</span>
-                    <span>Carborundum Globar</span>
-                    <span>TAM Ceramics</span>
-                    <span>Vanadium Corporation of America</span>
-                    <span>Oldbury Furnace</span>
-                    <span>Union Carbide / Newco–CECOS</span>
-                  </div>
-                  <p class="waste-facility-note">These names do not establish that every later hotspot came from these facilities. They show why Niagara’s radioactive landscape cannot be explained by LOOW—or by any single factory—alone.</p>
                 </div>
               </section>
 
@@ -1955,7 +1953,6 @@
                   <p>Telvock also reported that in 1965 New York granted Union Carbide an exemption to bury radioactive waste on company property later incorporated into the closed CECOS landfill at 5600 Niagara Falls Boulevard. The costly alternative was to ship the material to an out-of-state facility authorized to accept it.</p>
                 </div>
               </section>
-
 
               <section class="waste-section" id="waste-cleanups">
                 <div class="waste-section-header">
@@ -2004,7 +2001,6 @@
                   <p>Because several factories generated slag, furnace waste, and other radiological residues—and because those materials were sold, hauled, mixed, and reused—the waste at a later property could have come from more than one industrial source. Attribution requires both radiological analysis and a documented chain of movement.</p>
                 </div>
               </section>
-
 
               <section class="waste-section" id="waste-ongoing">
                 <div class="waste-section-header">
