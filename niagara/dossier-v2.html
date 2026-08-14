@@ -1,0 +1,808 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#f2f0e9" />
+  <title>Greetings from Niagara — The Dossier</title>
+  <meta name="description" content="An alternate editorial design for Greetings from Niagara, tracing the radioactive and industrial history of Niagara Falls through records, maps, photographs, and field research." />
+  <style>
+    :root {
+      --paper:#f2f0e9;
+      --paper-deep:#e5e1d8;
+      --ink:#121411;
+      --muted:#62645f;
+      --line:rgba(18,20,17,.2);
+      --line-dark:rgba(242,240,233,.24);
+      --red:#540d0a;
+      --orange:#e24b22;
+      --night:#0c1110;
+      --rail:244px;
+      --top:58px;
+      --sans:Arial,Helvetica,sans-serif;
+      --serif:Georgia,"Times New Roman",serif;
+    }
+
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; background:var(--paper); }
+    body { margin:0; color:var(--ink); background:var(--paper); font-family:var(--serif); }
+    body.is-index-open { overflow:hidden; }
+    img,video { max-width:100%; }
+    a { color:inherit; text-underline-offset:.18em; }
+    button { font:inherit; }
+    ::selection { color:var(--paper); background:var(--red); }
+
+    .skip-link { position:fixed; z-index:100; left:12px; top:-60px; padding:10px 14px; color:var(--paper); background:var(--ink); font:700 11px/1 var(--sans); text-transform:uppercase; letter-spacing:.12em; }
+    .skip-link:focus { top:12px; }
+
+    .casebar { height:var(--top); position:sticky; z-index:50; top:0; display:grid; grid-template-columns:var(--rail) 1fr auto; align-items:center; color:var(--ink); background:rgba(242,240,233,.96); border-bottom:1px solid var(--line); backdrop-filter:blur(12px); }
+    .casebar-wordmark { height:100%; display:flex; align-items:center; padding:0 22px; border-right:1px solid var(--line); text-decoration:none; font:700 11px/1 var(--sans); letter-spacing:.04em; text-transform:uppercase; }
+    .casebar-file { display:flex; justify-content:center; gap:22px; padding:0 24px; color:var(--muted); font:8px/1 var(--sans); letter-spacing:.17em; text-transform:uppercase; }
+    .casebar-file b { color:var(--red); font-weight:700; }
+    .casebar-actions { height:100%; display:flex; align-items:stretch; }
+    .casebar-actions a,.index-toggle { display:flex; align-items:center; justify-content:center; min-width:132px; padding:0 18px; border:0; border-left:1px solid var(--line); color:var(--ink); background:transparent; text-decoration:none; font:700 9px/1 var(--sans); letter-spacing:.13em; text-transform:uppercase; cursor:pointer; }
+    .casebar-actions a:hover,.casebar-actions a:focus-visible,.index-toggle:hover,.index-toggle:focus-visible { color:var(--paper); background:var(--red); }
+    .index-toggle { display:none; min-width:82px; }
+
+    .cinematic-hero { min-height:calc(100svh - var(--top)); position:relative; display:grid; align-items:end; overflow:hidden; color:#fff; background:#0c0e0d; }
+    .cinematic-hero::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(0,0,0,.82) 0%,rgba(0,0,0,.34) 50%,rgba(0,0,0,.08) 100%),linear-gradient(0deg,rgba(0,0,0,.66),transparent 55%); }
+    .cinematic-hero video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:grayscale(1) contrast(1.05); }
+    .hero-copy { width:min(1500px,calc(100% - 80px)); position:relative; z-index:2; margin:0 auto; padding:8vh 0 10vh; display:grid; grid-template-columns:minmax(220px,.55fr) minmax(520px,1.45fr); gap:8vw; align-items:end; }
+    .hero-meta { align-self:start; color:rgba(255,255,255,.72); font:9px/1.5 var(--sans); letter-spacing:.18em; text-transform:uppercase; }
+    .hero-meta span { display:block; width:36px; height:2px; margin:16px 0; background:var(--orange); }
+    .hero-title { margin:0; font-size:clamp(70px,10.5vw,180px); font-weight:400; line-height:.75; letter-spacing:-.075em; }
+    .hero-title span { display:block; margin-left:11%; }
+    .hero-deck { max-width:720px; margin:46px 0 0 12%; color:rgba(255,255,255,.82); font-size:clamp(18px,1.7vw,28px); line-height:1.36; }
+    .hero-scroll { position:absolute; z-index:2; right:28px; bottom:26px; display:flex; align-items:center; gap:12px; color:rgba(255,255,255,.7); text-decoration:none; font:8px/1 var(--sans); letter-spacing:.17em; text-transform:uppercase; writing-mode:vertical-rl; }
+    .hero-scroll::after { content:""; width:1px; height:50px; background:rgba(255,255,255,.5); }
+
+    .waterfalls-record { height:calc(100svh - var(--top)); min-height:640px; position:relative; overflow:hidden; background:var(--paper); border-bottom:1px solid var(--line); }
+    .waterfalls-track { width:100%; height:100%; display:flex; overflow-x:auto; overflow-y:hidden; overscroll-behavior-inline:contain; scroll-snap-type:x mandatory; scrollbar-width:none; }
+    .waterfalls-track::-webkit-scrollbar { display:none; }
+    .waterfalls-slide { flex:0 0 100%; width:100%; height:100%; position:relative; display:grid; place-items:center; padding:clamp(38px,4.8vw,70px); padding-bottom:clamp(78px,8svh,104px); scroll-snap-align:start; scroll-snap-stop:always; }
+    .waterfalls-inner { width:min(1440px,100%); display:grid; grid-template-columns:minmax(230px,.55fr) minmax(520px,1.45fr); gap:clamp(54px,10vw,160px); align-items:center; }
+    [data-waterfalls-section="3"] .waterfalls-inner { column-gap:clamp(150px,17vw,320px); }
+    .waterfalls-meta { position:relative; z-index:3; }
+    .eyebrow,.chapter-id,.evidence-label { display:block; color:var(--red); font:700 9px/1.35 var(--sans); letter-spacing:.18em; text-transform:uppercase; }
+    .waterfalls-year { display:block; margin-top:8px; color:var(--muted); font:10px/1 var(--sans); letter-spacing:.15em; text-transform:uppercase; }
+    .waterfalls-meta h2 { margin:18px 0 0; max-width:500px; font-size:clamp(44px,5.5vw,88px); font-weight:400; line-height:.88; letter-spacing:-.055em; }
+    .waterfalls-copy { max-width:900px; font-size:clamp(18px,1.35vw,23px); line-height:1.47; letter-spacing:-.012em; }
+    .waterfalls-copy p { margin:0; }
+    .waterfalls-copy p + p { margin-top:1.2em; }
+    .waterfalls-frame { height:min(66svh,640px); min-height:360px; position:relative; margin:0; overflow:hidden; background:#ccc9c2; border:1px solid var(--line); }
+    .waterfalls-frame img { width:100%; height:100%; display:block; object-fit:cover; filter:grayscale(.2); }
+    .waterfalls-frame figcaption { position:absolute; left:0; right:0; bottom:0; padding:11px 14px; color:rgba(255,255,255,.82); background:linear-gradient(transparent,rgba(0,0,0,.72)); font:8px/1.4 var(--sans); letter-spacing:.12em; text-transform:uppercase; }
+    .factory-parent,.factory-location { margin:14px 0 0; color:var(--muted); font:9px/1.35 var(--sans); letter-spacing:.13em; text-transform:uppercase; }
+    .factory-location { margin-top:5px; color:var(--red); }
+    .micro-links { margin-top:20px; display:flex; flex-wrap:wrap; gap:6px 16px; }
+    .micro-links a { color:var(--muted); font:700 8px/1.35 var(--sans); letter-spacing:.1em; text-transform:uppercase; }
+    .micro-links a:hover { color:var(--red); }
+
+    .waterfalls-slide--carborundum { position:relative; overflow:visible; }
+    .waterfalls-slide--carborundum .waterfalls-inner { width:min(1220px,100%); height:100%; position:relative; display:block; }
+    .waterfalls-slide--carborundum .waterfalls-meta { width:34%; position:absolute; z-index:7; left:0; top:50%; transform:translateY(-50%); }
+    .waterfalls-slide--carborundum .waterfalls-meta h2 { max-width:none; white-space:nowrap; font-size:clamp(36px,5.5vw,68px); }
+    .waterfalls-slide--carborundum .waterfalls-frame { width:clamp(1132px,207.68svh,2013px); max-width:none; height:clamp(360px,66svh,640px); min-height:0; position:absolute; left:34%; top:50%; transform:translateY(-50%); overflow:visible; background:#092330; }
+    .waterfalls-slide--carborundum .waterfalls-frame img { width:100%; max-width:none; height:100%; object-fit:cover; }
+    .waterfalls-panorama-tail { flex:0 0 var(--carborundum-tail,0px); width:var(--carborundum-tail,0px); height:100%; position:relative; z-index:1; scroll-snap-align:end; scroll-snap-stop:always; pointer-events:none; background:transparent; }
+
+    .waterfalls-control { appearance:none; width:64px; height:42px; position:absolute; z-index:8; bottom:24px; padding:0; border:0; color:rgba(18,20,17,.58); background:transparent; cursor:pointer; font-size:0; transition:color .22s ease,opacity .25s ease,transform .25s ease; }
+    .waterfalls-prev { left:42%; opacity:0; pointer-events:none; }
+    .waterfalls-next { left:58%; }
+    .waterfalls-control::before { content:""; position:absolute; top:50%; width:44px; height:1px; background:currentColor; }
+    .waterfalls-prev::before { right:8px; }
+    .waterfalls-next::before { left:8px; }
+    .waterfalls-control::after { content:""; position:absolute; top:calc(50% - 4px); width:8px; height:8px; }
+    .waterfalls-prev::after { left:11px; border-top:1px solid currentColor; border-left:1px solid currentColor; transform:rotate(-45deg); }
+    .waterfalls-next::after { right:11px; border-top:1px solid currentColor; border-right:1px solid currentColor; transform:rotate(45deg); }
+    .waterfalls-prev:hover,.waterfalls-prev:focus-visible { color:var(--red); transform:translateX(-5px); }
+    .waterfalls-next:hover,.waterfalls-next:focus-visible { color:var(--red); transform:translateX(5px); }
+    .waterfalls-prev.is-visible { opacity:1; pointer-events:auto; }
+    .waterfalls-next:disabled { opacity:.18; cursor:default; pointer-events:none; transform:none; }
+
+    .waterfalls-progress { position:absolute; z-index:8; right:clamp(28px,4vw,58px); bottom:15px; display:flex; gap:3px; margin:0; padding:0; list-style:none; }
+    .waterfalls-progress li { transition:transform .25s ease; }
+    .waterfalls-progress button { appearance:none; min-width:43px; min-height:42px; display:grid; place-items:center; padding:0; border:0; color:rgba(18,20,17,.42); background:transparent; cursor:pointer; font:11px/1 var(--sans); letter-spacing:.09em; transition:color .25s ease; }
+    .waterfalls-progress button:hover,.waterfalls-progress button:focus-visible,.waterfalls-progress li.is-current button { color:var(--red); }
+    .waterfalls-progress li.is-current { transform:translateY(-3px); }
+
+    .dossier { display:grid; grid-template-columns:var(--rail) minmax(0,1fr); align-items:start; }
+    .case-index { height:calc(100svh - var(--top)); position:sticky; z-index:20; top:var(--top); display:flex; flex-direction:column; background:var(--paper); border-right:1px solid var(--line); }
+    .index-heading { padding:26px 22px 18px; border-bottom:1px solid var(--line); }
+    .index-heading small { color:var(--red); font:700 8px/1 var(--sans); letter-spacing:.16em; text-transform:uppercase; }
+    .index-heading strong { display:block; margin-top:11px; font:700 14px/1.05 var(--sans); text-transform:uppercase; }
+    .index-nav { flex:1; padding:8px 0; overflow:auto; }
+    .index-nav a { position:relative; display:grid; grid-template-columns:28px 1fr; align-items:center; min-height:47px; padding:10px 18px; color:var(--muted); border-bottom:1px solid rgba(18,20,17,.07); text-decoration:none; font:700 9px/1.25 var(--sans); letter-spacing:.06em; text-transform:uppercase; }
+    .index-nav a span { font-size:8px; color:rgba(18,20,17,.4); }
+    .index-nav a::after { content:""; width:3px; position:absolute; left:0; top:0; bottom:0; background:transparent; }
+    .index-nav a:hover,.index-nav a.is-active { color:var(--ink); background:var(--paper-deep); }
+    .index-nav a.is-active::after { background:var(--red); }
+    .index-foot { padding:20px 22px; border-top:1px solid var(--line); }
+    .index-foot a { display:block; padding:9px 0; color:var(--red); font:700 8px/1 var(--sans); letter-spacing:.12em; text-transform:uppercase; }
+
+    .case-content { min-width:0; overflow:hidden; }
+    .chapter { position:relative; border-bottom:1px solid var(--line); scroll-margin-top:var(--top); }
+    .chapter-cover { min-height:calc(100svh - var(--top)); display:grid; grid-template-columns:minmax(260px,.68fr) minmax(560px,1.32fr); align-items:stretch; }
+    .chapter-cover-meta { position:relative; padding:clamp(50px,6vw,92px) clamp(28px,4vw,70px); border-right:1px solid var(--line); }
+    .chapter-cover-meta::after { content:""; width:8px; height:8px; position:absolute; left:calc(100% - 4px); bottom:9%; border-radius:50%; background:var(--red); }
+    .chapter-cover-meta h2 { max-width:250px; margin:18px 0 0; font-size:clamp(23px,2.6vw,39px); font-weight:400; line-height:1; letter-spacing:-.035em; }
+    .chapter-cover-body { min-width:0; padding:clamp(50px,6vw,92px) clamp(28px,6vw,96px); display:flex; flex-direction:column; justify-content:center; }
+    .chapter-kicker { color:var(--red); font:700 9px/1 var(--sans); letter-spacing:.2em; text-transform:uppercase; }
+    .chapter-cover-body h3 { max-width:1050px; margin:22px 0 0; font-size:clamp(60px,8vw,142px); font-weight:400; line-height:.79; letter-spacing:-.065em; }
+    .chapter-cover-body .chapter-deck { max-width:820px; margin:40px 0 0; color:var(--muted); font-size:clamp(20px,2vw,31px); line-height:1.36; }
+    .chapter-cover.dark { color:var(--paper); background:var(--night); }
+    .chapter-cover.dark .chapter-cover-meta { border-color:var(--line-dark); }
+    .chapter-cover.dark .chapter-deck { color:rgba(242,240,233,.67); }
+
+    .content-block { padding:clamp(72px,9vw,150px) clamp(30px,6vw,104px); }
+    .reading-grid { display:grid; grid-template-columns:minmax(150px,.32fr) minmax(500px,1fr); gap:clamp(48px,7vw,110px); }
+    .side-note { color:var(--red); font:700 9px/1.45 var(--sans); letter-spacing:.14em; text-transform:uppercase; }
+    .side-note::before { content:""; display:block; width:42px; height:1px; margin-bottom:16px; background:var(--red); }
+    .prose { max-width:920px; }
+    .prose h4 { margin:0 0 32px; font-size:clamp(42px,5vw,82px); font-weight:400; line-height:.92; letter-spacing:-.05em; }
+    .prose h5 { margin:60px 0 20px; font-size:clamp(26px,3vw,44px); font-weight:400; line-height:1; letter-spacing:-.035em; }
+    .prose p { margin:0; font-size:clamp(18px,1.5vw,24px); line-height:1.55; }
+    .prose p + p { margin-top:1.2em; }
+    .prose .lede { font-size:clamp(27px,3.2vw,49px); line-height:1.18; letter-spacing:-.035em; }
+
+    .resource-row { margin-top:42px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); border-top:1px solid var(--line); border-left:1px solid var(--line); }
+    .resource-row a { min-height:110px; display:flex; flex-direction:column; justify-content:space-between; padding:20px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); text-decoration:none; }
+    .resource-row span { color:var(--muted); font:700 8px/1 var(--sans); letter-spacing:.14em; text-transform:uppercase; }
+    .resource-row strong { margin-top:22px; font:400 24px/1.08 var(--serif); }
+    .resource-row a:hover { color:var(--paper); background:var(--red); }
+    .resource-row a:hover span { color:rgba(242,240,233,.68); }
+
+    .atomic-stat { padding:clamp(60px,8vw,120px) clamp(30px,6vw,104px); text-align:center; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+    .atomic-stat small { color:var(--red); font:700 9px/1 var(--sans); letter-spacing:.18em; text-transform:uppercase; }
+    .atomic-stat strong { display:block; margin:22px 0 0; font:700 clamp(72px,11vw,190px)/.78 var(--sans); letter-spacing:-.075em; }
+    .atomic-stat strong::after { content:""; display:block; width:min(720px,70%); height:4px; margin:24px auto 18px; background:var(--orange); }
+    .atomic-stat p { max-width:720px; margin:0 auto; font-size:clamp(18px,1.7vw,26px); line-height:1.4; }
+    .process-chain { display:grid; grid-template-columns:repeat(3,1fr); border-bottom:1px solid var(--line); }
+    .process-card { min-height:520px; display:flex; flex-direction:column; border-right:1px solid var(--line); }
+    .process-card:last-child { border-right:0; }
+    .process-card figure { height:260px; margin:0; overflow:hidden; background:var(--night); }
+    .process-card img { width:100%; height:100%; object-fit:cover; filter:grayscale(1); transition:filter .4s ease,transform .6s ease; }
+    .process-card:hover img { filter:grayscale(0); transform:scale(1.03); }
+    .process-card-copy { flex:1; padding:26px; }
+    .process-card small { color:var(--red); font:700 8px/1 var(--sans); letter-spacing:.14em; text-transform:uppercase; }
+    .process-card h4 { margin:22px 0 18px; font-size:clamp(27px,2.6vw,43px); font-weight:400; line-height:.96; letter-spacing:-.04em; }
+    .process-card p { margin:0; color:var(--muted); font:400 15px/1.48 var(--serif); }
+
+    .love-layout { padding:clamp(70px,9vw,140px) clamp(30px,6vw,104px); display:grid; grid-template-columns:minmax(420px,1.1fr) minmax(240px,.48fr); gap:clamp(50px,7vw,110px); }
+    .love-story h4 { margin:0 0 32px; font-size:clamp(50px,6vw,100px); font-weight:400; line-height:.87; letter-spacing:-.055em; }
+    .love-story figure { margin:40px 0; }
+    .love-story img { width:100%; display:block; filter:grayscale(1); border:1px solid var(--line); }
+    .love-story figcaption { padding-top:9px; color:var(--muted); font:8px/1.4 var(--sans); letter-spacing:.12em; text-transform:uppercase; }
+    .love-story p { font-size:clamp(18px,1.45vw,23px); line-height:1.52; }
+    .love-rail { border-left:1px solid var(--line); }
+    .timeline-card { position:relative; padding:0 0 48px 34px; }
+    .timeline-card::before { content:""; width:7px; height:7px; position:absolute; left:-4px; top:0; background:var(--orange); }
+    .timeline-card time { color:var(--red); font:700 9px/1 var(--sans); letter-spacing:.15em; }
+    .timeline-card strong { display:block; margin:18px 0 8px; font-size:clamp(28px,3vw,46px); line-height:.95; font-weight:400; }
+    .timeline-card p { margin:0; color:var(--muted); font:400 14px/1.5 var(--serif); }
+    .timeline-card a { display:inline-block; margin-top:16px; color:var(--red); font:700 8px/1 var(--sans); letter-spacing:.1em; text-transform:uppercase; }
+
+    .loow-plate { min-height:82svh; position:relative; display:grid; align-items:end; overflow:hidden; color:var(--paper); background:var(--night); }
+    .loow-plate::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(0,0,0,.88),rgba(0,0,0,.18)),linear-gradient(0deg,rgba(0,0,0,.75),transparent 60%); }
+    .loow-plate img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:grayscale(1) contrast(1.1); }
+    .loow-copy { width:min(1000px,calc(100% - 60px)); position:relative; z-index:2; padding:90px 0; margin-left:clamp(30px,6vw,104px); }
+    .loow-copy h4 { margin:20px 0 28px; font-size:clamp(62px,8vw,140px); font-weight:400; line-height:.78; letter-spacing:-.06em; }
+    .loow-copy p { max-width:760px; color:rgba(242,240,233,.78); font-size:clamp(19px,1.7vw,28px); line-height:1.42; }
+    .containment { display:grid; grid-template-columns:minmax(320px,.75fr) minmax(500px,1.25fr); background:var(--paper-deep); }
+    .containment-copy { padding:clamp(60px,7vw,110px) clamp(30px,5vw,80px); }
+    .containment-copy h4 { margin:22px 0 30px; font-size:clamp(43px,5vw,80px); font-weight:400; line-height:.88; letter-spacing:-.05em; }
+    .containment-copy p { font-size:clamp(17px,1.4vw,22px); line-height:1.52; }
+    .containment-media { min-height:650px; display:grid; place-items:center; padding:50px; background:#d5d3cc; border-left:1px solid var(--line); }
+    .containment-media img { width:100%; height:auto; mix-blend-mode:multiply; }
+
+    .survey-dashboard { padding:clamp(76px,9vw,145px) clamp(30px,6vw,104px); background:var(--night); color:var(--paper); }
+    .survey-dashboard > header { display:grid; grid-template-columns:.42fr 1fr; gap:8vw; align-items:end; padding-bottom:64px; border-bottom:1px solid var(--line-dark); }
+    .survey-dashboard h4 { margin:0; font-size:clamp(58px,7vw,118px); font-weight:400; line-height:.8; letter-spacing:-.06em; }
+    .survey-dashboard header p { max-width:760px; margin:0; color:rgba(242,240,233,.68); font-size:clamp(18px,1.6vw,25px); line-height:1.45; }
+    .survey-reports { display:grid; grid-template-columns:repeat(2,1fr); border-left:1px solid var(--line-dark); }
+    .survey-report { min-height:520px; padding:40px; border-right:1px solid var(--line-dark); border-bottom:1px solid var(--line-dark); }
+    .survey-report time { color:#dfc6b7; font:700 10px/1 var(--sans); letter-spacing:.18em; }
+    .survey-report h5 { margin:25px 0 24px; font-size:clamp(40px,4.6vw,74px); font-weight:400; line-height:.9; letter-spacing:-.05em; }
+    .survey-report p { color:rgba(242,240,233,.68); font-size:clamp(17px,1.35vw,22px); line-height:1.5; }
+    .survey-report a { display:inline-block; margin-top:24px; color:#dfc6b7; font:700 8px/1 var(--sans); letter-spacing:.13em; text-transform:uppercase; }
+    .survey-accounting { display:grid; grid-template-columns:repeat(3,1fr); }
+    .survey-accounting article { min-height:255px; padding:32px; border-right:1px solid var(--line-dark); }
+    .survey-accounting article:last-child { border-right:0; }
+    .survey-accounting strong { display:block; font:400 clamp(72px,8vw,130px)/.75 var(--serif); letter-spacing:-.06em; }
+    .survey-accounting span { display:block; max-width:280px; margin-top:25px; color:rgba(242,240,233,.68); font:12px/1.45 var(--sans); }
+    .survey-map { position:relative; margin:0; border-top:1px solid var(--line-dark); }
+    .survey-map img { width:100%; max-height:760px; display:block; object-fit:cover; filter:invert(1) grayscale(1) contrast(.85); opacity:.85; }
+    .survey-map figcaption { position:absolute; left:20px; bottom:18px; padding:8px 10px; background:rgba(12,17,16,.82); color:rgba(242,240,233,.68); font:8px/1.4 var(--sans); letter-spacing:.12em; text-transform:uppercase; }
+
+    .factory-ledger { padding:clamp(72px,9vw,140px) clamp(30px,6vw,104px); }
+    .factory-ledger header { max-width:1000px; }
+    .factory-ledger h4 { margin:20px 0 28px; font-size:clamp(58px,7vw,118px); font-weight:400; line-height:.82; letter-spacing:-.06em; }
+    .factory-ledger header p { max-width:800px; color:var(--muted); font-size:clamp(18px,1.5vw,24px); line-height:1.5; }
+    .factory-list { margin-top:62px; border-top:1px solid var(--line); }
+    .factory-list a { min-height:82px; display:grid; grid-template-columns:80px 1fr auto; align-items:center; gap:24px; padding:12px 0; border-bottom:1px solid var(--line); text-decoration:none; }
+    .factory-list span { color:var(--red); font:700 9px/1 var(--sans); letter-spacing:.13em; }
+    .factory-list strong { font-size:clamp(24px,2.4vw,39px); font-weight:400; }
+    .factory-list em { color:var(--muted); font:normal 700 8px/1 var(--sans); letter-spacing:.12em; text-transform:uppercase; }
+    .factory-list a:hover strong { color:var(--red); }
+
+    .telvock { padding:clamp(72px,9vw,145px) clamp(30px,6vw,104px); display:grid; grid-template-columns:minmax(320px,.8fr) minmax(520px,1.2fr); gap:clamp(50px,7vw,110px); background:var(--paper-deep); }
+    .telvock figure { margin:0; position:sticky; top:calc(var(--top) + 30px); align-self:start; }
+    .telvock img { width:100%; display:block; background:var(--night); }
+    .telvock figcaption { padding-top:10px; color:var(--muted); font:8px/1.4 var(--sans); letter-spacing:.11em; text-transform:uppercase; }
+    .telvock-copy h4 { margin:20px 0 32px; font-size:clamp(52px,6vw,100px); font-weight:400; line-height:.84; letter-spacing:-.055em; }
+    .telvock-copy p { font-size:clamp(18px,1.45vw,23px); line-height:1.53; }
+    .telvock-links { margin-top:40px; border-top:1px solid var(--line); }
+    .telvock-links a { display:block; padding:22px 0; border-bottom:1px solid var(--line); text-decoration:none; }
+    .telvock-links span { color:var(--red); font:700 8px/1 var(--sans); letter-spacing:.12em; text-transform:uppercase; }
+    .telvock-links strong { display:block; margin-top:10px; font-size:clamp(21px,2vw,32px); font-weight:400; }
+
+    .project-origin { padding:clamp(76px,10vw,160px) clamp(30px,6vw,104px); }
+    .project-origin > header { display:grid; grid-template-columns:.42fr 1fr; gap:8vw; }
+    .project-origin h4 { margin:0; font-size:clamp(58px,7vw,118px); font-weight:400; line-height:.82; letter-spacing:-.06em; }
+    .project-origin .origin-intro { max-width:820px; font-size:clamp(24px,2.5vw,40px); line-height:1.3; letter-spacing:-.03em; }
+    .origin-quote { margin:90px 0; padding:50px 0; border-top:2px solid var(--red); border-bottom:2px solid var(--red); }
+    .origin-quote blockquote { margin:0; font-size:clamp(58px,8vw,138px); font-style:italic; line-height:.82; letter-spacing:-.06em; }
+    .origin-quote figcaption { margin-top:24px; color:var(--red); font:700 9px/1 var(--sans); letter-spacing:.13em; text-transform:uppercase; }
+    .origin-story { display:grid; grid-template-columns:.42fr 1fr; gap:8vw; }
+    .origin-story .prose { max-width:890px; }
+    .research-paths { margin-top:90px; display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--line); border-left:1px solid var(--line); }
+    .research-card { min-height:390px; padding:30px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); }
+    .research-card small { color:var(--red); font:700 8px/1 var(--sans); letter-spacing:.13em; text-transform:uppercase; }
+    .research-card h5 { margin:38px 0 18px; font-size:clamp(30px,3vw,48px); font-weight:400; line-height:.95; letter-spacing:-.04em; }
+    .research-card p { color:var(--muted); font:400 15px/1.55 var(--serif); }
+    .research-card a { display:inline-block; margin-top:20px; color:var(--red); font:700 8px/1 var(--sans); letter-spacing:.12em; text-transform:uppercase; }
+
+    .public-record { padding:clamp(70px,9vw,140px) clamp(30px,6vw,104px); color:var(--paper); background:var(--red); }
+    .public-record-grid { display:grid; grid-template-columns:.6fr 1.4fr; gap:8vw; }
+    .public-record strong { display:block; font:400 clamp(110px,16vw,260px)/.68 var(--serif); letter-spacing:-.08em; }
+    .public-record small { display:block; margin-top:28px; color:rgba(242,240,233,.66); font:700 9px/1.35 var(--sans); letter-spacing:.14em; text-transform:uppercase; }
+    .public-record h4 { margin:0 0 28px; font-size:clamp(47px,5.4vw,86px); font-weight:400; line-height:.9; letter-spacing:-.05em; }
+    .public-record p { font-size:clamp(18px,1.5vw,24px); line-height:1.5; }
+    .public-actions { margin-top:44px; display:grid; grid-template-columns:repeat(2,1fr); border-top:1px solid rgba(242,240,233,.35); border-left:1px solid rgba(242,240,233,.35); }
+    .public-actions a { min-height:142px; padding:24px; display:flex; flex-direction:column; justify-content:space-between; border-right:1px solid rgba(242,240,233,.35); border-bottom:1px solid rgba(242,240,233,.35); text-decoration:none; }
+    .public-actions span { color:rgba(242,240,233,.65); font:700 8px/1 var(--sans); letter-spacing:.13em; text-transform:uppercase; }
+    .public-actions strong { font:400 clamp(25px,2.8vw,42px)/1 var(--serif); letter-spacing:-.03em; }
+    .public-actions a:hover { color:var(--red); background:var(--paper); }
+    .public-actions a:hover span { color:var(--red); }
+
+    .survey-now { padding:clamp(72px,9vw,140px) clamp(30px,6vw,104px); }
+    .survey-now > header { max-width:1000px; }
+    .survey-now h4 { margin:20px 0 28px; font-size:clamp(54px,6.5vw,108px); font-weight:400; line-height:.84; letter-spacing:-.055em; }
+    .survey-now header p { color:var(--muted); font-size:clamp(19px,1.6vw,25px); line-height:1.5; }
+    .phase-list { margin-top:70px; display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--line); border-left:1px solid var(--line); }
+    .phase { min-height:330px; padding:30px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); }
+    .phase time { color:var(--red); font:700 9px/1 var(--sans); letter-spacing:.15em; }
+    .phase h5 { margin:46px 0 18px; font-size:clamp(31px,3.4vw,53px); font-weight:400; line-height:.93; letter-spacing:-.04em; }
+    .phase p { margin:0; color:var(--muted); font:400 15px/1.55 var(--serif); }
+
+    .closing { color:var(--paper); background:var(--night); }
+    .closing-lead { min-height:86svh; display:grid; align-items:center; padding:clamp(70px,9vw,150px) clamp(30px,6vw,104px); border-bottom:1px solid var(--line-dark); }
+    .closing-lead p { max-width:1320px; margin:0; font-size:clamp(50px,7.2vw,126px); line-height:.89; letter-spacing:-.06em; }
+    .closing-body { padding:clamp(72px,9vw,145px) clamp(30px,6vw,104px); }
+    .closing-grid { display:grid; grid-template-columns:.42fr 1fr; gap:8vw; }
+    .closing-copy { max-width:900px; }
+    .closing-copy p { color:rgba(242,240,233,.76); font-size:clamp(18px,1.5vw,24px); line-height:1.52; }
+    .closing-copy p + p { margin-top:1.3em; }
+    .remedial { margin:60px 0; padding:34px; color:var(--ink); background:var(--paper); }
+    .remedial span { color:var(--red); font:700 9px/1 var(--sans); letter-spacing:.14em; text-transform:uppercase; }
+    .remedial h4 { margin:26px 0 18px; font-size:clamp(38px,4vw,65px); font-weight:400; line-height:.92; letter-spacing:-.045em; }
+    .remedial p { color:var(--muted); }
+
+    .health { min-height:100svh; color:var(--ink); background:var(--paper); }
+    .health-header { padding:clamp(72px,9vw,145px) clamp(30px,6vw,104px); display:grid; grid-template-columns:.42fr 1fr; gap:8vw; border-bottom:1px solid var(--line); }
+    .health-header h4 { margin:0; font-size:clamp(58px,7vw,118px); font-weight:400; line-height:.82; letter-spacing:-.06em; }
+    .health-header blockquote { margin:0; font-size:clamp(28px,3.4vw,52px); line-height:1.18; letter-spacing:-.04em; }
+    .health-header cite { display:block; margin-top:20px; color:var(--red); font:normal 700 8px/1.4 var(--sans); letter-spacing:.12em; text-transform:uppercase; }
+    .health-grid { display:grid; grid-template-columns:repeat(3,1fr); }
+    .health-card { min-height:430px; padding:34px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); }
+    .health-card:last-child { border-right:0; }
+    .health-card small { color:var(--red); font:700 8px/1 var(--sans); letter-spacing:.13em; text-transform:uppercase; }
+    .health-card strong { display:block; margin:60px 0 28px; font-size:clamp(66px,8vw,130px); font-weight:400; line-height:.7; letter-spacing:-.07em; }
+    .health-card p { color:var(--muted); font:400 15px/1.55 var(--serif); }
+    .health-sources { padding:50px clamp(30px,6vw,104px) 100px; }
+    .health-sources a { display:grid; grid-template-columns:50px 1fr auto; gap:20px; align-items:center; min-height:70px; border-top:1px solid var(--line); text-decoration:none; }
+    .health-sources span { color:var(--red); font:700 9px/1 var(--sans); }
+    .health-sources strong { font-size:clamp(19px,2vw,30px); font-weight:400; }
+    .health-sources em { color:var(--muted); font:normal 700 8px/1 var(--sans); letter-spacing:.1em; text-transform:uppercase; }
+
+    .site-footer { display:grid; grid-template-columns:var(--rail) 1fr auto; min-height:92px; align-items:stretch; background:var(--paper); border-top:1px solid var(--line); }
+    .site-footer strong,.site-footer p,.site-footer a { margin:0; padding:24px; display:flex; align-items:center; border-right:1px solid var(--line); font:700 8px/1.4 var(--sans); letter-spacing:.12em; text-transform:uppercase; }
+    .site-footer p { color:var(--muted); }
+    .site-footer a { color:var(--paper); background:var(--red); border-right:0; text-decoration:none; }
+
+    [data-reveal] { opacity:0; transform:translateY(34px); transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1); }
+    [data-reveal].is-visible { opacity:1; transform:none; }
+
+    @media (max-width:980px) {
+      :root { --rail:0px; --top:52px; }
+      .casebar { grid-template-columns:1fr auto; }
+      .casebar-wordmark { border-right:0; }
+      .casebar-file { display:none; }
+      .casebar-actions a { display:none; }
+      .index-toggle { display:flex; }
+      .hero-copy,.waterfalls-inner,.chapter-cover,.reading-grid,.love-layout,.containment,.survey-dashboard > header,.telvock,.project-origin > header,.origin-story,.public-record-grid,.closing-grid,.health-header { grid-template-columns:1fr; }
+      .hero-copy { width:calc(100% - 42px); gap:42px; }
+      .hero-title span,.hero-deck { margin-left:0; }
+      .waterfalls-slide { padding:34px 22px 88px; align-items:start; }
+      .waterfalls-inner { gap:28px; }
+      .waterfalls-frame { height:44svh; min-height:260px; }
+      .waterfalls-prev { left:22px; }
+      .waterfalls-next { left:84px; }
+      .waterfalls-progress { right:12px; }
+      .waterfalls-progress button { width:29px; }
+      .dossier { grid-template-columns:1fr; }
+      .case-index { width:min(360px,90vw); position:fixed; z-index:70; left:0; top:var(--top); transform:translateX(-102%); transition:transform .3s ease; box-shadow:24px 0 60px rgba(0,0,0,.18); }
+      body.is-index-open .case-index { transform:none; }
+      .chapter-cover-meta { min-height:180px; border-right:0; border-bottom:1px solid var(--line); }
+      .chapter-cover-meta::after { left:auto; right:8%; bottom:-4px; }
+      .chapter-cover-body h3 { font-size:clamp(62px,13vw,122px); }
+      .reading-grid,.love-layout,.telvock,.project-origin > header,.origin-story,.public-record-grid,.closing-grid,.health-header { gap:48px; }
+      .process-chain,.research-paths,.phase-list,.health-grid { grid-template-columns:1fr; }
+      .process-card,.research-card,.phase,.health-card { border-right:0; }
+      .survey-accounting { grid-template-columns:1fr; }
+      .survey-accounting article { border-right:0; border-bottom:1px solid var(--line-dark); }
+      .containment-media { min-height:420px; border-left:0; border-top:1px solid var(--line); }
+      .telvock figure { position:relative; top:auto; }
+      .site-footer { grid-template-columns:1fr; }
+      .site-footer strong,.site-footer p,.site-footer a { border-right:0; border-bottom:1px solid var(--line); }
+    }
+
+    @media (max-width:640px) {
+      .cinematic-hero { min-height:calc(100svh - var(--top)); }
+      .hero-title { font-size:clamp(62px,20vw,92px); }
+      .hero-deck { margin-top:30px; }
+      .waterfalls-record { min-height:700px; }
+      .waterfalls-copy { font-size:17px; }
+      .waterfalls-meta h2 { font-size:clamp(42px,14vw,70px); }
+      .waterfalls-frame { height:40svh; }
+      .waterfalls-progress { display:none; }
+      .chapter-cover { min-height:auto; }
+      .chapter-cover-meta,.chapter-cover-body,.content-block,.atomic-stat,.love-layout,.survey-dashboard,.factory-ledger,.telvock,.project-origin,.public-record,.survey-now,.closing-lead,.closing-body,.health-header { padding-left:22px; padding-right:22px; }
+      .chapter-cover-body { min-height:76svh; }
+      .resource-row,.public-actions,.survey-reports { grid-template-columns:1fr; }
+      .process-card { min-height:auto; }
+      .process-card figure { height:230px; }
+      .survey-report { min-height:auto; padding:30px 0; border-right:0; }
+      .factory-list a { grid-template-columns:42px 1fr; }
+      .factory-list em { grid-column:2; padding-bottom:10px; }
+      .research-paths,.phase-list { border-left:0; }
+      .research-card,.phase { padding:28px 0; }
+      .public-record strong { font-size:34vw; }
+      .health-sources a { grid-template-columns:34px 1fr; padding:18px 0; }
+      .health-sources em { grid-column:2; }
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+      html { scroll-behavior:auto; }
+      *,*::before,*::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
+      [data-reveal] { opacity:1; transform:none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#dossier">Skip to the investigation</a>
+
+  <header class="casebar">
+    <a class="casebar-wordmark" href="./rebuild.html">Greetings from Niagara</a>
+    <div class="casebar-file"><span>Manhattan District · <b>Open record</b></span><span>Report ID · 1942–present</span><span>Research file · 800+ sources</span></div>
+    <div class="casebar-actions">
+      <a href="./rebuild.html#evidence">Evidence</a>
+      <a href="./rebuild.html#map">Interactive map</a>
+      <button class="index-toggle" type="button" aria-expanded="false" aria-controls="case-index">Index</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="cinematic-hero" aria-labelledby="page-title">
+      <video autoplay muted loop playsinline preload="metadata" aria-label="Archival family film from Niagara Falls">
+        <source src="./atomic-niagara-loop.mp4" type="video/mp4" />
+      </video>
+      <div class="hero-copy">
+        <div class="hero-meta">Ongoing investigation<span></span>Western New York<br />1895–present</div>
+        <div>
+          <h1 class="hero-title" id="page-title">Greetings <span>from Niagara</span></h1>
+          <p class="hero-deck">A research-driven photography and multimedia project tracing the human and environmental consequences of Manhattan Project and Cold War industry.</p>
+        </div>
+      </div>
+      <a class="hero-scroll" href="#waterfalls">Begin with the water</a>
+    </section>
+
+    <section class="waterfalls-record" id="waterfalls" aria-label="The waterfalls and industry">
+      <div class="waterfalls-track" tabindex="0" aria-label="Eight-part introduction. Use the arrow keys or controls to move between sections.">
+        <article class="waterfalls-slide" data-waterfalls-section="0">
+          <div class="waterfalls-inner">
+            <header class="waterfalls-meta"><span class="eyebrow">Origins</span><span class="waterfalls-year">1895</span><h2>The waterfalls + industry</h2></header>
+            <div class="waterfalls-copy">
+              <p>Driving through America’s Honeymoon Capital, Niagara Falls, one might hear the roar of the waterfalls, but this roar can’t silence the echoes of a buried secret: this city is heavily radioactive. Niagara Falls’s involvement in the Manhattan Project and the nuclear buildup that followed during the Cold War left a radioactive scar on the region. For thousands of years, this area will face the consequences of this contamination.</p>
+              <p>The origin of this American tragedy is rooted in what attracts tourists year after year: its waterfalls. Niagara Falls has long been a source of cheap and abundant hydroelectric power. In 1895, the Adams Power Station became the world’s first large-scale alternating-current power plant, supplying the city’s factories with cheap, abundant, reliable electricity.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="waterfalls-slide" data-waterfalls-section="1">
+          <div class="waterfalls-inner">
+            <header class="waterfalls-meta"><span class="eyebrow">Origins</span><span class="waterfalls-year">1895</span><h2>Adams Power Station</h2><div class="micro-links"><a href="./rebuild.html#map">Locate on the map →</a></div></header>
+            <figure class="waterfalls-frame"><img src="./archive/adams-power-station-aerial.jpg" alt="Aerial view of Adams Power Station and the Niagara Falls industrial landscape" /><figcaption>Adams Power Station and the surrounding industrial landscape</figcaption></figure>
+          </div>
+        </article>
+
+        <article class="waterfalls-slide" data-waterfalls-section="2">
+          <div class="waterfalls-inner">
+            <header class="waterfalls-meta"><span class="eyebrow">Origins</span><span class="waterfalls-year">1896</span><h2>Inside Adams Power Station</h2></header>
+            <figure class="waterfalls-frame"><img src="./archive/adams-power-station-machinery-1896.jpg" alt="Interior of the Adams Power Station generating room in 1896" /><figcaption>Adams Power Station · May 7, 1896 · Daniel Dumych Collection, Niagara County Historical Society</figcaption></figure>
+          </div>
+        </article>
+
+        <article class="waterfalls-slide" data-waterfalls-section="3">
+          <div class="waterfalls-inner">
+            <header class="waterfalls-meta"><span class="eyebrow">Origins</span><span class="waterfalls-year">1895–1942</span><h2>Electrochemistry +<br />electrometallurgy</h2></header>
+            <div class="waterfalls-copy">
+              <p>This new supply of electricity opened a new era of metal production and electrochemical discovery. Electric furnaces could reach temperatures exceeding 7,000 degrees Fahrenheit, enabling chemical changes in materials that had previously been impossible.</p>
+              <p>Hooker produced chlorine and caustic soda. Linde produced industrial gases. Electromet manufactured specialized alloys and became the nation’s largest producer of uranium metal. Vanadium strengthened steel. Carborundum pioneered the synthetic abrasive that transformed industrial grinding and cutting. These were not ordinary factories.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="waterfalls-slide" data-waterfalls-section="4">
+          <div class="waterfalls-inner">
+            <header class="waterfalls-meta"><span class="eyebrow">Industrial record</span><span class="waterfalls-year">1937</span><h2>Linde</h2><p class="factory-parent">Union Carbide division</p><p class="factory-location">North Tonawanda, Niagara County</p><div class="micro-links"><a href="./rebuild.html?archive=Linde#evidence">Search Linde records →</a><a href="./rebuild.html#map">Open map →</a></div></header>
+            <figure class="waterfalls-frame"><img src="./archive/linde-machine-shop-1937.jpg" alt="Workers inside the Linde plant machine shop in 1937" loading="lazy" /><figcaption>Linde machine shop · August 15, 1937</figcaption></figure>
+          </div>
+        </article>
+
+        <article class="waterfalls-slide" data-waterfalls-section="5">
+          <div class="waterfalls-inner">
+            <header class="waterfalls-meta"><span class="eyebrow">Industrial record</span><span class="waterfalls-year">Before 1942</span><h2>Electromet</h2><p class="factory-parent">Union Carbide division</p><p class="factory-location">Niagara Falls</p><div class="micro-links"><a href="./rebuild.html?archive=Electromet#evidence">Search Electromet records →</a><a href="./rebuild.html#map">Open map →</a></div></header>
+            <figure class="waterfalls-frame"><img src="./archive/electromet-niagara-falls.jpg" alt="Gantry crane and raw materials at the Electromet plant" loading="lazy" /><figcaption>Electromet plant · Niagara Falls, New York</figcaption></figure>
+          </div>
+        </article>
+
+        <article class="waterfalls-slide" data-waterfalls-section="6">
+          <div class="waterfalls-inner">
+            <header class="waterfalls-meta"><span class="eyebrow">Industrial record</span><span class="waterfalls-year">Before 1942</span><h2>Hooker</h2><p class="factory-parent">Electrochemical Company</p><p class="factory-location">Niagara Falls</p><div class="micro-links"><a href="./rebuild.html?archive=Hooker#evidence">Search Hooker records →</a><a href="./rebuild.html#map">Open map →</a></div></header>
+            <figure class="waterfalls-frame"><img src="./archive/hooker-electrochemical-niagara-falls.jpg" alt="Aerial view of the Hooker Electrochemical Company plant" loading="lazy" /><figcaption>Hooker Electrochemical Company · Niagara Falls, New York</figcaption></figure>
+          </div>
+        </article>
+
+        <article class="waterfalls-slide waterfalls-slide--carborundum" data-waterfalls-section="7">
+          <div class="waterfalls-inner">
+            <header class="waterfalls-meta"><span class="eyebrow">Industrial record</span><span class="waterfalls-year">Before 1942</span><h2>Carborundum</h2><p class="factory-location">Niagara Falls</p><div class="micro-links"><a href="./rebuild.html?archive=Carborundum#evidence">Search Carborundum records →</a><a href="./rebuild.html#map">Open map →</a></div></header>
+            <figure class="waterfalls-frame"><img src="./archive/carborundum-company-niagara-falls.jpg" alt="Historical panorama of the Carborundum Company plant" loading="lazy" /><figcaption>The Carborundum Company · Niagara Falls, New York</figcaption></figure>
+          </div>
+        </article>
+        <div class="waterfalls-panorama-tail" aria-hidden="true"></div>
+      </div>
+      <button class="waterfalls-control waterfalls-prev" type="button" aria-label="Previous waterfall section">←</button>
+      <button class="waterfalls-control waterfalls-next" type="button" aria-label="Next waterfall section">→</button>
+      <ol class="waterfalls-progress" aria-label="Choose a waterfall section">
+        <li class="is-current"><button type="button" data-waterfalls-target="0" aria-current="step">01</button></li><li><button type="button" data-waterfalls-target="1">02</button></li><li><button type="button" data-waterfalls-target="2">03</button></li><li><button type="button" data-waterfalls-target="3">04</button></li><li><button type="button" data-waterfalls-target="4">05</button></li><li><button type="button" data-waterfalls-target="5">06</button></li><li><button type="button" data-waterfalls-target="6">07</button></li><li><button type="button" data-waterfalls-target="7">08</button></li>
+      </ol>
+    </section>
+
+    <div class="dossier" id="dossier">
+      <aside class="case-index" id="case-index" aria-label="Dossier index">
+        <div class="index-heading"><small>Manhattan District</small><strong>Dossier index</strong></div>
+        <nav class="index-nav">
+          <a href="#atomic"><span>01</span>Atomic Niagara</a>
+          <a href="#love-canal"><span>02</span>Love Canal</a>
+          <a href="#loow"><span>03</span>LOOW + NFSS</a>
+          <a href="#surveys"><span>04</span>The surveys</a>
+          <a href="#union-carbide"><span>05</span>Union Carbide</a>
+          <a href="#project"><span>06</span>Project archive</a>
+          <a href="#closing"><span>07</span>What remains</a>
+          <a href="#health"><span>08</span>Health record</a>
+        </nav>
+        <div class="index-foot"><a href="./rebuild.html#evidence">Examine evidence →</a><a href="./rebuild.html#map">Follow the geography →</a></div>
+      </aside>
+
+      <div class="case-content">
+        <section class="chapter" id="atomic" data-chapter>
+          <div class="chapter-cover dark">
+            <header class="chapter-cover-meta"><span class="chapter-id">Chapter I</span><h2>1942–1978<br />Production becomes a secret system.</h2></header>
+            <div class="chapter-cover-body"><span class="chapter-kicker">The Manhattan Project reaches Niagara</span><h3>Atomic Niagara</h3><p class="chapter-deck">Cheap power, specialized chemistry, and an established network of metal plants made the Niagara Frontier essential to the production of uranium compounds and metal.</p></div>
+          </div>
+
+          <div class="atomic-stat" data-reveal><small>The Federal Connection · 1981</small><strong>37M GALLONS</strong><p>of radioactively contaminated chemical waste identified by the report—left dispersed across Linde, Electromet, Hooker, and LOOW.</p></div>
+
+          <div class="process-chain" aria-label="Uranium production chain">
+            <article class="process-card" data-reveal><figure><img src="./archive/green-salt-uranium-tetrafluoride.jpg" alt="Uranium tetrafluoride, known as green salt" loading="lazy" /></figure><div class="process-card-copy"><small>Stage 01 · Chemical conversion</small><h4>Uranium tetrafluoride</h4><p>Linde and Hooker helped convert uranium concentrates into uranium compounds used in the production chain.</p></div></article>
+            <article class="process-card" data-reveal><figure><img src="./archive/uranium-recovery-hooker-report-p90.webp" alt="Historical technical report page on uranium recovery" loading="lazy" /></figure><div class="process-card-copy"><small>Stage 02 · Refinement byproduct</small><h4>Recovery + waste</h4><p>The same processes produced residues, contaminated liquids, slag, and other wastes requiring storage or disposal.</p></div></article>
+            <article class="process-card" data-reveal><figure><img src="./archive/uranium-metal-rods.jpg" alt="Processed uranium metal rods" loading="lazy" /></figure><div class="process-card-copy"><small>Stage 03 · Metal production</small><h4>Processed uranium metal</h4><p>Electromet produced uranium metal used in the wartime production system and the nuclear buildup that followed.</p></div></article>
+          </div>
+
+          <div class="content-block">
+            <div class="reading-grid">
+              <aside class="side-note">The hidden production chain</aside>
+              <div class="prose" data-reveal>
+                <h4>A regional system, not one factory.</h4>
+                <p class="lede">The bomb was assembled elsewhere. Its materials were transformed here.</p>
+                <p>Niagara’s factories separated uranium from ore, converted it into chemical compounds, reduced those compounds to metal, recovered material from residues, and generated radioactive waste at each stage. The work moved between companies, federal contractors, rail lines, roads, storage areas, and disposal grounds.</p>
+                <div class="resource-row"><a href="./rebuild.html?archive=Linde#evidence"><span>Archive query</span><strong>Linde records →</strong></a><a href="./rebuild.html?archive=Electromet#evidence"><span>Archive query</span><strong>Electromet records →</strong></a><a href="./rebuild.html?archive=Hooker#evidence"><span>Archive query</span><strong>Hooker records →</strong></a><a href="./rebuild.html#map"><span>Interactive map</span><strong>Trace the network →</strong></a></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="chapter" id="love-canal" data-chapter>
+          <div class="chapter-cover">
+            <header class="chapter-cover-meta"><span class="chapter-id">Chapter II</span><h2>1978–1981<br />A chemical disaster opens a second archive.</h2></header>
+            <div class="chapter-cover-body"><span class="chapter-kicker">The records begin to surface</span><h3>Love Canal + The Federal Connection</h3><p class="chapter-deck">Residents forced the government to confront one buried history. The investigation exposed another: a regional uranium-production and waste network.</p></div>
+          </div>
+
+          <div class="love-layout">
+            <article class="love-story" data-reveal>
+              <h4>One neighborhood revealed a much larger system.</h4>
+              <figure><img src="./archive/love-canal-public-health-time-bomb.webp" alt="Love Canal Public Health Time Bomb report over an aerial photograph" loading="lazy" /><figcaption>Evidence · Love Canal: Public Health Time Bomb · 1978</figcaption></figure>
+              <p>Love Canal was a working-class Niagara Falls neighborhood built around an unfinished canal that Hooker Chemical had used as a hazardous-waste landfill. From 1942 to 1952, the company buried more than 21,000 tons of chemical waste there.</p>
+              <p>Residents documented miscarriages, cancers, and congenital malformations, organized, protested, and forced state and federal officials to respond. Emergency declarations in 1978 and 1980 led to the evacuation of approximately 950 families.</p>
+              <p>The Assembly inquiry began with eyewitness allegations that United States Army personnel had dumped toxic waste into the canal. To identify what the witnesses remembered, investigators reconstructed federal defense activity across Niagara and Erie Counties. That search widened into <em>The Federal Connection</em>.</p>
+              <div class="resource-row"><a href="./rebuild.html?archive=Love%20Canal#evidence"><span>Archive of Evidence</span><strong>Search Love Canal →</strong></a><a href="./rebuild.html#map"><span>Interactive map</span><strong>Locate the neighborhood →</strong></a></div>
+            </article>
+            <aside class="love-rail" aria-label="Love Canal investigation timeline">
+              <article class="timeline-card"><time>1978</time><strong>21,000 tons</strong><p>Amount of chemical waste Hooker Chemical is estimated to have buried in Love Canal between 1942 and 1952.</p></article>
+              <article class="timeline-card"><time>1978–1980</time><strong>950 families</strong><p>Households ultimately evacuated after residents and public-health evidence forced government action.</p></article>
+              <article class="timeline-card"><time>20 months</time><strong>67,000 records</strong><p>Department of Energy files obtained by the Assembly Task Force through information requests.</p></article>
+              <article class="timeline-card"><time>1981</time><strong>The Federal Connection</strong><p>The report traced factories, contractors, disposal sites, transport, and radioactive waste across the Niagara Frontier.</p><a href="https://www.health.ny.gov/environmental/investigations/love_canal/lcreport.htm" target="_blank" rel="noopener">Read the state history ↗</a></article>
+            </aside>
+          </div>
+        </section>
+
+        <section class="chapter" id="loow" data-chapter>
+          <div class="chapter-cover dark">
+            <header class="chapter-cover-meta"><span class="chapter-id">Chapter III</span><h2>1942–present<br />A weapons plant becomes a radioactive landscape.</h2></header>
+            <div class="chapter-cover-body"><span class="chapter-kicker">Lake Ontario Ordnance Works</span><h3>LOOW</h3><p class="chapter-deck">A 7,567-acre wartime TNT plant became a storage, burial, testing, industrial, residential, and waste-management landscape divided among agencies and property owners.</p></div>
+          </div>
+
+          <div class="loow-plate">
+            <img src="./archive/loow-aerial-01.webp" alt="Historical aerial photograph of the Lake Ontario Ordnance Works" loading="lazy" />
+            <div class="loow-copy" data-reveal><span class="evidence-label">Aerial record · former LOOW property</span><h4>One federal site became many different places.</h4><p>After World War II, most of the property was sold or transferred. The resulting landscape includes federal land, private businesses, homes, schools, farms, waste facilities, and the Niagara Falls Storage Site.</p></div>
+          </div>
+
+          <div class="containment">
+            <div class="containment-copy" data-reveal><span class="evidence-label">NFSS · Interim containment</span><h4>Containment is not disappearance.</h4><p>The interim waste containment structure consolidated radioactive residues that remained at the Niagara Falls Storage Site. Its anticipated 25-year life carried it only to about 2011. In 2026, the structure remains in use.</p><p>Containment could address only what remained at LOOW. It could not account for radioactive waste that never reached the site—or material that had already left it.</p><div class="micro-links"><a href="./rebuild.html?archive=LOOW#evidence">Search LOOW records →</a><a href="./rebuild.html#map">Open LOOW on the map →</a></div></div>
+            <figure class="containment-media"><img src="./archive/nfss-iwcs-conceptual-design.jpg" alt="Conceptual cross-section of the NFSS interim waste containment structure" loading="lazy" /></figure>
+          </div>
+        </section>
+
+        <section class="chapter" id="surveys" data-chapter>
+          <div class="chapter-cover">
+            <header class="chapter-cover-meta"><span class="chapter-id">Chapter IV</span><h2>1979–2017<br />The official route becomes a regional trail.</h2></header>
+            <div class="chapter-cover-body"><span class="chapter-kicker">Following the radioactive trail</span><h3>The surveys</h3><p class="chapter-deck">Federal researchers began with suspected routes to LOOW. Their measurements revealed overlapping waste histories beneath roads, businesses, driveways, parking areas, and homes.</p></div>
+          </div>
+
+          <div class="content-block">
+            <div class="reading-grid">
+              <aside class="side-note">The first regional surveys</aside>
+              <div class="prose" data-reveal>
+                <h4>One question opened two different records.</h4>
+                <p>The Department of Energy commissioned EG&amp;G, Inc. to survey the region from the air in 1978 and 1979, looking for places where radiation rose above the surrounding background. Oak Ridge National Laboratory later drove through the region with radiation detectors in 1984 and inspected the locations it found in 1985.</p>
+                <p>The stated question was whether contaminated material had been lost from trucks traveling to LOOW. But the surveys also found hotspots beneath driveways, parking lots, roads, businesses, and homes—material that did not necessarily come from LOOW at all.</p>
+                <p class="lede">The surveys therefore did not reveal one trail leading to one disposal site. They revealed overlapping waste histories: possible federal material associated with LOOW and radioactive residues produced by Niagara industries, some of which had been reused as construction fill.</p>
+                <p>Once industrial slag emerged as a separate source, the search could no longer be confined to suspected routes leading to LOOW. Later radiological surveys examined former factory properties and redevelopment sites, especially within Niagara Falls’s two principal industrial districts: the Buffalo Avenue corridor along the river and the Highland Avenue corridor beside residential neighborhoods.</p>
+              </div>
+            </div>
+          </div>
+
+          <section class="survey-dashboard" aria-label="Federal survey record">
+            <header data-reveal><h4>The regional record widens.</h4><p>Different instruments, boundaries, cleanup criteria, and legal authorities produced different answers. No single survey mapped the entire Niagara County metropolitan area.</p></header>
+            <div class="survey-reports">
+              <article class="survey-report" data-reveal><time>1978–1979</time><h5>Aerial + follow-up survey</h5><p>Federal aerial work identified radiological anomalies at residential, commercial, and roadside locations. It located suspected hotspots; it did not provide a complete ground-level survey of the region.</p><a href="https://lmpublicsearch.lm.doe.gov/lmsites/2711-ny.17-6.pdf" target="_blank" rel="noopener">View the 1979 survey ↗</a></article>
+              <article class="survey-report" data-reveal><time>1984–1985</time><h5>Oak Ridge mobile gamma survey</h5><p>A vehicle survey selected 100 elevated gamma anomalies for follow-up. Onsite measurements and soil sampling classified 38 as exceeding FUSRAP guidelines and associated the remaining 62 principally with industrial slag.</p><a href="https://natalianeuhaus.com/wp-content/uploads/2026/07/ORNL_1985_Niagara_Falls_Radiological_Survey_18050447.pdf" target="_blank" rel="noopener">View the 1985 field survey ↗</a></article>
+            </div>
+            <div class="survey-accounting">
+              <article><strong>100</strong><span>gamma anomalies selected for onsite investigation in 1985</span></article>
+              <article><strong>38</strong><span>FUSRAP anomalies the 1986 report said had been remediated</span></article>
+              <article><strong>62</strong><span>anomalies attributed principally to industrial slag—not given the same federal cleanup accounting</span></article>
+            </div>
+            <figure class="survey-map"><img src="./archive/ornl-1986-survey-maps.webp" alt="Pages from the 1986 Oak Ridge mobile gamma survey maps" loading="lazy" /><figcaption>ORNL/TM-10076 · Mobile gamma survey of Niagara Falls</figcaption></figure>
+          </section>
+
+          <section class="factory-ledger">
+            <header data-reveal><span class="evidence-label">The record widens</span><h4>The factory list kept growing.</h4><p><em>The Federal Connection</em> revealed a system, but it was not a complete inventory. Later worker-exposure records, radiological surveys of former factory properties, and brownfield files added other facilities and changing company names to the archive.</p></header>
+            <div class="factory-list" aria-label="Additional facilities in later records">
+              <a href="./rebuild.html?archive=Carborundum#evidence"><span>01</span><strong>National Carbon + Carborundum</strong><em>Open related records →</em></a>
+              <a href="./rebuild.html?archive=Steel#evidence"><span>02</span><strong>Pittsburgh Metallurgical / Globe</strong><em>Open related records →</em></a>
+              <a href="./rebuild.html?archive=TAM%20Ceramics#evidence"><span>03</span><strong>TAM Ceramics</strong><em>Open related records →</em></a>
+              <a href="./rebuild.html?archive=Vanadium#evidence"><span>04</span><strong>Vanadium Corporation of America</strong><em>Open records →</em></a>
+              <a href="./rebuild.html?archive=Union%20Carbide#evidence"><span>05</span><strong>Union Carbide / Newco–CECOS</strong><em>Open records →</em></a>
+              <a href="./rebuild.html#map"><span>06</span><strong>Buffalo Avenue + Highland Avenue corridors</strong><em>Compare on the map →</em></a>
+            </div>
+          </section>
+        </section>
+
+        <section class="chapter" id="union-carbide" data-chapter>
+          <div class="chapter-cover dark">
+            <header class="chapter-cover-meta"><span class="chapter-id">The Union Carbide trail</span><h2>1979 records<br />2016–2017 reporting</h2></header>
+            <div class="chapter-cover-body"><span class="chapter-kicker">Dan Telvock · Investigative Post</span><h3>The record returns.</h3><p class="chapter-deck">Decades-old technical reports and private-investigator interviews re-entered public view—and showed how much of the historical record had remained disconnected from cleanup.</p></div>
+          </div>
+
+          <div class="telvock">
+            <figure><img src="./archive/private-investigator-union-carbide.webp" alt="A 1979 private-investigator report concerning Union Carbide slag and fill" loading="lazy" /><figcaption>Probe International · private-investigator record · May 10, 1979</figcaption></figure>
+            <article class="telvock-copy" data-reveal>
+              <span class="evidence-label">Investigative Post · Buffalo</span><h4>Dan Telvock reopens the file.</h4>
+              <p>Dan Telvock published the investigation through the Buffalo-based nonprofit news outlet Investigative Post in 2016 and 2017. He returned to Oak Ridge National Laboratory’s 1985 survey and compared its radioactive anomalies with the properties that had actually entered federal cleanup.</p>
+              <p>He found that the Upper Mountain Road driveway—measured decades earlier—remained outside the federal cleanup program, along with dozens of other properties identified by the survey. The technical record existed, but many of the people living or working at those locations had never been told what federal researchers had recorded.</p>
+              <p>In 2017, Telvock published two private-investigator reports prepared in 1979 for the owner of the Pine Bowl parking lot. The interviews described Friona Trucking hauling waste and slag from Union Carbide’s Niagara Falls property to the company dump, then known as Newco. They also recorded untreated slag being sold or used as inexpensive fill.</p>
+              <p>The reports did not prove that Union Carbide slag had been used at Pine Bowl. What they revealed was a disposal chain extending through a factory, haulers, a company dump, commercial sales, and possible fill sites—a history that federal cleanup boundaries could not explain.</p>
+              <div class="telvock-links"><a href="https://www.investigativepost.org/2016/07/05/radioactive-hot-spots-pepper-niagara-county/" target="_blank" rel="noopener"><span>2016 · Investigative Post</span><strong>Radioactive hot spots pepper Niagara County ↗</strong></a><a href="https://www.investigativepost.org/2017/02/09/paying-price-for-radioactive-hotspots-in-niagara/" target="_blank" rel="noopener"><span>2017 · Investigative Post</span><strong>Paying price for radioactive hotspots in Niagara ↗</strong></a></div>
+              <div class="micro-links"><a href="./rebuild.html?archive=Union%20Carbide#evidence">Search Union Carbide records →</a><a href="./rebuild.html#map">Trace the disposal chain →</a></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="chapter" id="project" data-chapter>
+          <div class="chapter-cover">
+            <header class="chapter-cover-meta"><span class="chapter-id">Chapter V</span><h2>2017–present<br />An independent investigation.</h2></header>
+            <div class="chapter-cover-body"><span class="chapter-kicker">From photographs to a public archive</span><h3>Greetings from Niagara</h3><p class="chapter-deck">The project began with a warning, became a 25-page report, and widened through photography, fieldwork, maps, technical files, worker records, and thousands of archival pages.</p></div>
+          </div>
+
+          <section class="project-origin">
+            <header data-reveal><h4>A warning became an investigation.</h4><p class="origin-intro"><em>Greetings from Niagara</em> began independently in 2023, after Natalia Neuhaus asked her close friend Alex O’Malley about the place where O’Malley’s family had lived for four generations.</p></header>
+            <figure class="origin-quote" data-reveal><blockquote>“It’s polluted—very polluted.”</blockquote><figcaption>Alex O’Malley · fourth-generation Niagara Falls resident</figcaption></figure>
+            <div class="origin-story">
+              <aside class="side-note">How the project began · 2023</aside>
+              <div class="prose" data-reveal>
+                <p>The warning prompted Neuhaus to write her own 25-page report, <em>Cancer Town: Unveiling Niagara Falls’ Radioactive Secret</em>. That first report was how she began teaching herself Niagara’s industrial history, its role in the Manhattan Project, and the radioactive waste those industries left behind.</p>
+                <p>Neuhaus first photographed Niagara Falls from October 4 through October 7, 2023. The photographs recorded the tourist landscape, former factory districts, Love Canal, LOOW, and residents living beside places where federal surveys had measured elevated radiation. But the landscape could not answer the questions the photographs raised: what had been produced at each factory, where the waste had gone, which properties had been surveyed, and whether the people living or working there had ever been told.</p>
+                <p>At the Lewiston Public Library, Neuhaus found an original copy of Oak Ridge National Laboratory’s 1986 mobile gamma survey. Its maps and tables connected radiation readings to roads, homes, businesses, and former industrial properties. The report became an entry point into a much larger record—not the conclusion of the investigation.</p>
+                <h5>The research expanded through records that had never been read together.</h5>
+                <p>The investigation continued through Department of Energy and Army Corps records, NIOSH dose-reconstruction files, state and federal cleanup documents, environmental easements, Sanborn maps, property records, historical directories, archival films, court arguments, newspapers, public meetings, academic research, and interviews.</p>
+                <p>Factories appeared under different owners and names. Industrial properties were divided, sold, and redeveloped. One location could reappear across decades in a production record, a worker-exposure file, a radiological survey, a brownfield investigation, and a cleanup document—without any agency assembling those fragments into one history.</p>
+              </div>
+            </div>
+            <div class="research-paths">
+              <article class="research-card" data-reveal><small>Worker records</small><h5>NIOSH files</h5><p>Dose-reconstruction reports preserved facility-level histories of radioactive processes, materials, and exposure beyond the factories emphasized in the 1981 report.</p><a href="./rebuild.html?archive=NIOSH#evidence">Search NIOSH records →</a></article>
+              <article class="research-card" data-reveal><small>Industrial geography</small><h5>Sanborn maps</h5><p>Fire-insurance maps, parcel records, and historical directories helped locate former plants, track changing names, and connect factory grounds to the properties that replaced them.</p><a href="./rebuild.html#map">Map the industrial geography →</a></article>
+              <article class="research-card" data-reveal><small>Physical evidence</small><h5>Surveys + brownfield files</h5><p>Radiological surveys performed at former factory properties and redevelopment sites documented where contaminated material remained or was disturbed.</p><a href="./rebuild.html?archive=brownfield#evidence">Search brownfield records →</a></article>
+            </div>
+          </section>
+
+          <section class="public-record">
+            <div class="public-record-grid" data-reveal>
+              <div><strong>800+</strong><small>linked source records and counting</small></div>
+              <div><h4>The research became a public resource.</h4><p>The official record never became a complete public accounting. The project’s Archive of Evidence brings scattered source files into one searchable collection. The Interactive Map connects them to factories, disposal areas, roads, waterways, homes, schools, and public spaces.</p><p>It does not assign every radioactive finding to one source. It shows why no single survey, agency, cleanup program, or industrial history can explain the whole landscape.</p><div class="public-actions"><a href="./rebuild.html#evidence"><span>Archive of Evidence</span><strong>Read the records →</strong></a><a href="./rebuild.html#map"><span>Interactive Map</span><strong>Follow the geography →</strong></a></div></div>
+            </div>
+          </section>
+
+          <section class="survey-now">
+            <header data-reveal><span class="evidence-label">2023–present</span><h4>The new surveys return to the region.</h4><p>The limitations of the earlier surveys became visible as new hotspots appeared during roadwork, repairs, and construction. DEC and EPA began a new regional radiological assessment in 2023, then moved from aircraft scanning to road-level measurements and property follow-up.</p></header>
+            <div class="phase-list">
+              <article class="phase" data-reveal><time>2023–2024 · Phase I</time><h5>Aircraft survey</h5><p>An aircraft-based survey collected new regional radiological data across Erie and Niagara Counties.</p></article>
+              <article class="phase" data-reveal><time>2025 · Phase II</time><h5>Roadway survey</h5><p>A vehicle equipped with radiological sensors traveled selected roadways to supplement the aerial record and identify possible follow-up areas.</p></article>
+              <article class="phase" data-reveal><time>2025–present · Phase III</time><h5>Property follow-up</h5><p>Agencies began contacting selected property owners for ground-level screening and sampling while complete public results remained unavailable.</p></article>
+            </div>
+            <div class="resource-row"><a href="https://dec.ny.gov/news/press-releases/2023/9/dec-and-epa-announce-oct-2-start-of-aircraft-based-survey-of-erie-and-niagara-counties" target="_blank" rel="noopener"><span>DEC · 2023</span><strong>Aircraft survey ↗</strong></a><a href="https://dec.ny.gov/news/press-releases/2025/7/dec-and-us-epa-announce-july-7-start-of-vehicle-based-survey-of-erie-and-niagara-counties" target="_blank" rel="noopener"><span>DEC · 2025</span><strong>Roadway survey ↗</strong></a><a href="./rebuild.html?archive=radiological%20survey#evidence"><span>Archive query</span><strong>New survey records →</strong></a><a href="./rebuild.html#map"><span>Interactive map</span><strong>Compare the geography →</strong></a></div>
+          </section>
+        </section>
+
+        <section class="chapter closing" id="closing" data-chapter>
+          <div class="closing-lead"><p>For over eight decades, the government’s silence and the lack of a comprehensive plan to address radioactive contamination have proven deadly to the Falls.</p></div>
+          <div class="closing-body">
+            <div class="closing-grid">
+              <aside class="side-note">A patchwork, not a plan</aside>
+              <div class="closing-copy" data-reveal>
+                <p>Los Alamos became the public symbol of the Manhattan Project, but the bomb was the product of a dispersed national system of laboratories, refineries, metal plants, storage depots, transport routes, and disposal grounds. Niagara was one of its densest industrial landscapes.</p>
+                <p>The thirteen Niagara Frontier sites mapped by this project are not all FUSRAP properties. Some fall under FUSRAP, some under Superfund or the Formerly Used Defense Sites program, some under New York State cleanup and brownfield programs, and others sit outside any single comprehensive federal investigation. That division is the problem: no one program is responsible for the whole geography.</p>
+                <aside class="remedial"><span>What “remedial” means</span><h4>Remediated does not mean erased.</h4><p>A remedy may excavate some material while containing other contamination beneath a cap, restricting land use, and requiring monitoring or institutional controls. A former factory may be cleared for a hotel, mall, parking lot, or industrial use without meeting the assumptions required for homes, schools, or unrestricted excavation.</p></aside>
+                <p>In Niagara Falls, no site developed or redeveloped after the 1940s should be presumed free of radioactive fill without testing. The same applies to roads, driveways, and sidewalks.</p>
+                <div class="resource-row"><a href="./rebuild.html#evidence"><span>The records</span><strong>Examine the archive →</strong></a><a href="./rebuild.html#map"><span>The geography</span><strong>Open the map →</strong></a></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="chapter health" id="health" data-chapter>
+          <header class="health-header"><h4>The unresolved health record.</h4><div><blockquote>“Cancer incidence generally remains higher in this region than in the state and nationwide.”</blockquote><cite>Roswell Park Comprehensive Cancer Center · WNY Cancer Snapshot · 2022</cite></div></header>
+          <div class="content-block"><div class="reading-grid"><aside class="side-note">Documented burden · unresolved attribution</aside><div class="prose" data-reveal><p class="lede">Western New York’s cancer burden is documented. What the available studies have not established is whether—and to what extent—radioactive contamination contributed to it.</p><p>Most regional health analyses do not reconstruct exposure to radioactive fill dispersed beneath roads, homes, schools, and public spaces. The limitation of those studies does not erase the burden they record; it defines the question that remains unanswered.</p></div></div></div>
+          <div class="health-grid">
+            <article class="health-card" data-reveal><small>Four decades of concern</small><strong>36%</strong><p>Approximate rise in lung-cancer cases in Niagara County over four decades, reported through Niagara Falls Memorial Medical Center and state health data.</p></article>
+            <article class="health-card" data-reveal><small>Western New York · 2015–2019</small><strong>9 of 10</strong><p>Most deadly cancers had higher death rates in Western New York than in the state and/or nationwide.</p></article>
+            <article class="health-card" data-reveal><small>Lewiston-Porter · 2008</small><strong>+80%</strong><p>Approximate excess of childhood cancer recorded in the school district. The investigation could not identify a cause.</p></article>
+          </div>
+          <div class="health-sources" aria-label="Health record sources"><a href="https://www.roswellpark.org/sites/default/files/2022-09/wny-cancer-snapshot-roswell-park-september-202238.pdf" target="_blank" rel="noopener"><span>01</span><strong>WNY Cancer Snapshot</strong><em>Roswell Park · 2022 ↗</em></a><a href="https://www.health.ny.gov/statistics/cancer/registry/vol3/v3niagara.htm" target="_blank" rel="noopener"><span>02</span><strong>Niagara County cancer trends</strong><em>NYS Cancer Registry · 1976–2020 ↗</em></a><a href="https://www.health.ny.gov/environmental/investigations/lewiston/docs/lewiston_cancer_report.pdf" target="_blank" rel="noopener"><span>03</span><strong>Lewiston cancer investigation</strong><em>NYS Department of Health · 2008 ↗</em></a><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2721871/" target="_blank" rel="noopener"><span>04</span><strong>Love Canal resident study</strong><em>Peer-reviewed epidemiology ↗</em></a></div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer"><strong>Greetings from Niagara</strong><p>Research, photography, archive, and design · Natalia Neuhaus</p><a href="#page-title">Return to the beginning ↑</a></footer>
+
+  <script>
+    (() => {
+      const track = document.querySelector('.waterfalls-track');
+      if (track) {
+        const slides = [...track.querySelectorAll('.waterfalls-slide')];
+        const dots = [...document.querySelectorAll('[data-waterfalls-target]')];
+        const previous = document.querySelector('.waterfalls-prev');
+        const next = document.querySelector('.waterfalls-next');
+        const carborundumSlide = track.querySelector('.waterfalls-slide--carborundum');
+        const carborundumFrame = carborundumSlide && carborundumSlide.querySelector('.waterfalls-frame');
+        const carborundumTail = track.querySelector('.waterfalls-panorama-tail');
+        let frame = 0;
+
+        const layoutCarborundumSpread = () => {
+          if (!carborundumSlide || !carborundumFrame || !carborundumTail) return;
+          carborundumTail.style.setProperty('--carborundum-tail','0px');
+          const slideRect = carborundumSlide.getBoundingClientRect();
+          const frameRect = carborundumFrame.getBoundingClientRect();
+          const spill = Math.max(0,Math.ceil(frameRect.right - slideRect.right));
+          carborundumTail.style.setProperty('--carborundum-tail',spill + 'px');
+        };
+
+        const currentIndex = () => Math.max(0,Math.min(slides.length - 1,Math.round(track.scrollLeft / Math.max(1,track.clientWidth))));
+        const update = () => {
+          frame = 0;
+          const index = currentIndex();
+          dots.forEach((dot,i) => {
+            dot.parentElement.classList.toggle('is-current',i === index);
+            if (i === index) dot.setAttribute('aria-current','step');
+            else dot.removeAttribute('aria-current');
+          });
+          previous.classList.toggle('is-visible',index > 0);
+          const trackEnd = Math.max(0,track.scrollWidth - track.clientWidth);
+          next.disabled = track.scrollLeft >= trackEnd - 2;
+        };
+
+        const move = direction => {
+          const lastSlideStart = (slides.length - 1) * track.clientWidth;
+          const trackEnd = Math.max(0,track.scrollWidth - track.clientWidth);
+          if (direction > 0 && track.scrollLeft >= lastSlideStart - 2) {
+            track.scrollTo({left:trackEnd,behavior:'smooth'});
+          } else if (direction < 0 && track.scrollLeft > lastSlideStart + 2) {
+            track.scrollTo({left:lastSlideStart,behavior:'smooth'});
+          } else {
+            track.scrollBy({left:direction * track.clientWidth,behavior:'smooth'});
+          }
+        };
+
+        previous.addEventListener('click',() => move(-1));
+        next.addEventListener('click',() => move(1));
+        dots.forEach(dot => dot.addEventListener('click',() => track.scrollTo({left:Number(dot.dataset.waterfallsTarget) * track.clientWidth,behavior:'smooth'})));
+        track.addEventListener('scroll',() => { if (!frame) frame = requestAnimationFrame(update); },{passive:true});
+        track.addEventListener('keydown',event => {
+          if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+          event.preventDefault();
+          move(event.key === 'ArrowRight' ? 1 : -1);
+        });
+        layoutCarborundumSpread();
+        update();
+        window.addEventListener('resize',() => {
+          requestAnimationFrame(() => {
+            layoutCarborundumSpread();
+            update();
+          });
+        });
+      }
+
+      const toggle = document.querySelector('.index-toggle');
+      const index = document.querySelector('.case-index');
+      const closeIndex = () => { document.body.classList.remove('is-index-open'); toggle.setAttribute('aria-expanded','false'); };
+      toggle.addEventListener('click',() => {
+        const open = document.body.classList.toggle('is-index-open');
+        toggle.setAttribute('aria-expanded',String(open));
+      });
+      index.querySelectorAll('a').forEach(link => link.addEventListener('click',closeIndex));
+      document.addEventListener('keydown',event => { if (event.key === 'Escape') closeIndex(); });
+
+      const chapterLinks = [...document.querySelectorAll('.index-nav a')];
+      const chapters = [...document.querySelectorAll('[data-chapter]')];
+      const chapterObserver = new IntersectionObserver(entries => {
+        const visible = entries.filter(entry => entry.isIntersecting).sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (!visible) return;
+        chapterLinks.forEach(link => link.classList.toggle('is-active',link.hash === '#' + visible.target.id));
+      },{rootMargin:'-20% 0px -62% 0px',threshold:[0,.1,.25,.5]});
+      chapters.forEach(chapter => chapterObserver.observe(chapter));
+
+      const revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        });
+      },{rootMargin:'0px 0px -10% 0px',threshold:.08});
+      document.querySelectorAll('[data-reveal]').forEach(element => revealObserver.observe(element));
+    })();
+  </script>
+</body>
+</html>
