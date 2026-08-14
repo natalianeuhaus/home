@@ -195,6 +195,16 @@
     .survey-map img { width:100%; max-height:760px; display:block; object-fit:cover; filter:invert(1) grayscale(1) contrast(.85); opacity:.85; }
     .survey-map figcaption { position:absolute; left:20px; bottom:18px; padding:8px 10px; background:rgba(12,17,16,.82); color:rgba(242,240,233,.68); font:8px/1.4 var(--sans); letter-spacing:.12em; text-transform:uppercase; }
 
+    .later-findings { padding:clamp(72px,9vw,140px) clamp(30px,6vw,104px); background:var(--paper-deep); }
+    .later-findings header { max-width:1040px; }
+    .later-findings h4 { margin:20px 0 28px; font-size:clamp(54px,6.5vw,108px); font-weight:400; line-height:.84; letter-spacing:-.055em; }
+    .later-findings header p { max-width:840px; color:var(--muted); font-size:clamp(18px,1.5vw,24px); line-height:1.5; }
+    .finding-ledger { margin-top:64px; border-top:1px solid var(--line); }
+    .finding-row { min-height:150px; display:grid; grid-template-columns:130px minmax(260px,.75fr) minmax(360px,1.25fr); gap:34px; align-items:center; padding:24px 0; border-bottom:1px solid var(--line); }
+    .finding-row time { color:var(--red); font:700 11px/1 var(--sans); letter-spacing:.15em; }
+    .finding-row strong { font-size:clamp(27px,3vw,48px); font-weight:400; line-height:.95; letter-spacing:-.04em; }
+    .finding-row p { margin:0; color:var(--muted); font:15px/1.55 var(--sans); }
+
     .factory-ledger { padding:clamp(72px,9vw,140px) clamp(30px,6vw,104px); }
     .factory-ledger header { max-width:1000px; }
     .factory-ledger h4 { margin:20px 0 28px; font-size:clamp(58px,7vw,118px); font-weight:400; line-height:.82; letter-spacing:-.06em; }
@@ -245,6 +255,21 @@
     .public-actions strong { font:400 clamp(25px,2.8vw,42px)/1 var(--serif); letter-spacing:-.03em; }
     .public-actions a:hover { color:var(--red); background:var(--paper); }
     .public-actions a:hover span { color:var(--red); }
+
+    .upper-case { padding:clamp(74px,9vw,145px) clamp(30px,6vw,104px); background:var(--paper-deep); }
+    .upper-case-header { display:grid; grid-template-columns:.42fr 1fr; gap:8vw; align-items:end; }
+    .upper-case-header h4 { margin:0; font-size:clamp(55px,6.8vw,112px); font-weight:400; line-height:.82; letter-spacing:-.06em; }
+    .upper-case-header p { max-width:780px; margin:0; color:var(--muted); font-size:clamp(19px,1.65vw,26px); line-height:1.45; }
+    .upper-timeline { margin-top:74px; display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line); border-left:1px solid var(--line); }
+    .upper-timeline article { min-height:330px; position:relative; padding:30px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); }
+    .upper-timeline article::before { content:""; width:8px; height:8px; position:absolute; left:28px; top:-5px; background:var(--red); }
+    .upper-timeline time { color:var(--red); font:700 9px/1 var(--sans); letter-spacing:.15em; }
+    .upper-timeline h5 { margin:52px 0 18px; font-size:clamp(29px,3vw,48px); font-weight:400; line-height:.95; letter-spacing:-.04em; }
+    .upper-timeline p { margin:0; color:var(--muted); font:14px/1.55 var(--sans); }
+    .upper-accounting { margin-top:54px; display:grid; grid-template-columns:190px 1fr; gap:clamp(42px,7vw,100px); padding-top:46px; border-top:2px solid var(--red); }
+    .upper-accounting strong { color:var(--red); font:400 clamp(94px,12vw,190px)/.65 var(--serif); letter-spacing:-.08em; }
+    .upper-accounting h5 { margin:0 0 18px; font-size:clamp(34px,4vw,61px); font-weight:400; line-height:.94; letter-spacing:-.045em; }
+    .upper-accounting p { max-width:860px; color:var(--muted); font-size:clamp(17px,1.35vw,22px); line-height:1.52; }
 
     .survey-now { padding:clamp(72px,9vw,140px) clamp(30px,6vw,104px); }
     .survey-now > header { max-width:1000px; }
@@ -301,7 +326,7 @@
       .casebar-file { display:none; }
       .casebar-actions a { display:none; }
       .index-toggle { display:flex; }
-      .hero-copy,.waterfalls-inner,.chapter-cover,.reading-grid,.love-layout,.containment,.survey-dashboard > header,.telvock,.project-origin > header,.origin-story,.public-record-grid,.closing-grid,.health-header { grid-template-columns:1fr; }
+      .hero-copy,.waterfalls-inner,.chapter-cover,.reading-grid,.love-layout,.containment,.survey-dashboard > header,.telvock,.project-origin > header,.origin-story,.public-record-grid,.upper-case-header,.upper-accounting,.closing-grid,.health-header { grid-template-columns:1fr; }
       .hero-copy { width:calc(100% - 42px); gap:42px; }
       .hero-title span,.hero-deck { margin-left:0; }
       .waterfalls-slide { padding:34px 22px 88px; align-items:start; }
@@ -318,10 +343,12 @@
       .chapter-cover-meta::after { left:auto; right:8%; bottom:-4px; }
       .chapter-cover-body h3 { font-size:clamp(62px,13vw,122px); }
       .reading-grid,.love-layout,.telvock,.project-origin > header,.origin-story,.public-record-grid,.closing-grid,.health-header { gap:48px; }
-      .process-chain,.research-paths,.phase-list,.health-grid { grid-template-columns:1fr; }
+      .process-chain,.research-paths,.upper-timeline,.phase-list,.health-grid { grid-template-columns:1fr; }
       .process-card,.research-card,.phase,.health-card { border-right:0; }
       .survey-accounting { grid-template-columns:1fr; }
       .survey-accounting article { border-right:0; border-bottom:1px solid var(--line-dark); }
+      .finding-row { grid-template-columns:90px 1fr; }
+      .finding-row p { grid-column:2; padding-bottom:18px; }
       .containment-media { min-height:420px; border-left:0; border-top:1px solid var(--line); }
       .telvock figure { position:relative; top:auto; }
       .site-footer { grid-template-columns:1fr; }
@@ -338,16 +365,22 @@
       .waterfalls-frame { height:40svh; }
       .waterfalls-progress { display:none; }
       .chapter-cover { min-height:auto; }
-      .chapter-cover-meta,.chapter-cover-body,.content-block,.atomic-stat,.love-layout,.survey-dashboard,.factory-ledger,.telvock,.project-origin,.public-record,.survey-now,.closing-lead,.closing-body,.health-header { padding-left:22px; padding-right:22px; }
+      .chapter-cover-meta,.chapter-cover-body,.content-block,.atomic-stat,.love-layout,.survey-dashboard,.later-findings,.factory-ledger,.telvock,.project-origin,.public-record,.upper-case,.survey-now,.closing-lead,.closing-body,.health-header { padding-left:22px; padding-right:22px; }
       .chapter-cover-body { min-height:76svh; }
       .resource-row,.public-actions,.survey-reports { grid-template-columns:1fr; }
       .process-card { min-height:auto; }
       .process-card figure { height:230px; }
       .survey-report { min-height:auto; padding:30px 0; border-right:0; }
+      .finding-row { grid-template-columns:1fr; gap:12px; padding:28px 0; }
+      .finding-row p { grid-column:auto; }
       .factory-list a { grid-template-columns:42px 1fr; }
       .factory-list em { grid-column:2; padding-bottom:10px; }
       .research-paths,.phase-list { border-left:0; }
       .research-card,.phase { padding:28px 0; }
+      .upper-timeline { border-left:0; }
+      .upper-timeline article { min-height:auto; padding:30px 0; border-right:0; }
+      .upper-timeline article::before { left:0; }
+      .upper-accounting strong { font-size:40vw; }
       .public-record strong { font-size:34vw; }
       .health-sources a { grid-template-columns:34px 1fr; padding:18px 0; }
       .health-sources em { grid-column:2; }
@@ -577,6 +610,17 @@
             <figure class="survey-map"><img src="./archive/ornl-1986-survey-maps.webp" alt="Pages from the 1986 Oak Ridge mobile gamma survey maps" loading="lazy" /><figcaption>ORNL/TM-10076 · Mobile gamma survey of Niagara Falls</figcaption></figure>
           </section>
 
+          <section class="later-findings">
+            <header data-reveal><span class="evidence-label">After the 1986 report</span><h4>Excavation kept reopening the record.</h4><p>The Oak Ridge work mapped selected suspected hotspots; it was not a complete ground-level survey of the metropolitan area. As streets, parks, and construction sites were opened, additional radiological material continued to appear outside the earlier cleanup accounting.</p></header>
+            <div class="finding-ledger" aria-label="Radiological findings after the Oak Ridge survey">
+              <article class="finding-row" data-reveal><time>2015</time><strong>Robert Moses Parkway</strong><p>A radiological survey measured readings exceeding 80 µR/h near the Aquarium of Niagara and Park Police facilities.</p></article>
+              <article class="finding-row" data-reveal><time>2015</time><strong>Whirlpool Bridge exit</strong><p>A separate reading near the exit area reached 2,750 µR/h, showing how sharply a localized hotspot could rise above its surroundings.</p></article>
+              <article class="finding-row" data-reveal><time>2021</time><strong>Niagara Falls State Park</strong><p>Radioactive gravel was documented near the park entrance as construction and screening disturbed material beneath a heavily used public landscape.</p></article>
+              <article class="finding-row" data-reveal><time>2022</time><strong>Donovan Head Start</strong><p>Low-level radiological material found in construction waste and soil debris at the Main Street preschool triggered state referral and an EPA assessment.</p></article>
+            </div>
+            <div class="resource-row"><a href="./rebuild.html?archive=Robert%20Moses%20Parkway#evidence"><span>Archive query</span><strong>Parkway records →</strong></a><a href="https://www.epa.gov/system/files/documents/2023-06/Donovan%20head%20start%20community%20update%20Fact%20Sheet%20June%202023_0.pdf" target="_blank" rel="noopener"><span>EPA · 2023</span><strong>Donovan fact sheet ↗</strong></a></div>
+          </section>
+
           <section class="factory-ledger">
             <header data-reveal><span class="evidence-label">The record widens</span><h4>The factory list kept growing.</h4><p><em>The Federal Connection</em> revealed a system, but it was not a complete inventory. Later worker-exposure records, radiological surveys of former factory properties, and brownfield files added other facilities and changing company names to the archive.</p></header>
             <div class="factory-list" aria-label="Additional facilities in later records">
@@ -642,6 +686,17 @@
               <div><strong>800+</strong><small>linked source records and counting</small></div>
               <div><h4>The research became a public resource.</h4><p>The official record never became a complete public accounting. The project’s Archive of Evidence brings scattered source files into one searchable collection. The Interactive Map connects them to factories, disposal areas, roads, waterways, homes, schools, and public spaces.</p><p>It does not assign every radioactive finding to one source. It shows why no single survey, agency, cleanup program, or industrial history can explain the whole landscape.</p><div class="public-actions"><a href="./rebuild.html#evidence"><span>Archive of Evidence</span><strong>Read the records →</strong></a><a href="./rebuild.html#map"><span>Interactive Map</span><strong>Follow the geography →</strong></a></div></div>
             </div>
+          </section>
+
+          <section class="upper-case" aria-labelledby="upper-case-title">
+            <header class="upper-case-header" data-reveal><h4 id="upper-case-title">One driveway. Four decades.</h4><p>Upper Mountain Road shows why making the record public matters. A location measured in the first federal survey cycle remained outside the federal cleanup program until later investigations returned to it.</p></header>
+            <div class="upper-timeline">
+              <article data-reveal><time>1978</time><h5>Aerial anomaly</h5><p>The Department of Energy’s aerial survey recorded elevated radiation in the Upper Mountain Road area.</p></article>
+              <article data-reveal><time>1984–1985</time><h5>Ground measurement</h5><p>Oak Ridge’s vehicle survey and onsite follow-up measured the driveway anomaly but associated it with industrial slag rather than NFSS.</p></article>
+              <article data-reveal><time>2020</time><h5>Road + culvert</h5><p>EPA removed contaminated material from a culvert and portions of the gravel access road, then replaced it with clean fill.</p></article>
+              <article data-reveal><time>2021–2023</time><h5>Two homes</h5><p>EPA excavated radioactive soil beneath basement areas and yards at two adjacent residences. Both families were temporarily relocated.</p></article>
+            </div>
+            <div class="upper-accounting" data-reveal><strong>62</strong><div><h5>How many properties like Upper Mountain Road were ultimately cleaned?</h5><p>No agency has published a property-by-property reconciliation of Oak Ridge’s 62 industrial-slag driveway anomalies with every later investigation and cleanup. EPA’s current completed-site list documents work at four residences—two on Upper Mountain Road and two beside Holy Trinity Cemetery—plus the Upper Mountain Road access road and separate commercial or public properties. That is evidence of later cleanup, but it is not a complete answer for all 62 locations.</p><div class="micro-links"><a href="./rebuild.html?archive=radiological%20survey#evidence">Search the 1985 survey archive →</a><a href="./rebuild.html#map">Trace Upper Mountain Road →</a></div></div></div>
           </section>
 
           <section class="survey-now">
