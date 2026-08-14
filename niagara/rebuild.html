@@ -527,8 +527,7 @@
     .waste-closing-stop { min-height:155px; padding:22px 20px 24px; border-right:1px solid rgba(241,240,234,.25); border-bottom:1px solid rgba(241,240,234,.25); }
     .waste-closing-stop time { display:block; margin-bottom:34px; color:#d8c08b; font:9px/1.2 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
     .waste-closing-stop p { margin:0 !important; color:rgba(241,240,234,.7); font:12px/1.48 Arial,Helvetica,sans-serif !important; letter-spacing:0 !important; }
-    .waste-record-expansion { width:calc(100vw - 84px); margin:clamp(84px,11svh,130px) 0 0 calc(100% - (100vw - 84px)); padding:clamp(76px,10svh,130px) clamp(42px,6.5vw,100px); background:#d8d5cd; border-bottom:1px solid var(--niagara-line); }
-    #waste-survey-years > .waste-record-expansion { transform:translateX(calc(min(1540px,calc(100vw - 84px)) - 950px)); }
+    .waste-record-expansion { width:100vw; min-height:calc(100svh - 66px); margin:clamp(84px,11svh,130px) 0 0; padding:clamp(76px,10svh,130px) clamp(42px,6.5vw,100px); display:flex; flex-direction:column; justify-content:center; background:#d8d5cd; border-top:1px solid var(--niagara-line); border-bottom:1px solid var(--niagara-line); }
     .waste-record-expansion-header { display:grid; grid-template-columns:minmax(180px,.35fr) minmax(520px,1.15fr); gap:clamp(54px,8vw,140px); align-items:start; }
     .waste-record-expansion-label { padding-top:9px; color:var(--niagara-red); font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.17em; text-transform:uppercase; }
     .waste-record-expansion h4 { margin:0; max-width:980px; font:400 clamp(48px,5.7vw,88px)/.92 Georgia,"Times New Roman",serif; letter-spacing:-.052em; }
@@ -870,13 +869,12 @@
       .waste-trail span:nth-child(3)::before { display:none; }
       .waste-survey-timeline { grid-template-columns:1fr; }
       .waste-survey-item { min-height:0; }
-      .waste-closing-hero,.waste-record-expansion { width:calc(100vw - 48px); margin-left:0; }
-      #waste-survey-years > .waste-record-expansion { transform:none; }
+      .waste-closing-hero { width:calc(100vw - 48px); margin-left:0; }
       .waste-closing-hero { min-height:0; padding:56px 24px; grid-template-columns:1fr; gap:40px; }
       .waste-closing-copy h4 { font-size:clamp(46px,13.5vw,68px); }
       .waste-closing-timeline { grid-template-columns:1fr; margin-top:28px; }
       .waste-closing-stop { min-height:0; }
-      .waste-record-expansion { margin-top:76px; padding:64px 24px 78px; }
+      .waste-record-expansion { width:100vw; min-height:0; margin-top:76px; padding:64px 24px 78px; }
       .waste-record-expansion-header,.waste-record-grid { grid-template-columns:1fr; gap:20px; }
       .waste-record-grid { gap:0; }
       .waste-record-card { min-height:0; }
@@ -1845,7 +1843,7 @@
                 <div class="waste-era-inner waste-era-inner--survey-map">
                   <div class="waste-era-survey-copy">
                     <span class="waste-era-chapter">Chapter IV</span>
-                    <p class="waste-era-year waste-era-year--range">1979–present</p>
+                    <p class="waste-era-year waste-era-year--range">1979–2017</p>
                     <div class="waste-era-copy">
                       <span class="waste-era-kicker">The surveys</span>
                       <h4 id="era-surveys-title">Following the radioactive trail</h4>
@@ -2261,6 +2259,7 @@
       const waterfallsSection = document.querySelector('#waterfalls-chapter');
       const tabbar = document.querySelector('.niagara-tabbar');
       const wasteNetworkFrames = Array.from(document.querySelectorAll('[data-waste-network-src]'));
+      const wasteRecordExpansions = Array.from(document.querySelectorAll('.waste-record-expansion'));
       const archiveSearchTerm = new URLSearchParams(window.location.search).get('archive');
       const indicator = document.createElement('span');
       indicator.className = 'niagara-tab-indicator';
@@ -2276,6 +2275,14 @@
         });
       };
       requestAnimationFrame(alignWasteNetworkEmbeds);
+
+      const alignWasteRecordExpansions = () => {
+        wasteRecordExpansions.forEach(panel => {
+          panel.style.marginLeft = '0px';
+          panel.style.marginLeft = `${-panel.getBoundingClientRect().left}px`;
+        });
+      };
+      requestAnimationFrame(alignWasteRecordExpansions);
 
       wasteNetworkFrames.forEach(wasteNetworkFrame => {
         const loadWasteNetwork = () => {
@@ -3402,6 +3409,7 @@
         requestAnimationFrame(updateChapterScrollMarkerPosition);
         requestAnimationFrame(updateChapterScrollMarker);
         requestAnimationFrame(alignWasteNetworkEmbeds);
+        requestAnimationFrame(alignWasteRecordExpansions);
         updateStickyHeader();
       });
       window.addEventListener('hashchange', () => activate(location.hash.slice(1), false, true, true));
