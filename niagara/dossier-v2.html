@@ -620,6 +620,14 @@
     #atomic .atomic-evidence-viewer,
     #atomic .atomic-reference-viewer { z-index:100; }
 
+    @media (min-aspect-ratio:3 / 2) and (max-height:950px) {
+      .electro-cover-content { top:94px; }
+      .electro-cover-content h2 {
+        margin-top:30px;
+        font-size:clamp(70px,min(11.7vw,22svh),160px);
+      }
+    }
+
     @media (max-width:980px) {
       .electro-cover-line { left:12%; }
       .electro-cover-content { left:23%; width:72vw; }
