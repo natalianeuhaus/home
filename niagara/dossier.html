@@ -183,36 +183,6 @@
     .timeline-card p { margin:0; color:var(--muted); font:400 14px/1.5 var(--serif); }
     .timeline-card a { display:inline-block; margin-top:16px; color:var(--red); font:700 8px/1 var(--sans); letter-spacing:.1em; text-transform:uppercase; }
 
-    .love-dossier { padding:clamp(76px,9vw,140px) clamp(30px,6vw,104px) 0; }
-    .love-dossier-intro { display:grid; grid-template-columns:minmax(0,1fr) minmax(250px,.42fr); gap:clamp(48px,7vw,110px); align-items:start; }
-    .love-dossier-copy { max-width:890px; }
-    .love-dossier-copy p { margin:0 0 1.2em; font:400 clamp(18px,1.35vw,23px)/1.47 var(--serif); letter-spacing:-.012em; }
-    .love-dossier-health-photo { margin:0; position:sticky; top:110px; }
-    .love-dossier-health-photo img { width:100%; height:auto; display:block; opacity:.24; filter:grayscale(1); mix-blend-mode:multiply; }
-    .love-dossier-health-photo figcaption { margin-top:13px; color:var(--muted); font:700 8px/1.45 var(--sans); letter-spacing:.12em; text-transform:uppercase; }
-    .love-dossier-report-link { width:max-content; max-width:100%; display:inline-block; margin-top:16px; padding-bottom:4px; border-bottom:1px solid currentColor; color:var(--red); font:700 9px/1.4 var(--sans); letter-spacing:.12em; text-decoration:none; text-transform:uppercase; }
-    .love-dossier-report-link:hover,.love-dossier-report-link:focus-visible,.love-dossier-links a:hover,.love-dossier-links a:focus-visible { color:#3b3b3b; }
-    .love-dossier-links { margin-top:24px; display:flex; flex-wrap:wrap; gap:12px 24px; }
-    .love-dossier-links a { width:max-content; max-width:100%; padding-bottom:3px; border-bottom:1px solid currentColor; color:var(--red); font:700 8px/1.4 var(--sans); letter-spacing:.13em; text-decoration:none; text-transform:uppercase; }
-    .love-dossier-transition { max-width:1040px; margin:clamp(100px,13vw,180px) auto clamp(72px,9vw,120px); padding:clamp(30px,4vw,50px) 0; border-top:1px solid var(--red); border-bottom:1px solid var(--red); font:400 clamp(30px,3.8vw,62px)/1.1 var(--serif); letter-spacing:-.04em; }
-    .love-dossier-stats { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
-    .love-dossier-stat { min-height:180px; padding:30px; }
-    .love-dossier-stat + .love-dossier-stat { border-left:1px solid var(--line); }
-    .love-dossier-stat strong { display:block; margin-bottom:14px; font:400 clamp(42px,5.4vw,88px)/.88 var(--serif); letter-spacing:-.06em; }
-    .love-dossier-stat span { display:block; max-width:290px; color:var(--muted); font:700 10px/1.5 var(--sans); letter-spacing:.11em; text-transform:uppercase; }
-    .love-dossier-map { width:100%; margin:clamp(90px,12vw,150px) 0 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--paper); }
-    .love-dossier-map iframe { width:100%; height:calc(100svh - 88px); min-height:620px; display:block; border:0; background:var(--paper); }
-    .love-dossier-connector { max-width:900px; margin:clamp(90px,12vw,160px) auto; padding:0 clamp(30px,6vw,104px); }
-    .love-dossier-connector p { margin:0; font:400 clamp(18px,1.35vw,23px)/1.47 var(--serif); letter-spacing:-.012em; }
-    .love-losa-story { min-height:120svh; padding:0 clamp(30px,6vw,104px) clamp(100px,13vw,180px); display:grid; grid-template-columns:minmax(0,1.08fr) minmax(320px,.72fr); gap:clamp(48px,6vw,100px); align-items:start; }
-    .love-losa-media { margin:0; position:sticky; top:110px; }
-    .love-losa-media img { width:100%; max-height:76svh; display:block; object-fit:contain; background:#200c07; box-shadow:0 24px 70px rgba(24,10,7,.2); }
-    .love-losa-media figcaption { margin-top:18px; display:grid; grid-template-columns:1fr auto; gap:18px; color:var(--muted); font:700 8px/1.45 var(--sans); letter-spacing:.11em; text-transform:uppercase; }
-    .love-losa-media figcaption span { color:var(--red); }
-    .love-losa-copy { margin:0; padding:12px 0 30px clamp(30px,4vw,62px); position:sticky; top:150px; border-left:1px solid var(--red); }
-    .love-losa-copy p { margin:0; color:rgba(21,23,21,.84); font:italic 400 clamp(23px,2.2vw,36px)/1.36 var(--serif); letter-spacing:-.018em; }
-    .love-losa-copy cite { margin-top:24px; display:block; color:var(--red); font:400 9px/1.4 var(--sans); font-style:normal; letter-spacing:.14em; text-transform:uppercase; }
-
     .loow-plate { min-height:82svh; position:relative; display:grid; align-items:end; overflow:hidden; color:var(--paper); background:var(--night); }
     .loow-plate::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(0,0,0,.88),rgba(0,0,0,.18)),linear-gradient(0deg,rgba(0,0,0,.75),transparent 60%); }
     .loow-plate img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:grayscale(1) contrast(1.1); }
@@ -369,15 +339,6 @@
       .chapter-cover-body h3 { font-size:clamp(62px,13vw,122px); }
       .reading-grid,.love-layout,.telvock,.project-origin > header,.origin-story,.public-record-grid,.closing-grid,.health-header { gap:48px; }
       .process-chain,.research-paths,.phase-list,.health-grid { grid-template-columns:1fr; }
-      .love-dossier-intro { grid-template-columns:1fr; gap:38px; }
-      .love-dossier-health-photo { width:min(520px,100%); position:relative; top:auto; }
-      .love-dossier-stats { grid-template-columns:1fr; }
-      .love-dossier-stat { min-height:0; padding:28px 0; }
-      .love-dossier-stat + .love-dossier-stat { border-left:0; border-top:1px solid var(--line); }
-      .love-dossier-map iframe { height:calc(100svh - 58px); min-height:650px; }
-      .love-losa-story { min-height:0; grid-template-columns:1fr; gap:46px; }
-      .love-losa-media,.love-losa-copy { position:relative; top:auto; }
-      .love-losa-copy { padding-left:24px; }
       .process-card,.research-card,.phase,.health-card { border-right:0; }
       .survey-accounting { grid-template-columns:1fr; }
       .survey-accounting article { border-right:0; border-bottom:1px solid var(--line-dark); }
@@ -566,58 +527,25 @@
         <section class="chapter" id="love-canal" data-chapter>
           <div class="chapter-cover">
             <header class="chapter-cover-meta"><span class="chapter-id">Chapter II</span><h2>1978–1981<br />A chemical disaster opens a second archive.</h2></header>
-            <div class="chapter-cover-body"><span class="chapter-kicker">The records begin to surface</span><h3>Love Canal &amp; The Federal Connection Report</h3><p class="chapter-deck">Residents forced the government to confront one buried history. The investigation exposed another: a regional uranium-production and waste network.</p></div>
+            <div class="chapter-cover-body"><span class="chapter-kicker">The records begin to surface</span><h3>Love Canal + The Federal Connection</h3><p class="chapter-deck">Residents forced the government to confront one buried history. The investigation exposed another: a regional uranium-production and waste network.</p></div>
           </div>
 
-          <div class="love-dossier">
-            <div class="love-dossier-intro">
-              <article class="love-dossier-copy" data-reveal>
-                <p>For decades, the waste left by this industrial system remained hidden. It began to surface only after the crisis at Love Canal. Love Canal was a working-class Niagara Falls neighborhood built around an unfinished canal that Hooker Chemical had used as a hazardous-waste landfill. From 1942 to 1952, the company buried more than 21,000 tons of chemical waste there.</p>
-                <p>In 1953, as Niagara Falls struggled to accommodate its growing postwar population, Hooker sold the covered landfill to the Niagara Falls Board of Education for one dollar. The deed disclosed the presence of industrial waste and included a liability disclaimer. Despite that warning, the 99th Street School was built on the middle third of the landfill, and the surrounding area was developed with homes and low-income apartments, many directly along the canal’s edges.</p>
-                <p>By the late 1970s, chemicals were surfacing in yards, basements, sewers, and school grounds. Residents reported cancers and other illnesses, while state investigators documented a significant excess of miscarriages among women living on 99th Street South and congenital malformations among children born in the neighborhood. One grandmother told an EPA official that two of her four grandchildren had been born with defects: a granddaughter was deaf and had a cleft palate, an extra row of teeth, and a cognitive disability; a grandson had an eye defect.</p>
-                <p>Lois Gibbs, who founded the Love Canal Homeowners Association, helped turn those private experiences into a national environmental crisis. Residents organized, protested, and forced state and federal officials to respond. Emergency declarations in 1978 and 1980 ultimately led to the evacuation of approximately 950 families. Love Canal became a major catalyst for the 1980 Comprehensive Environmental Response, Compensation, and Liability Act—the law that created Superfund—and its resident-led activism became a model for the modern environmental movement.</p>
-                <p>Love Canal itself was a chemical-waste disaster. But the Assembly inquiry began with eyewitness allegations that United States Army personnel had dumped toxic waste into the canal—and with questions about whether the Army’s own 1978 investigation had adequately examined those claims. To identify the soldiers witnesses remembered and determine what they might have been transporting, the Task Force had to reconstruct the history of federal defense activity across Niagara and Erie Counties.</p>
-                <p>That search expanded far beyond Love Canal and revealed that the region’s contamination was also radioactive. The Task Force traced the uranium-production chain through Linde, Electromet, Hooker, and other federal contractors; documented Linde’s underground disposal wells; and investigated the storage, burial, loss, and reuse of radioactive material at the Lake Ontario Ordnance Works and Lake Ontario Storage Area. The 1981 report concluded that Love Canal and federal involvement there were only the tip of a much larger system of factories, contractors, disposal sites, and radioactive waste.</p>
-                <a class="love-dossier-report-link" href="https://natalianeuhaus.com/wp-content/uploads/2026/07/the_federal_connection.pdf" target="_blank" rel="noopener noreferrer">View <em>The Federal Connection</em> report →</a>
-                <div class="love-dossier-links">
-                  <a href="./rebuild.html?archive=Love%20Canal#evidence">Search Love Canal records →</a>
-                  <a href="./rebuild.html#map">Open the Interactive Map →</a>
-                </div>
-              </article>
-
-              <figure class="love-dossier-health-photo" data-reveal>
-                <img src="./archive/love-canal-child-exam.jpg" alt="Black-and-white archival photograph of a young child being examined by medical workers" loading="lazy" decoding="async" />
-                <figcaption>Archival public-health examination · Love Canal</figcaption>
-              </figure>
-            </div>
-
-            <p class="love-dossier-transition" data-reveal>Investigators entered Love Canal looking for one history of chemical disposal. The inquiry opened a second archive: a regional system of wartime uranium production and the movement, reuse, and disposal of its radioactive waste.</p>
-
-            <div class="love-dossier-stats" aria-label="The Federal Connection investigation" data-reveal>
-              <div class="love-dossier-stat"><strong>20</strong><span>months of investigation by the Assembly Task Force on Toxic Substances</span></div>
-              <div class="love-dossier-stat"><strong>67,000</strong><span>Department of Energy records obtained through information requests</span></div>
-              <div class="love-dossier-stat"><strong>37M</strong><span>gallons of radioactively contaminated chemical waste identified by the report</span></div>
-            </div>
+          <div class="love-layout">
+            <article class="love-story" data-reveal>
+              <h4>One neighborhood revealed a much larger system.</h4>
+              <figure><img src="./archive/love-canal-public-health-time-bomb.webp" alt="Love Canal Public Health Time Bomb report over an aerial photograph" loading="lazy" /><figcaption>Evidence · Love Canal: Public Health Time Bomb · 1978</figcaption></figure>
+              <p>Love Canal was a working-class Niagara Falls neighborhood built around an unfinished canal that Hooker Chemical had used as a hazardous-waste landfill. From 1942 to 1952, the company buried more than 21,000 tons of chemical waste there.</p>
+              <p>Residents documented miscarriages, cancers, and congenital malformations, organized, protested, and forced state and federal officials to respond. Emergency declarations in 1978 and 1980 led to the evacuation of approximately 950 families.</p>
+              <p>The Assembly inquiry began with eyewitness allegations that United States Army personnel had dumped toxic waste into the canal. To identify what the witnesses remembered, investigators reconstructed federal defense activity across Niagara and Erie Counties. That search widened into <em>The Federal Connection</em>.</p>
+              <div class="resource-row"><a href="./rebuild.html?archive=Love%20Canal#evidence"><span>Archive of Evidence</span><strong>Search Love Canal →</strong></a><a href="./rebuild.html#map"><span>Interactive map</span><strong>Locate the neighborhood →</strong></a></div>
+            </article>
+            <aside class="love-rail" aria-label="Love Canal investigation timeline">
+              <article class="timeline-card"><time>1978</time><strong>21,000 tons</strong><p>Amount of chemical waste Hooker Chemical is estimated to have buried in Love Canal between 1942 and 1952.</p></article>
+              <article class="timeline-card"><time>1978–1980</time><strong>950 families</strong><p>Households ultimately evacuated after residents and public-health evidence forced government action.</p></article>
+              <article class="timeline-card"><time>20 months</time><strong>67,000 records</strong><p>Department of Energy files obtained by the Assembly Task Force through information requests.</p></article>
+              <article class="timeline-card"><time>1981</time><strong>The Federal Connection</strong><p>The report traced factories, contractors, disposal sites, transport, and radioactive waste across the Niagara Frontier.</p><a href="https://www.health.ny.gov/environmental/investigations/love_canal/lcreport.htm" target="_blank" rel="noopener">Read the state history ↗</a></article>
+            </aside>
           </div>
-
-          <figure class="love-dossier-map" aria-label="Animated map of liquid radioactive-waste pathways">
-            <iframe title="Where the Waste Moved: liquid waste" src="./waste-network/?slide=2&amp;v=32" loading="lazy" allow="fullscreen" allowfullscreen></iframe>
-          </figure>
-
-          <div class="love-dossier-connector" data-reveal>
-            <p>While the “sludge” was disposed of through waterways like creeks, wells, and the city’s storm drains, the solid waste, known as “slag,” piled up unsupervised and unaccounted for in factories and at the Lake Ontario Ordnance Works storage site. Unaware of the dangers, workers brought this material home and used it as filler for home improvements like paving driveways. Since it was free, readily available, and abundant in the area, construction and trucking companies began commercializing it and spreading it throughout the region, transforming a once idyllic city into a radioactive minefield and a cancer factory in the making.</p>
-          </div>
-
-          <section class="love-losa-story" aria-label="Rock slag taken from the Lake Ontario Storage Area">
-            <figure class="love-losa-media">
-              <img src="./archive/radioactive-slag-2015.webp" alt="A gloved person holds a radioactive slag sample on August 12, 2015" loading="lazy" decoding="async" />
-              <figcaption><span>LOSA · Lake Ontario Storage Area</span><small>Slag sample · August 12, 2015</small></figcaption>
-            </figure>
-            <blockquote class="love-losa-copy">
-              <p>Some of this radioactive material reportedly left LOSA as “rock slag.” Workers were permitted to use Atomic Energy Commission trucks to carry it home and spread it as fill in driveways and around their properties. The practice was so routine that one worker’s wife was asked whether her husband was “getting in on the gravy at LOSA.”</p>
-              <cite>The Federal Connection Report</cite>
-            </blockquote>
-          </section>
         </section>
 
         <section class="chapter" id="loow" data-chapter>
