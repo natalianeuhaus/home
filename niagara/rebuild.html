@@ -523,6 +523,15 @@
     .telvock-article-links a:hover,.telvock-article-links a:focus-visible { color:var(--niagara-paper); background:var(--niagara-red); }
     .telvock-article-links span { color:inherit; opacity:.58; font:8px/1.3 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
     .telvock-article-links strong { max-width:310px; font:400 clamp(17px,1.5vw,23px)/1.08 Georgia,"Times New Roman",serif; letter-spacing:-.02em; }
+    .waste-research-expansion { width:min(900px,100%); margin:clamp(120px,16svh,190px) 0 clamp(120px,16svh,190px); transform:translateX(calc(-1 * (min(1540px,calc(100vw - 84px)) - 950px))); }
+    .waste-research-expansion-label { display:block; margin-bottom:22px; color:var(--niagara-red); font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
+    .waste-research-expansion h4 { margin:0 0 clamp(34px,5svh,54px); max-width:780px; font:400 clamp(42px,5vw,72px)/.96 Georgia,"Times New Roman",serif; letter-spacing:-.047em; }
+    .waste-research-expansion p { max-width:900px; margin:0 0 1.2em; color:rgba(21,23,21,.8); font-size:clamp(18px,1.35vw,23px); line-height:1.47; letter-spacing:-.012em; }
+    .waste-research-links { margin-top:clamp(40px,5svh,60px); display:grid; grid-template-columns:1fr 1fr; border-top:1px solid rgba(21,23,21,.3); border-left:1px solid rgba(21,23,21,.3); }
+    .waste-research-links a { min-height:126px; padding:22px 24px; display:flex; flex-direction:column; justify-content:space-between; gap:28px; color:var(--niagara-ink); border-right:1px solid rgba(21,23,21,.3); border-bottom:1px solid rgba(21,23,21,.3); text-decoration:none; transition:color .22s ease,background-color .22s ease; }
+    .waste-research-links a:hover,.waste-research-links a:focus-visible { color:var(--niagara-paper); background:var(--niagara-red); }
+    .waste-research-links span { color:inherit; opacity:.58; font:8px/1.3 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
+    .waste-research-links strong { font:400 clamp(19px,1.7vw,26px)/1.08 Georgia,"Times New Roman",serif; letter-spacing:-.025em; }
     .waste-record-expansion { width:100vw; min-height:calc(100svh - 66px); margin:clamp(84px,11svh,130px) 0 0; padding:clamp(76px,10svh,130px) clamp(42px,6.5vw,100px); display:flex; flex-direction:column; justify-content:center; background:#d8d5cd; border-top:1px solid var(--niagara-line); border-bottom:1px solid var(--niagara-line); }
     .waste-record-expansion-header { display:grid; grid-template-columns:minmax(180px,.35fr) minmax(520px,1.15fr); gap:clamp(54px,8vw,140px); align-items:start; }
     .waste-record-expansion-label { padding-top:9px; color:var(--niagara-red); font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.17em; text-transform:uppercase; }
@@ -605,7 +614,6 @@
     body.niagara-love-canal-active .atomic-thread-end { fill:var(--love-canal-red); }
     .waste-section { margin-top:clamp(78px,11svh,142px); padding-top:clamp(30px,4.5svh,58px); border-top:1px solid var(--niagara-line); }
     #waste-survey-years { transform:translateX(calc(-1 * (min(1540px,calc(100vw - 84px)) - 950px))); }
-    #waste-union-carbide { transform:translateX(calc(-1 * (min(1540px,calc(100vw - 84px)) - 950px))); }
     .waste-section-header { display:grid; grid-template-columns:112px minmax(0,1fr); gap:clamp(22px,4vw,54px); align-items:start; margin-bottom:30px; }
     .waste-year { padding-top:7px; color:var(--niagara-red); font:10px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
     .waste-section h4 { margin:0; font-size:clamp(34px,4.1vw,62px); line-height:.98; font-weight:400; letter-spacing:-.043em; }
@@ -850,7 +858,6 @@
       .federal-record-page img { max-height:660px; }
       .waste-section-header { grid-template-columns:1fr; gap:10px; }
       #waste-survey-years { transform:none; }
-      #waste-union-carbide { transform:none; }
       .waste-year { padding-top:0; }
       .waste-section-copy { margin-left:0; }
       .waste-video-block,.waste-split { grid-template-columns:1fr; }
@@ -869,6 +876,8 @@
       .waste-survey-item { min-height:0; }
       .waste-chapter-followup--telvock-investigation { width:100%; margin:84px 0 104px; transform:none; }
       .telvock-article-links { grid-template-columns:1fr; }
+      .waste-research-expansion { width:100%; margin:104px 0 124px; transform:none; }
+      .waste-research-links { grid-template-columns:1fr; }
       .waste-record-expansion { width:100vw; min-height:0; margin-top:76px; padding:64px 24px 78px; }
       .waste-record-expansion-header,.waste-record-grid { grid-template-columns:1fr; gap:20px; }
       .waste-record-grid { gap:0; }
@@ -1951,23 +1960,21 @@
                   <a href="https://www.investigativepost.org/2016/07/05/radioactive-hot-spots-pepper-niagara-county/" target="_blank" rel="noopener noreferrer"><span>2016 · Investigative Post</span><strong>Radioactive hot spots pepper Niagara County ↗</strong></a>
                   <a href="https://www.investigativepost.org/2017/02/09/paying-price-for-radioactive-hotspots-in-niagara/" target="_blank" rel="noopener noreferrer"><span>2017 · Investigative Post</span><strong>Paying price for radioactive hotspots in Niagara ↗</strong></a>
                 </div>
-              </div>
-
-              <section class="waste-section" id="waste-union-carbide">
-                <div class="waste-section-header">
-                  <span class="waste-year">The 1979 records</span>
-                  <h4>A lead, not a final attribution</h4>
-                </div>
-                <div class="waste-section-copy">
-                  <p>The private investigator recorded contractor statements, not laboratory proof linking a particular slag sample to a particular property. The reports matter because they preserve testimony about how industrial waste moved—and because they state plainly what the investigator could not establish.</p>
-                </div>
-                <div class="waste-trail" aria-label="Trail described in the private investigator records">
-                  <span>Union Carbide</span><span>Haulers</span><span>Slag and waste</span><span>Dump or fill site</span>
-                </div>
                 <figure class="waste-document">
                   <img src="./archive/private-investigator-union-carbide.webp" alt="May 10, 1979 private investigator report concerning Union Carbide slag, haulers, a company dump, and fill use" loading="lazy" />
                   <figcaption>Probe International report to the Pine Bowl owner, May 10, 1979. The document records contractor statements and preserves uncertainty about whether Union Carbide material was present at the parking lot.</figcaption>
                 </figure>
+              </div>
+
+              <section class="waste-research-expansion" aria-labelledby="waste-research-expansion-title">
+                <span class="waste-research-expansion-label">The project archive</span>
+                <h4 id="waste-research-expansion-title">The investigation kept widening.</h4>
+                <p>Telvock’s reporting returned part of the federal record to public view. Research for <em>Greetings from Niagara</em> used that work as a point of departure, then widened across federal and state technical reports, cleanup files, property records, newspaper archives, and interviews. Read together, those sources revealed a geography larger than any single survey, cleanup program, or industrial site.</p>
+                <p>The documents gathered through that research now form the project’s Archive of Evidence. The Interactive Map connects those records to factories, disposal areas, roads, waterways, homes, and public spaces, showing how the same locations and waste routes reappear across decades.</p>
+                <div class="waste-research-links" aria-label="Explore the project research">
+                  <a href="#evidence"><span>Archive of Evidence</span><strong>Read the records →</strong></a>
+                  <a href="#map"><span>Interactive Map</span><strong>Follow the geography →</strong></a>
+                </div>
               </section>
 
               <section class="waste-section" id="waste-cleanups">
