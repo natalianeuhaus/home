@@ -378,6 +378,253 @@
       *,*::before,*::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
       [data-reveal] { opacity:1; transform:none; }
     }
+    .atomic-niagara-chapter { border-top:0; padding-top:0; padding-bottom:0; }
+    .atomic-niagara-hero { width:100vw; height:100svh; min-height:640px; margin-left:calc(50% - 50vw); display:grid; grid-template-columns:minmax(340px,.44fr) minmax(0,.56fr); overflow:hidden; background:var(--night); }
+    .atomic-niagara-title { min-width:0; padding:clamp(44px,5vw,86px); display:flex; flex-direction:column; justify-content:center; color:var(--paper); background:var(--night); pointer-events:none; }
+    .atomic-niagara-title .investigation-chapter-label { color:rgba(241,240,234,.48); }
+    .atomic-niagara-title .investigation-number { color:rgba(241,240,234,.58); }
+    .atomic-niagara-title h3 { position:relative; z-index:5; margin:0; max-width:720px; font-size:clamp(38px,4.5vw,76px); line-height:.94; font-weight:400; letter-spacing:-.045em; }
+    .atomic-niagara-title > .investigation-chapter-label { transform:translate3d(0,var(--chapter-parallax-label,0px),0); will-change:transform; }
+    .atomic-niagara-title > .investigation-number { transform:translate3d(0,var(--chapter-parallax-number,0px),0); will-change:transform; }
+    .atomic-niagara-title > h3 { transform:translate3d(0,var(--chapter-parallax-title,0px),0); will-change:transform; }
+    .atomic-niagara-media { min-width:0; position:relative; overflow:hidden; background:#111; }
+    .atomic-niagara-video { width:100%; height:100%; border:0; display:block; object-fit:cover; object-position:center; background:#111; }
+    .atomic-niagara-credit { position:absolute; z-index:1; right:18px; bottom:16px; margin:0; max-width:76%; color:rgba(241,240,234,.68); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.08em; text-align:right; text-transform:uppercase; text-shadow:0 1px 8px rgba(0,0,0,.7); }
+
+    /* Atomic Niagara permanent X-ray treatment */
+    #atomic > .atomic-xray-sequence {
+      width:100vw;
+      height:auto;
+      min-height:0;
+      margin-left:calc(50% - 50vw);
+      position:relative;
+      display:block;
+      overflow:hidden;
+      isolation:isolate;
+    }
+    #atomic > .atomic-xray-sequence > .atomic-niagara-hero {
+      height:calc(100svh - 50px);
+      min-height:590px;
+    }
+    #atomic > .atomic-xray-sequence > .atomic-evidence-mosaic {
+      height:auto;
+      min-height:0;
+    }
+    #atomic > .atomic-xray-sequence > .atomic-evidence-mosaic .atomic-evidence-grid {
+      height:min(76svh,790px);
+      min-height:560px;
+    }
+    #atomic > .atomic-xray-sequence > .atomic-niagara-hero,
+    #atomic > .atomic-xray-sequence > .atomic-evidence-mosaic {
+      filter:invert(1) grayscale(.9) sepia(.18) hue-rotate(150deg) saturate(2.4) contrast(1.55) brightness(.75);
+    }
+    #atomic > .atomic-xray-sequence::after {
+      content:"";
+      position:absolute;
+      z-index:12;
+      top:-3%;
+      bottom:-3%;
+      left:-45%;
+      width:42%;
+      pointer-events:none;
+      opacity:0;
+      transform:translate3d(-30%,0,0);
+      background:linear-gradient(90deg,transparent 0%,rgba(154,224,255,.08) 24%,rgba(223,249,255,.72) 48%,rgba(255,255,255,.96) 50%,rgba(123,203,235,.2) 55%,transparent 100%);
+      mix-blend-mode:screen;
+      will-change:transform,opacity;
+    }
+    #atomic > .atomic-xray-sequence.is-xray-revealed::after {
+      animation:atomic-xray-scan 7.2s cubic-bezier(.25,.7,.2,1) both;
+    }
+    #atomic > .atomic-xray-sequence.is-xray-reverse::after {
+      left:auto;
+      right:-45%;
+      transform:translate3d(30%,0,0);
+    }
+    #atomic > .atomic-xray-sequence.is-xray-revealed.is-xray-reverse::after {
+      animation-name:atomic-xray-scan-reverse;
+    }
+    @keyframes atomic-xray-scan {
+      0% { opacity:0; transform:translate3d(-30%,0,0); }
+      9% { opacity:.9; }
+      82% { opacity:.68; }
+      100% { opacity:0; transform:translate3d(410%,0,0); }
+    }
+    @keyframes atomic-xray-scan-reverse {
+      0% { opacity:0; transform:translate3d(30%,0,0); }
+      9% { opacity:.9; }
+      82% { opacity:.68; }
+      100% { opacity:0; transform:translate3d(-410%,0,0); }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      #atomic > .atomic-xray-sequence::after,
+      #atomic > .atomic-xray-sequence.is-xray-revealed::after {
+        content:none;
+        animation:none;
+      }
+    }
+    .atomic-niagara-copy-grid { grid-template-columns:minmax(500px,900px); justify-content:end; padding-top:clamp(86px,12svh,150px); }
+    .atomic-niagara-intro-grid { justify-content:start; padding-top:80px; padding-bottom:100px; padding-left:50px; }
+    .atomic-niagara-intro-grid .investigation-chapter-copy p { margin-top:50px; }
+    .atomic-niagara-process-grid { grid-template-columns:minmax(650px,1050px); transform:translateX(-50px); }
+    .atomic-process-heading { margin:clamp(64px,8svh,100px) 0 22px; font-size:clamp(34px,4vw,62px); line-height:1; font-weight:400; letter-spacing:-.04em; }
+    .atomic-process-list { margin:0; padding:0; list-style:none; }
+    .atomic-process-step { display:grid; grid-template-columns:minmax(150px,.34fr) minmax(0,1fr); gap:clamp(32px,5vw,76px); padding:clamp(38px,5svh,64px) 0; border-top:1px solid var(--line); }
+    .atomic-process-number { display:block; margin:0 0 22px; color:var(--red); font:10px/1 Arial,Helvetica,sans-serif; letter-spacing:.18em; }
+    .atomic-process-title { margin:0; font-size:clamp(27px,2.75vw,43px); line-height:.98; font-weight:400; letter-spacing:-.038em; }
+    .atomic-process-location { display:block; margin-top:13px; color:rgba(21,23,21,.54); font:9px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
+    .atomic-process-copy p { margin:0 0 1.2em; }
+    .atomic-process-copy p:last-child { margin-bottom:0; }
+    .atomic-process-reveal { width:min(900px,calc(100% - 48px)); margin:clamp(30px,calc(15svh - 80px),100px) clamp(24px,8vw,140px) clamp(92px,12svh,150px) auto; margin-bottom:calc(clamp(92px,12svh,150px) + 120px); padding:clamp(8px,1vw,14px) 0 clamp(8px,1vw,14px) clamp(26px,4vw,62px); box-sizing:border-box; position:relative; border-left:1px solid var(--red); }
+    .atomic-process-reveal-label { display:block; margin:0 0 clamp(18px,2.5svh,28px); color:var(--red); font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.18em; text-transform:uppercase; }
+    .atomic-process-reveal p { margin:0; color:var(--ink); font-size:clamp(19px,1.55vw,25px); line-height:1.45; letter-spacing:-.014em; }
+    .atomic-process-reveal em { color:var(--red); font-style:italic; }
+    @media (max-width:820px) {
+      .atomic-process-reveal { width:calc(100% - 36px); margin:8px 18px 78px; padding-left:22px; }
+      .atomic-process-reveal p { font-size:clamp(18px,5.2vw,23px); }
+    }
+    .atomic-process-map { width:100vw; max-width:none; margin:clamp(74px,10svh,120px) 0 10px calc(50% - 50vw); position:relative; z-index:25; border-top:1px solid rgba(21,23,21,.18); border-bottom:1px solid rgba(21,23,21,.18); background:var(--paper); }
+    .atomic-process-map-frame { width:100%; height:calc(100svh - 66px); min-height:0; display:block; border:0; background:var(--paper); }
+    .atomic-process-reference { width:calc(100vw - (50vw - 50%)); max-width:none; min-height:clamp(500px,38vw,780px); margin:0 0 clamp(192px,calc(13svh + 100px),256px); display:grid; grid-template-columns:minmax(420px,.96fr) minmax(0,1.04fr); align-items:stretch; border:2px solid #4f1414; background:rgba(68,8,6,.055); overflow:hidden; }
+    .atomic-process-reference-copy { min-width:0; padding:clamp(28px,3.2vw,46px); display:flex; flex-direction:column; justify-content:center; }
+    .atomic-process-reference-label { display:block; width:calc(100vw - (50vw - 50%)); max-width:none; margin:120px 0 50px; color:var(--red); font:14px/1.3 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
+    .atomic-process-reference h4 { margin:0 0 18px; font-size:clamp(30px,2.8vw,44px); line-height:.98; font-weight:400; letter-spacing:-.038em; }
+    .atomic-process-reference p { margin:0 0 15px; max-width:680px; font-size:clamp(15px,1.12vw,19px); line-height:1.48; }
+    .usace-fusrap-explainer { margin-top:clamp(20px,2.6vw,32px); padding-top:clamp(18px,2.2vw,26px); border-top:1px solid rgba(68,8,6,.25); }
+    .usace-fusrap-explainer > span { display:block; margin-bottom:10px; color:var(--red); font:9px/1.35 Arial,Helvetica,sans-serif; letter-spacing:.15em; text-transform:uppercase; }
+    .atomic-process-reference .usace-fusrap-explainer p { margin:0; max-width:680px; color:rgba(21,23,21,.72); font-size:clamp(13px,.95vw,16px); line-height:1.52; }
+    .waste-chapter-followup .usace-fusrap-explainer { margin:0 0 clamp(52px,7svh,82px); padding-top:clamp(22px,3svh,34px); }
+    .waste-chapter-followup .usace-fusrap-explainer p { max-width:900px; margin:0; color:rgba(21,23,21,.76); font-size:clamp(18px,1.35vw,23px); font-style:normal; line-height:1.47; letter-spacing:-.012em; }
+    .usace-fusrap-explainer a { color:inherit; text-decoration-line:underline; text-decoration-thickness:1px; text-underline-offset:.16em; }
+    .atomic-process-reference-comparison { margin:10px 0 24px; padding:17px 0; display:grid; grid-template-columns:minmax(0,.82fr) 26px minmax(0,1.18fr); gap:14px; align-items:center; border-top:1px solid rgba(68,8,6,.2); border-bottom:1px solid rgba(68,8,6,.2); }
+    .atomic-process-reference-place span { display:block; color:var(--red); font:8px/1.35 Arial,Helvetica,sans-serif; letter-spacing:.14em; text-transform:uppercase; }
+    .atomic-process-reference-place strong { display:block; margin-top:7px; font-size:clamp(14px,1vw,17px); line-height:1.28; font-weight:400; }
+    .atomic-process-reference-transfer { color:var(--red); font:22px/1 Georgia,serif; text-align:center; }
+    .atomic-process-reference-media { appearance:none; width:100%; min-width:0; min-height:280px; padding:0; position:relative; display:block; overflow:hidden; border:0; color:var(--paper); background:#171717; cursor:pointer; text-align:inherit; }
+    .atomic-process-reference-media img { width:100%; height:100%; display:block; object-fit:cover; object-position:center; filter:grayscale(1) contrast(1.08); transition:transform .55s cubic-bezier(.22,.7,.25,1),filter .35s ease; }
+    .atomic-process-reference-media::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 52%,rgba(0,0,0,.78)); pointer-events:none; }
+    .atomic-process-reference-media:hover img,.atomic-process-reference-media:focus-visible img { transform:scale(1.025); filter:grayscale(.2) contrast(1.04); }
+    .atomic-process-reference-play { position:absolute; z-index:2; left:50%; top:50%; width:58px; height:58px; display:grid; place-items:center; border:1px solid rgba(255,255,255,.78); border-radius:50%; background:rgba(0,0,0,.34); backdrop-filter:blur(5px); -webkit-backdrop-filter:blur(5px); transform:translate(-50%,-50%); font:15px/1 Arial,Helvetica,sans-serif; }
+    .atomic-process-reference-caption { position:absolute; z-index:2; left:18px; right:18px; bottom:16px; color:rgba(255,255,255,.78); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.1em; text-transform:uppercase; }
+    .atomic-reference-viewer { width:min(1400px,calc(100vw - 48px)); max-width:none; height:auto; max-height:calc(100svh - 48px); margin:auto; padding:0; border:0; color:var(--paper); background:#090909; box-shadow:0 28px 100px rgba(0,0,0,.72); overflow:hidden; }
+    .atomic-reference-viewer::backdrop { background:rgba(0,0,0,.9); backdrop-filter:blur(5px); -webkit-backdrop-filter:blur(5px); }
+    .atomic-reference-viewer-shell { display:grid; grid-template-rows:minmax(0,1fr) auto; }
+    .atomic-reference-viewer-frame { width:100%; aspect-ratio:16 / 9; background:#000; }
+    .atomic-reference-viewer-frame iframe { width:100%; height:100%; display:block; border:0; }
+    .atomic-reference-viewer-caption { margin:0; padding:16px 58px 18px 20px; color:rgba(241,240,234,.62); font:9px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.1em; text-transform:uppercase; }
+    .atomic-reference-viewer-close { appearance:none; position:absolute; z-index:2; top:8px; right:8px; width:42px; height:42px; border:0; border-radius:50%; color:rgba(241,240,234,.8); background:rgba(0,0,0,.56); cursor:pointer; font:22px/1 Arial,Helvetica,sans-serif; }
+    .atomic-reference-viewer-close:hover,.atomic-reference-viewer-close:focus-visible { color:#fff; background:rgba(255,255,255,.13); }
+    .atomic-evidence-mosaic { width:100vw; margin:0 0 0 calc(50% - 50vw); padding:0; color:var(--paper); background:var(--night); }
+    .atomic-evidence-grid { height:min(76svh,790px); min-height:560px; display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); grid-template-rows:repeat(3,minmax(0,1fr)); gap:0; }
+    .atomic-evidence-item { min-width:0; min-height:0; position:relative; overflow:hidden; color:var(--paper); background:#1d1d1d; }
+    .atomic-evidence-item:nth-child(1) { grid-column:1 / 5; grid-row:1 / 4; }
+    .atomic-evidence-item:nth-child(2) { grid-column:5 / 10; grid-row:1 / 3; }
+    .atomic-evidence-item:nth-child(3) { grid-column:10 / 13; grid-row:1 / 2; }
+    .atomic-evidence-item:nth-child(4) { grid-column:10 / 13; grid-row:2 / 4; }
+    .atomic-evidence-item:nth-child(5) { grid-column:5 / 7; grid-row:3 / 4; }
+    .atomic-evidence-item:nth-child(6) { grid-column:7 / 10; grid-row:3 / 4; }
+    .atomic-evidence-placeholder { width:100%; height:100%; display:grid; place-items:center; color:rgba(241,240,234,.42); background:#5e5e5e; transition:background .3s ease,color .3s ease; }
+    .atomic-evidence-item:nth-child(2) .atomic-evidence-placeholder { background:#4f4f4f; }
+    .atomic-evidence-item:nth-child(3) .atomic-evidence-placeholder { background:#707070; }
+    .atomic-evidence-item:nth-child(4) .atomic-evidence-placeholder { background:#484848; }
+    .atomic-evidence-item:nth-child(5) .atomic-evidence-placeholder { background:#686868; }
+    .atomic-evidence-item:nth-child(6) .atomic-evidence-placeholder { background:#565656; }
+    .atomic-evidence-placeholder span { padding:8px 10px; border:1px solid rgba(241,240,234,.25); font:8px/1 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
+    .atomic-evidence-item--text { padding:clamp(16px,1.7vw,26px); display:flex; flex-direction:column; justify-content:flex-end; color:var(--paper); background:#686868; text-decoration:none; transition:background-color .28s ease; }
+    .atomic-evidence-item--text::before,.atomic-evidence-item--text::after { display:none; }
+    .atomic-evidence-item--text:hover,.atomic-evidence-item--text:focus-visible { background:#747474; }
+    .atomic-evidence-text-number { position:absolute; top:16px; left:clamp(16px,1.7vw,26px); color:rgba(241,240,234,.48); font:8px/1 Arial,Helvetica,sans-serif; letter-spacing:.16em; }
+    .atomic-evidence-text-title { margin:0 0 10px; color:var(--paper); font:400 clamp(20px,1.7vw,29px)/.96 Georgia,"Times New Roman",serif; letter-spacing:-.035em; }
+    .atomic-evidence-text-copy { margin:0 0 13px; max-width:240px; color:rgba(241,240,234,.74); font:9px/1.42 Arial,Helvetica,sans-serif; letter-spacing:.02em; }
+    .atomic-evidence-text-link { color:var(--paper); font:8px/1.2 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
+    .atomic-evidence-item > img { width:100%; height:100%; display:block; object-fit:cover; object-position:center top; }
+    .atomic-evidence-item--text > .atomic-evidence-viewer-source { position:absolute; width:1px; height:1px; inset:0 auto auto 0; opacity:0; pointer-events:none; }
+    .atomic-evidence-item--text > .atomic-evidence-caption { display:none; }
+    .atomic-evidence-item--profile > img { transform:scale(1.14); transform-origin:center center; }
+    .atomic-evidence-item--ore { background:var(--paper); }
+    .atomic-evidence-item--ore > img { width:84%; height:84%; margin:1% 8% 15%; object-fit:contain; object-position:center top; }
+    .atomic-evidence-item--ore::after { display:none; }
+    .atomic-evidence-item--ore::before { color:var(--ink); border-color:rgba(21,23,21,.45); background:rgba(241,240,234,.74); }
+    .atomic-evidence-item--ore .atomic-evidence-caption { color:rgba(21,23,21,.76); }
+    .atomic-evidence-item::before { content:"open"; position:absolute; z-index:2; top:12px; right:12px; width:42px; height:42px; display:grid; place-items:center; border:1px solid rgba(241,240,234,.62); border-radius:50%; color:var(--paper); background:rgba(0,0,0,.26); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); opacity:0; transform:scale(.82); transition:opacity .25s ease,transform .35s cubic-bezier(.22,.7,.25,1); pointer-events:none; font:7px/1 Arial,Helvetica,sans-serif; letter-spacing:.1em; text-transform:uppercase; }
+    .atomic-evidence-item::after { content:""; position:absolute; inset:auto 0 0; height:48%; background:linear-gradient(transparent,rgba(0,0,0,.82)); pointer-events:none; }
+    .atomic-evidence-caption { position:absolute; z-index:1; left:14px; right:14px; bottom:12px; color:rgba(241,240,234,.88); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.11em; text-transform:uppercase; }
+    .atomic-evidence-item:hover::before,.atomic-evidence-item:focus-visible::before { opacity:1; transform:scale(1); }
+    .atomic-evidence-item:hover .atomic-evidence-placeholder,.atomic-evidence-item:focus-visible .atomic-evidence-placeholder { color:rgba(241,240,234,.78); background:#3f3f3f; }
+    .atomic-evidence-item:focus-visible { outline:1px solid var(--paper); outline-offset:-3px; }
+    .atomic-evidence-viewer { width:min(1180px,calc(100vw - 42px)); height:min(88svh,850px); max-width:none; max-height:none; margin:auto; padding:0; border:0; color:var(--paper); background:#101010; box-shadow:0 28px 90px rgba(0,0,0,.58); overflow:hidden; }
+    .atomic-evidence-viewer::backdrop { background:rgba(0,0,0,.84); backdrop-filter:blur(5px); -webkit-backdrop-filter:blur(5px); }
+    .atomic-evidence-viewer-shell { height:100%; display:grid; grid-template-columns:58px minmax(0,1fr) 58px; }
+    .atomic-evidence-viewer figure { min-width:0; min-height:0; margin:0; display:grid; grid-template-rows:minmax(0,1fr) auto; overflow:hidden; }
+    .atomic-evidence-viewer-image { width:100%; height:100%; min-height:0; display:block; object-fit:contain; background:#090909; }
+    .atomic-evidence-viewer.is-profile figure { grid-template-columns:minmax(300px,.88fr) minmax(360px,1.12fr); grid-template-rows:1fr; }
+    .atomic-evidence-viewer.is-profile .atomic-evidence-viewer-image { grid-column:1; grid-row:1; object-fit:cover; object-position:center center; transform:scale(1.14); transform-origin:center center; }
+    .atomic-evidence-viewer.is-profile .atomic-evidence-viewer-caption { grid-column:2; grid-row:1; min-height:0; padding:clamp(34px,5vw,72px); grid-template-columns:1fr; grid-template-rows:auto auto auto auto; gap:18px; align-content:center; align-items:start; border-top:0; border-left:1px solid rgba(241,240,234,.18); background:#101010; }
+    .atomic-evidence-viewer.is-profile .atomic-evidence-viewer-count { grid-column:1; grid-row:1; }
+    .atomic-evidence-viewer.is-profile .atomic-evidence-viewer-title { grid-column:1; grid-row:2; font-size:clamp(34px,4vw,58px); line-height:.94; }
+    .atomic-evidence-viewer.is-profile .atomic-evidence-viewer-summary { grid-column:1; grid-row:3; max-width:520px; font-size:clamp(13px,1.25vw,16px); line-height:1.55; }
+    .atomic-evidence-viewer.is-profile .atomic-evidence-follow { grid-column:1; grid-row:4; justify-self:start; margin-top:10px; }
+    .atomic-evidence-viewer-caption { min-height:84px; padding:17px 22px 18px; position:relative; z-index:1; display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:18px; align-items:center; border-top:1px solid rgba(241,240,234,.18); background:#101010; }
+    .atomic-evidence-viewer-count { color:rgba(241,240,234,.5); font:8px/1 Arial,Helvetica,sans-serif; letter-spacing:.14em; }
+    .atomic-evidence-viewer-title { font-size:clamp(17px,1.6vw,24px); line-height:1.08; font-weight:400; letter-spacing:-.02em; }
+    .atomic-evidence-viewer-summary { grid-column:2 / 3; grid-row:2; margin:0; max-width:780px; color:rgba(241,240,234,.68); font:12px/1.45 Arial,Helvetica,sans-serif; }
+    .atomic-evidence-viewer-summary:empty { display:none; }
+    .atomic-evidence-follow { grid-column:3; grid-row:1 / span 2; padding-bottom:3px; border-bottom:1px solid rgba(241,240,234,.5); color:var(--paper); font:8px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; white-space:nowrap; }
+    .atomic-evidence-viewer-nav,.atomic-evidence-viewer-close { appearance:none; border:0; color:rgba(241,240,234,.76); background:transparent; cursor:pointer; font-family:Arial,Helvetica,sans-serif; transition:color .2s ease,background .2s ease; }
+    .atomic-evidence-viewer-nav { font-size:18px; }
+    .atomic-evidence-viewer.is-single .atomic-evidence-viewer-nav { visibility:hidden; pointer-events:none; }
+    .atomic-evidence-viewer.is-single .atomic-evidence-follow { display:none; }
+    .atomic-evidence-viewer.is-single .atomic-evidence-viewer-caption { grid-template-columns:auto minmax(0,1fr); }
+    .atomic-evidence-viewer-nav:hover,.atomic-evidence-viewer-nav:focus-visible,.atomic-evidence-viewer-close:hover,.atomic-evidence-viewer-close:focus-visible { color:#fff; background:rgba(255,255,255,.07); }
+    .atomic-evidence-viewer-close { position:absolute; z-index:2; top:8px; right:8px; width:42px; height:42px; border-radius:50%; background:rgba(0,0,0,.35); font-size:18px; }
+    .chapter-one-coda { width:min(980px,calc(100vw - 84px)); margin:45px auto 85px 42px; padding:0; color:var(--ink); background:transparent; }
+    .chapter-one-coda img { width:80%; height:auto; margin-top:125px; margin-bottom:140px; display:block; object-fit:contain; }
+    .chapter-one-coda figcaption { padding:10px 0 0; display:flex; justify-content:space-between; gap:24px; color:rgba(21,23,21,.52); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
+    body:has(.atomic-evidence-viewer[open]),body:has(.atomic-reference-viewer[open]) { overflow:hidden; }
+
+    /* Dossier 2 · Origins chapter opening */
+    .waterfalls-slide--electro-cover { padding:0; display:block; overflow:hidden; background:var(--paper); }
+    .electro-cover-line { width:1px; height:65%; position:absolute; left:16.65%; top:0; background:var(--red); }
+    .electro-cover-line::after { content:""; width:18px; height:18px; position:absolute; left:50%; bottom:0; border-radius:50%; background:var(--red); transform:translate(-50%,50%); }
+    .electro-cover-content { width:min(70vw,850px); position:absolute; left:29.5%; top:clamp(68px,7.2svh,112px); }
+    .electro-cover-content .eyebrow { color:rgba(18,20,17,.44); font-size:clamp(11px,1.25vw,18px); font-weight:400; letter-spacing:.25em; }
+    .electro-cover-content .waterfalls-year { margin-top:18px; color:rgba(18,20,17,.44); font-size:clamp(12px,1.55vw,22px); font-weight:400; letter-spacing:.2em; }
+    .electro-cover-content h2 { width:min(70vw,850px); margin:clamp(42px,5.2svh,74px) 0 0; font-size:clamp(70px,11.7vw,170px); font-weight:400; line-height:.78; letter-spacing:-.07em; overflow-wrap:normal; }
+
+    /* Rebuild Chapter I, fitted inside the dossier rail */
+    #atomic { --atomic-content-width:calc(100vw - var(--rail)); background:var(--paper); }
+    #atomic .investigation-chapter-label { display:block; margin:0 0 6px; color:rgba(18,20,17,.42); font:10px/1.35 var(--sans); letter-spacing:.2em; text-transform:uppercase; }
+    #atomic .investigation-number { display:block; margin:0 0 20px; color:rgba(18,20,17,.42); font:13px/1.4 var(--sans); letter-spacing:.22em; text-transform:uppercase; }
+    #atomic .investigation-chapter-grid { width:min(1220px,calc(100% - 84px)); margin:0 auto; display:grid; align-items:start; }
+    #atomic .investigation-chapter-copy { max-width:900px; }
+    #atomic .investigation-chapter-copy p { margin:0 0 1.2em; font-size:clamp(18px,1.35vw,23px); line-height:1.47; letter-spacing:-.012em; }
+    #atomic > .atomic-xray-sequence,
+    #atomic .atomic-niagara-hero,
+    #atomic .atomic-evidence-mosaic,
+    #atomic .atomic-process-map { width:100%; margin-left:0; }
+    #atomic > .atomic-xray-sequence > .atomic-niagara-hero { height:calc(100svh - var(--top)); }
+    #atomic .atomic-niagara-title { padding:clamp(44px,5vw,78px); }
+    #atomic .atomic-niagara-title h3 { font-size:clamp(46px,5.4vw,84px); }
+    #atomic .atomic-niagara-intro-grid { width:min(1120px,calc(100% - 84px)); padding-left:0; }
+    #atomic .atomic-niagara-process-grid { width:min(1120px,calc(100% - 84px)); transform:none; }
+    #atomic .atomic-process-map-frame { height:calc(100svh - var(--top)); }
+    #atomic .atomic-process-reference-label { width:calc(100% - 84px); margin-left:42px; }
+    #atomic .atomic-process-reference { width:calc(100% - 84px); margin-left:42px; margin-right:42px; }
+    #atomic .atomic-process-reveal { margin-right:42px; }
+    #atomic .atomic-evidence-viewer,
+    #atomic .atomic-reference-viewer { z-index:100; }
+
+    @media (max-width:980px) {
+      .electro-cover-line { left:12%; }
+      .electro-cover-content { left:23%; width:72vw; }
+      .electro-cover-content h2 { width:72vw; font-size:clamp(64px,13vw,126px); }
+      #atomic .atomic-niagara-hero { grid-template-columns:1fr; grid-template-rows:minmax(250px,.42fr) minmax(300px,.58fr); height:auto; min-height:calc(100svh - var(--top)); }
+      #atomic .atomic-niagara-title { padding:48px 34px 42px; }
+      #atomic .atomic-niagara-media { min-height:340px; }
+      #atomic .atomic-process-reference { min-height:0; grid-template-columns:1fr; }
+      #atomic .atomic-process-reference-media { min-height:420px; }
+    }
+
   </style>
 </head>
 <body>
@@ -434,14 +681,13 @@
           </div>
         </article>
 
-        <article class="waterfalls-slide" data-waterfalls-section="3">
-          <div class="waterfalls-inner">
-            <header class="waterfalls-meta"><span class="eyebrow">Origins</span><span class="waterfalls-year">1895–1942</span><h2>Electrochemistry +<br />electrometallurgy</h2></header>
-            <div class="waterfalls-copy">
-              <p>This new supply of electricity opened a new era of metal production and electrochemical discovery. Electric furnaces could reach temperatures exceeding 7,000 degrees Fahrenheit, enabling chemical changes in materials that had previously been impossible.</p>
-              <p>Hooker produced chlorine and caustic soda. Linde produced industrial gases. Electromet manufactured specialized alloys and became the nation’s largest producer of uranium metal. Vanadium strengthened steel. Carborundum pioneered the synthetic abrasive that transformed industrial grinding and cutting. These were not ordinary factories.</p>
-            </div>
-          </div>
+        <article class="waterfalls-slide waterfalls-slide--electro-cover" data-waterfalls-section="3">
+          <span class="electro-cover-line" aria-hidden="true"></span>
+          <header class="electro-cover-content">
+            <span class="eyebrow">Origins</span>
+            <span class="waterfalls-year">1895–1942</span>
+            <h2>Electro<wbr>chemistry + electro<wbr>metallurgy</h2>
+          </header>
         </article>
 
         <article class="waterfalls-slide" data-waterfalls-section="4">
@@ -497,31 +743,242 @@
       </aside>
 
       <div class="case-content">
-        <section class="chapter" id="atomic" data-chapter>
-          <div class="chapter-cover dark">
-            <header class="chapter-cover-meta"><span class="chapter-id">Chapter I</span><h2>1942–1978<br />Production becomes a secret system.</h2></header>
-            <div class="chapter-cover-body"><span class="chapter-kicker">The Manhattan Project reaches Niagara</span><h3>Atomic Niagara</h3><p class="chapter-deck">Cheap power, specialized chemistry, and an established network of metal plants made the Niagara Frontier essential to the production of uranium compounds and metal.</p></div>
+        <section class="chapter investigation-chapter atomic-niagara-chapter" id="atomic" data-chapter>
+          <div class="atomic-xray-sequence">
+          <div class="atomic-niagara-hero">
+            <div class="atomic-niagara-title">
+              <span class="investigation-chapter-label">Chapter I</span>
+              <span class="investigation-number">1942</span>
+              <h3>Atomic Niagara</h3>
+            </div>
+            <figure class="atomic-niagara-media">
+              <img class="atomic-niagara-video" src="./atomic-niagara-trinity.gif" alt="Archival film loop of the Trinity atomic bomb detonation in 1945" loading="lazy" decoding="async" />
+              <figcaption class="atomic-niagara-credit">Trinity test · July 16, 1945 · U.S. Department of Energy / Wikimedia Commons · Public domain</figcaption>
+            </figure>
           </div>
-
-          <div class="atomic-stat" data-reveal><small>The Federal Connection · 1981</small><strong>37M GALLONS</strong><p>of radioactively contaminated chemical waste identified by the report—left dispersed across Linde, Electromet, Hooker, and LOOW.</p></div>
-
-          <div class="process-chain" aria-label="Uranium production chain">
-            <article class="process-card" data-reveal><figure><img src="./archive/green-salt-uranium-tetrafluoride.jpg" alt="Uranium tetrafluoride, known as green salt" loading="lazy" /></figure><div class="process-card-copy"><small>Stage 01 · Chemical conversion</small><h4>Uranium tetrafluoride</h4><p>Linde and Hooker helped convert uranium concentrates into uranium compounds used in the production chain.</p></div></article>
-            <article class="process-card" data-reveal><figure><img src="./archive/uranium-recovery-hooker-report-p90.webp" alt="Historical technical report page on uranium recovery" loading="lazy" /></figure><div class="process-card-copy"><small>Stage 02 · Refinement byproduct</small><h4>Recovery + waste</h4><p>The same processes produced residues, contaminated liquids, slag, and other wastes requiring storage or disposal.</p></div></article>
-            <article class="process-card" data-reveal><figure><img src="./archive/uranium-metal-rods.jpg" alt="Processed uranium metal rods" loading="lazy" /></figure><div class="process-card-copy"><small>Stage 03 · Metal production</small><h4>Processed uranium metal</h4><p>Electromet produced uranium metal used in the wartime production system and the nuclear buildup that followed.</p></div></article>
-          </div>
-
-          <div class="content-block">
-            <div class="reading-grid">
-              <aside class="side-note">The hidden production chain</aside>
-              <div class="prose" data-reveal>
-                <h4>A regional system, not one factory.</h4>
-                <p class="lede">The bomb was assembled elsewhere. Its materials were transformed here.</p>
-                <p>Niagara’s factories separated uranium from ore, converted it into chemical compounds, reduced those compounds to metal, recovered material from residues, and generated radioactive waste at each stage. The work moved between companies, federal contractors, rail lines, roads, storage areas, and disposal grounds.</p>
-                <div class="resource-row"><a href="./rebuild.html?archive=Linde#evidence"><span>Archive query</span><strong>Linde records →</strong></a><a href="./rebuild.html?archive=Electromet#evidence"><span>Archive query</span><strong>Electromet records →</strong></a><a href="./rebuild.html?archive=Hooker#evidence"><span>Archive query</span><strong>Hooker records →</strong></a><a href="./rebuild.html#map"><span>Interactive map</span><strong>Trace the network →</strong></a></div>
-              </div>
+          <div class="atomic-evidence-mosaic" aria-label="A visual index of archival and photographic evidence">
+            <div class="atomic-evidence-grid">
+              <a class="atomic-evidence-item atomic-evidence-item--profile" href="https://en.wikipedia.org/wiki/Leslie_Groves" data-evidence-number="01" data-evidence-link-label="Read on Wikipedia →" data-evidence-summary="Leslie Richard Groves Jr. (1896–1970) was a U.S. Army Corps of Engineers officer who oversaw construction of the Pentagon and directed the Manhattan Project. From 1942, he managed its construction, raw-material acquisition, security, intelligence, and the selection of research and production sites.">
+                <img src="./archive/leslie-groves.jpg?v=2" alt="Negative portrait of Leslie R. Groves in U.S. Army uniform" loading="eager" fetchpriority="high" decoding="async" />
+                <span class="atomic-evidence-caption">Leslie R. Groves · Director of the Manhattan Project</span>
+              </a>
+              <a class="atomic-evidence-item" href="https://en.wikipedia.org/wiki/Uranium_tetrafluoride" data-evidence-number="02" data-evidence-link-label="Read on Wikipedia →" data-evidence-summary="Uranium tetrafluoride (UF₄) is a green crystalline solid known in the uranium-refining industry as “green salt.” It is an intermediate that can be reduced with magnesium to produce uranium metal or fluorinated further toward uranium hexafluoride. Image: U.S. Department of Energy, public domain.">
+                <img src="./archive/green-salt-uranium-tetrafluoride.jpg" alt="Worker handling green uranium tetrafluoride powder at a processing facility" loading="lazy" decoding="async" />
+                <span class="atomic-evidence-caption">Uranium tetrafluoride · “green salt” · U.S. Department of Energy</span>
+              </a>
+              <a class="atomic-evidence-item atomic-evidence-item--text" href="https://en.wikipedia.org/wiki/Ames_Project#Production" target="_blank" rel="noopener noreferrer" aria-label="Open archival evidence about uranium recovery" data-evidence-number="03" data-evidence-link-label="Read about uranium recovery on Wikipedia →" data-evidence-summary="From 1943 through 1945, Hooker used waste hydrochloric acid to strip uranium from slag sent by rail from Linde. This report page states that the liquid waste was discharged to sewers, was not monitored for radioactivity, and was handled by Hooker personnel who had not been told the material was uranium.">
+                <img class="atomic-evidence-viewer-source" src="./archive/uranium-recovery-hooker-report-p90.webp" alt="Highlighted page 90 of The Federal Connection report describing Hooker’s uranium-slag recovery process and unmonitored radioactive effluent" loading="eager" decoding="async" />
+                <span class="atomic-evidence-text-number">03</span>
+                <h4 class="atomic-evidence-text-title">Uranium recovery</h4>
+                <p class="atomic-evidence-text-copy">At Hooker, uranium-bearing slag was treated with acid; the unmonitored liquid waste went to the sewers.</p>
+                <span class="atomic-evidence-caption">Processing of uranium slag · Hooker · 1943–1945</span>
+              </a>
+              <a class="atomic-evidence-item" href="https://en.wikipedia.org/wiki/Ames_Project" data-evidence-number="04" data-evidence-link-label="Read on Wikipedia →" data-evidence-summary="After reduction, uranium metal was remelted and cast into ingots, then forged, extruded, or rolled into billets and rods for the atomic program.">
+                <img src="./archive/uranium-metal-rods.jpg" alt="Finished uranium metal rods and tubes arranged on a green surface" loading="lazy" decoding="async" />
+                <span class="atomic-evidence-caption">Uranium metal rods · final product</span>
+              </a>
+              <a class="atomic-evidence-item atomic-evidence-item--ore" href="https://en.wikipedia.org/wiki/Shinkolobwe#Manhattan_Project" data-evidence-number="05" data-evidence-link-label="Read on Wikipedia →" data-evidence-summary="This uranium ore specimen was collected at Shinkolobwe in November 1965. During World War II, the mine—then in the Belgian Congo—supplied exceptionally rich uranium ore to the Manhattan Project. Congolese ores eventually accounted for about 72 percent of the uranium oxides acquired by the Manhattan District. Photograph by Andrew Silver, USGS.">
+                <img src="./archive/uranium-ore-shinkolobwe.jpg" alt="Bright green uranium ore specimen collected at Shinkolobwe in the Belgian Congo" loading="lazy" decoding="async" />
+                <span class="atomic-evidence-caption">Uranium ore · Shinkolobwe, Belgian Congo · collected 1965</span>
+              </a>
+              <a class="atomic-evidence-item" href="https://en.wikipedia.org/wiki/Ames_process" data-evidence-number="08" data-evidence-link-label="Read on Wikipedia →" data-evidence-summary="Green salt was mixed with magnesium and fired in a reduction vessel. The thermite reaction separated molten uranium from magnesium fluoride slag, producing a solid mass of uranium metal. Electromet performed uranium reduction in Niagara Falls.">
+                <img src="./archive/green-salt-to-uranium-metal.jpg" alt="Uranium metal masses produced by reducing green salt" loading="lazy" decoding="async" />
+                <span class="atomic-evidence-caption">From green salt to uranium metal</span>
+              </a>
             </div>
           </div>
+          </div>
+
+
+          <div class="investigation-chapter-grid atomic-niagara-copy-grid atomic-niagara-intro-grid">
+            <div class="investigation-chapter-copy">
+              <p>Driven by the urgency of World War II and the atomic bomb project, this region became the nation’s leading center for processing and refining much of the uranium needed for the bomb. Many factories also operated laboratories, where scientists sought to maximize uranium yield by recovering it from leftover materials. General Leslie Groves cultivated close ties with regional factory owners, valuing their commitment to confidentiality and the protection of sensitive information. That secrecy exposed thousands of workers to radioactive materials. Niagara’s atomic role did not end with the war: it continued throughout the Cold War, including Bell Aerospace’s development of RASCAL, an early nuclear-armed standoff missile.</p>
+            </div>
+          </div>
+
+          <section class="atomic-process-map" aria-label="Interactive map: The Uranium Route">
+            <iframe
+              class="atomic-process-map-frame"
+              src="./process-map/?embed=chapter-one&amp;v=framed-map-38"
+              title="The Uranium Route interactive map"
+              loading="lazy"
+              allowfullscreen
+            ></iframe>
+          </section>
+
+          <div class="investigation-chapter-grid atomic-niagara-copy-grid atomic-niagara-process-grid">
+            <div class="investigation-chapter-copy">
+              <h4 class="atomic-process-heading">The process</h4>
+              <ol class="atomic-process-list">
+                <li class="atomic-process-step">
+                  <div class="atomic-process-meta">
+                    <span class="atomic-process-number">01</span>
+                    <h4 class="atomic-process-title">Linde Ceramics Plant</h4>
+                    <span class="atomic-process-location">Tonawanda, New York · Union Carbide</span>
+                  </div>
+                  <div class="atomic-process-copy">
+                    <p>Before the Manhattan Project, Linde’s ceramics business used uranium compounds to produce black, yellow, green, and brown salts for coloring ceramic glazes. This is the origin of the name Linde Ceramics. That chemical experience is also why the Army selected Linde for large-scale uranium separation.</p>
+                    <p>Linde Air Products was a division of Union Carbide and Carbon Corporation. During the war, its Tonawanda plant processed high-grade uranium ore—much of it mined in the Belgian Congo—through three stages: ore into black uranium oxide (U3O8), black oxide into brown uranium oxide (UO2), and brown oxide into uranium tetrafluoride (UF4). The final product was the green, salt-like powder known as <em>“green salt,”</em> which was shipped by train to Electromet in Niagara Falls.</p>
+                    <div class="atomic-process-links">
+                      <a class="atomic-process-archive-link" href="./rebuild.html?archive=Linde#evidence" target="_blank" rel="noopener noreferrer">View Linde archive →</a>
+                      <a class="atomic-process-archive-link" href="./rebuild.html#map" target="_blank" rel="noopener noreferrer">Open the Interactive Map →</a>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="atomic-process-step">
+                  <div class="atomic-process-meta">
+                    <span class="atomic-process-number">02</span>
+                    <h4 class="atomic-process-title">Electromet</h4>
+                    <span class="atomic-process-location">Niagara Falls, New York · Union Carbide</span>
+                  </div>
+                  <div class="atomic-process-copy">
+                    <p>Electro Metallurgical Company, known as Electromet, was another Union Carbide company. Before uranium, its electric furnaces produced calcium carbide, ferroalloys, tungsten, titanium, and other specialty metals. This high-temperature metallurgical expertise made Electromet suited to convert green salt into uranium metal.</p>
+                    <p>Workers mixed uranium tetrafluoride with magnesium inside a dolomite-lined steel vessel known as a “bomb.” When heated, the mixture underwent a violent thermite reaction. The uranium separated, pooled at the bottom, and was cast into 110–135-kilogram ingots, then recast into billets. The process left uranium-bearing C-1 and C-2 slag.</p>
+                    <div class="atomic-process-links">
+                      <a class="atomic-process-archive-link" href="./rebuild.html?archive=Electromet#evidence" target="_blank" rel="noopener noreferrer">View Electromet archive →</a>
+                      <a class="atomic-process-archive-link" href="./rebuild.html#map" target="_blank" rel="noopener noreferrer">Open the Interactive Map →</a>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="atomic-process-step">
+                  <div class="atomic-process-meta">
+                    <span class="atomic-process-number">03</span>
+                    <h4 class="atomic-process-title">Hooker Electrochemical</h4>
+                    <span class="atomic-process-location">Niagara Falls, New York</span>
+                  </div>
+                  <div class="atomic-process-copy">
+                    <p>Before its uranium work, Hooker used Niagara’s cheap hydroelectric power to electrolyze salt into chlorine, caustic soda, and hydrogen. Its products included bleach, water-treatment chemicals, solvents, and other industrial compounds.</p>
+                    <p>Under its Manhattan Engineer District contract, Hooker also manufactured fluorinated and chlorinated organic chemicals. One product, xylene hexafluoride, was known by the wartime code P-45. Although P-45 itself was not radioactive, its production generated waste hydrochloric acid.</p>
+                    <p>Hooker used this acid in a separate uranium-recovery operation, treating C-2 slag delivered from Electromet’s uranium-metal reduction vessels. The slag consisted largely of magnesium-fluoride residue and spent dolomite liners—materials that still retained recoverable uranium. Workers opened and screened the barrels, separated uranium-rich pieces, conveyed the remaining material to digest tanks, treated it with acid, neutralized it with lime, filtered and washed the slurry, and rebarreled the concentrate. The process increased the uranium concentration from roughly 0.2 percent in the incoming material to approximately 1–2 percent in the resulting concentrate.</p>
+                    <p>The recovered uranium concentrate was shipped by rail back to Linde in Tonawanda, where it reentered the production cycle—refined again into green salt and returned to Electromet for conversion into uranium metal. The process then began again.</p>
+                    <div class="atomic-process-links">
+                      <a class="atomic-process-archive-link" href="./rebuild.html?archive=Hooker#evidence" target="_blank" rel="noopener noreferrer">View Hooker archive →</a>
+                      <a class="atomic-process-archive-link" href="./rebuild.html#map" target="_blank" rel="noopener noreferrer">Open the Interactive Map →</a>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="atomic-process-step">
+                  <div class="atomic-process-meta">
+                    <span class="atomic-process-number">04</span>
+                    <h4 class="atomic-process-title">Steel and rolling mills</h4>
+                    <span class="atomic-process-location">Lackawanna and Lockport, New York</span>
+                  </div>
+                  <div class="atomic-process-copy">
+                    <p>Bethlehem Steel in Lackawanna and Simonds Saw and Steel in Lockport—the plant later known as Guterl Specialty Steel—formed the rolling and finishing stage of the regional uranium chain. Simonds became the program’s principal rod manufacturer, rolling uranium metal billets into long rods from 1948 through 1956. Bethlehem finish-rolled some bars rough-rolled at Simonds, heat-treated and ground uranium rods, and helped develop continuous-rolling methods later used at Fernald.</p>
+                    <p>The finished rods were shipped to Hanford in Washington State, where they were cut and machined into short fuel slugs, canned, loaded into production reactors, and irradiated to produce plutonium for nuclear weapons.</p>
+                    <div class="atomic-process-links">
+                      <a class="atomic-process-archive-link" href="./rebuild.html?archive=Steel#evidence" target="_blank" rel="noopener noreferrer">View steel-mill archive →</a>
+                      <a class="atomic-process-archive-link" href="./rebuild.html#map" target="_blank" rel="noopener noreferrer">Open the Interactive Map →</a>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="atomic-process-step">
+                  <div class="atomic-process-meta">
+                    <span class="atomic-process-number">05</span>
+                    <h4 class="atomic-process-title">Carborundum</h4>
+                    <span class="atomic-process-location">Niagara Falls, New York</span>
+                  </div>
+                  <div class="atomic-process-copy">
+                    <p>In 1943, DuPont sent Carborundum ten unfinished uranium slugs—about thirty pounds of metal—to determine which abrasive wheels and grinding speeds should be used to finish reactor fuel. These centerless-grinding experiments supported the production of uranium slugs for the Clinton and Hanford reactors. The surviving records do not establish whether this work occurred at the Buffalo Avenue site or the Globar Plant.</p>
+                    <p>Carborundum’s nuclear work expanded dramatically from 1959 through 1967 at its Central Research Laboratory on Buffalo Avenue. There, researchers developed uranium nitride, uranium carbide, and uranium silicide as possible alternatives to uranium dioxide and devised methods for synthesizing, forming, and testing these materials as reactor fuels.</p>
+                    <p>Beginning in 1960, plutonium shipped from Hanford arrived at Carborundum for the AEC’s Carbide Fuel Development Program. Inside a classified fourth-floor laboratory, workers mixed uranium and plutonium compounds, heated them in furnaces, pressed and sintered the material, and ground it into experimental uranium–plutonium carbide fuel pellets. The program investigated fuels capable of longer burnups and higher power in advanced reactors.</p>
+                    <div class="atomic-process-links">
+                      <a class="atomic-process-archive-link" href="./rebuild.html?archive=Carborundum#evidence" target="_blank" rel="noopener noreferrer">View Carborundum archive →</a>
+                      <a class="atomic-process-archive-link" href="./rebuild.html#map" target="_blank" rel="noopener noreferrer">Open the Interactive Map →</a>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="atomic-process-step">
+                  <div class="atomic-process-meta">
+                    <span class="atomic-process-number">06</span>
+                    <h4 class="atomic-process-title">Bell</h4>
+                    <span class="atomic-process-location">Niagara County, New York</span>
+                  </div>
+                  <div class="atomic-process-copy">
+                    <p>At the same time, Bell Aerospace was developing the RASCAL, the United States Air Force’s first nuclear-armed standoff missile—an air-to-surface, supersonic guided missile designed to deliver a nuclear warhead.</p>
+                    <p>Bell and the Atomic Energy Commission operated a test center north of Balmer Road on the former Lake Ontario Ordnance Works (LOOW), a 7,567-acre federal site in Lewiston and Porter originally built during World War II to manufacture TNT. The facility became known as the Bell Test Center.</p>
+                    <p>In 1967, the site was temporarily used to house the Lewiston-Porter School while a new school building was under construction and scheduled for completion in 1970. During that time, 275 students, along with their teachers and administrative staff, attended classes at the site. This matters because children and staff were placed on a former military-industrial site where radioactive materials had already been stored and buried, without the site’s full history being publicly legible.</p>
+                    <div class="atomic-process-links">
+                      <a class="atomic-process-archive-link" href="./rebuild.html?archive=Bell#evidence" target="_blank" rel="noopener noreferrer">View Bell archive →</a>
+                      <a class="atomic-process-archive-link" href="./rebuild.html#map" target="_blank" rel="noopener noreferrer">Open the Interactive Map →</a>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="atomic-process-step">
+                  <div class="atomic-process-meta">
+                    <span class="atomic-process-number">07</span>
+                    <h4 class="atomic-process-title">Lake Ontario Ordnance Works</h4>
+                    <span class="atomic-process-location">Lewiston and Porter, New York</span>
+                  </div>
+                  <div class="atomic-process-copy">
+                    <p>The Lake Ontario Ordnance Works was a vast U.S. Army industrial site constructed during World War II to manufacture TNT. After explosives production ended, the Manhattan Engineer District repurposed part of the site as its official regional repository for radioactive waste from Western New York’s uranium program. Beginning in 1944, residues and contaminated materials were brought there for storage, repackaging, burial, and disposal. Not all of the region’s waste reached LOOW; much of what did was concealed by secrecy, buried, and ultimately forgotten.</p>
+                    <div class="atomic-process-links">
+                      <a class="atomic-process-archive-link" href="./rebuild.html?archive=LOOW#evidence" target="_blank" rel="noopener noreferrer">View LOOW archive →</a>
+                      <a class="atomic-process-archive-link" href="./rebuild.html#map" target="_blank" rel="noopener noreferrer">Open the Interactive Map →</a>
+                    </div>
+                  </div>
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <span class="atomic-process-reference-label">Reference film · Fernald uranium production</span>
+          <aside class="atomic-process-reference" aria-label="Historical Fernald uranium-production film">
+            <button class="atomic-process-reference-media" type="button" data-reference-film-open aria-label="Watch Production of Uranium Feed Materials">
+              <img src="https://i.ytimg.com/vi/VOm7_Lf8PVo/hq2.jpg" alt="Still from the historical film Production of Uranium Feed Materials" loading="lazy" />
+              <span class="atomic-process-reference-play" aria-hidden="true">▶</span>
+              <span class="atomic-process-reference-caption">Production of Uranium Feed Materials · USAEC Oak Ridge Operations · 1959</span>
+            </button>
+            <div class="atomic-process-reference-copy">
+              <h4>Niagara’s dispersed system, shown in one place.</h4>
+              <p>Fernald was a federal uranium-processing complex near Cincinnati, Ohio. Built by the Atomic Energy Commission in the early 1950s, it produced high-purity uranium metal products for the Cold War nuclear weapons program.</p>
+              <p>Fernald was one complex. Niagara was an entire geography. At Fernald, the stages of uranium production were gathered within a single federal site. In Western New York, they were spread across Linde, Electromet, Hooker, LOOW, and the roads, rail lines, sewers, and waterways connecting them. The film helps make visible a system that Niagara dispersed across the landscape.</p>
+              <div class="atomic-process-reference-comparison" aria-label="Comparison between Fernald and Western New York uranium production">
+                <div class="atomic-process-reference-place"><span>Fernald, Ohio</span><strong>One integrated federal complex</strong></div>
+                <span class="atomic-process-reference-transfer" aria-hidden="true">→</span>
+                <div class="atomic-process-reference-place"><span>Western New York</span><strong>Linde → Electromet → Hooker → LOOW</strong></div>
+              </div>
+            </div>
+          </aside>
+
+          <aside class="atomic-process-reveal" aria-label="Transition from the hidden uranium-production system to the Love Canal investigation">
+            <span class="atomic-process-reveal-label">The hidden connection · 1981</span>
+            <p>For decades, this entire system remained hidden. It surfaced only when Love Canal—a suburban neighborhood built around and partly atop an abandoned canal used as a chemical landfill—forced officials to investigate. The inquiry into federal involvement culminated in the 1981 report <em>The Federal Connection</em>.</p>
+          </aside>
+
+          <dialog class="atomic-reference-viewer" aria-label="Production of Uranium Feed Materials film">
+            <button class="atomic-reference-viewer-close" type="button" aria-label="Close historical film">×</button>
+            <div class="atomic-reference-viewer-shell">
+              <div class="atomic-reference-viewer-frame">
+                <iframe title="Production of Uranium Feed Materials" data-src="https://www.youtube-nocookie.com/embed/VOm7_Lf8PVo?autoplay=1&amp;rel=0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <p class="atomic-reference-viewer-caption">Production of Uranium Feed Materials · U.S. Atomic Energy Commission, Oak Ridge Operations · 1959</p>
+            </div>
+          </dialog>
+
+          <dialog class="atomic-evidence-viewer" aria-label="Evidence viewer">
+            <button class="atomic-evidence-viewer-close" type="button" aria-label="Close evidence viewer">×</button>
+            <div class="atomic-evidence-viewer-shell">
+              <button class="atomic-evidence-viewer-nav atomic-evidence-viewer-prev" type="button" aria-label="Previous piece of evidence">←</button>
+              <figure>
+                <img class="atomic-evidence-viewer-image" alt="" />
+                <figcaption class="atomic-evidence-viewer-caption">
+                  <span class="atomic-evidence-viewer-count"></span>
+                  <strong class="atomic-evidence-viewer-title"></strong>
+                  <p class="atomic-evidence-viewer-summary"></p>
+                  <a class="atomic-evidence-follow" href="#">Follow this evidence →</a>
+                </figcaption>
+              </figure>
+              <button class="atomic-evidence-viewer-nav atomic-evidence-viewer-next" type="button" aria-label="Next piece of evidence">→</button>
+            </div>
+          </dialog>
+
         </section>
 
         <section class="chapter" id="love-canal" data-chapter>
@@ -802,6 +1259,127 @@
         });
       },{rootMargin:'0px 0px -10% 0px',threshold:.08});
       document.querySelectorAll('[data-reveal]').forEach(element => revealObserver.observe(element));
+
+      const atomicReferenceViewer = document.querySelector('#atomic .atomic-reference-viewer');
+      const atomicReferenceOpeners = [...document.querySelectorAll('#atomic [data-reference-film-open]')];
+      if (atomicReferenceViewer && atomicReferenceOpeners.length && typeof atomicReferenceViewer.showModal === 'function') {
+        const frame = atomicReferenceViewer.querySelector('iframe');
+        const close = atomicReferenceViewer.querySelector('.atomic-reference-viewer-close');
+        const stop = () => {
+          frame.src = 'about:blank';
+          frame.removeAttribute('src');
+        };
+        atomicReferenceOpeners.forEach(opener => opener.addEventListener('click',() => {
+          frame.src = frame.dataset.src;
+          if (!atomicReferenceViewer.open) atomicReferenceViewer.showModal();
+        }));
+        close.addEventListener('click',() => atomicReferenceViewer.close());
+        atomicReferenceViewer.addEventListener('close',stop);
+        atomicReferenceViewer.addEventListener('click',event => {
+          if (event.target === atomicReferenceViewer) atomicReferenceViewer.close();
+        });
+        document.addEventListener('visibilitychange',() => {
+          if (document.hidden && atomicReferenceViewer.open) atomicReferenceViewer.close();
+        });
+        window.addEventListener('pagehide',() => {
+          if (atomicReferenceViewer.open) atomicReferenceViewer.close();
+        });
+      }
+
+      const atomicEvidenceItems = [...document.querySelectorAll('#atomic .atomic-evidence-item')].filter(item => item.querySelector('img'));
+      const atomicEvidenceViewer = document.querySelector('#atomic .atomic-evidence-viewer');
+      if (atomicEvidenceItems.length && atomicEvidenceViewer && typeof atomicEvidenceViewer.showModal === 'function') {
+        const image = atomicEvidenceViewer.querySelector('.atomic-evidence-viewer-image');
+        const count = atomicEvidenceViewer.querySelector('.atomic-evidence-viewer-count');
+        const title = atomicEvidenceViewer.querySelector('.atomic-evidence-viewer-title');
+        const summary = atomicEvidenceViewer.querySelector('.atomic-evidence-viewer-summary');
+        const follow = atomicEvidenceViewer.querySelector('.atomic-evidence-follow');
+        const close = atomicEvidenceViewer.querySelector('.atomic-evidence-viewer-close');
+        const previous = atomicEvidenceViewer.querySelector('.atomic-evidence-viewer-prev');
+        const next = atomicEvidenceViewer.querySelector('.atomic-evidence-viewer-next');
+        let active = 0;
+
+        const show = index => {
+          active = (index + atomicEvidenceItems.length) % atomicEvidenceItems.length;
+          const item = atomicEvidenceItems[active];
+          const source = item.querySelector('img');
+          const caption = item.querySelector('.atomic-evidence-caption');
+          image.src = source.currentSrc || source.src;
+          image.alt = source.alt;
+          count.textContent = item.dataset.evidenceNumber
+            ? item.dataset.evidenceNumber + ' / 08'
+            : String(active + 1).padStart(2,'0') + ' / ' + String(atomicEvidenceItems.length).padStart(2,'0');
+          title.textContent = caption ? caption.textContent : source.alt;
+          summary.textContent = item.dataset.evidenceSummary || '';
+          follow.href = item.getAttribute('href');
+          follow.textContent = item.dataset.evidenceLinkLabel || 'Follow this evidence →';
+          const external = /^https?:/i.test(follow.href);
+          follow.target = external ? '_blank' : '';
+          follow.rel = external ? 'noopener noreferrer' : '';
+          atomicEvidenceViewer.classList.toggle('is-profile',item.classList.contains('atomic-evidence-item--profile'));
+          if (!atomicEvidenceViewer.open) atomicEvidenceViewer.showModal();
+        };
+
+        atomicEvidenceItems.forEach((item,index) => item.addEventListener('click',event => {
+          event.preventDefault();
+          show(index);
+        }));
+        previous.addEventListener('click',() => show(active - 1));
+        next.addEventListener('click',() => show(active + 1));
+        close.addEventListener('click',() => atomicEvidenceViewer.close());
+        follow.addEventListener('click',() => atomicEvidenceViewer.close());
+        atomicEvidenceViewer.addEventListener('click',event => {
+          if (event.target === atomicEvidenceViewer) atomicEvidenceViewer.close();
+        });
+        atomicEvidenceViewer.addEventListener('keydown',event => {
+          if (event.key === 'ArrowLeft') { event.preventDefault(); show(active - 1); }
+          if (event.key === 'ArrowRight') { event.preventDefault(); show(active + 1); }
+        });
+      }
+
+      const atomicXraySequence = document.querySelector('#atomic > .atomic-xray-sequence');
+      const atomicReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (atomicXraySequence && !atomicReducedMotion.matches) {
+        let timer = 0;
+        let visible = false;
+        let firstPass = true;
+        const stop = () => {
+          window.clearTimeout(timer);
+          timer = 0;
+          atomicXraySequence.classList.remove('is-xray-revealed','is-xray-reverse');
+        };
+        const schedule = immediate => {
+          window.clearTimeout(timer);
+          if (!visible || document.hidden) return;
+          timer = window.setTimeout(() => {
+            timer = 0;
+            if (!visible || document.hidden) return;
+            atomicXraySequence.classList.remove('is-xray-revealed','is-xray-reverse');
+            atomicXraySequence.classList.toggle('is-xray-reverse',Math.random() < .5);
+            void atomicXraySequence.offsetWidth;
+            atomicXraySequence.classList.add('is-xray-revealed');
+          },immediate ? 350 : 6000 + Math.random() * 12000);
+        };
+        atomicXraySequence.addEventListener('animationend',event => {
+          if (event.animationName !== 'atomic-xray-scan' && event.animationName !== 'atomic-xray-scan-reverse') return;
+          atomicXraySequence.classList.remove('is-xray-revealed','is-xray-reverse');
+          schedule(false);
+        });
+        const observer = new IntersectionObserver(entries => {
+          visible = Boolean(entries[0] && entries[0].isIntersecting);
+          if (!visible) stop();
+          else {
+            schedule(firstPass);
+            firstPass = false;
+          }
+        },{rootMargin:'0px 0px -8% 0px',threshold:.01});
+        observer.observe(atomicXraySequence);
+        document.addEventListener('visibilitychange',() => {
+          if (document.hidden) stop();
+          else if (visible) schedule(false);
+        });
+      }
+
     })();
   </script>
 </body>
