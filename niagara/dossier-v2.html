@@ -590,6 +590,7 @@
     .electro-cover-content .eyebrow { color:rgba(18,20,17,.44); font-size:clamp(11px,1.25vw,18px); font-weight:400; letter-spacing:.25em; }
     .electro-cover-content .waterfalls-year { margin-top:18px; color:rgba(18,20,17,.44); font-size:clamp(12px,1.55vw,22px); font-weight:400; letter-spacing:.2em; }
     .electro-cover-content h2 { width:min(70vw,850px); margin:clamp(42px,5.2svh,74px) 0 0; font-size:clamp(70px,11.7vw,170px); font-weight:400; line-height:.78; letter-spacing:-.07em; overflow-wrap:normal; }
+    .electro-cover-content h2 span { display:block; }
 
     /* Rebuild Chapter I, fitted inside the dossier rail */
     #atomic { --atomic-content-width:calc(100vw - var(--rail)); background:var(--paper); }
@@ -621,10 +622,10 @@
     #atomic .atomic-reference-viewer { z-index:100; }
 
     @media (min-aspect-ratio:3 / 2) and (max-height:950px) {
-      .electro-cover-content { top:94px; }
+      .electro-cover-content { top:134px; bottom:120px; }
       .electro-cover-content h2 {
-        margin-top:30px;
-        font-size:clamp(70px,min(11.7vw,22svh),160px);
+        margin-top:22px;
+        font-size:clamp(62px,min(10.5vw,17svh),132px);
       }
     }
 
@@ -700,7 +701,7 @@
           <header class="electro-cover-content">
             <span class="eyebrow">Origins</span>
             <span class="waterfalls-year">1895–1942</span>
-            <h2>Electro<wbr>chemistry + electro<wbr>metallurgy</h2>
+            <h2><span>Electro</span><span>chemistry +</span><span>electro</span><span>metallurgy</span></h2>
           </header>
         </article>
 
