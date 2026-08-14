@@ -179,7 +179,7 @@
           thumb.type = 'button';
           thumb.className = 'niagara-photo-thumb';
           thumb.setAttribute('aria-label', `View photograph ${index + 1}: ${photo.title}`);
-          image.dataset.src = photo.src;
+          image.src = photo.src;
           image.alt = '';
           image.loading = 'lazy';
           number.textContent = photo.number;
