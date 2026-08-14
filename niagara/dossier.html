@@ -88,7 +88,7 @@
     .waterfalls-progress button { appearance:none; width:40px; height:42px; padding:0; border:0; color:var(--muted); background:transparent; cursor:pointer; font:9px/1 var(--sans); letter-spacing:.08em; }
     .waterfalls-progress .is-current button { color:var(--red); border-top:2px solid var(--red); }
 
-    .dossier { display:grid; grid-template-columns:var(--rail) minmax(0,1fr); align-items:start; }
+    .dossier { display:grid; grid-template-columns:var(--rail) minmax(0,1fr); align-items:start; margin-top:clamp(96px,10vw,150px); border-top:1px solid var(--line); }
     .case-index { height:calc(100svh - var(--top)); position:sticky; z-index:20; top:var(--top); display:flex; flex-direction:column; background:var(--paper); border-right:1px solid var(--line); }
     .index-heading { padding:26px 22px 18px; border-bottom:1px solid var(--line); }
     .index-heading small { color:var(--red); font:700 8px/1 var(--sans); letter-spacing:.16em; text-transform:uppercase; }
@@ -115,6 +115,14 @@
     .chapter-cover.dark { color:var(--paper); background:var(--night); }
     .chapter-cover.dark .chapter-cover-meta { border-color:var(--line-dark); }
     .chapter-cover.dark .chapter-deck { color:rgba(242,240,233,.67); }
+    .chapter-cover.atomic-cover { background:#2d2f2c; }
+    .atomic-cover .chapter-cover-meta { padding-top:clamp(42px,5vw,68px); padding-bottom:clamp(42px,5vw,68px); }
+    .atomic-cover .chapter-cover-body { padding-top:clamp(42px,5vw,68px); padding-bottom:clamp(42px,5vw,68px); }
+    .atomic-cover .chapter-cover-body h3 { font-size:clamp(60px,7.1vw,122px); }
+    .atomic-cover .chapter-cover-body .chapter-deck { margin-top:30px; font-size:clamp(19px,1.75vw,28px); }
+    .atomic-cover-film { width:100%; max-width:370px; height:clamp(150px,20svh,220px); position:relative; margin:clamp(28px,4svh,44px) 0 0; overflow:hidden; background:#151614; border:1px solid rgba(242,240,233,.3); }
+    .atomic-cover-film img { width:100%; height:100%; display:block; object-fit:cover; filter:grayscale(1) contrast(1.12); }
+    .atomic-cover-film figcaption { position:absolute; left:0; right:0; bottom:0; padding:28px 12px 10px; color:rgba(242,240,233,.75); background:linear-gradient(transparent,rgba(0,0,0,.78)); font:700 7px/1.35 var(--sans); letter-spacing:.13em; text-transform:uppercase; }
 
     .content-block { padding:clamp(72px,9vw,150px) clamp(30px,6vw,104px); }
     .reading-grid { display:grid; grid-template-columns:minmax(150px,.32fr) minmax(500px,1fr); gap:clamp(48px,7vw,110px); }
@@ -364,6 +372,7 @@
       .case-index { width:min(360px,90vw); position:fixed; z-index:70; left:0; top:var(--top); transform:translateX(-102%); transition:transform .3s ease; box-shadow:24px 0 60px rgba(0,0,0,.18); }
       body.is-index-open .case-index { transform:none; }
       .chapter-cover-meta { min-height:180px; border-right:0; border-bottom:1px solid var(--line); }
+      .atomic-cover-film { max-width:520px; height:min(32svh,250px); }
       .chapter-cover-meta::after { left:auto; right:8%; bottom:-4px; }
       .chapter-cover-body h3 { font-size:clamp(62px,13vw,122px); }
       .reading-grid,.love-layout,.telvock,.project-origin > header,.origin-story,.public-record-grid,.closing-grid,.health-header { gap:48px; }
@@ -534,8 +543,8 @@
 
       <div class="case-content">
         <section class="chapter" id="atomic" data-chapter>
-          <div class="chapter-cover dark">
-            <header class="chapter-cover-meta"><span class="chapter-id">Chapter I</span><h2>1942–1978<br />Production becomes a secret system.</h2></header>
+          <div class="chapter-cover dark atomic-cover">
+            <header class="chapter-cover-meta"><span class="chapter-id">Chapter I</span><h2>1942–1978<br />Production becomes a secret system.</h2><figure class="atomic-cover-film"><img src="./atomic-niagara-trinity.gif" alt="Archival film loop of the Trinity atomic bomb test in 1945" loading="eager" decoding="async" /><figcaption>Trinity test · July 16, 1945 · U.S. Department of Energy</figcaption></figure></header>
             <div class="chapter-cover-body"><span class="chapter-kicker">The Manhattan Project reaches Niagara</span><h3>Atomic Niagara</h3><p class="chapter-deck">Cheap power, specialized chemistry, and an established network of metal plants made the Niagara Frontier essential to the production of uranium compounds and metal.</p></div>
           </div>
 
