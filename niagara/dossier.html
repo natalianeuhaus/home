@@ -149,6 +149,29 @@
     .process-card h4 { margin:22px 0 18px; font-size:clamp(27px,2.6vw,43px); font-weight:400; line-height:.96; letter-spacing:-.04em; }
     .process-card p { margin:0; color:var(--muted); font:15px/1.48 var(--sans); }
 
+    .uranium-route { padding:clamp(76px,9vw,145px) clamp(30px,6vw,104px); background:var(--paper-deep); border-top:1px solid var(--line); }
+    .uranium-route-header { display:grid; grid-template-columns:.42fr 1fr; gap:8vw; align-items:end; }
+    .uranium-route-header h4 { margin:0; font-size:clamp(58px,7vw,118px); font-weight:400; line-height:.82; letter-spacing:-.06em; }
+    .uranium-route-header p { max-width:790px; margin:0; color:var(--muted); font-size:clamp(19px,1.65vw,26px); line-height:1.45; }
+    .uranium-map-shell { margin-top:clamp(70px,9vw,120px); }
+    .uranium-map-bar { min-height:54px; display:flex; align-items:center; justify-content:space-between; gap:20px; padding:0 18px; color:var(--red); border:2px solid var(--red); border-bottom:0; font:700 8px/1 var(--sans); letter-spacing:.14em; text-transform:uppercase; }
+    .uranium-map-bar a { color:var(--red); }
+    .uranium-map-frame { width:100%; height:clamp(720px,82svh,940px); display:block; border:2px solid var(--red); background:#e5e1d8; }
+    .process-ledger { padding:clamp(76px,9vw,145px) clamp(30px,6vw,104px); }
+    .process-ledger-header { display:grid; grid-template-columns:.42fr 1fr; gap:8vw; align-items:end; padding-bottom:58px; border-bottom:2px solid var(--ink); }
+    .process-ledger-header h4 { margin:0; font-size:clamp(58px,7vw,118px); font-weight:400; line-height:.82; letter-spacing:-.06em; }
+    .process-ledger-header p { max-width:790px; margin:0; color:var(--muted); font-size:clamp(19px,1.65vw,26px); line-height:1.45; }
+    .process-ledger-list { margin:0; padding:0; list-style:none; }
+    .process-ledger-step { display:grid; grid-template-columns:minmax(250px,.54fr) minmax(520px,1.46fr); gap:clamp(50px,7vw,110px); padding:clamp(54px,7vw,96px) 0; border-bottom:1px solid var(--line); }
+    .process-ledger-meta { position:relative; padding-left:74px; }
+    .process-ledger-number { position:absolute; left:0; top:4px; color:var(--red); font:700 10px/1 var(--sans); letter-spacing:.14em; }
+    .process-ledger-title { margin:0; font-size:clamp(31px,3.3vw,54px); font-weight:400; line-height:.92; letter-spacing:-.045em; }
+    .process-ledger-location { display:block; margin-top:18px; color:var(--red); font:700 8px/1.45 var(--sans); letter-spacing:.13em; text-transform:uppercase; }
+    .process-ledger-copy p { margin:0; color:var(--muted); font-size:clamp(17px,1.35vw,22px); line-height:1.55; }
+    .process-ledger-copy p + p { margin-top:1.2em; }
+    .process-ledger-links { margin-top:26px; display:flex; flex-wrap:wrap; gap:10px 22px; }
+    .process-ledger-links a { color:var(--red); font:700 8px/1.35 var(--sans); letter-spacing:.11em; text-transform:uppercase; }
+
     .love-layout { padding:clamp(70px,9vw,140px) clamp(30px,6vw,104px); display:grid; grid-template-columns:minmax(420px,1.1fr) minmax(240px,.48fr); gap:clamp(50px,7vw,110px); }
     .love-story h4 { margin:0 0 32px; font-size:clamp(50px,6vw,100px); font-weight:400; line-height:.87; letter-spacing:-.055em; }
     .love-story figure { margin:40px 0; }
@@ -326,7 +349,7 @@
       .casebar-file { display:none; }
       .casebar-actions a { display:none; }
       .index-toggle { display:flex; }
-      .hero-copy,.waterfalls-inner,.chapter-cover,.reading-grid,.love-layout,.containment,.survey-dashboard > header,.telvock,.project-origin > header,.origin-story,.public-record-grid,.upper-case-header,.upper-accounting,.closing-grid,.health-header { grid-template-columns:1fr; }
+      .hero-copy,.waterfalls-inner,.chapter-cover,.reading-grid,.love-layout,.containment,.survey-dashboard > header,.uranium-route-header,.process-ledger-header,.process-ledger-step,.telvock,.project-origin > header,.origin-story,.public-record-grid,.upper-case-header,.upper-accounting,.closing-grid,.health-header { grid-template-columns:1fr; }
       .hero-copy { width:calc(100% - 42px); gap:42px; }
       .hero-title span,.hero-deck { margin-left:0; }
       .waterfalls-slide { padding:34px 22px 88px; align-items:start; }
@@ -365,7 +388,7 @@
       .waterfalls-frame { height:40svh; }
       .waterfalls-progress { display:none; }
       .chapter-cover { min-height:auto; }
-      .chapter-cover-meta,.chapter-cover-body,.content-block,.atomic-stat,.love-layout,.survey-dashboard,.later-findings,.factory-ledger,.telvock,.project-origin,.public-record,.upper-case,.survey-now,.closing-lead,.closing-body,.health-header { padding-left:22px; padding-right:22px; }
+      .chapter-cover-meta,.chapter-cover-body,.content-block,.atomic-stat,.love-layout,.uranium-route,.process-ledger,.survey-dashboard,.later-findings,.factory-ledger,.telvock,.project-origin,.public-record,.upper-case,.survey-now,.closing-lead,.closing-body,.health-header { padding-left:22px; padding-right:22px; }
       .chapter-cover-body { min-height:76svh; }
       .resource-row,.public-actions,.survey-reports { grid-template-columns:1fr; }
       .process-card { min-height:auto; }
@@ -534,6 +557,54 @@
               </div>
             </div>
           </div>
+
+          <section class="uranium-route" aria-labelledby="uranium-route-title">
+            <header class="uranium-route-header" data-reveal>
+              <h4 id="uranium-route-title">The Uranium Route.</h4>
+              <p>Follow the material step by step—from the Shinkolobwe mine through Western New York’s refining, reduction, recovery, rod-rolling, and finishing network to the federal waste destination at LOOW.</p>
+            </header>
+            <div class="uranium-map-shell" data-reveal>
+              <div class="uranium-map-bar"><span>Interactive process map · Steps 01–07</span><a href="./process-map/" target="_blank" rel="noopener">Open full screen ↗</a></div>
+              <iframe class="uranium-map-frame" src="./process-map/?embed=dossier&amp;v=framed-map-38" title="The Uranium Route interactive process map" loading="lazy" allowfullscreen></iframe>
+            </div>
+          </section>
+
+          <section class="process-ledger" aria-labelledby="process-ledger-title">
+            <header class="process-ledger-header" data-reveal>
+              <h4 id="process-ledger-title">The process.</h4>
+              <p>The map follows the movement of uranium. The list below explains what each Niagara facility did to the material—and what remained after production.</p>
+            </header>
+            <ol class="process-ledger-list">
+              <li class="process-ledger-step" data-reveal>
+                <div class="process-ledger-meta"><span class="process-ledger-number">01</span><h5 class="process-ledger-title">Linde Ceramics Plant</h5><span class="process-ledger-location">Tonawanda, New York · Union Carbide</span></div>
+                <div class="process-ledger-copy"><p>Before the Manhattan Project, Linde’s ceramics business used uranium compounds to produce colored salts for ceramic glazes. That chemical experience is why the Army selected Linde for large-scale uranium separation.</p><p>During the war, the plant processed high-grade uranium ore through three stages: ore into black uranium oxide, black oxide into brown uranium oxide, and brown oxide into uranium tetrafluoride. The final product was the green, salt-like powder known as <em>“green salt,”</em> shipped by train to Electromet in Niagara Falls.</p><div class="process-ledger-links"><a href="./rebuild.html?archive=Linde#evidence" target="_blank" rel="noopener">View Linde archive →</a><a href="./rebuild.html#map" target="_blank" rel="noopener">Locate Linde →</a></div></div>
+              </li>
+              <li class="process-ledger-step" data-reveal>
+                <div class="process-ledger-meta"><span class="process-ledger-number">02</span><h5 class="process-ledger-title">Electromet</h5><span class="process-ledger-location">Niagara Falls, New York · Union Carbide</span></div>
+                <div class="process-ledger-copy"><p>Electromet’s high-temperature metallurgical expertise made it suited to convert green salt into uranium metal. Workers mixed uranium tetrafluoride with magnesium inside a dolomite-lined steel vessel known as a “bomb.”</p><p>When heated, the mixture underwent a violent thermite reaction. Uranium separated, pooled at the bottom, and was cast into ingots, then recast into billets. The process left uranium-bearing C-1 and C-2 slag.</p><div class="process-ledger-links"><a href="./rebuild.html?archive=Electromet#evidence" target="_blank" rel="noopener">View Electromet archive →</a><a href="./rebuild.html#map" target="_blank" rel="noopener">Locate Electromet →</a></div></div>
+              </li>
+              <li class="process-ledger-step" data-reveal>
+                <div class="process-ledger-meta"><span class="process-ledger-number">03</span><h5 class="process-ledger-title">Hooker Electrochemical</h5><span class="process-ledger-location">Niagara Falls, New York</span></div>
+                <div class="process-ledger-copy"><p>Hooker treated C-2 slag delivered from Electromet’s uranium-metal reduction vessels. The slag consisted largely of magnesium-fluoride residue and spent dolomite liners—materials that still retained recoverable uranium.</p><p>Workers screened the material, treated it with acid, neutralized and filtered the slurry, and rebarreled the concentrate. The recovered uranium was shipped back to Linde, where it reentered the production cycle. The process then began again.</p><div class="process-ledger-links"><a href="./rebuild.html?archive=Hooker#evidence" target="_blank" rel="noopener">View Hooker archive →</a><a href="./rebuild.html#map" target="_blank" rel="noopener">Locate Hooker →</a></div></div>
+              </li>
+              <li class="process-ledger-step" data-reveal>
+                <div class="process-ledger-meta"><span class="process-ledger-number">04</span><h5 class="process-ledger-title">Steel + rolling mills</h5><span class="process-ledger-location">Lackawanna, Lockport, and Buffalo, New York</span></div>
+                <div class="process-ledger-copy"><p>Simonds Saw and Steel in Lockport became the program’s principal rod manufacturer, rolling uranium billets into long rods from 1948 through 1956. Bethlehem Steel in Lackawanna finish-rolled, heat-treated, and ground uranium rods. Bliss &amp; Laughlin in Buffalo machined, straightened, and finished them.</p><p>The finished rods continued west toward the reactors that produced plutonium for nuclear weapons.</p><div class="process-ledger-links"><a href="./rebuild.html?archive=Steel#evidence" target="_blank" rel="noopener">View steel-mill archive →</a><a href="./rebuild.html#map" target="_blank" rel="noopener">Trace the mills →</a></div></div>
+              </li>
+              <li class="process-ledger-step" data-reveal>
+                <div class="process-ledger-meta"><span class="process-ledger-number">05</span><h5 class="process-ledger-title">Carborundum</h5><span class="process-ledger-location">Niagara Falls, New York</span></div>
+                <div class="process-ledger-copy"><p>Carborundum first tested abrasive wheels and grinding speeds for finishing uranium slugs. Its nuclear work later expanded at the Central Research Laboratory, where researchers developed uranium compounds as possible reactor fuels.</p><p>Beginning in 1960, plutonium from Hanford arrived for a classified fuel-development program. Workers mixed uranium and plutonium compounds, heated them in furnaces, pressed and sintered the material, and ground it into experimental fuel pellets.</p><div class="process-ledger-links"><a href="./rebuild.html?archive=Carborundum#evidence" target="_blank" rel="noopener">View Carborundum archive →</a><a href="./rebuild.html#map" target="_blank" rel="noopener">Locate Carborundum →</a></div></div>
+              </li>
+              <li class="process-ledger-step" data-reveal>
+                <div class="process-ledger-meta"><span class="process-ledger-number">06</span><h5 class="process-ledger-title">Bell</h5><span class="process-ledger-location">Niagara County, New York</span></div>
+                <div class="process-ledger-copy"><p>Bell Aerospace developed RASCAL, an early nuclear-armed standoff missile, and operated a test center on the former Lake Ontario Ordnance Works property.</p><p>In 1967, the site temporarily housed the Lewiston-Porter School. This matters because children and staff were placed on a former military-industrial site where radioactive materials had already been stored and buried, without the site’s full history being publicly legible.</p><div class="process-ledger-links"><a href="./rebuild.html?archive=Bell#evidence" target="_blank" rel="noopener">View Bell archive →</a><a href="./rebuild.html#map" target="_blank" rel="noopener">Locate Bell →</a></div></div>
+              </li>
+              <li class="process-ledger-step" data-reveal>
+                <div class="process-ledger-meta"><span class="process-ledger-number">07</span><h5 class="process-ledger-title">Lake Ontario Ordnance Works</h5><span class="process-ledger-location">Lewiston and Porter, New York</span></div>
+                <div class="process-ledger-copy"><p>After explosives production ended, the Manhattan Engineer District repurposed part of LOOW as the official regional destination for radioactive waste from Western New York’s uranium program.</p><p>Beginning in 1944, residues and contaminated materials were brought there for storage, repackaging, burial, and disposal. Not all of the region’s waste reached LOOW; much of what did was concealed by secrecy, buried, and ultimately forgotten.</p><div class="process-ledger-links"><a href="./rebuild.html?archive=LOOW#evidence" target="_blank" rel="noopener">View LOOW archive →</a><a href="./rebuild.html#map" target="_blank" rel="noopener">Locate LOOW →</a></div></div>
+              </li>
+            </ol>
+          </section>
         </section>
 
         <section class="chapter" id="love-canal" data-chapter>
