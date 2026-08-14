@@ -543,6 +543,31 @@
     .project-story-origin blockquote { margin:0; color:var(--niagara-ink); font:italic 400 clamp(35px,4.4vw,68px)/1 Georgia,"Times New Roman",serif; letter-spacing:-.045em; }
     .project-story-origin figcaption { margin-top:18px; color:var(--niagara-red); font:9px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.14em; text-transform:uppercase; }
     .project-story-subhead { margin:clamp(68px,9svh,110px) 0 28px; max-width:760px; font:400 clamp(36px,4.2vw,62px)/.98 Georgia,"Times New Roman",serif; letter-spacing:-.044em; }
+    .project-public-record { margin:clamp(46px,6svh,72px) 0 0; border-top:1px solid rgba(21,23,21,.3); border-left:1px solid rgba(21,23,21,.3); }
+    .project-public-record-stats { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .project-public-record-stat { min-height:230px; padding:clamp(25px,3.2vw,40px); border-right:1px solid rgba(21,23,21,.3); border-bottom:1px solid rgba(21,23,21,.3); }
+    .project-public-record-stat strong { display:block; margin-bottom:42px; color:var(--niagara-red); font:400 clamp(48px,5vw,76px)/.8 Georgia,"Times New Roman",serif; letter-spacing:-.05em; }
+    .project-public-record-stat span { display:block; max-width:240px; color:rgba(21,23,21,.72); font:13px/1.5 Arial,Helvetica,sans-serif; }
+    .project-upper-mountain { padding:clamp(34px,4.5vw,58px); color:var(--niagara-paper); background:#101312; border-right:1px solid #101312; border-bottom:1px solid #101312; }
+    .project-upper-mountain-label { display:block; margin-bottom:20px; color:rgba(241,240,234,.55); font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
+    .project-upper-mountain h6 { margin:0 0 clamp(34px,4.5svh,50px); max-width:780px; font:400 clamp(31px,3.6vw,54px)/.98 Georgia,"Times New Roman",serif; letter-spacing:-.043em; }
+    .project-upper-mountain-timeline { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border-top:1px solid rgba(241,240,234,.24); border-left:1px solid rgba(241,240,234,.24); }
+    .project-upper-mountain-timeline article { min-height:180px; padding:22px; border-right:1px solid rgba(241,240,234,.24); border-bottom:1px solid rgba(241,240,234,.24); }
+    .project-upper-mountain-timeline time { display:block; margin-bottom:30px; color:#d4b57c; font:9px/1.3 Arial,Helvetica,sans-serif; letter-spacing:.15em; text-transform:uppercase; }
+    .waste-chapter-followup--project-story .project-upper-mountain-timeline p { margin:0; color:rgba(241,240,234,.7); font:13px/1.52 Arial,Helvetica,sans-serif; letter-spacing:0; }
+    .project-cleanup-accounting { padding:clamp(30px,4vw,48px); border-right:1px solid rgba(21,23,21,.3); border-bottom:1px solid rgba(21,23,21,.3); }
+    .waste-chapter-followup--project-story .project-cleanup-accounting p { max-width:880px; margin:0; font-size:clamp(17px,1.25vw,21px); }
+    .project-later-findings { margin-top:clamp(60px,8svh,96px); }
+    .project-later-findings > span { display:block; margin-bottom:22px; color:var(--niagara-red); font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
+    .project-later-findings h6 { margin:0 0 clamp(34px,5svh,56px); max-width:780px; font:400 clamp(35px,4.2vw,62px)/.97 Georgia,"Times New Roman",serif; letter-spacing:-.045em; }
+    .project-later-findings-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-top:1px solid rgba(21,23,21,.3); border-left:1px solid rgba(21,23,21,.3); }
+    .project-later-findings-grid article { min-height:300px; padding:clamp(25px,3vw,38px); border-right:1px solid rgba(21,23,21,.3); border-bottom:1px solid rgba(21,23,21,.3); }
+    .project-later-findings-grid time { display:block; margin-bottom:44px; color:var(--niagara-red); font:9px/1.3 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
+    .project-later-findings-grid h6 { margin:0 0 18px; font-size:clamp(23px,2.2vw,34px); line-height:1; letter-spacing:-.035em; }
+    .waste-chapter-followup--project-story .project-later-findings-grid p { margin:0; color:rgba(21,23,21,.68); font:14px/1.55 Arial,Helvetica,sans-serif; letter-spacing:0; }
+    .project-public-sources { margin-top:26px; display:flex; flex-wrap:wrap; gap:12px 24px; }
+    .project-public-sources a { padding-bottom:3px; color:var(--niagara-red); border-bottom:1px solid currentColor; font:8px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.13em; text-decoration:none; text-transform:uppercase; }
+    .project-public-sources a:hover,.project-public-sources a:focus-visible { color:var(--niagara-ink); }
     .project-research-path { margin:clamp(48px,6svh,72px) 0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-top:1px solid rgba(21,23,21,.3); border-left:1px solid rgba(21,23,21,.3); }
     .project-research-path article { min-height:260px; padding:clamp(25px,3vw,38px); border-right:1px solid rgba(21,23,21,.3); border-bottom:1px solid rgba(21,23,21,.3); }
     .project-research-path span { display:block; margin-bottom:42px; color:var(--niagara-red); font:9px/1.35 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
@@ -918,6 +943,8 @@
       .waste-chapter-followup--project-story { width:100%; margin:84px 0 124px; transform:none; }
       .project-research-path { grid-template-columns:1fr; }
       .project-research-path article { min-height:0; }
+      .project-public-record-stats,.project-upper-mountain-timeline,.project-later-findings-grid { grid-template-columns:1fr; }
+      .project-public-record-stat,.project-upper-mountain-timeline article,.project-later-findings-grid article { min-height:0; }
       .waste-record-expansion { width:100vw; min-height:0; margin-top:76px; padding:64px 24px 78px; }
       .waste-record-expansion-header,.waste-record-grid { grid-template-columns:1fr; gap:20px; }
       .waste-record-grid { gap:0; }
@@ -2072,7 +2099,83 @@
 
                 <p>The investigation continued through Department of Energy and Army Corps records, state and federal cleanup files, environmental easements, historical maps, archival films, court arguments, newspaper archives, public meetings, academic research, and interviews. Neuhaus reviewed thousands of documents and archival pages; more than 800 source records are now linked through the project.</p>
                 <p>Factories appeared under different owners and names. Large industrial properties were divided, sold, and redeveloped. One location could reappear across decades in a production record, a worker-exposure file, a radiological survey, a brownfield investigation, and a cleanup document—without any agency assembling those fragments into one history. Reconstructing the landscape required cross-referencing names, addresses, parcel boundaries, dates, survey readings, waste routes, and later land uses.</p>
-                <h5 class="project-story-subhead">The research became a public resource.</h5>
+                <h5 class="project-story-subhead">The research became public because the official record never became a complete public accounting.</h5>
+                <p>The 1986 Oak Ridge report recorded two very different outcomes. Of the 100 anomalies investigated on the ground in 1985, 38 exceeded FUSRAP guidelines and were associated with the suspected federal waste route. The report stated that those 38 had been remediated and that material above the guidelines had been removed. The other 62 were associated principally with radioactive industrial slag beneath asphalt driveways, parking lots, and other gravel applications. Because Oak Ridge concluded that this material was not connected to NFSS, those 62 anomalies were not included in the same federal cleanup.</p>
+
+                <section class="project-public-record" aria-label="What happened to the 100 anomalies investigated in 1985">
+                  <div class="project-public-record-stats">
+                    <article class="project-public-record-stat">
+                      <strong>100</strong>
+                      <span>gamma anomalies selected for onsite investigation in 1985</span>
+                    </article>
+                    <article class="project-public-record-stat">
+                      <strong>38</strong>
+                      <span>FUSRAP anomalies the 1986 report said had been remediated</span>
+                    </article>
+                    <article class="project-public-record-stat">
+                      <strong>62</strong>
+                      <span>remaining anomalies attributed principally to industrial slag—not given a complete public cleanup accounting</span>
+                    </article>
+                  </div>
+
+                  <div class="project-upper-mountain">
+                    <span class="project-upper-mountain-label">Upper Mountain Road · one anomaly across four decades</span>
+                    <h6>Surveyed in the 1970s and 1980s. Cleanup was not completed until 2023.</h6>
+                    <div class="project-upper-mountain-timeline">
+                      <article>
+                        <time>1978</time>
+                        <p>The Department of Energy’s aerial survey recorded elevated radiation in the Upper Mountain Road area.</p>
+                      </article>
+                      <article>
+                        <time>1984–1985</time>
+                        <p>Oak Ridge’s vehicle survey and onsite follow-up measured the Upper Mountain Road anomaly as part of the regional investigation.</p>
+                      </article>
+                      <article>
+                        <time>2020</time>
+                        <p>EPA removed contaminated material from a culvert and portions of the gravel access road and replaced it with clean fill.</p>
+                      </article>
+                      <article>
+                        <time>2021–2023</time>
+                        <p>EPA excavated radioactive soil beneath basement areas and yards at two adjacent homes. Both families were temporarily relocated.</p>
+                      </article>
+                    </div>
+                  </div>
+
+                  <div class="project-cleanup-accounting">
+                    <p><strong>How many homes like Upper Mountain Road were ultimately cleaned?</strong> No agency has published a property-by-property reconciliation of Oak Ridge’s 62 slag anomalies with every later investigation and cleanup. EPA’s current completed-site list documents work at four residences—two on Upper Mountain Road and two beside Holy Trinity Cemetery—plus the Upper Mountain Road access road. It also lists commercial properties on Niagara Falls Boulevard and Donovan Head Start. That is evidence of later cleanup, but it is not a complete answer for all 62 locations.</p>
+                  </div>
+                </section>
+
+                <section class="project-later-findings" aria-labelledby="project-later-findings-title">
+                  <span>The survey’s limits</span>
+                  <h6 id="project-later-findings-title">Construction kept finding what the 1985 survey had not mapped.</h6>
+                  <p>The 1984 mobile scan was not a parcel-by-parcel survey of the Niagara metropolitan area. Detectors followed accessible roads, and the 1985 fieldwork investigated the 100 anomalies selected from that route. As streets, parks, and buildings were later excavated, radioactive material continued to emerge outside that fixed set of locations.</p>
+                  <div class="project-later-findings-grid">
+                    <article>
+                      <time>2015 · Robert Moses Parkway</time>
+                      <h6>New readings along a construction corridor</h6>
+                      <p>A radiological survey reported readings above 80 µR/h near the Aquarium of Niagara and the Park Police area, and a separate reading of 2,750 µR/h near the Whirlpool Bridge exit area.</p>
+                    </article>
+                    <article>
+                      <time>2018 · Niagara Falls State Park</time>
+                      <h6>Radioactive slag at the park entrance</h6>
+                      <p>Contractors exposed radioactive industrial slag while building the Prospect Point welcome plaza. Approximately 1,500 tons of compromised material were removed during the first cleanup.</p>
+                    </article>
+                    <article>
+                      <time>2021–2023 · Donovan Head Start</time>
+                      <h6>Fill beneath a playground and parking lot</h6>
+                      <p>Radioactive material was discovered during a playground project in 2021. EPA later documented uranium-bearing slag beneath roughly 10,000 square feet and oversaw its removal in 2023.</p>
+                    </article>
+                  </div>
+                  <p>These discoveries do not mean that every unsurveyed property is contaminated. They show why the 1985 findings cannot be treated as a complete map—and why residents should not have to reconstruct the history of a property from scattered technical reports after contamination is disturbed.</p>
+                  <div class="project-public-sources" aria-label="Sources for the 1985 survey and later cleanups">
+                    <a href="https://natalianeuhaus.com/wp-content/uploads/2026/07/ORNL_1985_Niagara_Falls_Radiological_Survey_18050447.pdf" target="_blank" rel="noopener noreferrer">1986 Oak Ridge report ↗</a>
+                    <a href="https://www.dot.ny.gov/portal/pls/portal/MEXIS_APP.BC_CONST_NOTICE_ADMIN.VIEWFILE?p_file_id=21164&amp;p_is_digital=Y" target="_blank" rel="noopener noreferrer">Robert Moses Parkway project records ↗</a>
+                    <a href="https://www.epa.gov/ny/niagara-county-radiation-removal-sites" target="_blank" rel="noopener noreferrer">EPA completed cleanup sites ↗</a>
+                    <a href="https://www.epa.gov/ny/donovan-head-start-removal-site" target="_blank" rel="noopener noreferrer">EPA Donovan Head Start record ↗</a>
+                  </div>
+                </section>
+
                 <p>The Archive of Evidence makes the underlying records accessible rather than asking each new researcher or resident to begin again. The Interactive Map reconnects those documents to factories, disposal areas, survey boundaries, roads, waterways, homes, schools, and public spaces. Together, they show where the same places and unresolved questions return across decades.</p>
 
                 <aside class="project-current-record" aria-labelledby="project-current-record-title">
