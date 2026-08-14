@@ -604,6 +604,10 @@
     #atomic .atomic-process-map { width:100%; margin-left:0; }
     #atomic > .atomic-xray-sequence > .atomic-niagara-hero { height:calc(100svh - var(--top)); }
     #atomic .atomic-niagara-title { padding:clamp(44px,5vw,78px); }
+    #atomic .atomic-niagara-media { margin:0; }
+    #atomic .atomic-evidence-item { cursor:default; }
+    #atomic .atomic-evidence-item::before { content:none; display:none; }
+    #atomic .atomic-evidence-item--text:hover { background:#686868; }
     #atomic .atomic-niagara-title .investigation-chapter-label { color:rgba(242,240,233,.48); }
     #atomic .atomic-niagara-title .investigation-number { color:rgba(242,240,233,.58); }
     #atomic .atomic-niagara-title h3 { font-size:clamp(46px,5.4vw,84px); }
@@ -758,35 +762,35 @@
               <figcaption class="atomic-niagara-credit">Trinity test · July 16, 1945 · U.S. Department of Energy / Wikimedia Commons · Public domain</figcaption>
             </figure>
           </div>
-          <div class="atomic-evidence-mosaic" aria-label="A visual index of archival and photographic evidence">
+          <div class="atomic-evidence-mosaic" aria-label="A static visual index of archival and photographic evidence">
             <div class="atomic-evidence-grid">
-              <a class="atomic-evidence-item atomic-evidence-item--profile" href="https://en.wikipedia.org/wiki/Leslie_Groves" data-evidence-number="01" data-evidence-link-label="Read on Wikipedia →" data-evidence-summary="Leslie Richard Groves Jr. (1896–1970) was a U.S. Army Corps of Engineers officer who oversaw construction of the Pentagon and directed the Manhattan Project. From 1942, he managed its construction, raw-material acquisition, security, intelligence, and the selection of research and production sites.">
+              <div class="atomic-evidence-item atomic-evidence-item--profile">
                 <img src="./archive/leslie-groves.jpg?v=2" alt="Negative portrait of Leslie R. Groves in U.S. Army uniform" loading="eager" fetchpriority="high" decoding="async" />
                 <span class="atomic-evidence-caption">Leslie R. Groves · Director of the Manhattan Project</span>
-              </a>
-              <a class="atomic-evidence-item" href="https://en.wikipedia.org/wiki/Uranium_tetrafluoride" data-evidence-number="02" data-evidence-link-label="Read on Wikipedia →" data-evidence-summary="Uranium tetrafluoride (UF₄) is a green crystalline solid known in the uranium-refining industry as “green salt.” It is an intermediate that can be reduced with magnesium to produce uranium metal or fluorinated further toward uranium hexafluoride. Image: U.S. Department of Energy, public domain.">
+              </div>
+              <div class="atomic-evidence-item">
                 <img src="./archive/green-salt-uranium-tetrafluoride.jpg" alt="Worker handling green uranium tetrafluoride powder at a processing facility" loading="lazy" decoding="async" />
                 <span class="atomic-evidence-caption">Uranium tetrafluoride · “green salt” · U.S. Department of Energy</span>
-              </a>
-              <a class="atomic-evidence-item atomic-evidence-item--text" href="https://en.wikipedia.org/wiki/Ames_Project#Production" target="_blank" rel="noopener noreferrer" aria-label="Open archival evidence about uranium recovery" data-evidence-number="03" data-evidence-link-label="Read about uranium recovery on Wikipedia →" data-evidence-summary="From 1943 through 1945, Hooker used waste hydrochloric acid to strip uranium from slag sent by rail from Linde. This report page states that the liquid waste was discharged to sewers, was not monitored for radioactivity, and was handled by Hooker personnel who had not been told the material was uranium.">
+              </div>
+              <div class="atomic-evidence-item atomic-evidence-item--text">
                 <img class="atomic-evidence-viewer-source" src="./archive/uranium-recovery-hooker-report-p90.webp" alt="Highlighted page 90 of The Federal Connection report describing Hooker’s uranium-slag recovery process and unmonitored radioactive effluent" loading="eager" decoding="async" />
                 <span class="atomic-evidence-text-number">03</span>
                 <h4 class="atomic-evidence-text-title">Uranium recovery</h4>
                 <p class="atomic-evidence-text-copy">At Hooker, uranium-bearing slag was treated with acid; the unmonitored liquid waste went to the sewers.</p>
                 <span class="atomic-evidence-caption">Processing of uranium slag · Hooker · 1943–1945</span>
-              </a>
-              <a class="atomic-evidence-item" href="https://en.wikipedia.org/wiki/Ames_Project" data-evidence-number="04" data-evidence-link-label="Read on Wikipedia →" data-evidence-summary="After reduction, uranium metal was remelted and cast into ingots, then forged, extruded, or rolled into billets and rods for the atomic program.">
+              </div>
+              <div class="atomic-evidence-item">
                 <img src="./archive/uranium-metal-rods.jpg" alt="Finished uranium metal rods and tubes arranged on a green surface" loading="lazy" decoding="async" />
                 <span class="atomic-evidence-caption">Uranium metal rods · final product</span>
-              </a>
-              <a class="atomic-evidence-item atomic-evidence-item--ore" href="https://en.wikipedia.org/wiki/Shinkolobwe#Manhattan_Project" data-evidence-number="05" data-evidence-link-label="Read on Wikipedia →" data-evidence-summary="This uranium ore specimen was collected at Shinkolobwe in November 1965. During World War II, the mine—then in the Belgian Congo—supplied exceptionally rich uranium ore to the Manhattan Project. Congolese ores eventually accounted for about 72 percent of the uranium oxides acquired by the Manhattan District. Photograph by Andrew Silver, USGS.">
+              </div>
+              <div class="atomic-evidence-item atomic-evidence-item--ore">
                 <img src="./archive/uranium-ore-shinkolobwe.jpg" alt="Bright green uranium ore specimen collected at Shinkolobwe in the Belgian Congo" loading="lazy" decoding="async" />
                 <span class="atomic-evidence-caption">Uranium ore · Shinkolobwe, Belgian Congo · collected 1965</span>
-              </a>
-              <a class="atomic-evidence-item" href="https://en.wikipedia.org/wiki/Ames_process" data-evidence-number="08" data-evidence-link-label="Read on Wikipedia →" data-evidence-summary="Green salt was mixed with magnesium and fired in a reduction vessel. The thermite reaction separated molten uranium from magnesium fluoride slag, producing a solid mass of uranium metal. Electromet performed uranium reduction in Niagara Falls.">
+              </div>
+              <div class="atomic-evidence-item">
                 <img src="./archive/green-salt-to-uranium-metal.jpg" alt="Uranium metal masses produced by reducing green salt" loading="lazy" decoding="async" />
                 <span class="atomic-evidence-caption">From green salt to uranium metal</span>
-              </a>
+              </div>
             </div>
           </div>
           </div>
@@ -961,23 +965,6 @@
                 <iframe title="Production of Uranium Feed Materials" data-src="https://www.youtube-nocookie.com/embed/VOm7_Lf8PVo?autoplay=1&amp;rel=0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
               </div>
               <p class="atomic-reference-viewer-caption">Production of Uranium Feed Materials · U.S. Atomic Energy Commission, Oak Ridge Operations · 1959</p>
-            </div>
-          </dialog>
-
-          <dialog class="atomic-evidence-viewer" aria-label="Evidence viewer">
-            <button class="atomic-evidence-viewer-close" type="button" aria-label="Close evidence viewer">×</button>
-            <div class="atomic-evidence-viewer-shell">
-              <button class="atomic-evidence-viewer-nav atomic-evidence-viewer-prev" type="button" aria-label="Previous piece of evidence">←</button>
-              <figure>
-                <img class="atomic-evidence-viewer-image" alt="" />
-                <figcaption class="atomic-evidence-viewer-caption">
-                  <span class="atomic-evidence-viewer-count"></span>
-                  <strong class="atomic-evidence-viewer-title"></strong>
-                  <p class="atomic-evidence-viewer-summary"></p>
-                  <a class="atomic-evidence-follow" href="#">Follow this evidence →</a>
-                </figcaption>
-              </figure>
-              <button class="atomic-evidence-viewer-nav atomic-evidence-viewer-next" type="button" aria-label="Next piece of evidence">→</button>
             </div>
           </dialog>
 
@@ -1285,57 +1272,6 @@
         });
         window.addEventListener('pagehide',() => {
           if (atomicReferenceViewer.open) atomicReferenceViewer.close();
-        });
-      }
-
-      const atomicEvidenceItems = [...document.querySelectorAll('#atomic .atomic-evidence-item')].filter(item => item.querySelector('img'));
-      const atomicEvidenceViewer = document.querySelector('#atomic .atomic-evidence-viewer');
-      if (atomicEvidenceItems.length && atomicEvidenceViewer && typeof atomicEvidenceViewer.showModal === 'function') {
-        const image = atomicEvidenceViewer.querySelector('.atomic-evidence-viewer-image');
-        const count = atomicEvidenceViewer.querySelector('.atomic-evidence-viewer-count');
-        const title = atomicEvidenceViewer.querySelector('.atomic-evidence-viewer-title');
-        const summary = atomicEvidenceViewer.querySelector('.atomic-evidence-viewer-summary');
-        const follow = atomicEvidenceViewer.querySelector('.atomic-evidence-follow');
-        const close = atomicEvidenceViewer.querySelector('.atomic-evidence-viewer-close');
-        const previous = atomicEvidenceViewer.querySelector('.atomic-evidence-viewer-prev');
-        const next = atomicEvidenceViewer.querySelector('.atomic-evidence-viewer-next');
-        let active = 0;
-
-        const show = index => {
-          active = (index + atomicEvidenceItems.length) % atomicEvidenceItems.length;
-          const item = atomicEvidenceItems[active];
-          const source = item.querySelector('img');
-          const caption = item.querySelector('.atomic-evidence-caption');
-          image.src = source.currentSrc || source.src;
-          image.alt = source.alt;
-          count.textContent = item.dataset.evidenceNumber
-            ? item.dataset.evidenceNumber + ' / 08'
-            : String(active + 1).padStart(2,'0') + ' / ' + String(atomicEvidenceItems.length).padStart(2,'0');
-          title.textContent = caption ? caption.textContent : source.alt;
-          summary.textContent = item.dataset.evidenceSummary || '';
-          follow.href = item.getAttribute('href');
-          follow.textContent = item.dataset.evidenceLinkLabel || 'Follow this evidence →';
-          const external = /^https?:/i.test(follow.href);
-          follow.target = external ? '_blank' : '';
-          follow.rel = external ? 'noopener noreferrer' : '';
-          atomicEvidenceViewer.classList.toggle('is-profile',item.classList.contains('atomic-evidence-item--profile'));
-          if (!atomicEvidenceViewer.open) atomicEvidenceViewer.showModal();
-        };
-
-        atomicEvidenceItems.forEach((item,index) => item.addEventListener('click',event => {
-          event.preventDefault();
-          show(index);
-        }));
-        previous.addEventListener('click',() => show(active - 1));
-        next.addEventListener('click',() => show(active + 1));
-        close.addEventListener('click',() => atomicEvidenceViewer.close());
-        follow.addEventListener('click',() => atomicEvidenceViewer.close());
-        atomicEvidenceViewer.addEventListener('click',event => {
-          if (event.target === atomicEvidenceViewer) atomicEvidenceViewer.close();
-        });
-        atomicEvidenceViewer.addEventListener('keydown',event => {
-          if (event.key === 'ArrowLeft') { event.preventDefault(); show(active - 1); }
-          if (event.key === 'ArrowRight') { event.preventDefault(); show(active + 1); }
         });
       }
 
