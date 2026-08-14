@@ -57,7 +57,7 @@
     .hero-scroll { position:absolute; z-index:2; right:28px; bottom:26px; display:flex; align-items:center; gap:12px; color:rgba(255,255,255,.7); text-decoration:none; font:8px/1 var(--sans); letter-spacing:.17em; text-transform:uppercase; writing-mode:vertical-rl; }
     .hero-scroll::after { content:""; width:1px; height:50px; background:rgba(255,255,255,.5); }
 
-    .waterfalls-record { height:calc(100svh + 140px); min-height:780px; position:relative; overflow:hidden; background:var(--paper); border-bottom:1px solid var(--line); }
+    .waterfalls-record { height:calc(100svh - var(--top)); min-height:640px; position:relative; overflow:hidden; background:var(--paper); border-bottom:1px solid var(--line); }
     .waterfalls-track { width:100%; height:100%; display:flex; overflow-x:auto; overflow-y:hidden; overscroll-behavior-inline:contain; scroll-snap-type:x mandatory; scrollbar-width:none; }
     .waterfalls-track::-webkit-scrollbar { display:none; }
     .waterfalls-slide { flex:0 0 100%; width:100%; height:100%; position:relative; display:grid; place-items:center; padding:clamp(42px,6vw,90px); scroll-snap-align:start; scroll-snap-stop:always; }
@@ -79,7 +79,7 @@
     .micro-links a { color:var(--muted); font:700 8px/1.35 var(--sans); letter-spacing:.1em; text-transform:uppercase; }
     .micro-links a:hover { color:var(--red); }
     .waterfalls-control { appearance:none; width:54px; height:54px; position:absolute; z-index:8; bottom:19px; display:grid; place-items:center; border:1px solid var(--line); color:var(--ink); background:rgba(242,240,233,.92); cursor:pointer; transition:.2s ease; }
-    .waterfalls-control:hover,.waterfalls-control:focus-visible { color:var(--paper); background:#343633; border-color:#343633; }
+    .waterfalls-control:hover,.waterfalls-control:focus-visible { color:var(--paper); background:var(--red); border-color:var(--red); }
     .waterfalls-prev { left:calc(50% - 62px); opacity:0; pointer-events:none; }
     .waterfalls-prev.is-visible { opacity:1; pointer-events:auto; }
     .waterfalls-next { left:calc(50% + 8px); }
@@ -88,7 +88,7 @@
     .waterfalls-progress button { appearance:none; width:40px; height:42px; padding:0; border:0; color:var(--muted); background:transparent; cursor:pointer; font:9px/1 var(--sans); letter-spacing:.08em; }
     .waterfalls-progress .is-current button { color:var(--red); border-top:2px solid var(--red); }
 
-    .dossier { display:grid; grid-template-columns:var(--rail) minmax(0,1fr); align-items:start; margin-top:0; border-top:0; }
+    .dossier { display:grid; grid-template-columns:var(--rail) minmax(0,1fr); align-items:start; }
     .case-index { height:calc(100svh - var(--top)); position:sticky; z-index:20; top:var(--top); display:flex; flex-direction:column; background:var(--paper); border-right:1px solid var(--line); }
     .index-heading { padding:26px 22px 18px; border-bottom:1px solid var(--line); }
     .index-heading small { color:var(--red); font:700 8px/1 var(--sans); letter-spacing:.16em; text-transform:uppercase; }
@@ -115,14 +115,6 @@
     .chapter-cover.dark { color:var(--paper); background:var(--night); }
     .chapter-cover.dark .chapter-cover-meta { border-color:var(--line-dark); }
     .chapter-cover.dark .chapter-deck { color:rgba(242,240,233,.67); }
-    .chapter-cover.atomic-cover { background:#151515; }
-    .atomic-cover .chapter-cover-meta { padding-top:clamp(42px,5vw,68px); padding-bottom:clamp(42px,5vw,68px); }
-    .atomic-cover .chapter-cover-body { padding-top:clamp(42px,5vw,68px); padding-bottom:clamp(42px,5vw,68px); }
-    .atomic-cover .chapter-cover-body h3 { max-width:100%; font-size:clamp(54px,5.9vw,104px); line-height:.83; letter-spacing:-.055em; }
-    .atomic-cover .chapter-cover-body .chapter-deck { max-width:760px; margin-top:26px; font-size:clamp(18px,1.55vw,26px); line-height:1.38; }
-    .atomic-cover-film { width:100%; max-width:370px; height:clamp(150px,20svh,220px); position:relative; margin:clamp(28px,4svh,44px) 0 0; overflow:hidden; background:#151614; border:1px solid rgba(242,240,233,.3); }
-    .atomic-cover-film img { width:100%; height:100%; display:block; object-fit:cover; filter:grayscale(1) contrast(1.12); }
-    .atomic-cover-film figcaption { position:absolute; left:0; right:0; bottom:0; padding:28px 12px 10px; color:rgba(242,240,233,.75); background:linear-gradient(transparent,rgba(0,0,0,.78)); font:700 7px/1.35 var(--sans); letter-spacing:.13em; text-transform:uppercase; }
 
     .content-block { padding:clamp(72px,9vw,150px) clamp(30px,6vw,104px); }
     .reading-grid { display:grid; grid-template-columns:minmax(150px,.32fr) minmax(500px,1fr); gap:clamp(48px,7vw,110px); }
@@ -157,29 +149,6 @@
     .process-card small { color:var(--red); font:700 8px/1 var(--sans); letter-spacing:.14em; text-transform:uppercase; }
     .process-card h4 { margin:22px 0 18px; font-size:clamp(27px,2.6vw,43px); font-weight:400; line-height:.96; letter-spacing:-.04em; }
     .process-card p { margin:0; color:var(--muted); font:15px/1.48 var(--sans); }
-
-    .uranium-route { padding:clamp(76px,9vw,145px) 0; background:var(--paper-deep); border-top:1px solid var(--line); }
-    .uranium-route-header { display:grid; grid-template-columns:.42fr 1fr; gap:8vw; align-items:end; padding:0 clamp(30px,6vw,104px); }
-    .uranium-route-header h4 { margin:0; font-size:clamp(58px,7vw,118px); font-weight:400; line-height:.82; letter-spacing:-.06em; }
-    .uranium-route-header p { max-width:790px; margin:0; color:var(--muted); font-size:clamp(19px,1.65vw,26px); line-height:1.45; }
-    .uranium-map-shell { margin-top:clamp(70px,9vw,120px); }
-    .uranium-map-bar { min-height:54px; display:flex; align-items:center; justify-content:space-between; gap:20px; padding:0 18px; color:var(--red); border:2px solid var(--red); border-bottom:0; font:700 8px/1 var(--sans); letter-spacing:.14em; text-transform:uppercase; }
-    .uranium-map-bar a { color:var(--red); }
-    .uranium-map-frame { width:100%; height:clamp(720px,82svh,940px); display:block; border:2px solid var(--red); background:#e5e1d8; }
-    .process-ledger { padding:clamp(76px,9vw,145px) clamp(30px,6vw,104px); }
-    .process-ledger-header { display:grid; grid-template-columns:.42fr 1fr; gap:8vw; align-items:end; padding-bottom:58px; border-bottom:2px solid var(--ink); }
-    .process-ledger-header h4 { margin:0; font-size:clamp(58px,7vw,118px); font-weight:400; line-height:.82; letter-spacing:-.06em; }
-    .process-ledger-header p { max-width:790px; margin:0; color:var(--muted); font-size:clamp(19px,1.65vw,26px); line-height:1.45; }
-    .process-ledger-list { margin:0; padding:0; list-style:none; }
-    .process-ledger-step { display:grid; grid-template-columns:minmax(250px,.54fr) minmax(520px,1.46fr); gap:clamp(50px,7vw,110px); padding:clamp(54px,7vw,96px) 0; border-bottom:1px solid var(--line); }
-    .process-ledger-meta { position:relative; padding-left:74px; }
-    .process-ledger-number { position:absolute; left:0; top:4px; color:var(--red); font:700 10px/1 var(--sans); letter-spacing:.14em; }
-    .process-ledger-title { margin:0; font-size:clamp(31px,3.3vw,54px); font-weight:400; line-height:.92; letter-spacing:-.045em; }
-    .process-ledger-location { display:block; margin-top:18px; color:var(--red); font:700 8px/1.45 var(--sans); letter-spacing:.13em; text-transform:uppercase; }
-    .process-ledger-copy p { margin:0; color:var(--muted); font-size:clamp(17px,1.35vw,22px); line-height:1.55; }
-    .process-ledger-copy p + p { margin-top:1.2em; }
-    .process-ledger-links { margin-top:26px; display:flex; flex-wrap:wrap; gap:10px 22px; }
-    .process-ledger-links a { color:var(--red); font:700 8px/1.35 var(--sans); letter-spacing:.11em; text-transform:uppercase; }
 
     .love-layout { padding:clamp(70px,9vw,140px) clamp(30px,6vw,104px); display:grid; grid-template-columns:minmax(420px,1.1fr) minmax(240px,.48fr); gap:clamp(50px,7vw,110px); }
     .love-story h4 { margin:0 0 32px; font-size:clamp(50px,6vw,100px); font-weight:400; line-height:.87; letter-spacing:-.055em; }
@@ -226,16 +195,6 @@
     .survey-map { position:relative; margin:0; border-top:1px solid var(--line-dark); }
     .survey-map img { width:100%; max-height:760px; display:block; object-fit:cover; filter:invert(1) grayscale(1) contrast(.85); opacity:.85; }
     .survey-map figcaption { position:absolute; left:20px; bottom:18px; padding:8px 10px; background:rgba(12,17,16,.82); color:rgba(242,240,233,.68); font:8px/1.4 var(--sans); letter-spacing:.12em; text-transform:uppercase; }
-
-    .later-findings { padding:clamp(72px,9vw,140px) clamp(30px,6vw,104px); background:var(--paper-deep); }
-    .later-findings header { max-width:1040px; }
-    .later-findings h4 { margin:20px 0 28px; font-size:clamp(54px,6.5vw,108px); font-weight:400; line-height:.84; letter-spacing:-.055em; }
-    .later-findings header p { max-width:840px; color:var(--muted); font-size:clamp(18px,1.5vw,24px); line-height:1.5; }
-    .finding-ledger { margin-top:64px; border-top:1px solid var(--line); }
-    .finding-row { min-height:150px; display:grid; grid-template-columns:130px minmax(260px,.75fr) minmax(360px,1.25fr); gap:34px; align-items:center; padding:24px 0; border-bottom:1px solid var(--line); }
-    .finding-row time { color:var(--red); font:700 11px/1 var(--sans); letter-spacing:.15em; }
-    .finding-row strong { font-size:clamp(27px,3vw,48px); font-weight:400; line-height:.95; letter-spacing:-.04em; }
-    .finding-row p { margin:0; color:var(--muted); font:15px/1.55 var(--sans); }
 
     .factory-ledger { padding:clamp(72px,9vw,140px) clamp(30px,6vw,104px); }
     .factory-ledger header { max-width:1000px; }
@@ -287,21 +246,6 @@
     .public-actions strong { font:400 clamp(25px,2.8vw,42px)/1 var(--serif); letter-spacing:-.03em; }
     .public-actions a:hover { color:var(--red); background:var(--paper); }
     .public-actions a:hover span { color:var(--red); }
-
-    .upper-case { padding:clamp(74px,9vw,145px) clamp(30px,6vw,104px); background:var(--paper-deep); }
-    .upper-case-header { display:grid; grid-template-columns:.42fr 1fr; gap:8vw; align-items:end; }
-    .upper-case-header h4 { margin:0; font-size:clamp(55px,6.8vw,112px); font-weight:400; line-height:.82; letter-spacing:-.06em; }
-    .upper-case-header p { max-width:780px; margin:0; color:var(--muted); font-size:clamp(19px,1.65vw,26px); line-height:1.45; }
-    .upper-timeline { margin-top:74px; display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line); border-left:1px solid var(--line); }
-    .upper-timeline article { min-height:330px; position:relative; padding:30px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); }
-    .upper-timeline article::before { content:""; width:8px; height:8px; position:absolute; left:28px; top:-5px; background:var(--red); }
-    .upper-timeline time { color:var(--red); font:700 9px/1 var(--sans); letter-spacing:.15em; }
-    .upper-timeline h5 { margin:52px 0 18px; font-size:clamp(29px,3vw,48px); font-weight:400; line-height:.95; letter-spacing:-.04em; }
-    .upper-timeline p { margin:0; color:var(--muted); font:14px/1.55 var(--sans); }
-    .upper-accounting { margin-top:54px; display:grid; grid-template-columns:190px 1fr; gap:clamp(42px,7vw,100px); padding-top:46px; border-top:2px solid var(--red); }
-    .upper-accounting strong { color:var(--red); font:400 clamp(94px,12vw,190px)/.65 var(--serif); letter-spacing:-.08em; }
-    .upper-accounting h5 { margin:0 0 18px; font-size:clamp(34px,4vw,61px); font-weight:400; line-height:.94; letter-spacing:-.045em; }
-    .upper-accounting p { max-width:860px; color:var(--muted); font-size:clamp(17px,1.35vw,22px); line-height:1.52; }
 
     .survey-now { padding:clamp(72px,9vw,140px) clamp(30px,6vw,104px); }
     .survey-now > header { max-width:1000px; }
@@ -358,7 +302,7 @@
       .casebar-file { display:none; }
       .casebar-actions a { display:none; }
       .index-toggle { display:flex; }
-      .hero-copy,.waterfalls-inner,.chapter-cover,.reading-grid,.love-layout,.containment,.survey-dashboard > header,.uranium-route-header,.process-ledger-header,.process-ledger-step,.telvock,.project-origin > header,.origin-story,.public-record-grid,.upper-case-header,.upper-accounting,.closing-grid,.health-header { grid-template-columns:1fr; }
+      .hero-copy,.waterfalls-inner,.chapter-cover,.reading-grid,.love-layout,.containment,.survey-dashboard > header,.telvock,.project-origin > header,.origin-story,.public-record-grid,.closing-grid,.health-header { grid-template-columns:1fr; }
       .hero-copy { width:calc(100% - 42px); gap:42px; }
       .hero-title span,.hero-deck { margin-left:0; }
       .waterfalls-slide { padding:34px 22px 88px; align-items:start; }
@@ -372,16 +316,13 @@
       .case-index { width:min(360px,90vw); position:fixed; z-index:70; left:0; top:var(--top); transform:translateX(-102%); transition:transform .3s ease; box-shadow:24px 0 60px rgba(0,0,0,.18); }
       body.is-index-open .case-index { transform:none; }
       .chapter-cover-meta { min-height:180px; border-right:0; border-bottom:1px solid var(--line); }
-      .atomic-cover-film { max-width:520px; height:min(32svh,250px); }
       .chapter-cover-meta::after { left:auto; right:8%; bottom:-4px; }
       .chapter-cover-body h3 { font-size:clamp(62px,13vw,122px); }
       .reading-grid,.love-layout,.telvock,.project-origin > header,.origin-story,.public-record-grid,.closing-grid,.health-header { gap:48px; }
-      .process-chain,.research-paths,.upper-timeline,.phase-list,.health-grid { grid-template-columns:1fr; }
+      .process-chain,.research-paths,.phase-list,.health-grid { grid-template-columns:1fr; }
       .process-card,.research-card,.phase,.health-card { border-right:0; }
       .survey-accounting { grid-template-columns:1fr; }
       .survey-accounting article { border-right:0; border-bottom:1px solid var(--line-dark); }
-      .finding-row { grid-template-columns:90px 1fr; }
-      .finding-row p { grid-column:2; padding-bottom:18px; }
       .containment-media { min-height:420px; border-left:0; border-top:1px solid var(--line); }
       .telvock figure { position:relative; top:auto; }
       .site-footer { grid-template-columns:1fr; }
@@ -398,22 +339,16 @@
       .waterfalls-frame { height:40svh; }
       .waterfalls-progress { display:none; }
       .chapter-cover { min-height:auto; }
-      .chapter-cover-meta,.chapter-cover-body,.content-block,.atomic-stat,.love-layout,.process-ledger,.survey-dashboard,.later-findings,.factory-ledger,.telvock,.project-origin,.public-record,.upper-case,.survey-now,.closing-lead,.closing-body,.health-header { padding-left:22px; padding-right:22px; }
+      .chapter-cover-meta,.chapter-cover-body,.content-block,.atomic-stat,.love-layout,.survey-dashboard,.factory-ledger,.telvock,.project-origin,.public-record,.survey-now,.closing-lead,.closing-body,.health-header { padding-left:22px; padding-right:22px; }
       .chapter-cover-body { min-height:76svh; }
       .resource-row,.public-actions,.survey-reports { grid-template-columns:1fr; }
       .process-card { min-height:auto; }
       .process-card figure { height:230px; }
       .survey-report { min-height:auto; padding:30px 0; border-right:0; }
-      .finding-row { grid-template-columns:1fr; gap:12px; padding:28px 0; }
-      .finding-row p { grid-column:auto; }
       .factory-list a { grid-template-columns:42px 1fr; }
       .factory-list em { grid-column:2; padding-bottom:10px; }
       .research-paths,.phase-list { border-left:0; }
       .research-card,.phase { padding:28px 0; }
-      .upper-timeline { border-left:0; }
-      .upper-timeline article { min-height:auto; padding:30px 0; border-right:0; }
-      .upper-timeline article::before { left:0; }
-      .upper-accounting strong { font-size:40vw; }
       .public-record strong { font-size:34vw; }
       .health-sources a { grid-template-columns:34px 1fr; padding:18px 0; }
       .health-sources em { grid-column:2; }
@@ -482,7 +417,7 @@
 
         <article class="waterfalls-slide" data-waterfalls-section="3">
           <div class="waterfalls-inner">
-            <header class="waterfalls-meta"><span class="eyebrow">Origins</span><span class="waterfalls-year">1895–1942</span><h2>Electro<wbr>chemistry + electro<wbr>metallurgy</h2></header>
+            <header class="waterfalls-meta"><span class="eyebrow">Origins</span><span class="waterfalls-year">1895–1942</span><h2>Electrochemistry + <wbr>electrometallurgy</h2></header>
             <div class="waterfalls-copy">
               <p>This new supply of electricity opened a new era of metal production and electrochemical discovery. Electric furnaces could reach temperatures exceeding 7,000 degrees Fahrenheit, enabling chemical changes in materials that had previously been impossible.</p>
               <p>Hooker produced chlorine and caustic soda. Linde produced industrial gases. Electromet manufactured specialized alloys and became the nation’s largest producer of uranium metal. Vanadium strengthened steel. Carborundum pioneered the synthetic abrasive that transformed industrial grinding and cutting. These were not ordinary factories.</p>
@@ -543,12 +478,18 @@
 
       <div class="case-content">
         <section class="chapter" id="atomic" data-chapter>
-          <div class="chapter-cover dark atomic-cover">
-            <header class="chapter-cover-meta"><span class="chapter-id">Chapter I</span><h2>1942–1978<br />Production becomes a secret system.</h2><figure class="atomic-cover-film"><img src="./atomic-niagara-trinity.gif" alt="Archival film loop of the Trinity atomic bomb test in 1945" loading="eager" decoding="async" /><figcaption>Trinity test · July 16, 1945 · U.S. Department of Energy</figcaption></figure></header>
+          <div class="chapter-cover dark">
+            <header class="chapter-cover-meta"><span class="chapter-id">Chapter I</span><h2>1942–1978<br />Production becomes a secret system.</h2></header>
             <div class="chapter-cover-body"><span class="chapter-kicker">The Manhattan Project reaches Niagara</span><h3>Atomic Niagara</h3><p class="chapter-deck">Cheap power, specialized chemistry, and an established network of metal plants made the Niagara Frontier essential to the production of uranium compounds and metal.</p></div>
           </div>
 
           <div class="atomic-stat" data-reveal><small>The Federal Connection · 1981</small><strong>37M GALLONS</strong><p>of radioactively contaminated chemical waste identified by the report—left dispersed across Linde, Electromet, Hooker, and LOOW.</p></div>
+
+          <div class="process-chain" aria-label="Uranium production chain">
+            <article class="process-card" data-reveal><figure><img src="./archive/green-salt-uranium-tetrafluoride.jpg" alt="Uranium tetrafluoride, known as green salt" loading="lazy" /></figure><div class="process-card-copy"><small>Stage 01 · Chemical conversion</small><h4>Uranium tetrafluoride</h4><p>Linde and Hooker helped convert uranium concentrates into uranium compounds used in the production chain.</p></div></article>
+            <article class="process-card" data-reveal><figure><img src="./archive/uranium-recovery-hooker-report-p90.webp" alt="Historical technical report page on uranium recovery" loading="lazy" /></figure><div class="process-card-copy"><small>Stage 02 · Refinement byproduct</small><h4>Recovery + waste</h4><p>The same processes produced residues, contaminated liquids, slag, and other wastes requiring storage or disposal.</p></div></article>
+            <article class="process-card" data-reveal><figure><img src="./archive/uranium-metal-rods.jpg" alt="Processed uranium metal rods" loading="lazy" /></figure><div class="process-card-copy"><small>Stage 03 · Metal production</small><h4>Processed uranium metal</h4><p>Electromet produced uranium metal used in the wartime production system and the nuclear buildup that followed.</p></div></article>
+          </div>
 
           <div class="content-block">
             <div class="reading-grid">
@@ -561,54 +502,6 @@
               </div>
             </div>
           </div>
-
-          <section class="uranium-route" aria-labelledby="uranium-route-title">
-            <header class="uranium-route-header" data-reveal>
-              <h4 id="uranium-route-title">The Uranium Route.</h4>
-              <p>Follow the material step by step—from the Shinkolobwe mine through Western New York’s refining, reduction, recovery, rod-rolling, and finishing network to the federal waste destination at LOOW.</p>
-            </header>
-            <div class="uranium-map-shell" data-reveal>
-              <div class="uranium-map-bar"><span>Interactive process map · Steps 01–07</span><a href="./process-map/" target="_blank" rel="noopener">Open full screen ↗</a></div>
-              <iframe class="uranium-map-frame" src="./process-map/?embed=dossier&amp;v=framed-map-38" title="The Uranium Route interactive process map" loading="lazy" allowfullscreen></iframe>
-            </div>
-          </section>
-
-          <section class="process-ledger" aria-labelledby="process-ledger-title">
-            <header class="process-ledger-header" data-reveal>
-              <h4 id="process-ledger-title">The process.</h4>
-              <p>The map and list follow the same material route—from extraction to refining, reduction, recovery, rod production, and the designated federal waste destination.</p>
-            </header>
-            <ol class="process-ledger-list">
-              <li class="process-ledger-step" data-reveal>
-                <div class="process-ledger-meta"><span class="process-ledger-number">01</span><h5 class="process-ledger-title">Shinkolobwe mine</h5><span class="process-ledger-location">Katanga, Belgian Congo · now the Democratic Republic of the Congo</span></div>
-                <div class="process-ledger-copy"><p>Extremely high-grade pitchblende was mined at Shinkolobwe before entering the wartime uranium supply chain. The ore traveled from Central Africa to North America, where its uranium moved through a network of refineries and metal plants.</p><div class="process-ledger-links"><a href="./process-map/" target="_blank" rel="noopener">Follow the route from the mine →</a></div></div>
-              </li>
-              <li class="process-ledger-step" data-reveal>
-                <div class="process-ledger-meta"><span class="process-ledger-number">02</span><h5 class="process-ledger-title">Linde Air Products</h5><span class="process-ledger-location">Tonawanda, New York · Union Carbide</span></div>
-                <div class="process-ledger-copy"><p>Linde refined uranium ore into oxides and then uranium tetrafluoride—UF₄, the green, salt-like powder known as <em>“green salt.”</em> That material was shipped by rail to Electromet in Niagara Falls.</p><div class="process-ledger-links"><a href="./rebuild.html?archive=Linde#evidence" target="_blank" rel="noopener">View Linde archive →</a><a href="./rebuild.html#map" target="_blank" rel="noopener">Locate Linde →</a></div></div>
-              </li>
-              <li class="process-ledger-step" data-reveal>
-                <div class="process-ledger-meta"><span class="process-ledger-number">03</span><h5 class="process-ledger-title">Electromet</h5><span class="process-ledger-location">Niagara Falls, New York · Union Carbide</span></div>
-                <div class="process-ledger-copy"><p>Electromet mixed green salt with magnesium inside dolomite-lined steel vessels. A thermite reaction separated uranium from magnesium-fluoride residue, producing uranium metal and leaving uranium-bearing C-1 and C-2 slag.</p><div class="process-ledger-links"><a href="./rebuild.html?archive=Electromet#evidence" target="_blank" rel="noopener">View Electromet archive →</a><a href="./rebuild.html#map" target="_blank" rel="noopener">Locate Electromet →</a></div></div>
-              </li>
-              <li class="process-ledger-step" data-reveal>
-                <div class="process-ledger-meta"><span class="process-ledger-number">04</span><h5 class="process-ledger-title">Hooker Chemical</h5><span class="process-ledger-location">Niagara Falls, New York</span></div>
-                <div class="process-ledger-copy"><p>Hooker treated C-2 slag from Electromet to recover uranium that remained in the residue. The recovered concentrate was shipped back to Linde, where it reentered the refining cycle.</p><div class="process-ledger-links"><a href="./rebuild.html?archive=Hooker#evidence" target="_blank" rel="noopener">View Hooker archive →</a><a href="./rebuild.html#map" target="_blank" rel="noopener">Locate Hooker →</a></div></div>
-              </li>
-              <li class="process-ledger-step" data-reveal>
-                <div class="process-ledger-meta"><span class="process-ledger-number">05</span><h5 class="process-ledger-title">Simonds Saw and Steel</h5><span class="process-ledger-location">Lockport, New York · later Guterl Specialty Steel</span></div>
-                <div class="process-ledger-copy"><p>Simonds heated uranium-metal billets and rolled them into long rods from 1948 through 1956. The Lockport plant became the program’s principal uranium-rod manufacturer.</p><div class="process-ledger-links"><a href="./rebuild.html?archive=Steel#evidence" target="_blank" rel="noopener">View steel-mill archive →</a><a href="./rebuild.html#map" target="_blank" rel="noopener">Locate Simonds →</a></div></div>
-              </li>
-              <li class="process-ledger-step" data-reveal>
-                <div class="process-ledger-meta"><span class="process-ledger-number">06</span><h5 class="process-ledger-title">Bliss &amp; Laughlin Steel</h5><span class="process-ledger-location">110 Hopkins Street · Buffalo, New York</span></div>
-                <div class="process-ledger-copy"><p>Bliss &amp; Laughlin machined, straightened, and finished uranium rods in Buffalo before the material continued through the federal production system.</p><div class="process-ledger-links"><a href="./rebuild.html?archive=Steel#evidence" target="_blank" rel="noopener">View steel-mill archive →</a><a href="./rebuild.html#map" target="_blank" rel="noopener">Locate Bliss &amp; Laughlin →</a></div></div>
-              </li>
-              <li class="process-ledger-step" data-reveal>
-                <div class="process-ledger-meta"><span class="process-ledger-number">07</span><h5 class="process-ledger-title">Lake Ontario Ordnance Works</h5><span class="process-ledger-location">Lewiston and Porter, New York</span></div>
-                <div class="process-ledger-copy"><p>Beginning in 1944, LOOW became the designated federal destination for radioactive residues from Western New York’s uranium-production network. Material was brought there for storage, repackaging, burial, and disposal—although not all of the region’s waste ever reached the site.</p><div class="process-ledger-links"><a href="./rebuild.html?archive=LOOW#evidence" target="_blank" rel="noopener">View LOOW archive →</a><a href="./rebuild.html#map" target="_blank" rel="noopener">Locate LOOW →</a></div></div>
-              </li>
-            </ol>
-          </section>
         </section>
 
         <section class="chapter" id="love-canal" data-chapter>
@@ -685,17 +578,6 @@
             <figure class="survey-map"><img src="./archive/ornl-1986-survey-maps.webp" alt="Pages from the 1986 Oak Ridge mobile gamma survey maps" loading="lazy" /><figcaption>ORNL/TM-10076 · Mobile gamma survey of Niagara Falls</figcaption></figure>
           </section>
 
-          <section class="later-findings">
-            <header data-reveal><span class="evidence-label">After the 1986 report</span><h4>Excavation kept reopening the record.</h4><p>The Oak Ridge work mapped selected suspected hotspots; it was not a complete ground-level survey of the metropolitan area. As streets, parks, and construction sites were opened, additional radiological material continued to appear outside the earlier cleanup accounting.</p></header>
-            <div class="finding-ledger" aria-label="Radiological findings after the Oak Ridge survey">
-              <article class="finding-row" data-reveal><time>2015</time><strong>Robert Moses Parkway</strong><p>A radiological survey measured readings exceeding 80 µR/h near the Aquarium of Niagara and Park Police facilities.</p></article>
-              <article class="finding-row" data-reveal><time>2015</time><strong>Whirlpool Bridge exit</strong><p>A separate reading near the exit area reached 2,750 µR/h, showing how sharply a localized hotspot could rise above its surroundings.</p></article>
-              <article class="finding-row" data-reveal><time>2021</time><strong>Niagara Falls State Park</strong><p>Radioactive gravel was documented near the park entrance as construction and screening disturbed material beneath a heavily used public landscape.</p></article>
-              <article class="finding-row" data-reveal><time>2022</time><strong>Donovan Head Start</strong><p>Low-level radiological material found in construction waste and soil debris at the Main Street preschool triggered state referral and an EPA assessment.</p></article>
-            </div>
-            <div class="resource-row"><a href="./rebuild.html?archive=Robert%20Moses%20Parkway#evidence"><span>Archive query</span><strong>Parkway records →</strong></a><a href="https://www.epa.gov/system/files/documents/2023-06/Donovan%20head%20start%20community%20update%20Fact%20Sheet%20June%202023_0.pdf" target="_blank" rel="noopener"><span>EPA · 2023</span><strong>Donovan fact sheet ↗</strong></a></div>
-          </section>
-
           <section class="factory-ledger">
             <header data-reveal><span class="evidence-label">The record widens</span><h4>The factory list kept growing.</h4><p><em>The Federal Connection</em> revealed a system, but it was not a complete inventory. Later worker-exposure records, radiological surveys of former factory properties, and brownfield files added other facilities and changing company names to the archive.</p></header>
             <div class="factory-list" aria-label="Additional facilities in later records">
@@ -761,17 +643,6 @@
               <div><strong>800+</strong><small>linked source records and counting</small></div>
               <div><h4>The research became a public resource.</h4><p>The official record never became a complete public accounting. The project’s Archive of Evidence brings scattered source files into one searchable collection. The Interactive Map connects them to factories, disposal areas, roads, waterways, homes, schools, and public spaces.</p><p>It does not assign every radioactive finding to one source. It shows why no single survey, agency, cleanup program, or industrial history can explain the whole landscape.</p><div class="public-actions"><a href="./rebuild.html#evidence"><span>Archive of Evidence</span><strong>Read the records →</strong></a><a href="./rebuild.html#map"><span>Interactive Map</span><strong>Follow the geography →</strong></a></div></div>
             </div>
-          </section>
-
-          <section class="upper-case" aria-labelledby="upper-case-title">
-            <header class="upper-case-header" data-reveal><h4 id="upper-case-title">One driveway. Four decades.</h4><p>Upper Mountain Road shows why making the record public matters. A location measured in the first federal survey cycle remained outside the federal cleanup program until later investigations returned to it.</p></header>
-            <div class="upper-timeline">
-              <article data-reveal><time>1978</time><h5>Aerial anomaly</h5><p>The Department of Energy’s aerial survey recorded elevated radiation in the Upper Mountain Road area.</p></article>
-              <article data-reveal><time>1984–1985</time><h5>Ground measurement</h5><p>Oak Ridge’s vehicle survey and onsite follow-up measured the driveway anomaly but associated it with industrial slag rather than NFSS.</p></article>
-              <article data-reveal><time>2020</time><h5>Road + culvert</h5><p>EPA removed contaminated material from a culvert and portions of the gravel access road, then replaced it with clean fill.</p></article>
-              <article data-reveal><time>2021–2023</time><h5>Two homes</h5><p>EPA excavated radioactive soil beneath basement areas and yards at two adjacent residences. Both families were temporarily relocated.</p></article>
-            </div>
-            <div class="upper-accounting" data-reveal><strong>62</strong><div><h5>How many properties like Upper Mountain Road were ultimately cleaned?</h5><p>No agency has published a property-by-property reconciliation of Oak Ridge’s 62 industrial-slag driveway anomalies with every later investigation and cleanup. EPA’s current completed-site list documents work at four residences—two on Upper Mountain Road and two beside Holy Trinity Cemetery—plus the Upper Mountain Road access road and separate commercial or public properties. That is evidence of later cleanup, but it is not a complete answer for all 62 locations.</p><div class="micro-links"><a href="./rebuild.html?archive=radiological%20survey#evidence">Search the 1985 survey archive →</a><a href="./rebuild.html#map">Trace Upper Mountain Road →</a></div></div></div>
           </section>
 
           <section class="survey-now">
