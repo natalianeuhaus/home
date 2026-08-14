@@ -60,37 +60,52 @@
     .waterfalls-record { height:calc(100svh - var(--top)); min-height:640px; position:relative; overflow:hidden; background:var(--paper); border-bottom:1px solid var(--line); }
     .waterfalls-track { width:100%; height:100%; display:flex; overflow-x:auto; overflow-y:hidden; overscroll-behavior-inline:contain; scroll-snap-type:x mandatory; scrollbar-width:none; }
     .waterfalls-track::-webkit-scrollbar { display:none; }
-    .waterfalls-slide { flex:0 0 100%; width:100%; height:100%; position:relative; display:grid; place-items:center; padding:clamp(42px,6vw,90px); scroll-snap-align:start; scroll-snap-stop:always; }
-    .waterfalls-inner { width:min(1440px,100%); display:grid; grid-template-columns:minmax(230px,.55fr) minmax(520px,1.45fr); gap:clamp(54px,10vw,160px); align-items:center; transform:translateY(-73px); }
-    [data-waterfalls-section="3"] .waterfalls-inner { column-gap:clamp(120px,15vw,260px); }
+    .waterfalls-slide { flex:0 0 100%; width:100%; height:100%; position:relative; display:grid; place-items:center; padding:clamp(38px,4.8vw,70px); padding-bottom:clamp(78px,8svh,104px); scroll-snap-align:start; scroll-snap-stop:always; }
+    .waterfalls-inner { width:min(1440px,100%); display:grid; grid-template-columns:minmax(230px,.55fr) minmax(520px,1.45fr); gap:clamp(54px,10vw,160px); align-items:center; }
+    [data-waterfalls-section="3"] .waterfalls-inner { column-gap:clamp(150px,17vw,320px); }
     .waterfalls-meta { position:relative; z-index:3; }
     .eyebrow,.chapter-id,.evidence-label { display:block; color:var(--red); font:700 9px/1.35 var(--sans); letter-spacing:.18em; text-transform:uppercase; }
     .waterfalls-year { display:block; margin-top:8px; color:var(--muted); font:10px/1 var(--sans); letter-spacing:.15em; text-transform:uppercase; }
     .waterfalls-meta h2 { margin:18px 0 0; max-width:500px; font-size:clamp(44px,5.5vw,88px); font-weight:400; line-height:.88; letter-spacing:-.055em; }
-    .waterfalls-copy { max-width:820px; font-size:clamp(18px,1.45vw,24px); line-height:1.48; }
+    .waterfalls-copy { max-width:900px; font-size:clamp(18px,1.35vw,23px); line-height:1.47; letter-spacing:-.012em; }
     .waterfalls-copy p { margin:0; }
-    .waterfalls-copy p + p { margin-top:1.15em; }
-    .waterfalls-frame { height:min(68svh,690px); min-height:380px; position:relative; margin:0; overflow:hidden; background:#ccc9c2; border:1px solid var(--line); }
+    .waterfalls-copy p + p { margin-top:1.2em; }
+    .waterfalls-frame { height:min(66svh,640px); min-height:360px; position:relative; margin:0; overflow:hidden; background:#ccc9c2; border:1px solid var(--line); }
     .waterfalls-frame img { width:100%; height:100%; display:block; object-fit:cover; filter:grayscale(.2); }
-    [data-waterfalls-section="7"] .waterfalls-inner { column-gap:clamp(90px,11vw,190px); }
-    [data-waterfalls-section="7"] .waterfalls-meta h2 { max-width:100%; font-size:clamp(46px,4.5vw,70px); line-height:.9; }
-    [data-waterfalls-section="7"] .waterfalls-frame { height:auto; min-height:0; aspect-ratio:2048 / 651; background:#151515; }
-    [data-waterfalls-section="7"] .waterfalls-frame img { object-fit:contain; }
     .waterfalls-frame figcaption { position:absolute; left:0; right:0; bottom:0; padding:11px 14px; color:rgba(255,255,255,.82); background:linear-gradient(transparent,rgba(0,0,0,.72)); font:8px/1.4 var(--sans); letter-spacing:.12em; text-transform:uppercase; }
     .factory-parent,.factory-location { margin:14px 0 0; color:var(--muted); font:9px/1.35 var(--sans); letter-spacing:.13em; text-transform:uppercase; }
     .factory-location { margin-top:5px; color:var(--red); }
     .micro-links { margin-top:20px; display:flex; flex-wrap:wrap; gap:6px 16px; }
     .micro-links a { color:var(--muted); font:700 8px/1.35 var(--sans); letter-spacing:.1em; text-transform:uppercase; }
     .micro-links a:hover { color:var(--red); }
-    .waterfalls-control { appearance:none; width:54px; height:54px; position:absolute; z-index:8; bottom:70px; display:grid; place-items:center; border:1px solid var(--line); color:var(--ink); background:rgba(242,240,233,.92); cursor:pointer; transition:.2s ease; }
-    .waterfalls-control:hover,.waterfalls-control:focus-visible { color:var(--paper); background:var(--red); border-color:var(--red); }
-    .waterfalls-prev { left:calc(50% - 62px); opacity:0; pointer-events:none; }
+
+    .waterfalls-slide--carborundum { position:relative; overflow:visible; }
+    .waterfalls-slide--carborundum .waterfalls-inner { width:min(1220px,100%); height:100%; position:relative; display:block; }
+    .waterfalls-slide--carborundum .waterfalls-meta { width:34%; position:absolute; z-index:7; left:0; top:50%; transform:translateY(-50%); }
+    .waterfalls-slide--carborundum .waterfalls-meta h2 { max-width:none; white-space:nowrap; font-size:clamp(36px,5.5vw,68px); }
+    .waterfalls-slide--carborundum .waterfalls-frame { width:clamp(1132px,207.68svh,2013px); max-width:none; height:clamp(360px,66svh,640px); min-height:0; position:absolute; left:34%; top:50%; transform:translateY(-50%); overflow:visible; background:#092330; }
+    .waterfalls-slide--carborundum .waterfalls-frame img { width:100%; max-width:none; height:100%; object-fit:cover; }
+    .waterfalls-panorama-tail { flex:0 0 var(--carborundum-tail,0px); width:var(--carborundum-tail,0px); height:100%; position:relative; z-index:1; scroll-snap-align:end; scroll-snap-stop:always; pointer-events:none; background:transparent; }
+
+    .waterfalls-control { appearance:none; width:64px; height:42px; position:absolute; z-index:8; bottom:24px; padding:0; border:0; color:rgba(18,20,17,.58); background:transparent; cursor:pointer; font-size:0; transition:color .22s ease,opacity .25s ease,transform .25s ease; }
+    .waterfalls-prev { left:42%; opacity:0; pointer-events:none; }
+    .waterfalls-next { left:58%; }
+    .waterfalls-control::before { content:""; position:absolute; top:50%; width:44px; height:1px; background:currentColor; }
+    .waterfalls-prev::before { right:8px; }
+    .waterfalls-next::before { left:8px; }
+    .waterfalls-control::after { content:""; position:absolute; top:calc(50% - 4px); width:8px; height:8px; }
+    .waterfalls-prev::after { left:11px; border-top:1px solid currentColor; border-left:1px solid currentColor; transform:rotate(-45deg); }
+    .waterfalls-next::after { right:11px; border-top:1px solid currentColor; border-right:1px solid currentColor; transform:rotate(45deg); }
+    .waterfalls-prev:hover,.waterfalls-prev:focus-visible { color:var(--red); transform:translateX(-5px); }
+    .waterfalls-next:hover,.waterfalls-next:focus-visible { color:var(--red); transform:translateX(5px); }
     .waterfalls-prev.is-visible { opacity:1; pointer-events:auto; }
-    .waterfalls-next { left:calc(50% + 8px); }
-    .waterfalls-next:disabled { opacity:.2; pointer-events:none; }
-    .waterfalls-progress { position:absolute; z-index:8; right:24px; bottom:70px; display:flex; margin:0; padding:0; list-style:none; }
-    .waterfalls-progress button { appearance:none; width:40px; height:42px; padding:0; border:0; color:var(--muted); background:transparent; cursor:pointer; font:9px/1 var(--sans); letter-spacing:.08em; }
-    .waterfalls-progress .is-current button { color:var(--red); border-top:2px solid var(--red); }
+    .waterfalls-next:disabled { opacity:.18; cursor:default; pointer-events:none; transform:none; }
+
+    .waterfalls-progress { position:absolute; z-index:8; right:clamp(28px,4vw,58px); bottom:15px; display:flex; gap:3px; margin:0; padding:0; list-style:none; }
+    .waterfalls-progress li { transition:transform .25s ease; }
+    .waterfalls-progress button { appearance:none; min-width:43px; min-height:42px; display:grid; place-items:center; padding:0; border:0; color:rgba(18,20,17,.42); background:transparent; cursor:pointer; font:11px/1 var(--sans); letter-spacing:.09em; transition:color .25s ease; }
+    .waterfalls-progress button:hover,.waterfalls-progress button:focus-visible,.waterfalls-progress li.is-current button { color:var(--red); }
+    .waterfalls-progress li.is-current { transform:translateY(-3px); }
 
     .dossier { display:grid; grid-template-columns:var(--rail) minmax(0,1fr); align-items:start; }
     .case-index { height:calc(100svh - var(--top)); position:sticky; z-index:20; top:var(--top); display:flex; flex-direction:column; background:var(--paper); border-right:1px solid var(--line); }
@@ -450,12 +465,13 @@
           </div>
         </article>
 
-        <article class="waterfalls-slide" data-waterfalls-section="7">
+        <article class="waterfalls-slide waterfalls-slide--carborundum" data-waterfalls-section="7">
           <div class="waterfalls-inner">
             <header class="waterfalls-meta"><span class="eyebrow">Industrial record</span><span class="waterfalls-year">Before 1942</span><h2>Carborundum</h2><p class="factory-location">Niagara Falls</p><div class="micro-links"><a href="./rebuild.html?archive=Carborundum#evidence">Search Carborundum records →</a><a href="./rebuild.html#map">Open map →</a></div></header>
             <figure class="waterfalls-frame"><img src="./archive/carborundum-company-niagara-falls.jpg" alt="Historical panorama of the Carborundum Company plant" loading="lazy" /><figcaption>The Carborundum Company · Niagara Falls, New York</figcaption></figure>
           </div>
         </article>
+        <div class="waterfalls-panorama-tail" aria-hidden="true"></div>
       </div>
       <button class="waterfalls-control waterfalls-prev" type="button" aria-label="Previous waterfall section">←</button>
       <button class="waterfalls-control waterfalls-next" type="button" aria-label="Next waterfall section">→</button>
@@ -700,7 +716,20 @@
         const dots = [...document.querySelectorAll('[data-waterfalls-target]')];
         const previous = document.querySelector('.waterfalls-prev');
         const next = document.querySelector('.waterfalls-next');
+        const carborundumSlide = track.querySelector('.waterfalls-slide--carborundum');
+        const carborundumFrame = carborundumSlide && carborundumSlide.querySelector('.waterfalls-frame');
+        const carborundumTail = track.querySelector('.waterfalls-panorama-tail');
         let frame = 0;
+
+        const layoutCarborundumSpread = () => {
+          if (!carborundumSlide || !carborundumFrame || !carborundumTail) return;
+          carborundumTail.style.setProperty('--carborundum-tail','0px');
+          const slideRect = carborundumSlide.getBoundingClientRect();
+          const frameRect = carborundumFrame.getBoundingClientRect();
+          const spill = Math.max(0,Math.ceil(frameRect.right - slideRect.right));
+          carborundumTail.style.setProperty('--carborundum-tail',spill + 'px');
+        };
+
         const currentIndex = () => Math.max(0,Math.min(slides.length - 1,Math.round(track.scrollLeft / Math.max(1,track.clientWidth))));
         const update = () => {
           frame = 0;
@@ -711,9 +740,22 @@
             else dot.removeAttribute('aria-current');
           });
           previous.classList.toggle('is-visible',index > 0);
-          next.disabled = index === slides.length - 1;
+          const trackEnd = Math.max(0,track.scrollWidth - track.clientWidth);
+          next.disabled = track.scrollLeft >= trackEnd - 2;
         };
-        const move = amount => track.scrollTo({left:(currentIndex() + amount) * track.clientWidth,behavior:'smooth'});
+
+        const move = direction => {
+          const lastSlideStart = (slides.length - 1) * track.clientWidth;
+          const trackEnd = Math.max(0,track.scrollWidth - track.clientWidth);
+          if (direction > 0 && track.scrollLeft >= lastSlideStart - 2) {
+            track.scrollTo({left:trackEnd,behavior:'smooth'});
+          } else if (direction < 0 && track.scrollLeft > lastSlideStart + 2) {
+            track.scrollTo({left:lastSlideStart,behavior:'smooth'});
+          } else {
+            track.scrollBy({left:direction * track.clientWidth,behavior:'smooth'});
+          }
+        };
+
         previous.addEventListener('click',() => move(-1));
         next.addEventListener('click',() => move(1));
         dots.forEach(dot => dot.addEventListener('click',() => track.scrollTo({left:Number(dot.dataset.waterfallsTarget) * track.clientWidth,behavior:'smooth'})));
@@ -723,8 +765,14 @@
           event.preventDefault();
           move(event.key === 'ArrowRight' ? 1 : -1);
         });
-        window.addEventListener('resize',update);
+        layoutCarborundumSpread();
         update();
+        window.addEventListener('resize',() => {
+          requestAnimationFrame(() => {
+            layoutCarborundumSpread();
+            update();
+          });
+        });
       }
 
       const toggle = document.querySelector('.index-toggle');
