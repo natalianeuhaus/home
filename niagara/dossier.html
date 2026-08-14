@@ -61,7 +61,7 @@
     .waterfalls-track { width:100%; height:100%; display:flex; overflow-x:auto; overflow-y:hidden; overscroll-behavior-inline:contain; scroll-snap-type:x mandatory; scrollbar-width:none; }
     .waterfalls-track::-webkit-scrollbar { display:none; }
     .waterfalls-slide { flex:0 0 100%; width:100%; height:100%; position:relative; display:grid; place-items:center; padding:clamp(42px,6vw,90px); scroll-snap-align:start; scroll-snap-stop:always; }
-    .waterfalls-inner { width:min(1440px,100%); display:grid; grid-template-columns:minmax(230px,.55fr) minmax(520px,1.45fr); gap:clamp(54px,10vw,160px); align-items:center; transform:translateY(-114px); }
+    .waterfalls-inner { width:min(1440px,100%); display:grid; grid-template-columns:minmax(230px,.55fr) minmax(520px,1.45fr); gap:clamp(54px,10vw,160px); align-items:center; transform:translateY(-73px); }
     .waterfalls-meta { position:relative; z-index:3; }
     .eyebrow,.chapter-id,.evidence-label { display:block; color:var(--red); font:700 9px/1.35 var(--sans); letter-spacing:.18em; text-transform:uppercase; }
     .waterfalls-year { display:block; margin-top:8px; color:var(--muted); font:10px/1 var(--sans); letter-spacing:.15em; text-transform:uppercase; }
@@ -72,19 +72,23 @@
     .waterfalls-copy p + p { margin-top:1.15em; }
     .waterfalls-frame { height:min(68svh,690px); min-height:380px; position:relative; margin:0; overflow:hidden; background:#ccc9c2; border:1px solid var(--line); }
     .waterfalls-frame img { width:100%; height:100%; display:block; object-fit:cover; filter:grayscale(.2); }
+    [data-waterfalls-section="7"] .waterfalls-inner { column-gap:clamp(90px,11vw,190px); }
+    [data-waterfalls-section="7"] .waterfalls-meta h2 { max-width:100%; font-size:clamp(46px,4.5vw,70px); line-height:.9; }
+    [data-waterfalls-section="7"] .waterfalls-frame { height:auto; min-height:0; aspect-ratio:2048 / 651; background:#151515; }
+    [data-waterfalls-section="7"] .waterfalls-frame img { object-fit:contain; }
     .waterfalls-frame figcaption { position:absolute; left:0; right:0; bottom:0; padding:11px 14px; color:rgba(255,255,255,.82); background:linear-gradient(transparent,rgba(0,0,0,.72)); font:8px/1.4 var(--sans); letter-spacing:.12em; text-transform:uppercase; }
     .factory-parent,.factory-location { margin:14px 0 0; color:var(--muted); font:9px/1.35 var(--sans); letter-spacing:.13em; text-transform:uppercase; }
     .factory-location { margin-top:5px; color:var(--red); }
     .micro-links { margin-top:20px; display:flex; flex-wrap:wrap; gap:6px 16px; }
     .micro-links a { color:var(--muted); font:700 8px/1.35 var(--sans); letter-spacing:.1em; text-transform:uppercase; }
     .micro-links a:hover { color:var(--red); }
-    .waterfalls-control { appearance:none; width:54px; height:54px; position:absolute; z-index:8; bottom:90px; display:grid; place-items:center; border:1px solid var(--line); color:var(--ink); background:rgba(242,240,233,.92); cursor:pointer; transition:.2s ease; }
+    .waterfalls-control { appearance:none; width:54px; height:54px; position:absolute; z-index:8; bottom:70px; display:grid; place-items:center; border:1px solid var(--line); color:var(--ink); background:rgba(242,240,233,.92); cursor:pointer; transition:.2s ease; }
     .waterfalls-control:hover,.waterfalls-control:focus-visible { color:var(--paper); background:var(--red); border-color:var(--red); }
     .waterfalls-prev { left:calc(50% - 62px); opacity:0; pointer-events:none; }
     .waterfalls-prev.is-visible { opacity:1; pointer-events:auto; }
     .waterfalls-next { left:calc(50% + 8px); }
     .waterfalls-next:disabled { opacity:.2; pointer-events:none; }
-    .waterfalls-progress { position:absolute; z-index:8; right:24px; bottom:90px; display:flex; margin:0; padding:0; list-style:none; }
+    .waterfalls-progress { position:absolute; z-index:8; right:24px; bottom:70px; display:flex; margin:0; padding:0; list-style:none; }
     .waterfalls-progress button { appearance:none; width:40px; height:42px; padding:0; border:0; color:var(--muted); background:transparent; cursor:pointer; font:9px/1 var(--sans); letter-spacing:.08em; }
     .waterfalls-progress .is-current button { color:var(--red); border-top:2px solid var(--red); }
 
