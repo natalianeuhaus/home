@@ -535,6 +535,23 @@
     .waste-research-links a:hover,.waste-research-links a:focus-visible { color:var(--niagara-paper); background:var(--niagara-red); }
     .waste-research-links span { color:inherit; opacity:.58; font:8px/1.3 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
     .waste-research-links strong { font:400 clamp(19px,1.7vw,26px)/1.08 Georgia,"Times New Roman",serif; letter-spacing:-.025em; }
+    .waste-chapter-followup--project-story { width:min(980px,100%); margin:clamp(96px,13svh,160px) 0 clamp(120px,16svh,190px); margin-left:0; transform:translateX(calc(-1 * (min(1540px,calc(100vw - 84px)) - 950px))); }
+    .waste-chapter-followup--project-story p { max-width:900px; margin:0 0 1.25em; color:rgba(21,23,21,.82); font-size:clamp(18px,1.35vw,23px); font-style:normal; line-height:1.5; letter-spacing:-.012em; }
+    .project-story-label { display:block; margin-bottom:24px; color:var(--niagara-red); font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.17em; text-transform:uppercase; }
+    .project-story-title { margin:0 0 clamp(42px,6svh,68px); max-width:850px; font:400 clamp(48px,5.7vw,84px)/.94 Georgia,"Times New Roman",serif; letter-spacing:-.052em; }
+    .project-story-origin { margin:0 0 clamp(48px,6svh,72px); padding:clamp(28px,4vw,48px) 0; border-top:1px solid var(--niagara-red); border-bottom:1px solid var(--niagara-red); }
+    .project-story-origin blockquote { margin:0; color:var(--niagara-ink); font:italic 400 clamp(35px,4.4vw,68px)/1 Georgia,"Times New Roman",serif; letter-spacing:-.045em; }
+    .project-story-origin figcaption { margin-top:18px; color:var(--niagara-red); font:9px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.14em; text-transform:uppercase; }
+    .project-story-subhead { margin:clamp(68px,9svh,110px) 0 28px; max-width:760px; font:400 clamp(36px,4.2vw,62px)/.98 Georgia,"Times New Roman",serif; letter-spacing:-.044em; }
+    .project-research-path { margin:clamp(48px,6svh,72px) 0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-top:1px solid rgba(21,23,21,.3); border-left:1px solid rgba(21,23,21,.3); }
+    .project-research-path article { min-height:260px; padding:clamp(25px,3vw,38px); border-right:1px solid rgba(21,23,21,.3); border-bottom:1px solid rgba(21,23,21,.3); }
+    .project-research-path span { display:block; margin-bottom:42px; color:var(--niagara-red); font:9px/1.35 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
+    .project-research-path h5 { margin:0 0 16px; font:400 clamp(23px,2.2vw,34px)/1 Georgia,"Times New Roman",serif; letter-spacing:-.035em; }
+    .waste-chapter-followup--project-story .project-research-path p { margin:0; color:rgba(21,23,21,.68); font:14px/1.55 Arial,Helvetica,sans-serif; letter-spacing:0; }
+    .project-current-record { margin:clamp(68px,9svh,110px) 0 0; padding:clamp(34px,4.5vw,56px); color:var(--niagara-paper); background:#101312; }
+    .project-current-record > span { display:block; margin-bottom:22px; color:rgba(241,240,234,.56); font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.16em; text-transform:uppercase; }
+    .project-current-record h5 { margin:0 0 28px; max-width:760px; font:400 clamp(31px,3.5vw,52px)/.98 Georgia,"Times New Roman",serif; letter-spacing:-.042em; }
+    .waste-chapter-followup--project-story .project-current-record p { margin:0 0 1.15em; color:rgba(241,240,234,.74); font:clamp(15px,1.1vw,18px)/1.55 Arial,Helvetica,sans-serif; letter-spacing:0; }
     .waste-record-expansion { width:100vw; min-height:calc(100svh - 66px); margin:clamp(84px,11svh,130px) 0 0; padding:clamp(76px,10svh,130px) clamp(42px,6.5vw,100px); display:flex; flex-direction:column; justify-content:center; background:#d8d5cd; border-top:1px solid var(--niagara-line); border-bottom:1px solid var(--niagara-line); }
     .waste-record-expansion-header { display:grid; grid-template-columns:minmax(180px,.35fr) minmax(520px,1.15fr); gap:clamp(54px,8vw,140px); align-items:start; }
     .waste-record-expansion-label { padding-top:9px; color:var(--niagara-red); font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.17em; text-transform:uppercase; }
@@ -608,6 +625,12 @@
     .union-carbide-chapter-marker .waste-era-survey-copy { width:42%; background:#101312; }
     .union-carbide-chapter-marker .waste-era-survey-copy .waste-era-copy h4 { max-width:560px; }
     .union-carbide-chapter-marker .waste-era-survey-map { width:auto; inset:0 0 0 42%; background:#d8d5cd; }
+    .project-archive-chapter-marker { margin-top:clamp(130px,18svh,220px); }
+    .project-archive-chapter-marker .waste-era-survey-copy { width:42%; background:var(--niagara-red); }
+    .project-archive-chapter-marker .waste-era-survey-copy .waste-era-copy h4 { max-width:600px; }
+    .project-archive-chapter-marker .waste-era-survey-map { width:auto; inset:0 0 0 42%; background:#101312; }
+    .project-archive-chapter-marker .waste-era-survey-map::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(16,19,18,.25),transparent 38%),linear-gradient(0deg,rgba(16,19,18,.42),transparent 42%); pointer-events:none; }
+    .project-archive-chapter-marker .waste-era-survey-map img { object-fit:cover; object-position:center; filter:grayscale(1) contrast(1.08); }
     .union-carbide-aerial-placeholder { width:100%; height:100%; position:relative; display:grid; place-items:center; overflow:hidden; color:rgba(21,23,21,.5); background-color:#d8d5cd; background-image:linear-gradient(rgba(21,23,21,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(21,23,21,.08) 1px,transparent 1px); background-size:72px 72px; }
     .union-carbide-aerial-placeholder::before,.union-carbide-aerial-placeholder::after { content:""; position:absolute; background:rgba(68,8,6,.38); }
     .union-carbide-aerial-placeholder::before { width:1px; height:100%; left:50%; top:0; }
@@ -853,6 +876,9 @@
       .loow-chapter-marker .waste-era-survey-map img { opacity:1; transform:none; object-fit:contain; object-position:center; }
       .union-carbide-chapter-marker .waste-era-survey-copy { width:100%; min-height:52svh; background:#101312; }
       .union-carbide-chapter-marker .waste-era-survey-map { width:100%; min-height:58svh; inset:auto; background:#d8d5cd; }
+      .project-archive-chapter-marker .waste-era-survey-copy { width:100%; min-height:56svh; background:var(--niagara-red); }
+      .project-archive-chapter-marker .waste-era-survey-map { width:100%; min-height:58svh; inset:auto; background:#101312; }
+      .project-archive-chapter-marker .waste-era-survey-map img { opacity:1; object-fit:cover; }
       .loow-archive-followup { width:100vw; margin:0 0 0 -24px; padding:64px 24px 92px; }
       .loow-archive-followup img,.loow-archive-followup figcaption { width:100%; max-height:none; }
       .federal-record { width:calc(100vw - 48px); margin-left:0; }
@@ -889,6 +915,9 @@
       .telvock-article-links { grid-template-columns:1fr; }
       .waste-research-expansion { width:100%; margin:104px 0 124px; transform:none; }
       .waste-research-links { grid-template-columns:1fr; }
+      .waste-chapter-followup--project-story { width:100%; margin:84px 0 124px; transform:none; }
+      .project-research-path { grid-template-columns:1fr; }
+      .project-research-path article { min-height:0; }
       .waste-record-expansion { width:100vw; min-height:0; margin-top:76px; padding:64px 24px 78px; }
       .waste-record-expansion-header,.waste-record-grid { grid-template-columns:1fr; gap:20px; }
       .waste-record-grid { gap:0; }
@@ -1962,8 +1991,8 @@
               <section class="waste-era-marker waste-era-marker--survey-map union-carbide-chapter-marker" data-waste-era id="era-union-carbide" aria-labelledby="era-union-carbide-title">
                 <div class="waste-era-inner waste-era-inner--survey-map">
                   <div class="waste-era-survey-copy">
-                    <span class="waste-era-chapter">Chapter V</span>
-                    <p class="waste-era-year waste-era-year--range">1979–present</p>
+                    <span class="waste-era-chapter">The 1979 records</span>
+                    <p class="waste-era-year waste-era-year--range">1979</p>
                     <div class="waste-era-copy">
                       <span class="waste-era-kicker">The industrial trail</span>
                       <h4 id="era-union-carbide-title">The Union Carbide trail</h4>
@@ -1991,67 +2020,78 @@
                   <a href="https://www.investigativepost.org/2016/07/05/radioactive-hot-spots-pepper-niagara-county/" target="_blank" rel="noopener noreferrer"><span>2016 · Investigative Post</span><strong>Radioactive hot spots pepper Niagara County ↗</strong></a>
                   <a href="https://www.investigativepost.org/2017/02/09/paying-price-for-radioactive-hotspots-in-niagara/" target="_blank" rel="noopener noreferrer"><span>2017 · Investigative Post</span><strong>Paying price for radioactive hotspots in Niagara ↗</strong></a>
                 </div>
-                <section class="waste-research-expansion" aria-labelledby="waste-research-expansion-title">
-                  <span class="waste-research-expansion-label">The project archive</span>
-                  <h4 id="waste-research-expansion-title">The record did not end there.</h4>
-                  <p>Research for <em>Greetings from Niagara</em> brought together federal and state technical reports, cleanup files, property records, newspaper archives, and interviews that had remained scattered across agencies and decades. Read together, they revealed a geography larger than any single survey, cleanup program, or industrial site.</p>
-                  <p>The project’s Archive of Evidence makes those source records publicly accessible. The Interactive Map connects them to factories, disposal areas, roads, waterways, homes, and public spaces, showing how the same locations and waste routes reappear across time.</p>
-                  <div class="waste-research-conclusion">
-                    <span>What the record requires</span>
-                    <p>In Niagara Falls, no site developed or redeveloped after the 1940s should be presumed free of radioactive fill without testing. The same applies to roads, driveways, and sidewalks.</p>
-                  </div>
-                  <div class="waste-research-links" aria-label="Explore the project research">
-                    <a href="#evidence"><span>Archive of Evidence</span><strong>Read the records →</strong></a>
-                    <a href="#map"><span>Interactive Map</span><strong>Follow the geography →</strong></a>
-                  </div>
-                </section>
               </div>
 
-              <section class="waste-section" id="waste-ongoing">
-                <div class="waste-section-header">
-                  <span class="waste-year">2023–present</span>
-                  <h4>The investigation is widening</h4>
-                </div>
-                <div class="waste-section-copy">
-                  <p>DEC and EPA began an aerial radiological survey across Erie and Niagara Counties in 2023 and completed that phase in 2024. In July 2025, a sensor-equipped vehicle traveled selected roadways to collect ground-level data and identify areas for possible follow-up surveys and sampling.</p>
-                  <p>In 2026, the Niagara and Erie County Radiological Assessment expanded from regional scanning into property-level outreach and follow-up. The number of properties contacted rose rapidly—from roughly 120 in the initial round to approximately 1,000 by early August. Phase II also added roadways to the investigation, recognizing that contaminated fill may move through public infrastructure as well as private land.</p>
-                  <p>FEMA joined the field effort. EPA has not yet publicly released results for the public spaces included in the assessment, and additional findings are expected later in 2026 or in 2027. The geography of the fill—and the question of who remains exposed to it—is therefore not a closed chapter.</p>
-                </div>
-                <div class="waste-survey-timeline" aria-label="Recent radiological surveys and follow-up work">
-                  <article class="waste-survey-item"><time>2023–2024</time><p>An aircraft-based survey collected new regional data across Erie and Niagara Counties.</p></article>
-                  <article class="waste-survey-item"><time>2025</time><p>A vehicle equipped with radiological sensors traveled selected roadways to supplement the aerial record.</p></article>
-                  <article class="waste-survey-item"><time>2026</time><p>Outreach expanded to approximately 1,000 properties, roadways entered Phase II, and federal teams continued field investigation while public-space results remained unreleased.</p></article>
+              <section class="waste-era-marker waste-era-marker--survey-map project-archive-chapter-marker" data-waste-era id="era-project-archive" aria-labelledby="era-project-archive-title">
+                <div class="waste-era-inner waste-era-inner--survey-map">
+                  <div class="waste-era-survey-copy">
+                    <span class="waste-era-chapter">Chapter V</span>
+                    <p class="waste-era-year waste-era-year--range">2017–present</p>
+                    <div class="waste-era-copy">
+                      <span class="waste-era-kicker">An independent investigation</span>
+                      <h4 id="era-project-archive-title">Greetings from Niagara</h4>
+                      <h5>From photographs to a public archive</h5>
+                    </div>
+                  </div>
+                  <figure class="waste-era-survey-map">
+                    <img src="./archive/ornl-1986-survey-maps.webp" alt="Pages from the 1986 Oak Ridge National Laboratory mobile gamma survey of Niagara Falls" loading="lazy" decoding="async" />
+                    <figcaption><span>ORNL/TM-10076</span><span>Original survey found during the project’s archival research</span></figcaption>
+                  </figure>
                 </div>
               </section>
 
-              <p class="waste-coda">The investigation no longer pointed to one disposal route or one source. Radiological findings were surfacing at factories and brownfields across Niagara Falls—including throughout the Highland Avenue industrial district, where many sites had never appeared in <em>The Federal Connection</em>.</p>
+              <section class="waste-chapter-followup waste-chapter-followup--project-story" aria-labelledby="project-story-title">
+                <span class="project-story-label">How the project began · 2023</span>
+                <h4 class="project-story-title" id="project-story-title">A warning became an investigation.</h4>
+                <figure class="project-story-origin">
+                  <blockquote>“It’s polluted—very polluted.”</blockquote>
+                  <figcaption>Alex O’Malley · fourth-generation Niagara Falls resident</figcaption>
+                </figure>
+                <p><em>Greetings from Niagara</em> began independently in 2023, after Natalia Neuhaus spoke with her close friend Alex O’Malley about the place where O’Malley’s family had lived for four generations. The warning prompted Neuhaus to write her own 25-page report, <em>Cancer Town: Unveiling Niagara Falls’ Radioactive Secret</em>. That first report was how she began teaching herself Niagara’s industrial history, its role in the Manhattan Project, and the radioactive waste those industries left behind.</p>
+                <p>Neuhaus first photographed Niagara Falls from October 4 through October 7, 2023. The photographs recorded the tourist landscape, former factory districts, Love Canal, LOOW, and residents living beside places where federal surveys had measured elevated radiation. But the landscape could not answer the questions the photographs raised: what had been produced at each factory, where the waste had gone, which properties had been surveyed, and whether the people living or working there had ever been told.</p>
+                <p>At the Lewiston Public Library, Neuhaus found an original copy of Oak Ridge National Laboratory’s 1986 report on the mobile gamma survey of Niagara Falls. Its maps and tables connected radiation readings to roads, homes, businesses, and former industrial properties. The report became an entry point into a much larger record—not the conclusion of the investigation.</p>
 
-              <section class="waste-section" id="investigation-method">
-                <div class="waste-section-header">
-                  <span class="waste-year">Research method</span>
-                  <h4>How this investigation was built</h4>
+                <h5 class="project-story-subhead">The research expanded through records that had never been read together.</h5>
+                <div class="project-research-path" aria-label="Records used to build the Greetings from Niagara investigation">
+                  <article>
+                    <span>Worker records</span>
+                    <h5>NIOSH files</h5>
+                    <p>Dose-reconstruction reports and worker-exposure records identified additional factories, radioactive processes, materials, and periods of operation beyond the sites emphasized in <em>The Federal Connection</em>.</p>
+                  </article>
+                  <article>
+                    <span>Industrial geography</span>
+                    <h5>Sanborn maps</h5>
+                    <p>Fire-insurance maps, property records, and historical directories helped locate former plants, follow changing company names and boundaries, and connect factory grounds to the parcels that replaced them.</p>
+                  </article>
+                  <article>
+                    <span>Physical evidence</span>
+                    <h5>Surveys and brownfield files</h5>
+                    <p>Federal radiological surveys and later redevelopment files documented readings at former factories, roads, parking areas, and other sites where contaminated material remained or had been disturbed.</p>
+                  </article>
                 </div>
-                <div class="waste-section-copy">
-                  <p>This project brings together more than 800 linked government documents, radiological surveys, worker-exposure reconstructions, archival films, maps, newspaper records, academic research, and cleanup files. It continues the investigation opened by <em>The Federal Connection</em>, incorporating records that were unavailable—or difficult to locate—when the New York State Assembly published its report in 1981.</p>
-                  <p>The record does not support assigning every later radioactive finding to one source. Instead, it shows why no single survey, agency, cleanup program, or industrial history can explain the whole landscape.</p>
+
+                <p>The investigation continued through Department of Energy and Army Corps records, state and federal cleanup files, environmental easements, historical maps, archival films, court arguments, newspaper archives, public meetings, academic research, and interviews. Neuhaus reviewed thousands of documents and archival pages; more than 800 source records are now linked through the project.</p>
+                <p>Factories appeared under different owners and names. Large industrial properties were divided, sold, and redeveloped. One location could reappear across decades in a production record, a worker-exposure file, a radiological survey, a brownfield investigation, and a cleanup document—without any agency assembling those fragments into one history. Reconstructing the landscape required cross-referencing names, addresses, parcel boundaries, dates, survey readings, waste routes, and later land uses.</p>
+                <p>Telvock’s articles and the 1979 private-investigator reports became sources within this archive, but they were not the origin of the project. The investigation developed through Neuhaus’s own research, fieldwork, photography, and continuing process of learning how Niagara’s industrial and federal histories overlapped.</p>
+
+                <h5 class="project-story-subhead">The research became a public resource.</h5>
+                <p>The Archive of Evidence makes the underlying records accessible rather than asking each new researcher or resident to begin again. The Interactive Map reconnects those documents to factories, disposal areas, survey boundaries, roads, waterways, homes, schools, and public spaces. Together, they show where the same places and unresolved questions return across decades.</p>
+
+                <aside class="project-current-record" aria-labelledby="project-current-record-title">
+                  <span>The record is still changing</span>
+                  <h5 id="project-current-record-title">The official investigation reopened while the archive was being built.</h5>
+                  <p>DEC and EPA conducted a new regional aerial survey in 2023 and 2024, followed by a vehicle-based survey in 2025. In 2026, the Niagara and Erie County Radiological Assessment expanded into property-level outreach and added roadways to Phase II. <em>Greetings from Niagara</em> has continued to track those developments, preserve the new records, and compare them with the historical surveys.</p>
+                </aside>
+
+                <div class="waste-research-conclusion">
+                  <span>What the record requires</span>
+                  <p>In Niagara Falls, no site developed or redeveloped after the 1940s should be presumed free of radioactive fill without testing. The same applies to roads, driveways, and sidewalks.</p>
+                </div>
+                <div class="waste-research-links" aria-label="Explore the project research">
+                  <a href="#evidence"><span>Archive of Evidence</span><strong>Read the records →</strong></a>
+                  <a href="#map"><span>Interactive Map</span><strong>Follow the geography →</strong></a>
                 </div>
               </section>
-
-              <div class="waste-sources" aria-label="Sources for the Love Canal and radioactive waste chapter">
-                <span class="waste-sources-label">Selected sources</span>
-                <div class="waste-sources-list">
-                  <a href="https://www.health.ny.gov/environmental/investigations/love_canal/lcreport.htm" target="_blank" rel="noopener noreferrer">New York State · Love Canal special report</a>
-                  <a href="https://www.epa.gov/archive/epa/aboutepa/love-canal-tragedy.html" target="_blank" rel="noopener noreferrer">EPA · The Love Canal Tragedy</a>
-                  <a href="https://www.archives.nysed.gov/creator-authority/new-york-state-legislature-assembly-task-force-toxic" target="_blank" rel="noopener noreferrer">New York State Archives · Task Force history</a>
-                  <a href="https://natalianeuhaus.com/wp-content/uploads/2026/07/ORNL_1985_Niagara_Falls_Radiological_Survey_18050447.pdf" target="_blank" rel="noopener noreferrer">ORNL/TM-10076 · 1985 field survey</a>
-                  <a href="https://www.investigativepost.org/2016/07/05/radioactive-hot-spots-pepper-niagara-county/" target="_blank" rel="noopener noreferrer">Dan Telvock · Radioactive hot spots</a>
-                  <a href="https://www.investigativepost.org/2017/02/09/paying-price-for-radioactive-hotspots-in-niagara/" target="_blank" rel="noopener noreferrer">Dan Telvock · Private-investigator records</a>
-                  <a href="https://www.epa.gov/ny/niagara-county-radiation-removal-sites" target="_blank" rel="noopener noreferrer">EPA · Niagara County removal sites</a>
-                  <a href="https://dec.ny.gov/news/press-releases/2025/7/dec-and-us-epa-announce-july-7-start-of-vehicle-based-survey-of-erie-and-niagara-counties" target="_blank" rel="noopener noreferrer">DEC/EPA · 2025 regional survey</a>
-                  <a href="https://parks.ny.gov/documents/inside-our-agency/PublicDocuments/AmericanFallsBridgesProject/AmericanFallsBridgeDraftDesignReportAppendices.pdf" target="_blank" rel="noopener noreferrer">American Falls Bridges · environmental screening</a>
-                  <a href="https://www.epa.gov/archive/epapages/newsroom_archive/newsreleases/e3463177fa64c92985257173006802da.html" target="_blank" rel="noopener noreferrer">EPA · Highland and Buffalo Avenue brownfield corridors</a>
-                </div>
-              </div>
             </div>
           </div>
         </section>
