@@ -233,14 +233,14 @@
     .containment-diagram-viewer img { width:100%; max-height:calc(100svh - 136px); display:block; object-fit:contain; filter:invert(1); }
     .containment-diagram-viewer-close { appearance:none; position:absolute; z-index:2; top:8px; right:8px; width:42px; height:42px; border:0; border-radius:50%; color:rgba(21,23,21,.8); background:rgba(242,240,233,.88); cursor:pointer; font:22px/1 Arial,Helvetica,sans-serif; }
     .containment-diagram-viewer-close:hover,.containment-diagram-viewer-close:focus-visible { color:#fff; background:var(--red); }
-    .loow-federal-record { width:calc(100% - 84px); margin:clamp(90px,8vw,120px) 42px clamp(90px,10vw,140px); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
-    .loow-federal-record summary { min-height:132px; padding:31px 72px 30px 0; position:relative; cursor:pointer; list-style:none; }
+    .loow-federal-record { width:100%; margin:clamp(54px,4.5vw,78px) 0 0; border-top:1px solid rgba(21,23,21,.22); border-bottom:1px solid rgba(21,23,21,.22); }
+    .loow-federal-record summary { min-height:132px; padding:31px 58px 30px 0; position:relative; cursor:pointer; list-style:none; }
     .loow-federal-record summary::-webkit-details-marker { display:none; }
     .loow-federal-record summary::after { content:"+"; position:absolute; top:30px; right:4px; color:var(--ink); font:300 27px/1 var(--sans); }
     .loow-federal-record[open] summary::after { content:"−"; }
     .loow-federal-record-label { display:block; color:var(--red); font:700 9px/1 var(--sans); letter-spacing:.15em; text-transform:uppercase; }
     .loow-federal-record strong { display:block; margin-top:16px; font-size:clamp(31px,3vw,50px); font-weight:400; line-height:1; letter-spacing:-.04em; }
-    .loow-federal-record-copy { max-width:1050px; padding:0 72px 38px 0; color:var(--copy-ink); font-size:clamp(17px,1.35vw,22px); line-height:1.5; }
+    .loow-federal-record-copy { max-width:820px; padding:0 58px 38px 0; color:var(--copy-ink); font-size:clamp(16px,1.2vw,20px); line-height:1.5; }
     .loow-federal-record-copy p { margin:0; }
     .loow-federal-record-copy a { color:inherit; text-decoration-line:underline; text-decoration-thickness:1px; text-underline-offset:.16em; }
 
@@ -400,7 +400,7 @@
       .loow-film .atomic-process-reference-media { min-height:420px; }
       .containment-copy { padding-top:48px; }
       .containment-media { min-height:0; padding:34px 22px; border-left:0; border-top:1px solid var(--line); }
-      .loow-federal-record { width:calc(100% - 44px); margin-left:22px; margin-right:22px; }
+      .loow-federal-record { width:100%; margin:36px 0 0; }
       .loow-federal-record summary { padding-right:52px; }
       .loow-federal-record-copy { padding-right:30px; }
       .telvock figure { position:relative; top:auto; }
@@ -1127,7 +1127,13 @@
 
           <div class="containment">
             <div class="containment-copy" data-reveal><h4>An “interim” structure</h4><p>“Interim” matters. The containment structure was given an anticipated 25-year life, carrying it only to about 2011. In 2026, it remains in use—approximately 15 years beyond that original horizon. Its compacted-clay cover is intended to limit water infiltration and slow contaminant migration, while drainage ditches carry surface water away from the containment area.</p></div>
-            <figure class="containment-media"><button class="containment-diagram-open" type="button" data-containment-diagram-open aria-label="Enlarge the conceptual cross-section of the NFSS interim waste containment structure"><img src="./archive/nfss-iwcs-conceptual-design.jpg" alt="Conceptual cross-section of the NFSS interim waste containment structure" loading="lazy" /></button></figure>
+            <figure class="containment-media">
+              <button class="containment-diagram-open" type="button" data-containment-diagram-open aria-label="Enlarge the conceptual cross-section of the NFSS interim waste containment structure"><img src="./archive/nfss-iwcs-conceptual-design.jpg" alt="Conceptual cross-section of the NFSS interim waste containment structure" loading="lazy" /></button>
+              <details class="loow-federal-record">
+                <summary><span class="loow-federal-record-label">Federal responsibility</span><strong>Why is the Army Corps responsible?</strong></summary>
+                <div class="loow-federal-record-copy"><p>Responsibility for NFSS changed again in 1997, when Congress transferred <a href="https://www.usace.army.mil/Missions/Environmental/FUSRAP/" target="_blank" rel="noopener">FUSRAP</a> from the Department of Energy to the U.S. Army Corps of Engineers. Under that program, the Corps manages NFSS and eligible properties connected to former Manhattan Project and early Atomic Energy Commission work. It investigates the larger former LOOW property separately through the <a href="https://www.lrd.usace.army.mil/Missions/Projects/Article/3663181/lake-ontario-ordnance-works-loow/" target="_blank" rel="noopener">Formerly Used Defense Sites program</a> because LOOW was once military property. The Corps is therefore responsible for this work because Congress assigned it these two cleanup programs—not because LOOW remains an active military base. Those authorities do not extend to every contaminated site in Niagara.</p></div>
+              </details>
+            </figure>
           </div>
 
           <dialog class="containment-diagram-viewer" aria-label="Enlarged conceptual cross-section of the NFSS interim waste containment structure">
@@ -1135,10 +1141,6 @@
             <img src="./archive/nfss-iwcs-conceptual-design.jpg" alt="Conceptual cross-section of the NFSS interim waste containment structure" />
           </dialog>
 
-          <details class="loow-federal-record">
-            <summary><span class="loow-federal-record-label">Federal responsibility</span><strong>Why is the Army Corps responsible?</strong></summary>
-            <div class="loow-federal-record-copy"><p>Responsibility for NFSS changed again in 1997, when Congress transferred <a href="https://www.usace.army.mil/Missions/Environmental/FUSRAP/" target="_blank" rel="noopener">FUSRAP</a> from the Department of Energy to the U.S. Army Corps of Engineers. Under that program, the Corps manages NFSS and eligible properties connected to former Manhattan Project and early Atomic Energy Commission work. It investigates the larger former LOOW property separately through the <a href="https://www.lrd.usace.army.mil/Missions/Projects/Article/3663181/lake-ontario-ordnance-works-loow/" target="_blank" rel="noopener">Formerly Used Defense Sites program</a> because LOOW was once military property. The Corps is therefore responsible for this work because Congress assigned it these two cleanup programs—not because LOOW remains an active military base. Those authorities do not extend to every contaminated site in Niagara.</p></div>
-          </details>
         </section>
 
         <section class="chapter" id="surveys" data-chapter>
