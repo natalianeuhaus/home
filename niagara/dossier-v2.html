@@ -188,11 +188,14 @@
     .timeline-card p { margin:0; color:var(--muted); font:400 14px/1.5 var(--serif); }
     .timeline-card a { display:inline-block; margin-top:16px; color:var(--red); font:700 8px/1 var(--sans); letter-spacing:.1em; text-transform:uppercase; }
 
-    .love-slag-evidence { margin:40px 0 42px; }
-    .love-story .love-slag-evidence figure { margin:0 0 24px; }
-    .love-story .love-slag-evidence img { width:100%; height:auto; display:block; border:1px solid var(--line); filter:none; }
-    .love-story .love-slag-evidence p { margin:0; font-style:normal; }
-    .love-slag-evidence cite { display:block; margin-top:18px; color:var(--red); font:700 9px/1.35 var(--sans); font-style:normal; letter-spacing:.16em; text-transform:uppercase; }
+    .love-slag-evidence { grid-column:1/-1; margin:40px 0 42px; display:grid; grid-template-columns:minmax(420px,1.1fr) minmax(240px,.48fr); gap:clamp(50px,7vw,110px); align-items:start; }
+    .love-slag-evidence figure { margin:0; }
+    .love-slag-evidence img { width:100%; height:auto; display:block; border:1px solid var(--line); filter:none; }
+    .love-slag-evidence-copy { min-height:100%; position:relative; padding:0 0 40px 34px; border-left:1px solid var(--line); }
+    .love-slag-evidence-copy::before { content:""; width:7px; height:7px; position:absolute; left:-4px; top:0; background:var(--orange); }
+    .love-slag-evidence cite { display:block; margin:0 0 24px; color:var(--red); font:700 9px/1.35 var(--sans); font-style:normal; letter-spacing:.16em; text-transform:uppercase; }
+    .love-slag-evidence .love-slag-evidence-copy p { margin:0; color:var(--copy-ink); font:400 clamp(22px,2vw,28px)/1.42 var(--serif); font-style:normal; }
+    #love-canal .love-layout > .resource-row { grid-column:1; }
 
     .loow-plate { min-height:82svh; position:relative; display:grid; align-items:end; overflow:hidden; color:var(--paper); background:var(--night); }
     .loow-plate::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(0,0,0,.88),rgba(0,0,0,.18)),linear-gradient(0deg,rgba(0,0,0,.75),transparent 60%); }
@@ -349,6 +352,11 @@
       .chapter-cover-meta::after { left:auto; right:8%; bottom:-4px; }
       .chapter-cover-body h3 { font-size:clamp(62px,13vw,122px); }
       .reading-grid,.love-layout,.telvock,.project-origin > header,.origin-story,.public-record-grid,.closing-grid,.health-header { gap:48px; }
+      .love-slag-evidence { grid-template-columns:1fr; gap:24px; order:2; }
+      .love-slag-evidence-copy { min-height:0; padding:28px 0 0; border-top:1px solid var(--line); border-left:0; }
+      .love-slag-evidence-copy::before { left:0; top:-4px; }
+      #love-canal .love-layout > .resource-row { order:3; }
+      .love-rail { order:4; }
       .process-chain,.research-paths,.phase-list,.health-grid { grid-template-columns:1fr; }
       .process-card,.research-card,.phase,.health-card { border-right:0; }
       .survey-accounting { grid-template-columns:1fr; }
@@ -993,12 +1001,6 @@
               <p>Love Canal itself was a chemical-waste disaster. But the Assembly inquiry began with eyewitness allegations that United States Army personnel had dumped toxic waste into the canal—and with questions about whether the Army’s own 1978 investigation had adequately examined those claims. To identify the soldiers witnesses remembered and determine what they might have been transporting, the Task Force had to reconstruct the history of federal defense activity across Niagara and Erie Counties.</p>
               <p>That search expanded far beyond Love Canal and revealed that the region’s contamination was also radioactive. The Task Force traced the uranium-production chain through Linde, Electromet, Hooker, and other federal contractors; documented Linde’s underground disposal wells; and investigated the storage, burial, loss, and reuse of radioactive material at the Lake Ontario Ordnance Works and Lake Ontario Storage Area. The 1981 report concluded that Love Canal and federal involvement there were only the tip of a much larger system of factories, contractors, disposal sites, and radioactive waste.</p>
               <p>While the “sludge” was disposed of through waterways like creeks, wells, and the city’s storm drains, the solid waste, known as “slag,” piled up unsupervised and unaccounted for in factories and at the Lake Ontario Ordnance Works storage site. Unaware of the dangers, workers brought this material home and used it as filler for home improvements like paving driveways. Since it was free, readily available, and abundant in the area, construction and trucking companies began commercializing it and spreading it throughout the region, transforming a once idyllic city into a radioactive minefield and a cancer factory in the making.</p>
-              <section class="love-slag-evidence" aria-label="Rock slag evidence from the Lake Ontario Storage Area">
-                <figure><img src="./archive/losa-rock-slag-2015.svg" alt="A large piece of rock slag held in front of a person, dated August 12, 2015" loading="lazy" /></figure>
-                <p>Some of this radioactive material reportedly left LOSA as “rock slag.” Workers were permitted to use Atomic Energy Commission trucks to carry it home and spread it as fill in driveways and around their properties. The practice was so routine that one worker’s wife was asked whether her husband was “getting in on the gravy at LOSA.”</p>
-                <cite>The Federal Connection Report</cite>
-              </section>
-              <div class="resource-row"><a href="https://natalianeuhaus.com/wp-content/uploads/2026/07/the_federal_connection.pdf" target="_blank" rel="noopener"><span>The 1981 report</span><strong>View <em>The Federal Connection</em> report →</strong></a><a href="https://natalianeuhaus.github.io/home/niagara/rebuild.html?archive=Love%20Canal#evidence" target="_blank" rel="noopener"><span>Archive of Evidence</span><strong>Search Love Canal records →</strong></a><a href="https://natalianeuhaus.github.io/home/niagara/rebuild.html#map" target="_blank" rel="noopener"><span>Interactive Map</span><strong>Open the Interactive Map →</strong></a></div>
             </article>
             <aside class="love-rail" aria-label="Love Canal investigation timeline">
               <article class="timeline-card"><time>1978</time><strong>21,000 tons</strong><p>Amount of chemical waste Hooker Chemical is estimated to have buried in Love Canal between 1942 and 1952.</p></article>
@@ -1006,6 +1008,14 @@
               <article class="timeline-card"><time>20 months</time><strong>67,000 records</strong><p>Department of Energy files obtained by the Assembly Task Force through information requests.</p></article>
               <article class="timeline-card"><time>1981</time><strong>The Federal Connection Report</strong><p>The report traced factories, contractors, disposal sites, transport, and radioactive waste across the Niagara Frontier.</p><a href="https://www.health.ny.gov/environmental/investigations/love_canal/lcreport.htm" target="_blank" rel="noopener">Read the state history ↗</a></article>
             </aside>
+            <section class="love-slag-evidence" aria-label="Rock slag evidence from the Lake Ontario Storage Area">
+              <figure><img src="./archive/losa-rock-slag-2015.svg" alt="A large piece of rock slag held in front of a person, dated August 12, 2015" loading="lazy" /></figure>
+              <div class="love-slag-evidence-copy">
+                <cite>The Federal Connection Report</cite>
+                <p>Some of this radioactive material reportedly left LOSA as “rock slag.” Workers were permitted to use Atomic Energy Commission trucks to carry it home and spread it as fill in driveways and around their properties. The practice was so routine that one worker’s wife was asked whether her husband was “getting in on the gravy at LOSA.”</p>
+              </div>
+            </section>
+            <div class="resource-row"><a href="https://natalianeuhaus.com/wp-content/uploads/2026/07/the_federal_connection.pdf" target="_blank" rel="noopener"><span>The 1981 report</span><strong>View <em>The Federal Connection</em> report →</strong></a><a href="https://natalianeuhaus.github.io/home/niagara/rebuild.html?archive=Love%20Canal#evidence" target="_blank" rel="noopener"><span>Archive of Evidence</span><strong>Search Love Canal records →</strong></a><a href="https://natalianeuhaus.github.io/home/niagara/rebuild.html#map" target="_blank" rel="noopener"><span>Interactive Map</span><strong>Open the Interactive Map →</strong></a></div>
           </div>
         </section>
 
