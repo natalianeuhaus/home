@@ -204,12 +204,21 @@
     .loow-copy { width:min(1000px,calc(100% - 60px)); position:relative; z-index:2; padding:90px 0; margin-left:clamp(30px,6vw,104px); }
     .loow-copy h4 { margin:20px 0 28px; font-size:clamp(62px,8vw,140px); font-weight:400; line-height:.78; letter-spacing:-.06em; }
     .loow-copy p { max-width:760px; color:rgba(242,240,233,.78); font-size:clamp(19px,1.7vw,28px); line-height:1.42; }
-    .loow-film { padding:0 0 clamp(90px,12vw,150px); }
+    .loow-film { padding:0 0 120px; }
     .loow-film .atomic-process-reference-label { width:calc(100% - 42px); margin:0 0 50px 42px; }
     .loow-film .atomic-process-reference { width:calc(100% - 42px); margin:0 0 0 42px; }
     .loow-film .atomic-process-reference-media img,
     .loow-film .atomic-process-reference-media:hover img,
     .loow-film .atomic-process-reference-media:focus-visible img { filter:none; }
+    .loow-deer-record { width:min(55%,900px); margin:0 0 clamp(90px,10vw,140px) 42px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+    .loow-deer-record summary { min-height:114px; position:relative; padding:25px 64px 25px 0; list-style:none; cursor:pointer; }
+    .loow-deer-record summary::-webkit-details-marker { display:none; }
+    .loow-deer-record summary::after { content:"+"; position:absolute; top:24px; right:0; font:400 28px/1 var(--sans); }
+    .loow-deer-record[open] summary::after { content:"−"; }
+    .loow-deer-record time { display:block; color:var(--ink); font:400 9px/1 var(--sans); letter-spacing:.15em; }
+    .loow-deer-record strong { display:block; margin-top:15px; font-size:clamp(27px,2.6vw,42px); font-weight:400; line-height:1; letter-spacing:-.035em; }
+    .loow-deer-record-copy { max-width:680px; padding:0 64px 30px 0; color:var(--muted); font:400 14px/1.5 var(--serif); }
+    .loow-deer-record-copy p { margin:0; }
     .containment { display:grid; grid-template-columns:minmax(320px,.75fr) minmax(500px,1.25fr); background:var(--paper-deep); }
     .containment-copy { padding:clamp(60px,7vw,110px) clamp(30px,5vw,80px); }
     .containment-copy h4 { margin:22px 0 30px; font-size:clamp(43px,5vw,80px); font-weight:400; line-height:.88; letter-spacing:-.05em; }
@@ -389,10 +398,14 @@
       .chapter-cover { min-height:auto; }
       .chapter-cover-meta,.chapter-cover-body,.content-block,.atomic-stat,.love-layout,.survey-dashboard,.factory-ledger,.telvock,.project-origin,.public-record,.survey-now,.closing-lead,.closing-body,.health-header { padding-left:22px; padding-right:22px; }
       .chapter-cover-body { min-height:76svh; }
-      .loow-film { padding-bottom:92px; }
+      .loow-film { padding-bottom:72px; }
       .loow-film .atomic-process-reference-label { width:calc(100% - 22px); margin:0 0 32px 22px; }
       .loow-film .atomic-process-reference { width:calc(100% - 22px); margin:0 0 0 22px; }
       .loow-film .atomic-process-reference-media { min-height:300px; }
+      .loow-deer-record { width:calc(100% - 44px); margin:0 22px 92px; }
+      .loow-deer-record summary { min-height:104px; padding-right:46px; }
+      .loow-deer-record strong { font-size:30px; }
+      .loow-deer-record-copy { padding-right:32px; }
       .resource-row,.public-actions,.survey-reports { grid-template-columns:1fr; }
       .process-card { min-height:auto; }
       .process-card figure { height:230px; }
@@ -1084,6 +1097,11 @@
               <p class="atomic-reference-viewer-caption">Lake Ontario Storage Area within the former Lake Ontario Ordnance Works site · before construction of the interim waste containment structure · 1985</p>
             </div>
           </dialog>
+
+          <details class="loow-deer-record">
+            <summary><time datetime="1981">1981</time><strong>Radioactive deer near LOOW</strong></summary>
+            <div class="loow-deer-record-copy"><p>Tests conducted for the <em>Niagara Gazette</em> found elevated cesium-137 and radium in the liver of a deer shot near LOOW. A separate study that year reported abnormalities in 15 of 20 deer captured nearby and elevated radium and cesium in four deer livers.</p></div>
+          </details>
 
           <div class="containment">
             <div class="containment-copy" data-reveal><span class="evidence-label">NFSS · Interim containment</span><h4>Containment is not disappearance.</h4><p>The interim waste containment structure consolidated radioactive residues that remained at the Niagara Falls Storage Site. Its anticipated 25-year life carried it only to about 2011. In 2026, the structure remains in use.</p><p>Containment could address only what remained at LOOW. It could not account for radioactive waste that never reached the site—or material that had already left it.</p><div class="micro-links"><a href="./rebuild.html?archive=LOOW#evidence">Search LOOW records →</a><a href="./rebuild.html#map">Open LOOW on the map →</a></div></div>
