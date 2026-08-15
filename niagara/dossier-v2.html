@@ -1363,16 +1363,20 @@
           frame.src = frame.dataset.src;
           if (!loowReferenceViewer.open) loowReferenceViewer.showModal();
         });
-        close.addEventListener('click',() => loowReferenceViewer.close());
+        const closeViewer = () => {
+          stop();
+          if (loowReferenceViewer.open) loowReferenceViewer.close();
+        };
+        close.addEventListener('click',closeViewer);
         loowReferenceViewer.addEventListener('close',stop);
         loowReferenceViewer.addEventListener('click',event => {
-          if (event.target === loowReferenceViewer) loowReferenceViewer.close();
+          if (event.target === loowReferenceViewer) closeViewer();
         });
         document.addEventListener('visibilitychange',() => {
-          if (document.hidden && loowReferenceViewer.open) loowReferenceViewer.close();
+          if (document.hidden && loowReferenceViewer.open) closeViewer();
         });
         window.addEventListener('pagehide',() => {
-          if (loowReferenceViewer.open) loowReferenceViewer.close();
+          if (loowReferenceViewer.open) closeViewer();
         });
       }
 
