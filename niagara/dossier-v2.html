@@ -192,9 +192,10 @@
     .love-slag-evidence figure { margin:0; }
     .love-slag-evidence img { width:100%; height:auto; display:block; border:1px solid var(--line); filter:none; }
     .love-slag-evidence-copy { min-height:100%; position:relative; padding:0 0 40px 34px; border-left:1px solid var(--line); }
-    .love-slag-evidence-copy::before { content:""; width:7px; height:7px; position:absolute; left:-4px; top:0; background:var(--orange); }
-    .love-slag-evidence-copy h5 { margin:0 0 24px; font-size:clamp(38px,3.8vw,58px); line-height:.92; font-weight:400; letter-spacing:-.045em; }
-    .love-slag-evidence .love-slag-evidence-copy p { margin:0; color:var(--copy-ink); font:400 clamp(22px,2vw,28px)/1.42 var(--serif); font-style:normal; }
+    .love-slag-evidence-copy::before { content:""; width:7px; height:7px; position:absolute; z-index:1; left:-4px; top:0; background:var(--orange); }
+    .love-slag-evidence-copy::after { content:""; width:1px; height:calc(40px + clamp(50px,7vw,110px)); position:absolute; left:-1px; top:calc(-40px - clamp(50px,7vw,110px)); background:var(--line); }
+    .love-slag-evidence-copy h5 { display:block; margin:18px 0 8px; font-size:clamp(28px,3vw,46px); line-height:.95; font-weight:400; letter-spacing:normal; }
+    .love-slag-evidence .love-slag-evidence-copy p { margin:0; color:var(--muted); font:400 14px/1.5 var(--serif); font-style:normal; }
     #love-canal .love-layout > .resource-row { grid-column:1; }
 
     .loow-plate { min-height:82svh; position:relative; display:grid; align-items:end; overflow:hidden; color:var(--paper); background:var(--night); }
@@ -355,6 +356,7 @@
       .love-slag-evidence { grid-template-columns:1fr; gap:24px; order:2; }
       .love-slag-evidence-copy { min-height:0; padding:28px 0 0; border-top:1px solid var(--line); border-left:0; }
       .love-slag-evidence-copy::before { left:0; top:-4px; }
+      .love-slag-evidence-copy::after { display:none; }
       #love-canal .love-layout > .resource-row { order:3; }
       .love-rail { order:4; }
       .process-chain,.research-paths,.phase-list,.health-grid { grid-template-columns:1fr; }
