@@ -220,12 +220,19 @@
     .loow-deer-record-copy { max-width:680px; padding:0 64px 30px 0; color:var(--muted); font:400 14px/1.5 var(--serif); }
     .loow-deer-record-copy p { margin:0; }
     .loow-deer-record-copy a { display:inline-block; margin-top:18px; color:var(--red); font:700 8px/1.2 var(--sans); letter-spacing:.11em; text-transform:uppercase; }
-    .containment { display:grid; grid-template-columns:minmax(320px,.75fr) minmax(500px,1.25fr); background:var(--paper-deep); }
-    .containment-copy { padding:clamp(60px,7vw,110px) clamp(30px,5vw,80px); }
+    .containment { display:grid; grid-template-columns:minmax(320px,.75fr) minmax(500px,1.25fr); align-items:start; background:var(--paper-deep); }
+    .containment-copy { padding:60px clamp(30px,5vw,80px) clamp(60px,7vw,110px); }
     .containment-copy h4 { margin:22px 0 30px; font-size:clamp(43px,5vw,80px); font-weight:400; line-height:.88; letter-spacing:-.05em; }
     .containment-copy p { color:var(--copy-ink); font-size:clamp(17px,1.4vw,22px); line-height:1.52; }
-    .containment-media { min-height:650px; display:grid; place-items:center; padding:50px; background:#d5d3cc; border-left:1px solid var(--line); }
-    .containment-media img { width:100%; height:auto; filter:invert(1); mix-blend-mode:normal; }
+    .containment-media { align-self:start; min-height:0; display:grid; place-items:center; padding:clamp(64px,6vw,110px) 50px; background:#d5d3cc; border-left:1px solid var(--line); }
+    .containment-diagram-open { appearance:none; width:100%; margin:0; padding:0; display:block; border:0; background:transparent; cursor:zoom-in; }
+    .containment-diagram-open img { width:100%; height:auto; display:block; filter:invert(1); mix-blend-mode:normal; }
+    .containment-diagram-open:focus-visible { outline:2px solid var(--red); outline-offset:6px; }
+    .containment-diagram-viewer { width:min(1500px,calc(100vw - 48px)); max-width:none; max-height:calc(100svh - 48px); margin:auto; padding:44px; border:0; background:#fff; box-shadow:0 28px 100px rgba(0,0,0,.72); overflow:auto; }
+    .containment-diagram-viewer::backdrop { background:rgba(0,0,0,.9); backdrop-filter:blur(5px); -webkit-backdrop-filter:blur(5px); }
+    .containment-diagram-viewer img { width:100%; max-height:calc(100svh - 136px); display:block; object-fit:contain; filter:invert(1); }
+    .containment-diagram-viewer-close { appearance:none; position:absolute; z-index:2; top:8px; right:8px; width:42px; height:42px; border:0; border-radius:50%; color:rgba(21,23,21,.8); background:rgba(242,240,233,.88); cursor:pointer; font:22px/1 Arial,Helvetica,sans-serif; }
+    .containment-diagram-viewer-close:hover,.containment-diagram-viewer-close:focus-visible { color:#fff; background:var(--red); }
 
     .survey-dashboard { padding:clamp(76px,9vw,145px) clamp(30px,6vw,104px); background:var(--night); color:var(--paper); }
     .survey-dashboard > header { display:grid; grid-template-columns:.42fr 1fr; gap:8vw; align-items:end; padding-bottom:64px; border-bottom:1px solid var(--line-dark); }
@@ -381,7 +388,8 @@
       .survey-accounting article { border-right:0; border-bottom:1px solid var(--line-dark); }
       .loow-film .atomic-process-reference { min-height:0; grid-template-columns:1fr; }
       .loow-film .atomic-process-reference-media { min-height:420px; }
-      .containment-media { min-height:420px; border-left:0; border-top:1px solid var(--line); }
+      .containment-copy { padding-top:48px; }
+      .containment-media { min-height:0; padding:34px 22px; border-left:0; border-top:1px solid var(--line); }
       .telvock figure { position:relative; top:auto; }
       .site-footer { grid-template-columns:1fr; }
       .site-footer strong,.site-footer p,.site-footer a { border-right:0; border-bottom:1px solid var(--line); }
@@ -627,7 +635,7 @@
     .chapter-one-coda { width:min(980px,calc(100vw - 84px)); margin:45px auto 85px 42px; padding:0; color:var(--ink); background:transparent; }
     .chapter-one-coda img { width:80%; height:auto; margin-top:125px; margin-bottom:140px; display:block; object-fit:contain; }
     .chapter-one-coda figcaption { padding:10px 0 0; display:flex; justify-content:space-between; gap:24px; color:rgba(21,23,21,.52); font:8px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
-    body:has(.atomic-evidence-viewer[open]),body:has(.atomic-reference-viewer[open]) { overflow:hidden; }
+    body:has(.atomic-evidence-viewer[open]),body:has(.atomic-reference-viewer[open]),body:has(.containment-diagram-viewer[open]) { overflow:hidden; }
 
     .waterfalls-title--electro span { display:block; }
 
@@ -1106,8 +1114,13 @@
 
           <div class="containment">
             <div class="containment-copy" data-reveal><h4>An “interim” structure</h4><p>“Interim” matters. The containment structure was given an anticipated 25-year life, carrying it only to about 2011. In 2026, it remains in use—approximately 15 years beyond that original horizon. Its compacted-clay cover is intended to limit water infiltration and slow contaminant migration, while drainage ditches carry surface water away from the containment area.</p></div>
-            <figure class="containment-media"><img src="./archive/nfss-iwcs-conceptual-design.jpg" alt="Conceptual cross-section of the NFSS interim waste containment structure" loading="lazy" /></figure>
+            <figure class="containment-media"><button class="containment-diagram-open" type="button" data-containment-diagram-open aria-label="Enlarge the conceptual cross-section of the NFSS interim waste containment structure"><img src="./archive/nfss-iwcs-conceptual-design.jpg" alt="Conceptual cross-section of the NFSS interim waste containment structure" loading="lazy" /></button></figure>
           </div>
+
+          <dialog class="containment-diagram-viewer" aria-label="Enlarged conceptual cross-section of the NFSS interim waste containment structure">
+            <button class="containment-diagram-viewer-close" type="button" aria-label="Close enlarged diagram">×</button>
+            <img src="./archive/nfss-iwcs-conceptual-design.jpg" alt="Conceptual cross-section of the NFSS interim waste containment structure" />
+          </dialog>
         </section>
 
         <section class="chapter" id="surveys" data-chapter>
@@ -1401,6 +1414,19 @@
         });
         window.addEventListener('pagehide',() => {
           if (loowReferenceViewer.open) closeViewer();
+        });
+      }
+
+      const containmentDiagramViewer = document.querySelector('#loow .containment-diagram-viewer');
+      const containmentDiagramOpener = document.querySelector('#loow [data-containment-diagram-open]');
+      if (containmentDiagramViewer && containmentDiagramOpener && typeof containmentDiagramViewer.showModal === 'function') {
+        const close = containmentDiagramViewer.querySelector('.containment-diagram-viewer-close');
+        containmentDiagramOpener.addEventListener('click',() => {
+          if (!containmentDiagramViewer.open) containmentDiagramViewer.showModal();
+        });
+        close.addEventListener('click',() => containmentDiagramViewer.close());
+        containmentDiagramViewer.addEventListener('click',event => {
+          if (event.target === containmentDiagramViewer) containmentDiagramViewer.close();
         });
       }
 
