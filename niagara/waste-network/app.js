@@ -136,7 +136,7 @@ const regionalBounds = L.latLngBounds([
   [43.29, -78.61]
 ]);
 const sourceBounds = L.latLngBounds(sites.map(site => site.point)).pad(0.02);
-const sourceFocus = [43.03, window.innerWidth < 1600 ? -79.13 : -79.07];
+const sourceFocus = [43.03, window.innerWidth < 1600 ? -79.115 : -79.055];
 const niagaraFocus = window.innerWidth < 900
   ? [43.095, -79.005]
   : [43.095, -79.04];
@@ -157,7 +157,7 @@ map.fitBounds(regionalBounds, {
 const regionalZoom = map.getZoom();
 const sourceZoom = Math.min(
   map.getBoundsZoom(sourceBounds, false, [60, 100]) - 0.25,
-  window.innerHeight < 1000 ? 11 : 11.25
+  window.innerHeight < 1000 ? 11.25 : 11.5
 );
 const niagaraZoom = Math.min(Math.max(
   regionalZoom + Math.log2(10),
