@@ -29,6 +29,7 @@
     html { scroll-behavior:smooth; background:var(--paper); }
     body { margin:0; color:var(--ink); background:var(--paper); font-family:var(--serif); }
     body.is-index-open { overflow:hidden; }
+    body.is-dossier-viewer-open { overflow:hidden; }
     img,video { max-width:100%; }
     a { color:inherit; text-underline-offset:.18em; }
     button { font:inherit; }
@@ -43,7 +44,7 @@
     .casebar-file b { color:var(--red); font-weight:700; }
     .casebar-actions { height:100%; display:flex; align-items:stretch; }
     .casebar-actions a,.index-toggle { display:flex; align-items:center; justify-content:center; min-width:132px; padding:0 18px; border:0; border-left:1px solid var(--line); color:var(--ink); background:transparent; text-decoration:none; font:700 9px/1 var(--sans); letter-spacing:.13em; text-transform:uppercase; cursor:pointer; }
-    .casebar-actions a:hover,.casebar-actions a:focus-visible,.index-toggle:hover,.index-toggle:focus-visible { color:var(--paper); background:var(--red); }
+    .casebar-actions a:hover,.casebar-actions a:focus-visible,.casebar-actions a.is-active,.index-toggle:hover,.index-toggle:focus-visible { color:var(--paper); background:var(--red); }
     .index-toggle { display:none; min-width:82px; }
 
     .cinematic-hero { min-height:calc(100svh - var(--top)); position:relative; display:grid; align-items:end; overflow:hidden; color:#fff; background:#0c0e0d; }
@@ -122,6 +123,9 @@
     .index-foot a { display:block; padding:9px 0; color:var(--red); font:700 8px/1 var(--sans); letter-spacing:.12em; text-transform:uppercase; }
 
     .case-content { min-width:0; overflow:hidden; }
+    .dossier-viewer { display:none; position:fixed; z-index:45; inset:var(--top) 0 0 var(--rail); background:var(--paper); }
+    .dossier-viewer.is-open { display:block; }
+    .dossier-viewer iframe { width:100%; height:100%; display:block; border:0; background:var(--paper); }
     .chapter { position:relative; border-bottom:1px solid var(--line); scroll-margin-top:var(--top); }
     .chapter-cover { min-height:calc(100svh - var(--top)); display:grid; grid-template-columns:minmax(260px,.68fr) minmax(560px,1.32fr); align-items:stretch; }
     .chapter-cover-meta { position:relative; padding:clamp(50px,6vw,92px) clamp(28px,4vw,70px); border-right:1px solid var(--line); }
@@ -451,6 +455,7 @@
       .waterfalls-progress { right:12px; }
       .waterfalls-progress button { width:29px; }
       .dossier { grid-template-columns:1fr; }
+      .dossier-viewer { left:0; }
       .case-index { width:min(360px,90vw); position:fixed; z-index:70; left:0; top:var(--top); transform:translateX(-102%); transition:transform .3s ease; box-shadow:24px 0 60px rgba(0,0,0,.18); }
       body.is-index-open .case-index { transform:none; }
       .chapter-cover-meta { min-height:180px; border-right:0; border-bottom:1px solid var(--line); }
@@ -803,8 +808,8 @@
     <a class="casebar-wordmark" href="./rebuild.html">Greetings from Niagara</a>
     <div class="casebar-file"><span>Manhattan District · <b>Open record</b></span><span>Report ID · 1942–present</span><span>Research file · 800+ sources</span></div>
     <div class="casebar-actions">
-      <a href="./rebuild.html#evidence">Evidence</a>
-      <a href="./rebuild.html#map">Interactive map</a>
+      <a href="https://natalianeuhaus.github.io/GreetingsFromNiagaraProject/archive.html" data-dossier-viewer-target="evidence">Evidence</a>
+      <a href="https://natalianeuhaus.github.io/GreetingsFromNiagaraProject/" data-dossier-viewer-target="map">Interactive map</a>
       <button class="index-toggle" type="button" aria-expanded="false" aria-controls="case-index">Index</button>
     </div>
   </header>
@@ -838,10 +843,13 @@
           <a href="#closing"><span>07</span>What remains</a>
           <a href="#health"><span>08</span>Health record</a>
         </nav>
-        <div class="index-foot"><a href="./rebuild.html#evidence">Examine evidence →</a><a href="./rebuild.html#map">Follow the geography →</a></div>
+        <div class="index-foot"><a href="https://natalianeuhaus.github.io/GreetingsFromNiagaraProject/archive.html" data-dossier-viewer-target="evidence">Examine evidence →</a><a href="https://natalianeuhaus.github.io/GreetingsFromNiagaraProject/" data-dossier-viewer-target="map">Follow the geography →</a></div>
       </aside>
 
       <div class="case-content">
+        <div class="dossier-viewer" id="dossier-viewer" aria-hidden="true">
+          <iframe id="dossier-viewer-frame" title="" loading="eager" allow="fullscreen"></iframe>
+        </div>
     <section class="waterfalls-record" id="waterfalls" aria-label="The waterfalls and industry" data-chapter>
       <div class="waterfalls-track" tabindex="0" aria-label="Eight-part introduction. Use the arrow keys or controls to move between sections.">
         <article class="waterfalls-slide" data-waterfalls-section="0">
@@ -1557,7 +1565,56 @@
       index.querySelectorAll('a').forEach(link => link.addEventListener('click',closeIndex));
       document.addEventListener('keydown',event => { if (event.key === 'Escape') closeIndex(); });
 
+      const dossier = document.querySelector('.dossier');
+      const dossierViewer = document.getElementById('dossier-viewer');
+      const dossierViewerFrame = document.getElementById('dossier-viewer-frame');
+      const dossierViewerLinks = [...document.querySelectorAll('[data-dossier-viewer-target]')];
+      let dossierViewerReturnY = 0;
+      let dossierViewerOpen = false;
+
+      const setDossierViewerActive = target => {
+        dossierViewerLinks.forEach(link => {
+          const active = link.dataset.dossierViewerTarget === target;
+          link.classList.toggle('is-active',active);
+          if (active) link.setAttribute('aria-current','page');
+          else link.removeAttribute('aria-current');
+        });
+      };
+
+      const closeDossierViewer = (restorePosition = false) => {
+        if (!dossierViewerOpen) return;
+        dossierViewerOpen = false;
+        document.body.classList.remove('is-dossier-viewer-open');
+        dossierViewer.classList.remove('is-open');
+        dossierViewer.setAttribute('aria-hidden','true');
+        dossierViewerFrame.src = 'about:blank';
+        dossierViewerFrame.title = '';
+        setDossierViewerActive('');
+        if (restorePosition) requestAnimationFrame(() => window.scrollTo({top:dossierViewerReturnY,behavior:'auto'}));
+      };
+
+      const openDossierViewer = link => {
+        const target = link.dataset.dossierViewerTarget;
+        if (!dossierViewerOpen) dossierViewerReturnY = window.scrollY;
+        if (window.scrollY < dossier.offsetTop) window.scrollTo({top:dossier.offsetTop,behavior:'auto'});
+        dossierViewerOpen = true;
+        dossierViewerFrame.title = target === 'map' ? 'Greetings from Niagara interactive map' : 'Greetings from Niagara evidence archive';
+        dossierViewerFrame.src = link.href;
+        dossierViewer.dataset.view = target;
+        dossierViewer.classList.add('is-open');
+        dossierViewer.setAttribute('aria-hidden','false');
+        document.body.classList.add('is-dossier-viewer-open');
+        setDossierViewerActive(target);
+      };
+
+      dossierViewerLinks.forEach(link => link.addEventListener('click',event => {
+        event.preventDefault();
+        openDossierViewer(link);
+      }));
+      document.addEventListener('keydown',event => { if (event.key === 'Escape') closeDossierViewer(true); });
+
       const chapterLinks = [...document.querySelectorAll('.index-nav a')];
+      chapterLinks.forEach(link => link.addEventListener('click',() => closeDossierViewer(false)));
       const chapters = [...document.querySelectorAll('[data-chapter]')];
       const chapterObserver = new IntersectionObserver(entries => {
         const visible = entries.filter(entry => entry.isIntersecting).sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
