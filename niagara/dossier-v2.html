@@ -320,6 +320,11 @@
     #surveys .story-resource-links { margin-top:24px; display:flex; flex-wrap:wrap; gap:11px 22px; }
     #surveys .story-resource-links a { width:max-content; max-width:100%; padding-bottom:3px; border-bottom:1px solid currentColor; color:var(--red); font:8px/1.4 var(--sans); letter-spacing:.13em; text-decoration:none; text-transform:uppercase; }
     #surveys .story-resource-links a:hover,#surveys .story-resource-links a:focus-visible { color:var(--ink); }
+    #surveys .palmeri-case-study { margin:clamp(90px,12svh,150px) 0 0; padding:clamp(36px,5svh,58px) 0 clamp(44px,6svh,72px); display:grid; grid-template-columns:112px minmax(0,1fr); gap:clamp(22px,4vw,54px); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+    #surveys .palmeri-case-study time { padding-top:7px; color:var(--red); font:10px/1.45 var(--sans); letter-spacing:.16em; text-transform:uppercase; }
+    #surveys .palmeri-case-study h5 { margin:0 0 30px; font-size:clamp(34px,4.1vw,62px); font-weight:400; line-height:.98; letter-spacing:-.043em; }
+    #surveys .palmeri-case-study p { max-width:900px; margin:0; color:var(--copy-ink); font-size:clamp(18px,1.35vw,23px); line-height:1.47; letter-spacing:-.012em; }
+    #surveys .palmeri-case-study p + p { margin-top:1.2em; }
     .waste-record-expansion { width:100%; min-height:calc(100svh - var(--top)); margin:clamp(84px,11svh,130px) 0 0; padding:clamp(76px,10svh,130px) clamp(42px,6.5vw,100px); display:flex; flex-direction:column; justify-content:center; background:#d8d5cd; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
     .waste-record-expansion-header { display:grid; grid-template-columns:minmax(180px,.35fr) minmax(520px,1.15fr); gap:clamp(54px,8vw,140px); align-items:start; }
     .waste-record-expansion-label { padding-top:9px; color:var(--red); font:9px/1.4 var(--sans); letter-spacing:.17em; text-transform:uppercase; }
@@ -510,6 +515,7 @@
       #surveys .waste-chapter-followup { width:100%; margin:84px 0 104px; }
       #surveys .waste-chapter-followup p { margin-left:0; }
       #surveys .waste-section-header { grid-template-columns:1fr; gap:10px; }
+      #surveys .palmeri-case-study { grid-template-columns:1fr; gap:18px; }
       #surveys .waste-year { padding-top:0; }
       #surveys .waste-section-copy { margin-left:0; }
       #surveys .waste-survey-timeline { grid-template-columns:1fr; }
@@ -1377,6 +1383,21 @@
                 <a href="./rebuild.html?archive=radiological%20survey#evidence" target="_blank" rel="noopener noreferrer">Search the survey archive →</a>
                 <a href="./rebuild.html#map" target="_blank" rel="noopener noreferrer">Compare the survey geography →</a>
               </div>
+
+              <article class="palmeri-case-study" aria-labelledby="palmeri-case-study-title">
+                <time datetime="1979/2023">1979–2023</time>
+                <div>
+                  <h5 id="palmeri-case-study-title">The Palmeri home</h5>
+                  <p>One of the properties identified by the federal surveys was 789 Upper Mountain Road in Lewiston. Oak Ridge National Laboratory’s 1986 report recorded gamma radiation at the property approximately five times higher than local background and attributed it to slag containing elevated levels of thorium. The Palmeri family purchased the house in 2011—decades after the federal government had recorded the contamination.</p>
+                  <p>After private testing later measured gamma radiation as high as 30 times background in the crawl space, state health officials alerted the EPA. In 2020, the agency determined that gamma radiation, radon gas, and radioactive dust from contaminated soil presented an unacceptable risk. The Palmeris were relocated in September 2021 while the EPA began excavating beneath the house and across the surrounding property.</p>
+                  <p>Over three years, the EPA removed approximately 4,800 tons of radioactive waste from the Palmeri property and an adjacent lot in a cleanup costing more than $7 million. Beneath the house, workers found radioactive sand, slag, ash, refractory brick, and metal plates bearing the name Titanium Alloys Manufacturing Co. The EPA completed the cleanup in 2023.</p>
+                  <p>Tracey Palmeri died from breast cancer in April 2022 at the age of 44. Her husband later filed a wrongful-death lawsuit alleging that exposure to the radioactive waste caused her illness. The excavation established the presence of radioactive industrial waste and produced evidence of its likely source; it did not establish whether the exposure caused her cancer.</p>
+                  <div class="story-resource-links">
+                    <a href="https://investigativepost.org/2024/06/18/radioactive-material-in-lewiston/" target="_blank" rel="noopener noreferrer">Read Geoff Kelly’s investigation →</a>
+                    <a href="https://www.epa.gov/ny/niagara-county-radiation-removal-sites" target="_blank" rel="noopener noreferrer">View the EPA cleanup record →</a>
+                  </div>
+                </div>
+              </article>
             </section>
           </div>
 
