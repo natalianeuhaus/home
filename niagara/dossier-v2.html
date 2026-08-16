@@ -257,6 +257,7 @@
     .loow-film .atomic-process-reference-media:focus-visible img { filter:none; }
     .loow-deer-record { width:min(55%,900px); margin:0 0 clamp(90px,10vw,140px) 42px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
     .loow-deer-record summary { min-height:114px; position:relative; padding:25px 64px 25px 0; list-style:none; cursor:pointer; }
+    .loow-deer-record-static header { min-height:114px; position:relative; padding:25px 64px 25px 0; }
     .loow-deer-record summary::-webkit-details-marker { display:none; }
     .loow-deer-record summary::after { content:"+"; position:absolute; top:24px; right:0; font:400 28px/1 var(--sans); }
     .loow-deer-record[open] summary::after { content:"−"; }
@@ -569,6 +570,7 @@
       .loow-film .atomic-process-reference-media { min-height:300px; }
       .loow-deer-record { width:calc(100% - 44px); margin:0 22px 92px; }
       .loow-deer-record summary { min-height:104px; padding-right:46px; }
+      .loow-deer-record-static header { min-height:104px; padding-right:46px; }
       .loow-deer-record strong { font-size:30px; }
       .loow-deer-record-copy { padding-right:32px; }
       .resource-row,.public-actions,.survey-reports { grid-template-columns:1fr; }
@@ -1261,6 +1263,11 @@
             </div>
           </div>
 
+          <section class="loow-deer-record loow-deer-record-static" aria-label="1981 radioactive deer record near LOOW">
+            <header><time datetime="1981">1981</time><strong>Radioactive deer near LOOW</strong></header>
+            <div class="loow-deer-record-copy"><p>Tests conducted for the <em>Niagara Gazette</em> found elevated cesium-137 and radium in the liver of a deer shot near LOOW. A separate study that year reported abnormalities in 15 of 20 deer captured nearby and elevated radium and cesium in four deer livers.</p><a href="https://gateway.okhistory.org/ark:/67531/metadc2550061/m1/4/" target="_blank" rel="noopener">Read the 1980 Niagara Gazette report ↗</a></div>
+          </section>
+
           <section class="loow-film" aria-label="Historical Lake Ontario Ordnance Works film">
             <span class="atomic-process-reference-label">Archival film · Lake Ontario Ordnance Works · 1985</span>
             <aside class="atomic-process-reference" aria-label="Historical Lake Ontario Ordnance Works film">
@@ -1285,11 +1292,6 @@
               <p class="atomic-reference-viewer-caption">Lake Ontario Storage Area within the former Lake Ontario Ordnance Works site · before construction of the interim waste containment structure · 1985</p>
             </div>
           </dialog>
-
-          <details class="loow-deer-record">
-            <summary><time datetime="1981">1981</time><strong>Radioactive deer near LOOW</strong></summary>
-            <div class="loow-deer-record-copy"><p>Tests conducted for the <em>Niagara Gazette</em> found elevated cesium-137 and radium in the liver of a deer shot near LOOW. A separate study that year reported abnormalities in 15 of 20 deer captured nearby and elevated radium and cesium in four deer livers.</p><a href="https://gateway.okhistory.org/ark:/67531/metadc2550061/m1/4/" target="_blank" rel="noopener">Read the 1980 Niagara Gazette report ↗</a></div>
-          </details>
 
           <div class="containment">
             <figure class="containment-media">
