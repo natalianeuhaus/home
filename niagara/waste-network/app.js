@@ -202,11 +202,16 @@ const allScenes = [
   { name: "final", duration: 11500 }
 ];
 
-const requestedSlide = Number.parseInt(new URLSearchParams(window.location.search).get("slide"), 10);
+const wasteNetworkParams = new URLSearchParams(window.location.search);
+const requestedSlide = Number.parseInt(wasteNetworkParams.get("slide"), 10);
 const embeddedSlideIndex = Number.isInteger(requestedSlide) && requestedSlide >= 1 && requestedSlide <= allScenes.length
   ? requestedSlide - 1
   : -1;
 const scenes = embeddedSlideIndex >= 0 ? [allScenes[embeddedSlideIndex]] : allScenes;
+
+if (wasteNetworkParams.get("nav") === "0") {
+  film.dataset.navigation = "hidden";
+}
 
 if (embeddedSlideIndex >= 0) {
   film.dataset.embeddedSlide = String(requestedSlide);
