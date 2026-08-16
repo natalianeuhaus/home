@@ -243,12 +243,11 @@
     .love-slag-evidence .love-slag-evidence-copy p { margin:0; color:var(--muted); font:400 14px/1.5 var(--serif); font-style:normal; }
     #love-canal .love-layout > .resource-row { grid-column:1; }
 
-    .loow-plate { min-height:82svh; position:relative; display:grid; align-items:end; overflow:hidden; color:var(--paper); background:var(--night); }
-    .loow-plate::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(0,0,0,.88),rgba(0,0,0,.18)),linear-gradient(0deg,rgba(0,0,0,.75),transparent 60%); }
-    .loow-plate img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:grayscale(1) contrast(1.1); }
-    .loow-copy { width:min(1000px,calc(100% - 60px)); position:relative; z-index:2; padding:90px 0; margin-left:clamp(30px,6vw,104px); }
-    .loow-copy h4 { margin:20px 0 28px; font-size:clamp(62px,8vw,140px); font-weight:400; line-height:.78; letter-spacing:-.06em; }
-    .loow-copy p { max-width:760px; color:rgba(242,240,233,.78); font-size:clamp(19px,1.7vw,28px); line-height:1.42; }
+    #loow .loow-cover-aerial { min-height:100%; position:relative; isolation:isolate; justify-content:flex-end; overflow:hidden; color:var(--paper); background:url("./archive/loow-aerial-01.webp") center/cover no-repeat; }
+    #loow .loow-cover-aerial::before { content:""; position:absolute; z-index:0; inset:0; background:linear-gradient(90deg,rgba(0,0,0,.82),rgba(0,0,0,.18)),linear-gradient(0deg,rgba(0,0,0,.76),transparent 64%); }
+    #loow .loow-cover-aerial > * { position:relative; z-index:1; }
+    #loow .loow-cover-aerial h3 { max-width:900px; margin:20px 0 28px; font-size:clamp(50px,6.1vw,110px); line-height:.8; letter-spacing:-.06em; }
+    #loow .loow-cover-aerial .chapter-deck { max-width:760px; margin:0; color:rgba(242,240,233,.78); font-size:clamp(19px,1.7vw,28px); line-height:1.42; }
     .loow-film { padding:0 0 120px; }
     .loow-film .atomic-process-reference-label { width:calc(100% - 42px); margin:0 0 50px 42px; }
     .loow-film .atomic-process-reference { width:calc(100% - 42px); margin:0 0 0 42px; }
@@ -1246,12 +1245,7 @@
         <section class="chapter" id="loow" data-chapter>
           <div class="chapter-cover dark">
             <header class="chapter-cover-meta"><span class="chapter-id">Chapter III</span><h2>1941–present<br />A TNT plant becomes a radioactive-waste site.</h2></header>
-            <div class="chapter-cover-body"><span class="chapter-kicker">Lake Ontario Ordnance Works</span><h3>LOOW</h3><p class="chapter-deck">Built across 7,567 acres during World War II, LOOW manufactured TNT before it was decommissioned in 1943. Beginning in 1944, the Manhattan Engineer District—the agency that ran the Manhattan Project—used part of the former plant to store uranium-processing residues, uranium metal, and other radioactive waste. Storage continued throughout the Cold War.</p></div>
-          </div>
-
-          <div class="loow-plate">
-            <img src="./archive/loow-aerial-01.webp" alt="Historical aerial photograph of the Lake Ontario Ordnance Works" loading="lazy" />
-            <div class="loow-copy" data-reveal><span class="evidence-label">Aerial record · former LOOW property</span><h4>One federal site became many different places.</h4><p>After World War II, most of the property was sold or transferred. The resulting landscape includes federal land, private businesses, homes, schools, farms, waste facilities, and the Niagara Falls Storage Site.</p></div>
+            <div class="chapter-cover-body loow-cover-aerial"><span class="evidence-label">Former LOOW property</span><h3>One federal site became many different places.</h3><p class="chapter-deck">After World War II, most of the property was sold or transferred. The resulting landscape includes federal land, private businesses, homes, schools, farms, waste facilities, and the Niagara Falls Storage Site.</p></div>
           </div>
 
           <div class="content-block loow-history">
