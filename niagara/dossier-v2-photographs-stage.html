@@ -18,20 +18,22 @@
     .niagara-photo-viewport { position:relative; width:100%; height:100%; overflow:hidden; display:grid; place-items:center; outline:none; cursor:zoom-in; }
     .niagara-photo-viewport::before { content:""; position:absolute; inset:0; pointer-events:none; background:transparent; }
     .niagara-photo-main { position:relative; z-index:1; width:auto !important; height:var(--photo-panel-height) !important; max-width:100% !important; max-height:none !important; object-fit:contain !important; object-position:center center; display:block; opacity:1; transform:scale(1); transition:opacity .24s ease,transform .5s cubic-bezier(.2,.7,.2,1); }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-viewport { place-items:start center; }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-main { width:auto !important; height:auto !important; max-width:calc(100% - 160px) !important; max-height:calc(var(--photo-panel-height) - 76px) !important; align-self:start; }
     .niagara-photo-main.is-changing { opacity:.18; transform:scale(.992); }
     .niagara-photo-control { position:absolute; z-index:5; top:50%; width:52px; height:74px; border:1px solid rgba(255,255,255,.24); color:#fff; background:rgba(8,9,8,.52); backdrop-filter:blur(9px); cursor:pointer; opacity:0; pointer-events:none; transform:translateY(-50%); font:30px/1 Georgia,"Times New Roman",serif; transition:opacity .22s ease,background-color .2s ease,border-color .2s ease; }
     .niagara-photo-control:hover,.niagara-photo-control:focus-visible { background:#30312f; border-color:#30312f; outline:none; }
     .niagara-photo-prev { left:22px; }
     .niagara-photo-next { right:22px; }
-    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control { width:86px; height:42px; border:0; color:rgba(21,23,21,.58); background:transparent; backdrop-filter:none; font-size:0; }
-    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control::before { content:""; position:absolute; top:50%; width:58px; height:1px; background:currentColor; }
-    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control::after { content:""; position:absolute; top:50%; width:8px; height:8px; border-top:1px solid currentColor; border-right:1px solid currentColor; }
-    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-prev { left:20px; }
-    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-prev::before { right:8px; }
-    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-prev::after { left:13px; transform:translateY(-50%) rotate(-135deg); }
-    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-next { right:20px; }
-    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-next::before { left:8px; }
-    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-next::after { right:13px; transform:translateY(-50%) rotate(45deg); }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control { top:calc(50% - 38px); width:66px; height:36px; border:0; color:rgba(21,23,21,.58); background:transparent; backdrop-filter:none; font-size:0; }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control::before { content:""; position:absolute; top:50%; width:42px; height:1px; background:currentColor; }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control::after { content:""; position:absolute; top:50%; width:7px; height:7px; border-top:1px solid currentColor; border-right:1px solid currentColor; }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-prev { left:18px; }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-prev::before { right:6px; }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-prev::after { left:10px; transform:translateY(-50%) rotate(-135deg); }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-next { right:18px; }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-next::before { left:6px; }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-next::after { right:10px; transform:translateY(-50%) rotate(45deg); }
     .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control:hover,
     .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control:focus-visible { color:rgba(21,23,21,.95); background:transparent; border-color:transparent; }
     .niagara-photo-caption-toggle,.niagara-photo-caption-close { border:1px solid rgba(255,255,255,.26); color:#fff; background:rgba(8,9,8,.58); backdrop-filter:blur(9px); cursor:pointer; text-transform:uppercase; letter-spacing:.16em; font:10px/1 Arial,Helvetica,sans-serif; }
@@ -81,6 +83,16 @@
       .niagara-photo-story.is-fullscreen .niagara-photo-caption { height:42svh; padding:58px 24px 42px; border-left:0; border-top:1px solid rgba(255,255,255,.18); }
       .niagara-photo-caption h3 { font-size:clamp(29px,8vw,44px); }
       .niagara-photo-caption-copy { font-size:15px; }
+      .niagara-photo-story:not(.is-fullscreen) .niagara-photo-main { max-width:calc(100% - 104px) !important; max-height:calc(var(--photo-panel-height) - 60px) !important; }
+      .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control { top:calc(50% - 30px); width:48px; height:32px; }
+      .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control::before { width:30px; }
+      .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control::after { width:6px; height:6px; }
+      .niagara-photo-story:not(.is-fullscreen) .niagara-photo-prev { left:4px; }
+      .niagara-photo-story:not(.is-fullscreen) .niagara-photo-prev::before { right:4px; }
+      .niagara-photo-story:not(.is-fullscreen) .niagara-photo-prev::after { left:6px; }
+      .niagara-photo-story:not(.is-fullscreen) .niagara-photo-next { right:4px; }
+      .niagara-photo-story:not(.is-fullscreen) .niagara-photo-next::before { left:4px; }
+      .niagara-photo-story:not(.is-fullscreen) .niagara-photo-next::after { right:6px; }
     }
     @media (prefers-reduced-motion:reduce) {
       .niagara-photo-main,.niagara-photo-strip,.niagara-photo-thumb,.niagara-photo-progress span { transition:none !important; }
