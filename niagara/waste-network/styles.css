@@ -103,8 +103,8 @@ body { overflow: hidden; color: var(--ink); background: var(--paper); font-famil
 .industrial-district { width: 220px; height: 54px; position: relative; display: block; opacity: 0; transform: scale(.86); transform-origin: 8px center; transition: opacity .7s ease,transform .9s cubic-bezier(.22,1,.36,1); }
 .industrial-district i { width: 34px; height: 34px; position: absolute; left: -9px; top: 10px; border: 1px solid var(--ink); border-radius: 50%; background: rgba(216,192,139,.2); box-shadow: 0 0 0 5px rgba(241,240,234,.56); }
 .industrial-district i::after { width: 5px; height: 5px; position: absolute; left: 50%; top: 50%; border-radius: 50%; background: var(--ink); content: ""; transform: translate(-50%,-50%); }
-.industrial-district b { width: 174px; position: absolute; left: 36px; padding: 6px 8px 5px 15px; border-bottom: 1px solid var(--ink); color: var(--ink); background: rgba(241,240,234,.9); font: 700 8px/1.25 Arial,Helvetica,sans-serif; letter-spacing: .1em; text-transform: uppercase; }
-.industrial-district b::before { width: 15px; height: 1px; position: absolute; left: -15px; top: 50%; background: var(--ink); content: ""; }
+.industrial-district b { width: 174px; position: absolute; left: 56px; padding: 6px 8px 5px 15px; border-bottom: 1px solid var(--ink); color: var(--ink); background: rgba(241,240,234,.9); font: 700 8px/1.25 Arial,Helvetica,sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+.industrial-district b::before { width: 35px; height: 1px; position: absolute; left: -35px; top: 50%; background: var(--ink); content: ""; }
 .industrial-district--top-right b { bottom: 27px; }
 .industrial-district--bottom-right b { width:260px; top:27px; }
 .waste-film[data-scene="sources"] .industrial-district { opacity: 1; transform: scale(1); }
@@ -201,7 +201,8 @@ body { overflow: hidden; color: var(--ink); background: var(--paper); font-famil
   .scene-copy { max-width: 650px; font-size: 16px; }
   .regional-field { width: 82%; height: 43%; right: 5%; top: 52%; }
   .industrial-district { transform-origin: 8px center; }
-  .industrial-district b { width: 150px; font-size: 7px; }
+  .industrial-district b { width:150px; left:48px; font-size:7px; }
+  .industrial-district b::before { width:27px; left:-27px; }
   .industrial-district--bottom-right b { width:210px; }
   .waste-site-label { max-width:150px; }
   .water-pathways { width: 78vw; right: 5%; top: 58%; transform: scale(.82); transform-origin: right top; }
@@ -228,6 +229,8 @@ body { overflow: hidden; color: var(--ink); background: var(--paper); font-famil
   .film-footer { left: 16px; right: 16px; bottom: 14px; }
   .regional-field { width: 94%; right: 1%; }
   .regional-field span { font-size: 7px; }
+  .industrial-district b { left:42px; }
+  .industrial-district b::before { width:21px; left:-21px; }
   .water-pathways { width: 94vw; right: 3%; top: 60%; transform: scale(.68); }
   .screening-vignette { right: -1%; transform: scale(.66); }
   .waste-film[data-scene="screening"] .screening-vignette { transform: scale(.66); }
