@@ -140,8 +140,10 @@
     .index-heading small { color:var(--red); font:700 8px/1 var(--sans); letter-spacing:.16em; text-transform:uppercase; }
     .index-heading strong { display:block; margin-top:11px; font:700 14px/1.05 var(--sans); text-transform:uppercase; }
     .index-nav { flex:1; padding:8px 0; overflow:auto; }
-    .index-nav a { position:relative; display:grid; grid-template-columns:28px 1fr; align-items:center; min-height:47px; padding:10px 18px; color:var(--muted); border-bottom:1px solid rgba(18,20,17,.07); text-decoration:none; font:700 9px/1.25 var(--sans); letter-spacing:.06em; text-transform:uppercase; }
-    .index-nav a span { font-size:8px; color:rgba(18,20,17,.4); }
+    .index-nav a,.index-nav-placeholder { position:relative; display:grid; grid-template-columns:28px 1fr; align-items:center; min-height:47px; padding:10px 18px; color:var(--muted); border-bottom:1px solid rgba(18,20,17,.07); text-decoration:none; font:700 9px/1.25 var(--sans); letter-spacing:.06em; text-transform:uppercase; }
+    .index-nav a span,.index-nav-placeholder span { font-size:8px; color:rgba(18,20,17,.4); }
+    .index-nav-placeholder { color:rgba(98,100,95,.48); cursor:default; }
+    .index-nav-placeholder span { color:rgba(18,20,17,.24); }
     .index-nav a::after { content:""; width:3px; position:absolute; left:0; top:0; bottom:0; background:transparent; }
     .index-nav a:hover,.index-nav a.is-active { color:var(--ink); background:var(--paper-deep); }
     .index-nav a.is-active::after { background:var(--red); }
@@ -899,6 +901,7 @@
           <a href="#project"><span>06</span>Project archive</a>
           <a href="#closing"><span>07</span>What remains</a>
           <a href="#health"><span>08</span>Health record</a>
+          <span class="index-nav-placeholder" aria-disabled="true"><span>09</span>Sanborn Map</span>
         </nav>
         <div class="index-foot"><a href="https://natalianeuhaus.github.io/GreetingsFromNiagaraProject/archive.html" data-dossier-viewer-target="evidence">Examine evidence →</a><a href="https://natalianeuhaus.github.io/GreetingsFromNiagaraProject/" data-dossier-viewer-target="map">Follow the geography →</a></div>
       </aside>
