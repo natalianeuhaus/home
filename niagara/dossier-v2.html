@@ -1573,6 +1573,7 @@
       const dossierViewerFrame = document.getElementById('dossier-viewer-frame');
       const dossierViewerLinks = [...document.querySelectorAll('[data-dossier-viewer-target]')];
       let dossierViewerReturnY = 0;
+      let dossierViewerReturnChapter = '';
       let dossierViewerOpen = false;
 
       const hideEmbeddedSiteChrome = () => {
@@ -1641,12 +1642,17 @@
         dossierViewerFrame.src = 'about:blank';
         dossierViewerFrame.title = '';
         setDossierViewerActive('');
+        chapterLinks.forEach(link => link.classList.toggle('is-active',link.hash === dossierViewerReturnChapter));
+        dossierViewerReturnChapter = '';
         if (restorePosition) requestAnimationFrame(() => window.scrollTo({top:dossierViewerReturnY,behavior:'auto'}));
       };
 
       const openDossierViewer = link => {
         const target = link.dataset.dossierViewerTarget;
-        if (!dossierViewerOpen) dossierViewerReturnY = window.scrollY;
+        if (!dossierViewerOpen) {
+          dossierViewerReturnY = window.scrollY;
+          dossierViewerReturnChapter = chapterLinks.find(chapterLink => chapterLink.classList.contains('is-active'))?.hash || '';
+        }
         if (window.scrollY < dossier.offsetTop) window.scrollTo({top:dossier.offsetTop,behavior:'auto'});
         dossierViewerOpen = true;
         const viewerTitles = {
@@ -1661,6 +1667,7 @@
         dossierViewer.setAttribute('aria-hidden','false');
         document.body.classList.add('is-dossier-viewer-open');
         setDossierViewerActive(target);
+        chapterLinks.forEach(chapterLink => chapterLink.classList.remove('is-active'));
       };
 
       dossierViewerLinks.forEach(link => link.addEventListener('click',event => {
@@ -1670,9 +1677,13 @@
       document.addEventListener('keydown',event => { if (event.key === 'Escape') closeDossierViewer(true); });
 
       const chapterLinks = [...document.querySelectorAll('.index-nav a')];
-      chapterLinks.forEach(link => link.addEventListener('click',() => closeDossierViewer(false)));
+      chapterLinks.forEach(link => link.addEventListener('click',() => {
+        closeDossierViewer(false);
+        chapterLinks.forEach(chapterLink => chapterLink.classList.toggle('is-active',chapterLink === link));
+      }));
       const chapters = [...document.querySelectorAll('[data-chapter]')];
       const chapterObserver = new IntersectionObserver(entries => {
+        if (dossierViewerOpen) return;
         const visible = entries.filter(entry => entry.isIntersecting).sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
         if (!visible) return;
         chapterLinks.forEach(link => link.classList.toggle('is-active',link.hash === '#' + visible.target.id));
