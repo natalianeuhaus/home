@@ -346,12 +346,11 @@
     .factory-list em { color:var(--muted); font:normal 700 8px/1 var(--sans); letter-spacing:.12em; text-transform:uppercase; }
     .factory-list a:hover strong { color:var(--red); }
 
-    .telvock { padding:clamp(72px,9vw,145px) clamp(30px,6vw,104px); display:grid; grid-template-columns:minmax(320px,.8fr) minmax(520px,1.2fr); gap:clamp(50px,7vw,110px); background:var(--paper-deep); }
-    .telvock figure { margin:0; position:sticky; top:calc(var(--top) + 30px); align-self:start; }
-    .telvock img { width:100%; display:block; background:var(--night); }
-    .telvock figcaption { padding-top:10px; color:var(--muted); font:8px/1.4 var(--sans); letter-spacing:.11em; text-transform:uppercase; }
-    .telvock-copy h4 { margin:20px 0 32px; font-size:clamp(52px,6vw,100px); font-weight:400; line-height:.84; letter-spacing:-.055em; }
-    .telvock-copy p { color:var(--copy-ink); font-size:clamp(18px,1.45vw,23px); line-height:1.53; }
+    .telvock { padding:clamp(72px,9vw,150px) clamp(30px,6vw,104px); background:var(--paper-deep); }
+    .telvock-copy { max-width:920px; margin:0 auto; }
+    .telvock-copy h4 { margin:20px 0 32px; font-size:clamp(42px,5vw,82px); font-weight:400; line-height:.92; letter-spacing:-.05em; }
+    .telvock-copy p { margin:0; color:var(--copy-ink); font-size:clamp(18px,1.5vw,24px); line-height:1.55; }
+    .telvock-copy p + p { margin-top:1.2em; }
     .telvock-links { margin-top:40px; border-top:1px solid var(--line); }
     .telvock-links a { display:block; padding:22px 0; border-bottom:1px solid var(--line); text-decoration:none; }
     .telvock-links span { color:var(--red); font:700 8px/1 var(--sans); letter-spacing:.12em; text-transform:uppercase; }
@@ -1387,7 +1386,6 @@
           </section>
 
           <div class="telvock">
-            <figure><img src="./archive/private-investigator-union-carbide.webp" alt="A 1979 private-investigator report concerning Union Carbide slag and fill" loading="lazy" /><figcaption>Probe International · private-investigator record · May 10, 1979</figcaption></figure>
             <article class="telvock-copy" data-reveal>
               <span class="evidence-label">Investigative Post · Buffalo</span><h4>Dan Telvock reopens the file.</h4>
               <p>Dan Telvock published the investigation through the Buffalo-based nonprofit news outlet Investigative Post in 2016 and 2017. He returned to Oak Ridge National Laboratory’s 1985 survey and compared its radioactive anomalies with the properties that had actually entered federal cleanup.</p>
