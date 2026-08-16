@@ -30,6 +30,7 @@
     body { margin:0; color:var(--ink); background:var(--paper); font-family:var(--serif); }
     body.is-index-open { overflow:hidden; }
     body.is-dossier-viewer-open { overflow:hidden; }
+    body.is-portfolio-menu-open { overflow:hidden; }
     img,video { max-width:100%; }
     a { color:inherit; text-underline-offset:.18em; }
     button { font:inherit; }
@@ -47,7 +48,30 @@
     .casebar-actions a:hover,.casebar-actions a:focus-visible,.casebar-actions a.is-active,.index-toggle:hover,.index-toggle:focus-visible { color:var(--paper); background:var(--red); }
     .casebar-actions a[data-dossier-viewer-target="photographs"],.casebar-actions a[data-dossier-viewer-target="photographs"].is-active { color:var(--paper); background:#111; }
     .casebar-actions a[data-dossier-viewer-target="photographs"]:hover,.casebar-actions a[data-dossier-viewer-target="photographs"]:focus-visible { background:#777772; }
+    .portfolio-menu-toggle { width:64px; min-width:64px; height:100%; padding:0; display:grid; place-content:center; gap:7px; border:0; border-left:1px solid var(--line); color:var(--ink); background:transparent; cursor:pointer; }
+    .portfolio-menu-toggle span { width:24px; height:1px; display:block; background:currentColor; transition:transform .35s cubic-bezier(.65,0,.35,1); }
+    .portfolio-menu-toggle:hover,.portfolio-menu-toggle:focus-visible { color:var(--paper); background:var(--red); outline:none; }
+    .portfolio-menu-toggle.is-open span:first-child { transform:translateY(4px) rotate(45deg); }
+    .portfolio-menu-toggle.is-open span:last-child { transform:translateY(-4px) rotate(-45deg); }
     .index-toggle { display:none; min-width:82px; }
+
+    .portfolio-menu-scrim { position:fixed; z-index:72; inset:var(--top) 0 0; border:0; background:rgba(0,0,0,.43); cursor:pointer; }
+    .portfolio-menu-panel { width:70vw; position:fixed; z-index:80; top:var(--top); right:0; bottom:0; padding:58px 36px 32px; display:flex; flex-direction:column; color:var(--paper); background:#101312; transform:translateX(102%); transition:transform .65s cubic-bezier(.76,0,.24,1); }
+    .portfolio-menu-panel.is-open { transform:none; }
+    .portfolio-menu-groups { min-height:0; flex:1; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); position:relative; }
+    .portfolio-menu-groups::before { content:""; position:absolute; z-index:1; top:54px; left:0; right:0; height:1px; background:rgba(255,255,255,.18); pointer-events:none; }
+    .portfolio-menu-group { padding:0 64px 28px; position:relative; }
+    .portfolio-menu-group:first-child { border-right:1px solid rgba(255,255,255,.14); }
+    .portfolio-menu-label { margin:0 0 42px; color:rgba(242,240,233,.52); font:9px/1.4 var(--sans); letter-spacing:.36em; text-transform:uppercase; }
+    .portfolio-menu-links { border-top:0; }
+    .portfolio-menu-links a { min-height:52px; padding:15px 0 13px; display:grid; grid-template-columns:34px 1fr; align-items:center; gap:16px; position:relative; color:var(--paper); font-size:clamp(16px,1.35vw,21px); text-decoration:none; transition:opacity .25s; }
+    .portfolio-menu-links a::after { content:""; width:0; height:1px; position:absolute; left:50px; bottom:7px; background:currentColor; opacity:.72; transition:width .42s cubic-bezier(.65,0,.35,1); }
+    .portfolio-menu-links a:hover,.portfolio-menu-links a:focus-visible { opacity:.62; outline:none; }
+    .portfolio-menu-links a:hover::after,.portfolio-menu-links a:focus-visible::after { width:calc(100% - 50px); }
+    .portfolio-menu-project-number { color:rgba(242,240,233,.44); font:9px/1 var(--sans); letter-spacing:.12em; }
+    .portfolio-menu-footer { margin-top:0; padding:30px 64px 0; display:flex; justify-content:space-between; gap:32px; border-top:1px solid rgba(255,255,255,.14); font-size:15px; line-height:1.4; }
+    .portfolio-menu-footer a { color:var(--paper); text-decoration:none; transition:opacity .25s; }
+    .portfolio-menu-footer a:hover,.portfolio-menu-footer a:focus-visible { opacity:.6; outline:none; }
 
     .cinematic-hero { min-height:calc(100svh - var(--top)); position:relative; display:grid; align-items:end; overflow:hidden; color:#fff; background:#0c0e0d; }
     .cinematic-hero::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(0,0,0,.82) 0%,rgba(0,0,0,.34) 50%,rgba(0,0,0,.08) 100%),linear-gradient(0deg,rgba(0,0,0,.66),transparent 55%); }
@@ -445,7 +469,17 @@
       .casebar-wordmark { border-right:0; }
       .casebar-file { display:none; }
       .casebar-actions a { display:none; }
+      .portfolio-menu-toggle { display:grid; }
       .index-toggle { display:flex; }
+      .portfolio-menu-panel { width:100%; padding:42px 20px 24px; }
+      .portfolio-menu-groups { display:block; overflow-y:auto; }
+      .portfolio-menu-groups::before { display:none; }
+      .portfolio-menu-group { padding:0 4px 18px; }
+      .portfolio-menu-group:first-child { border-right:0; }
+      .portfolio-menu-label { margin-bottom:18px; }
+      .portfolio-menu-links { border-top:1px solid rgba(255,255,255,.18); }
+      .portfolio-menu-links a { font-size:19px; }
+      .portfolio-menu-footer { padding:24px 4px 0; font-size:14px; }
       .hero-copy,.waterfalls-inner,.chapter-cover,.reading-grid,.love-layout,.containment,.survey-dashboard > header,.telvock,.project-origin > header,.origin-story,.public-record-grid,.closing-grid,.health-header { grid-template-columns:1fr; }
       .hero-copy { width:calc(100% - 42px); gap:42px; }
       .hero-title span,.hero-deck { margin-left:0; }
@@ -807,15 +841,35 @@
   <a class="skip-link" href="#dossier">Skip to the investigation</a>
 
   <header class="casebar">
-    <a class="casebar-wordmark" href="./rebuild.html">Greetings from Niagara</a>
+    <a class="casebar-wordmark" href="../index.html" aria-label="Natalia Neuhaus home">Natalia Neuhaus</a>
     <div class="casebar-file"><span>Manhattan District · <b>Open record</b></span><span>Report ID · 1942–present</span><span>Research file · 800+ sources</span></div>
     <div class="casebar-actions">
       <a href="https://natalianeuhaus.github.io/GreetingsFromNiagaraProject/archive.html" data-dossier-viewer-target="evidence">Evidence</a>
       <a href="https://natalianeuhaus.github.io/GreetingsFromNiagaraProject/" data-dossier-viewer-target="map">Interactive map</a>
       <a href="./dossier-v2-photographs-stage.html" data-dossier-viewer-target="photographs">Photographs</a>
+      <button class="portfolio-menu-toggle" type="button" aria-expanded="false" aria-controls="portfolio-menu" aria-label="Open menu"><span></span><span></span></button>
       <button class="index-toggle" type="button" aria-expanded="false" aria-controls="case-index">Index</button>
     </div>
   </header>
+
+  <nav class="portfolio-menu-panel" id="portfolio-menu" aria-hidden="true" aria-label="Portfolio navigation">
+    <div class="portfolio-menu-groups">
+      <section class="portfolio-menu-group" aria-label="Work">
+        <p class="portfolio-menu-label">Work</p>
+        <div class="portfolio-menu-links">
+          <a href="../burlesque-color/index.html" tabindex="-1"><span class="portfolio-menu-project-number">1</span><span>Burlesque</span></a>
+          <a href="../intermission/index.html" tabindex="-1"><span class="portfolio-menu-project-number">2</span><span>Intermission — Ongoing</span></a>
+          <a href="../healers/index.html" tabindex="-1"><span class="portfolio-menu-project-number">3</span><span>Healers</span></a>
+          <a href="./index.html" tabindex="-1"><span class="portfolio-menu-project-number">4</span><span>Greetings from Niagara</span></a>
+          <a href="../index.html#milk-route" tabindex="-1"><span class="portfolio-menu-project-number">5</span><span>Milk Route</span></a>
+          <a href="../index.html#the-tapestry" tabindex="-1"><span class="portfolio-menu-project-number">6</span><span>The Tapestry</span></a>
+          <a href="../index.html#fort-tilden" tabindex="-1"><span class="portfolio-menu-project-number">7</span><span>Fort Tilden</span></a>
+        </div>
+      </section>
+    </div>
+    <div class="portfolio-menu-footer"><a href="../index.html" tabindex="-1">Natalia Neuhaus</a><a href="../bio-contact/index.html" tabindex="-1">Bio &amp; Contact</a></div>
+  </nav>
+  <button class="portfolio-menu-scrim" type="button" aria-label="Close menu" hidden></button>
 
   <main>
     <section class="cinematic-hero" aria-labelledby="page-title">
@@ -1567,6 +1621,34 @@
       });
       index.querySelectorAll('a').forEach(link => link.addEventListener('click',closeIndex));
       document.addEventListener('keydown',event => { if (event.key === 'Escape') closeIndex(); });
+
+      const portfolioMenuToggle = document.querySelector('.portfolio-menu-toggle');
+      const portfolioMenuPanel = document.querySelector('.portfolio-menu-panel');
+      const portfolioMenuScrim = document.querySelector('.portfolio-menu-scrim');
+      const portfolioMenuLinks = [...portfolioMenuPanel.querySelectorAll('a')];
+      const setPortfolioMenuOpen = open => {
+        document.body.classList.toggle('is-portfolio-menu-open',open);
+        portfolioMenuToggle.classList.toggle('is-open',open);
+        portfolioMenuToggle.setAttribute('aria-expanded',String(open));
+        portfolioMenuToggle.setAttribute('aria-label',open ? 'Close menu' : 'Open menu');
+        portfolioMenuPanel.classList.toggle('is-open',open);
+        portfolioMenuPanel.setAttribute('aria-hidden',String(!open));
+        portfolioMenuScrim.hidden = !open;
+        portfolioMenuLinks.forEach(link => { link.tabIndex = open ? 0 : -1; });
+      };
+      portfolioMenuToggle.addEventListener('click',() => setPortfolioMenuOpen(!portfolioMenuPanel.classList.contains('is-open')));
+      portfolioMenuScrim.addEventListener('click',() => {
+        setPortfolioMenuOpen(false);
+        portfolioMenuToggle.focus();
+      });
+      portfolioMenuLinks.forEach(link => link.addEventListener('click',() => setPortfolioMenuOpen(false)));
+      document.addEventListener('keydown',event => {
+        if (event.key !== 'Escape' || !portfolioMenuPanel.classList.contains('is-open')) return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        setPortfolioMenuOpen(false);
+        portfolioMenuToggle.focus();
+      },true);
 
       const dossier = document.querySelector('.dossier');
       const dossierViewer = document.getElementById('dossier-viewer');
