@@ -285,6 +285,15 @@
     #surveys .story-resource-links { margin-top:24px; display:flex; flex-wrap:wrap; gap:11px 22px; }
     #surveys .story-resource-links a { width:max-content; max-width:100%; padding-bottom:3px; border-bottom:1px solid currentColor; color:var(--red); font:8px/1.4 var(--sans); letter-spacing:.13em; text-decoration:none; text-transform:uppercase; }
     #surveys .story-resource-links a:hover,#surveys .story-resource-links a:focus-visible { color:var(--ink); }
+    #surveys .waste-record-expansion { width:100%; min-height:calc(100svh - var(--top)); margin:clamp(84px,11svh,130px) 0 0; padding:clamp(76px,10svh,130px) clamp(42px,6.5vw,100px); display:flex; flex-direction:column; justify-content:center; background:#d8d5cd; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+    #surveys .waste-record-expansion-header { display:grid; grid-template-columns:minmax(180px,.35fr) minmax(520px,1.15fr); gap:clamp(54px,8vw,140px); align-items:start; }
+    #surveys .waste-record-expansion-label { padding-top:9px; color:var(--red); font:9px/1.4 var(--sans); letter-spacing:.17em; text-transform:uppercase; }
+    #surveys .waste-record-expansion h4 { max-width:980px; margin:0; font-size:clamp(48px,5.7vw,88px); font-weight:400; line-height:.92; letter-spacing:-.052em; }
+    #surveys .waste-record-grid { margin-top:clamp(58px,8svh,94px); display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-top:1px solid rgba(21,23,21,.26); border-left:1px solid rgba(21,23,21,.26); }
+    #surveys .waste-record-card { min-height:290px; padding:clamp(28px,3.4vw,48px); border-right:1px solid rgba(21,23,21,.26); border-bottom:1px solid rgba(21,23,21,.26); }
+    #surveys .waste-record-card > span { display:block; margin-bottom:50px; color:var(--red); font:9px/1.2 var(--sans); letter-spacing:.16em; }
+    #surveys .waste-record-card h5 { margin:0 0 18px; font-size:clamp(25px,2.5vw,38px); font-weight:400; line-height:1; letter-spacing:-.035em; }
+    #surveys .waste-record-card p { margin:0; color:rgba(21,23,21,.7); font:14px/1.55 var(--sans); letter-spacing:0; }
 
     .survey-dashboard { padding:clamp(76px,9vw,145px) clamp(30px,6vw,104px); background:var(--night); color:var(--paper); }
     .survey-dashboard > header { display:grid; grid-template-columns:.42fr 1fr; gap:8vw; align-items:end; padding-bottom:64px; border-bottom:1px solid var(--line-dark); }
@@ -439,6 +448,10 @@
       #surveys .waste-section-copy { margin-left:0; }
       #surveys .waste-survey-timeline { grid-template-columns:1fr; }
       #surveys .waste-survey-item { min-height:0; }
+      #surveys .waste-record-expansion { min-height:0; margin-top:76px; padding:64px 24px 78px; }
+      #surveys .waste-record-expansion-header,#surveys .waste-record-grid { grid-template-columns:1fr; gap:20px; }
+      #surveys .waste-record-grid { gap:0; }
+      #surveys .waste-record-card { min-height:0; }
       .reading-grid,.love-layout,.telvock,.project-origin > header,.origin-story,.public-record-grid,.closing-grid,.health-header { gap:48px; }
       .love-slag-evidence { grid-template-columns:1fr; gap:24px; order:2; }
       .love-slag-evidence-copy { min-height:0; padding:28px 0 0; border-top:1px solid var(--line); border-left:0; }
@@ -1271,8 +1284,32 @@
             </section>
           </div>
 
+          <section class="waste-record-expansion" aria-labelledby="dossier-record-expansion-title">
+            <header class="waste-record-expansion-header">
+              <span class="waste-record-expansion-label">How the record expanded</span>
+              <h4 id="dossier-record-expansion-title">More factories entered the record.</h4>
+            </header>
+            <div class="waste-record-grid">
+              <article class="waste-record-card">
+                <span>01</span>
+                <h5>The 1981 investigation</h5>
+                <p><em>The Federal Connection</em> documented a federal uranium-production and waste network connecting Linde, Electromet, Hooker, and LOOW. It established the system, but it was never a complete inventory of every Niagara factory that handled radioactive material.</p>
+              </article>
+              <article class="waste-record-card">
+                <span>02</span>
+                <h5>Worker-exposure records</h5>
+                <p>Later NIOSH dose-reconstruction files documented radioactive processes and worker exposures at additional facilities. These records expanded the history of where radioactive materials were handled, but did not by themselves prove that a factory caused a particular offsite hotspot.</p>
+              </article>
+              <article class="waste-record-card">
+                <span>03</span>
+                <h5>Surveys of former factory sites</h5>
+                <p>Radiological surveys were also conducted at brownfields where factories had operated. These site investigations documented contamination at former industrial properties, including beneath roads, parking areas, and parcels being prepared for redevelopment.</p>
+              </article>
+            </div>
+          </section>
+
           <section class="factory-ledger">
-            <header data-reveal><span class="evidence-label">How the record expanded</span><h4>The factory list kept growing.</h4><p><em>The Federal Connection</em> revealed a system, but it was not a complete inventory. Later worker-exposure records, radiological surveys of former factory properties, and brownfield files added other facilities and changing company names to the archive.</p></header>
+            <header data-reveal><span class="evidence-label">Additional facilities in later records</span><h4>The factory list kept growing.</h4></header>
             <div class="factory-list" aria-label="Additional facilities in later records">
               <a href="./rebuild.html?archive=Carborundum#evidence"><span>01</span><strong>National Carbon + Carborundum</strong><em>Open related records →</em></a>
               <a href="./rebuild.html?archive=Steel#evidence"><span>02</span><strong>Pittsburgh Metallurgical / Globe</strong><em>Open related records →</em></a>
