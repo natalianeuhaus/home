@@ -196,7 +196,7 @@ industrialDistricts.forEach((district, index) => {
 });
 
 const allScenes = [
-  { name: "sources", duration: 25500 },
+  { name: "sources", duration: 27500 },
   { name: "water", duration: 10000 },
   { name: "screening", duration: 10500 },
   { name: "final", duration: 11500 }
