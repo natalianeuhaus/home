@@ -294,6 +294,8 @@
     #surveys .waste-record-card > span { display:block; margin-bottom:50px; color:var(--red); font:9px/1.2 var(--sans); letter-spacing:.16em; }
     #surveys .waste-record-card h5 { margin:0 0 18px; font-size:clamp(25px,2.5vw,38px); font-weight:400; line-height:1; letter-spacing:-.035em; }
     #surveys .waste-record-card p { margin:0; color:rgba(21,23,21,.7); font:14px/1.55 var(--sans); letter-spacing:0; }
+    #surveys .waste-network-embed { width:100%; margin:0; position:relative; border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--paper); }
+    #surveys .waste-network-embed-frame { width:100%; height:calc(100svh - var(--top)); min-height:620px; display:block; border:0; background:var(--paper); }
 
     .survey-dashboard { padding:clamp(76px,9vw,145px) clamp(30px,6vw,104px); background:var(--night); color:var(--paper); }
     .survey-dashboard > header { display:grid; grid-template-columns:.42fr 1fr; gap:8vw; align-items:end; padding-bottom:64px; border-bottom:1px solid var(--line-dark); }
@@ -452,6 +454,7 @@
       #surveys .waste-record-expansion-header,#surveys .waste-record-grid { grid-template-columns:1fr; gap:20px; }
       #surveys .waste-record-grid { gap:0; }
       #surveys .waste-record-card { min-height:0; }
+      #surveys .waste-network-embed-frame { height:calc(100svh - var(--top)); min-height:650px; }
       .reading-grid,.love-layout,.telvock,.project-origin > header,.origin-story,.public-record-grid,.closing-grid,.health-header { gap:48px; }
       .love-slag-evidence { grid-template-columns:1fr; gap:24px; order:2; }
       .love-slag-evidence-copy { min-height:0; padding:28px 0 0; border-top:1px solid var(--line); border-left:0; }
@@ -1319,6 +1322,10 @@
               <a href="./rebuild.html#map"><span>06</span><strong>Buffalo Avenue + Highland Avenue corridors</strong><em>Compare on the map →</em></a>
             </div>
           </section>
+
+          <figure class="waste-network-embed" aria-label="Animated map tracing the regional radioactive-waste network">
+            <iframe class="waste-network-embed-frame" title="Where the Waste Moved: production, storage, and disposal sites" src="./waste-network/?slide=1&amp;nav=0&amp;v=35" loading="lazy"></iframe>
+          </figure>
         </section>
 
         <section class="chapter" id="union-carbide" data-chapter>
