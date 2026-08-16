@@ -204,22 +204,30 @@ const allScenes = [
 
 const wasteNetworkParams = new URLSearchParams(window.location.search);
 const requestedSlide = Number.parseInt(wasteNetworkParams.get("slide"), 10);
-const embeddedSlideIndex = Number.isInteger(requestedSlide) && requestedSlide >= 1 && requestedSlide <= allScenes.length
-  ? requestedSlide - 1
-  : -1;
-const scenes = embeddedSlideIndex >= 0 ? [allScenes[embeddedSlideIndex]] : allScenes;
+const requestedSlides = (wasteNetworkParams.get("slides") || "")
+  .split(",")
+  .map(value => Number.parseInt(value, 10))
+  .filter((value, index, values) => Number.isInteger(value) && value >= 1 && value <= allScenes.length && values.indexOf(value) === index);
+const embeddedSlideIndices = requestedSlides.length
+  ? requestedSlides.map(value => value - 1)
+  : Number.isInteger(requestedSlide) && requestedSlide >= 1 && requestedSlide <= allScenes.length
+    ? [requestedSlide - 1]
+    : [];
+const isEmbeddedSequence = embeddedSlideIndices.length > 0;
+const scenes = isEmbeddedSequence ? embeddedSlideIndices.map(index => allScenes[index]) : allScenes;
 
 if (wasteNetworkParams.get("nav") === "0") {
   film.dataset.navigation = "hidden";
 }
 
-if (embeddedSlideIndex >= 0) {
-  film.dataset.embeddedSlide = String(requestedSlide);
-  film.dataset.scene = allScenes[embeddedSlideIndex].name;
+if (isEmbeddedSequence) {
+  const firstEmbeddedSlide = embeddedSlideIndices[0];
+  film.dataset.embeddedSlide = embeddedSlideIndices.map(index => index + 1).join("-");
+  film.dataset.scene = allScenes[firstEmbeddedSlide].name;
   sceneElements.forEach(element => {
-    element.classList.toggle("is-active", element.dataset.sceneName === allScenes[embeddedSlideIndex].name);
+    element.classList.toggle("is-active", element.dataset.sceneName === allScenes[firstEmbeddedSlide].name);
   });
-  sceneCounter.textContent = `${String(requestedSlide).padStart(2, "0")} / ${String(allScenes.length).padStart(2, "0")}`;
+  sceneCounter.textContent = `${String(firstEmbeddedSlide + 1).padStart(2, "0")} / ${String(allScenes.length).padStart(2, "0")}`;
   const durationLabel = document.querySelector(".film-header span:last-child");
   if (durationLabel) durationLabel.textContent = "Waste movement · Animated map";
 }
@@ -312,7 +320,7 @@ function updateProgress(timestamp) {
   if (elapsed < totalDuration && !isPaused) {
     progressFrame = window.requestAnimationFrame(updateProgress);
   } else if (elapsed >= totalDuration) {
-    if (embeddedSlideIndex >= 0) {
+    if (isEmbeddedSequence) {
       restartFilm();
       return;
     }
