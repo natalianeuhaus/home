@@ -311,11 +311,19 @@
     #surveys .waste-section-copy { margin-left:calc(112px + clamp(22px,4vw,54px)); }
     #surveys .waste-section-copy p { max-width:900px; margin:0; color:var(--copy-ink); font-size:clamp(18px,1.35vw,23px); line-height:1.47; letter-spacing:-.012em; }
     #surveys .waste-section-copy p + p { margin-top:1.2em; }
-    #surveys .waste-survey-timeline { margin-top:44px; display:grid; grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr); border-top:1px solid var(--line); border-left:1px solid var(--line); }
-    #surveys .waste-survey-item { min-height:196px; padding:25px 22px 28px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); }
-    #surveys .waste-survey-item time { display:block; margin-bottom:30px; color:var(--red); font:10px/1 var(--sans); letter-spacing:.14em; }
-    #surveys .waste-survey-item p { margin:0; color:rgba(18,20,17,.72); font:14px/1.48 var(--sans); letter-spacing:0; }
-    #surveys .waste-survey-source { width:max-content; display:block; margin-top:24px; padding-bottom:3px; border-bottom:1px solid currentColor; color:var(--red); font:9px/1.4 var(--sans); letter-spacing:.13em; text-decoration:none; text-transform:uppercase; }
+    #surveys .waste-survey-timeline { margin-top:70px; display:block; }
+    #surveys .waste-survey-item { width:100%; margin:0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+    #surveys .waste-survey-item + .waste-survey-item { margin-top:45px; }
+    #surveys .waste-survey-item summary { min-height:114px; position:relative; padding:25px 64px 25px 0; list-style:none; cursor:pointer; }
+    #surveys .waste-survey-item summary::-webkit-details-marker { display:none; }
+    #surveys .waste-survey-item summary::after { content:"+"; position:absolute; top:24px; right:0; color:var(--ink); font:400 28px/1 var(--sans); }
+    #surveys .waste-survey-item[open] summary::after { content:"−"; }
+    #surveys .waste-survey-item time { display:block; color:var(--ink); font:400 9px/1 var(--sans); letter-spacing:.15em; }
+    #surveys .waste-survey-item summary strong { display:block; margin-top:15px; color:var(--ink); font:400 clamp(27px,2.6vw,42px)/1 var(--serif); letter-spacing:-.035em; }
+    #surveys .waste-survey-item-copy { max-width:680px; padding:0 64px 30px 0; color:var(--muted); font:400 14px/1.5 var(--serif); }
+    #surveys .waste-survey-item-copy p { margin:0; }
+    #surveys .waste-survey-item-copy p + p { margin-top:1.1em; }
+    #surveys .waste-survey-source { color:inherit; font:inherit; letter-spacing:normal; text-underline-offset:.16em; text-decoration-thickness:1px; }
     #surveys .waste-survey-source:hover,#surveys .waste-survey-source:focus-visible { color:var(--ink); }
     #surveys .story-resource-links { margin-top:24px; display:flex; flex-wrap:wrap; gap:11px 22px; }
     #surveys .story-resource-links a { width:max-content; max-width:100%; padding-bottom:3px; border-bottom:1px solid currentColor; color:var(--red); font:8px/1.4 var(--sans); letter-spacing:.13em; text-decoration:none; text-transform:uppercase; }
@@ -1376,8 +1384,20 @@
                 <p>Once industrial slag emerged as a source of contamination, the search could no longer be confined to suspected routes leading to LOOW. Later radiological surveys examined former factory properties and redevelopment sites, especially within Niagara Falls’s two principal industrial districts: the Buffalo Avenue corridor along the river and the Highland Avenue corridor beside residential neighborhoods.</p>
               </div>
               <div class="waste-survey-timeline" aria-label="Early radiological surveys and follow-up work">
-                <article class="waste-survey-item"><time>1978–1979</time><p><strong>Where were radiation levels elevated?</strong> The aerial surveys mapped radiation above the surrounding background across broad areas. Because airborne readings averaged radiation over several acres, they could not identify the precise source or property responsible. Ground measurements were required.</p><a class="waste-survey-source" href="https://lmpublicsearch.lm.doe.gov/lmsites/2711-ny.17-6.pdf" target="_blank" rel="noopener noreferrer">View the 1979 aerial survey →</a></article>
-                <article class="waste-survey-item"><time>1984–1985</time><p><strong>What was present at those locations?</strong> A vehicle survey identified 100 gamma anomalies for follow-up. In 1985, ORNL measured and sampled exterior locations—not the interiors of homes or businesses. Thirty-eight anomalies exceeded FUSRAP guidelines; the remaining 62 were associated with radioactive industrial slag beneath asphalt driveways and parking lots.</p><a class="waste-survey-source" href="https://natalianeuhaus.com/wp-content/uploads/2026/07/ORNL_1985_Niagara_Falls_Radiological_Survey_18050447.pdf" target="_blank" rel="noopener noreferrer">View the 1985 field survey →</a></article>
+                <details class="waste-survey-item" open>
+                  <summary><time>1978–1979 · Aerial radiological surveys</time><strong>Where were radiation levels elevated?</strong></summary>
+                  <div class="waste-survey-item-copy">
+                    <p>The aerial surveys mapped radiation above the surrounding background across broad areas. Because airborne readings averaged radiation over several acres, they could not identify the precise source or property responsible. Ground measurements were required.</p>
+                    <p><a class="waste-survey-source" href="https://lmpublicsearch.lm.doe.gov/lmsites/2711-ny.17-6.pdf" target="_blank" rel="noopener noreferrer">View the 1979 aerial survey →</a></p>
+                  </div>
+                </details>
+                <details class="waste-survey-item" open>
+                  <summary><time>1984–1985 · Vehicle + ground surveys</time><strong>What was present at those locations?</strong></summary>
+                  <div class="waste-survey-item-copy">
+                    <p>A vehicle survey identified 100 gamma anomalies for follow-up. In 1985, ORNL measured and sampled exterior locations—not the interiors of homes or businesses. Thirty-eight anomalies exceeded FUSRAP guidelines; the remaining 62 were associated with radioactive industrial slag beneath asphalt driveways and parking lots.</p>
+                    <p><a class="waste-survey-source" href="https://natalianeuhaus.com/wp-content/uploads/2026/07/ORNL_1985_Niagara_Falls_Radiological_Survey_18050447.pdf" target="_blank" rel="noopener noreferrer">View the 1985 field survey →</a></p>
+                  </div>
+                </details>
               </div>
               <div class="story-resource-links">
                 <a href="https://natalianeuhaus.github.io/GreetingsFromNiagaraProject/archive.html" data-dossier-viewer-target="evidence" data-dossier-archive-query="radiological survey">Search the survey archive →</a>
