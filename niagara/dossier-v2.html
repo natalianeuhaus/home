@@ -707,14 +707,6 @@
     .atomic-process-copy p:last-child { margin-bottom:0; }
     .atomic-process-links { display:flex; flex-wrap:wrap; column-gap:24px; row-gap:10px; }
     .linde-document-text-link { text-decoration-thickness:1px; text-decoration-color:rgba(18,20,17,.42); }
-    .linde-document-pair { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(18px,3vw,34px); margin:clamp(34px,4.5vw,54px) 0 1.55em; }
-    .linde-document-card { margin:0; scroll-margin-top:calc(var(--top) + 28px); }
-    .linde-document-card > a { display:block; color:inherit; text-decoration:none; }
-    .linde-document-image { width:100%; height:auto; display:block; border:1px solid rgba(18,20,17,.15); filter:invert(1) grayscale(1); mix-blend-mode:multiply; }
-    .linde-document-card figcaption { margin-top:10px; color:rgba(18,20,17,.6); font:9px/1.45 Arial,Helvetica,sans-serif; letter-spacing:.11em; text-transform:uppercase; }
-    @media (max-width:680px) {
-      .linde-document-pair { grid-template-columns:1fr; gap:30px; }
-    }
     .atomic-process-reveal { width:min(900px,calc(100% - 48px)); margin:clamp(30px,calc(15svh - 80px),100px) clamp(24px,8vw,140px) clamp(92px,12svh,150px) auto; margin-bottom:calc(clamp(92px,12svh,150px) + 120px); padding:clamp(8px,1vw,14px) 0 clamp(8px,1vw,14px) clamp(26px,4vw,62px); box-sizing:border-box; position:relative; border-left:1px solid var(--red); }
     .atomic-process-reveal-label { display:block; margin:0 0 clamp(18px,2.5svh,28px); color:var(--red); font:9px/1.4 Arial,Helvetica,sans-serif; letter-spacing:.18em; text-transform:uppercase; }
     .atomic-process-reveal p { margin:0; color:var(--copy-ink); font-size:clamp(19px,1.55vw,25px); line-height:1.45; letter-spacing:-.014em; }
@@ -1091,21 +1083,7 @@
                   <div class="atomic-process-copy">
                     <p>Before the Manhattan Project, Linde’s ceramics business used uranium compounds to produce colored salts for ceramic glazes—the origin of the name Linde Ceramics. That chemical experience helped lead the Army to select Linde for large-scale uranium processing.</p>
                     <p>Linde Air Products, a division of Union Carbide and Carbon Corporation, converted high-grade uranium ore—much of it mined in the Belgian Congo—into uranium tetrafluoride, or <em>“green salt,”</em> for shipment to Electromet in Niagara Falls. The work generated a vast waste stream.</p>
-                    <p>In 1944, after a process change made the liquid waste too caustic for the sanitary sewer, <a class="linde-document-text-link" href="#linde-letter-1944">Linde proposed two alternatives to the Army</a>: discharge it through a storm sewer into Two Mile Creek and ultimately the Niagara River, or inject it into an onsite well. Linde’s legal department favored the well because the path of underground water would be difficult to determine and “responsibility for contamination could not be fixed.” <a class="linde-document-text-link" href="#linde-army-response-1944">The Army replied that it had “no objection” to either plan</a>. Linde chose the well; when the injection wells became blocked, the waste was discharged into the storm sewer. <a href="https://www.cdc.gov/niosh/ocas/pdfs/tbd/lindec-r4.pdf" target="_blank" rel="noopener">Federal estimates</a> indicate that approximately 55 million gallons entered seven injection wells and another 56 million gallons entered the storm-sewer system.</p>
-                    <div class="linde-document-pair" aria-label="1944 correspondence concerning Linde liquid-waste disposal">
-                      <figure class="linde-document-card" id="linde-letter-1944">
-                        <a href="./assets/linde-disposal-letter-march-29-1944.jpg" target="_blank" rel="noopener" aria-label="Open Linde’s March 29, 1944 disposal letter">
-                          <img class="linde-document-image" src="./assets/linde-disposal-letter-march-29-1944.jpg" alt="Linde Air Products letter to the Manhattan Engineer District dated March 29, 1944, proposing storm-sewer discharge or disposal into an onsite well." loading="lazy" decoding="async" />
-                          <figcaption>Linde to the Manhattan Engineer District · March 29, 1944</figcaption>
-                        </a>
-                      </figure>
-                      <figure class="linde-document-card" id="linde-army-response-1944">
-                        <a href="./assets/army-response-april-3-1944.jpg" target="_blank" rel="noopener" aria-label="Open the Army’s April 3, 1944 response">
-                          <img class="linde-document-image" src="./assets/army-response-april-3-1944.jpg" alt="War Department letter dated April 3, 1944, stating that the Army had no objection to either proposed disposal method." loading="lazy" decoding="async" />
-                          <figcaption>War Department response · April 3, 1944</figcaption>
-                        </a>
-                      </figure>
-                    </div>
+                    <p>In 1944, after a process change made the liquid waste too caustic for the sanitary sewer, <a class="linde-document-text-link" href="./assets/linde-disposal-letter-march-29-1944.jpg" target="_blank" rel="noopener">Linde proposed two alternatives to the Army</a>: discharge it through a storm sewer into Two Mile Creek and ultimately the Niagara River, or inject it into an onsite well. Linde’s legal department favored the well because the path of underground water would be difficult to determine and “responsibility for contamination could not be fixed.” <a class="linde-document-text-link" href="./assets/army-response-april-3-1944.jpg" target="_blank" rel="noopener">The Army replied that it had “no objection” to either plan</a>. Linde chose the well; when the injection wells became blocked, the waste was discharged into the storm sewer. <a href="https://www.cdc.gov/niosh/ocas/pdfs/tbd/lindec-r4.pdf" target="_blank" rel="noopener">Federal estimates</a> indicate that approximately 55 million gallons entered seven injection wells and another 56 million gallons entered the storm-sewer system.</p>
                     <p>Solid radioactive residues were sent to Ashland 1 and later spread to Seaway and Ashland 2. Linde and the three disposal properties became federal cleanup sites under the <a href="https://www.usace.army.mil/Missions/Environmental/FUSRAP/" target="_blank" rel="noopener">Formerly Utilized Sites Remedial Action Program</a>, or FUSRAP—the program responsible for cleaning properties contaminated by Manhattan Project and early federal atomic work.</p>
                     <div class="atomic-process-links">
                       <a class="atomic-process-archive-link" href="https://natalianeuhaus.github.io/GreetingsFromNiagaraProject/archive.html" data-dossier-viewer-target="evidence" data-dossier-archive-query="Linde">View Linde archive →</a>
