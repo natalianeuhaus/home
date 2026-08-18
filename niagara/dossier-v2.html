@@ -1685,11 +1685,20 @@
       let dossierViewerOpen = false;
       let dossierViewerArchiveQuery = '';
 
+      const revealDossierViewerFrame = () => {
+        requestAnimationFrame(() => {
+          if (dossierViewerOpen) dossierViewerFrame.style.visibility = 'visible';
+        });
+      };
+
       const hideEmbeddedSiteChrome = () => {
         if (!dossierViewerOpen || dossierViewerFrame.src === 'about:blank') return;
         try {
           const embeddedDocument = dossierViewerFrame.contentDocument;
-          if (!embeddedDocument || !embeddedDocument.head) return;
+          if (!embeddedDocument || !embeddedDocument.head) {
+            revealDossierViewerFrame();
+            return;
+          }
           let style = embeddedDocument.getElementById('dossier-embedded-chrome');
           if (!style) {
             style = embeddedDocument.createElement('style');
@@ -1737,8 +1746,18 @@
             }
           }
 
+          if (dossierViewer.dataset.view === 'map' && embeddedDocument.documentElement.dataset.dossierMapPositioned !== 'true') {
+            const embeddedWindow = embeddedDocument.defaultView;
+            if (embeddedWindow) {
+              embeddedWindow.eval('map.panBy([0,300],{animate:false})');
+              embeddedDocument.documentElement.dataset.dossierMapPositioned = 'true';
+            }
+          }
+
+          revealDossierViewerFrame();
         } catch (error) {
           /* Both published pages share an origin; leave the viewer usable if that changes. */
+          revealDossierViewerFrame();
         }
       };
 
@@ -1784,6 +1803,7 @@
         };
         dossierViewerFrame.title = viewerTitles[target] || 'Greetings from Niagara';
         dossierViewer.dataset.view = target;
+        dossierViewerFrame.style.visibility = target === 'map' ? 'hidden' : 'visible';
         dossierViewerFrame.src = link.href;
         dossierViewer.classList.add('is-open');
         dossierViewer.setAttribute('aria-hidden','false');
