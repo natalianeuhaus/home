@@ -1737,13 +1737,6 @@
             }
           }
 
-          if (dossierViewer.dataset.view === 'map' && embeddedDocument.documentElement.dataset.dossierMapPositioned !== 'true') {
-            const embeddedWindow = embeddedDocument.defaultView;
-            if (embeddedWindow) {
-              embeddedWindow.eval('map.panBy([0,120],{animate:false})');
-              embeddedDocument.documentElement.dataset.dossierMapPositioned = 'true';
-            }
-          }
         } catch (error) {
           /* Both published pages share an origin; leave the viewer usable if that changes. */
         }
