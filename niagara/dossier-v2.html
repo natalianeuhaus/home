@@ -333,7 +333,9 @@
     #surveys .palmeri-case-study h5 { margin:0 0 30px; font-size:clamp(34px,4.1vw,62px); font-weight:400; line-height:.98; letter-spacing:-.043em; }
     #surveys .palmeri-case-study p { max-width:900px; margin:0; color:var(--copy-ink); font-size:clamp(18px,1.35vw,23px); line-height:1.47; letter-spacing:-.012em; }
     #surveys .palmeri-case-study p + p { margin-top:1.2em; }
-    .waste-record-expansion { width:calc(100% + clamp(30px,6vw,104px) + clamp(30px,6vw,104px)); min-height:calc(100svh - var(--top)); margin:clamp(84px,11svh,130px) calc(0px - clamp(30px,6vw,104px)) 0; padding:clamp(76px,10svh,130px) clamp(42px,6.5vw,100px); display:flex; flex-direction:column; justify-content:center; background:#d8d5cd; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+    .waste-record-expansion { width:100%; min-height:calc(100svh - var(--top)); position:relative; isolation:isolate; margin:clamp(84px,11svh,130px) 0 0; padding:clamp(76px,10svh,130px) clamp(42px,6.5vw,100px); display:flex; flex-direction:column; justify-content:center; background:transparent; }
+    .waste-record-expansion::before { content:""; position:absolute; z-index:0; top:0; bottom:0; left:-100vw; right:-100vw; background:#d8d5cd; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+    .waste-record-expansion > * { position:relative; z-index:1; }
     .waste-record-expansion-header { display:grid; grid-template-columns:minmax(180px,.35fr) minmax(520px,1.15fr); gap:clamp(54px,8vw,140px); align-items:start; }
     .waste-record-expansion-label { padding-top:9px; color:var(--red); font:9px/1.4 var(--sans); letter-spacing:.17em; text-transform:uppercase; }
     .waste-record-expansion h4 { max-width:980px; margin:0; font-size:clamp(48px,5.7vw,88px); font-weight:400; line-height:.92; letter-spacing:-.052em; }
@@ -526,7 +528,7 @@
       #surveys .waste-section-copy { margin-left:0; }
       #surveys .waste-survey-timeline { grid-template-columns:1fr; }
       #surveys .waste-survey-item { min-height:0; }
-      .waste-record-expansion { width:calc(100% + 44px); min-height:0; margin-top:76px; margin-left:-22px; margin-right:-22px; padding:64px 24px 78px; }
+      .waste-record-expansion { width:100%; min-height:0; margin-top:76px; padding:64px 24px 78px; }
       .waste-record-expansion-header,.waste-record-grid { grid-template-columns:1fr; gap:20px; }
       .waste-record-summary { margin-top:42px; grid-template-columns:1fr; gap:0; }
       .waste-record-summary p { grid-column:1; }
