@@ -347,7 +347,7 @@
     .waste-record-card > span { display:block; margin-bottom:50px; color:var(--red); font:9px/1.2 var(--sans); letter-spacing:.16em; }
     .waste-record-card h5 { margin:0 0 18px; font-size:clamp(25px,2.5vw,38px); font-weight:400; line-height:1; letter-spacing:-.035em; }
     .waste-record-card p { margin:0; color:rgba(21,23,21,.7); font:14px/1.55 var(--sans); letter-spacing:0; }
-    .waste-network-embed { width:100%; margin:0; position:relative; border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--paper); }
+    .waste-network-embed { width:calc(100% + clamp(30px,6vw,104px) + clamp(30px,6vw,104px)); margin:0 calc(0px - clamp(30px,6vw,104px)); position:relative; border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--paper); }
     .waste-network-embed-frame { width:100%; height:calc(100svh - var(--top)); min-height:620px; display:block; border:0; background:var(--paper); }
     .waste-brownfield-explainer { min-height:calc(100svh - var(--top)); margin:0; padding:clamp(34px,4.5vw,62px) calc(clamp(42px,6.5vw,100px) + clamp(34px,4.5vw,62px)); display:grid; grid-template-columns:minmax(220px,.42fr) minmax(0,1fr); gap:clamp(42px,7vw,110px); align-items:center; color:var(--ink); background:#d8d5cd; }
     .waste-brownfield-explainer-label { display:block; margin-bottom:18px; color:rgba(21,23,21,.58); font:9px/1.4 var(--sans); letter-spacing:.17em; text-transform:uppercase; }
@@ -537,6 +537,7 @@
       .waste-record-summary p { grid-column:1; }
       .waste-record-grid { gap:0; }
       .waste-record-card { min-height:0; }
+      .waste-network-embed { width:calc(100% + 44px); margin-left:-22px; margin-right:-22px; }
       .waste-network-embed-frame { height:calc(100svh - var(--top)); min-height:650px; }
       .waste-brownfield-explainer { min-height:0; grid-template-columns:1fr; gap:34px; margin:64px 24px 78px; padding:34px 26px; }
       #union-carbide .union-carbide-chapter-marker { min-height:0; }
@@ -1520,7 +1521,7 @@
             </section>
 
             <figure class="waste-network-embed" aria-label="Animated map tracing the regional radioactive-waste network">
-              <iframe class="waste-network-embed-frame" title="Where the Waste Moved: production, storage, and disposal sites" src="./waste-network/?slide=1&amp;nav=0&amp;v=40" loading="lazy"></iframe>
+              <iframe class="waste-network-embed-frame" title="Where the Waste Moved: production, storage, and disposal sites" src="./waste-network/?slide=1&amp;nav=0&amp;v=42" loading="lazy"></iframe>
             </figure>
 
             <aside class="waste-brownfield-explainer" aria-labelledby="dossier-brownfield-title">
