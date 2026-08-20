@@ -334,7 +334,7 @@
     #surveys .palmeri-case-study p { max-width:900px; margin:0; color:var(--copy-ink); font-size:clamp(18px,1.35vw,23px); line-height:1.47; letter-spacing:-.012em; }
     #surveys .palmeri-case-study p + p { margin-top:1.2em; }
     .waste-record-expansion { width:100%; min-height:calc(100svh - var(--top)); position:relative; isolation:isolate; margin:clamp(84px,11svh,130px) 0 0; padding:clamp(76px,10svh,130px) clamp(42px,6.5vw,100px); display:flex; flex-direction:column; justify-content:center; background:transparent; }
-    .waste-record-expansion::before { content:""; position:absolute; z-index:0; top:0; bottom:0; left:-100vw; right:-100vw; background:#d8d5cd; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+    .waste-record-expansion::before { content:""; position:absolute; z-index:0; top:0; bottom:0; left:-100vw; right:-100vw; background:#d8d5cd; border-top:1px solid var(--line); }
     .waste-record-expansion > * { position:relative; z-index:1; }
     .waste-record-expansion-header { display:grid; grid-template-columns:minmax(180px,.35fr) minmax(520px,1.15fr); gap:clamp(54px,8vw,140px); align-items:start; }
     .waste-record-expansion-label { padding-top:9px; color:var(--red); font:9px/1.4 var(--sans); letter-spacing:.17em; text-transform:uppercase; }
@@ -388,7 +388,9 @@
     .survey-map img { width:100%; max-height:760px; display:block; object-fit:cover; filter:invert(1) grayscale(1) contrast(.85); opacity:.85; }
     .survey-map figcaption { position:absolute; left:20px; bottom:18px; padding:8px 10px; background:rgba(12,17,16,.82); color:rgba(242,240,233,.68); font:8px/1.4 var(--sans); letter-spacing:.12em; text-transform:uppercase; }
 
-    .factory-ledger { padding:clamp(72px,9vw,140px) clamp(30px,6vw,104px); }
+    .factory-ledger { position:relative; isolation:isolate; padding:clamp(72px,9vw,140px) clamp(30px,6vw,104px); }
+    .factory-ledger::before { content:""; position:absolute; z-index:0; top:0; bottom:0; left:-100vw; right:-100vw; background:#d8d5cd; border-bottom:1px solid var(--line); }
+    .factory-ledger > * { position:relative; z-index:1; }
     .factory-list { margin-top:0; border-top:1px solid var(--line); }
     .factory-list a { min-height:82px; display:grid; grid-template-columns:80px 1fr auto; align-items:center; gap:24px; padding:12px 0; border-bottom:1px solid var(--line); text-decoration:none; }
     .factory-list span { color:var(--red); font:700 9px/1 var(--sans); letter-spacing:.13em; }
