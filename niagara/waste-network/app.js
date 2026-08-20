@@ -100,6 +100,20 @@ const sites = [
     point: [43.124241, -79.026944],
     type: "factory",
     label: "bottom-right"
+  },
+  {
+    name: "Bell Aerospace",
+    detail: "Wheatfield · aerospace research",
+    point: [43.10397172465604, -78.92943272330498],
+    type: "factory",
+    label: "top-right"
+  },
+  {
+    name: "Bethlehem Steel",
+    detail: "Lackawanna · uranium rolling",
+    point: [42.825534, -78.858169],
+    type: "factory",
+    label: "bottom-left"
   }
 ];
 
@@ -164,7 +178,7 @@ const niagaraZoom = Math.min(Math.max(
   window.innerWidth < 900 ? 13.25 : 14.25
 ), 15);
 
-const siteRevealDelays = [.7, 2, 3.3, 4.6, 5.9, 7.2, 8.5, 9.8, 11.6, 13.4, 15.2, 17, 18.8];
+const siteRevealDelays = [.7, 2, 3.3, 4.6, 5.9, 7.2, 8.5, 9.8, 11.6, 13.4, 15.2, 17, 18.8, 20.6, 22.4];
 
 sites.forEach((site, index) => {
   const revealDelay = siteRevealDelays[index];
@@ -196,7 +210,7 @@ industrialDistricts.forEach((district, index) => {
 });
 
 const allScenes = [
-  { name: "sources", duration: 27500 },
+  { name: "sources", duration: 31000 },
   { name: "water", duration: 10000 },
   { name: "screening", duration: 10500 },
   { name: "final", duration: 11500 }
