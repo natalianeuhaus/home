@@ -405,11 +405,12 @@
     .telvock-links strong { display:block; margin-top:10px; font-size:clamp(21px,2vw,32px); font-weight:400; }
 
     .project-origin { padding:clamp(76px,10vw,160px) clamp(30px,6vw,104px); }
-    .project-origin-content { display:grid; grid-template-columns:minmax(150px,.32fr) minmax(500px,1fr); gap:clamp(48px,7vw,110px); align-items:start; }
-    .project-origin-content .prose { max-width:890px; }
-    .project-origin-content .prose > h4 { margin:0 0 26px; font-size:clamp(30px,3vw,46px); font-weight:400; line-height:1; letter-spacing:-.035em; }
-    .origin-quote { margin:36px 0 52px; padding:18px 0 18px 28px; border-left:1px solid var(--red); }
-    .origin-quote blockquote { margin:0; font-size:clamp(30px,3.5vw,52px); font-style:italic; line-height:1; letter-spacing:-.04em; }
+    .project-origin-content { width:min(1100px,calc(100% + clamp(30px,6vw,104px) + clamp(30px,6vw,104px) - 84px)); margin:0 auto; display:block; }
+    .project-origin-kicker { display:block; max-width:960px; margin:0 0 24px 80px; color:var(--red); font:700 9px/1.45 var(--sans); letter-spacing:.14em; text-transform:uppercase; }
+    .project-origin-content .prose { max-width:960px; margin-left:80px; }
+    .project-origin-content .prose > h4 { margin:0 0 1.1em; color:rgba(18,20,17,.82); font-size:clamp(23px,1.9vw,32px); font-style:italic; font-weight:400; line-height:1.36; letter-spacing:-.018em; }
+    .origin-quote { margin:46px 0 56px; padding:18px 0 18px 28px; border-left:1px solid var(--red); }
+    .origin-quote blockquote { margin:0; font-size:clamp(30px,3.3vw,48px); font-style:italic; line-height:1; letter-spacing:-.04em; }
     .origin-quote figcaption { margin-top:18px; color:var(--red); font:700 9px/1.35 var(--sans); letter-spacing:.13em; text-transform:uppercase; }
     .research-paths { margin-top:90px; display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--line); border-left:1px solid var(--line); }
     .research-card { min-height:390px; padding:30px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); }
@@ -496,7 +497,7 @@
       .portfolio-menu-links { border-top:1px solid rgba(255,255,255,.18); }
       .portfolio-menu-links a { font-size:19px; }
       .portfolio-menu-footer { padding:24px 4px 0; font-size:14px; }
-      .hero-copy,.waterfalls-inner,.chapter-cover,.reading-grid,.love-layout,.containment,.survey-dashboard > header,.telvock,.project-origin-content,.public-record-grid,.closing-grid,.health-header { grid-template-columns:1fr; }
+      .hero-copy,.waterfalls-inner,.chapter-cover,.reading-grid,.love-layout,.containment,.survey-dashboard > header,.telvock,.public-record-grid,.closing-grid,.health-header { grid-template-columns:1fr; }
       .hero-copy { width:calc(100% - 42px); gap:42px; }
       .hero-title span,.hero-deck { margin-left:0; }
       .waterfalls-slide { padding:34px 22px 88px; align-items:start; }
@@ -536,7 +537,9 @@
       #union-carbide .waste-era-inner--survey-map { min-height:0; display:flex; flex-direction:column; }
       #union-carbide .waste-era-survey-copy { width:100%; min-height:52svh; position:relative; inset:auto; padding:58px 24px 64px; }
       #union-carbide .waste-era-survey-map { width:100%; min-height:58svh; position:relative; inset:auto; }
-      .reading-grid,.love-layout,.telvock,.project-origin-content,.public-record-grid,.closing-grid,.health-header { gap:48px; }
+      .reading-grid,.love-layout,.telvock,.public-record-grid,.closing-grid,.health-header { gap:48px; }
+      .project-origin-content { width:100%; }
+      .project-origin-kicker,.project-origin-content .prose { margin-left:0; }
       .origin-quote { margin-top:32px; padding-left:20px; }
       .love-slag-evidence { grid-template-columns:1fr; gap:24px; order:2; }
       .love-slag-evidence-copy { min-height:0; padding:28px 0 0; border-top:1px solid var(--line); border-left:0; }
@@ -1468,7 +1471,7 @@
 
           <section class="project-origin">
             <div class="project-origin-content">
-              <aside class="side-note">How the project began · 2023</aside>
+              <span class="project-origin-kicker">How the project began · 2023</span>
               <div class="prose" data-reveal>
                 <h4>A personal story opened a larger investigation.</h4>
                 <p class="origin-intro">In 2023, Natalia Neuhaus’s close friend Alex O’Malley told her that she had grown up in Niagara Falls, where her family had lived for four generations. O’Malley also shared that she and two of her siblings had the same thyroid condition, which they had been told was not hereditary. To Neuhaus, that pattern immediately raised an environmental question. When she asked O’Malley about the place itself, O’Malley answered:</p>
