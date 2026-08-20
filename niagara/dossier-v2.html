@@ -339,8 +339,9 @@
     .waste-record-expansion-header { display:grid; grid-template-columns:minmax(180px,.35fr) minmax(520px,1.15fr); gap:clamp(54px,8vw,140px); align-items:start; }
     .waste-record-expansion-label { padding-top:9px; color:var(--red); font:9px/1.4 var(--sans); letter-spacing:.17em; text-transform:uppercase; }
     .waste-record-expansion h4 { max-width:980px; margin:0; font-size:clamp(48px,5.7vw,88px); font-weight:400; line-height:.92; letter-spacing:-.052em; }
-    .waste-record-summary { margin-top:clamp(58px,8svh,94px); display:grid; grid-template-columns:minmax(180px,.35fr) minmax(520px,1.15fr); gap:clamp(54px,8vw,140px); }
+    .waste-record-summary { margin-top:clamp(58px,8svh,94px); display:grid; grid-template-columns:minmax(180px,.35fr) minmax(520px,1.15fr); column-gap:clamp(54px,8vw,140px); }
     .waste-record-summary p { grid-column:2; max-width:860px; margin:0; color:rgba(21,23,21,.76); font-size:clamp(19px,1.5vw,25px); line-height:1.5; letter-spacing:-.014em; }
+    .waste-record-summary p + p { margin-top:1.15em; }
     .waste-record-grid { margin-top:clamp(58px,8svh,94px); display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-top:1px solid rgba(21,23,21,.26); border-left:1px solid rgba(21,23,21,.26); }
     .waste-record-card { min-height:290px; padding:clamp(28px,3.4vw,48px); border-right:1px solid rgba(21,23,21,.26); border-bottom:1px solid rgba(21,23,21,.26); }
     .waste-record-card > span { display:block; margin-bottom:50px; color:var(--red); font:9px/1.2 var(--sans); letter-spacing:.16em; }
@@ -1499,7 +1500,8 @@
                 <h4 id="dossier-record-expansion-title">More factories entered the record.</h4>
               </header>
               <div class="waste-record-summary">
-                <p>The 1981 report <em>The Federal Connection</em> established a federal network linking Linde, Electromet, Hooker, and LOOW, but it was never a complete inventory of Niagara facilities that handled radioactive material. Reading that report alongside worker-exposure files, historical maps, property records, and radiological surveys brought additional factories, former industrial sites, and redevelopment properties into the same record.</p>
+                <p>The 1981 report <em>The Federal Connection</em> established a federal network linking Linde, Electromet, Hooker, and LOOW, but it was never a complete inventory of Niagara facilities that handled radioactive material.</p>
+                <p>Reading that report alongside worker-exposure files, historical maps, property records, and radiological surveys brought additional factories, former industrial sites, and redevelopment properties into the same record.</p>
               </div>
             </section>
 
