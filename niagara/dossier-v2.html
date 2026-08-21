@@ -461,11 +461,8 @@
     .closing-lead { min-height:86svh; display:grid; align-items:center; padding:clamp(70px,9vw,150px) clamp(30px,6vw,104px); border-bottom:1px solid var(--line-dark); }
     .closing-lead p { max-width:1320px; margin:0; font-size:clamp(50px,7.2vw,126px); line-height:.89; letter-spacing:-.06em; }
     .closing-body { padding:clamp(72px,9vw,145px) clamp(30px,6vw,104px); }
-    .closing-grid { display:grid; grid-template-columns:minmax(150px,.32fr) minmax(500px,1fr); gap:clamp(48px,7vw,110px); }
     .closing-copy { max-width:900px; }
-    .closing-intro { color:var(--ink); background:var(--paper); }
-    .closing-intro .closing-copy { max-width:920px; }
-    .closing-intro .closing-copy p { color:var(--copy-ink); line-height:1.55; }
+    .closing-intro { padding:clamp(76px,10vw,160px) clamp(30px,6vw,104px); color:var(--ink); background:var(--paper); }
     .closing-waste-network { margin-top:clamp(48px,7vw,96px); }
     .closing-body--continuation .closing-copy { margin-left:auto; }
     .closing-copy p { color:rgba(242,240,233,.76); font-size:clamp(18px,1.5vw,24px); line-height:1.52; }
@@ -1561,15 +1558,16 @@
             </header>
             <div class="chapter-cover-body"><p class="closing-chapter-statement">For over eight decades, the government’s silence and the lack of a comprehensive plan to address radioactive contamination have proven deadly to the Falls.</p></div>
           </div>
-          <div class="closing-body closing-intro">
-            <div class="closing-grid">
-              <aside class="side-note">A patchwork, not a plan</aside>
-              <div class="closing-copy" data-reveal>
+          <section class="closing-intro">
+            <div class="project-origin-content">
+              <span class="project-origin-kicker">A patchwork, not a plan</span>
+              <div class="prose" data-reveal>
+                <h4>No one program is responsible for the whole geography.</h4>
                 <p>Los Alamos became the public symbol of the Manhattan Project, but the bomb was the product of a dispersed national system of laboratories, refineries, metal plants, storage depots, transport routes, and disposal grounds. Niagara was one of its densest industrial landscapes.</p>
-                <p>The fifteen Niagara Frontier sites mapped by this project are not all FUSRAP properties. Some fall under FUSRAP, some under Superfund or the Formerly Used Defense Sites program, some under New York State cleanup and brownfield programs, and others sit outside any single comprehensive federal investigation. That division is the problem: no one program is responsible for the whole geography.</p>
+                <p>The fifteen Niagara Frontier sites mapped by this project are not all FUSRAP properties. Some fall under FUSRAP, some under Superfund or the Formerly Used Defense Sites program, some under New York State cleanup and brownfield programs, and others sit outside any single comprehensive federal investigation.</p>
               </div>
             </div>
-          </div>
+          </section>
           <aside class="waste-brownfield-explainer" aria-labelledby="dossier-brownfield-title">
             <div>
               <span class="waste-brownfield-explainer-label">What “brownfield” means</span>
