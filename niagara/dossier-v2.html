@@ -468,14 +468,8 @@
     .closing-lead { min-height:86svh; display:grid; align-items:center; padding:clamp(70px,9vw,150px) clamp(30px,6vw,104px); border-bottom:1px solid var(--line-dark); }
     .closing-lead p { max-width:1320px; margin:0; font-size:clamp(50px,7.2vw,126px); line-height:.89; letter-spacing:-.06em; }
     .closing-intro { padding:clamp(76px,10vw,160px) clamp(30px,6vw,104px); color:var(--ink); background:var(--paper); }
-    .closing-intro .waste-brownfield-explainer { width:min(1320px,100%); min-height:0; margin:clamp(72px,8vw,120px) auto 0; padding:clamp(38px,4vw,58px) 0 0; grid-template-columns:minmax(220px,.42fr) minmax(0,1fr); gap:clamp(42px,7vw,110px); align-items:start; background:transparent; border-top:1px solid rgba(18,20,17,.28); }
-    .closing-intro .waste-brownfield-explainer::before { display:none; }
-    .closing-intro .waste-brownfield-explainer-label { color:var(--red); font-weight:700; }
-    .closing-intro .waste-brownfield-explainer h5 { max-width:390px; font-size:clamp(34px,3.25vw,52px); font-style:italic; line-height:1.02; }
-    .closing-intro .waste-brownfield-explainer-copy { padding-top:1px; }
-    .closing-intro .waste-brownfield-explainer-copy p { color:var(--copy-ink); font:400 clamp(17px,1.3vw,21px)/1.58 var(--serif); }
-    .closing-intro .waste-brownfield-explainer-copy > p:first-child { color:rgba(18,20,17,.82); font-size:clamp(20px,1.7vw,27px); line-height:1.5; letter-spacing:-.018em; }
-    .closing-intro .waste-brownfield-explainer-copy .waste-brownfield-warning { padding-left:clamp(18px,2.2vw,32px); border-left:2px solid var(--red); }
+    .closing-intro .prose .waste-brownfield-sources { margin-top:clamp(38px,4vw,58px); }
+    .closing-intro .prose .waste-brownfield-warning { margin:clamp(42px,5vw,72px) 0 0; padding-left:clamp(18px,2.2vw,32px); border-left:2px solid var(--red); color:var(--ink); font-size:clamp(21px,1.75vw,28px); line-height:1.4; letter-spacing:-.018em; }
     .closing-waste-network { width:100%; margin:0; }
     .health { min-height:100svh; color:var(--ink); background:var(--paper); }
     .health-header { padding:clamp(72px,9vw,145px) clamp(30px,6vw,104px); display:grid; grid-template-columns:.42fr 1fr; gap:8vw; border-bottom:1px solid var(--line); }
@@ -558,7 +552,6 @@
       .waste-network-embed { width:calc(100% + 44px); margin-left:-22px; margin-right:-22px; }
       .waste-network-embed-frame { height:calc(100svh - var(--top)); min-height:650px; }
       .waste-brownfield-explainer { min-height:0; grid-template-columns:1fr; gap:34px; margin:64px 24px 78px; padding:34px 26px; }
-      .closing-intro .waste-brownfield-explainer { grid-template-columns:1fr; gap:30px; margin:64px 0 0; padding:34px 0 0; }
       #union-carbide .union-carbide-chapter-marker { min-height:0; }
       #union-carbide .waste-era-inner--survey-map { min-height:0; display:flex; flex-direction:column; }
       #union-carbide .waste-era-survey-copy { width:100%; min-height:52svh; position:relative; inset:auto; padding:58px 24px 64px; }
@@ -1577,14 +1570,6 @@
                 <h4>No one program is responsible for the whole geography.</h4>
                 <p>Los Alamos became the public symbol of the Manhattan Project, but the bomb was the product of a dispersed national system of laboratories, refineries, metal plants, storage depots, transport routes, and disposal grounds. Niagara was one of its densest industrial landscapes.</p>
                 <p>The fifteen Niagara Frontier sites mapped by this project are not all FUSRAP properties. Some fall under FUSRAP, some under Superfund or the Formerly Used Defense Sites program, some under New York State cleanup and brownfield programs, and others sit outside any single comprehensive federal investigation.</p>
-              </div>
-            </div>
-            <aside class="waste-brownfield-explainer" aria-labelledby="dossier-brownfield-title">
-              <div>
-                <span class="waste-brownfield-explainer-label">What “brownfield” means</span>
-                <h5 id="dossier-brownfield-title">Remediated does not mean erased.</h5>
-              </div>
-              <div class="waste-brownfield-explainer-copy">
                 <p>A brownfield is a property where known or suspected contamination complicates reuse or redevelopment. It may be an abandoned factory, but it does not have to remain vacant: after remediation, a brownfield can become a hotel, shopping center, office, parking area, park, or housing—depending on the cleanup standard approved for that site.</p>
                 <p>Brownfield remediation is often risk-based. The cleanup is designed around the property’s intended future use, and it may leave contaminated soil or fill in place beneath clean soil, asphalt, concrete, or another protective barrier. Environmental easements, site-management plans, and restrictions on excavation or groundwater use may then be required to prevent exposure.</p>
                 <p><strong>A property approved only for commercial use may be suitable for a hotel or shopping center while still failing to meet residential or unrestricted-use standards.</strong> If the use changes—or if construction disturbs the protective cap—additional investigation or cleanup may be required.</p>
@@ -1595,7 +1580,7 @@
                 <p class="waste-brownfield-warning">In Niagara Falls, no site developed or redeveloped after the 1940s should be presumed free of radioactive fill without testing. The same applies to roads, driveways, and sidewalks.</p>
                 <p>The animation below shows one gap in that system: excavated slag or fill may be carried directly from one property to another without ever passing through a landfill radiation detector.</p>
               </div>
-            </aside>
+            </div>
           </section>
           <figure class="waste-network-embed closing-waste-network" aria-label="Animated explanation of landfill radiation screening and the gap for reused fill">
             <iframe class="waste-network-embed-frame" title="Radiation screening requirements and the present-day gap for reused fill" src="./waste-network/?slides=3,4&amp;nav=0&amp;v=41" loading="lazy"></iframe>
