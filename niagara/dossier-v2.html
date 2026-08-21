@@ -453,6 +453,7 @@
     .phase p { margin:0; color:var(--muted); font:400 15px/1.55 var(--serif); }
 
     .closing { color:var(--paper); background:var(--night); }
+    .closing-chapter-statement { max-width:1050px; margin:0; font-size:clamp(38px,5.25vw,88px); font-weight:400; line-height:.93; letter-spacing:-.052em; }
     .closing-lead { min-height:86svh; display:grid; align-items:center; padding:clamp(70px,9vw,150px) clamp(30px,6vw,104px); border-bottom:1px solid var(--line-dark); }
     .closing-lead p { max-width:1320px; margin:0; font-size:clamp(50px,7.2vw,126px); line-height:.89; letter-spacing:-.06em; }
     .closing-body { padding:clamp(72px,9vw,145px) clamp(30px,6vw,104px); }
@@ -1548,7 +1549,10 @@
         </section>
 
         <section class="chapter closing" id="closing" data-chapter>
-          <div class="closing-lead"><p>For over eight decades, the government’s silence and the lack of a comprehensive plan to address radioactive contamination have proven deadly to the Falls.</p></div>
+          <div class="chapter-cover dark closing-chapter-cover">
+            <header class="chapter-cover-meta"><span class="chapter-id">Chapter VI</span><h2>What remains</h2></header>
+            <div class="chapter-cover-body"><p class="closing-chapter-statement">For over eight decades, the government’s silence and the lack of a comprehensive plan to address radioactive contamination have proven deadly to the Falls.</p></div>
+          </div>
           <div class="closing-body closing-intro">
             <div class="closing-grid">
               <aside class="side-note">A patchwork, not a plan</aside>
