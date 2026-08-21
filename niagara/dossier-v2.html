@@ -461,8 +461,11 @@
     .closing-lead { min-height:86svh; display:grid; align-items:center; padding:clamp(70px,9vw,150px) clamp(30px,6vw,104px); border-bottom:1px solid var(--line-dark); }
     .closing-lead p { max-width:1320px; margin:0; font-size:clamp(50px,7.2vw,126px); line-height:.89; letter-spacing:-.06em; }
     .closing-body { padding:clamp(72px,9vw,145px) clamp(30px,6vw,104px); }
-    .closing-grid { display:grid; grid-template-columns:.42fr 1fr; gap:8vw; }
+    .closing-grid { display:grid; grid-template-columns:minmax(150px,.32fr) minmax(500px,1fr); gap:clamp(48px,7vw,110px); }
     .closing-copy { max-width:900px; }
+    .closing-intro { color:var(--ink); background:var(--paper); }
+    .closing-intro .closing-copy { max-width:920px; }
+    .closing-intro .closing-copy p { color:var(--copy-ink); line-height:1.55; }
     .closing-body--continuation .closing-copy { margin-left:auto; }
     .closing-copy p { color:rgba(242,240,233,.76); font-size:clamp(18px,1.5vw,24px); line-height:1.52; }
     .closing-copy p + p { margin-top:1.3em; }
