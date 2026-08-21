@@ -475,15 +475,21 @@
     .survey-now-followup .waste-animation-bridge { margin-top:30px; }
     .closing-waste-network { width:100%; margin:0; }
     .health { min-height:100svh; color:var(--ink); background:var(--paper); }
-    .health-header { padding:clamp(72px,9vw,145px) clamp(30px,6vw,104px); display:grid; grid-template-columns:.42fr 1fr; gap:8vw; border-bottom:1px solid var(--line); }
-    .health-header h4 { margin:0; font-size:clamp(58px,7vw,118px); font-weight:400; line-height:.82; letter-spacing:-.06em; }
-    .health-header blockquote { margin:0; font-size:clamp(28px,3.4vw,52px); line-height:1.18; letter-spacing:-.04em; }
-    .health-header cite { display:block; margin-top:20px; color:var(--red); font:normal 700 8px/1.4 var(--sans); letter-spacing:.12em; text-transform:uppercase; }
-    .health-grid { display:grid; grid-template-columns:repeat(3,1fr); }
-    .health-card { min-height:430px; padding:34px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); }
+    .chapter-cover.dark.health-chapter-cover { background:#65737A; }
+    .health-chapter-cover .chapter-cover-meta { display:flex; flex-direction:column; justify-content:center; }
+    .health-chapter-kicker { display:block; margin-top:clamp(54px,7vw,104px); color:rgba(242,240,233,.7); font:400 10px/1.2 var(--sans); letter-spacing:.2em; text-transform:uppercase; }
+    .health-chapter-cover .chapter-cover-body { justify-content:center; }
+    .health-chapter-cover .chapter-kicker { color:rgba(242,240,233,.72); }
+    .health-chapter-cover .chapter-cover-body h3 { max-width:980px; font-size:clamp(54px,6.8vw,118px); line-height:.84; }
+    .health-chapter-quote { max-width:880px; margin:clamp(34px,4.5vw,64px) 0 0; padding-top:clamp(24px,3vw,38px); border-top:1px solid rgba(242,240,233,.3); }
+    .health-chapter-quote p { margin:0; color:rgba(242,240,233,.92); font-size:clamp(22px,2.15vw,36px); line-height:1.22; letter-spacing:-.028em; }
+    .health-chapter-quote cite { display:block; margin-top:20px; color:rgba(242,240,233,.66); font:normal 700 8px/1.4 var(--sans); letter-spacing:.12em; text-transform:uppercase; }
+    .health-intro .prose { max-width:980px; }
+    .health-grid { display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line); }
+    .health-card { min-height:390px; padding:34px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); }
     .health-card:last-child { border-right:0; }
     .health-card small { color:var(--red); font:700 8px/1 var(--sans); letter-spacing:.13em; text-transform:uppercase; }
-    .health-card strong { display:block; margin:60px 0 28px; font-size:clamp(66px,8vw,130px); font-weight:400; line-height:.7; letter-spacing:-.07em; }
+    .health-card strong { display:block; margin:60px 0 28px; font-size:clamp(58px,7vw,112px); font-weight:400; line-height:.7; letter-spacing:-.07em; }
     .health-card p { color:var(--muted); font:400 15px/1.55 var(--serif); }
     .health-sources { padding:50px clamp(30px,6vw,104px) 100px; }
     .health-sources a { display:grid; grid-template-columns:50px 1fr auto; gap:20px; align-items:center; min-height:70px; border-top:1px solid var(--line); text-decoration:none; }
@@ -516,7 +522,7 @@
       .portfolio-menu-links { border-top:1px solid rgba(255,255,255,.18); }
       .portfolio-menu-links a { font-size:19px; }
       .portfolio-menu-footer { padding:24px 4px 0; font-size:14px; }
-      .hero-copy,.waterfalls-inner,.chapter-cover,.reading-grid,.love-layout,.containment,.survey-dashboard > header,.telvock,.public-record-grid,.closing-grid,.health-header { grid-template-columns:1fr; }
+      .hero-copy,.waterfalls-inner,.chapter-cover,.reading-grid,.love-layout,.containment,.survey-dashboard > header,.telvock,.public-record-grid,.closing-grid { grid-template-columns:1fr; }
       .hero-copy { width:calc(100% - 42px); gap:42px; }
       .hero-title span,.hero-deck { margin-left:0; }
       .waterfalls-slide { padding:34px 22px 88px; align-items:start; }
@@ -559,7 +565,7 @@
       #union-carbide .waste-era-inner--survey-map { min-height:0; display:flex; flex-direction:column; }
       #union-carbide .waste-era-survey-copy { width:100%; min-height:52svh; position:relative; inset:auto; padding:58px 24px 64px; }
       #union-carbide .waste-era-survey-map { width:100%; min-height:58svh; position:relative; inset:auto; }
-      .reading-grid,.love-layout,.telvock,.public-record-grid,.closing-grid,.health-header { gap:48px; }
+      .reading-grid,.love-layout,.telvock,.public-record-grid,.closing-grid { gap:48px; }
       .project-origin-content { width:100%; margin-left:0; }
       .project-origin-kicker,.project-origin-content .prose { margin-left:0; }
       .origin-quote { margin-top:32px; padding-left:20px; }
@@ -597,7 +603,7 @@
       .waterfalls-frame { height:40svh; }
       .waterfalls-progress { display:none; }
       .chapter-cover { min-height:auto; }
-      .chapter-cover-meta,.chapter-cover-body,.content-block,.atomic-stat,.love-layout,.survey-dashboard,.factory-ledger,.telvock,.project-origin,.public-record,.survey-now,.closing-lead,.closing-body,.health-header { padding-left:22px; padding-right:22px; }
+      .chapter-cover-meta,.chapter-cover-body,.content-block,.atomic-stat,.love-layout,.survey-dashboard,.factory-ledger,.telvock,.project-origin,.public-record,.survey-now,.closing-lead,.closing-body { padding-left:22px; padding-right:22px; }
       .chapter-cover-body { min-height:76svh; }
       .survey-chapter-copy { min-height:70svh; padding:52px 24px 58px; }
       .survey-chapter-label { margin-bottom:30px; }
@@ -1610,14 +1616,38 @@
         </section>
 
         <section class="chapter health" id="health" data-chapter>
-          <header class="health-header"><h4>The unresolved health record.</h4><div><blockquote>“Cancer incidence generally remains higher in this region than in the state and nationwide.”</blockquote><cite>Roswell Park Comprehensive Cancer Center · WNY Cancer Snapshot · 2022</cite></div></header>
-          <div class="content-block"><div class="reading-grid"><aside class="side-note">Documented burden · unresolved attribution</aside><div class="prose" data-reveal><p class="lede">Western New York’s cancer burden is documented. What the available studies have not established is whether—and to what extent—radioactive contamination contributed to it.</p><p>Most regional health analyses do not reconstruct exposure to radioactive fill dispersed beneath roads, homes, schools, and public spaces. The limitation of those studies does not erase the burden they record; it defines the question that remains unanswered.</p></div></div></div>
-          <div class="health-grid">
-            <article class="health-card" data-reveal><small>Four decades of concern</small><strong>36%</strong><p>Approximate rise in lung-cancer cases in Niagara County over four decades, reported through Niagara Falls Memorial Medical Center and state health data.</p></article>
-            <article class="health-card" data-reveal><small>Western New York · 2015–2019</small><strong>9 of 10</strong><p>Most deadly cancers had higher death rates in Western New York than in the state and/or nationwide.</p></article>
-            <article class="health-card" data-reveal><small>Lewiston-Porter · 2008</small><strong>+80%</strong><p>Approximate excess of childhood cancer recorded in the school district. The investigation could not identify a cause.</p></article>
+          <div class="chapter-cover dark health-chapter-cover">
+            <header class="chapter-cover-meta">
+              <span class="chapter-id">Chapter VII</span>
+              <span class="health-chapter-kicker">Western New York</span>
+              <h2>Health record</h2>
+            </header>
+            <div class="chapter-cover-body">
+              <span class="chapter-kicker">Documented burden · unresolved attribution</span>
+              <h3>The unresolved health record.</h3>
+              <blockquote class="health-chapter-quote"><p>“Cancer incidence generally remains higher in this region than in the state and nationwide.”</p><cite>Roswell Park Comprehensive Cancer Center · WNY Cancer Snapshot · 2022</cite></blockquote>
+            </div>
           </div>
-          <div class="health-sources" aria-label="Health record sources"><a href="https://www.roswellpark.org/sites/default/files/2022-09/wny-cancer-snapshot-roswell-park-september-202238.pdf" target="_blank" rel="noopener"><span>01</span><strong>WNY Cancer Snapshot</strong><em>Roswell Park · 2022 ↗</em></a><a href="https://www.health.ny.gov/statistics/cancer/registry/vol3/v3niagara.htm" target="_blank" rel="noopener"><span>02</span><strong>Niagara County cancer trends</strong><em>NYS Cancer Registry · 1976–2020 ↗</em></a><a href="https://www.health.ny.gov/environmental/investigations/lewiston/docs/lewiston_cancer_report.pdf" target="_blank" rel="noopener"><span>03</span><strong>Lewiston cancer investigation</strong><em>NYS Department of Health · 2008 ↗</em></a><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2721871/" target="_blank" rel="noopener"><span>04</span><strong>Love Canal resident study</strong><em>Peer-reviewed epidemiology ↗</em></a></div>
+          <div class="content-block health-intro">
+            <div class="reading-grid">
+              <aside class="side-note">Hospital records · Western New York · 2001</aside>
+              <div class="prose" data-reveal>
+                <h4>The burden extends beyond cancer.</h4>
+                <p class="lede">Cancer incidence in Western New York generally remains above state and national rates. In 2019, Roswell Park reported that Niagara County ranked sixth among New York’s 62 counties for cancer incidence and that its cancer death rate was nearly 36 percent above the state average.</p>
+                <p>A 2001 peer-reviewed study examined hospital diagnoses among residents living within 15 miles of the Buffalo River, Niagara River, and Eighteen Mile Creek—three contiguous Western New York Areas of Concern. It found significantly elevated thyroid disorders among women older than 25 in every age group and across all three comparison populations.</p>
+                <p>The researchers also found increased diseases of the female genital tract and significantly elevated endometriosis among women ages 25–44. All of the reported elevations were significant at the 99 percent confidence level.</p>
+                <p>The study did not establish causation. Its authors cautioned that many factors influence thyroid and genital diseases, while concluding that the findings were consistent with the hypothesis that exposure to environmental contaminants through residence near polluted sites may be a factor.</p>
+                <p>Most regional health analyses still do not reconstruct exposure to radioactive fill dispersed beneath roads, homes, schools, and public spaces. Together, the studies document a burden without resolving its sources.</p>
+              </div>
+            </div>
+          </div>
+          <div class="health-grid">
+            <article class="health-card" data-reveal><small>Niagara County · 2019</small><strong>6th</strong><p>Cancer-incidence rank among New York’s 62 counties, reported by Roswell Park.</p></article>
+            <article class="health-card" data-reveal><small>Niagara County · 2019</small><strong>+36%</strong><p>Approximate cancer death rate above the New York State average, reported by Roswell Park.</p></article>
+            <article class="health-card" data-reveal><small>Lewiston-Porter · 2008</small><strong>+80%</strong><p>Approximate excess of childhood cancer recorded in the school district. The investigation could not identify a cause.</p></article>
+            <article class="health-card" data-reveal><small>Western New York · 2001</small><strong>3 of 3</strong><p>Comparison populations in which thyroid disorders among women older than 25 remained significantly elevated.</p></article>
+          </div>
+          <div class="health-sources" aria-label="Health record sources"><a href="https://www.roswellpark.org/sites/default/files/2022-09/wny-cancer-snapshot-roswell-park-september-202238.pdf" target="_blank" rel="noopener"><span>01</span><strong>WNY Cancer Snapshot</strong><em>Roswell Park · 2022 ↗</em></a><a href="https://www.roswellpark.org/newsroom/201911-tom-golisano-gives-15-million-build-new-2-million-medical-oncology-center-niagara" target="_blank" rel="noopener"><span>02</span><strong>Niagara County cancer burden</strong><em>Roswell Park · 2019 ↗</em></a><a href="https://www.health.ny.gov/statistics/cancer/registry/vol3/v3niagara.htm" target="_blank" rel="noopener"><span>03</span><strong>Niagara County cancer trends</strong><em>NYS Cancer Registry · 1976–2020 ↗</em></a><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC1240619/pdf/ehp109s-000845.pdf" target="_blank" rel="noopener"><span>04</span><strong>Endocrine disease near New York Areas of Concern</strong><em>Environmental Health Perspectives · 2001 ↗</em></a><a href="https://www.health.ny.gov/environmental/investigations/lewiston/docs/lewiston_cancer_report.pdf" target="_blank" rel="noopener"><span>05</span><strong>Lewiston cancer investigation</strong><em>NYS Department of Health · 2008 ↗</em></a><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2721871/" target="_blank" rel="noopener"><span>06</span><strong>Love Canal resident study</strong><em>Peer-reviewed epidemiology ↗</em></a></div>
         </section>
       </div>
     </div>
