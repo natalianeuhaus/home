@@ -444,9 +444,15 @@
 
     .survey-now { padding:clamp(72px,9vw,140px) clamp(30px,6vw,104px); }
     #closing .survey-now { color:var(--ink); background:var(--paper); }
-    .survey-now > header { max-width:1000px; }
-    .survey-now h4 { margin:20px 0 28px; font-size:clamp(54px,6.5vw,108px); font-weight:400; line-height:.84; letter-spacing:-.055em; }
-    .survey-now header p { color:var(--muted); font-size:clamp(19px,1.6vw,25px); line-height:1.5; }
+    .survey-now-intro { display:grid; grid-template-columns:minmax(280px,.72fr) minmax(520px,1.28fr); gap:clamp(48px,7vw,112px); align-items:start; }
+    .survey-now > .survey-now-intro > header { max-width:760px; padding-top:8px; }
+    .survey-now > .survey-now-intro .evidence-label { margin-bottom:24px; }
+    .survey-now h4 { margin:0 0 1.1em; color:rgba(18,20,17,.82); font-size:clamp(23px,1.9vw,32px); font-style:italic; font-weight:400; line-height:1.36; letter-spacing:-.018em; }
+    .survey-now header p { margin:0; color:var(--copy-ink); font-size:clamp(18px,1.5vw,24px); line-height:1.55; }
+    .survey-now-map { margin:0; overflow:hidden; background:#d8d5cd; border:1px solid var(--line); }
+    .survey-now-map-frame { width:100%; height:clamp(430px,40vw,640px); display:block; border:0; background:#d8d5cd; }
+    .survey-now-map figcaption { min-height:54px; padding:14px 16px; display:flex; justify-content:space-between; gap:20px; align-items:center; border-top:1px solid var(--line); color:var(--muted); background:var(--paper); font:700 8px/1.45 var(--sans); letter-spacing:.11em; text-transform:uppercase; }
+    .survey-now-map figcaption a { color:var(--red); white-space:nowrap; }
     .phase-list { margin-top:70px; display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--line); border-left:1px solid var(--line); }
     .phase { min-height:330px; padding:30px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); }
     .phase time { color:var(--red); font:700 9px/1 var(--sans); letter-spacing:.15em; }
@@ -558,7 +564,7 @@
       .love-slag-evidence-copy::after { display:none; }
       #love-canal .love-layout > .resource-row { order:3; }
       .love-rail { order:4; }
-      .process-chain,.research-paths,.phase-list,.health-grid { grid-template-columns:1fr; }
+      .process-chain,.research-paths,.phase-list,.health-grid,.survey-now-intro { grid-template-columns:1fr; }
       .process-card,.research-card,.phase,.health-card { border-right:0; }
       .survey-accounting { grid-template-columns:1fr; }
       .survey-accounting article { border-right:0; border-bottom:1px solid var(--line-dark); }
@@ -611,6 +617,8 @@
       .factory-list em { grid-column:2; padding-bottom:10px; }
       .research-paths,.phase-list { border-left:0; }
       .research-card,.phase { padding:28px 0; }
+      .survey-now-map-frame { height:clamp(300px,76vw,430px); }
+      .survey-now-map figcaption { align-items:flex-start; flex-direction:column; gap:7px; }
       .project-origin > .public-record { width:calc(100% + 44px); margin-top:44px; margin-left:-22px; margin-right:-22px; }
       .public-record strong { font-size:34vw; }
       .health-sources a { grid-template-columns:34px 1fr; padding:18px 0; }
@@ -1585,7 +1593,13 @@
             <iframe class="waste-network-embed-frame" title="Radiation screening requirements and the present-day gap for reused fill" src="./waste-network/?slides=3,4&amp;nav=0&amp;v=41" loading="lazy"></iframe>
           </figure>
           <section class="survey-now">
-            <header data-reveal><span class="evidence-label">2023–present</span><h4>The new surveys return to the region.</h4><p>The limitations of the earlier surveys became visible as new hotspots appeared during roadwork, repairs, and construction. DEC and EPA began a new regional radiological assessment in 2023, then moved from aircraft scanning to road-level measurements and property follow-up.</p></header>
+            <div class="survey-now-intro">
+              <header data-reveal><span class="evidence-label">2023–present</span><h4>The new surveys return to the region.</h4><p>The limitations of the earlier surveys became visible as new hotspots appeared during roadwork, repairs, and construction. DEC and EPA began a new regional radiological assessment in 2023, then moved from aircraft scanning to road-level measurements and property follow-up.</p></header>
+              <figure class="survey-now-map" data-reveal>
+                <iframe class="survey-now-map-frame" title="Official NECRA Phase II Roadway Survey map from the New York State Department of Environmental Conservation" src="https://dec.ny.gov/sites/default/files/2026-07/necraophase11roadwaysurvey.pdf#toolbar=0&amp;navpanes=0&amp;scrollbar=0&amp;view=FitH" loading="lazy"></iframe>
+                <figcaption><span>NECRA Phase II Roadway Survey · NYSDEC · 2026</span><a href="https://dec.ny.gov/sites/default/files/2026-07/necraophase11roadwaysurvey.pdf" target="_blank" rel="noopener">View official PDF ↗</a></figcaption>
+              </figure>
+            </div>
             <div class="phase-list">
               <article class="phase" data-reveal><time>2023–2024 · Phase I</time><h5>Aircraft survey</h5><p>An aircraft-based survey collected new regional radiological data across Erie and Niagara Counties.</p></article>
               <article class="phase" data-reveal><time>2025 · Phase II</time><h5>Roadway survey</h5><p>A vehicle equipped with radiological sensors traveled selected roadways to supplement the aerial record and identify possible follow-up areas.</p></article>
