@@ -450,7 +450,7 @@
     .survey-now h4 { margin:0 0 1.1em; color:rgba(18,20,17,.82); font-size:clamp(23px,1.9vw,32px); font-style:italic; font-weight:400; line-height:1.36; letter-spacing:-.018em; }
     .survey-now header p { margin:0; color:var(--copy-ink); font-size:clamp(18px,1.5vw,24px); line-height:1.55; }
     .survey-now-map { margin:0; overflow:hidden; background:#d8d5cd; border:1px solid var(--line); }
-    .survey-now-map-frame { width:100%; height:clamp(430px,40vw,640px); display:block; border:0; background:#d8d5cd; }
+    .survey-now-map-frame { width:100%; height:auto; display:block; background:#d8d5cd; }
     .survey-now-map figcaption { min-height:54px; padding:14px 16px; display:flex; justify-content:space-between; gap:20px; align-items:center; border-top:1px solid var(--line); color:var(--muted); background:var(--paper); font:700 8px/1.45 var(--sans); letter-spacing:.11em; text-transform:uppercase; }
     .survey-now-map figcaption a { color:var(--red); white-space:nowrap; }
     .phase-list { margin-top:70px; display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--line); border-left:1px solid var(--line); }
@@ -617,7 +617,6 @@
       .factory-list em { grid-column:2; padding-bottom:10px; }
       .research-paths,.phase-list { border-left:0; }
       .research-card,.phase { padding:28px 0; }
-      .survey-now-map-frame { height:clamp(300px,76vw,430px); }
       .survey-now-map figcaption { align-items:flex-start; flex-direction:column; gap:7px; }
       .project-origin > .public-record { width:calc(100% + 44px); margin-top:44px; margin-left:-22px; margin-right:-22px; }
       .public-record strong { font-size:34vw; }
@@ -1596,7 +1595,7 @@
             <div class="survey-now-intro">
               <header data-reveal><span class="evidence-label">2023–present</span><h4>The new surveys return to the region.</h4><p>The limitations of the earlier surveys became visible as new hotspots appeared during roadwork, repairs, and construction. DEC and EPA began a new regional radiological assessment in 2023, then moved from aircraft scanning to road-level measurements and property follow-up.</p></header>
               <figure class="survey-now-map" data-reveal>
-                <iframe class="survey-now-map-frame" title="Official NECRA Phase II Roadway Survey map from the New York State Department of Environmental Conservation" src="https://dec.ny.gov/sites/default/files/2026-07/necraophase11roadwaysurvey.pdf#toolbar=0&amp;navpanes=0&amp;scrollbar=0&amp;view=FitH" loading="lazy"></iframe>
+                <img class="survey-now-map-frame" src="./archive/necra-phase-ii-roadway-survey.webp" alt="NECRA Phase II Roadway Survey map showing targeted roadways across Niagara Falls, Lewiston, Grand Island, and Lockport, with Tuscarora Territory outlined in blue." loading="lazy" />
                 <figcaption><span>NECRA Phase II Roadway Survey · NYSDEC · 2026</span><a href="https://dec.ny.gov/sites/default/files/2026-07/necraophase11roadwaysurvey.pdf" target="_blank" rel="noopener">View official PDF ↗</a></figcaption>
               </figure>
             </div>
