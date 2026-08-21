@@ -441,7 +441,7 @@
     .public-actions a:hover span { color:var(--red); }
 
     .survey-now { padding:clamp(72px,9vw,140px) clamp(30px,6vw,104px); }
-    #closing .survey-now { color:var(--ink); background:var(--paper); }
+    #closing .survey-now { padding-bottom:0; color:var(--ink); background:var(--paper); }
     .survey-now-intro { display:grid; grid-template-columns:minmax(280px,.72fr) minmax(520px,1.28fr); gap:clamp(48px,7vw,112px); align-items:start; }
     .survey-now > .survey-now-intro > header { max-width:760px; padding-top:8px; }
     .survey-now > .survey-now-intro .evidence-label { margin-bottom:24px; }
@@ -469,9 +469,10 @@
     .closing-intro .prose .patchwork-program-divider { padding-bottom:clamp(28px,3.4vw,46px); border-bottom:1px solid rgba(18,20,17,.22); }
     .closing-intro .prose .brownfield-fallacy-kicker { display:block; margin:clamp(52px,6vw,88px) 0 18px; color:var(--red); font:700 9px/1.45 var(--sans); letter-spacing:.14em; text-transform:uppercase; }
     .closing-intro .prose .brownfield-fallacy-title { margin:0 0 1.1em; color:rgba(18,20,17,.82); font-size:clamp(23px,1.9vw,32px); font-style:italic; font-weight:400; line-height:1.36; letter-spacing:-.018em; }
-    .closing-intro .prose .waste-brownfield-sources { margin-top:1.25em; margin-bottom:50px; padding-top:16px; border-top:1px solid rgba(18,20,17,.22); }
-    .closing-intro .prose .waste-brownfield-warning { margin:clamp(34px,4vw,54px) 0 0; padding-left:clamp(18px,2.2vw,32px); border-left:2px solid var(--red); color:var(--ink); font-size:clamp(21px,1.75vw,28px); line-height:1.4; letter-spacing:-.018em; }
-    .closing-intro .prose .waste-animation-bridge { margin-top:30px; }
+    .survey-now-followup { max-width:920px; margin:clamp(72px,9vw,120px) auto 0; padding-bottom:50px; }
+    .survey-now-followup .waste-brownfield-sources { margin-top:1.25em; margin-bottom:0; padding-top:16px; border-top:1px solid rgba(18,20,17,.22); }
+    .survey-now-followup .waste-brownfield-warning { margin:0; padding-left:clamp(18px,2.2vw,32px); border-left:2px solid var(--red); color:var(--ink); font-size:clamp(21px,1.75vw,28px); line-height:1.4; letter-spacing:-.018em; }
+    .survey-now-followup .waste-animation-bridge { margin-top:30px; }
     .closing-waste-network { width:100%; margin:0; }
     .health { min-height:100svh; color:var(--ink); background:var(--paper); }
     .health-header { padding:clamp(72px,9vw,145px) clamp(30px,6vw,104px); display:grid; grid-template-columns:.42fr 1fr; gap:8vw; border-bottom:1px solid var(--line); }
@@ -1576,19 +1577,9 @@
                 <p>Superfund is a federal cleanup and enforcement program. A brownfield is a property whose contamination complicates reuse or redevelopment. In New York, private owners and developers can enter the state Brownfield Cleanup Program, complete a DEC-approved remedy, and receive a Certificate of Completion. That certificate can unlock refundable tax credits for site preparation, groundwater cleanup, and redevelopment costs—including buildings and other qualifying property. The size of the credit depends on the cleanup level, intended use, location, and project type.</p>
                 <p>Brownfield remediation is often risk-based. The cleanup is designed around the property’s intended future use, and it may leave contaminated soil or fill in place beneath clean soil, asphalt, concrete, or another protective barrier. Environmental easements, site-management plans, and restrictions on excavation or groundwater use may then be required to prevent exposure.</p>
                 <p>The cleanup standard follows the property’s intended use. A site remediated only for commercial use may qualify for tax credits and be approved for shops, offices, a mall, or a hotel while still failing to meet the cleanup standard required for housing. If the use changes—or if construction disturbs the protective cap—additional investigation or cleanup may be required.</p>
-                <p class="waste-brownfield-warning">In Niagara Falls, no site developed or redeveloped after the 1940s should be presumed free of radioactive fill without testing. The same applies to roads, driveways, and sidewalks.</p>
-                <p class="waste-animation-bridge">The animation below shows one gap in that system: excavated slag or fill may be carried directly from one property to another without ever passing through a landfill radiation detector.</p>
-                <div class="waste-brownfield-sources">
-                  <a href="https://dec.ny.gov/environmental-protection/site-cleanup/brownfield-and-state-superfund-programs/brownfield" target="_blank" rel="noopener noreferrer">NYSDEC cleanup tracks ↗</a>
-                  <a href="https://www.epa.gov/brownfields/risk-based-brownfields-cleanups" target="_blank" rel="noopener noreferrer">EPA risk-based cleanups ↗</a>
-                  <a href="https://dec.ny.gov/environmental-protection/site-cleanup/brownfield-and-state-superfund-programs/brownfield/work-plan-report-documents/brownfield-cleanup-program-tax-credit-eligibility-and-rates" target="_blank" rel="noopener noreferrer">NYS brownfield tax credits ↗</a>
-                </div>
               </div>
             </div>
           </section>
-          <figure class="waste-network-embed closing-waste-network" aria-label="Animated explanation of landfill radiation screening and the gap for reused fill">
-            <iframe class="waste-network-embed-frame" title="Radiation screening requirements and the present-day gap for reused fill" src="./waste-network/?slides=3,4&amp;nav=0&amp;v=41" loading="lazy"></iframe>
-          </figure>
           <section class="survey-now">
             <div class="survey-now-intro">
               <header data-reveal><span class="evidence-label">2023–present</span><h4>The new surveys return to the region.</h4><p>The limitations of the earlier surveys became visible as new hotspots appeared during roadwork, repairs, and construction. DEC and EPA began a new regional radiological assessment in 2023, then moved from aircraft scanning to road-level measurements and property follow-up.</p></header>
@@ -1603,7 +1594,19 @@
               <article class="phase" data-reveal><time>2025–present · Phase III</time><h5>Property follow-up</h5><p>Agencies began contacting selected property owners for ground-level screening and sampling while complete public results remained unavailable.</p></article>
             </div>
             <div class="resource-row"><a href="https://dec.ny.gov/news/press-releases/2023/9/dec-and-epa-announce-oct-2-start-of-aircraft-based-survey-of-erie-and-niagara-counties" target="_blank" rel="noopener"><span>DEC · 2023</span><strong>Aircraft survey ↗</strong></a><a href="https://dec.ny.gov/news/press-releases/2025/7/dec-and-us-epa-announce-july-7-start-of-vehicle-based-survey-of-erie-and-niagara-counties" target="_blank" rel="noopener"><span>DEC · 2025</span><strong>Roadway survey ↗</strong></a><a href="https://natalianeuhaus.github.io/GreetingsFromNiagaraProject/archive.html" data-dossier-viewer-target="evidence" data-dossier-archive-query="radiological survey"><span>Archive query</span><strong>New survey records →</strong></a><a href="https://natalianeuhaus.github.io/GreetingsFromNiagaraProject/" data-dossier-viewer-target="map"><span>Interactive map</span><strong>Compare the geography →</strong></a></div>
+            <div class="survey-now-followup prose" data-reveal>
+              <p class="waste-brownfield-warning">In Niagara Falls, no site developed or redeveloped after the 1940s should be presumed free of radioactive fill without testing. The same applies to roads, driveways, and sidewalks.</p>
+              <p class="waste-animation-bridge">The animation below shows one gap in that system: excavated slag or fill may be carried directly from one property to another without ever passing through a landfill radiation detector.</p>
+              <div class="waste-brownfield-sources">
+                <a href="https://dec.ny.gov/environmental-protection/site-cleanup/brownfield-and-state-superfund-programs/brownfield" target="_blank" rel="noopener noreferrer">NYSDEC cleanup tracks ↗</a>
+                <a href="https://www.epa.gov/brownfields/risk-based-brownfields-cleanups" target="_blank" rel="noopener noreferrer">EPA risk-based cleanups ↗</a>
+                <a href="https://dec.ny.gov/environmental-protection/site-cleanup/brownfield-and-state-superfund-programs/brownfield/work-plan-report-documents/brownfield-cleanup-program-tax-credit-eligibility-and-rates" target="_blank" rel="noopener noreferrer">NYS brownfield tax credits ↗</a>
+              </div>
+            </div>
           </section>
+          <figure class="waste-network-embed closing-waste-network" aria-label="Animated explanation of landfill radiation screening and the gap for reused fill">
+            <iframe class="waste-network-embed-frame" title="Radiation screening requirements and the present-day gap for reused fill" src="./waste-network/?slides=3,4&amp;nav=0&amp;v=41" loading="lazy"></iframe>
+          </figure>
         </section>
 
         <section class="chapter health" id="health" data-chapter>
