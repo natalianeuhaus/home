@@ -356,6 +356,7 @@
     .waste-brownfield-explainer h5 { max-width:430px; margin:0; font-size:clamp(31px,3.5vw,52px); font-weight:400; line-height:.98; letter-spacing:-.042em; }
     .waste-brownfield-explainer-copy p { margin:0 0 1.15em; color:rgba(21,23,21,.74); font:clamp(15px,1.15vw,18px)/1.55 var(--sans); letter-spacing:0; }
     .waste-brownfield-explainer-copy strong { color:var(--ink); font-weight:400; }
+    .waste-brownfield-explainer-copy .waste-brownfield-warning { margin:clamp(34px,4vw,58px) 0 0; color:var(--ink); font:400 clamp(21px,1.75vw,28px)/1.4 var(--serif); letter-spacing:-.018em; }
     .waste-brownfield-sources { margin-top:30px; padding-top:18px; display:flex; flex-wrap:wrap; gap:14px 26px; border-top:1px solid rgba(21,23,21,.22); }
     .waste-brownfield-sources a { color:var(--red); border-bottom:1px solid currentColor; font:8px/1.4 var(--sans); letter-spacing:.13em; text-decoration:none; text-transform:uppercase; }
     .waste-brownfield-sources a:hover,.waste-brownfield-sources a:focus-visible { color:var(--ink); }
@@ -460,13 +461,10 @@
     .closing-chapter-statement { max-width:1000px; margin:0; font-size:clamp(36px,4.6vw,76px); font-weight:400; line-height:.94; letter-spacing:-.048em; }
     .closing-lead { min-height:86svh; display:grid; align-items:center; padding:clamp(70px,9vw,150px) clamp(30px,6vw,104px); border-bottom:1px solid var(--line-dark); }
     .closing-lead p { max-width:1320px; margin:0; font-size:clamp(50px,7.2vw,126px); line-height:.89; letter-spacing:-.06em; }
-    .closing-body { padding:clamp(72px,9vw,145px) clamp(30px,6vw,104px); }
-    .closing-copy { max-width:900px; }
     .closing-intro { padding:clamp(76px,10vw,160px) clamp(30px,6vw,104px); color:var(--ink); background:var(--paper); }
-    .closing-waste-network { margin-top:clamp(48px,7vw,96px); }
-    .closing-body--continuation .closing-copy { margin-left:auto; }
-    .closing-copy p { color:rgba(242,240,233,.76); font-size:clamp(18px,1.5vw,24px); line-height:1.52; }
-    .closing-copy p + p { margin-top:1.3em; }
+    .closing-map-stage { padding-top:clamp(50px,6vw,90px); background:#65737A; }
+    .closing-map-bridge { max-width:900px; margin:0 clamp(30px,6vw,104px) clamp(40px,5vw,70px) auto; color:rgba(242,240,233,.84); font-size:clamp(18px,1.5vw,24px); line-height:1.52; }
+    .closing-map-stage .closing-waste-network { width:100%; margin:0; }
     .health { min-height:100svh; color:var(--ink); background:var(--paper); }
     .health-header { padding:clamp(72px,9vw,145px) clamp(30px,6vw,104px); display:grid; grid-template-columns:.42fr 1fr; gap:8vw; border-bottom:1px solid var(--line); }
     .health-header h4 { margin:0; font-size:clamp(58px,7vw,118px); font-weight:400; line-height:.82; letter-spacing:-.06em; }
@@ -1577,22 +1575,18 @@
               <p>A brownfield is a property where known or suspected contamination complicates reuse or redevelopment. It may be an abandoned factory, but it does not have to remain vacant: after remediation, a brownfield can become a hotel, shopping center, office, parking area, park, or housing—depending on the cleanup standard approved for that site.</p>
               <p>Brownfield remediation is often risk-based. The cleanup is designed around the property’s intended future use, and it may leave contaminated soil or fill in place beneath clean soil, asphalt, concrete, or another protective barrier. Environmental easements, site-management plans, and restrictions on excavation or groundwater use may then be required to prevent exposure.</p>
               <p><strong>A property approved only for commercial use may be suitable for a hotel or shopping center while still failing to meet residential or unrestricted-use standards.</strong> If the use changes—or if construction disturbs the protective cap—additional investigation or cleanup may be required.</p>
+              <p class="waste-brownfield-warning">In Niagara Falls, no site developed or redeveloped after the 1940s should be presumed free of radioactive fill without testing. The same applies to roads, driveways, and sidewalks.</p>
               <div class="waste-brownfield-sources">
                 <a href="https://dec.ny.gov/environmental-protection/site-cleanup/brownfield-and-state-superfund-programs/brownfield" target="_blank" rel="noopener noreferrer">NYSDEC cleanup tracks ↗</a>
                 <a href="https://www.epa.gov/brownfields/risk-based-brownfields-cleanups" target="_blank" rel="noopener noreferrer">EPA risk-based cleanups ↗</a>
               </div>
             </div>
           </aside>
-          <div class="closing-body closing-body--continuation">
-            <div class="closing-copy" data-reveal>
-              <p>In Niagara Falls, no site developed or redeveloped after the 1940s should be presumed free of radioactive fill without testing. The same applies to roads, driveways, and sidewalks.</p>
-            </div>
+          <div class="closing-map-stage">
+            <p class="closing-map-bridge" data-reveal>The animation below shows one gap in that system: excavated slag or fill may be carried directly from one property to another without ever passing through a landfill radiation detector.</p>
             <figure class="waste-network-embed closing-waste-network" aria-label="Animated explanation of landfill radiation screening and the gap for reused fill">
               <iframe class="waste-network-embed-frame" title="Radiation screening requirements and the present-day gap for reused fill" src="./waste-network/?slides=3,4&amp;nav=0&amp;v=41" loading="lazy"></iframe>
             </figure>
-            <div class="closing-copy closing-resources" data-reveal>
-              <div class="resource-row"><a href="https://natalianeuhaus.github.io/GreetingsFromNiagaraProject/archive.html" data-dossier-viewer-target="evidence"><span>The records</span><strong>Examine the archive →</strong></a><a href="https://natalianeuhaus.github.io/GreetingsFromNiagaraProject/" data-dossier-viewer-target="map"><span>The geography</span><strong>Open the map →</strong></a></div>
-            </div>
           </div>
           <section class="survey-now">
             <header data-reveal><span class="evidence-label">2023–present</span><h4>The new surveys return to the region.</h4><p>The limitations of the earlier surveys became visible as new hotspots appeared during roadwork, repairs, and construction. DEC and EPA began a new regional radiological assessment in 2023, then moved from aircraft scanning to road-level measurements and property follow-up.</p></header>
