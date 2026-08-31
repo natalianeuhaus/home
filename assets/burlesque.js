@@ -70,8 +70,11 @@
     style.id = 'burlesque-progress-styles';
     style.textContent = `
       .burlesque-progress{--progress:0;position:absolute;z-index:8;left:0;bottom:0;width:100%;height:1px;background:#15171570;transform:scaleX(var(--progress));transform-origin:0;transition:transform .8s cubic-bezier(.22,1,.36,1);pointer-events:none}
-      .burlesque-lightbox-counter{z-index:3;position:absolute;right:28px;bottom:24px;color:rgba(241,239,231,.54);letter-spacing:.18em;font:9px/1.4 Arial,Helvetica,sans-serif;font-variant-numeric:tabular-nums;pointer-events:none}
-      @media (max-width:760px){.burlesque-lightbox-counter{right:16px;bottom:14px}}
+      .burlesque-lightbox-status{z-index:3;position:absolute;right:28px;bottom:24px;display:flex;align-items:center;gap:18px;color:rgba(241,239,231,.54);letter-spacing:.18em;font:9px/1.4 Arial,Helvetica,sans-serif;font-variant-numeric:tabular-nums}
+      .burlesque-lightbox .burlesque-lightbox-first{position:static;color:rgba(241,239,231,.54);background:transparent;border:0;padding:0;letter-spacing:.18em;font:inherit;cursor:pointer;transition:color .25s ease}
+      .burlesque-lightbox .burlesque-lightbox-first:hover,.burlesque-lightbox .burlesque-lightbox-first:focus-visible{color:#f1efe7;opacity:1}
+      .burlesque-lightbox-counter{pointer-events:none}
+      @media (max-width:760px){.burlesque-lightbox-status{right:16px;bottom:14px;gap:14px}}
       @media (prefers-reduced-motion:reduce){.burlesque-progress{transition:none}}
     `;
     document.head.append(style);
@@ -138,18 +141,29 @@
     next.setAttribute('aria-label', 'Next photograph');
     next.textContent = '→';
 
+    const first = document.createElement('button');
+    first.className = 'burlesque-lightbox-first';
+    first.type = 'button';
+    first.textContent = 'FIRST';
+    first.setAttribute('aria-label', 'Return to the first photograph');
+
     const counter = document.createElement('div');
     counter.className = 'burlesque-lightbox-counter';
     counter.setAttribute('aria-live', 'polite');
     counter.setAttribute('aria-atomic', 'true');
 
-    dialog.append(close, previous, viewport, next, counter);
+    const status = document.createElement('div');
+    status.className = 'burlesque-lightbox-status';
+    status.append(first, counter);
+
+    dialog.append(close, previous, viewport, next, status);
     document.body.append(dialog);
     html.style.overflow = 'hidden';
 
     const render = () => {
       dialog.setAttribute('aria-label', `Fullscreen photograph ${activeIndex + 1} of ${slides.length}`);
       counter.textContent = `${String(activeIndex + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+      first.hidden = activeIndex === 0;
       track.style.transform = `translate3d(-${activeIndex * 100}%,0,0)`;
       previous.disabled = activeIndex === 0;
       next.disabled = activeIndex === slides.length - 1;
@@ -189,6 +203,11 @@
 
     const onKeyDown = (event) => {
       if (event.key === 'Escape') destroy();
+      if (event.key === 'Home' && activeIndex > 0) {
+        event.preventDefault();
+        activeIndex = 0;
+        render();
+      }
       if (event.key === 'ArrowLeft' && activeIndex > 0) { activeIndex -= 1; render(); }
       if (event.key === 'ArrowRight' && activeIndex < slides.length - 1) { activeIndex += 1; render(); }
     };
@@ -218,6 +237,11 @@
         render();
       }
     }, { passive: false });
+    first.addEventListener('click', (event) => {
+      event.stopPropagation();
+      activeIndex = 0;
+      render();
+    });
     previous.addEventListener('click', (event) => { event.stopPropagation(); activeIndex = Math.max(0, activeIndex - 1); render(); });
     next.addEventListener('click', (event) => { event.stopPropagation(); activeIndex = Math.min(slides.length - 1, activeIndex + 1); render(); });
     window.addEventListener('keydown', onKeyDown);
