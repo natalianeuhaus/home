@@ -326,12 +326,6 @@
     film.append(progress);
 
     let activeIndex = 0;
-    let wheelLockedUntil = 0;
-    const TRANSITION_MS = 1300;
-
-    function isSeriesOpen() {
-      return page.classList.contains('is-in-series');
-    }
 
     function setSeriesOpen(open) {
       page.classList.toggle('is-in-series', open);
@@ -367,39 +361,6 @@
     enterButton?.addEventListener('click', () => {
       createLightbox(slides, activeIndex, enterButton, { requestBrowserFullscreen: true });
     });
-
-    window.addEventListener('keydown', (event) => {
-      if (document.querySelector('.intermission-lightbox') || document.querySelector('.menu-panel.is-open')) return;
-      if (event.key === 'ArrowRight') {
-        event.preventDefault();
-        if (!isSeriesOpen()) setSeriesOpen(true);
-        else goToSlide(activeIndex + 1);
-      }
-      if (event.key === 'ArrowLeft') {
-        event.preventDefault();
-        if (isSeriesOpen() && activeIndex === 0) setSeriesOpen(false);
-        else if (isSeriesOpen()) goToSlide(activeIndex - 1);
-      }
-    });
-
-    scroller.addEventListener('wheel', (event) => {
-      if (window.matchMedia('(max-width:760px)').matches) return;
-      const delta = Math.abs(event.deltaY) >= Math.abs(event.deltaX) ? event.deltaY : event.deltaX;
-      if (Math.abs(delta) < 18) return;
-      event.preventDefault();
-      const now = performance.now();
-      if (now < wheelLockedUntil) return;
-      if (!isSeriesOpen()) {
-        if (delta > 0) setSeriesOpen(true);
-      } else if (delta > 0 && activeIndex < slides.length - 1) {
-        goToSlide(activeIndex + 1);
-      } else if (delta < 0 && activeIndex > 0) {
-        goToSlide(activeIndex - 1);
-      } else if (delta < 0 && activeIndex === 0) {
-        setSeriesOpen(false);
-      }
-      wheelLockedUntil = now + TRANSITION_MS + 25;
-    }, { passive: false });
 
     scroller.scrollLeft = 0;
     setSeriesOpen(false);
