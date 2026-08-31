@@ -70,6 +70,8 @@
     style.id = 'burlesque-progress-styles';
     style.textContent = `
       .burlesque-progress{--progress:0;position:absolute;z-index:8;left:0;bottom:0;width:100%;height:1px;background:#15171570;transform:scaleX(var(--progress));transform-origin:0;transition:transform .8s cubic-bezier(.22,1,.36,1);pointer-events:none}
+      .burlesque-lightbox-counter{z-index:3;position:absolute;right:28px;bottom:24px;color:rgba(241,239,231,.54);letter-spacing:.18em;font:9px/1.4 Arial,Helvetica,sans-serif;font-variant-numeric:tabular-nums;pointer-events:none}
+      @media (max-width:760px){.burlesque-lightbox-counter{right:16px;bottom:14px}}
       @media (prefers-reduced-motion:reduce){.burlesque-progress{transition:none}}
     `;
     document.head.append(style);
@@ -94,9 +96,10 @@
     return localSlides;
   }
 
-  function createLightbox(slides, startIndex, triggerImage) {
+  function createLightbox(slides, startIndex, triggerImage, options = {}) {
     let activeIndex = startIndex;
     const previousOverflow = html.style.overflow;
+    const requestBrowserFullscreen = Boolean(options.requestBrowserFullscreen);
     const dialog = document.createElement('div');
     dialog.className = 'intermission-lightbox burlesque-lightbox';
     dialog.setAttribute('role', 'dialog');
@@ -135,12 +138,18 @@
     next.setAttribute('aria-label', 'Next photograph');
     next.textContent = '→';
 
-    dialog.append(close, previous, viewport, next);
+    const counter = document.createElement('div');
+    counter.className = 'burlesque-lightbox-counter';
+    counter.setAttribute('aria-live', 'polite');
+    counter.setAttribute('aria-atomic', 'true');
+
+    dialog.append(close, previous, viewport, next, counter);
     document.body.append(dialog);
     html.style.overflow = 'hidden';
 
     const render = () => {
       dialog.setAttribute('aria-label', `Fullscreen photograph ${activeIndex + 1} of ${slides.length}`);
+      counter.textContent = `${String(activeIndex + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
       track.style.transform = `translate3d(-${activeIndex * 100}%,0,0)`;
       previous.disabled = activeIndex === 0;
       next.disabled = activeIndex === slides.length - 1;
@@ -155,11 +164,18 @@
     let wheelGestureActive = false;
     let wheelGestureTimer = 0;
     let isClosing = false;
+    let ownsBrowserFullscreen = false;
+    let onFullscreenChange = null;
     const destroy = () => {
       if (isClosing) return;
       isClosing = true;
       window.clearTimeout(wheelGestureTimer);
       window.removeEventListener('keydown', onKeyDown);
+      if (onFullscreenChange) document.removeEventListener('fullscreenchange', onFullscreenChange);
+      if (ownsBrowserFullscreen && document.fullscreenElement === dialog && document.exitFullscreen) {
+        ownsBrowserFullscreen = false;
+        document.exitFullscreen().catch(() => {});
+      }
       dialog.classList.remove('is-visible');
       dialog.classList.add('is-closing');
       const finish = () => {
@@ -205,6 +221,26 @@
     previous.addEventListener('click', (event) => { event.stopPropagation(); activeIndex = Math.max(0, activeIndex - 1); render(); });
     next.addEventListener('click', (event) => { event.stopPropagation(); activeIndex = Math.min(slides.length - 1, activeIndex + 1); render(); });
     window.addEventListener('keydown', onKeyDown);
+
+    onFullscreenChange = () => {
+      if (ownsBrowserFullscreen && !document.fullscreenElement) destroy();
+    };
+
+    if (requestBrowserFullscreen && typeof dialog.requestFullscreen === 'function') {
+      ownsBrowserFullscreen = true;
+      document.addEventListener('fullscreenchange', onFullscreenChange);
+      try {
+        const fullscreenRequest = dialog.requestFullscreen();
+        fullscreenRequest?.catch(() => {
+          ownsBrowserFullscreen = false;
+          document.removeEventListener('fullscreenchange', onFullscreenChange);
+        });
+      } catch (_) {
+        ownsBrowserFullscreen = false;
+        document.removeEventListener('fullscreenchange', onFullscreenChange);
+      }
+    }
+
     render();
     requestAnimationFrame(() => requestAnimationFrame(() => dialog.classList.add('is-visible')));
     close.focus();
@@ -304,7 +340,9 @@
       renderSlide();
     }
 
-    enterButton?.addEventListener('click', () => setSeriesOpen(true));
+    enterButton?.addEventListener('click', () => {
+      createLightbox(slides, activeIndex, enterButton, { requestBrowserFullscreen: true });
+    });
 
     window.addEventListener('keydown', (event) => {
       if (document.querySelector('.intermission-lightbox') || document.querySelector('.menu-panel.is-open')) return;
