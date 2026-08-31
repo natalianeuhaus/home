@@ -106,12 +106,27 @@
     window.addEventListener("resize", requestUpdate);
   }
 
+  function installHealersLightboxStatusStyles() {
+    if (document.getElementById("healers-lightbox-status-styles")) return;
+    const style = document.createElement("style");
+    style.id = "healers-lightbox-status-styles";
+    style.textContent = `
+      .healers-lightbox-status{z-index:3;position:absolute;right:34px;bottom:28px;display:flex;align-items:center;gap:18px;color:rgba(21,23,21,.52);letter-spacing:.18em;font:9px/1.4 Arial,Helvetica,sans-serif;font-variant-numeric:tabular-nums}
+      .healers-lightbox .healers-lightbox-first{position:static;color:rgba(21,23,21,.52);background:transparent;border:0;padding:0;letter-spacing:.18em;font:inherit;cursor:pointer;transition:color .25s ease}
+      .healers-lightbox .healers-lightbox-first:hover,.healers-lightbox .healers-lightbox-first:focus-visible{color:#151715;opacity:1}
+      .healers-lightbox-counter{pointer-events:none}
+      @media (max-width:760px){.healers-lightbox-status{right:16px;bottom:14px;gap:14px}}
+    `;
+    document.head.append(style);
+  }
+
   function createLightbox({ slides, startIndex, className }) {
     let activeIndex = startIndex;
     const dialog = document.createElement("div");
     const prefix = className;
     const previousOverflow = html.style.overflow;
     const enableTrackpadNavigation = prefix === "healers-lightbox";
+    if (enableTrackpadNavigation) installHealersLightboxStatusStyles();
     let wheelLockedUntil = 0;
 
     dialog.className = prefix;
@@ -152,7 +167,28 @@
     next.setAttribute("aria-label", "Next photograph");
     next.textContent = "→";
 
+    let first = null;
+    let counter = null;
+    let status = null;
+    if (enableTrackpadNavigation) {
+      first = document.createElement("button");
+      first.className = "healers-lightbox-first";
+      first.type = "button";
+      first.textContent = "FIRST";
+      first.setAttribute("aria-label", "Return to the first photograph");
+
+      counter = document.createElement("div");
+      counter.className = "healers-lightbox-counter";
+      counter.setAttribute("aria-live", "polite");
+      counter.setAttribute("aria-atomic", "true");
+
+      status = document.createElement("div");
+      status.className = "healers-lightbox-status";
+      status.append(first, counter);
+    }
+
     dialog.append(close, previous, viewport, next);
+    if (status) dialog.append(status);
     document.body.append(dialog);
     html.style.overflow = "hidden";
 
@@ -162,6 +198,8 @@
         `Fullscreen photograph ${activeIndex + 1} of ${slides.length}`,
       );
       track.style.transform = `translate3d(-${activeIndex * 100}%, 0, 0)`;
+      if (counter) counter.textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+      if (first) first.hidden = activeIndex === 0;
       previous.disabled = activeIndex === 0;
       next.disabled = activeIndex === slides.length - 1;
       figures.forEach((item, index) => {
@@ -205,6 +243,11 @@
 
     const onKeyDown = (event) => {
       if (event.key === "Escape") destroy();
+      if (event.key === "Home" && activeIndex > 0) {
+        event.preventDefault();
+        activeIndex = 0;
+        render();
+      }
       if (event.key === "ArrowLeft" && activeIndex > 0) {
         activeIndex -= 1;
         render();
@@ -219,6 +262,11 @@
     dialog.addEventListener("click", destroy);
     viewport.addEventListener("click", (event) => event.stopPropagation());
     viewport.addEventListener("wheel", onWheel, { passive: false });
+    first?.addEventListener("click", (event) => {
+      event.stopPropagation();
+      activeIndex = 0;
+      render();
+    });
     previous.addEventListener("click", (event) => {
       event.stopPropagation();
       activeIndex = Math.max(activeIndex - 1, 0);
