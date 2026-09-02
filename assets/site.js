@@ -111,11 +111,11 @@
     const style = document.createElement("style");
     style.id = "healers-lightbox-status-styles";
     style.textContent = `
-      .healers-lightbox-status{z-index:3;position:absolute;right:28px;bottom:24px;display:flex;align-items:center;gap:18px;color:rgba(241,239,231,.54);letter-spacing:.18em;font:9px/1.4 Arial,Helvetica,sans-serif;font-variant-numeric:tabular-nums}
-      .healers-lightbox .healers-lightbox-first{position:static;color:rgba(241,239,231,.54);background:transparent;border:0;padding:0;letter-spacing:.18em;font:inherit;cursor:pointer;transition:color .25s ease}
-      .healers-lightbox .healers-lightbox-first:hover,.healers-lightbox .healers-lightbox-first:focus-visible{color:#f1efe7;opacity:1}
-      .healers-lightbox-counter{pointer-events:none}
-      @media (max-width:760px){.healers-lightbox-status{right:16px;bottom:14px;gap:14px}}
+      .healers-lightbox-status,.burlesque-lightbox-status{z-index:3;position:absolute;right:28px;bottom:24px;display:flex;align-items:center;gap:18px;color:rgba(241,239,231,.54);letter-spacing:.18em;font:9px/1.4 Arial,Helvetica,sans-serif;font-variant-numeric:tabular-nums}
+      .healers-lightbox .healers-lightbox-first,.burlesque-lightbox .burlesque-lightbox-first{position:static;color:rgba(241,239,231,.54);background:transparent;border:0;padding:0;letter-spacing:.18em;font:inherit;cursor:pointer;transition:color .25s ease}
+      .healers-lightbox .healers-lightbox-first:hover,.healers-lightbox .healers-lightbox-first:focus-visible,.burlesque-lightbox .burlesque-lightbox-first:hover,.burlesque-lightbox .burlesque-lightbox-first:focus-visible{color:#f1efe7;opacity:1}
+      .healers-lightbox-counter,.burlesque-lightbox-counter{pointer-events:none}
+      @media (max-width:760px){.healers-lightbox-status,.burlesque-lightbox-status{right:16px;bottom:14px;gap:14px}}
     `;
     document.head.append(style);
   }
@@ -129,9 +129,12 @@
     const visualPrefix = usesBurlesqueViewer ? "intermission-lightbox" : prefix;
     const previousOverflow = html.style.overflow;
     const enableTrackpadNavigation = prefix === "healers-lightbox";
+    const enableStatusNavigation = usesBurlesqueViewer;
+    const statusPrefix =
+      prefix === "intermission-lightbox" ? "burlesque-lightbox" : "healers-lightbox";
     const animateOpening = usesBurlesqueViewer;
     const shouldRequestBrowserFullscreen = Boolean(requestBrowserFullscreen);
-    if (enableTrackpadNavigation) installHealersLightboxStatusStyles();
+    if (enableStatusNavigation) installHealersLightboxStatusStyles();
     let wheelLockedUntil = 0;
 
     dialog.className = usesBurlesqueViewer
@@ -177,20 +180,20 @@
     let first = null;
     let counter = null;
     let status = null;
-    if (enableTrackpadNavigation) {
+    if (enableStatusNavigation) {
       first = document.createElement("button");
-      first.className = "healers-lightbox-first";
+      first.className = `${statusPrefix}-first`;
       first.type = "button";
       first.textContent = "FIRST";
       first.setAttribute("aria-label", "Return to the first photograph");
 
       counter = document.createElement("div");
-      counter.className = "healers-lightbox-counter";
+      counter.className = `${statusPrefix}-counter`;
       counter.setAttribute("aria-live", "polite");
       counter.setAttribute("aria-atomic", "true");
 
       status = document.createElement("div");
-      status.className = "healers-lightbox-status";
+      status.className = `${statusPrefix}-status`;
       status.append(first, counter);
     }
 
