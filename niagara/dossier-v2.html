@@ -883,6 +883,27 @@
       #atomic .atomic-niagara-media { min-height:340px; }
       #atomic .atomic-process-reference { min-height:0; grid-template-columns:1fr; }
       #atomic .atomic-process-reference-media { min-height:420px; }
+
+      #atomic .atomic-niagara-copy-grid,
+      #atomic .atomic-niagara-intro-grid,
+      #atomic .atomic-niagara-process-grid {
+        width:calc(100% - 44px);
+        min-width:0;
+        grid-template-columns:minmax(0,1fr);
+        justify-content:stretch;
+      }
+      #atomic .atomic-niagara-copy-grid .investigation-chapter-copy,
+      #atomic .atomic-niagara-process-grid .investigation-chapter-copy {
+        width:100%;
+        min-width:0;
+        max-width:none;
+      }
+      #atomic .atomic-process-step {
+        grid-template-columns:minmax(0,1fr);
+        gap:22px;
+      }
+      #atomic .atomic-process-meta,
+      #atomic .atomic-process-copy { min-width:0; }
     }
 
     @media (max-width:640px) {
