@@ -124,6 +124,8 @@
     let activeIndex = startIndex;
     const dialog = document.createElement("div");
     const prefix = className;
+    const usesBurlesqueViewer = prefix === "healers-lightbox";
+    const visualPrefix = usesBurlesqueViewer ? "intermission-lightbox" : prefix;
     const previousOverflow = html.style.overflow;
     const enableTrackpadNavigation = prefix === "healers-lightbox";
     const animateOpening = prefix === "healers-lightbox";
@@ -131,26 +133,28 @@
     if (enableTrackpadNavigation) installHealersLightboxStatusStyles();
     let wheelLockedUntil = 0;
 
-    dialog.className = prefix;
+    dialog.className = usesBurlesqueViewer
+      ? `${prefix} intermission-lightbox burlesque-lightbox`
+      : prefix;
     dialog.setAttribute("role", "dialog");
     dialog.setAttribute("aria-modal", "true");
 
     const close = document.createElement("button");
-    close.className = `${prefix}-close`;
+    close.className = `${visualPrefix}-close`;
     close.type = "button";
     close.setAttribute("aria-label", "Close fullscreen slideshow");
     close.textContent = "×";
 
     const previous = document.createElement("button");
-    previous.className = `${prefix}-arrow ${prefix}-arrow--previous`;
+    previous.className = `${visualPrefix}-arrow ${visualPrefix}-arrow--previous`;
     previous.type = "button";
     previous.setAttribute("aria-label", "Previous photograph");
     previous.textContent = "←";
 
     const viewport = document.createElement("div");
-    viewport.className = `${prefix}-viewport`;
+    viewport.className = `${visualPrefix}-viewport`;
     const track = document.createElement("div");
-    track.className = `${prefix}-track`;
+    track.className = `${visualPrefix}-track`;
 
     const figures = slides.map((slide) => {
       const figure = document.createElement("figure");
@@ -164,7 +168,7 @@
     viewport.append(track);
 
     const next = document.createElement("button");
-    next.className = `${prefix}-arrow ${prefix}-arrow--next`;
+    next.className = `${visualPrefix}-arrow ${visualPrefix}-arrow--next`;
     next.type = "button";
     next.setAttribute("aria-label", "Next photograph");
     next.textContent = "→";
