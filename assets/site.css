@@ -1330,12 +1330,12 @@ body.burlesque-horizontal-body{overflow:hidden}
 
 /* Burlesque opening title and arrow cue — v1 */
 .burlesque-intro-heading h1{
-  animation:burlesque-title-drop-in 1.35s cubic-bezier(.22,1,.36,1) both;
+  animation:burlesque-title-drop-in 2.2s cubic-bezier(.22,1,.36,1) both;
   will-change:transform,opacity;
 }
 .burlesque-enter-series{
-  color:rgba(21,23,21,.42);
-  animation:burlesque-arrow-attention 1.4s ease-in-out 1.25s both;
+  color:rgba(21,23,21,.62);
+  animation:burlesque-arrow-attention 2.8s ease-in-out 2.05s both;
 }
 .burlesque-enter-series:hover,
 .burlesque-enter-series:focus-visible{
