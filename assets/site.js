@@ -124,17 +124,18 @@
     let activeIndex = startIndex;
     const dialog = document.createElement("div");
     const prefix = className;
-    const usesBurlesqueViewer = prefix === "healers-lightbox";
+    const usesBurlesqueViewer =
+      prefix === "healers-lightbox" || prefix === "intermission-lightbox";
     const visualPrefix = usesBurlesqueViewer ? "intermission-lightbox" : prefix;
     const previousOverflow = html.style.overflow;
     const enableTrackpadNavigation = prefix === "healers-lightbox";
-    const animateOpening = prefix === "healers-lightbox";
+    const animateOpening = usesBurlesqueViewer;
     const shouldRequestBrowserFullscreen = Boolean(requestBrowserFullscreen);
     if (enableTrackpadNavigation) installHealersLightboxStatusStyles();
     let wheelLockedUntil = 0;
 
     dialog.className = usesBurlesqueViewer
-      ? `${prefix} intermission-lightbox burlesque-lightbox`
+      ? `${prefix}${prefix === "healers-lightbox" ? " intermission-lightbox" : ""} burlesque-lightbox`
       : prefix;
     dialog.setAttribute("role", "dialog");
     dialog.setAttribute("aria-modal", "true");
@@ -757,6 +758,7 @@
           slides: imageSlides,
           startIndex: index,
           className: "intermission-lightbox",
+          requestBrowserFullscreen: true,
         });
       image.addEventListener("click", open);
       image.addEventListener("keydown", (event) => {
