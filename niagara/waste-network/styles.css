@@ -20,7 +20,7 @@ body { overflow: hidden; color: var(--ink); background: var(--paper); font-famil
 .waste-map .leaflet-tile-pane { filter: grayscale(1) contrast(.92) brightness(1.03); opacity: .76; }
 .waste-map .leaflet-control-container { display: none; }
 .waste-map.leaflet-container { background: #d6d3cb; font-family: Arial, Helvetica, sans-serif; }
-.map-wash { position: absolute; z-index: 300; inset: 0; pointer-events: none; background: linear-gradient(90deg,rgba(241,240,234,.98) 0%,rgba(241,240,234,.92) 31%,rgba(241,240,234,.24) 56%,rgba(241,240,234,.1) 100%); }
+.map-wash { position: absolute; z-index: 300; inset: 0; pointer-events: none; background: linear-gradient(90deg,rgba(241,240,234,.99) 0%,rgba(241,240,234,.97) 36%,rgba(241,240,234,.72) 68%,rgba(241,240,234,.48) 100%); }
 
 .film-header { position: absolute; z-index: 900; top: 0; left: 0; right: 0; padding: 22px clamp(24px,3.8vw,64px); display: flex; justify-content: space-between; gap: 20px; border-bottom: 1px solid rgba(17,17,15,.22); color: rgba(17,17,15,.62); font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
 .scene-stage { width: min(610px,42vw); position: absolute; z-index: 800; left: clamp(24px,3.8vw,64px); top: 50%; transform: translateY(-50%); }
@@ -198,7 +198,7 @@ body { overflow: hidden; color: var(--ink); background: var(--paper); font-famil
 
 @media (max-width: 900px) {
   .waste-film { min-height: 690px; }
-  .map-wash { background: linear-gradient(180deg,rgba(241,240,234,.98) 0%,rgba(241,240,234,.9) 54%,rgba(241,240,234,.2) 80%,rgba(241,240,234,.1) 100%); }
+  .map-wash { background: linear-gradient(180deg,rgba(241,240,234,.99) 0%,rgba(241,240,234,.97) 58%,rgba(241,240,234,.78) 82%,rgba(241,240,234,.58) 100%); }
   .scene-stage { width: calc(100% - 48px); left: 24px; top: 35%; }
   .scene h1,.scene h2 { max-width: 690px; font-size: clamp(41px,9.5vw,68px); }
   .waste-film[data-embedded-slide="1"] .scene-stage { width:calc(100% - 64px); left:32px; }
