@@ -683,15 +683,21 @@
     const chapters = [
       {
         label: "Chapter I",
+        targetId: "chapter-1",
         paragraphs: [
           "New York City was one of the hardest-hit cities in the United States during COVID-19. This chapter is a visual archive of a city famous for its fast-paced streets and congested sidewalks, forced to pause.",
           "The invisible disease shut down the city. Stores were left suspended in time, displaying winter fashion well into spring. Time was nowhere to be seen. Then George Floyd was killed, and people filled the streets to protest yet another Black man killed by police.",
           "Chapter I moves from lockdown and shutdown through the beginning of 2021.",
         ],
       },
-      { label: "Chapter II", paragraphs: ["Coming soon"] },
-      { label: "Chapter III", paragraphs: ["Coming soon"] },
+      {
+        label: "Chapter II",
+        targetId: "chapter-2",
+        paragraphs: ["Arles, 2023."],
+      },
+      { label: "Chapter III", targetId: null, paragraphs: ["Coming soon"] },
     ];
+    const films = Array.from(document.querySelectorAll(".intermission-film"));
 
     const alignDescription = (index) => {
       const title = tabs[index].querySelector("strong");
@@ -708,6 +714,7 @@
     };
 
     const render = (index, focus = false) => {
+      const chapter = chapters[index];
       tabs.forEach((tab, tabIndex) => {
         const active = tabIndex === index;
         tab.classList.toggle("is-active", active);
@@ -720,27 +727,34 @@
         `intermission-chapter-tab-${index + 1}`,
       );
       description.replaceChildren(
-        ...chapters[index].paragraphs.map((text) => {
+        ...chapter.paragraphs.map((text) => {
           const paragraph = document.createElement("p");
           paragraph.textContent = text;
           return paragraph;
         }),
       );
-      const enter = document.createElement("button");
-      enter.className = "intermission-enter-series";
-      enter.type = "button";
-      enter.setAttribute(
-        "aria-label",
-        "Scroll down to the photographic series",
-      );
-      enter.innerHTML = "<span>↓</span>";
-      enter.addEventListener("click", () => {
-        document.getElementById("chapter-1")?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
+      films.forEach((film) => {
+        const active = film.id === chapter.targetId;
+        film.hidden = !active;
+        film.setAttribute("aria-hidden", String(!active));
       });
-      description.append(enter);
+      if (chapter.targetId) {
+        const enter = document.createElement("button");
+        enter.className = "intermission-enter-series";
+        enter.type = "button";
+        enter.setAttribute(
+          "aria-label",
+          `Scroll down to ${chapter.label} photographic series`,
+        );
+        enter.innerHTML = "<span>↓</span>";
+        enter.addEventListener("click", () => {
+          document.getElementById(chapter.targetId)?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        });
+        description.append(enter);
+      }
       if (scrollIndicator) {
         scrollIndicator.style.transform = `translate3d(0, ${index * 100}%, 0)`;
       }
@@ -766,10 +780,9 @@
     render(0);
   }
 
-  function initializeIntermissionSequence() {
-    const film = document.querySelector(".intermission-film");
-    if (!film) return;
-
+  function initializeIntermissionSequences() {
+    const films = Array.from(document.querySelectorAll(".intermission-film"));
+    films.forEach((film) => {
     const slides = Array.from(film.querySelectorAll(".intermission-slide"));
     const triggers = Array.from(
       film.querySelectorAll("[data-intermission-trigger]"),
@@ -816,6 +829,7 @@
 
     const updateFromScroll = () => {
       frame = 0;
+      if (film.hidden) return;
       const target = window.innerHeight * 0.5;
       let closest = 0;
       let distance = Number.POSITIVE_INFINITY;
@@ -890,6 +904,7 @@
       );
       observer.observe(statement);
     }
+    });
   }
 
   initializeNavigation();
@@ -900,5 +915,5 @@
   initializeMilkRouteLightbox();
   initializeHealersBackstory();
   initializeIntermissionChapters();
-  initializeIntermissionSequence();
+  initializeIntermissionSequences();
 })();
