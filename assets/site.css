@@ -1373,5 +1373,10 @@ body.burlesque-horizontal-body{overflow:hidden}
   }
 }
 
-/* Healers fullscreen duplicate-arrow fix v3 */
-.healers-lightbox .healers-lightbox-arrow{font-size:0}
+/* Healers fullscreen arrow geometry match v4 */
+.healers-lightbox .healers-lightbox-arrow{
+  width:62px;
+  height:42px;
+  padding:0;
+  font-size:0;
+}
