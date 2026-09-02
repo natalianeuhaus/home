@@ -1326,3 +1326,49 @@ body.burlesque-horizontal-body{overflow:hidden}
   .healers-lightbox .healers-lightbox-arrow--previous{left:10px}
   .healers-lightbox .healers-lightbox-arrow--next{right:10px}
 }
+
+
+/* Burlesque opening title and arrow cue — v1 */
+.burlesque-intro-heading h1{
+  animation:burlesque-title-drop-in 1.35s cubic-bezier(.22,1,.36,1) both;
+  will-change:transform,opacity;
+}
+.burlesque-enter-series{
+  color:rgba(21,23,21,.42);
+  animation:burlesque-arrow-attention 1.4s ease-in-out 1.25s both;
+}
+.burlesque-enter-series:hover,
+.burlesque-enter-series:focus-visible{
+  color:#151715;
+  opacity:1;
+}
+@keyframes burlesque-title-drop-in{
+  0%{
+    opacity:0;
+    transform:translate3d(0,-34vh,0);
+  }
+  82%{
+    opacity:1;
+    transform:translate3d(0,7px,0);
+  }
+  100%{
+    opacity:1;
+    transform:translate3d(0,0,0);
+  }
+}
+@keyframes burlesque-arrow-attention{
+  0%{opacity:0}
+  18%{opacity:1}
+  36%{opacity:.18}
+  54%{opacity:1}
+  72%{opacity:.18}
+  100%{opacity:1}
+}
+@media (prefers-reduced-motion:reduce){
+  .burlesque-intro-heading h1,
+  .burlesque-enter-series{
+    animation:none;
+    opacity:1;
+    transform:none;
+  }
+}
