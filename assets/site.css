@@ -1242,3 +1242,34 @@ body.burlesque-horizontal-body{overflow:hidden}
   color:#f1efe7;
   opacity:.18;
 }
+
+
+/* Healers fullscreen viewer — Burlesque treatment */
+.healers-lightbox{
+  color:#f1efe7;
+  background-color:transparent;
+  opacity:0;
+  transition:opacity .55s cubic-bezier(.22,1,.36,1),background-color .7s cubic-bezier(.22,1,.36,1);
+}
+.healers-lightbox.is-visible{
+  background-color:#050606;
+  opacity:1;
+}
+.healers-lightbox .healers-lightbox-close,
+.healers-lightbox .healers-lightbox-arrow{
+  color:#f1efe7;
+}
+.healers-lightbox .healers-lightbox-viewport{
+  opacity:0;
+  transform:scale(.975);
+  transition:opacity .48s ease .12s,transform .78s cubic-bezier(.22,1,.36,1) .05s;
+}
+.healers-lightbox.is-visible .healers-lightbox-viewport{
+  opacity:1;
+  transform:scale(1);
+}
+.healers-lightbox.is-closing{pointer-events:none}
+@media (prefers-reduced-motion:reduce){
+  .healers-lightbox,
+  .healers-lightbox .healers-lightbox-viewport{transition:none}
+}
