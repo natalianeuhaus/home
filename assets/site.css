@@ -1372,3 +1372,6 @@ body.burlesque-horizontal-body{overflow:hidden}
     transform:none;
   }
 }
+
+/* Healers fullscreen duplicate-arrow fix v3 */
+.healers-lightbox .healers-lightbox-arrow{font-size:0}
