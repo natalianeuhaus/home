@@ -120,6 +120,52 @@
     document.head.append(style);
   }
 
+  function installMilkRouteLightboxStyles() {
+    if (document.getElementById("milk-route-lightbox-styles")) return;
+    const style = document.createElement("style");
+    style.id = "milk-route-lightbox-styles";
+    style.textContent = `
+      .intermission-lightbox{z-index:300;color:#f1efe7;background-color:transparent;place-items:center;display:grid;position:fixed;inset:0;overflow:hidden;opacity:0;transition:opacity .55s cubic-bezier(.22,1,.36,1),background-color .7s cubic-bezier(.22,1,.36,1)}
+      .intermission-lightbox.is-visible{background-color:#050606;opacity:1}
+      .intermission-lightbox.is-closing{pointer-events:none}
+      .intermission-lightbox-viewport{position:absolute;inset:0;overflow:hidden;opacity:0;transform:scale(.975);transition:opacity .48s ease .12s,transform .78s cubic-bezier(.22,1,.36,1) .05s}
+      .intermission-lightbox.is-visible .intermission-lightbox-viewport{opacity:1;transform:scale(1)}
+      .intermission-lightbox-track{will-change:transform;width:100%;height:100%;transition:transform 1.3s ease-in-out;display:flex}
+      .intermission-lightbox-track figure{flex:0 0 100%;place-items:center;height:100%;margin:0;padding:22px 56px;display:grid;position:relative}
+      .burlesque-lightbox .intermission-lightbox-track figure>img{width:100%;height:100%;max-width:none;max-height:none;min-width:0;min-height:0;object-fit:contain;object-position:center;display:block}
+      .intermission-lightbox-close,.intermission-lightbox-arrow{z-index:2;cursor:pointer;background:transparent;border:0;padding:0;position:absolute}
+      .intermission-lightbox-close{width:42px;height:42px;color:rgba(241,239,231,.36);font-size:31px;font-weight:200;line-height:1;top:24px;right:34px;transition:color .25s ease,opacity .25s ease,transform .25s ease}
+      .intermission-lightbox-arrow{width:62px;height:42px;color:rgba(241,239,231,.36);font-size:0;line-height:1;top:50%;transform:translateY(-50%);transition:color .25s ease,opacity .25s ease,transform .25s ease}
+      .intermission-lightbox-arrow--previous{left:18px}
+      .intermission-lightbox-arrow--next{right:18px}
+      .intermission-lightbox-arrow::before{content:"";width:44px;height:1px;background:currentColor;position:absolute;top:50%;transform:translateY(-50%)}
+      .intermission-lightbox-arrow::after{content:"";width:7px;height:7px;border-top:1px solid currentColor;border-right:1px solid currentColor;position:absolute;top:50%}
+      .intermission-lightbox-arrow--previous::before{right:7px;left:auto}
+      .intermission-lightbox-arrow--previous::after{left:7px;right:auto;transform:translateY(-50%) rotate(-135deg)}
+      .intermission-lightbox-arrow--next::before{left:7px;right:auto}
+      .intermission-lightbox-arrow--next::after{right:7px;left:auto;transform:translateY(-50%) rotate(45deg)}
+      .burlesque-lightbox .intermission-lightbox-arrow:hover,.burlesque-lightbox .intermission-lightbox-arrow:focus-visible,.burlesque-lightbox .intermission-lightbox-close:hover,.burlesque-lightbox .intermission-lightbox-close:focus-visible{color:#f1efe7;opacity:1}
+      .burlesque-lightbox .intermission-lightbox-arrow:disabled{color:#f1efe7;opacity:.18;cursor:default}
+      .intermission-lightbox-arrow--previous:hover,.intermission-lightbox-arrow--previous:focus-visible{transform:translate(-3px,-50%)}
+      .intermission-lightbox-arrow--next:hover,.intermission-lightbox-arrow--next:focus-visible{transform:translate(3px,-50%)}
+      @media(max-width:760px){
+        .intermission-lightbox-track figure{padding:16px 38px}
+        .intermission-lightbox-close{top:10px;right:12px}
+        .intermission-lightbox-arrow{width:52px;height:38px}
+        .intermission-lightbox-arrow::before{width:34px}
+        .intermission-lightbox-arrow::after{width:6px;height:6px}
+        .intermission-lightbox-arrow--previous{left:2px}
+        .intermission-lightbox-arrow--next{right:2px}
+        .intermission-lightbox-arrow--previous::before{right:6px}
+        .intermission-lightbox-arrow--previous::after{left:6px}
+        .intermission-lightbox-arrow--next::before{left:6px}
+        .intermission-lightbox-arrow--next::after{right:6px}
+      }
+      @media(prefers-reduced-motion:reduce){.intermission-lightbox,.intermission-lightbox-viewport,.intermission-lightbox-track{transition:none}}
+    `;
+    document.head.append(style);
+  }
+
   function createLightbox({ slides, startIndex, className, requestBrowserFullscreen = false }) {
     let activeIndex = startIndex;
     const dialog = document.createElement("div");
@@ -136,6 +182,7 @@
     const shouldRequestBrowserFullscreen = Boolean(requestBrowserFullscreen);
     if (enableStatusNavigation) installHealersLightboxStatusStyles();
     let wheelLockedUntil = 0;
+    let touchStartX = null;
 
     dialog.className = usesBurlesqueViewer
       ? `${prefix}${prefix === "healers-lightbox" ? " intermission-lightbox" : ""} burlesque-lightbox`
@@ -298,6 +345,31 @@
     dialog.addEventListener("click", destroy);
     viewport.addEventListener("click", (event) => event.stopPropagation());
     viewport.addEventListener("wheel", onWheel, { passive: false });
+    viewport.addEventListener(
+      "touchstart",
+      (event) => {
+        touchStartX = event.touches[0]?.clientX ?? null;
+      },
+      { passive: true },
+    );
+    viewport.addEventListener(
+      "touchend",
+      (event) => {
+        if (touchStartX === null) return;
+        const touchEndX = event.changedTouches[0]?.clientX ?? touchStartX;
+        const distance = touchStartX - touchEndX;
+        touchStartX = null;
+        if (Math.abs(distance) < 48) return;
+        if (distance > 0 && activeIndex < slides.length - 1) {
+          activeIndex += 1;
+          render();
+        } else if (distance < 0 && activeIndex > 0) {
+          activeIndex -= 1;
+          render();
+        }
+      },
+      { passive: true },
+    );
     first?.addEventListener("click", (event) => {
       event.stopPropagation();
       activeIndex = 0;
@@ -381,6 +453,39 @@
         event.preventDefault();
         open(image);
       });
+    });
+  }
+
+  function initializeMilkRouteLightbox() {
+    const trigger = document.getElementById("slideImage");
+    if (!trigger || !trigger.closest(".slideshow")) return;
+
+    installMilkRouteLightboxStyles();
+    const slides = Array.from({ length: 48 }, (_, index) => ({
+      src: `./landscape/${String(index + 1).padStart(2, "0")}.jpg`,
+      alt: `Nevada landscape photograph ${index + 1}`,
+    }));
+
+    const open = () => {
+      const index = Number(trigger.dataset.slideIndex);
+      if (!Number.isInteger(index) || index < 0 || index >= slides.length)
+        return;
+      createLightbox({
+        slides,
+        startIndex: index,
+        className: "intermission-lightbox",
+        requestBrowserFullscreen: true,
+      });
+    };
+
+    trigger.tabIndex = 0;
+    trigger.setAttribute("role", "button");
+    trigger.setAttribute("aria-label", "Open current photograph in fullscreen");
+    trigger.addEventListener("click", open);
+    trigger.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      event.preventDefault();
+      open();
     });
   }
 
@@ -792,6 +897,7 @@
   initializeReveals();
   initializeHealersHeaderTransition();
   initializeHealersSlideshow();
+  initializeMilkRouteLightbox();
   initializeHealersBackstory();
   initializeIntermissionChapters();
   initializeIntermissionSequence();
