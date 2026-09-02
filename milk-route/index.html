@@ -19,10 +19,61 @@
 .lightbox{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.96);display:none;grid-template-rows:auto 1fr auto;padding:18px}.lightbox.open{display:grid}.lightbox-top{display:flex;justify-content:space-between;align-items:center;font-size:9px;letter-spacing:.14em;color:#bbb}.lightbox-count{margin-left:12px;color:#777}.lightbox-close{border:0;background:transparent;font-size:30px;line-height:1;cursor:pointer}.lightbox-body{position:relative;min-height:0;display:grid;place-items:center;padding:20px 76px}.lightbox-body img{max-width:95vw;max-height:82vh;width:auto;height:auto;object-fit:contain}.lightbox-arrow{position:absolute;z-index:2;top:50%;transform:translateY(-50%);width:64px;height:64px;border:0;background:transparent;color:#bbb;font-size:30px;cursor:pointer}.lightbox-arrow:hover,.lightbox-arrow:focus-visible{color:#fff}.lightbox-arrow.prev{left:0}.lightbox-arrow.next{right:0}.lightbox-caption{text-align:center;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#aaa;padding-bottom:4px}
 .residue{padding:0}.residue-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:10vw;align-items:start;margin-top:42px}.residue .iodine-note{margin-top:90px}.closing-pair{display:flex;width:100%;align-items:flex-start;justify-content:space-between;background:#fff;overflow:visible}.closing-pair>img{display:block;width:46vw;height:auto;max-width:none;flex:0 0 46vw}.evidence-canvas{flex:0 0 46vw;width:46vw;background:#fff}.evidence-canvas img{display:block;width:100%;height:auto;max-width:none}.footer{border-top:1px solid var(--line);padding:18px var(--pad) 25px;display:grid;grid-template-columns:1fr auto 1fr;font-size:9px;letter-spacing:.14em;color:var(--muted)}.footer span:nth-child(2){justify-self:center}.footer span:last-child{justify-self:end}
 @media(max-width:900px){.evidence-strip{display:flex;overflow-x:auto;gap:0;padding-bottom:10px;scroll-snap-type:x proximity}.evidence-item{flex:0 0 42vw;scroll-snap-align:start}}@media(max-width:800px){.menu-panel{width:100%;padding:22px 20px 24px;overflow-y:auto}.menu-group{padding:0 4px 10px}.menu-label{margin-bottom:18px;font-size:11px;line-height:38px}.menu-links{border-top:1px solid rgba(255,255,255,.18)}.menu-links a{grid-template-columns:26px minmax(0,1fr);column-gap:12px;font-size:20px}.menu-footer{padding:26px 4px 0;font-size:15px}.hero h1{font-size:23vw}.hero-copy{padding-top:90px}.hero-bottom span:first-child{display:none}.short-film video{height:100svh}.statement{padding-top:80px;padding-bottom:82px}.statement .lead.secondary{margin-left:0}.test-scale-card{left:14px;right:14px;bottom:14px;width:auto;padding:0}.test-scale-measure,.test-scale-typed{font-size:clamp(11px,3.15vw,14px);line-height:1.5}.iodine-note{padding-top:28px;padding-bottom:34px}.route{padding-top:104px;padding-bottom:86px}.route-intro,.evidence-intro,.residue-grid{grid-template-columns:1fr;gap:30px}.route-line{grid-template-columns:1fr;margin-top:58px}.node{min-height:auto;padding-bottom:13px}.arrow{transform:rotate(90deg);text-align:left;padding:0 0 4px 22px}.slideshow{padding-top:80px;padding-bottom:88px}.stage{height:62vh;min-height:390px}.evidence{padding-top:104px;padding-bottom:0}.evidence-item{flex-basis:62vw}.lightbox-body{padding-left:48px;padding-right:48px}.lightbox-arrow{width:44px;height:56px;font-size:24px}.residue .iodine-note{margin-top:64px}.closing-pair{display:block;height:auto;overflow:visible}.closing-pair>img,.evidence-canvas img{width:100%;height:auto;max-width:none}.evidence-canvas{width:100%;height:auto;overflow:visible}.footer{grid-template-columns:1fr 1fr}.footer span:nth-child(2){display:none}}@media(prefers-reduced-motion:reduce){.test-scale-copy.is-typing:after{animation:none}}
+
+/* milk-route-standard-site-header-v1 */
+.site-header{
+  z-index:90;
+  pointer-events:none;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:34px 42px;
+  position:fixed;
+  inset:0 0 auto;
+  color:#fff;
+  mix-blend-mode:difference;
+}
+.site-header .wordmark,
+.site-header .menu-toggle{pointer-events:auto}
+.site-header .wordmark{
+  color:#fff;
+  letter-spacing:.02em;
+  text-transform:uppercase;
+  text-shadow:0 2px 18px rgba(0,0,0,.25);
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:14px;
+  font-weight:400;
+  line-height:1.5;
+}
+.site-header .menu-toggle{
+  width:46px;
+  height:38px;
+  margin:0;
+  color:#fff;
+  cursor:pointer;
+  background:transparent;
+  border:0;
+  place-content:center;
+  gap:7px;
+  padding:0;
+  display:grid;
+}
+.site-header .menu-toggle span{
+  width:25px;
+  height:1px;
+  background:currentColor;
+  transition:transform .35s;
+}
+.site-header .menu-toggle.is-open span:first-child{transform:translateY(4px) rotate(45deg)}
+.site-header .menu-toggle.is-open span:last-child{transform:translateY(-4px) rotate(-45deg)}
+@media(max-width:760px){
+  .site-header{padding:22px 20px}
+  .site-header .wordmark{font-size:12px}
+}
 </style>
 <link href="../assets/menu-standard.css?v=1" rel="stylesheet"/></head>
 <body>
-<header class="header"><a href="../index.html">NATALIA NEUHAUS</a><div class="header-actions"><div class="project"><span>05</span>THE MILK ROUTE</div><button aria-expanded="false" aria-label="Open menu" class="menu-toggle" type="button"><span></span><span></span></button></div></header>
+<header class="site-header"><a aria-label="Natalia Neuhaus home" class="wordmark" href="../index.html">Natalia Neuhaus</a><button aria-expanded="false" aria-label="Open menu" class="menu-toggle" type="button"><span></span><span></span></button></header>
 <nav aria-hidden="true" class="menu-panel menu-standard"><div class="menu-groups"><section aria-label="Work" class="menu-group menu-group--work"><p class="menu-label">Work</p><div class="menu-links menu-links--numbered"><a href="../burlesque-color/index.html" tabindex="-1"><span class="menu-project-number">1</span><span>Burlesque</span></a><a href="../intermission/index.html" tabindex="-1"><span class="menu-project-number">2</span><span>Intermission — Ongoing</span></a><a href="../healers/index.html" tabindex="-1"><span class="menu-project-number">3</span><span>Healers</span></a><a href="https://natalianeuhaus.github.io/home/niagara/dossier-v2.html" tabindex="-1"><span class="menu-project-number">4</span><span>Greetings from Niagara</span></a><a aria-current="page" href="./index.html" tabindex="-1"><span class="menu-project-number">5</span><span>Milk Route</span></a><a href="../index.html#the-tapestry" tabindex="-1"><span class="menu-project-number">6</span><span>The Tapestry</span></a></div></section></div><div class="menu-footer"><a href="../bio-contact/index.html" tabindex="-1">Bio &amp; Contact</a></div></nav>
 <main>
 <section class="hero"><img class="hero-img" src="https://drive.google.com/thumbnail?id=1I9FMwafHjIhXbKvba7cwYcWb86LKLKgG&sz=w3000" alt="Spilled milk on a red-and-white checked tablecloth"><div class="hero-overlay"></div><div class="hero-copy"><div class="kicker">AN ONGOING INVESTIGATION</div><h1>THE<br>MILK<br>ROUTE</h1><div class="hero-bottom"><span>Fallout / food / bodies / land</span><a href="#short-film">ENTER ↓</a></div></div></section>
