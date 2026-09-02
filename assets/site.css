@@ -1273,3 +1273,56 @@ body.burlesque-horizontal-body{overflow:hidden}
   .healers-lightbox,
   .healers-lightbox .healers-lightbox-viewport{transition:none}
 }
+
+
+/* Healers fullscreen controls — exact Burlesque match v2 */
+.healers-lightbox .healers-lightbox-close,
+.healers-lightbox .healers-lightbox-arrow{
+  color:rgba(241,239,231,.36);
+  opacity:1;
+  transition:color .25s ease,opacity .25s ease,transform .25s ease;
+}
+.healers-lightbox .healers-lightbox-close{
+  width:40px;
+  height:40px;
+  top:22px;
+  right:28px;
+  font-size:28px;
+  font-weight:400;
+  line-height:1;
+}
+.healers-lightbox .healers-lightbox-arrow{
+  width:44px;
+  height:56px;
+  top:50%;
+  font-size:22px;
+  line-height:normal;
+  transform:translateY(-50%);
+}
+.healers-lightbox .healers-lightbox-arrow--previous{left:10px}
+.healers-lightbox .healers-lightbox-arrow--next{right:10px}
+.healers-lightbox .healers-lightbox-close:hover,
+.healers-lightbox .healers-lightbox-close:focus-visible,
+.healers-lightbox .healers-lightbox-arrow:hover,
+.healers-lightbox .healers-lightbox-arrow:focus-visible{
+  color:#f1efe7;
+  opacity:1;
+}
+.healers-lightbox .healers-lightbox-arrow--previous:hover,
+.healers-lightbox .healers-lightbox-arrow--previous:focus-visible,
+.healers-lightbox .healers-lightbox-arrow--next:hover,
+.healers-lightbox .healers-lightbox-arrow--next:focus-visible{
+  transform:translateY(-50%);
+}
+.healers-lightbox .healers-lightbox-arrow:disabled{
+  color:#f1efe7;
+  opacity:.18;
+}
+@media (max-width:760px){
+  .healers-lightbox .healers-lightbox-close{
+    top:10px;
+    right:12px;
+  }
+  .healers-lightbox .healers-lightbox-arrow--previous{left:10px}
+  .healers-lightbox .healers-lightbox-arrow--next{right:10px}
+}
