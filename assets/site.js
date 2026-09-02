@@ -111,21 +111,23 @@
     const style = document.createElement("style");
     style.id = "healers-lightbox-status-styles";
     style.textContent = `
-      .healers-lightbox-status{z-index:3;position:absolute;right:34px;bottom:28px;display:flex;align-items:center;gap:18px;color:rgba(21,23,21,.52);letter-spacing:.18em;font:9px/1.4 Arial,Helvetica,sans-serif;font-variant-numeric:tabular-nums}
-      .healers-lightbox .healers-lightbox-first{position:static;color:rgba(21,23,21,.52);background:transparent;border:0;padding:0;letter-spacing:.18em;font:inherit;cursor:pointer;transition:color .25s ease}
-      .healers-lightbox .healers-lightbox-first:hover,.healers-lightbox .healers-lightbox-first:focus-visible{color:#151715;opacity:1}
+      .healers-lightbox-status{z-index:3;position:absolute;right:28px;bottom:24px;display:flex;align-items:center;gap:18px;color:rgba(241,239,231,.54);letter-spacing:.18em;font:9px/1.4 Arial,Helvetica,sans-serif;font-variant-numeric:tabular-nums}
+      .healers-lightbox .healers-lightbox-first{position:static;color:rgba(241,239,231,.54);background:transparent;border:0;padding:0;letter-spacing:.18em;font:inherit;cursor:pointer;transition:color .25s ease}
+      .healers-lightbox .healers-lightbox-first:hover,.healers-lightbox .healers-lightbox-first:focus-visible{color:#f1efe7;opacity:1}
       .healers-lightbox-counter{pointer-events:none}
       @media (max-width:760px){.healers-lightbox-status{right:16px;bottom:14px;gap:14px}}
     `;
     document.head.append(style);
   }
 
-  function createLightbox({ slides, startIndex, className }) {
+  function createLightbox({ slides, startIndex, className, requestBrowserFullscreen = false }) {
     let activeIndex = startIndex;
     const dialog = document.createElement("div");
     const prefix = className;
     const previousOverflow = html.style.overflow;
     const enableTrackpadNavigation = prefix === "healers-lightbox";
+    const animateOpening = prefix === "healers-lightbox";
+    const shouldRequestBrowserFullscreen = Boolean(requestBrowserFullscreen);
     if (enableTrackpadNavigation) installHealersLightboxStatusStyles();
     let wheelLockedUntil = 0;
 
@@ -192,6 +194,10 @@
     document.body.append(dialog);
     html.style.overflow = "hidden";
 
+    let isClosing = false;
+    let ownsBrowserFullscreen = false;
+    let onFullscreenChange = null;
+
     const render = () => {
       dialog.setAttribute(
         "aria-label",
@@ -235,10 +241,32 @@
     };
 
     const destroy = () => {
+      if (isClosing) return;
+      isClosing = true;
       window.removeEventListener("keydown", onKeyDown);
       viewport.removeEventListener("wheel", onWheel);
-      html.style.overflow = previousOverflow;
-      dialog.remove();
+      if (onFullscreenChange)
+        document.removeEventListener("fullscreenchange", onFullscreenChange);
+      if (
+        ownsBrowserFullscreen &&
+        document.fullscreenElement === dialog &&
+        document.exitFullscreen
+      ) {
+        ownsBrowserFullscreen = false;
+        document.exitFullscreen().catch(() => {});
+      }
+      dialog.classList.remove("is-visible");
+      dialog.classList.add("is-closing");
+      const finish = () => {
+        html.style.overflow = previousOverflow;
+        dialog.remove();
+      };
+      const closingTime =
+        animateOpening &&
+        !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? 650
+          : 0;
+      window.setTimeout(finish, closingTime);
     };
 
     const onKeyDown = (event) => {
@@ -278,7 +306,36 @@
       render();
     });
     window.addEventListener("keydown", onKeyDown);
+
+    onFullscreenChange = () => {
+      if (ownsBrowserFullscreen && !document.fullscreenElement) destroy();
+    };
+
+    if (
+      shouldRequestBrowserFullscreen &&
+      typeof dialog.requestFullscreen === "function"
+    ) {
+      ownsBrowserFullscreen = true;
+      document.addEventListener("fullscreenchange", onFullscreenChange);
+      try {
+        const fullscreenRequest = dialog.requestFullscreen();
+        fullscreenRequest?.catch(() => {
+          ownsBrowserFullscreen = false;
+          document.removeEventListener(
+            "fullscreenchange",
+            onFullscreenChange,
+          );
+        });
+      } catch (_) {
+        ownsBrowserFullscreen = false;
+        document.removeEventListener("fullscreenchange", onFullscreenChange);
+      }
+    }
+
     render();
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => dialog.classList.add("is-visible")),
+    );
     close.focus();
   }
 
@@ -305,6 +362,7 @@
         slides,
         startIndex: index,
         className: "healers-lightbox",
+        requestBrowserFullscreen: true,
       });
     };
 
