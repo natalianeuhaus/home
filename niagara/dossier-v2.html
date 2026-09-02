@@ -904,6 +904,9 @@
       }
       #atomic .atomic-process-meta,
       #atomic .atomic-process-copy { min-width:0; }
+      #atomic .atomic-process-map { margin-bottom:0; }
+      #atomic .atomic-niagara-process-grid { padding-top:0; }
+      #atomic .atomic-process-heading { margin-top:55px; }
     }
 
     @media (max-width:640px) {
@@ -1995,6 +1998,76 @@
         containmentDiagramViewer.addEventListener('click',event => {
           if (event.target === containmentDiagramViewer) containmentDiagramViewer.close();
         });
+      }
+
+      const atomicProcessMapFrame = document.querySelector('.atomic-process-map-frame');
+      if (atomicProcessMapFrame) {
+        const atomicProcessMobile = window.matchMedia('(max-width:980px)');
+        let atomicProcessResizeObserver = null;
+        let atomicProcessResizeFrame = 0;
+
+        const fitAtomicProcessMap = () => {
+          window.cancelAnimationFrame(atomicProcessResizeFrame);
+          atomicProcessResizeFrame = window.requestAnimationFrame(() => {
+            if (!atomicProcessMobile.matches) {
+              atomicProcessMapFrame.style.removeProperty('height');
+              return;
+            }
+            try {
+              const embeddedDocument = atomicProcessMapFrame.contentDocument;
+              const processShell = embeddedDocument && embeddedDocument.querySelector('.process-shell');
+              if (!embeddedDocument || !embeddedDocument.head || !processShell) return;
+
+              let mobileStyle = embeddedDocument.getElementById('atomic-process-mobile-embed');
+              if (!mobileStyle) {
+                mobileStyle = embeddedDocument.createElement('style');
+                mobileStyle.id = 'atomic-process-mobile-embed';
+                embeddedDocument.head.appendChild(mobileStyle);
+              }
+              mobileStyle.textContent = `
+                @media (max-width:980px) {
+                  html,body { min-height:0 !important; }
+                  .process-shell { min-height:0 !important; }
+                  .story-panel { height:auto !important; min-height:0 !important; }
+                  .story-scroll { flex:none !important; overflow:visible !important; }
+                  .map-panel { height:clamp(220px,58vw,300px) !important; min-height:220px !important; }
+                }
+              `;
+
+              window.requestAnimationFrame(() => {
+                const contentHeight = Math.ceil(processShell.getBoundingClientRect().height);
+                if (contentHeight > 0) atomicProcessMapFrame.style.height = contentHeight + 'px';
+              });
+            } catch (error) {
+              // The embedded route remains usable at its CSS fallback height.
+            }
+          });
+        };
+
+        const watchAtomicProcessMap = () => {
+          if (atomicProcessResizeObserver) atomicProcessResizeObserver.disconnect();
+          try {
+            const processShell = atomicProcessMapFrame.contentDocument && atomicProcessMapFrame.contentDocument.querySelector('.process-shell');
+            if (processShell && 'ResizeObserver' in window) {
+              atomicProcessResizeObserver = new ResizeObserver(fitAtomicProcessMap);
+              atomicProcessResizeObserver.observe(processShell);
+            }
+          } catch (error) {
+            // Same-origin access is expected; the fallback height is retained otherwise.
+          }
+          fitAtomicProcessMap();
+          window.setTimeout(fitAtomicProcessMap,500);
+        };
+
+        atomicProcessMapFrame.addEventListener('load',watchAtomicProcessMap);
+        window.addEventListener('resize',fitAtomicProcessMap);
+        try {
+          if (atomicProcessMapFrame.contentDocument && atomicProcessMapFrame.contentDocument.readyState === 'complete') {
+            watchAtomicProcessMap();
+          }
+        } catch (error) {
+          // The load listener will retry when the embedded route is ready.
+        }
       }
 
       const atomicXraySequence = document.querySelector('#atomic > .atomic-xray-sequence');
