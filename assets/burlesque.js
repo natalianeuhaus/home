@@ -41,28 +41,17 @@
     if (event.key === "Escape" && backstoryDialog?.classList.contains("is-visible")) closeBackstory();
   });
 
-  const localSlides = [
-    { src: 'images/5O9A0248.jpg', full: 'images/5O9A0248.jpg', alt: 'Burlesque Mon Amour photograph 1', width: 1200, height: 800 },
-    { src: 'images/5O9A0351.jpg', full: 'images/5O9A0351.jpg', alt: 'Burlesque Mon Amour photograph 2', width: 1200, height: 800 },
-    { src: 'images/5O9A0468.jpg', full: 'images/5O9A0468.jpg', alt: 'Burlesque Mon Amour photograph 3', width: 1200, height: 800 },
-    { src: 'images/5O9A0826.jpg', full: 'images/5O9A0826.jpg', alt: 'Burlesque Mon Amour photograph 4', width: 1200, height: 800 },
-    { src: 'images/5O9A0963.jpg', full: 'images/5O9A0963.jpg', alt: 'Burlesque Mon Amour photograph 5', width: 1200, height: 800 },
-    { src: 'images/5O9A0997.jpg', full: 'images/5O9A0997.jpg', alt: 'Burlesque Mon Amour photograph 6', width: 1200, height: 800 },
-    { src: 'images/5O9A1445.jpg', full: 'images/5O9A1445.jpg', alt: 'Burlesque Mon Amour photograph 7', width: 1200, height: 800 },
-    { src: 'images/5O9A1531.jpg', full: 'images/5O9A1531.jpg', alt: 'Burlesque Mon Amour photograph 8', width: 1200, height: 800 },
-    { src: 'images/5O9A1603.jpg', full: 'images/5O9A1603.jpg', alt: 'Burlesque Mon Amour photograph 9', width: 1200, height: 800 },
-    { src: 'images/5O9A1812.jpg', full: 'images/5O9A1812.jpg', alt: 'Burlesque Mon Amour photograph 10', width: 1200, height: 800 },
-    { src: 'images/5O9A2319.jpg', full: 'images/5O9A2319.jpg', alt: 'Burlesque Mon Amour photograph 11', width: 1200, height: 800 },
-    { src: 'images/5O9A2875.jpg', full: 'images/5O9A2875.jpg', alt: 'Burlesque Mon Amour photograph 12', width: 1200, height: 800 },
-    { src: 'images/5O9A4781.jpg', full: 'images/5O9A4781.jpg', alt: 'Burlesque Mon Amour photograph 13', width: 1200, height: 800 },
-    { src: 'images/5O9A4889.jpg', full: 'images/5O9A4889.jpg', alt: 'Burlesque Mon Amour photograph 14', width: 1200, height: 800 },
-    { src: 'images/5O9A5956.jpg', full: 'images/5O9A5956.jpg', alt: 'Burlesque Mon Amour photograph 15', width: 1200, height: 800 },
-    { src: 'images/5O9A6068.jpg', full: 'images/5O9A6068.jpg', alt: 'Burlesque Mon Amour photograph 16', width: 1200, height: 800 },
-    { src: 'images/5O9A6825.jpg', full: 'images/5O9A6825.jpg', alt: 'Burlesque Mon Amour photograph 17', width: 1200, height: 800 },
-    { src: 'images/5O9A7596.jpg', full: 'images/5O9A7596.jpg', alt: 'Burlesque Mon Amour photograph 18', width: 1200, height: 800 },
-    { src: 'images/5O9A7673.jpg', full: 'images/5O9A7673.jpg', alt: 'Burlesque Mon Amour photograph 19', width: 1200, height: 800 },
-    { src: 'images/5O9A8496.jpg', full: 'images/5O9A8496.jpg', alt: 'Burlesque Mon Amour photograph 20', width: 1200, height: 800 }
-  ];
+  const localSlides = Array.from({ length: 37 }, (_, index) => {
+    const number = index + 1;
+    const src = `images/Natalia_Neuhaus-${number}.jpg`;
+    return {
+      src,
+      full: src,
+      alt: `Burlesque Mon Amour photograph ${number}`,
+      width: 1200,
+      height: 800
+    };
+  });
 
   function installProgressStyles() {
     if (document.getElementById('burlesque-progress-styles')) return;
@@ -95,7 +84,7 @@
   }
 
   async function loadSlides() {
-    await Promise.all(localSlides.map(preloadPhotograph));
+    await preloadPhotograph(localSlides[0], 0);
     return localSlides;
   }
 
