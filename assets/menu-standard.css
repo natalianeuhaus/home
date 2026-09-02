@@ -8,6 +8,8 @@
   background: #101312;
   padding: 34px 36px 32px;
   font-family: Georgia, "Times New Roman", serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .menu-standard .menu-groups {
