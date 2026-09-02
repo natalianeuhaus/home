@@ -1,0 +1,197 @@
+/* Standard portfolio menu
+   Burlesque is the canonical visual reference. Every global portfolio menu
+   loads this file after its page styles so the navigation cannot drift. */
+
+.menu-panel.menu-standard {
+  width: 70vw;
+  color: #e9e7df;
+  background: #101312;
+  padding: 34px 36px 32px;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.menu-standard .menu-groups {
+  min-height: 0;
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  position: relative;
+}
+
+.menu-standard .menu-groups::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 68px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, .18);
+  pointer-events: none;
+}
+
+.menu-standard .menu-group,
+.menu-standard .menu-group:first-child {
+  grid-column: 1 / -1;
+  padding: 0 64px 28px;
+  border-right: 0;
+  position: relative;
+}
+
+.menu-standard .menu-group::after,
+.menu-standard .menu-group:first-child::after {
+  display: none;
+}
+
+.menu-standard .menu-label {
+  margin: 0 0 42px;
+  color: #e9e7df;
+  opacity: .52;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 38px;
+  letter-spacing: .36em;
+  text-transform: uppercase;
+}
+
+.menu-standard .menu-links {
+  border-top: 0;
+}
+
+.menu-standard .menu-links a {
+  display: grid;
+  grid-template-columns: clamp(28px, 3vw, 44px) minmax(0, 1fr);
+  align-items: baseline;
+  column-gap: 18px;
+  padding: 17px 0 15px;
+  color: #e9e7df;
+  opacity: .62;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(16px, 1.35vw, 21px);
+  font-weight: 400;
+  line-height: 1.5;
+  text-decoration: none;
+  transition: opacity .25s ease;
+  position: relative;
+}
+
+.menu-standard .menu-links a::after {
+  display: none;
+}
+
+.menu-standard .menu-links a:hover,
+.menu-standard .menu-links a:focus-visible {
+  color: #e9e7df;
+  opacity: 1;
+  outline: none;
+}
+
+.menu-standard .menu-project-number {
+  color: inherit;
+  opacity: .5;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: .18em;
+}
+
+.menu-standard .menu-links a > span:last-child {
+  width: fit-content;
+  position: relative;
+}
+
+.menu-standard .menu-links a > span:last-child::after {
+  content: "";
+  width: 0;
+  height: 1px;
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  background: currentColor;
+  opacity: .72;
+  transition: width .42s cubic-bezier(.65, 0, .35, 1);
+}
+
+.menu-standard .menu-links a:hover > span:last-child::after,
+.menu-standard .menu-links a:focus-visible > span:last-child::after {
+  width: calc(100% + 14px);
+}
+
+.menu-standard .menu-footer {
+  margin-top: 0;
+  padding: 30px 64px 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0;
+  border-top: 1px solid rgba(255, 255, 255, .14);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.menu-standard .menu-footer a {
+  color: #e9e7df;
+  opacity: .42;
+  text-decoration: none;
+  transition: opacity .25s ease;
+}
+
+.menu-standard .menu-footer a:hover,
+.menu-standard .menu-footer a:focus-visible {
+  color: #e9e7df;
+  opacity: 1;
+  outline: none;
+}
+
+@media (max-width: 760px) {
+  .menu-panel.menu-standard {
+    width: 100%;
+    padding: 22px 20px 24px;
+    overflow-y: auto;
+  }
+
+  .menu-standard .menu-groups {
+    display: block;
+  }
+
+  .menu-standard .menu-groups::before {
+    display: none;
+  }
+
+  .menu-standard .menu-group,
+  .menu-standard .menu-group:first-child {
+    padding: 0 4px 10px;
+  }
+
+  .menu-standard .menu-label {
+    margin-bottom: 18px;
+    font-size: 11px;
+    line-height: 38px;
+  }
+
+  .menu-standard .menu-links {
+    border-top: 1px solid rgba(255, 255, 255, .18);
+  }
+
+  .menu-standard .menu-links a {
+    grid-template-columns: 26px minmax(0, 1fr);
+    column-gap: 12px;
+    font-size: 20px;
+  }
+
+  .menu-standard .menu-footer {
+    padding: 26px 4px 0;
+    font-size: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-standard,
+  .menu-standard *,
+  .menu-standard *::after {
+    transition-duration: .01ms !important;
+  }
+}
