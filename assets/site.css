@@ -1393,3 +1393,14 @@ body.burlesque-horizontal-body{overflow:hidden}
   object-position:center;
   display:block;
 }
+
+/* portfolio-tapestry-paper-v1: unify the light project backgrounds. */
+.burlesque-page,
+.burlesque-intro,
+.burlesque-horizontal .burlesque-stage,
+.burlesque-horizontal-slide,
+.burlesque-horizontal .burlesque-loading,
+.burlesque-horizontal .burlesque-error,
+.healers-page {
+  background: #faf9f5;
+}
