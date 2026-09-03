@@ -18,7 +18,17 @@ body { overflow: hidden; color: var(--ink); background: var(--paper); font-famil
 .map-stage { position: absolute; z-index: 0; inset: 0; background: #d6d3cb; }
 .waste-map { position: absolute; inset: 0; background: #d6d3cb; }
 .waste-map .leaflet-tile-pane { filter: grayscale(1) contrast(.92) brightness(1.03); opacity: .52; }
-.waste-map .leaflet-control-container { display: none; }
+.waste-map .leaflet-control-container { display: block; }
+.waste-map .leaflet-control-attribution {
+  margin: 0 3px 2px 0;
+  padding: 1px 3px;
+  color: rgba(17,17,15,.48);
+  background: rgba(241,240,234,.72);
+  box-shadow: none;
+  font-size: 6px;
+  line-height: 1.25;
+}
+.waste-map .leaflet-control-attribution a { color: inherit; }
 .waste-map.leaflet-container { background: #d6d3cb; font-family: Arial, Helvetica, sans-serif; }
 .map-wash { position: absolute; z-index: 300; inset: 0; pointer-events: none; background: linear-gradient(90deg,rgba(241,240,234,.995) 0%,rgba(241,240,234,.985) 38%,rgba(241,240,234,.86) 70%,rgba(241,240,234,.70) 100%); }
 
