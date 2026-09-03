@@ -15,3 +15,8 @@ web server rather than double-clicking index.html. From this folder, run:
   python3 -m http.server 8000
 
 Then open http://localhost:8000 in a browser.
+
+COPYRIGHT
+© Natalia Neuhaus. All rights reserved.
+
+Unless otherwise credited, the photographs, moving images, written material, research, and original visual content in this repository may not be reproduced, distributed, modified, or used without prior written permission from Natalia Neuhaus.
