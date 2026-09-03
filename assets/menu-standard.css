@@ -137,13 +137,26 @@
   margin-top: 0;
   padding: 30px 64px 0;
   display: flex;
-  justify-content: flex-end;
-  gap: 0;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
   border-top: 1px solid rgba(255, 255, 255, .14);
   font-family: Georgia, "Times New Roman", serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.4;
+}
+
+.menu-standard .menu-copyright {
+  max-width: 230px;
+  color: #e9e7df;
+  opacity: .42;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 8px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: .12em;
+  text-transform: uppercase;
 }
 
 .menu-standard .menu-footer a {
@@ -198,7 +211,13 @@
 
   .menu-standard .menu-footer {
     padding: 26px 4px 0;
+    gap: 18px;
     font-size: 15px;
+  }
+
+  .menu-standard .menu-copyright {
+    max-width: 150px;
+    font-size: 7px;
   }
 }
 
