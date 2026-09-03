@@ -339,21 +339,23 @@
       position: fixed;
       z-index: 12000;
       inset: 0;
-      padding: 56px;
+      padding: 18px;
       display: grid;
-      place-items: center;
+      grid-template-rows: auto 1fr;
       background: rgba(7, 6, 6, .97);
       color: #f2f0ea;
     }
     .video-modal:focus { outline: none; }
+    .video-modal-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #bbb;
+    }
     .video-close {
-      position: absolute;
-      z-index: 2;
-      top: 22px;
-      right: 30px;
-      width: 44px;
-      height: 44px;
-      padding: 0;
+      width: 42px;
+      height: 42px;
+      padding: 0 0 3px;
       border: 0;
       background: transparent;
       color: inherit;
@@ -366,16 +368,19 @@
       outline: 1px solid rgba(242, 240, 234, .75);
       outline-offset: 2px;
     }
+    .video-modal-body {
+      min-height: 0;
+      padding: 20px;
+      display: grid;
+      place-items: center;
+    }
     .video-frame {
       position: relative;
       width: min(1280px, calc(100vw - 112px), calc(177.78svh - 199px));
-      max-height: calc(100svh - 112px);
+      aspect-ratio: 16 / 9;
+      background: #000;
     }
     .video-title {
-      position: absolute;
-      right: 0;
-      bottom: calc(100% + 13px);
-      left: 0;
       margin: 0;
       font-size: 14px;
       font-weight: 400;
@@ -383,10 +388,12 @@
     }
     .video-frame video {
       width: 100%;
-      aspect-ratio: 16 / 9;
+      height: 100%;
       display: block;
       border: 0;
       background: #000;
+      object-fit: contain;
+      cursor: pointer;
     }
 
     @media (max-width: 1100px) {
@@ -463,27 +470,27 @@
         opacity: 0;
         pointer-events: none;
       }
+      .video-modal { padding: 10px; }
+      .video-modal-body { padding: 10px 0; }
+      .video-frame { width: 100%; }
+    }
+
+
+    @media (max-width: 960px) and (orientation: landscape) {
+      body.modal-open .site-header {
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+      }
       .video-modal {
-        padding: max(64px, calc(env(safe-area-inset-top) + 52px)) 0 max(20px, env(safe-area-inset-bottom));
-        display: block;
-        overflow-y: auto;
+        grid-template-rows: 40px 1fr;
+        padding: 6px max(12px, env(safe-area-inset-right)) 6px max(12px, env(safe-area-inset-left));
       }
-      .video-close {
-        position: fixed;
-        top: max(8px, env(safe-area-inset-top));
-        right: 9px;
-      }
+      .video-modal-body { padding: 0; }
       .video-frame {
-        width: 100%;
-        max-height: none;
-      }
-      .video-title {
-        position: static;
-        margin: 0 20px 12px;
-        font-size: 15px;
-      }
-      .video-frame video {
-        min-height: 56.25vw;
+        width: min(100%, calc(177.78svh - 92px));
+        width: min(100%, calc(177.78dvh - 92px));
+        max-width: none;
       }
     }
 
@@ -625,12 +632,16 @@
   <footer class="page-footer"><span>Natalia Neuhaus</span><a href="#top">Back to top ↑</a></footer>
 
   <div class="video-modal" role="dialog" aria-modal="true" aria-labelledby="video-title" tabindex="-1" hidden>
-    <button class="video-close" type="button" aria-label="Close Blood Bath video">×</button>
-    <div class="video-frame">
+    <div class="video-modal-top">
       <h2 class="video-title" id="video-title">Blood Bath</h2>
-      <video controls playsinline preload="metadata" poster="../blood-bath-loop-poster-v1.jpg" aria-label="Blood Bath full video">
-        <source src="https://rachelbodyworkmassage.com/wp-content/uploads/videos/blood.mp4" type="video/mp4" />
-      </video>
+      <button class="video-close" type="button" aria-label="Close Blood Bath video">×</button>
+    </div>
+    <div class="video-modal-body">
+      <div class="video-frame">
+        <video controls playsinline preload="metadata" poster="../blood-bath-loop-poster-v1.jpg" aria-label="Blood Bath full video">
+          <source src="https://rachelbodyworkmassage.com/wp-content/uploads/videos/blood.mp4" type="video/mp4" />
+        </video>
+      </div>
     </div>
   </div>
 

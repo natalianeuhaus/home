@@ -1488,3 +1488,17 @@ body.burlesque-horizontal-body{overflow:hidden}
   .intermission-video-modal-body{padding:10px 0}
   .intermission-video-modal-frame{width:100%}
 }
+
+@media (max-width:960px) and (orientation:landscape){
+  .intermission-video-modal{
+    grid-template-rows:40px 1fr;
+    padding:6px max(12px,env(safe-area-inset-right)) 6px max(12px,env(safe-area-inset-left));
+  }
+  .intermission-video-modal-top{padding:0}
+  .intermission-video-modal-body{padding:0}
+  .intermission-video-modal-frame{
+    width:min(100%,calc(177.78svh - 92px));
+    width:min(100%,calc(177.78dvh - 92px));
+    max-width:none;
+  }
+}
