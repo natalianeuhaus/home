@@ -521,3 +521,96 @@ body.is-portfolio-menu-open .portfolio-menu-toggle span:last-child {
     transform: none !important;
   }
 }
+
+
+/* portrait-menu-header-consistency-v1
+   Keep page-specific headers from changing the shared mobile menu. */
+@media (max-width: 760px) and (orientation: portrait) {
+  html.menu-open .site-header,
+  body.is-portfolio-menu-open .casebar {
+    position: fixed !important;
+    inset: 0 0 auto !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 22px 20px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    color: #e9e7df !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    mix-blend-mode: normal !important;
+    transform: none !important;
+    pointer-events: none !important;
+  }
+
+  html.menu-open .site-header .wordmark,
+  body.is-portfolio-menu-open .casebar-wordmark {
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    color: #e9e7df !important;
+    background: transparent !important;
+    border: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    font: 400 13px/1.5 Georgia, "Times New Roman", serif !important;
+    letter-spacing: .02em !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    text-shadow: none !important;
+    pointer-events: auto !important;
+  }
+
+  body.is-portfolio-menu-open .casebar-actions {
+    width: auto !important;
+    height: 38px !important;
+    margin-left: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    pointer-events: none !important;
+  }
+
+  body.is-portfolio-menu-open .casebar-actions > :not(.portfolio-menu-toggle) {
+    display: none !important;
+  }
+
+  html.menu-open .site-header .menu-toggle,
+  body.is-portfolio-menu-open .portfolio-menu-toggle {
+    position: relative !important;
+    inset: auto !important;
+    z-index: 10001 !important;
+    width: 46px !important;
+    min-width: 46px !important;
+    height: 38px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: grid !important;
+    place-content: center !important;
+    gap: 7px !important;
+    color: #e9e7df !important;
+    background: transparent !important;
+    border: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    pointer-events: auto !important;
+  }
+
+  html.menu-open .site-header .menu-toggle span,
+  body.is-portfolio-menu-open .portfolio-menu-toggle span {
+    width: 25px !important;
+    height: 1px !important;
+    margin: 0 !important;
+    display: block !important;
+    background: #e9e7df !important;
+  }
+}
