@@ -53,9 +53,15 @@
     .portfolio-menu-toggle.is-open span:last-child { transform:translateY(-4px) rotate(-45deg); }
     .index-toggle { display:none; min-width:82px; }
 
-    .portfolio-menu-scrim { position:fixed; z-index:72; inset:var(--top) 0 0; border:0; background:rgba(0,0,0,.43); cursor:pointer; }
-    .portfolio-menu-panel { width:70vw; position:fixed; z-index:80; top:var(--top); right:0; bottom:0; padding:58px 36px 32px; display:flex; flex-direction:column; color:var(--paper); background:#101312; transform:translateX(102%); transition:transform .65s cubic-bezier(.76,0,.24,1); }
+    .portfolio-menu-scrim { position:fixed; z-index:72; inset:0; border:0; background:rgba(0,0,0,.43); cursor:pointer; }
+    .portfolio-menu-panel { width:70vw; position:fixed; z-index:80; top:0; right:0; bottom:0; padding:58px 36px 32px; display:flex; flex-direction:column; color:var(--paper); background:#101312; transform:translateX(102%); transition:transform .65s cubic-bezier(.76,0,.24,1); }
     .portfolio-menu-panel.is-open { transform:none; }
+    body.is-portfolio-menu-open .casebar { z-index:90; background:transparent; border-color:transparent; backdrop-filter:none; }
+    body.is-portfolio-menu-open .casebar-wordmark,
+    body.is-portfolio-menu-open .casebar-file,
+    body.is-portfolio-menu-open .casebar-actions > a,
+    body.is-portfolio-menu-open .index-toggle { visibility:hidden; pointer-events:none; }
+    body.is-portfolio-menu-open .portfolio-menu-toggle { visibility:visible; color:var(--paper); background:transparent; border-left:0; }
     .portfolio-menu-groups { min-height:0; flex:1; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); position:relative; }
     .portfolio-menu-groups::before { content:""; position:absolute; z-index:1; top:54px; left:0; right:0; height:1px; background:rgba(255,255,255,.18); pointer-events:none; }
     .portfolio-menu-group { padding:0 64px 28px; position:relative; }
