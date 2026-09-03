@@ -1538,3 +1538,43 @@ body.burlesque-horizontal-body{overflow:hidden}
   .project-copyright-footer{padding:24px 20px 27px;font-size:7px}
   .project-copyright-footer--overlay{left:20px;bottom:14px;width:auto;padding:0}
 }
+
+
+/* Burlesque mobile ending — v1: keep Backstory and copyright in normal
+   document flow after the introduction, never over the photographs. */
+@media(max-width:760px){
+  .burlesque-intro-copy .healers-backstory-trigger.burlesque-mobile-ending{
+    position:relative;
+    inset:auto;
+    width:165px;
+    min-height:116px;
+    margin:48px 0 0 auto;
+    padding:15px 8px 16px 10px;
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+    transform:none;
+    background:transparent;
+    border-color:transparent;
+    box-shadow:none;
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+  }
+  .burlesque-intro-copy .healers-backstory-trigger.burlesque-mobile-ending:hover,
+  .burlesque-intro-copy .healers-backstory-trigger.burlesque-mobile-ending:focus-visible{
+    transform:none;
+    background:transparent;
+    border-color:transparent;
+    box-shadow:none;
+  }
+  .burlesque-intro-copy .project-copyright-footer--overlay.burlesque-mobile-ending{
+    position:static;
+    width:100%;
+    margin:28px 0 0;
+    padding:20px 0 0;
+    border-top:1px solid rgba(21,23,21,.22);
+    background:transparent;
+    color:rgba(21,23,21,.58);
+    mix-blend-mode:normal;
+  }
+}
