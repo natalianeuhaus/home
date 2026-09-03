@@ -20,14 +20,16 @@
     .ketchum-full-video:focus-visible { outline:1px solid currentColor; outline-offset:7px; }
     .ketchum-video-modal { position:fixed; z-index:100; inset:0; display:grid; place-items:center; padding:clamp(54px,6vw,88px) clamp(18px,4vw,58px) clamp(24px,4vw,52px); background:rgba(8,9,8,.96); }
     .ketchum-video-modal[hidden] { display:none; }
-    .ketchum-video-frame { width:min(1280px,100%); height:min(78svh,760px); border:0; background:#000; }
+    .ketchum-video-shell { position:relative; width:min(1280px,100%); height:min(78svh,760px); }
+    .ketchum-video-frame { width:100%; height:100%; border:0; background:#000; }
+    .ketchum-drive-cover { position:absolute; z-index:1; inset:0; width:100%; height:100%; padding:0; border:0; background:transparent; cursor:pointer; }
     .ketchum-video-close { position:fixed; z-index:101; top:18px; right:20px; width:46px; height:46px; padding:0; border:1px solid rgba(241,240,234,.3); color:#f1f0ea; background:#10110f; display:grid; place-items:center; font:28px/1 Arial,Helvetica,sans-serif; cursor:pointer; transition:background-color .2s ease,border-color .2s ease; }
     .ketchum-video-close:hover,.ketchum-video-close:focus-visible { background:#2b2c2a; border-color:#2b2c2a; outline:none; }
     @media (max-width:700px) {
       .ketchum-stage { padding:20px 18px 34px; }
       .ketchum-media video { max-height:calc(100svh - 130px); }
       .ketchum-video-modal { padding:66px 0 0; }
-      .ketchum-video-frame { width:100%; height:calc(100svh - 66px); }
+      .ketchum-video-shell { width:100%; height:calc(100svh - 66px); }
       .ketchum-video-close { top:10px; right:10px; }
     }
     @media (prefers-reduced-motion:reduce) {
@@ -51,14 +53,17 @@
 
   <div class="ketchum-video-modal" data-ketchum-video-modal role="dialog" aria-modal="true" aria-label="Ketchum Family full video" hidden>
     <button class="ketchum-video-close" type="button" data-ketchum-video-close aria-label="Close full video">×</button>
-    <iframe
-      class="ketchum-video-frame"
-      data-ketchum-video-frame
-      data-src="https://drive.google.com/file/d/1C8VWqPumNSTUgYeL459wV-waOU4siuq-/preview"
-      title="Ketchum Family full video"
-      allow="autoplay; fullscreen"
-      allowfullscreen
-    ></iframe>
+    <div class="ketchum-video-shell">
+      <iframe
+        class="ketchum-video-frame"
+        data-ketchum-video-frame
+        data-src="https://drive.google.com/file/d/1C8VWqPumNSTUgYeL459wV-waOU4siuq-/preview"
+        title="Ketchum Family full video"
+        allow="autoplay; fullscreen"
+        allowfullscreen
+      ></iframe>
+      <button class="ketchum-drive-cover" type="button" data-ketchum-drive-cover aria-label="Open Ketchum Family in Google Drive"></button>
+    </div>
   </div>
 
   <script>
@@ -67,6 +72,7 @@
       const closeButton = document.querySelector('[data-ketchum-video-close]');
       const modal = document.querySelector('[data-ketchum-video-modal]');
       const frame = document.querySelector('[data-ketchum-video-frame]');
+      const driveCover = document.querySelector('[data-ketchum-drive-cover]');
       const loop = document.querySelector('[data-ketchum-loop]');
       const preview = document.querySelector('[data-ketchum-video-preview]');
 
@@ -95,6 +101,9 @@
       };
 
       openButton.addEventListener('click',openVideo);
+      driveCover.addEventListener('click',() => {
+        window.open(frame.dataset.src.replace(/\/preview(?:[?#].*)?$/, '/view'),'_blank','noopener,noreferrer');
+      });
       preview.addEventListener('click',event => {
         if (!event.target.closest('[data-ketchum-video-open]')) openVideo();
       });

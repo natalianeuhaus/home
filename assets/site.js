@@ -743,6 +743,7 @@
       const body = document.createElement("div");
       const frame = document.createElement("div");
       const player = document.createElement("iframe");
+      const driveCover = document.createElement("button");
 
       modal.className = "intermission-video-modal";
       modal.setAttribute("role", "dialog");
@@ -760,6 +761,9 @@
       player.allow = "autoplay; fullscreen";
       player.allowFullscreen = true;
       player.src = chapter.videoEmbedUrl;
+      driveCover.className = "intermission-video-drive-cover";
+      driveCover.type = "button";
+      driveCover.setAttribute("aria-label", "Open Arles video in Google Drive");
 
       const closeVideo = () => {
         player.removeAttribute("src");
@@ -773,12 +777,19 @@
       };
 
       close.addEventListener("click", closeVideo);
+      driveCover.addEventListener("click", () => {
+        window.open(
+          chapter.videoEmbedUrl.replace(/\/preview(?:[?#].*)?$/, "/view"),
+          "_blank",
+          "noopener,noreferrer",
+        );
+      });
       modal.addEventListener("click", (event) => {
         if (event.target === modal || event.target === body) closeVideo();
       });
       window.addEventListener("keydown", onKeyDown);
       header.append(title, close);
-      frame.append(player);
+      frame.append(player, driveCover);
       body.append(frame);
       modal.append(header, body);
       document.body.append(modal);

@@ -1467,11 +1467,21 @@ body.burlesque-horizontal-body{overflow:hidden}
   background:#000;
   width:min(92vw,1400px);
   aspect-ratio:16/9;
+  position:relative;
 }
 .intermission-video-modal-frame iframe{
   border:0;
   width:100%;
   height:100%;
+}
+.intermission-video-drive-cover{
+  z-index:2;
+  cursor:pointer;
+  background:transparent;
+  border:0;
+  padding:0;
+  position:absolute;
+  inset:0;
 }
 @media (max-width:760px){
   .intermission-video-modal{padding:10px}
