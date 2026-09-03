@@ -348,6 +348,13 @@ body.is-portfolio-menu-open .portfolio-menu-toggle span:last-child {
   transform: translateY(-4px) rotate(-45deg) !important;
 }
 
+@media (min-width: 761px) {
+  html.menu-open .site-header .menu-toggle,
+  body.is-portfolio-menu-open .portfolio-menu-toggle {
+    transform: translateY(28px) !important;
+  }
+}
+
 @media (max-width: 760px) {
   .menu-panel.menu-standard {
     width: 100% !important;
