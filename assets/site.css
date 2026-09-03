@@ -1607,3 +1607,10 @@ body.burlesque-horizontal-body{overflow:hidden}
   color:rgba(241,239,231,.48);
   text-align:left;
 }
+
+
+/* Healers copyright matches the seamless Burlesque footer at every width. */
+.healers-page .project-copyright-footer{
+  border-top:0;
+  background:transparent;
+}
