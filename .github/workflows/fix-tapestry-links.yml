@@ -1,0 +1,51 @@
+name: Fix Tapestry public links
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fix-tapestry-links.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  replace-private-tapestry-links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Replace ChatGPT preview links
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          old = 'https://natalia-neuhaus.natalia-neuhaus.chatgpt.site/tapestry-soap-blood-bath'
+          new = 'https://natalianeuhaus.github.io/home/tapestry-soap-blood-bath/'
+          changed = []
+          for p in Path('.').rglob('*'):
+              if not p.is_file() or '.git' in p.parts or p.suffix.lower() not in {'.html', '.js'}:
+                  continue
+              try:
+                  text = p.read_text(encoding='utf-8')
+              except UnicodeDecodeError:
+                  continue
+              if old in text:
+                  p.write_text(text.replace(old, new), encoding='utf-8')
+                  changed.append(str(p))
+          print('Updated:', *changed, sep='\n- ')
+          PY
+      - name: Commit replacements
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo 'No private Tapestry links remain.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Point Tapestry menus to public GitHub page'
+          git push
