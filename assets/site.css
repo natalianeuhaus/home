@@ -1578,3 +1578,16 @@ body.burlesque-horizontal-body{overflow:hidden}
     mix-blend-mode:normal;
   }
 }
+
+
+/* Mobile copyright footer alignment — v1: seamless with each project page. */
+@media(max-width:760px){
+  .healers-page .project-copyright-footer{
+    border-top:0;
+    background:transparent;
+  }
+  .burlesque-intro-copy .project-copyright-footer--overlay.burlesque-mobile-ending{
+    border-top:0;
+    background:transparent;
+  }
+}
