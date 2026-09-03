@@ -499,7 +499,11 @@
     .survey-now-followup .waste-animation-bridge { margin-top:30px; }
     .closing-waste-network { width:100%; margin:0; }
     .health { min-height:100svh; color:var(--ink); background:var(--paper); }
-    .chapter-cover.dark.health-chapter-cover { background:#65737A; }
+    .chapter-cover.dark.health-chapter-cover { position:relative; isolation:isolate; overflow:hidden; background:#172b23; }
+    .health-chapter-cover::before { content:""; position:absolute; z-index:1; inset:0; background:linear-gradient(90deg,rgba(12,38,29,.84) 0%,rgba(25,59,45,.72) 50%,rgba(10,32,25,.8) 100%); }
+    .health-chapter-image { width:100%; max-width:none; height:100%; position:absolute; z-index:0; inset:0; display:block; object-fit:cover; object-position:center; }
+    .health-chapter-cover > .chapter-cover-meta,
+    .health-chapter-cover > .chapter-cover-body { position:relative; z-index:2; }
     .health-chapter-cover .chapter-cover-meta { display:flex; flex-direction:column; justify-content:center; }
     .health-chapter-kicker { display:block; margin-top:clamp(54px,7vw,104px); color:rgba(242,240,233,.7); font:400 10px/1.2 var(--sans); letter-spacing:.2em; text-transform:uppercase; }
     .health-chapter-cover .chapter-cover-body { justify-content:center; }
@@ -1674,6 +1678,7 @@
 
         <section class="chapter health" id="health" data-chapter>
           <div class="chapter-cover dark health-chapter-cover">
+            <img class="health-chapter-image" src="./assets/chapter-vii-health-record.jpg" alt="X-ray-like still life of translucent protective gloves" />
             <header class="chapter-cover-meta">
               <span class="chapter-id">Chapter VII</span>
               <span class="health-chapter-kicker">Western New York</span>
