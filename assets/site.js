@@ -693,6 +693,9 @@
       {
         label: "Chapter II",
         targetId: "chapter-2",
+        videoLabel: "Stop motion video ↗",
+        videoUrl:
+          "https://drive.google.com/file/d/1WDErC-Nq_XlsNNhmfzXvqJUN8cpkqPbG/view?usp=drivesdk",
         paragraphs: [
           "For five weeks in 2023, Arles became a kind of intermission—a sun-soaked, enchanted town where time seemed to move differently. I was there through the mentorship award from The VII Foundation and Leica, wandering, observing, and photographing the small encounters that made the unfamiliar briefly feel like home.",
         ],
@@ -702,11 +705,7 @@
     const films = Array.from(document.querySelectorAll(".intermission-film"));
 
     const alignDescription = (index) => {
-      if (index === 1) {
-        description.style.setProperty("--chapter-description-offset", "0px");
-        return;
-      }
-      const title = tabs[index].querySelector("strong");
+      const title = tabs[index === 1 ? 0 : index].querySelector("strong");
       if (!title) return;
       const offset = Math.max(
         0,
@@ -739,6 +738,15 @@
           return paragraph;
         }),
       );
+      if (chapter.videoUrl) {
+        const videoLink = document.createElement("a");
+        videoLink.className = "intermission-video-link";
+        videoLink.href = chapter.videoUrl;
+        videoLink.target = "_blank";
+        videoLink.rel = "noopener noreferrer";
+        videoLink.textContent = chapter.videoLabel || "Watch video ↗";
+        description.append(videoLink);
+      }
       films.forEach((film) => {
         const active = film.id === chapter.targetId;
         film.hidden = !active;
