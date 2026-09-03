@@ -132,7 +132,7 @@ const industrialDistricts = [
 
 const map = L.map("waste-map", {
   zoomControl: false,
-  attributionControl: false,
+  attributionControl: true,
   zoomSnap: 0.25,
   zoomDelta: 0.25,
   dragging: false,
@@ -155,8 +155,8 @@ const niagaraFocus = window.innerWidth < 900
   ? [43.095, -79.005]
   : [43.095, -79.04];
 
-L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
-  subdomains: "abcd",
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   maxZoom: 19,
   updateWhenZooming: false,
   keepBuffer: 6
