@@ -312,4 +312,28 @@
     color: #e9e7df !important;
     opacity: .62 !important;
   }
+
+  /* Greetings from Niagara uses its own scrim/toggle classes. On mobile the
+     menu fills the viewport, so the scrim must never sit above or intercept
+     taps intended for portfolio links. */
+  .portfolio-menu-scrim {
+    z-index: 9996 !important;
+    pointer-events: none !important;
+  }
+
+  .portfolio-menu-panel.menu-standard {
+    z-index: 9998 !important;
+  }
+
+  .portfolio-menu-toggle {
+    position: relative;
+    z-index: 9999 !important;
+    pointer-events: auto !important;
+  }
+
+  .portfolio-menu-panel.menu-standard .portfolio-menu-links,
+  .portfolio-menu-panel.menu-standard .portfolio-menu-links a {
+    pointer-events: auto !important;
+    touch-action: manipulation;
+  }
 }
