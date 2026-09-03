@@ -1594,7 +1594,11 @@ body.burlesque-horizontal-body{overflow:hidden}
 
 
 /* Intermission final-panel copyright: visible in normal flow on desktop and mobile. */
+.intermission-page > .project-copyright-footer--intermission{
+  display:none;
+}
 .intermission-chapter-description .project-copyright-footer--intermission{
+  display:block;
   margin:clamp(48px,8vh,96px) 0 0;
   padding:0;
   border:0;
