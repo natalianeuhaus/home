@@ -10,15 +10,25 @@
     * { box-sizing:border-box; }
     html,body { width:100%; min-height:100%; margin:0; }
     body { color:var(--ink); background:var(--paper); font-family:Georgia,"Times New Roman",serif; -webkit-font-smoothing:antialiased; }
+    body.is-video-open { overflow:hidden; }
+    button { font:inherit; }
     .ketchum-stage { min-height:100svh; display:grid; place-items:center; padding:clamp(28px,5vw,76px); }
     .ketchum-media { width:min(1120px,100%); margin:0; }
     .ketchum-media video { width:100%; max-height:calc(100svh - 150px); display:block; object-fit:contain; background:#090a09; }
-    .ketchum-full-video { width:100%; padding:28px 0 0; display:flex; align-items:baseline; justify-content:flex-end; gap:14px; color:inherit; font-size:25px; font-weight:400; line-height:1.2; text-align:right; text-decoration:none; transition:opacity .2s ease; }
+    .ketchum-full-video { width:100%; padding:28px 0 0; border:0; background:transparent; display:flex; align-items:baseline; justify-content:flex-end; gap:14px; color:inherit; font-size:25px; font-weight:400; line-height:1.2; text-align:right; cursor:pointer; transition:opacity .2s ease; }
     .ketchum-full-video:hover { opacity:.55; }
     .ketchum-full-video:focus-visible { outline:1px solid currentColor; outline-offset:7px; }
+    .ketchum-video-modal { position:fixed; z-index:100; inset:0; display:grid; place-items:center; padding:clamp(54px,6vw,88px) clamp(18px,4vw,58px) clamp(24px,4vw,52px); background:rgba(8,9,8,.96); }
+    .ketchum-video-modal[hidden] { display:none; }
+    .ketchum-video-frame { width:min(1280px,100%); height:min(78svh,760px); border:0; background:#000; }
+    .ketchum-video-close { position:fixed; z-index:101; top:18px; right:20px; width:46px; height:46px; padding:0; border:1px solid rgba(241,240,234,.3); color:#f1f0ea; background:#10110f; display:grid; place-items:center; font:28px/1 Arial,Helvetica,sans-serif; cursor:pointer; transition:background-color .2s ease,border-color .2s ease; }
+    .ketchum-video-close:hover,.ketchum-video-close:focus-visible { background:#2b2c2a; border-color:#2b2c2a; outline:none; }
     @media (max-width:700px) {
       .ketchum-stage { padding:20px 18px 34px; }
       .ketchum-media video { max-height:calc(100svh - 130px); }
+      .ketchum-video-modal { padding:66px 0 0; }
+      .ketchum-video-frame { width:100%; height:calc(100svh - 66px); }
+      .ketchum-video-close { top:10px; right:10px; }
     }
     @media (prefers-reduced-motion:reduce) {
       .ketchum-full-video { transition:none; }
@@ -28,14 +38,61 @@
 <body>
   <main class="ketchum-stage">
     <figure class="ketchum-media" aria-label="Excerpt from the Ketchum Family film">
-      <video autoplay muted loop playsinline preload="auto" poster="./ketchum-family-loop-poster.jpg" aria-hidden="true">
+      <video data-ketchum-loop autoplay muted loop playsinline preload="auto" poster="./ketchum-family-loop-poster.jpg" aria-hidden="true">
         <source src="./ketchum-family-loop-8s.mp4" type="video/mp4" />
       </video>
-      <a class="ketchum-full-video" href="https://drive.google.com/file/d/1C8VWqPumNSTUgYeL459wV-waOU4siuq-/view?usp=drivesdk">
+      <button class="ketchum-full-video" type="button" data-ketchum-video-open>
         <span>Watch the full video</span>
         <span aria-hidden="true">↗</span>
-      </a>
+      </button>
     </figure>
   </main>
+
+  <div class="ketchum-video-modal" data-ketchum-video-modal role="dialog" aria-modal="true" aria-label="Ketchum Family full video" hidden>
+    <button class="ketchum-video-close" type="button" data-ketchum-video-close aria-label="Close full video">×</button>
+    <iframe
+      class="ketchum-video-frame"
+      data-ketchum-video-frame
+      data-src="https://drive.google.com/file/d/1C8VWqPumNSTUgYeL459wV-waOU4siuq-/preview"
+      title="Ketchum Family full video"
+      allow="autoplay; fullscreen"
+      allowfullscreen
+    ></iframe>
+  </div>
+
+  <script>
+    (() => {
+      const openButton = document.querySelector('[data-ketchum-video-open]');
+      const closeButton = document.querySelector('[data-ketchum-video-close]');
+      const modal = document.querySelector('[data-ketchum-video-modal]');
+      const frame = document.querySelector('[data-ketchum-video-frame]');
+      const loop = document.querySelector('[data-ketchum-loop]');
+
+      const openVideo = () => {
+        loop.pause();
+        frame.src = frame.dataset.src;
+        modal.hidden = false;
+        document.body.classList.add('is-video-open');
+        closeButton.focus({ preventScroll:true });
+      };
+
+      const closeVideo = () => {
+        frame.src = 'about:blank';
+        modal.hidden = true;
+        document.body.classList.remove('is-video-open');
+        loop.play().catch(() => {});
+        openButton.focus({ preventScroll:true });
+      };
+
+      openButton.addEventListener('click',openVideo);
+      closeButton.addEventListener('click',closeVideo);
+      modal.addEventListener('click',event => {
+        if (event.target === modal) closeVideo();
+      });
+      document.addEventListener('keydown',event => {
+        if (event.key === 'Escape' && !modal.hidden) closeVideo();
+      });
+    })();
+  </script>
 </body>
 </html>
