@@ -30,11 +30,6 @@
       .ketchum-video-frame { width:100%; height:calc(100svh - 66px); }
       .ketchum-video-close { top:10px; right:10px; }
     }
-    @media (hover:hover) and (pointer:fine) {
-      .ketchum-media video,
-      .ketchum-media video::-webkit-media-controls-play-button,
-      .ketchum-media video::-webkit-media-controls-start-playback-button { cursor:pointer !important; }
-    }
     @media (prefers-reduced-motion:reduce) {
       .ketchum-full-video { transition:none; }
     }
@@ -43,8 +38,8 @@
 </head>
 <body>
   <main class="ketchum-stage">
-    <figure class="ketchum-media" aria-label="Excerpt from the Ketchum Family film">
-      <video data-ketchum-loop style="cursor:pointer" autoplay muted loop playsinline preload="auto" poster="./ketchum-family-loop-poster.jpg" aria-hidden="true">
+    <figure class="ketchum-media" data-ketchum-video-preview style="cursor:pointer" aria-label="Open the full Ketchum Family video">
+      <video data-ketchum-loop style="pointer-events:none" autoplay muted loop playsinline preload="auto" poster="./ketchum-family-loop-poster.jpg" aria-hidden="true">
         <source src="./ketchum-family-loop-8s.mp4" type="video/mp4" />
       </video>
       <button class="ketchum-full-video" type="button" data-ketchum-video-open>
@@ -73,6 +68,7 @@
       const modal = document.querySelector('[data-ketchum-video-modal]');
       const frame = document.querySelector('[data-ketchum-video-frame]');
       const loop = document.querySelector('[data-ketchum-loop]');
+      const preview = document.querySelector('[data-ketchum-video-preview]');
 
       const openVideo = () => {
         if (window.matchMedia('(max-width:700px)').matches) {
@@ -99,6 +95,9 @@
       };
 
       openButton.addEventListener('click',openVideo);
+      preview.addEventListener('click',event => {
+        if (!event.target.closest('[data-ketchum-video-open]')) openVideo();
+      });
       closeButton.addEventListener('click',closeVideo);
       modal.addEventListener('click',event => {
         if (event.target === modal) closeVideo();

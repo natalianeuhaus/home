@@ -606,8 +606,8 @@
           </div>
         </div>
 
-        <figure class="performance-loop" aria-label="Excerpt from Blood Bath">
-          <video style="cursor:pointer" autoplay muted loop playsinline preload="metadata" poster="../blood-bath-loop-poster-v1.jpg" aria-label="Blood Bath video excerpt">
+        <figure class="performance-loop" data-video-preview style="cursor:pointer" aria-label="Open the full Blood Bath video">
+          <video style="pointer-events:none" autoplay muted loop playsinline preload="metadata" poster="../blood-bath-loop-poster-v1.jpg" aria-label="Blood Bath video excerpt">
             <source src="../blood-bath-loop-v1.mp4" type="video/mp4" />
           </video>
         </figure>
@@ -634,6 +634,7 @@
       var modal = document.querySelector('.video-modal');
       var closeButton = document.querySelector('.video-close');
       var frame = document.querySelector('.video-frame iframe');
+      var preview = document.querySelector('[data-video-preview]');
       var mobileVideo = window.matchMedia('(max-width: 760px)');
       var lastFocused = null;
 
@@ -661,6 +662,7 @@
       }
 
       openButton.addEventListener('click', openVideo);
+      preview.addEventListener('click', openVideo);
       closeButton.addEventListener('click', closeVideo);
       modal.addEventListener('click', function (event) {
         if (event.target === modal) closeVideo();

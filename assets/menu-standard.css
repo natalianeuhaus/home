@@ -202,14 +202,6 @@
   }
 }
 
-@media (hover: hover) and (pointer: fine) {
-  video,
-  video::-webkit-media-controls-play-button,
-  video::-webkit-media-controls-start-playback-button {
-    cursor: pointer !important;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .menu-standard,
   .menu-standard *,
