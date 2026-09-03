@@ -153,6 +153,8 @@
     .index-nav a::after { content:""; width:3px; position:absolute; left:0; top:0; bottom:0; background:transparent; }
     .index-nav a:hover,.index-nav a.is-active { color:var(--ink); background:var(--paper-deep); }
     .index-nav a.is-active::after { background:var(--red); }
+    .index-mobile-photographs { display:none; }
+    .index-mobile-photographs a { display:block; padding:14px 22px; color:var(--ink); text-decoration:none; font:700 9px/1 var(--sans); letter-spacing:.12em; text-transform:uppercase; }
     .index-foot { padding:20px 22px; border-top:1px solid var(--line); }
     .index-foot a { display:block; padding:9px 0; color:var(--red); font:700 8px/1 var(--sans); letter-spacing:.12em; text-transform:uppercase; }
 
@@ -543,6 +545,7 @@
       .dossier-viewer { left:0; }
       .case-index { width:min(360px,90vw); position:fixed; z-index:70; left:0; top:var(--top); transform:translateX(-102%); transition:transform .3s ease; box-shadow:24px 0 60px rgba(0,0,0,.18); }
       body.is-index-open .case-index { transform:none; }
+      .index-mobile-photographs { display:block; }
       .chapter-cover-meta { min-height:180px; border-right:0; border-bottom:1px solid var(--line); }
       .chapter-cover-meta::after { left:auto; right:8%; bottom:-4px; }
       .chapter-cover-body h3 { font-size:clamp(62px,13vw,122px); }
@@ -991,6 +994,7 @@
           <a href="#closing"><span>07</span>What remains</a>
           <a href="#health"><span>08</span>Health record</a>
         </nav>
+        <div class="index-mobile-photographs"><a href="./dossier-v2-photographs-stage.html" data-dossier-viewer-target="photographs">Photographs →</a></div>
         <div class="index-foot"><a href="https://natalianeuhaus.github.io/GreetingsFromNiagaraProject/archive.html" data-dossier-viewer-target="evidence">Examine evidence →</a><a href="https://natalianeuhaus.github.io/GreetingsFromNiagaraProject/" data-dossier-viewer-target="map">Follow the geography →</a></div>
       </aside>
 
