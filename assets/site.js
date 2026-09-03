@@ -700,7 +700,7 @@
           "For five weeks in 2023, Arles became a kind of intermission—a sun-soaked, enchanted town where time seemed to move differently. I was there through the mentorship award from The VII Foundation and Leica, wandering, observing, and photographing the small encounters that made the unfamiliar briefly feel like home.",
         ],
       },
-      { label: "Chapter III", targetId: null, paragraphs: ["Coming soon"] },
+      { label: "Chapter III", targetId: null, paragraphs: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."] },
     ];
     const films = Array.from(document.querySelectorAll(".intermission-film"));
 
