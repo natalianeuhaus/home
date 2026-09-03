@@ -676,6 +676,9 @@
       ".intermission-chapter-description",
     );
     const chapterIndex = document.querySelector(".intermission-chapter-index");
+    const copyrightFooter = document.querySelector(
+      ".intermission-page > .project-copyright-footer--intermission",
+    );
     const scrollIndicator = document.querySelector(
       ".intermission-chapter-scroll span",
     );
@@ -797,6 +800,7 @@
         "aria-labelledby",
         `intermission-chapter-tab-${index + 1}`,
       );
+      copyrightFooter?.remove();
       description.replaceChildren(
         ...chapter.paragraphs.map((text) => {
           const paragraph = document.createElement("p");
@@ -835,6 +839,9 @@
           });
         });
         description.append(enter);
+      }
+      if (index === chapters.length - 1 && copyrightFooter) {
+        description.append(copyrightFooter);
       }
       if (scrollIndicator) {
         scrollIndicator.style.transform = `translate3d(0, ${index * 100}%, 0)`;
