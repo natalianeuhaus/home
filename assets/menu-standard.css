@@ -209,3 +209,58 @@
     transition-duration: .01ms !important;
   }
 }
+
+/* Menu-state reliability guard.
+   Some project pages supply their own layout CSS. These rules preserve the
+   shared menu's fixed positioning and open state so the scrim can never appear
+   by itself while the navigation remains translated off-screen. */
+.menu-scrim {
+  z-index: 29 !important;
+}
+
+.menu-panel.menu-standard {
+  position: fixed !important;
+  z-index: 30 !important;
+  inset: 0 0 0 auto !important;
+  display: flex !important;
+  flex-direction: column;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translate3d(102%, 0, 0) !important;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.menu-panel.menu-standard.is-open,
+.menu-panel.menu-standard[aria-hidden="false"] {
+  color: #e9e7df !important;
+  background: #101312 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translate3d(0, 0, 0) !important;
+  pointer-events: auto;
+}
+
+.menu-panel.menu-standard.is-open > .menu-groups,
+.menu-panel.menu-standard.is-open > .menu-footer,
+.menu-panel.menu-standard[aria-hidden="false"] > .menu-groups,
+.menu-panel.menu-standard[aria-hidden="false"] > .menu-footer {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+@media (max-width: 760px) {
+  .menu-panel.menu-standard {
+    width: 100% !important;
+    height: 100dvh !important;
+    min-height: 100svh !important;
+    max-height: 100dvh !important;
+    padding-top: max(22px, env(safe-area-inset-top)) !important;
+    padding-bottom: max(24px, env(safe-area-inset-bottom)) !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+}
