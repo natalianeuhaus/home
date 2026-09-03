@@ -102,7 +102,7 @@
     .waterfalls-inner { width:min(1440px,100%); display:grid; grid-template-columns:minmax(230px,.55fr) minmax(520px,1.45fr); gap:clamp(54px,10vw,160px); align-items:center; }
     .waterfalls-meta { position:relative; z-index:3; }
     .eyebrow,.chapter-id,.evidence-label { display:block; color:var(--red); font:700 9px/1.35 var(--sans); letter-spacing:.18em; text-transform:uppercase; }
-    .chapter-id mark,.survey-chapter-label mark,.waste-era-chapter mark { padding:.05em .18em; color:var(--paper); background:var(--red); }
+    .chapter-id mark,.survey-chapter-label mark,.waste-era-chapter mark,.investigation-chapter-label mark { padding:.05em .18em; color:var(--paper); background:var(--red); }
     .waterfalls-year { display:block; margin-top:8px; color:var(--muted); font:10px/1 var(--sans); letter-spacing:.15em; text-transform:uppercase; }
     .waterfalls-meta h2 { margin:18px 0 0; max-width:500px; font-size:clamp(44px,5.5vw,88px); font-weight:400; line-height:.88; letter-spacing:-.055em; }
     .waterfalls-copy { max-width:900px; color:var(--copy-ink); font-size:clamp(18px,1.35vw,23px); line-height:1.47; letter-spacing:-.012em; }
@@ -890,7 +890,7 @@
 
     /* Rebuild Chapter I, fitted inside the dossier rail */
     #atomic { --atomic-content-width:calc(100vw - var(--rail)); background:var(--paper); }
-    #atomic .investigation-chapter-label { display:block; margin:0 0 6px; color:rgba(18,20,17,.42); font:10px/1.35 var(--sans); letter-spacing:.2em; text-transform:uppercase; }
+    #atomic .investigation-chapter-label { display:block; margin:0 0 6px; color:rgba(18,20,17,.42); font:700 9px/1.35 var(--sans); letter-spacing:.18em; text-transform:uppercase; }
     #atomic .investigation-number { display:block; margin:0 0 20px; color:rgba(18,20,17,.42); font:13px/1.4 var(--sans); letter-spacing:.22em; text-transform:uppercase; }
     #atomic .investigation-chapter-grid { width:min(1220px,calc(100% - 84px)); margin:0 auto; display:grid; align-items:start; }
     #atomic .investigation-chapter-copy { max-width:900px; }
@@ -1108,7 +1108,7 @@
           <div class="atomic-xray-sequence">
           <div class="atomic-niagara-hero">
             <div class="atomic-niagara-title">
-              <span class="investigation-chapter-label">Chapter I</span>
+              <span class="investigation-chapter-label"><mark>Chapter I</mark></span>
               <span class="investigation-number">1942</span>
               <h3>Atomic Niagara</h3>
             </div>
