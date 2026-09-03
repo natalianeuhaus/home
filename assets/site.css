@@ -1502,3 +1502,39 @@ body.burlesque-horizontal-body{overflow:hidden}
     max-width:none;
   }
 }
+
+
+/* Visible copyright footer shared by portfolio project pages. */
+.project-copyright-footer{
+  box-sizing:border-box;
+  width:100%;
+  border-top:1px solid rgba(21,23,21,.22);
+  padding:28px 42px 32px;
+  background:#f4f3ef;
+  color:rgba(21,23,21,.58);
+  font:500 8px/1.4 Arial,Helvetica,sans-serif;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.project-copyright-footer--dark{
+  border-top-color:rgba(241,239,231,.18);
+  background:#070808;
+  color:rgba(241,239,231,.58);
+}
+.project-copyright-footer--overlay{
+  position:fixed;
+  z-index:6;
+  left:42px;
+  bottom:20px;
+  width:auto;
+  border:0;
+  padding:0;
+  background:transparent;
+  color:#fff;
+  mix-blend-mode:difference;
+  pointer-events:none;
+}
+@media(max-width:760px){
+  .project-copyright-footer{padding:24px 20px 27px;font-size:7px}
+  .project-copyright-footer--overlay{left:20px;bottom:14px;width:auto;padding:0}
+}
