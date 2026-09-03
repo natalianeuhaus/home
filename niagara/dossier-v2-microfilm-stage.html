@@ -21,8 +21,7 @@
     .microfilm-video-modal { position:fixed; z-index:100; inset:0; display:grid; place-items:center; padding:clamp(54px,6vw,88px) clamp(18px,4vw,58px) clamp(24px,4vw,52px); background:rgba(8,9,8,.96); }
     .microfilm-video-modal[hidden] { display:none; }
     .microfilm-video-shell { position:relative; width:min(1280px,100%); height:min(78svh,760px); }
-    .microfilm-video-frame { width:100%; height:100%; border:0; background:#000; }
-    .microfilm-drive-cover { position:absolute; z-index:1; inset:0; width:100%; height:100%; padding:0; border:0; background:transparent; cursor:pointer; }
+    .microfilm-video-frame { width:100%; height:100%; display:block; border:0; background:#000; object-fit:contain; cursor:pointer; }
     .microfilm-video-close { position:fixed; z-index:101; top:18px; right:20px; width:46px; height:46px; padding:0; border:1px solid rgba(241,240,234,.3); color:#f1f0ea; background:#10110f; display:grid; place-items:center; font:28px/1 Arial,Helvetica,sans-serif; cursor:pointer; transition:background-color .2s ease,border-color .2s ease; }
     .microfilm-video-close:hover,.microfilm-video-close:focus-visible { background:#2b2c2a; border-color:#2b2c2a; outline:none; }
     @media (max-width:700px) {
@@ -54,15 +53,16 @@
   <div class="microfilm-video-modal" data-microfilm-video-modal role="dialog" aria-modal="true" aria-label="Microfilm full video" hidden>
     <button class="microfilm-video-close" type="button" data-microfilm-video-close aria-label="Close full video">×</button>
     <div class="microfilm-video-shell">
-      <iframe
+      <video
         class="microfilm-video-frame"
         data-microfilm-video-frame
-        data-src="https://drive.google.com/file/d/1CyKur2DpSyZXwoRX5pzHcv8_4DpldudN/preview"
-        title="Microfilm full video"
-        allow="autoplay; fullscreen"
-        allowfullscreen
-      ></iframe>
-      <button class="microfilm-drive-cover" type="button" data-microfilm-drive-cover aria-label="Open Microfilm in Google Drive"></button>
+        controls
+        playsinline
+        preload="metadata"
+        aria-label="Microfilm full video"
+      >
+        <source src="https://rachelbodyworkmassage.com/wp-content/uploads/videos/microfilm.mp4" type="video/mp4" />
+      </video>
     </div>
   </div>
 
@@ -71,29 +71,23 @@
       const openButton = document.querySelector('[data-microfilm-video-open]');
       const closeButton = document.querySelector('[data-microfilm-video-close]');
       const modal = document.querySelector('[data-microfilm-video-modal]');
-      const frame = document.querySelector('[data-microfilm-video-frame]');
-      const driveCover = document.querySelector('[data-microfilm-drive-cover]');
+      const player = document.querySelector('[data-microfilm-video-frame]');
       const loop = document.querySelector('[data-microfilm-loop]');
       const preview = document.querySelector('[data-microfilm-video-preview]');
 
       const openVideo = () => {
-        if (window.matchMedia('(max-width:700px)').matches) {
-          window.open(
-            frame.dataset.src.replace(/\/preview(?:[?#].*)?$/, '/view'),
-            '_blank',
-            'noopener,noreferrer'
-          );
-          return;
-        }
         loop.pause();
-        frame.src = frame.dataset.src;
         modal.hidden = false;
         document.body.classList.add('is-video-open');
+        const playback = player.play();
+        if (playback && typeof playback.catch === 'function') {
+          playback.catch(() => {});
+        }
         closeButton.focus({ preventScroll:true });
       };
 
       const closeVideo = () => {
-        frame.src = 'about:blank';
+        player.pause();
         modal.hidden = true;
         document.body.classList.remove('is-video-open');
         loop.play().catch(() => {});
@@ -101,9 +95,6 @@
       };
 
       openButton.addEventListener('click',openVideo);
-      driveCover.addEventListener('click',() => {
-        window.open(frame.dataset.src.replace(/\/preview(?:[?#].*)?$/, '/view'),'_blank','noopener,noreferrer');
-      });
       preview.addEventListener('click',event => {
         if (!event.target.closest('[data-microfilm-video-open]')) openVideo();
       });

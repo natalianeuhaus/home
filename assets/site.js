@@ -694,9 +694,9 @@
       {
         label: "Chapter II",
         targetId: "chapter-2",
-        videoLabel: "Stop motion video ↗",
-        videoEmbedUrl:
-          "https://drive.google.com/file/d/1WDErC-Nq_XlsNNhmfzXvqJUN8cpkqPbG/preview",
+        videoLabel: "Stop motion video",
+        videoSrc:
+          "https://rachelbodyworkmassage.com/wp-content/uploads/videos/Arles_Paganini.mp4",
         paragraphs: [
           "For five weeks in 2023, Arles became a kind of intermission—a sun-soaked, enchanted town where time seemed to move differently. I was there through the mentorship award from The VII Foundation and Leica, wandering, observing, and photographing the small encounters that made the unfamiliar briefly feel like home.",
         ],
@@ -720,15 +720,7 @@
     };
 
     const openVideo = (chapter, trigger) => {
-      if (!chapter.videoEmbedUrl) {
-        return;
-      }
-      if (window.matchMedia("(max-width: 760px)").matches) {
-        window.open(
-          chapter.videoEmbedUrl.replace(/\/preview(?:[?#].*)?$/, "/view"),
-          "_blank",
-          "noopener,noreferrer",
-        );
+      if (!chapter.videoSrc) {
         return;
       }
       if (document.querySelector(".intermission-video-modal")) {
@@ -742,8 +734,7 @@
       const close = document.createElement("button");
       const body = document.createElement("div");
       const frame = document.createElement("div");
-      const player = document.createElement("iframe");
-      const driveCover = document.createElement("button");
+      const player = document.createElement("video");
 
       modal.className = "intermission-video-modal";
       modal.setAttribute("role", "dialog");
@@ -757,16 +748,14 @@
       close.textContent = "×";
       body.className = "intermission-video-modal-body";
       frame.className = "intermission-video-modal-frame";
-      player.title = "Arles, 2023 stop motion video";
-      player.allow = "autoplay; fullscreen";
-      player.allowFullscreen = true;
-      player.src = chapter.videoEmbedUrl;
-      driveCover.className = "intermission-video-drive-cover";
-      driveCover.type = "button";
-      driveCover.setAttribute("aria-label", "Open Arles video in Google Drive");
+      player.controls = true;
+      player.playsInline = true;
+      player.preload = "metadata";
+      player.setAttribute("aria-label", "Arles, 2023 stop motion video");
+      player.src = chapter.videoSrc;
 
       const closeVideo = () => {
-        player.removeAttribute("src");
+        player.pause();
         modal.remove();
         document.documentElement.style.overflow = previousOverflow;
         window.removeEventListener("keydown", onKeyDown);
@@ -777,23 +766,20 @@
       };
 
       close.addEventListener("click", closeVideo);
-      driveCover.addEventListener("click", () => {
-        window.open(
-          chapter.videoEmbedUrl.replace(/\/preview(?:[?#].*)?$/, "/view"),
-          "_blank",
-          "noopener,noreferrer",
-        );
-      });
       modal.addEventListener("click", (event) => {
         if (event.target === modal || event.target === body) closeVideo();
       });
       window.addEventListener("keydown", onKeyDown);
       header.append(title, close);
-      frame.append(player, driveCover);
+      frame.append(player);
       body.append(frame);
       modal.append(header, body);
       document.body.append(modal);
       document.documentElement.style.overflow = "hidden";
+      const playback = player.play();
+      if (playback && typeof playback.catch === "function") {
+        playback.catch(() => {});
+      }
       close.focus();
     };
 
@@ -817,7 +803,7 @@
           return paragraph;
         }),
       );
-      if (chapter.videoEmbedUrl) {
+      if (chapter.videoSrc) {
         const videoLink = document.createElement("button");
         videoLink.className = "intermission-video-link";
         videoLink.type = "button";
