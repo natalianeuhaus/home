@@ -57,6 +57,18 @@
   text-transform: uppercase;
 }
 
+.menu-standard .menu-label a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity .25s ease;
+}
+
+.menu-standard .menu-label a:hover,
+.menu-standard .menu-label a:focus-visible {
+  opacity: 1;
+  outline: none;
+}
+
 .menu-standard .menu-links {
   border-top: 0;
 }
