@@ -210,24 +210,21 @@
   }
 }
 
-/* Menu-state reliability guard.
-   Some project pages supply their own layout CSS. These rules preserve the
-   shared menu's fixed positioning and open state so the scrim can never appear
-   by itself while the navigation remains translated off-screen. */
+/* Menu-state reliability guard. */
 .menu-scrim {
-  z-index: 29 !important;
+  z-index: 9997 !important;
 }
 
 .menu-panel.menu-standard {
   position: fixed !important;
-  z-index: 30 !important;
+  z-index: 9998 !important;
   inset: 0 0 0 auto !important;
   display: flex !important;
   flex-direction: column;
   opacity: 1 !important;
   visibility: visible !important;
   transform: translate3d(102%, 0, 0) !important;
-  pointer-events: none;
+  pointer-events: none !important;
   will-change: transform;
 }
 
@@ -238,7 +235,7 @@
   opacity: 1 !important;
   visibility: visible !important;
   transform: translate3d(0, 0, 0) !important;
-  pointer-events: auto;
+  pointer-events: auto !important;
 }
 
 .menu-panel.menu-standard.is-open > .menu-groups,
@@ -248,6 +245,31 @@
   opacity: 1 !important;
   visibility: visible !important;
   transform: none !important;
+  pointer-events: auto !important;
+  position: relative;
+  z-index: 2;
+}
+
+.menu-panel.menu-standard.is-open .menu-links,
+.menu-panel.menu-standard.is-open .menu-links a,
+.menu-panel.menu-standard.is-open .menu-footer,
+.menu-panel.menu-standard.is-open .menu-footer a,
+.menu-panel.menu-standard[aria-hidden="false"] .menu-links,
+.menu-panel.menu-standard[aria-hidden="false"] .menu-links a,
+.menu-panel.menu-standard[aria-hidden="false"] .menu-footer,
+.menu-panel.menu-standard[aria-hidden="false"] .menu-footer a {
+  pointer-events: auto !important;
+  touch-action: manipulation;
+}
+
+.menu-panel.menu-standard.is-open .menu-links a,
+.menu-panel.menu-standard[aria-hidden="false"] .menu-links a {
+  position: relative;
+  z-index: 3;
+}
+
+.menu-toggle {
+  z-index: 9999 !important;
 }
 
 @media (max-width: 760px) {
@@ -262,5 +284,32 @@
     overflow-y: auto !important;
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
+  }
+
+  /* The page wordmark already remains visible while the menu is open. */
+  .menu-panel.menu-standard .menu-label {
+    display: none !important;
+  }
+
+  .menu-panel.menu-standard .menu-links {
+    margin-top: 72px;
+    border-top-color: rgba(255,255,255,.18) !important;
+  }
+
+  .menu-panel.menu-standard .menu-links a {
+    color: #e9e7df !important;
+    opacity: .82 !important;
+    min-height: 56px;
+    -webkit-tap-highlight-color: rgba(255,255,255,.08);
+  }
+
+  .menu-panel.menu-standard .menu-project-number {
+    color: #e9e7df !important;
+    opacity: .42 !important;
+  }
+
+  .menu-panel.menu-standard .menu-footer a {
+    color: #e9e7df !important;
+    opacity: .62 !important;
   }
 }
