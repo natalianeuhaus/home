@@ -693,13 +693,19 @@
       {
         label: "Chapter II",
         targetId: "chapter-2",
-        paragraphs: ["Arles, 2023."],
+        paragraphs: [
+          "For five weeks in 2023, Arles became a kind of intermission—a sun-soaked, enchanted town where time seemed to move differently. I was there through the mentorship award from The VII Foundation and Leica, wandering, observing, and photographing the small encounters that made the unfamiliar briefly feel like home.",
+        ],
       },
       { label: "Chapter III", targetId: null, paragraphs: ["Coming soon"] },
     ];
     const films = Array.from(document.querySelectorAll(".intermission-film"));
 
     const alignDescription = (index) => {
+      if (index === 1) {
+        description.style.setProperty("--chapter-description-offset", "0px");
+        return;
+      }
       const title = tabs[index].querySelector("strong");
       if (!title) return;
       const offset = Math.max(
