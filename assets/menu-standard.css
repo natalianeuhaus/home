@@ -280,6 +280,82 @@
   z-index: 9999 !important;
 }
 
+/* Keep each page header above the open desktop menu. The panel's reliability
+   guard uses a high stacking level, so the header must join that same global
+   stack or its transformed menu toggle (the close X) is hidden underneath. */
+html.menu-open .site-header {
+  z-index: 10000 !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  pointer-events: none !important;
+}
+
+html.menu-open .site-header .wordmark {
+  display: inline-flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+html.menu-open .site-header .menu-toggle {
+  z-index: 10001 !important;
+  display: grid !important;
+  color: #e9e7df !important;
+  background: transparent !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+html.menu-open .site-header .menu-toggle span {
+  display: block !important;
+  background: #e9e7df !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+html.menu-open .site-header .menu-toggle span:first-child {
+  transform: translateY(4px) rotate(45deg) !important;
+}
+
+html.menu-open .site-header .menu-toggle span:last-child {
+  transform: translateY(-4px) rotate(-45deg) !important;
+}
+
+/* The Greetings dossier uses its casebar as the global page header. */
+body.is-portfolio-menu-open .casebar {
+  z-index: 10000 !important;
+}
+
+body.is-portfolio-menu-open .portfolio-menu-toggle {
+  position: relative;
+  z-index: 10001 !important;
+  display: grid !important;
+  color: #e9e7df !important;
+  background: transparent !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+body.is-portfolio-menu-open .portfolio-menu-toggle span {
+  display: block !important;
+  background: #e9e7df !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+body.is-portfolio-menu-open .portfolio-menu-toggle span:first-child {
+  transform: translateY(4px) rotate(45deg) !important;
+}
+
+body.is-portfolio-menu-open .portfolio-menu-toggle span:last-child {
+  transform: translateY(-4px) rotate(-45deg) !important;
+}
+
 @media (max-width: 760px) {
   .menu-panel.menu-standard {
     width: 100% !important;
