@@ -694,8 +694,8 @@
         label: "Chapter II",
         targetId: "chapter-2",
         videoLabel: "Stop motion video ↗",
-        videoUrl:
-          "https://drive.google.com/file/d/1WDErC-Nq_XlsNNhmfzXvqJUN8cpkqPbG/view?usp=drivesdk",
+        videoEmbedUrl:
+          "https://drive.google.com/file/d/1WDErC-Nq_XlsNNhmfzXvqJUN8cpkqPbG/preview",
         paragraphs: [
           "For five weeks in 2023, Arles became a kind of intermission—a sun-soaked, enchanted town where time seemed to move differently. I was there through the mentorship award from The VII Foundation and Leica, wandering, observing, and photographing the small encounters that made the unfamiliar briefly feel like home.",
         ],
@@ -718,6 +718,65 @@
       );
     };
 
+    const openVideo = (chapter, trigger) => {
+      if (
+        !chapter.videoEmbedUrl ||
+        document.querySelector(".intermission-video-modal")
+      ) {
+        return;
+      }
+
+      const previousOverflow = document.documentElement.style.overflow;
+      const modal = document.createElement("div");
+      const header = document.createElement("div");
+      const title = document.createElement("span");
+      const close = document.createElement("button");
+      const body = document.createElement("div");
+      const frame = document.createElement("div");
+      const player = document.createElement("iframe");
+
+      modal.className = "intermission-video-modal";
+      modal.setAttribute("role", "dialog");
+      modal.setAttribute("aria-modal", "true");
+      modal.setAttribute("aria-label", "Arles stop motion video");
+      header.className = "intermission-video-modal-top";
+      title.textContent = "ARLES · 2023";
+      close.className = "intermission-video-modal-close";
+      close.type = "button";
+      close.setAttribute("aria-label", "Close video");
+      close.textContent = "×";
+      body.className = "intermission-video-modal-body";
+      frame.className = "intermission-video-modal-frame";
+      player.title = "Arles, 2023 stop motion video";
+      player.allow = "autoplay; fullscreen";
+      player.allowFullscreen = true;
+      player.src = chapter.videoEmbedUrl;
+
+      const closeVideo = () => {
+        player.removeAttribute("src");
+        modal.remove();
+        document.documentElement.style.overflow = previousOverflow;
+        window.removeEventListener("keydown", onKeyDown);
+        trigger.focus();
+      };
+      const onKeyDown = (event) => {
+        if (event.key === "Escape") closeVideo();
+      };
+
+      close.addEventListener("click", closeVideo);
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal || event.target === body) closeVideo();
+      });
+      window.addEventListener("keydown", onKeyDown);
+      header.append(title, close);
+      frame.append(player);
+      body.append(frame);
+      modal.append(header, body);
+      document.body.append(modal);
+      document.documentElement.style.overflow = "hidden";
+      close.focus();
+    };
+
     const render = (index, focus = false) => {
       const chapter = chapters[index];
       tabs.forEach((tab, tabIndex) => {
@@ -738,13 +797,14 @@
           return paragraph;
         }),
       );
-      if (chapter.videoUrl) {
-        const videoLink = document.createElement("a");
+      if (chapter.videoEmbedUrl) {
+        const videoLink = document.createElement("button");
         videoLink.className = "intermission-video-link";
-        videoLink.href = chapter.videoUrl;
-        videoLink.target = "_blank";
-        videoLink.rel = "noopener noreferrer";
+        videoLink.type = "button";
         videoLink.textContent = chapter.videoLabel || "Watch video ↗";
+        videoLink.addEventListener("click", () =>
+          openVideo(chapter, videoLink),
+        );
         description.append(videoLink);
       }
       films.forEach((film) => {
