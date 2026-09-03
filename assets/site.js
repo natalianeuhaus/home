@@ -720,10 +720,18 @@
     };
 
     const openVideo = (chapter, trigger) => {
-      if (
-        !chapter.videoEmbedUrl ||
-        document.querySelector(".intermission-video-modal")
-      ) {
+      if (!chapter.videoEmbedUrl) {
+        return;
+      }
+      if (window.matchMedia("(max-width: 760px)").matches) {
+        window.open(
+          chapter.videoEmbedUrl.replace(/\/preview(?:[?#].*)?$/, "/view"),
+          "_blank",
+          "noopener,noreferrer",
+        );
+        return;
+      }
+      if (document.querySelector(".intermission-video-modal")) {
         return;
       }
 

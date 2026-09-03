@@ -634,10 +634,19 @@
       var modal = document.querySelector('.video-modal');
       var closeButton = document.querySelector('.video-close');
       var frame = document.querySelector('.video-frame iframe');
+      var mobileVideo = window.matchMedia('(max-width: 760px)');
       var lastFocused = null;
 
       function openVideo() {
         lastFocused = document.activeElement;
+        if (mobileVideo.matches) {
+          window.open(
+            frame.getAttribute('data-src').replace(/\/preview(?:[?#].*)?$/, '/view'),
+            '_blank',
+            'noopener,noreferrer'
+          );
+          return;
+        }
         frame.src = frame.getAttribute('data-src');
         modal.hidden = false;
         document.body.classList.add('modal-open');
