@@ -464,7 +464,18 @@
         object-fit: cover;
       }
       .full-video { font-size: 22px; }
-      .page-footer { padding: 24px 0 27px; font-size: 11px; }
+      .installation .project:last-child { border-bottom: 0; }
+      .page-footer {
+        padding: 24px 0 27px;
+        background: transparent;
+        font-size: 11px;
+      }
+      .page-footer > span:first-child {
+        color: rgba(23, 22, 21, .58);
+        font: 500 7px/1.4 Arial, Helvetica, sans-serif;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+      }
       body.modal-open .site-header {
         visibility: hidden;
         opacity: 0;
