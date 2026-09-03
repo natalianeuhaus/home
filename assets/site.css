@@ -1591,3 +1591,13 @@ body.burlesque-horizontal-body{overflow:hidden}
     background:transparent;
   }
 }
+
+
+/* Intermission final-panel copyright: visible in normal flow on desktop and mobile. */
+.intermission-chapter-description .project-copyright-footer--intermission{
+  margin:clamp(48px,8vh,96px) 0 0;
+  padding:0;
+  border:0;
+  background:transparent;
+  color:rgba(21,23,21,.58);
+}
