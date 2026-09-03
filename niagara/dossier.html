@@ -373,6 +373,12 @@
       .health-sources em { grid-column:2; }
     }
 
+    @media (hover:hover) and (pointer:fine) {
+      video,
+      video::-webkit-media-controls-play-button,
+      video::-webkit-media-controls-start-playback-button { cursor:pointer !important; }
+    }
+
     @media (prefers-reduced-motion:reduce) {
       html { scroll-behavior:auto; }
       *,*::before,*::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
@@ -396,7 +402,7 @@
 
   <main>
     <section class="cinematic-hero" aria-labelledby="page-title">
-      <video autoplay muted loop playsinline preload="metadata" aria-label="Archival family film from Niagara Falls">
+      <video style="cursor:pointer" autoplay muted loop playsinline preload="metadata" aria-label="Archival family film from Niagara Falls">
         <source src="./atomic-niagara-loop.mp4" type="video/mp4" />
       </video>
       <div class="hero-copy">

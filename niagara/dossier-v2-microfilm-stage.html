@@ -30,6 +30,11 @@
       .microfilm-video-frame { width:100%; height:calc(100svh - 66px); }
       .microfilm-video-close { top:10px; right:10px; }
     }
+    @media (hover:hover) and (pointer:fine) {
+      .microfilm-media video,
+      .microfilm-media video::-webkit-media-controls-play-button,
+      .microfilm-media video::-webkit-media-controls-start-playback-button { cursor:pointer !important; }
+    }
     @media (prefers-reduced-motion:reduce) {
       .microfilm-full-video { transition:none; }
     }
@@ -39,7 +44,7 @@
 <body>
   <main class="microfilm-stage">
     <figure class="microfilm-media" aria-label="Excerpt from the Microfilm film">
-      <video data-microfilm-loop autoplay muted loop playsinline preload="auto" aria-hidden="true">
+      <video data-microfilm-loop style="cursor:pointer" autoplay muted loop playsinline preload="auto" aria-hidden="true">
         <source src="./micro4.mp4" type="video/mp4" />
       </video>
       <button class="microfilm-full-video" type="button" data-microfilm-video-open>
