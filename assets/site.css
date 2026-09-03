@@ -1436,6 +1436,7 @@ body.burlesque-horizontal-body{overflow:hidden}
   position:fixed;
   inset:0;
 }
+.intermission-video-modal:focus{outline:none}
 .intermission-video-modal-top{
   color:#bbb;
   letter-spacing:.14em;
@@ -1455,8 +1456,12 @@ body.burlesque-horizontal-body{overflow:hidden}
   font:300 31px/1 Arial,Helvetica,sans-serif;
   transition:opacity .25s;
 }
-.intermission-video-modal-close:hover,
-.intermission-video-modal-close:focus-visible{opacity:.52}
+.intermission-video-modal-close:hover{opacity:.52}
+.intermission-video-modal-close:focus-visible{
+  opacity:.52;
+  outline:1px solid rgba(241,239,231,.75);
+  outline-offset:2px;
+}
 .intermission-video-modal-body{
   min-height:0;
   padding:20px;
@@ -1465,7 +1470,7 @@ body.burlesque-horizontal-body{overflow:hidden}
 }
 .intermission-video-modal-frame{
   background:#000;
-  width:min(92vw,1400px);
+  width:min(1280px,calc(100vw - 112px),calc(177.78svh - 199px));
   aspect-ratio:16/9;
   position:relative;
 }

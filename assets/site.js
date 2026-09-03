@@ -740,6 +740,7 @@
       modal.setAttribute("role", "dialog");
       modal.setAttribute("aria-modal", "true");
       modal.setAttribute("aria-label", "Arles stop motion video");
+      modal.tabIndex = -1;
       header.className = "intermission-video-modal-top";
       title.textContent = "ARLES · 2023";
       close.className = "intermission-video-modal-close";
@@ -780,7 +781,7 @@
       if (playback && typeof playback.catch === "function") {
         playback.catch(() => {});
       }
-      close.focus();
+      modal.focus({ preventScroll: true });
     };
 
     const render = (index, focus = false) => {

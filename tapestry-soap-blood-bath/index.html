@@ -345,6 +345,7 @@
       background: rgba(7, 6, 6, .97);
       color: #f2f0ea;
     }
+    .video-modal:focus { outline: none; }
     .video-close {
       position: absolute;
       z-index: 2;
@@ -361,9 +362,13 @@
       line-height: 1;
       cursor: pointer;
     }
+    .video-close:focus-visible {
+      outline: 1px solid rgba(242, 240, 234, .75);
+      outline-offset: 2px;
+    }
     .video-frame {
       position: relative;
-      width: min(1280px, calc(100vw - 112px));
+      width: min(1280px, calc(100vw - 112px), calc(177.78svh - 199px));
       max-height: calc(100svh - 112px);
     }
     .video-title {
@@ -619,7 +624,7 @@
 
   <footer class="page-footer"><span>Natalia Neuhaus</span><a href="#top">Back to top ↑</a></footer>
 
-  <div class="video-modal" role="dialog" aria-modal="true" aria-labelledby="video-title" hidden>
+  <div class="video-modal" role="dialog" aria-modal="true" aria-labelledby="video-title" tabindex="-1" hidden>
     <button class="video-close" type="button" aria-label="Close Blood Bath video">×</button>
     <div class="video-frame">
       <h2 class="video-title" id="video-title">Blood Bath</h2>
@@ -647,7 +652,7 @@
         if (playback && typeof playback.catch === 'function') {
           playback.catch(function () {});
         }
-        closeButton.focus();
+        modal.focus({ preventScroll: true });
       }
 
       function closeVideo() {
