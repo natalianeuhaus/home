@@ -10,6 +10,31 @@
   const backstoryTrigger = document.querySelector("[data-burlesque-backstory-open]");
   const backstoryDialog = document.querySelector(".burlesque-backstory");
   const backstoryClose = backstoryDialog?.querySelector("[data-burlesque-backstory-close]");
+  const introCopy = page.querySelector(".burlesque-intro-copy");
+  const copyrightFooter = page.querySelector(".project-copyright-footer--overlay");
+  const mobileEnding = window.matchMedia("(max-width: 760px)");
+
+  const placeBurlesqueEnding = () => {
+    if (!introCopy || !backstoryTrigger || !backstoryDialog || !copyrightFooter) return;
+    if (mobileEnding.matches) {
+      backstoryTrigger.classList.add("burlesque-mobile-ending");
+      copyrightFooter.classList.add("burlesque-mobile-ending");
+      introCopy.append(backstoryTrigger, copyrightFooter);
+      return;
+    }
+    backstoryTrigger.classList.remove("burlesque-mobile-ending");
+    copyrightFooter.classList.remove("burlesque-mobile-ending");
+    page.append(copyrightFooter);
+    backstoryDialog.before(backstoryTrigger);
+  };
+
+  placeBurlesqueEnding();
+  if (typeof mobileEnding.addEventListener === "function") {
+    mobileEnding.addEventListener("change", placeBurlesqueEnding);
+  } else {
+    mobileEnding.addListener(placeBurlesqueEnding);
+  }
+
   let backstoryPreviousOverflow = "";
 
   const closeBackstory = () => {
