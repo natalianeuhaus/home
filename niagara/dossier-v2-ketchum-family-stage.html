@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+  <title>Greetings from Niagara — Ketchum Family</title>
+  <style>
+    :root { --paper:#f1f0ea; --ink:#171615; }
+    * { box-sizing:border-box; }
+    html,body { width:100%; min-height:100%; margin:0; }
+    body { color:var(--ink); background:var(--paper); font-family:Georgia,"Times New Roman",serif; -webkit-font-smoothing:antialiased; }
+    .ketchum-stage { min-height:100svh; display:grid; place-items:center; padding:clamp(28px,5vw,76px); }
+    .ketchum-media { width:min(1120px,100%); margin:0; }
+    .ketchum-media video { width:100%; max-height:calc(100svh - 150px); display:block; object-fit:contain; background:#090a09; }
+    .ketchum-full-video { width:100%; padding:28px 0 0; display:flex; align-items:baseline; justify-content:flex-end; gap:14px; color:inherit; font-size:25px; font-weight:400; line-height:1.2; text-align:right; text-decoration:none; transition:opacity .2s ease; }
+    .ketchum-full-video:hover { opacity:.55; }
+    .ketchum-full-video:focus-visible { outline:1px solid currentColor; outline-offset:7px; }
+    @media (max-width:700px) {
+      .ketchum-stage { padding:20px 18px 34px; }
+      .ketchum-media video { max-height:calc(100svh - 130px); }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      .ketchum-full-video { transition:none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="ketchum-stage">
+    <figure class="ketchum-media" aria-label="Excerpt from the Ketchum Family film">
+      <video autoplay muted loop playsinline preload="auto" poster="./ketchum-family-loop-poster.jpg" aria-hidden="true">
+        <source src="./ketchum-family-loop-8s.mp4" type="video/mp4" />
+      </video>
+      <a class="ketchum-full-video" href="https://drive.google.com/file/d/1C8VWqPumNSTUgYeL459wV-waOU4siuq-/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">
+        <span>Watch the full video</span>
+        <span aria-hidden="true">↗</span>
+      </a>
+    </figure>
+  </main>
+</body>
+</html>
