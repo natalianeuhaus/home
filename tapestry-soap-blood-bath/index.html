@@ -453,13 +453,33 @@
       }
       .full-video { font-size: 22px; }
       .page-footer { padding: 24px 0 27px; font-size: 11px; }
-      .video-modal { padding: 52px 20px 20px; }
-      .video-close { top: 8px; right: 9px; }
+      body.modal-open .site-header {
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+      }
+      .video-modal {
+        padding: max(64px, calc(env(safe-area-inset-top) + 52px)) 0 max(20px, env(safe-area-inset-bottom));
+        display: block;
+        overflow-y: auto;
+      }
+      .video-close {
+        position: fixed;
+        top: max(8px, env(safe-area-inset-top));
+        right: 9px;
+      }
       .video-frame {
         width: 100%;
-        max-height: calc(100svh - 72px);
+        max-height: none;
       }
-      .video-title { bottom: calc(100% + 10px); font-size: 12px; }
+      .video-title {
+        position: static;
+        margin: 0 20px 12px;
+        font-size: 15px;
+      }
+      .video-frame iframe {
+        min-height: 56.25vw;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
