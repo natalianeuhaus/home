@@ -1404,3 +1404,22 @@ body.burlesque-horizontal-body{overflow:hidden}
 .healers-page {
   background: #faf9f5;
 }
+
+/* Arles stop-motion video. */
+.intermission-video-link{
+  color:#151715;
+  display:table;
+  margin-top:0;
+  padding-bottom:5px;
+  border-bottom:1px solid #15171566;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  font:9px/1.4 Arial,Helvetica,sans-serif;
+  transition:opacity .25s,border-color .25s;
+}
+.intermission-video-link:hover,
+.intermission-video-link:focus-visible{
+  color:#151715;
+  opacity:.52;
+  border-bottom-color:#151715;
+}
