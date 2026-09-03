@@ -10,6 +10,7 @@
     const links = Array.from(panel.querySelectorAll("a"));
 
     const setOpen = (open) => {
+      html.classList.toggle("menu-open", open);
       toggle.classList.toggle("is-open", open);
       panel.classList.toggle("is-open", open);
       toggle.setAttribute("aria-expanded", String(open));

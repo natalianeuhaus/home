@@ -3,76 +3,474 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#f6f2e9" />
+  <meta name="theme-color" content="#faf9f5" />
   <title>Tapestry, Soap and Blood Bath — Natalia Neuhaus</title>
-  <meta name="description" content="Tapestry, Soap and Blood Bath by Natalia Neuhaus — an interdisciplinary project about empire, violence and complicity." />
+  <meta name="description" content="Tapestry, Soap and Blood Bath by Natalia Neuhaus — an interdisciplinary installation examining empire, violence and complicity." />
   <link rel="canonical" href="https://natalianeuhaus.github.io/home/tapestry-soap-blood-bath/" />
   <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="../assets/menu-standard.css?v=6" />
+  <link rel="stylesheet" href="../assets/menu-standard.css?v=7" />
   <style>
-    :root{--paper:#f6f2e9;--ink:#191a18;--copy:rgba(25,26,24,.74);--muted:rgba(25,26,24,.48);--line:rgba(25,26,24,.17);--night:#0d0f0e}
-    *{box-sizing:border-box}
-    html{background:var(--paper);scroll-behavior:smooth}
-    body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,"Times New Roman",serif;-webkit-font-smoothing:antialiased}
-    a{color:inherit}
-    img,video{max-width:100%}
+    :root {
+      --paper: #faf9f5;
+      --ink: #171615;
+      --muted: rgba(23, 22, 21, .52);
+      --line: rgba(23, 22, 21, .23);
+    }
 
-    .site-header{height:60px;position:fixed;z-index:10000;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:0 22px;background:rgba(246,242,233,.95);border-bottom:1px solid var(--line);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-    .wordmark{font-size:13px;text-transform:uppercase;letter-spacing:.04em;text-decoration:none}
-    .menu-toggle{width:46px;height:46px;padding:0;display:grid;place-content:center;gap:7px;border:0;background:transparent;color:var(--ink);cursor:pointer}
-    .menu-toggle span{width:24px;height:1px;background:currentColor;display:block;transition:transform .3s ease}
-    .menu-toggle.is-open span:first-child{transform:translateY(4px) rotate(45deg)}
-    .menu-toggle.is-open span:last-child{transform:translateY(-4px) rotate(-45deg)}
+    * { box-sizing: border-box; }
+    html { background: var(--paper); scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      overflow-x: clip;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    body.modal-open { overflow: hidden; }
+    a { color: inherit; }
+    button, summary { font: inherit; }
+    img, video { max-width: 100%; }
+    [hidden] { display: none !important; }
 
-    .hero{min-height:82svh;padding:148px clamp(28px,6vw,96px) 76px;display:flex;flex-direction:column;justify-content:flex-end;border-bottom:1px solid var(--line)}
-    .hero h1{max-width:1240px;margin:0;font-size:clamp(62px,9.4vw,156px);font-weight:400;line-height:.82;letter-spacing:-.07em}
-    .hero-meta{margin:34px 0 0;font:10px/1.45 Arial,Helvetica,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+    .site-header {
+      position: fixed;
+      z-index: 10000;
+      inset: 0 0 auto;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 42px;
+      border-top: 1px solid rgba(23, 22, 21, .34);
+      background: rgba(250, 249, 245, .92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .wordmark {
+      color: var(--ink);
+      font-size: 16px;
+      letter-spacing: .01em;
+      text-decoration: none;
+      text-shadow: none;
+    }
+    .menu-toggle {
+      width: 46px;
+      height: 46px;
+      padding: 0;
+      display: grid;
+      place-content: center;
+      gap: 7px;
+      border: 0;
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+    }
+    .menu-toggle span {
+      width: 25px;
+      height: 1px;
+      display: block;
+      background: currentColor;
+      transition: transform .35s ease;
+    }
+    .menu-toggle.is-open { color: #e9e7df; }
+    .menu-toggle.is-open span:first-child { transform: translateY(4px) rotate(45deg); }
+    .menu-toggle.is-open span:last-child { transform: translateY(-4px) rotate(-45deg); }
 
-    .project-index{padding:0 clamp(28px,6vw,96px);border-bottom:1px solid var(--line)}
-    .project-index a{min-height:54px;display:grid;grid-template-columns:48px 1fr;align-items:center;border-top:1px solid var(--line);text-decoration:none;font:10px/1.3 Arial,Helvetica,sans-serif;letter-spacing:.15em;text-transform:uppercase}
-    .project-index a:first-child{border-top:0}
-    .project-index span:first-child{color:var(--muted)}
+    .page-width {
+      width: min(1540px, calc(100% - 84px));
+      margin-inline: auto;
+    }
 
-    .work{padding:0 clamp(28px,6vw,96px) 130px}
-    .project{padding:clamp(78px,10vw,150px) 0;border-top:1px solid var(--line)}
-    .project:first-child{border-top:0}
-    .project-head{display:grid;grid-template-columns:minmax(70px,.18fr) minmax(240px,.72fr) minmax(280px,1.1fr);gap:clamp(24px,5vw,88px);align-items:start}
-    .project-number{padding-top:10px;color:var(--muted);font:10px/1 Arial,Helvetica,sans-serif;letter-spacing:.18em}
-    .project h2{margin:0;font-size:clamp(46px,6.5vw,108px);font-weight:400;line-height:.88;letter-spacing:-.055em}
-    .project-copy{max-width:720px;color:var(--copy);font-size:clamp(18px,1.45vw,23px);line-height:1.5;letter-spacing:-.01em}
-    .project-copy p{margin:0}
-    .project-media{margin-top:clamp(46px,6vw,92px)}
-    .project-media video{width:100%;display:block;background:#000}
-    .media-caption{display:flex;justify-content:space-between;gap:20px;margin-top:12px;color:var(--muted);font:9px/1.45 Arial,Helvetica,sans-serif;letter-spacing:.13em;text-transform:uppercase}
-    .blood-video{aspect-ratio:16/9;object-fit:contain;background:#000}
-    .statement-note{max-width:700px;margin-top:28px;color:var(--muted);font:10px/1.5 Arial,Helvetica,sans-serif;letter-spacing:.08em;text-transform:uppercase}
+    .hero {
+      min-height: 100svh;
+      padding-top: 154px;
+      padding-bottom: 11svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .eyebrow,
+    .section-label,
+    .details dt,
+    .side-note,
+    figcaption {
+      font-family: Arial, Helvetica, sans-serif;
+      text-transform: uppercase;
+    }
+    .eyebrow {
+      margin: 0 0 28px;
+      color: rgba(23, 22, 21, .48);
+      font-size: 10px;
+      line-height: 1.4;
+      letter-spacing: .36em;
+    }
+    .hero h1 {
+      max-width: 1320px;
+      margin: 0;
+      font-size: clamp(62px, 10.4vw, 160px);
+      font-weight: 400;
+      line-height: .82;
+      letter-spacing: -.055em;
+    }
+    .hero h1 span { display: block; }
+    .hero h1 span:nth-child(2) { padding-left: 10.5vw; }
+    .thesis {
+      margin: 38px 0 0;
+      color: rgba(23, 22, 21, .58);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      line-height: 1.4;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+    }
 
-    .footer{padding:28px clamp(28px,6vw,96px);display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--line);color:var(--muted);font:10px/1.4 Arial,Helvetica,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+    .installation {
+      width: min(1120px, 78vw);
+      margin: 0 auto 4svh;
+    }
+    .installation img,
+    .project-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    figcaption {
+      margin-top: 12px;
+      color: rgba(23, 22, 21, .45);
+      font-size: 9px;
+      line-height: 1.4;
+      letter-spacing: .22em;
+    }
 
-    @media(max-width:760px){
-      .site-header{height:56px;padding:0 16px}
-      .wordmark{font-size:12px}
-      .hero{min-height:67svh;padding:112px 18px 48px}
-      .hero h1{font-size:clamp(46px,15vw,72px);line-height:.87;letter-spacing:-.06em}
-      .hero-meta{margin-top:26px;font-size:9px;letter-spacing:.21em}
-      .project-index{padding:0 18px}
-      .project-index a{grid-template-columns:38px 1fr;min-height:50px;font-size:9px}
-      .work{padding:0 18px 84px}
-      .project{padding:62px 0}
-      .project-head{grid-template-columns:30px minmax(0,1fr);gap:14px 12px}
-      .project-number{padding-top:7px;font-size:9px}
-      .project h2{font-size:clamp(42px,13.5vw,62px)}
-      .project-copy{grid-column:2;font-size:18px;line-height:1.52;margin-top:12px}
-      .project-media{margin-top:38px}
-      .blood-video{width:100%;height:auto;aspect-ratio:16/9}
-      .media-caption{font-size:8px;line-height:1.5}
-      .footer{padding:22px 18px;font-size:9px;flex-wrap:wrap}
+    .project {
+      padding: 17svh 0 18svh;
+      border-bottom: 1px solid rgba(23, 22, 21, .26);
+      scroll-margin-top: 64px;
+    }
+    .section-head,
+    .reading-grid {
+      display: grid;
+      grid-template-columns: minmax(220px, .7fr) minmax(0, 1.3fr);
+      gap: clamp(54px, 9vw, 150px);
+      align-items: start;
+    }
+    .section-label {
+      margin: 11px 0 0;
+      color: rgba(23, 22, 21, .58);
+      font-size: 10px;
+      line-height: 1.4;
+      letter-spacing: .34em;
+    }
+    .section-head h2 {
+      max-width: 1050px;
+      margin: 0;
+      font-size: clamp(54px, 7vw, 112px);
+      font-weight: 400;
+      line-height: .91;
+      letter-spacing: -.048em;
+      text-wrap: balance;
+    }
+    .reading-grid {
+      margin-top: 12svh;
+    }
+    .details {
+      margin: 0;
+      border-top: 1px solid var(--line);
+    }
+    .details > div {
+      padding: 17px 0 18px;
+      border-bottom: 1px solid var(--line);
+    }
+    .details dt {
+      margin-bottom: 7px;
+      color: rgba(23, 22, 21, .47);
+      font-size: 9px;
+      line-height: 1.4;
+      letter-spacing: .25em;
+    }
+    .details dd {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.35;
+    }
+    .prose {
+      width: min(790px, 100%);
+    }
+    .prose p {
+      margin: 0 0 1.18em;
+      font-size: clamp(18px, 1.5vw, 25px);
+      line-height: 1.43;
+      letter-spacing: -.012em;
+    }
+    .prose p:last-child { margin-bottom: 0; }
+    .closing-line {
+      width: min(680px, 100%);
+      margin-top: 2.3em !important;
+      padding-top: 24px;
+      border-top: 1px solid var(--ink);
+      font-size: clamp(25px, 2.45vw, 40px) !important;
+      line-height: 1.12 !important;
+      letter-spacing: -.025em !important;
+    }
+
+    .project-image { margin-top: 13svh; }
+    .project-image--soap {
+      width: min(1080px, 78%);
+      margin-left: auto;
+    }
+    .project-image--video {
+      width: min(1260px, 88%);
+      margin-right: auto;
+    }
+    .epigraph {
+      margin: 0;
+      padding-top: 21px;
+      border-top: 1px solid var(--ink);
+    }
+    .epigraph p {
+      margin: 0;
+      font-size: clamp(17px, 1.35vw, 21px);
+      font-style: italic;
+      line-height: 1.48;
+    }
+    .epigraph cite {
+      display: block;
+      margin-top: 18px;
+      color: rgba(23, 22, 21, .6);
+      font-size: 13px;
+      font-style: normal;
+      line-height: 1.4;
+    }
+    .side-note {
+      margin: 0;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      color: rgba(23, 22, 21, .5);
+      font-size: 9px;
+      line-height: 1.4;
+      letter-spacing: .26em;
+    }
+
+    .more { margin-top: 1.65em; }
+    .more summary {
+      padding: 15px 0 0;
+      border-top: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: inherit;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10px;
+      line-height: 1.4;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      cursor: pointer;
+      list-style: none;
+      transition: opacity .2s ease;
+    }
+    .more summary::-webkit-details-marker { display: none; }
+    .more summary:hover { opacity: .55; }
+    .more summary:focus-visible {
+      outline: 1px solid currentColor;
+      outline-offset: 7px;
+    }
+    .more summary .less-label { display: none; }
+    .more[open] summary .more-label { display: none; }
+    .more[open] summary .less-label { display: inline; }
+    .more[open] summary .more-arrow { transform: rotate(180deg); }
+    .more-content { padding-top: 2em; }
+
+    .performance-loop {
+      width: 100vw;
+      min-height: min(100svh, 920px);
+      margin: 12svh 0 0 calc(50% - 50vw);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background: #120000;
+    }
+    .performance-loop video {
+      width: 100%;
+      height: 100%;
+      min-height: min(100svh, 920px);
+      display: block;
+      object-fit: cover;
+      object-position: center;
+    }
+    .full-video {
+      width: 100%;
+      padding: 28px 0 0;
+      border: 0;
+      display: flex;
+      align-items: baseline;
+      justify-content: flex-end;
+      gap: 14px;
+      background: transparent;
+      color: inherit;
+      font-size: 25px;
+      font-weight: 400;
+      line-height: 1.2;
+      text-align: right;
+      cursor: pointer;
+      transition: opacity .2s ease;
+    }
+    .full-video:hover { opacity: .55; }
+    .full-video:focus-visible {
+      outline: 1px solid currentColor;
+      outline-offset: 7px;
+    }
+
+    .page-footer {
+      width: min(1540px, calc(100% - 84px));
+      margin-inline: auto;
+      padding: 30px 0 34px;
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    .page-footer a { text-decoration: none; transition: opacity .25s ease; }
+    .page-footer a:hover,
+    .page-footer a:focus-visible { opacity: .55; }
+
+    .video-modal {
+      position: fixed;
+      z-index: 12000;
+      inset: 0;
+      padding: 56px;
+      display: grid;
+      place-items: center;
+      background: rgba(7, 6, 6, .97);
+      color: #f2f0ea;
+    }
+    .video-close {
+      position: absolute;
+      z-index: 2;
+      top: 22px;
+      right: 30px;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font-size: 31px;
+      font-weight: 200;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .video-frame {
+      position: relative;
+      width: min(1280px, calc(100vw - 112px));
+      max-height: calc(100svh - 112px);
+    }
+    .video-title {
+      position: absolute;
+      right: 0;
+      bottom: calc(100% + 13px);
+      left: 0;
+      margin: 0;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.3;
+    }
+    .video-frame iframe {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      display: block;
+      border: 0;
+      background: #000;
+    }
+
+    @media (max-width: 1100px) {
+      .section-head,
+      .reading-grid {
+        grid-template-columns: minmax(190px, .58fr) minmax(0, 1.42fr);
+        gap: 54px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .site-header { height: 56px; padding: 0 20px; }
+      .wordmark { font-size: 13px; }
+      .page-width,
+      .page-footer { width: calc(100% - 40px); }
+      .hero {
+        min-height: 88svh;
+        padding-top: 120px;
+        padding-bottom: 9svh;
+        justify-content: flex-start;
+      }
+      .eyebrow { margin-bottom: 20px; font-size: 9px; }
+      .hero h1 {
+        font-size: clamp(54px, 18vw, 82px);
+        line-height: .85;
+        overflow-wrap: anywhere;
+      }
+      .hero h1 span:nth-child(2) { padding-left: 0; }
+      .thesis {
+        margin-top: 28px;
+        font-size: 10px;
+        line-height: 1.55;
+        letter-spacing: .18em;
+      }
+      .installation { width: calc(100% - 40px); margin-bottom: 0; }
+      .project { padding: 13svh 0 14svh; scroll-margin-top: 56px; }
+      .section-head,
+      .reading-grid { grid-template-columns: 1fr; gap: 0; }
+      .section-label { margin: 0 0 25px; }
+      .section-head h2 {
+        font-size: clamp(44px, 14.5vw, 68px);
+        line-height: .94;
+        overflow-wrap: anywhere;
+      }
+      .reading-grid { margin-top: 9svh; }
+      .details,
+      .epigraph,
+      .side-note {
+        width: min(420px, 100%);
+        margin-bottom: 9svh;
+      }
+      .prose p { font-size: 18px; line-height: 1.46; }
+      .closing-line { font-size: 28px !important; }
+      .project-image { margin-top: 9svh; }
+      .project-image--soap,
+      .project-image--video {
+        width: 100%;
+        margin-right: 0;
+        margin-left: 0;
+      }
+      .performance-loop {
+        min-height: 0;
+        aspect-ratio: 9 / 13;
+      }
+      .performance-loop video {
+        min-height: 0;
+        height: 100%;
+        object-fit: cover;
+      }
+      .full-video { font-size: 22px; }
+      .page-footer { padding: 24px 0 27px; font-size: 11px; }
+      .video-modal { padding: 52px 20px 20px; }
+      .video-close { top: 8px; right: 9px; }
+      .video-frame {
+        width: 100%;
+        max-height: calc(100svh - 72px);
+      }
+      .video-title { bottom: calc(100% + 10px); font-size: 12px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
     }
   </style>
 </head>
 <body>
   <header class="site-header">
-    <a class="wordmark" href="../index.html">Natalia Neuhaus</a>
+    <a class="wordmark" href="../index.html" aria-label="Natalia Neuhaus home">Natalia Neuhaus</a>
     <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
   </header>
 
@@ -81,7 +479,7 @@
       <section class="menu-group menu-group--work" aria-label="Portfolio">
         <p class="menu-label"><a href="../index.html">Natalia Neuhaus</a></p>
         <div class="menu-links menu-links--numbered">
-          <a href="./index.html" tabindex="-1"><span class="menu-project-number">1</span><span>Tapestry, Soap and Blood Bath</span></a>
+          <a href="./index.html" aria-current="page" tabindex="-1"><span class="menu-project-number">1</span><span>Tapestry, Soap and Blood Bath</span></a>
           <a href="../milk-route/index.html" tabindex="-1"><span class="menu-project-number">2</span><span>Milk Route</span></a>
           <a href="../niagara/dossier-v2.html" tabindex="-1"><span class="menu-project-number">3</span><span>Greetings from Niagara</span></a>
           <a href="../intermission/index.html" tabindex="-1"><span class="menu-project-number">4</span><span>Intermission</span></a>
@@ -93,58 +491,161 @@
     <div class="menu-footer"><a href="../bio-contact/index.html" tabindex="-1">Bio &amp; Contact</a></div>
   </nav>
 
-  <main>
-    <section class="hero" aria-labelledby="page-title">
-      <h1 id="page-title">Tapestry, Soap and Blood Bath</h1>
-      <p class="hero-meta">Empire. Violence. Complicity.</p>
+  <main id="top">
+    <section class="hero page-width" aria-labelledby="page-title">
+      <p class="eyebrow">Interdisciplinary installation</p>
+      <h1 id="page-title">
+        <span>Tapestry,</span>
+        <span>Soap and</span>
+        <span>Blood Bath</span>
+      </h1>
+      <p class="thesis">Empire. Violence. Complicity.</p>
     </section>
 
-    <nav class="project-index" aria-label="Project sections">
-      <a href="#tapestry"><span>01</span><span>Tapestry</span></a>
-      <a href="#soap"><span>02</span><span>Soap</span></a>
-      <a href="#blood-bath"><span>03</span><span>Blood Bath</span></a>
-    </nav>
+    <figure class="installation">
+      <img src="./installation-view.webp" width="1511" height="2048" alt="Installation view with Self-Portrait of Queer Latina Licking ICE, a CRT television playing Blood Bath, red soap, red thread and headphones" fetchpriority="high" />
+      <figcaption>Installation view</figcaption>
+    </figure>
 
-    <section class="work">
+    <div class="page-width">
       <article class="project" id="tapestry">
-        <div class="project-head">
-          <span class="project-number">01</span>
-          <h2>Tapestry</h2>
-          <div class="project-copy">
-            <p>This section is reserved for the final Tapestry statement and installation material from the original project page. The GitHub structure is now in place so the work can live entirely on the public portfolio without relying on ChatGPT hosting.</p>
+        <header class="section-head">
+          <p class="section-label">01 / Tapestry</p>
+          <h2>Self-Portrait of Queer Latina Licking ICE</h2>
+        </header>
+
+        <div class="reading-grid">
+          <dl class="details">
+            <div><dt>Artist</dt><dd>Natalia Neuhaus</dd></div>
+            <div><dt>Rug provenance</dt><dd>India</dd></div>
+          </dl>
+
+          <div class="prose">
+            <p>The Ouroboros is a snake that eats its own tail—an ancient symbol of eternal return and cyclical repetition.</p>
+            <p>The “American dream” was achieved through intervention abroad, particularly in Latin America from the 1950s through the 1980s. These actions disrupted political and economic life, contributing to instability, inflicting trauma and displacement across generations. With violence compounded by poverty—and now climate change—many migrants from Latin America flee the fallout of these interventions, ironically seeking refuge in the nation that helped set them in motion.</p>
+            <p>When these historical factors go unacknowledged in public narratives and policy, the resulting migration is often framed as detached from its deeper causes, reinforcing harm rather than addressing it. Against this backdrop, deportation functions as an inhumane response to problems with deep historical roots. Deportation violence is not new; it is structural, rehearsed, and bipartisan.</p>
+            <p>The rug also reflects the contradictions and failures built into protest itself. Although the work stands as a gesture of resistance, its production was unknowingly outsourced to a manufacturer in India, becoming complicit in the very systems it seeks to critique.</p>
+            <p class="closing-line">Cause and consequence entrenched in a never-ending cycle.</p>
           </div>
         </div>
       </article>
 
       <article class="project" id="soap">
-        <div class="project-head">
-          <span class="project-number">02</span>
-          <h2>Soap</h2>
-          <div class="project-copy">
-            <p>This section is reserved for the final Soap statement and documentation from the original project page, inside the same public GitHub-hosted project.</p>
+        <header class="section-head">
+          <p class="section-label">02 / Soap</p>
+          <h2>Handmade Red Goat’s Milk Soap: Notes on Complicity</h2>
+        </header>
+
+        <figure class="project-image project-image--soap">
+          <img src="./blood-soap.webp" width="1800" height="1350" alt="A handmade dark-red bar of goat’s milk soap embossed with the word BLOOD" loading="lazy" />
+        </figure>
+
+        <div class="reading-grid">
+          <blockquote class="epigraph">
+            <p>“These violent delights have violent ends<br />And in their triumph die, like fire and powder,<br />Which, as they kiss, consume.”</p>
+            <cite>—William Shakespeare, <em>Romeo and Juliet</em></cite>
+          </blockquote>
+
+          <div class="prose">
+            <p>It is day for some, night for others, and the news of yet another conflict in the making seeps into my skin. Nothing I do—or refuse to do—can distract me from the feeling that we, as a collective, have no control, no agency over the war games of a few, and yet “we” remain indirectly complicit.</p>
+            <p>I feel a strange urgency to make soap, as though it might cleanse that feeling of complicity.</p>
+            <p>Deliberately, I chose a pre-made goat’s milk soap solution. Perhaps it is my Catholic upbringing seeping into my queer body. In the haste of seeking absolution, I forget its provenance. Shipped from somewhere else, it folds me further into the slow violence of climate change. You see—complicit. There is no way out, only the ritual of protest: an act of <em>mea culpa</em>, after which, once absolved, our crimes are all but magically erased.</p>
+            <p>I, too, bought red dye—another deliberate gesture in the aesthetics of complicity.</p>
+            <p>Heat in the microwave on high for 1 minute, then continue heating in 10-second intervals until fully melted and smooth. Pour into a bowl, then add coloring until you reach the desired shade. I simply followed the instructions, you see. For an hour, I kept adding red dye and stirring. Slowly—so painfully slow that it became a cathartic performance in itself—what began as white, pre-made goat’s milk soap turned pink, and then, at last, red. Three empty bottles of red dye later, the mixture is so red that my stovetop is transformed into a bloodbath of soapy goat’s milk stains.</p>
+            <p>“Fuck,” I say, because this is not my home. I do not own it, and in a year or so I will likely be forced to move. Never mind, I tell myself. I hate my landlord.</p>
+            <p>Is the red dye natural? Does it matter when all of this is part of an even larger scheme? I stare down at the stovetop, where circles and drops of red ink have become unwanted residents. Then I look at my hands, covered in red polka-dot stains. The red, pre-made soap has now hardened, and I use the culprit of this crime to wash away the evidence from my hands.</p>
           </div>
         </div>
       </article>
 
       <article class="project" id="blood-bath">
-        <div class="project-head">
-          <span class="project-number">03</span>
+        <header class="section-head">
+          <p class="section-label">03 / Video</p>
           <h2>Blood Bath</h2>
-          <div class="project-copy">
-            <p>Blood Bath remains part of the same three-part project. Its video asset is now served directly from the GitHub portfolio.</p>
+        </header>
+
+        <figure class="project-image project-image--video">
+          <img src="./video-installation.webp" width="1800" height="1396" alt="A vintage CRT television playing Blood Bath with two red bars of soap on a green glass plate" loading="lazy" />
+        </figure>
+
+        <div class="reading-grid">
+          <p class="side-note">Video and performance</p>
+
+          <div class="prose">
+            <p>A faint smell of cleanliness lingers on my skin—post-bath, post-performance, post-ritual—as if in search of redemption for crimes committed by others, crimes to which I am nonetheless indirectly complicit. What began as an unconscious response to the news of yet another war first took shape as an object—in this case, a pre-made goat’s milk soap later transformed by hand into a red bar—but gradually became something else. The alteration of the soap, and then the soap itself, dissolved into an ephemeral performance whose final form is not an object at all, but its disappearance.</p>
+            <p>If order cannot mend brokenness, perhaps dilution—and the spent chaos of entropy—might give rise to a new order. If entropy transforms from within, dilution transforms from without: a quieter, nonviolent undoing. Unlike Jack Halberstam’s <em>Unworlding</em>, in which the world burns and collapses so that another order may rise from its ashes, dilution works by softening, thinning, and dissolving from the outside in. The dissolving of the soap in warm water stages this logic materially, not as rupture but as dispersal, softening, and release. This process finds a semiotic parallel in the reclamation of terms such as <em>queer</em>, <em>dyke</em>, and <em>faggot</em>: through repetition and resignification by the communities they were once used to wound, their violence is diluted and new forms of collective identification emerge.</p>
+
+            <details class="more">
+              <summary><span class="more-label">Read more</span><span class="less-label">Read less</span><span class="more-arrow" aria-hidden="true">↓</span></summary>
+              <div class="more-content">
+                <p>The pre-made goat’s milk soap, reworked by hand with red dye, bleeds into the warm bathwater, staining it as the performance is documented as evidence of our collective participation in capitalist violence. Twice denied full existence—first as a woman, then as a lesbian—this body, too, carries violence in and on itself, turning embodiment into a medium of protest. Like a double negative, its refusal does not cancel itself out but intensifies. Yet the work remains entangled in the systems it critiques: a pre-made goat’s milk soap imported from elsewhere, red dye, and the expenditure of resources—electricity and water—to produce something banal and unnecessary: an artistic performance.</p>
+                <p>Oscillating between deep breaths and soft focus, the scene shifts between intimacy and unease. The artist’s naked body operates as a device of attention: just as viewers struggle to look away from images of violence, the body turns looking into voyeuristic complicity. Conditioned to read certain female bodies as available, erotic, and consumable, the audience is implicated in the act of looking itself. The work redirects that gaze, exposing looking as a performative act through which bodies are made socially intelligible. Echoing Judith Butler’s <em>Performative Acts and Gender Constitution</em>, the body here is not a neutral fact, but something produced through the repeated norms that organize and categorize gender—a construct that has historically restricted certain bodies by rendering them legible only through eroticization, control, and consumption.</p>
+                <p>In <em>Blood Bath</em>, the performative body does not reject this established construct; rather, it turns it against itself, mobilizing it as a means of protesting our collective complicity in the violences of the modern world.</p>
+              </div>
+            </details>
           </div>
         </div>
-        <div class="project-media">
-          <video class="blood-video" controls playsinline preload="metadata" poster="../blood-bath-loop-poster-v1.jpg">
+
+        <figure class="performance-loop" aria-label="Excerpt from Blood Bath">
+          <video autoplay muted loop playsinline preload="metadata" poster="../blood-bath-loop-poster-v1.jpg" aria-label="Blood Bath video excerpt">
             <source src="../blood-bath-loop-v1.mp4" type="video/mp4" />
           </video>
-          <div class="media-caption"><span>Blood Bath</span><span>Video</span></div>
-        </div>
+        </figure>
+
+        <button class="full-video" type="button" data-video-open><span>Watch the full video</span><span aria-hidden="true">↗</span></button>
       </article>
-    </section>
+    </div>
   </main>
 
-  <footer class="footer"><span>Natalia Neuhaus</span><span>Brooklyn, New York</span></footer>
-  <script src="../assets/site.js?v=6"></script>
+  <footer class="page-footer"><span>Natalia Neuhaus</span><a href="#top">Back to top ↑</a></footer>
+
+  <div class="video-modal" role="dialog" aria-modal="true" aria-labelledby="video-title" hidden>
+    <button class="video-close" type="button" aria-label="Close Blood Bath video">×</button>
+    <div class="video-frame">
+      <h2 class="video-title" id="video-title">Blood Bath</h2>
+      <iframe data-src="https://drive.google.com/file/d/1VJmY5OQqWFcZ7Nha4yHA2ImyJ2SQfX5b/preview" title="Blood Bath" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <script src="../assets/site.js?v=7"></script>
+  <script>
+    (function () {
+      var openButton = document.querySelector('[data-video-open]');
+      var modal = document.querySelector('.video-modal');
+      var closeButton = document.querySelector('.video-close');
+      var frame = document.querySelector('.video-frame iframe');
+      var lastFocused = null;
+
+      function openVideo() {
+        lastFocused = document.activeElement;
+        frame.src = frame.getAttribute('data-src');
+        modal.hidden = false;
+        document.body.classList.add('modal-open');
+        closeButton.focus();
+      }
+
+      function closeVideo() {
+        modal.hidden = true;
+        frame.removeAttribute('src');
+        document.body.classList.remove('modal-open');
+        if (lastFocused) lastFocused.focus();
+      }
+
+      openButton.addEventListener('click', openVideo);
+      closeButton.addEventListener('click', closeVideo);
+      modal.addEventListener('click', function (event) {
+        if (event.target === modal) closeVideo();
+      });
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && !modal.hidden) closeVideo();
+      });
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        var loop = document.querySelector('.performance-loop video');
+        loop.pause();
+        loop.controls = true;
+      }
+    }());
+  </script>
 </body>
 </html>

@@ -286,7 +286,7 @@
     -webkit-overflow-scrolling: touch;
   }
 
-  /* The page wordmark already remains visible while the menu is open. */
+  /* The page wordmark becomes the mobile home link while the menu is open. */
   .menu-panel.menu-standard .menu-label {
     display: none !important;
   }
@@ -335,5 +335,50 @@
   .portfolio-menu-panel.menu-standard .portfolio-menu-links a {
     pointer-events: auto !important;
     touch-action: manipulation;
+  }
+
+  /* Keep the global header above the full-screen panel. This guarantees a
+     visible home link and a visible close control on every light or dark page. */
+  html.menu-open .site-header {
+    z-index: 10000 !important;
+    background: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    pointer-events: none !important;
+  }
+
+  html.menu-open .site-header .wordmark {
+    display: inline-flex !important;
+    color: #e9e7df !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  html.menu-open .site-header .menu-toggle {
+    z-index: 10001 !important;
+    display: grid !important;
+    color: #e9e7df !important;
+    background: transparent !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  html.menu-open .site-header .menu-toggle span {
+    display: block !important;
+    background: #e9e7df !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  html.menu-open .site-header .menu-toggle span:first-child {
+    transform: translateY(4px) rotate(45deg) !important;
+  }
+
+  html.menu-open .site-header .menu-toggle span:last-child {
+    transform: translateY(-4px) rotate(-45deg) !important;
   }
 }
