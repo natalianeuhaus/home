@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f3efe7" />
+  <title>Tapestry, Soap and Blood Bath — Natalia Neuhaus</title>
+  <meta name="description" content="Tapestry, Soap and Blood Bath by Natalia Neuhaus." />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../assets/menu-standard.css?v=5" />
+  <style>
+    :root{--paper:#f3efe7;--ink:#191a18;--muted:rgba(25,26,24,.52);--line:rgba(25,26,24,.18);--night:#0d0f0e}
+    *{box-sizing:border-box}
+    html{background:var(--paper)}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,"Times New Roman",serif}
+    a{color:inherit}
+    .site-header{height:64px;position:fixed;z-index:10000;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:0 24px;background:rgba(243,239,231,.94);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+    .wordmark{font-size:14px;text-transform:uppercase;letter-spacing:.04em;text-decoration:none}
+    .menu-toggle{width:46px;height:46px;padding:0;display:grid;place-content:center;gap:7px;border:0;background:transparent;cursor:pointer}
+    .menu-toggle span{width:24px;height:1px;background:currentColor;display:block;transition:transform .3s ease}
+    .menu-toggle.is-open span:first-child{transform:translateY(4px) rotate(45deg)}
+    .menu-toggle.is-open span:last-child{transform:translateY(-4px) rotate(-45deg)}
+    .hero{min-height:72svh;padding:150px clamp(24px,6vw,90px) 80px;display:flex;flex-direction:column;justify-content:flex-end;border-bottom:1px solid var(--line)}
+    .hero h1{max-width:1100px;margin:0;font-size:clamp(54px,9vw,150px);font-weight:400;line-height:.84;letter-spacing:-.065em}
+    .hero p{margin:30px 0 0;font:10px/1.4 Arial,Helvetica,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+    .work{padding:80px clamp(24px,6vw,90px) 120px}
+    .project{padding:62px 0;border-top:1px solid var(--line)}
+    .project:first-child{border-top:0}
+    .project h2{margin:0 0 22px;font-size:clamp(34px,5vw,72px);font-weight:400;letter-spacing:-.04em}
+    .project p{max-width:720px;margin:0;color:rgba(25,26,24,.72);font-size:18px;line-height:1.5}
+    .blood-video{width:min(1100px,100%);margin-top:32px;display:block;background:#000}
+    .video-note{display:block;margin-top:12px;color:var(--muted);font:9px/1.4 Arial,Helvetica,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+    .footer{padding:28px clamp(24px,6vw,90px);display:flex;justify-content:space-between;border-top:1px solid var(--line);color:var(--muted);font:10px/1.4 Arial,Helvetica,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+    @media(max-width:760px){
+      .site-header{height:58px;padding:0 18px}
+      .hero{min-height:58svh;padding:120px 20px 54px}
+      .hero h1{font-size:clamp(48px,15vw,74px);line-height:.88}
+      .work{padding:34px 20px 80px}
+      .project{padding:40px 0}
+      .project p{font-size:17px}
+      .blood-video{width:100%;max-height:none}
+      .footer{padding:22px 20px;gap:20px}
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="wordmark" href="../index.html">Natalia Neuhaus</a>
+    <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+  </header>
+
+  <nav class="menu-panel menu-standard" aria-hidden="true">
+    <div class="menu-groups">
+      <section class="menu-group menu-group--work" aria-label="Portfolio">
+        <p class="menu-label"><a href="../index.html">Natalia Neuhaus</a></p>
+        <div class="menu-links menu-links--numbered">
+          <a href="./index.html" tabindex="-1"><span class="menu-project-number">1</span><span>Tapestry, Soap and Blood Bath</span></a>
+          <a href="../milk-route/index.html" tabindex="-1"><span class="menu-project-number">2</span><span>Milk Route</span></a>
+          <a href="../niagara/dossier-v2.html" tabindex="-1"><span class="menu-project-number">3</span><span>Greetings from Niagara</span></a>
+          <a href="../intermission/index.html" tabindex="-1"><span class="menu-project-number">4</span><span>Intermission</span></a>
+          <a href="../healers/index.html" tabindex="-1"><span class="menu-project-number">5</span><span>Sex Work</span></a>
+          <a href="../burlesque-color/index.html" tabindex="-1"><span class="menu-project-number">6</span><span>Burlesque</span></a>
+        </div>
+      </section>
+    </div>
+    <div class="menu-footer"><a href="../bio-contact/index.html" tabindex="-1">Bio &amp; Contact</a></div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1>Tapestry, Soap and Blood Bath</h1>
+      <p>Three connected works</p>
+    </section>
+    <section class="work">
+      <article class="project" id="tapestry"><h2>Tapestry</h2></article>
+      <article class="project" id="soap"><h2>Soap</h2></article>
+      <article class="project" id="blood-bath">
+        <h2>Blood Bath</h2>
+        <video class="blood-video" controls playsinline preload="metadata" poster="../blood-bath-loop-poster-v1.jpg">
+          <source src="../blood-bath-loop-v1.mp4" type="video/mp4" />
+        </video>
+        <span class="video-note">Video</span>
+      </article>
+    </section>
+  </main>
+  <footer class="footer"><span>Natalia Neuhaus</span><span>Brooklyn, New York</span></footer>
+  <script src="../assets/site.js?v=5"></script>
+</body>
+</html>
