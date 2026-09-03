@@ -1597,11 +1597,13 @@ body.burlesque-horizontal-body{overflow:hidden}
 .intermission-page > .project-copyright-footer--intermission{
   display:none;
 }
-.intermission-chapter-description .project-copyright-footer--intermission{
+.intermission-navigation .project-copyright-footer--intermission{
   display:block;
-  margin:clamp(48px,8vh,96px) 0 0;
+  width:100%;
+  margin:18px 0 0;
   padding:0;
   border:0;
   background:transparent;
-  color:rgba(21,23,21,.58);
+  color:rgba(241,239,231,.48);
+  text-align:right;
 }
