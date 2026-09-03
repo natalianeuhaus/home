@@ -482,7 +482,11 @@
     .phase p { margin:0; color:var(--muted); font:400 15px/1.55 var(--serif); }
 
     .closing { color:var(--paper); background:var(--night); }
-    .chapter-cover.dark.closing-chapter-cover { background:#65737A; }
+    .chapter-cover.dark.closing-chapter-cover { position:relative; isolation:isolate; overflow:hidden; background:#263744; }
+    .closing-chapter-cover::before { content:""; position:absolute; z-index:1; inset:0; background:linear-gradient(90deg,rgba(23,42,55,.84) 0%,rgba(65,81,94,.72) 50%,rgba(19,35,47,.8) 100%); }
+    .closing-chapter-image { width:100%; max-width:none; height:100%; position:absolute; z-index:0; inset:0; display:block; object-fit:cover; object-position:center; }
+    .closing-chapter-cover > .chapter-cover-meta,
+    .closing-chapter-cover > .chapter-cover-body { position:relative; z-index:2; }
     .closing-chapter-cover .chapter-cover-meta { display:flex; flex-direction:column; justify-content:center; }
     .closing-chapter-kicker { display:block; margin-top:clamp(54px,7vw,104px); color:rgba(242,240,233,.7); font:400 10px/1.2 var(--sans); letter-spacing:.2em; text-transform:uppercase; }
     .closing-chapter-subhead { max-width:310px; margin:clamp(30px,4vw,58px) 0 0; color:rgba(242,240,233,.9); font-size:clamp(24px,2.25vw,36px); line-height:1.02; letter-spacing:-.035em; }
@@ -1624,6 +1628,7 @@
 
         <section class="chapter closing" id="closing" data-chapter>
           <div class="chapter-cover dark closing-chapter-cover">
+            <img class="closing-chapter-image" src="./assets/chapter-vi-what-remains.jpg" alt="X-ray-like still life of Carborundum sample jars" />
             <header class="chapter-cover-meta">
               <span class="chapter-id">Chapter VI</span>
               <span class="closing-chapter-kicker">The unfinished record</span>
