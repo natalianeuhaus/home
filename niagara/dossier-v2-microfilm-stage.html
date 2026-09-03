@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+  <title>Greetings from Niagara — Microfilm</title>
+  <style>
+    :root { --paper:#f1f0ea; --ink:#171615; }
+    * { box-sizing:border-box; }
+    html,body { width:100%; min-height:100%; margin:0; }
+    body { color:var(--ink); background:var(--paper); font-family:Georgia,"Times New Roman",serif; -webkit-font-smoothing:antialiased; }
+    body.is-video-open { overflow:hidden; }
+    button { font:inherit; }
+    .microfilm-stage { min-height:100svh; display:grid; place-items:center; padding:clamp(28px,5vw,76px); }
+    .microfilm-media { width:min(1120px,100%); margin:0; }
+    .microfilm-media video { width:100%; max-height:calc(100svh - 150px); display:block; object-fit:contain; background:#090a09; }
+    .microfilm-full-video { width:100%; padding:28px 0 0; border:0; background:transparent; display:flex; align-items:baseline; justify-content:flex-end; gap:14px; color:inherit; font-size:25px; font-weight:400; line-height:1.2; text-align:right; cursor:pointer; transition:opacity .2s ease; }
+    .microfilm-full-video:hover { opacity:.55; }
+    .microfilm-full-video:focus-visible { outline:1px solid currentColor; outline-offset:7px; }
+    .microfilm-video-modal { position:fixed; z-index:100; inset:0; display:grid; place-items:center; padding:clamp(54px,6vw,88px) clamp(18px,4vw,58px) clamp(24px,4vw,52px); background:rgba(8,9,8,.96); }
+    .microfilm-video-modal[hidden] { display:none; }
+    .microfilm-video-frame { width:min(1280px,100%); height:min(78svh,760px); border:0; background:#000; }
+    .microfilm-video-close { position:fixed; z-index:101; top:18px; right:20px; width:46px; height:46px; padding:0; border:1px solid rgba(241,240,234,.3); color:#f1f0ea; background:#10110f; display:grid; place-items:center; font:28px/1 Arial,Helvetica,sans-serif; cursor:pointer; transition:background-color .2s ease,border-color .2s ease; }
+    .microfilm-video-close:hover,.microfilm-video-close:focus-visible { background:#2b2c2a; border-color:#2b2c2a; outline:none; }
+    @media (max-width:700px) {
+      .microfilm-stage { padding:20px 18px 34px; }
+      .microfilm-media video { max-height:calc(100svh - 130px); }
+      .microfilm-video-modal { padding:66px 0 0; }
+      .microfilm-video-frame { width:100%; height:calc(100svh - 66px); }
+      .microfilm-video-close { top:10px; right:10px; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      .microfilm-full-video { transition:none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="microfilm-stage">
+    <figure class="microfilm-media" aria-label="Excerpt from the Microfilm film">
+      <video data-microfilm-loop autoplay muted loop playsinline preload="auto" aria-hidden="true">
+        <source src="./micro4.mp4" type="video/mp4" />
+      </video>
+      <button class="microfilm-full-video" type="button" data-microfilm-video-open>
+        <span>Watch the full video</span>
+        <span aria-hidden="true">↗</span>
+      </button>
+    </figure>
+  </main>
+
+  <div class="microfilm-video-modal" data-microfilm-video-modal role="dialog" aria-modal="true" aria-label="Microfilm full video" hidden>
+    <button class="microfilm-video-close" type="button" data-microfilm-video-close aria-label="Close full video">×</button>
+    <iframe
+      class="microfilm-video-frame"
+      data-microfilm-video-frame
+      data-src="https://drive.google.com/file/d/1CyKur2DpSyZXwoRX5pzHcv8_4DpldudN/preview"
+      title="Microfilm full video"
+      allow="autoplay; fullscreen"
+      allowfullscreen
+    ></iframe>
+  </div>
+
+  <script>
+    (() => {
+      const openButton = document.querySelector('[data-microfilm-video-open]');
+      const closeButton = document.querySelector('[data-microfilm-video-close]');
+      const modal = document.querySelector('[data-microfilm-video-modal]');
+      const frame = document.querySelector('[data-microfilm-video-frame]');
+      const loop = document.querySelector('[data-microfilm-loop]');
+
+      const openVideo = () => {
+        loop.pause();
+        frame.src = frame.dataset.src;
+        modal.hidden = false;
+        document.body.classList.add('is-video-open');
+        closeButton.focus({ preventScroll:true });
+      };
+
+      const closeVideo = () => {
+        frame.src = 'about:blank';
+        modal.hidden = true;
+        document.body.classList.remove('is-video-open');
+        loop.play().catch(() => {});
+        openButton.focus({ preventScroll:true });
+      };
+
+      openButton.addEventListener('click',openVideo);
+      closeButton.addEventListener('click',closeVideo);
+      modal.addEventListener('click',event => {
+        if (event.target === modal) closeVideo();
+      });
+      document.addEventListener('keydown',event => {
+        if (event.key === 'Escape' && !modal.hidden) closeVideo();
+      });
+    })();
+  </script>
+</body>
+</html>
