@@ -4,8 +4,9 @@
   const scroller = document.querySelector('.burlesque-horizontal');
   const film = document.querySelector('.burlesque-film');
   const stage = film?.querySelector('.burlesque-stage');
+  const collections = document.querySelector('.burlesque-collections');
   const enterButton = document.querySelector('.burlesque-enter-series');
-  if (!page || !scroller || !film || !stage) return;
+  if (!page || !scroller || !film || !stage || !collections) return;
 
   const backstoryTrigger = document.querySelector("[data-burlesque-backstory-open]");
   const backstoryDialog = document.querySelector(".burlesque-backstory");
@@ -78,6 +79,16 @@
     };
   });
 
+  const blackAndWhiteSlides = [
+    {
+      src: 'images-black-and-white/Natalia_Neuhaus-1.webp',
+      full: 'images-black-and-white/Natalia_Neuhaus-1.webp',
+      alt: 'Black-and-white Burlesque Mon Amour photograph 1',
+      width: 2048,
+      height: 1365
+    }
+  ];
+
   function installProgressStyles() {
     if (document.getElementById('burlesque-progress-styles')) return;
     const style = document.createElement('style');
@@ -109,7 +120,10 @@
   }
 
   async function loadSlides() {
-    await preloadPhotograph(localSlides[0], 0);
+    await Promise.all([
+      preloadPhotograph(localSlides[0], 0),
+      preloadPhotograph(blackAndWhiteSlides[0], 0)
+    ]);
     return localSlides;
   }
 
@@ -119,6 +133,7 @@
     const requestBrowserFullscreen = Boolean(options.requestBrowserFullscreen);
     const dialog = document.createElement('div');
     dialog.className = 'intermission-lightbox burlesque-lightbox';
+    if (slides.length === 1) dialog.classList.add('is-single-slide');
     dialog.setAttribute('role', 'dialog');
     dialog.setAttribute('aria-modal', 'true');
 
@@ -138,11 +153,12 @@
     viewport.className = 'intermission-lightbox-viewport';
     const track = document.createElement('div');
     track.className = 'intermission-lightbox-track';
-    const figures = slides.map((slide) => {
+    const figures = slides.map((slide, index) => {
       const figure = document.createElement('figure');
       const image = document.createElement('img');
       image.src = slide.full || slide.src;
       image.decoding = 'async';
+      image.loading = index === activeIndex ? 'eager' : 'lazy';
       figure.append(image);
       track.append(figure);
       return { figure, image, alt: slide.alt };
@@ -185,7 +201,7 @@
         const active = index === activeIndex;
         item.figure.setAttribute('aria-hidden', String(!active));
         item.image.alt = active ? item.alt : '';
-        item.image.loading = 'eager';
+        item.image.loading = active ? 'eager' : 'lazy';
       });
     };
 
@@ -302,7 +318,7 @@
       const image = document.createElement('img');
       image.src = slide.src;
       image.alt = slide.alt;
-      image.loading = 'eager';
+      image.loading = index === 0 ? 'eager' : 'lazy';
       image.decoding = 'async';
       image.setAttribute('role', 'button');
       image.tabIndex = index === 0 ? 0 : -1;
@@ -359,7 +375,7 @@
         const image = slideEl.querySelector('img');
         if (image) {
           image.tabIndex = active ? 0 : -1;
-          image.loading = 'eager';
+          if (active) image.loading = 'eager';
         }
       });
       updateProgress();
@@ -373,8 +389,32 @@
     }
 
     enterButton?.addEventListener('click', () => {
-      createLightbox(slides, activeIndex, enterButton, { requestBrowserFullscreen: true });
+      collections.scrollIntoView({
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+        block: 'start'
+      });
     });
+
+    collections.querySelector('[data-burlesque-collection="black-and-white"]')?.addEventListener('click', (event) => {
+      createLightbox(blackAndWhiteSlides, 0, event.currentTarget, { requestBrowserFullscreen: true });
+    });
+    collections.querySelector('[data-burlesque-collection="color"]')?.addEventListener('click', (event) => {
+      createLightbox(slides, 0, event.currentTarget, { requestBrowserFullscreen: true });
+    });
+
+    if ('IntersectionObserver' in window) {
+      const collectionsObserver = new IntersectionObserver(([entry]) => {
+        setSeriesOpen(entry.isIntersecting && entry.intersectionRatio >= 0.35);
+      }, { root: scroller, threshold: [0, 0.35, 0.7] });
+      collectionsObserver.observe(collections);
+    } else {
+      const updateCollectionState = () => {
+        const rect = collections.getBoundingClientRect();
+        setSeriesOpen(rect.top < window.innerHeight * 0.65 && rect.bottom > window.innerHeight * 0.35);
+      };
+      scroller.addEventListener('scroll', updateCollectionState, { passive: true });
+      updateCollectionState();
+    }
 
     scroller.scrollLeft = 0;
     setSeriesOpen(false);
