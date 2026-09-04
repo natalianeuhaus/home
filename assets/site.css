@@ -1851,3 +1851,59 @@ body.burlesque-horizontal-body{overflow:hidden}
   .burlesque-collection::after,
   .burlesque-collection-label i{transition:none}
 }
+
+/* New Healers draft: animated film cover and full-film link. */
+.new-healers-page .new-healers-film{
+  aspect-ratio:auto;
+  background:transparent;
+}
+.new-healers-film-poster{
+  aspect-ratio:3/2;
+  background:#0c0f0e;
+  cursor:pointer;
+  display:block;
+  overflow:hidden;
+  position:relative;
+}
+.new-healers-film-poster img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:filter .45s ease,transform .8s cubic-bezier(.22,1,.36,1);
+}
+.new-healers-film-poster:hover img,
+.new-healers-film-poster:focus-visible img{
+  filter:brightness(.88);
+  transform:scale(1.012);
+}
+.new-healers-film-poster:focus-visible,
+.new-healers-watch-link:focus-visible{
+  outline:1px solid currentColor;
+  outline-offset:5px;
+}
+.new-healers-watch-link{
+  border-bottom:1px solid rgba(21,23,21,.36);
+  color:#151715;
+  display:table;
+  font:10px/1.4 Arial,Helvetica,sans-serif;
+  letter-spacing:.28em;
+  margin:22px auto 0;
+  padding:0 0 5px .28em;
+  text-transform:uppercase;
+  transition:border-color .28s ease,opacity .28s ease;
+}
+.new-healers-watch-link:hover,
+.new-healers-watch-link:focus-visible{
+  border-color:#151715;
+  opacity:.62;
+}
+
+@media (max-width:760px){
+  .new-healers-watch-link{margin-top:18px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .new-healers-film-poster img{transition:none}
+  .new-healers-film-poster:hover img,
+  .new-healers-film-poster:focus-visible img{transform:none}
+}
