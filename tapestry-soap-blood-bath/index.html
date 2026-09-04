@@ -651,14 +651,14 @@
     </div>
     <div class="video-modal-body">
       <div class="video-frame">
-        <video controls playsinline preload="metadata" poster="../blood-bath-loop-poster-v1.jpg" aria-label="Blood Bath full video">
+        <video data-autoplay-interaction-controls playsinline preload="metadata" poster="../blood-bath-loop-poster-v1.jpg" aria-label="Blood Bath full video">
           <source src="https://rachelbodyworkmassage.com/wp-content/uploads/videos/blood.mp4" type="video/mp4" />
         </video>
       </div>
     </div>
   </div>
 
-  <script src="../assets/site.js?v=7"></script>
+  <script src="../assets/site.js?v=autoplay-interaction-controls-1"></script>
   <script>
     (function () {
       var openButton = document.querySelector('[data-video-open]');
@@ -681,6 +681,7 @@
 
       function closeVideo() {
         player.pause();
+        player.controls = false;
         modal.hidden = true;
         document.body.classList.remove('modal-open');
         if (lastFocused) lastFocused.focus();

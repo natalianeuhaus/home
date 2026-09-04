@@ -56,7 +56,6 @@
       <video
         class="ketchum-video-frame"
         data-ketchum-video-frame
-        controls
         playsinline
         preload="metadata"
         aria-label="Ketchum Family full video"
@@ -74,6 +73,26 @@
       const player = document.querySelector('[data-ketchum-video-frame]');
       const loop = document.querySelector('[data-ketchum-loop]');
       const preview = document.querySelector('[data-ketchum-video-preview]');
+      const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+      const showControls = () => { player.controls = true; };
+      const hideControls = () => {
+        if (finePointer.matches && !player.matches(':hover') && !player.matches(':focus-visible')) {
+          player.controls = false;
+        }
+      };
+
+      player.controls = false;
+      player.tabIndex = 0;
+      player.addEventListener('pointerenter',() => {
+        if (finePointer.matches) showControls();
+      });
+      player.addEventListener('pointerleave',hideControls);
+      player.addEventListener('focus',showControls);
+      player.addEventListener('blur',hideControls);
+      player.addEventListener('pointerdown',() => {
+        if (!finePointer.matches) showControls();
+      });
+      player.addEventListener('touchstart',showControls,{ passive:true });
 
       const openVideo = () => {
         loop.pause();
@@ -88,6 +107,7 @@
 
       const closeVideo = () => {
         player.pause();
+        player.controls = false;
         modal.hidden = true;
         document.body.classList.remove('is-video-open');
         loop.play().catch(() => {});

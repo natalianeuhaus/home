@@ -59,6 +59,45 @@
     play();
   }
 
+  function enableAutoplayInteractionControls(video) {
+    if (!video || video.dataset.autoplayControlsReady === "true") return;
+
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const showControls = () => {
+      video.controls = true;
+    };
+    const hideControls = () => {
+      if (
+        finePointer.matches &&
+        !video.matches(":hover") &&
+        !video.matches(":focus-visible")
+      ) {
+        video.controls = false;
+      }
+    };
+
+    video.dataset.autoplayControlsReady = "true";
+    video.controls = false;
+    if (!video.hasAttribute("tabindex")) video.tabIndex = 0;
+
+    video.addEventListener("pointerenter", () => {
+      if (finePointer.matches) showControls();
+    });
+    video.addEventListener("pointerleave", hideControls);
+    video.addEventListener("focus", showControls);
+    video.addEventListener("blur", hideControls);
+    video.addEventListener("pointerdown", () => {
+      if (!finePointer.matches) showControls();
+    });
+    video.addEventListener("touchstart", showControls, { passive: true });
+  }
+
+  function initializeAutoplayInteractionControls() {
+    document
+      .querySelectorAll("video[data-autoplay-interaction-controls]")
+      .forEach(enableAutoplayInteractionControls);
+  }
+
   function initializeReveals() {
     const page = document.querySelector(".healers-page");
     if (!page) return;
@@ -756,11 +795,12 @@
       close.textContent = "×";
       body.className = "intermission-video-modal-body";
       frame.className = "intermission-video-modal-frame";
-      player.controls = true;
+      player.setAttribute("data-autoplay-interaction-controls", "");
       player.playsInline = true;
       player.preload = "metadata";
       player.setAttribute("aria-label", "Arles, 2023 stop motion video");
       player.src = chapter.videoSrc;
+      enableAutoplayInteractionControls(player);
 
       const closeVideo = () => {
         player.pause();
@@ -1011,6 +1051,7 @@
 
   initializeNavigation();
   initializeHomeVideo();
+  initializeAutoplayInteractionControls();
   initializeReveals();
   initializeHealersHeaderTransition();
   initializeHealersSlideshow();
