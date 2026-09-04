@@ -79,15 +79,17 @@
     };
   });
 
-  const blackAndWhiteSlides = [
-    {
-      src: 'images-black-and-white/Natalia_Neuhaus-1.webp',
-      full: 'images-black-and-white/Natalia_Neuhaus-1.webp',
-      alt: 'Black-and-white Burlesque Mon Amour photograph 1',
-      width: 2048,
-      height: 1365
-    }
-  ];
+  const blackAndWhiteSlides = Array.from({ length: 26 }, (_, index) => {
+    const number = index + 1;
+    const src = `images-black-and-white/Natalia_Neuhaus-${number}.webp`;
+    return {
+      src,
+      full: src,
+      alt: `Black-and-white Burlesque Mon Amour photograph ${number}`,
+      width: 2200,
+      height: 1467
+    };
+  });
 
   function installProgressStyles() {
     if (document.getElementById('burlesque-progress-styles')) return;
