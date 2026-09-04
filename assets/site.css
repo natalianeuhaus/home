@@ -1630,3 +1630,14 @@ body.burlesque-horizontal-body{overflow:hidden}
     color:rgba(21,23,21,.58);
   }
 }
+
+/* Burlesque desktop intro: center the series arrow between Amour and the closing paragraph. */
+@media (min-width:761px){
+  .burlesque-intro-copy{position:relative}
+  .burlesque-intro-copy .burlesque-enter-series{
+    position:absolute;
+    right:calc(100% + clamp(80px,7.5vw,155px));
+    bottom:14px;
+    margin:0;
+  }
+}
