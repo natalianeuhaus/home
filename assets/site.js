@@ -705,7 +705,7 @@
         label: "Chapter III",
         targetId: "chapter-3",
         paragraphs: [
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          "This is my being silly because why not, life is a bit of a lorem ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         ],
       },
     ];
