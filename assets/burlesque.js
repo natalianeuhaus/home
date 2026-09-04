@@ -69,7 +69,7 @@
 
   const localSlides = Array.from({ length: 37 }, (_, index) => {
     const number = index + 1;
-    const src = `images/Natalia_Neuhaus-${number}.jpg`;
+    const src = `images/Natalia_Neuhaus-${number}.webp`;
     return {
       src,
       full: src,
