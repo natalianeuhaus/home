@@ -502,7 +502,7 @@
 
     installMilkRouteLightboxStyles();
     const slides = Array.from({ length: 48 }, (_, index) => ({
-      src: `./landscape/${String(index + 1).padStart(2, "0")}.jpg`,
+      src: `./landscape/${String(index + 1).padStart(2, "0")}.webp`,
       alt: `Nevada landscape photograph ${index + 1}`,
     }));
 
