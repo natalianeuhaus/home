@@ -1750,7 +1750,16 @@ body.burlesque-horizontal-body{overflow:hidden}
 }
 .burlesque-lightbox.is-single-slide .intermission-lightbox-arrow{display:none}
 
-/* Turn the opening cue downward now that the collections sit below the text. */
+/* Match the site's full downward cue now that the collections sit below. */
+.burlesque-enter-series{
+  appearance:none;
+  width:42px;
+  height:62px;
+  overflow:visible;
+  outline:0;
+  color:rgba(21,23,21,.62);
+  animation:burlesque-down-arrow-pulse 3.8s ease-in-out infinite;
+}
 .burlesque-enter-series::before{
   content:"";
   width:1px!important;
@@ -1775,6 +1784,17 @@ body.burlesque-horizontal-body{overflow:hidden}
   top:auto;
   bottom:7px;
   transform:translateX(-50%) rotate(45deg)!important;
+}
+.burlesque-enter-series:hover,
+.burlesque-enter-series:focus-visible{
+  color:#151715;
+  opacity:1;
+  outline:0;
+  animation-play-state:paused;
+}
+@keyframes burlesque-down-arrow-pulse{
+  0%,100%{opacity:.36}
+  50%{opacity:1}
 }
 
 @media (hover:hover) and (pointer:fine){
@@ -1817,11 +1837,27 @@ body.burlesque-horizontal-body{overflow:hidden}
     bottom:22px;
   }
   .burlesque-collection-label strong{font-size:30px}
-  .burlesque-enter-series::before{height:38px}
+  .burlesque-enter-series{
+    width:38px;
+    height:52px;
+  }
+  .burlesque-enter-series::before{
+    height:34px;
+    top:6px;
+  }
+  .burlesque-enter-series::after{
+    width:6px;
+    height:6px;
+    bottom:6px;
+  }
 }
 
 @media (prefers-reduced-motion:reduce){
   .burlesque-horizontal{scroll-behavior:auto!important}
+  .burlesque-enter-series{
+    animation:none;
+    opacity:.72;
+  }
   .burlesque-collection,
   .burlesque-collection>img,
   .burlesque-collection::after,
