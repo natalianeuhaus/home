@@ -712,7 +712,7 @@
     const films = Array.from(document.querySelectorAll(".intermission-film"));
 
     const alignDescription = (index) => {
-      const title = tabs[index === 1 ? 0 : index].querySelector("strong");
+      const title = tabs[0].querySelector("strong");
       if (!title) return;
       const offset = Math.max(
         0,
