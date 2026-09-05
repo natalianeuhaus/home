@@ -49,7 +49,7 @@
     .niagara-photo-thumb img { width:100%; height:100%; object-fit:contain; display:block; }
     .niagara-photo-thumb span { position:absolute; left:5px; bottom:4px; min-width:20px; padding:3px 4px 2px; color:#fff; background:rgba(8,9,8,.76); letter-spacing:.12em; font:8px/1 Arial,Helvetica,sans-serif; }
     .niagara-photo-story.is-controls-visible .niagara-photo-control,.niagara-photo-story:focus-within .niagara-photo-control,.niagara-photo-story.is-controls-visible .niagara-photo-caption-toggle,.niagara-photo-story:focus-within .niagara-photo-caption-toggle,.niagara-photo-story.is-controls-visible .niagara-photo-index,.niagara-photo-story:focus-within .niagara-photo-index { opacity:1; pointer-events:auto; }
-    .niagara-photo-stage:has(.niagara-photo-main:hover) .niagara-photo-strip,.niagara-photo-strip:hover,.niagara-photo-strip:focus-within { opacity:1; pointer-events:auto; transform:translate(-50%,0); }
+    .niagara-photo-stage:has(.niagara-photo-main:hover) .niagara-photo-strip,.niagara-photo-strip:hover,.niagara-photo-strip:has(:focus-visible) { opacity:1; pointer-events:auto; transform:translate(-50%,0); }
     .niagara-photo-caption { display:none; box-sizing:border-box; overflow-x:hidden; overflow-y:auto; padding:clamp(58px,6vw,96px) clamp(32px,4vw,66px) 52px; border-left:1px solid rgba(255,255,255,.18); background:#10110f; scrollbar-color:#9b958a #1b1c1a; scrollbar-width:auto; }
     .niagara-photo-caption::-webkit-scrollbar { width:11px; }
     .niagara-photo-caption::-webkit-scrollbar-track { background:#1b1c1a; }
@@ -73,7 +73,7 @@
     .niagara-photo-story.is-fullscreen .niagara-photo-control:focus-visible { color:#f1efe7; background:transparent; border-color:transparent; opacity:1; }
     .niagara-photo-story.is-fullscreen .niagara-photo-prev { left:var(--photo-prev-left,28px); right:auto; }
     .niagara-photo-story.is-fullscreen .niagara-photo-next { left:var(--photo-next-left,calc(100% - 72px)); right:auto; }
-    .niagara-photo-story.is-fullscreen .niagara-photo-strip { left:var(--photo-strip-left,50%); bottom:18px; width:var(--photo-strip-width,min(980px,calc(100% - 180px))); opacity:1; pointer-events:auto; transform:translate(-50%,0); }
+    .niagara-photo-story.is-fullscreen .niagara-photo-strip { left:var(--photo-strip-left,50%); bottom:18px; width:var(--photo-strip-width,min(980px,calc(100% - 180px))); }
     .niagara-photo-story.is-fullscreen .niagara-photo-index { opacity:1; pointer-events:none; }
     .niagara-photo-story.is-fullscreen .niagara-photo-caption-toggle { display:none; }
     .niagara-photo-story.is-fullscreen .niagara-photo-caption { position:relative; display:block; min-width:0; height:100svh; }
@@ -111,6 +111,7 @@
     }
     @media (hover:none) {
       .niagara-photo-control,.niagara-photo-caption-toggle,.niagara-photo-index { opacity:1; pointer-events:auto; }
+      .niagara-photo-story.is-fullscreen .niagara-photo-strip { opacity:1; pointer-events:auto; transform:translate(-50%,0); }
     }
   </style>
   <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
