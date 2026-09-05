@@ -292,32 +292,6 @@
     let isClosing = false;
     let ownsBrowserFullscreen = false;
     let onFullscreenChange = null;
-    const landscapeQuery = window.matchMedia("(orientation: landscape)");
-    const mayNudgeSafari =
-      shouldRequestBrowserFullscreen &&
-      /iPhone|iPod/.test(navigator.userAgent) &&
-      !document.fullscreenEnabled &&
-      !navigator.standalone &&
-      !window.matchMedia("(display-mode: standalone)").matches;
-    let nudgeStart = null;
-    const nudgeSafariControls = () => {
-      if (
-        !mayNudgeSafari || !landscapeQuery.matches || nudgeStart ||
-        isClosing || document.fullscreenElement
-      ) return;
-      const scrollRoot = document.scrollingElement;
-      if (!scrollRoot) return;
-      const top = Math.min(
-        window.scrollY + 32,
-        scrollRoot.scrollHeight - scrollRoot.clientHeight,
-      );
-      if (top <= window.scrollY) return;
-      nudgeStart = { left: window.scrollX, top: window.scrollY };
-      // A one-time scroll request; Safari may still require a physical swipe.
-      window.scrollTo({ left: nudgeStart.left, top, behavior: "instant" });
-    };
-    if (mayNudgeSafari)
-      landscapeQuery.addEventListener("change", nudgeSafariControls);
 
     const render = () => {
       dialog.setAttribute(
@@ -364,8 +338,6 @@
     const destroy = () => {
       if (isClosing) return;
       isClosing = true;
-      if (mayNudgeSafari)
-        landscapeQuery.removeEventListener("change", nudgeSafariControls);
       window.removeEventListener("keydown", onKeyDown);
       viewport.removeEventListener("wheel", onWheel);
       if (onFullscreenChange)
@@ -382,8 +354,6 @@
       dialog.classList.add("is-closing");
       const finish = () => {
         html.style.overflow = previousOverflow;
-        if (nudgeStart)
-          window.scrollTo({ ...nudgeStart, behavior: "instant" });
         dialog.remove();
       };
       const closingTime =
@@ -499,7 +469,6 @@
       requestAnimationFrame(() => {
         if (isClosing) return;
         dialog.classList.add("is-visible");
-        nudgeSafariControls();
       }),
     );
     close.focus({ preventScroll: true });
