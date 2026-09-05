@@ -1901,6 +1901,7 @@
           `;
 
           if (dossierViewer.dataset.view === 'evidence') {
+            style.textContent += '\nhtml body .site-footer { display: none !important; }\n';
             const archiveInput = embeddedDocument.getElementById('archiveSearch');
             if (archiveInput) {
               archiveInput.value = dossierViewerArchiveQuery;
