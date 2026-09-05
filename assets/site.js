@@ -222,7 +222,7 @@
     const shouldRequestBrowserFullscreen = Boolean(requestBrowserFullscreen);
     if (enableStatusNavigation) installHealersLightboxStatusStyles();
     let wheelLockedUntil = 0;
-    let touchStartX = null;
+    let touchStart = null;
 
     dialog.className = usesBurlesqueViewer
       ? `${prefix}${prefix === "healers-lightbox" ? " intermission-lightbox" : ""} burlesque-lightbox`
@@ -292,6 +292,32 @@
     let isClosing = false;
     let ownsBrowserFullscreen = false;
     let onFullscreenChange = null;
+    const landscapeQuery = window.matchMedia("(orientation: landscape)");
+    const mayNudgeSafari =
+      shouldRequestBrowserFullscreen &&
+      /iPhone|iPod/.test(navigator.userAgent) &&
+      !document.fullscreenEnabled &&
+      !navigator.standalone &&
+      !window.matchMedia("(display-mode: standalone)").matches;
+    let nudgeStart = null;
+    const nudgeSafariControls = () => {
+      if (
+        !mayNudgeSafari || !landscapeQuery.matches || nudgeStart ||
+        isClosing || document.fullscreenElement
+      ) return;
+      const scrollRoot = document.scrollingElement;
+      if (!scrollRoot) return;
+      const top = Math.min(
+        window.scrollY + 32,
+        scrollRoot.scrollHeight - scrollRoot.clientHeight,
+      );
+      if (top <= window.scrollY) return;
+      nudgeStart = { left: window.scrollX, top: window.scrollY };
+      // A one-time scroll request; Safari may still require a physical swipe.
+      window.scrollTo({ left: nudgeStart.left, top, behavior: "instant" });
+    };
+    if (mayNudgeSafari)
+      landscapeQuery.addEventListener("change", nudgeSafariControls);
 
     const render = () => {
       dialog.setAttribute(
@@ -338,6 +364,8 @@
     const destroy = () => {
       if (isClosing) return;
       isClosing = true;
+      if (mayNudgeSafari)
+        landscapeQuery.removeEventListener("change", nudgeSafariControls);
       window.removeEventListener("keydown", onKeyDown);
       viewport.removeEventListener("wheel", onWheel);
       if (onFullscreenChange)
@@ -354,6 +382,8 @@
       dialog.classList.add("is-closing");
       const finish = () => {
         html.style.overflow = previousOverflow;
+        if (nudgeStart)
+          window.scrollTo({ ...nudgeStart, behavior: "instant" });
         dialog.remove();
       };
       const closingTime =
@@ -388,18 +418,25 @@
     viewport.addEventListener(
       "touchstart",
       (event) => {
-        touchStartX = event.touches[0]?.clientX ?? null;
+        const touch = event.touches.length === 1 ? event.touches[0] : null;
+        touchStart = touch ? { x: touch.clientX, y: touch.clientY } : null;
       },
       { passive: true },
     );
     viewport.addEventListener(
       "touchend",
       (event) => {
-        if (touchStartX === null) return;
-        const touchEndX = event.changedTouches[0]?.clientX ?? touchStartX;
-        const distance = touchStartX - touchEndX;
-        touchStartX = null;
-        if (Math.abs(distance) < 48) return;
+        const start = touchStart;
+        touchStart = null;
+        const touch = event.changedTouches[0];
+        if (!start || !touch || event.touches.length) return;
+        const distance = start.x - touch.clientX;
+        const verticalDistance = start.y - touch.clientY;
+        // Leave vertical gestures available to the browser's toolbar controls.
+        if (
+          Math.abs(distance) < 48 ||
+          Math.abs(distance) <= Math.abs(verticalDistance) * 1.25
+        ) return;
         if (distance > 0 && activeIndex < slides.length - 1) {
           activeIndex += 1;
           render();
@@ -408,6 +445,11 @@
           render();
         }
       },
+      { passive: true },
+    );
+    viewport.addEventListener(
+      "touchcancel",
+      () => { touchStart = null; },
       { passive: true },
     );
     first?.addEventListener("click", (event) => {
@@ -454,9 +496,13 @@
 
     render();
     requestAnimationFrame(() =>
-      requestAnimationFrame(() => dialog.classList.add("is-visible")),
+      requestAnimationFrame(() => {
+        if (isClosing) return;
+        dialog.classList.add("is-visible");
+        nudgeSafariControls();
+      }),
     );
-    close.focus();
+    close.focus({ preventScroll: true });
   }
 
   function initializeHealersSlideshow() {
