@@ -187,7 +187,7 @@
 
             if (!photoStory.classList.contains('is-fullscreen')) {
               const imageGutter = (stageRect.width - photoMain.offsetWidth) / 2;
-              const arrowGap = window.innerWidth <= 820 ? 6 : 12;
+              const arrowGap = (window.innerWidth <= 820 ? 6 : 12) + 30;
               const arrowInset = Math.max(2, imageGutter - photoPrev.offsetWidth - arrowGap);
               photoStory.style.setProperty('--photo-preview-arrow-inset', `${arrowInset}px`);
               return;
