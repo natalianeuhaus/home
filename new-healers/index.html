@@ -251,13 +251,57 @@
       }
     </style>
     <meta content="Natalia Neuhaus static portfolio" name="generator" />
-  <link href="../assets/menu-standard.css?v=copyright-1" rel="stylesheet"/></head>
+  <link href="../assets/menu-standard.css?v=copyright-1" rel="stylesheet"/>
+    <style id="new-healers-scroll-styles">
+      .new-healers-sequence .new-healers-entry {
+        margin-bottom: clamp(160px, 22svh, 260px);
+      }
+      .new-healers-sequence .healers-photo {
+        margin-bottom: 0;
+      }
+      .new-healers-sequence .healers-photo img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+      }
+      .new-healers-sequence .healers-voice {
+        margin-top: clamp(32px, 5svh, 60px);
+      }
+      .new-healers-page.scroll-reveal-ready [data-scroll-photo] {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 1.5s ease, transform 1.7s cubic-bezier(.22,1,.36,1);
+      }
+      .new-healers-page.scroll-reveal-ready [data-scroll-photo].is-visible,
+      .new-healers-page.scroll-reveal-ready [data-scroll-photo]:focus-within {
+        opacity: 1;
+        transform: none;
+      }
+      @media (max-width: 760px) {
+        .new-healers-sequence .new-healers-entry {
+          margin-bottom: clamp(110px, 20svh, 180px);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .new-healers-page.scroll-reveal-ready [data-scroll-photo] {
+          transform: none;
+          transition: none;
+        }
+      }
+      @media print {
+        .new-healers-page.scroll-reveal-ready [data-scroll-photo] {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
   <body
     class="__variable_geist_0tvmz3h __variable_geist_mono_1diim1n antialiased"
   >
     <main
       class="healers-page new-healers-page"
-      data-release="new-healers-film-cover-v1"
+      data-release="new-healers-ordered-scroll-v1"
     >
       <header class="site-header">
         <a
@@ -278,7 +322,7 @@
       <section aria-labelledby="healers-title" class="healers-hero">
         <img
           alt="Goldie"
-          aria-label="Open photograph 1 of 22 fullscreen"
+          aria-label="Open cover photograph fullscreen"
           data-healers-slide-index="0"
           fetchpriority="high"
           height="801"
@@ -342,308 +386,39 @@
           >Watch full video</a
         >
       </section>
-      <section aria-label="Photographs and voices" class="healers-sequence">
-        <article class="healers-story">
+      <section aria-label="Photographs and voices" class="healers-sequence new-healers-sequence">
+        <article class="healers-story new-healers-entry">
           <div class="healers-story-images">
-            <figure
-              class="healers-photo healers-photo--wide-left"
-              data-reveal="true"
-            >
+            <figure class="healers-photo healers-photo--wide-left" data-scroll-photo="1">
               <img
-                alt="Lola, photograph 1"
-                aria-label="Open photograph 2 of 22 fullscreen"
+                alt="Healers, photograph 1"
+                aria-label="Open photograph 1 of the new 42-photo series fullscreen"
                 data-healers-slide-index="1"
                 decoding="async"
-                height="801"
+                height="1468"
                 loading="lazy"
                 role="button"
-                src="../Natalia_Neuhaus-14.jpg"
+                src="images/Natalia_Neuhaus-1.webp"
                 tabindex="0"
-                width="1200"
+                width="2200"
               />
             </figure>
-            <figure
-              class="healers-photo healers-photo--small-right"
-              data-reveal="true"
-            >
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--small-right" data-scroll-photo="2">
               <img
-                alt="Lola, photograph 2"
-                aria-label="Open photograph 3 of 22 fullscreen"
+                alt="Healers, photograph 2"
+                aria-label="Open photograph 2 of the new 42-photo series fullscreen"
                 data-healers-slide-index="2"
                 decoding="async"
-                height="801"
+                height="1468"
                 loading="lazy"
                 role="button"
-                src="../Natalia_Neuhaus-4.jpg"
+                src="images/Natalia_Neuhaus-2.webp"
                 tabindex="0"
-                width="1200"
-              />
-            </figure>
-          </div>
-          <blockquote class="healers-voice" data-reveal="true">
-            <p>
-              “<!-- -->If you like literature, we’ll have plenty to talk about
-              (when we aren’t snuggling, anyway.) I have my Bachelor of Arts in
-              English and I even keep a blog about my life experiences.<!-- -->”
-            </p>
-            <footer><span>02</span>Lola</footer>
-          </blockquote>
-        </article>
-        <article class="healers-story">
-          <div class="healers-story-images">
-            <figure
-              class="healers-photo healers-photo--medium-center"
-              data-reveal="true"
-            >
-              <img
-                alt="Miss Cheng, photograph 1"
-                aria-label="Open photograph 4 of 22 fullscreen"
-                data-healers-slide-index="3"
-                decoding="async"
-                height="801"
-                loading="lazy"
-                role="button"
-                src="../Natalia_Neuhaus-2.jpg"
-                tabindex="0"
-                width="1200"
-              />
-            </figure>
-            <figure
-              class="healers-photo healers-photo--medium-left"
-              data-reveal="true"
-            >
-              <img
-                alt="Miss Cheng, photograph 2"
-                aria-label="Open photograph 5 of 22 fullscreen"
-                data-healers-slide-index="4"
-                decoding="async"
-                height="801"
-                loading="lazy"
-                role="button"
-                src="../Natalia_Neuhaus-7.jpg"
-                tabindex="0"
-                width="1200"
-              />
-            </figure>
-          </div>
-          <blockquote class="healers-voice" data-reveal="true">
-            <p>
-              “<!-- -->Designer, domme, daddy — in no particular order.<!-- -->”
-            </p>
-            <footer><span>03</span>Miss Cheng</footer>
-          </blockquote>
-        </article>
-        <article class="healers-story">
-          <div class="healers-story-images">
-            <figure
-              class="healers-photo healers-photo--wide-right"
-              data-reveal="true"
-            >
-              <img
-                alt="Viper, photograph 1"
-                aria-label="Open photograph 6 of 22 fullscreen"
-                data-healers-slide-index="5"
-                decoding="async"
-                height="801"
-                loading="lazy"
-                role="button"
-                src="../Natalia_Neuhaus-8.jpg"
-                tabindex="0"
-                width="1200"
-              />
-            </figure>
-          </div>
-          <blockquote class="healers-voice" data-reveal="true">
-            <p>“<!-- -->Artist, anarchist, stripper.<!-- -->”</p>
-            <footer><span>04</span>Viper</footer>
-          </blockquote>
-        </article>
-        <article class="healers-story">
-          <div class="healers-story-images">
-            <figure
-              class="healers-photo healers-photo--small-left"
-              data-reveal="true"
-            >
-              <img
-                alt="Penelope, photograph 1"
-                aria-label="Open photograph 7 of 22 fullscreen"
-                data-healers-slide-index="6"
-                decoding="async"
-                height="801"
-                loading="lazy"
-                role="button"
-                src="../Natalia_Neuhaus-9.jpg"
-                tabindex="0"
-                width="1200"
-              />
-            </figure>
-            <figure
-              class="healers-photo healers-photo--medium-right"
-              data-reveal="true"
-            >
-              <img
-                alt="Penelope, photograph 2"
-                aria-label="Open photograph 8 of 22 fullscreen"
-                data-healers-slide-index="7"
-                decoding="async"
-                height="801"
-                loading="lazy"
-                role="button"
-                src="../Natalia_Neuhaus-10.jpg"
-                tabindex="0"
-                width="1200"
-              />
-            </figure>
-            <figure
-              class="healers-photo healers-photo--wide-center"
-              data-reveal="true"
-            >
-              <img
-                alt="Penelope, photograph 3"
-                aria-label="Open photograph 9 of 22 fullscreen"
-                data-healers-slide-index="8"
-                decoding="async"
-                height="801"
-                loading="lazy"
-                role="button"
-                src="../Natalia_Neuhaus-11.jpg"
-                tabindex="0"
-                width="1200"
-              />
-            </figure>
-          </div>
-          <blockquote class="healers-voice" data-reveal="true">
-            <p>
-              “<!-- -->I am a very creative woman who is confident and
-              uninhibited with a sweet and compassionate soul.<!-- -->”
-            </p>
-            <footer><span>05</span>Penelope</footer>
-          </blockquote>
-        </article>
-        <article class="healers-story">
-          <div class="healers-story-images">
-            <figure
-              class="healers-photo healers-photo--wide-left"
-              data-reveal="true"
-            >
-              <img
-                alt="Judith, photograph 1"
-                aria-label="Open photograph 10 of 22 fullscreen"
-                data-healers-slide-index="9"
-                decoding="async"
-                height="801"
-                loading="lazy"
-                role="button"
-                src="../Natalia_Neuhaus-17.jpg"
-                tabindex="0"
-                width="1200"
-              />
-            </figure>
-            <figure
-              class="healers-photo healers-photo--small-right"
-              data-reveal="true"
-            >
-              <img
-                alt="Judith, photograph 2"
-                aria-label="Open photograph 11 of 22 fullscreen"
-                data-healers-slide-index="10"
-                decoding="async"
-                height="801"
-                loading="lazy"
-                role="button"
-                src="../Natalia_Neuhaus-15.jpg"
-                tabindex="0"
-                width="1200"
-              />
-            </figure>
-            <figure
-              class="healers-photo healers-photo--medium-center"
-              data-reveal="true"
-            >
-              <img
-                alt="Judith, photograph 3"
-                aria-label="Open photograph 12 of 22 fullscreen"
-                data-healers-slide-index="11"
-                decoding="async"
-                height="801"
-                loading="lazy"
-                role="button"
-                src="../Natalia_Neuhaus-5.jpg"
-                tabindex="0"
-                width="1200"
-              />
-            </figure>
-            <figure
-              class="healers-photo healers-photo--medium-left"
-              data-reveal="true"
-            >
-              <img
-                alt="Judith, photograph 4"
-                aria-label="Open photograph 13 of 22 fullscreen"
-                data-healers-slide-index="12"
-                decoding="async"
-                height="801"
-                loading="lazy"
-                role="button"
-                src="../Natalia_Neuhaus-19.jpg"
-                tabindex="0"
-                width="1200"
-              />
-            </figure>
-          </div>
-          <blockquote class="healers-voice" data-reveal="true">
-            <p>
-              “<!-- -->Artist, shamanic healer, tantrika practitioner and
-              mentor.<!-- -->”
-            </p>
-            <footer><span>06</span>Judith</footer>
-          </blockquote>
-        </article>
-        <article class="healers-story">
-          <div class="healers-story-images">
-            <figure
-              class="healers-photo healers-photo--wide-right"
-              data-reveal="true"
-            >
-              <img
-                alt="Sunny, photograph 1"
-                aria-label="Open photograph 14 of 22 fullscreen"
-                data-healers-slide-index="13"
-                decoding="async"
-                height="801"
-                loading="lazy"
-                role="button"
-                src="../Natalia_Neuhaus-20.jpg"
-                tabindex="0"
-                width="1200"
-              />
-            </figure>
-          </div>
-          <blockquote class="healers-voice" data-reveal="true">
-            <p>
-              “<!-- -->Stripper, aerialist, performer. Barcelona, NYC,
-              California.<!-- -->”
-            </p>
-            <footer><span>07</span>Sunny</footer>
-          </blockquote>
-        </article>
-        <article class="healers-story">
-          <div class="healers-story-images">
-            <figure
-              class="healers-photo healers-photo--small-left"
-              data-reveal="true"
-            >
-              <img
-                alt="Monday Jones, photograph 1"
-                aria-label="Open photograph 15 of 22 fullscreen"
-                data-healers-slide-index="14"
-                decoding="async"
-                height="801"
-                loading="lazy"
-                role="button"
-                src="../Natalia_Neuhaus-21.jpg"
-                tabindex="0"
-                width="1200"
+                width="2200"
               />
             </figure>
           </div>
@@ -653,60 +428,656 @@
               college, where I studied the arts and became a parent. I spent 15+
               years working in end-of-life care and oncology.<!-- -->”
             </p>
-            <footer><span>08</span>Monday Jones</footer>
+            <footer><span>02</span>Monday Jones</footer>
           </blockquote>
         </article>
-        <article class="healers-story">
+        <article class="healers-story new-healers-entry">
           <div class="healers-story-images">
-            <figure
-              class="healers-photo healers-photo--medium-right"
-              data-reveal="true"
-            >
+            <figure class="healers-photo healers-photo--medium-center" data-scroll-photo="3">
               <img
-                alt="Feisty, photograph 1"
-                aria-label="Open photograph 16 of 22 fullscreen"
+                alt="Healers, photograph 3"
+                aria-label="Open photograph 3 of the new 42-photo series fullscreen"
+                data-healers-slide-index="3"
+                decoding="async"
+                height="1468"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-3.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--medium-left" data-scroll-photo="4">
+              <img
+                alt="Healers, photograph 4"
+                aria-label="Open photograph 4 of the new 42-photo series fullscreen"
+                data-healers-slide-index="4"
+                decoding="async"
+                height="1468"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-4.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--wide-right" data-scroll-photo="5">
+              <img
+                alt="Healers, photograph 5"
+                aria-label="Open photograph 5 of the new 42-photo series fullscreen"
+                data-healers-slide-index="5"
+                decoding="async"
+                height="1468"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-5.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--small-left" data-scroll-photo="6">
+              <img
+                alt="Healers, photograph 6"
+                aria-label="Open photograph 6 of the new 42-photo series fullscreen"
+                data-healers-slide-index="6"
+                decoding="async"
+                height="1468"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-6.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+          <blockquote class="healers-voice" data-reveal="true">
+            <p>
+              “<!-- -->I am a very creative woman who is confident and
+              uninhibited with a sweet and compassionate soul.<!-- -->”
+            </p>
+            <footer><span>03</span>Penelope</footer>
+          </blockquote>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--medium-right" data-scroll-photo="7">
+              <img
+                alt="Healers, photograph 7"
+                aria-label="Open photograph 7 of the new 42-photo series fullscreen"
+                data-healers-slide-index="7"
+                decoding="async"
+                height="1468"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-7.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--wide-center" data-scroll-photo="8">
+              <img
+                alt="Healers, photograph 8"
+                aria-label="Open photograph 8 of the new 42-photo series fullscreen"
+                data-healers-slide-index="8"
+                decoding="async"
+                height="1468"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-8.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--wide-left" data-scroll-photo="9">
+              <img
+                alt="Healers, photograph 9"
+                aria-label="Open photograph 9 of the new 42-photo series fullscreen"
+                data-healers-slide-index="9"
+                decoding="async"
+                height="1467"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-9.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--small-right" data-scroll-photo="10">
+              <img
+                alt="Healers, photograph 10"
+                aria-label="Open photograph 10 of the new 42-photo series fullscreen"
+                data-healers-slide-index="10"
+                decoding="async"
+                height="1468"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-10.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--medium-center" data-scroll-photo="11">
+              <img
+                alt="Healers, photograph 11"
+                aria-label="Open photograph 11 of the new 42-photo series fullscreen"
+                data-healers-slide-index="11"
+                decoding="async"
+                height="1467"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-11.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+          <blockquote class="healers-voice" data-reveal="true">
+            <p>
+              “<!-- -->If you are looking for a purely physical connection, I
+              respectfully am not the one for you.<!-- -->”
+            </p>
+            <footer><span>04</span>Althea</footer>
+          </blockquote>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--medium-left" data-scroll-photo="12">
+              <img
+                alt="Healers, photograph 12"
+                aria-label="Open photograph 12 of the new 42-photo series fullscreen"
+                data-healers-slide-index="12"
+                decoding="async"
+                height="1468"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-12.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--wide-right" data-scroll-photo="13">
+              <img
+                alt="Healers, photograph 13"
+                aria-label="Open photograph 13 of the new 42-photo series fullscreen"
+                data-healers-slide-index="13"
+                decoding="async"
+                height="1468"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-13.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--small-left" data-scroll-photo="14">
+              <img
+                alt="Healers, photograph 14"
+                aria-label="Open photograph 14 of the new 42-photo series fullscreen"
+                data-healers-slide-index="14"
+                decoding="async"
+                height="1468"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-14.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+          <blockquote class="healers-voice" data-reveal="true">
+            <p>“<!-- -->Artist, anarchist, stripper.<!-- -->”</p>
+            <footer><span>05</span>Viper</footer>
+          </blockquote>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--medium-right" data-scroll-photo="15">
+              <img
+                alt="Healers, photograph 15"
+                aria-label="Open photograph 15 of the new 42-photo series fullscreen"
                 data-healers-slide-index="15"
                 decoding="async"
-                height="801"
+                height="1468"
                 loading="lazy"
                 role="button"
-                src="../Natalia_Neuhaus-22-2.jpg"
+                src="images/Natalia_Neuhaus-15.webp"
                 tabindex="0"
-                width="1200"
+                width="2200"
               />
             </figure>
-            <figure
-              class="healers-photo healers-photo--wide-center"
-              data-reveal="true"
-            >
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--wide-center" data-scroll-photo="16">
               <img
-                alt="Feisty, photograph 2"
-                aria-label="Open photograph 17 of 22 fullscreen"
+                alt="Healers, photograph 16"
+                aria-label="Open photograph 16 of the new 42-photo series fullscreen"
                 data-healers-slide-index="16"
                 decoding="async"
-                height="801"
+                height="1468"
                 loading="lazy"
                 role="button"
-                src="../Natalia_Neuhaus-25.jpg"
+                src="images/Natalia_Neuhaus-16.webp"
                 tabindex="0"
-                width="1200"
+                width="2200"
               />
             </figure>
-            <figure
-              class="healers-photo healers-photo--wide-left"
-              data-reveal="true"
-            >
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--wide-left" data-scroll-photo="17">
               <img
-                alt="Feisty, photograph 3"
-                aria-label="Open photograph 18 of 22 fullscreen"
+                alt="Healers, photograph 17"
+                aria-label="Open photograph 17 of the new 42-photo series fullscreen"
                 data-healers-slide-index="17"
                 decoding="async"
-                height="801"
+                height="1468"
                 loading="lazy"
                 role="button"
-                src="../Natalia_Neuhaus-26.jpg"
+                src="images/Natalia_Neuhaus-17.webp"
                 tabindex="0"
-                width="1200"
+                width="2200"
+              />
+            </figure>
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--small-right" data-scroll-photo="18">
+              <img
+                alt="Healers, photograph 18"
+                aria-label="Open photograph 18 of the new 42-photo series fullscreen"
+                data-healers-slide-index="18"
+                decoding="async"
+                height="1468"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-18.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--medium-center" data-scroll-photo="19">
+              <img
+                alt="Healers, photograph 19"
+                aria-label="Open photograph 19 of the new 42-photo series fullscreen"
+                data-healers-slide-index="19"
+                decoding="async"
+                height="1468"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-19.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+          <blockquote class="healers-voice" data-reveal="true">
+            <p>
+              “<!-- -->If you like literature, we’ll have plenty to talk about
+              (when we aren’t snuggling, anyway.) I have my Bachelor of Arts in
+              English and I even keep a blog about my life experiences.<!-- -->”
+            </p>
+            <footer><span>06</span>Lola</footer>
+          </blockquote>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--medium-left" data-scroll-photo="20">
+              <img
+                alt="Healers, photograph 20"
+                aria-label="Open photograph 20 of the new 42-photo series fullscreen"
+                data-healers-slide-index="20"
+                decoding="async"
+                height="1468"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-20.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--wide-right" data-scroll-photo="21">
+              <img
+                alt="Healers, photograph 21"
+                aria-label="Open photograph 21 of the new 42-photo series fullscreen"
+                data-healers-slide-index="21"
+                decoding="async"
+                height="1467"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-21.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--small-left" data-scroll-photo="22">
+              <img
+                alt="Healers, photograph 22"
+                aria-label="Open photograph 22 of the new 42-photo series fullscreen"
+                data-healers-slide-index="22"
+                decoding="async"
+                height="1468"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-22.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--medium-right" data-scroll-photo="23">
+              <img
+                alt="Healers, photograph 23"
+                aria-label="Open photograph 23 of the new 42-photo series fullscreen"
+                data-healers-slide-index="23"
+                decoding="async"
+                height="1467"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-23.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--wide-center" data-scroll-photo="24">
+              <img
+                alt="Healers, photograph 24"
+                aria-label="Open photograph 24 of the new 42-photo series fullscreen"
+                data-healers-slide-index="24"
+                decoding="async"
+                height="1468"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-24.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+          <blockquote class="healers-voice" data-reveal="true">
+            <p>
+              “<!-- -->Designer, domme, daddy — in no particular order.<!-- -->”
+            </p>
+            <footer><span>07</span>Miss Cheng</footer>
+          </blockquote>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--wide-left" data-scroll-photo="25">
+              <img
+                alt="Healers, photograph 25"
+                aria-label="Open photograph 25 of the new 42-photo series fullscreen"
+                data-healers-slide-index="25"
+                decoding="async"
+                height="1467"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-25.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--small-right" data-scroll-photo="26">
+              <img
+                alt="Healers, photograph 26"
+                aria-label="Open photograph 26 of the new 42-photo series fullscreen"
+                data-healers-slide-index="26"
+                decoding="async"
+                height="1468"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-26.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--medium-center" data-scroll-photo="27">
+              <img
+                alt="Healers, photograph 27"
+                aria-label="Open photograph 27 of the new 42-photo series fullscreen"
+                data-healers-slide-index="27"
+                decoding="async"
+                height="1468"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-27.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--medium-left" data-scroll-photo="28">
+              <img
+                alt="Healers, photograph 28"
+                aria-label="Open photograph 28 of the new 42-photo series fullscreen"
+                data-healers-slide-index="28"
+                decoding="async"
+                height="1468"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-28.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--wide-right" data-scroll-photo="29">
+              <img
+                alt="Healers, photograph 29"
+                aria-label="Open photograph 29 of the new 42-photo series fullscreen"
+                data-healers-slide-index="29"
+                decoding="async"
+                height="1468"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-29.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--small-left" data-scroll-photo="30">
+              <img
+                alt="Healers, photograph 30"
+                aria-label="Open photograph 30 of the new 42-photo series fullscreen"
+                data-healers-slide-index="30"
+                decoding="async"
+                height="1468"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-30.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--medium-right" data-scroll-photo="31">
+              <img
+                alt="Healers, photograph 31"
+                aria-label="Open photograph 31 of the new 42-photo series fullscreen"
+                data-healers-slide-index="31"
+                decoding="async"
+                height="1468"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-31.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--wide-center" data-scroll-photo="32">
+              <img
+                alt="Healers, photograph 32"
+                aria-label="Open photograph 32 of the new 42-photo series fullscreen"
+                data-healers-slide-index="32"
+                decoding="async"
+                height="1468"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-32.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--wide-left" data-scroll-photo="33">
+              <img
+                alt="Healers, photograph 33"
+                aria-label="Open photograph 33 of the new 42-photo series fullscreen"
+                data-healers-slide-index="33"
+                decoding="async"
+                height="1468"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-33.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--small-right" data-scroll-photo="34">
+              <img
+                alt="Healers, photograph 34"
+                aria-label="Open photograph 34 of the new 42-photo series fullscreen"
+                data-healers-slide-index="34"
+                decoding="async"
+                height="1468"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-34.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--medium-center" data-scroll-photo="35">
+              <img
+                alt="Healers, photograph 35"
+                aria-label="Open photograph 35 of the new 42-photo series fullscreen"
+                data-healers-slide-index="35"
+                decoding="async"
+                height="1468"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-35.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+          <blockquote class="healers-voice" data-reveal="true">
+            <p>
+              “<!-- -->Artist, shamanic healer, tantrika practitioner and
+              mentor.<!-- -->”
+            </p>
+            <footer><span>08</span>Judith</footer>
+          </blockquote>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--medium-left" data-scroll-photo="36">
+              <img
+                alt="Healers, photograph 36"
+                aria-label="Open photograph 36 of the new 42-photo series fullscreen"
+                data-healers-slide-index="36"
+                decoding="async"
+                height="1468"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-36.webp"
+                tabindex="0"
+                width="2200"
               />
             </figure>
           </div>
@@ -719,63 +1090,123 @@
             <footer><span>09</span>Feisty</footer>
           </blockquote>
         </article>
-        <article class="healers-story">
+        <article class="healers-story new-healers-entry">
           <div class="healers-story-images">
-            <figure
-              class="healers-photo healers-photo--small-right"
-              data-reveal="true"
-            >
+            <figure class="healers-photo healers-photo--wide-right" data-scroll-photo="37">
               <img
-                alt="Althea, photograph 1"
-                aria-label="Open photograph 19 of 22 fullscreen"
-                data-healers-slide-index="18"
+                alt="Healers, photograph 37"
+                aria-label="Open photograph 37 of the new 42-photo series fullscreen"
+                data-healers-slide-index="37"
                 decoding="async"
-                height="801"
+                height="1468"
                 loading="lazy"
                 role="button"
-                src="../Natalia_Neuhaus-29.jpg"
+                src="images/Natalia_Neuhaus-37.webp"
                 tabindex="0"
-                width="1200"
+                width="2200"
+              />
+            </figure>
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--small-left" data-scroll-photo="38">
+              <img
+                alt="Healers, photograph 38"
+                aria-label="Open photograph 38 of the new 42-photo series fullscreen"
+                data-healers-slide-index="38"
+                decoding="async"
+                height="1468"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-38.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--medium-right" data-scroll-photo="39">
+              <img
+                alt="Healers, photograph 39"
+                aria-label="Open photograph 39 of the new 42-photo series fullscreen"
+                data-healers-slide-index="39"
+                decoding="async"
+                height="1467"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-39.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--wide-center" data-scroll-photo="40">
+              <img
+                alt="Healers, photograph 40"
+                aria-label="Open photograph 40 of the new 42-photo series fullscreen"
+                data-healers-slide-index="40"
+                decoding="async"
+                height="1467"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-40.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--wide-left" data-scroll-photo="41">
+              <img
+                alt="Healers, photograph 41"
+                aria-label="Open photograph 41 of the new 42-photo series fullscreen"
+                data-healers-slide-index="41"
+                decoding="async"
+                height="1467"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-41.webp"
+                tabindex="0"
+                width="2200"
               />
             </figure>
           </div>
           <blockquote class="healers-voice" data-reveal="true">
             <p>
-              “<!-- -->If you are looking for a purely physical connection, I
-              respectfully am not the one for you.<!-- -->”
+              “<!-- -->Stripper, aerialist, performer. Barcelona, NYC,
+              California.<!-- -->”
             </p>
-            <footer><span>10</span>Althea</footer>
+            <footer><span>10</span>Sunny</footer>
           </blockquote>
+        </article>
+        <article class="healers-story new-healers-entry">
+          <div class="healers-story-images">
+            <figure class="healers-photo healers-photo--small-right healers-final-photo" data-scroll-photo="42">
+              <img
+                alt="Healers, photograph 42"
+                aria-label="Open photograph 42 of the new 42-photo series fullscreen"
+                data-healers-slide-index="42"
+                decoding="async"
+                height="1468"
+                loading="lazy"
+                role="button"
+                src="images/Natalia_Neuhaus-42.webp"
+                tabindex="0"
+                width="2200"
+              />
+            </figure>
+          </div>
         </article>
       </section>
       <section aria-label="Closing statement" class="healers-closing">
-        <div class="healers-closing-images">
-          <img
-            alt="Portrait from Healers"
-            aria-label="Open photograph 20 of 22 fullscreen"
-            data-healers-slide-index="19"
-            data-reveal="true"
-            decoding="async"
-            height="801"
-            loading="lazy"
-            role="button"
-            src="../Natalia_Neuhaus-32.jpg"
-            tabindex="0"
-            width="1200"
-          /><img
-            alt="Personal objects from Healers"
-            aria-label="Open photograph 21 of 22 fullscreen"
-            data-healers-slide-index="20"
-            data-reveal="true"
-            decoding="async"
-            height="801"
-            loading="lazy"
-            role="button"
-            src="../Natalia_Neuhaus-31.jpg"
-            tabindex="0"
-            width="1200"
-          />
-        </div>
         <p data-reveal="true">
           This body of work is an homage to everyone in this profession: to
           those who fought and keep on fighting for decriminalization, and to
@@ -786,23 +1217,6 @@
           United States to no longer prosecute sex work; hopefully, more will
           follow.
         </p>
-        <figure
-          class="healers-photo healers-photo--small-right healers-final-photo"
-          data-reveal="true"
-        >
-          <img
-            alt="Feisty looking through a window toward a church"
-            aria-label="Open photograph 22 of 22 fullscreen"
-            data-healers-slide-index="21"
-            decoding="async"
-            height="801"
-            loading="lazy"
-            role="button"
-            src="../Natalia_Neuhaus-27.jpg"
-            tabindex="0"
-            width="1200"
-          />
-        </figure>
       </section>
     <footer class="project-copyright-footer"><span>&copy; Natalia Neuhaus. All rights reserved.</span></footer></main>
 
@@ -1142,6 +1556,49 @@
         </button>
       </footer>
     </section>
+
+    <script id="new-healers-scroll">
+      (() => {
+        const page = document.querySelector(".new-healers-page");
+        if (!page || !("IntersectionObserver" in window)) return;
+        const photos = Array.from(page.querySelectorAll("[data-scroll-photo]"));
+        let observer;
+        const reveal = (photo) => {
+          photo.classList.add("is-visible");
+          observer?.unobserve(photo);
+        };
+        const observePhotos = () => {
+          observer?.disconnect();
+          // Pixel margins use viewport height; percentage root margins use width.
+          const inset = Math.round(window.innerHeight * 0.16);
+          observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) reveal(entry.target);
+            });
+          }, { rootMargin: `0px 0px -${inset}px 0px`, threshold: 0.08 });
+          photos.forEach((photo) => {
+            if (!photo.classList.contains("is-visible")) observer.observe(photo);
+          });
+        };
+        try {
+          observePhotos();
+          page.classList.add("scroll-reveal-ready");
+        } catch (_) {
+          observer?.disconnect();
+          return;
+        }
+        // Keyboard navigation reveals the focused photo immediately.
+        page.addEventListener("focusin", (event) => {
+          const photo = event.target.closest("[data-scroll-photo]");
+          if (photo) reveal(photo);
+        });
+        let resizeFrame;
+        window.addEventListener("resize", () => {
+          cancelAnimationFrame(resizeFrame);
+          resizeFrame = requestAnimationFrame(observePhotos);
+        }, { passive: true });
+      })();
+    </script>
 
     <script defer="" src="../assets/site.js?v=healers-fullscreen-burlesque-5"></script>
   </body>
