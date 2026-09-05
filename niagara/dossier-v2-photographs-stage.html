@@ -26,13 +26,13 @@
     .niagara-photo-control:hover,.niagara-photo-control:focus-visible { background:#30312f; border-color:#30312f; outline:none; }
     .niagara-photo-prev { left:22px; }
     .niagara-photo-next { right:22px; }
-    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control { top:50%; width:62px; height:42px; padding:0; border:0; color:rgba(21,23,21,.24); background:transparent; backdrop-filter:none; font-size:0; line-height:1; transition:color .25s ease,opacity .25s ease,transform .25s ease; }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control { top:50%; width:62px; height:42px; padding:0; border:0; color:rgba(21,23,21,.34); background:transparent; backdrop-filter:none; font-size:0; line-height:1; transition:color .25s ease,opacity .25s ease,transform .25s ease; }
     .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control::before { content:""; position:absolute; top:50%; width:44px; height:1px; background:currentColor; transform:translateY(-50%); }
     .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control::after { content:""; position:absolute; top:50%; width:7px; height:7px; border-top:1px solid currentColor; border-right:1px solid currentColor; }
-    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-prev { left:18px; }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-prev { left:var(--photo-preview-arrow-inset,18px); }
     .niagara-photo-story:not(.is-fullscreen) .niagara-photo-prev::before { right:7px; left:auto; }
     .niagara-photo-story:not(.is-fullscreen) .niagara-photo-prev::after { left:7px; right:auto; transform:translateY(-50%) rotate(-135deg); }
-    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-next { right:18px; }
+    .niagara-photo-story:not(.is-fullscreen) .niagara-photo-next { right:var(--photo-preview-arrow-inset,18px); }
     .niagara-photo-story:not(.is-fullscreen) .niagara-photo-next::before { left:7px; right:auto; }
     .niagara-photo-story:not(.is-fullscreen) .niagara-photo-next::after { right:7px; left:auto; transform:translateY(-50%) rotate(45deg); }
     .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control:hover,
@@ -101,10 +101,10 @@
       .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control { top:50%; width:52px; height:38px; }
       .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control::before { width:34px; }
       .niagara-photo-story:not(.is-fullscreen) .niagara-photo-control::after { width:6px; height:6px; }
-      .niagara-photo-story:not(.is-fullscreen) .niagara-photo-prev { left:2px; }
+      .niagara-photo-story:not(.is-fullscreen) .niagara-photo-prev { left:var(--photo-preview-arrow-inset,2px); }
       .niagara-photo-story:not(.is-fullscreen) .niagara-photo-prev::before { right:6px; }
       .niagara-photo-story:not(.is-fullscreen) .niagara-photo-prev::after { left:6px; }
-      .niagara-photo-story:not(.is-fullscreen) .niagara-photo-next { right:2px; }
+      .niagara-photo-story:not(.is-fullscreen) .niagara-photo-next { right:var(--photo-preview-arrow-inset,2px); }
       .niagara-photo-story:not(.is-fullscreen) .niagara-photo-next::before { left:6px; }
       .niagara-photo-story:not(.is-fullscreen) .niagara-photo-next::after { right:6px; }
     }
@@ -178,13 +178,20 @@
         let photoReturnScrollY = 0;
         let photoControlFrame = 0;
 
-        function syncFullscreenPhotoControls() {
+        function syncPhotoControls() {
           window.cancelAnimationFrame(photoControlFrame);
           photoControlFrame = window.requestAnimationFrame(() => {
-            if (!photoStory.classList.contains('is-fullscreen')) return;
             const stageRect = photoStory.querySelector('.niagara-photo-stage').getBoundingClientRect();
             const imageRect = photoMain.getBoundingClientRect();
             if (!stageRect.width || !stageRect.height || !imageRect.width || !imageRect.height) return;
+
+            if (!photoStory.classList.contains('is-fullscreen')) {
+              const imageGutter = (stageRect.width - photoMain.offsetWidth) / 2;
+              const arrowGap = window.innerWidth <= 820 ? 6 : 12;
+              const arrowInset = Math.max(2, imageGutter - photoPrev.offsetWidth - arrowGap);
+              photoStory.style.setProperty('--photo-preview-arrow-inset', `${arrowInset}px`);
+              return;
+            }
 
             const controlWidth = 44;
             const edgeInset = 8;
@@ -252,7 +259,7 @@
             } catch (error) {}
           }
 
-          if (open) syncFullscreenPhotoControls();
+          syncPhotoControls();
           if (open && moveFocus) photoCaptionClose.focus({ preventScroll:true });
           if (!open && wasFullscreen) {
             requestAnimationFrame(() => window.scrollTo({ top:photoReturnScrollY, behavior:'auto' }));
@@ -266,12 +273,12 @@
           } else if (browserFullscreen === photoStory && !photoStory.classList.contains('is-fullscreen')) {
             setPhotoFullscreen(true, false, false);
           }
-          if (browserFullscreen === photoStory) syncFullscreenPhotoControls();
+          if (browserFullscreen === photoStory) syncPhotoControls();
         };
         document.addEventListener('fullscreenchange', syncPhotoFullscreenFromBrowser);
         document.addEventListener('webkitfullscreenchange', syncPhotoFullscreenFromBrowser);
-        window.addEventListener('resize', syncFullscreenPhotoControls);
-        photoMain.addEventListener('load', syncFullscreenPhotoControls);
+        window.addEventListener('resize', syncPhotoControls);
+        photoMain.addEventListener('load', syncPhotoControls);
 
         photographs.forEach((photo, index) => {
           const thumb = document.createElement('button');
