@@ -1,10 +1,32 @@
-/* Burlesque mobile landscape fixes — keep intro copy inside viewport and match Healers fullscreen scale. */
+/* Burlesque responsive fixes: preserve breathing room on portrait, keep landscape copy in-frame, and match Healers fullscreen scale. */
+
+@media (max-width: 760px) and (orientation: portrait) {
+  .burlesque-horizontal .burlesque-intro {
+    padding-bottom: 7svh !important;
+  }
+
+  .burlesque-intro-copy .burlesque-enter-series {
+    margin-top: 30px !important;
+  }
+
+  .burlesque-intro-copy .healers-backstory-trigger.burlesque-mobile-ending {
+    min-height: 94px !important;
+    margin-top: 38px !important;
+    padding: 13px 8px 14px 10px !important;
+  }
+
+  .burlesque-intro-copy .project-copyright-footer--overlay.burlesque-mobile-ending {
+    margin-top: 42px !important;
+    padding: 17px 0 14px !important;
+  }
+}
+
 @media (max-width: 960px) and (orientation: landscape) {
   .burlesque-intro {
     grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr) !important;
     gap: 5vw !important;
-    min-height: 100svh !important;
-    padding: 15svh max(28px, 4.5vw) 8svh !important;
+    min-height: 118svh !important;
+    padding: 15svh max(28px, 4.5vw) 24svh !important;
     align-items: center !important;
     overflow: visible !important;
   }
@@ -38,6 +60,26 @@
     font-size: clamp(15px, 2.15vw, 19px) !important;
     line-height: 1.32 !important;
     overflow-wrap: anywhere;
+  }
+
+  /* Keep the Backstory invitation in the white intro area, just below the copy. */
+  .burlesque-page + .healers-backstory-trigger {
+    display: grid !important;
+    position: absolute !important;
+    top: calc(96svh + 10px) !important;
+    right: max(34px, 5vw) !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: 165px !important;
+    min-height: 88px !important;
+    padding: 12px 8px 13px 10px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: none !important;
+    background: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
   }
 
   /* Exact Healers fullscreen image behavior. */
