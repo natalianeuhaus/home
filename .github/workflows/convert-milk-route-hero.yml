@@ -1,0 +1,51 @@
+name: Convert Milk Route hero to WebP
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/convert-milk-route-hero.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install WebP tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y webp
+
+      - name: Convert the exact Milk Route hero
+        run: |
+          cwebp -quiet -q 88 Natalia_Neuhaus-9.jpg -o milk-route/Natalia_Neuhaus-9.webp
+          file milk-route/Natalia_Neuhaus-9.webp
+
+      - name: Point the Milk Route hero to WebP
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('milk-route/index.html')
+          text = path.read_text()
+          text = text.replace('src="../Natalia_Neuhaus-9.jpg"', 'src="./Natalia_Neuhaus-9.webp?v=3"')
+          text = text.replace('src="./Natalia_Neuhaus-9.webp"', 'src="./Natalia_Neuhaus-9.webp?v=3"')
+          path.write_text(text)
+          PY
+
+      - name: Commit the valid WebP and hero link
+        run: |
+          git config user.name "natalianeuhaus"
+          git config user.email "natalia@casaneuhaus.com"
+          git add milk-route/Natalia_Neuhaus-9.webp milk-route/index.html
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "Use valid WebP for Milk Route hero"
+          git push
