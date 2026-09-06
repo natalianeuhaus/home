@@ -1,14 +1,3 @@
 @import url("./menu-standard-base.css?v=20260906");
 @import url("./milk-route-mobile.css?v=20260906-2");
 @import url("./intermission-healers-fullscreen.css?v=20260906");
-
-/* Milk Route hero fallback: use the valid GitHub-hosted JPG while the WebP is repaired. */
-body:has(.hero-img[alt="Spilled milk on a red-and-white checked tablecloth"]) .hero {
-  background-image: url("../Natalia_Neuhaus-9.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-body:has(.hero-img[alt="Spilled milk on a red-and-white checked tablecloth"]) .hero-img {
-  visibility: hidden;
-}
