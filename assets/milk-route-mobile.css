@@ -1,4 +1,4 @@
-/* Milk Route evidence fullscreen — mobile portrait centering only. */
+/* Milk Route evidence fullscreen — mobile portrait centering and controls. */
 @media (max-width: 760px) and (orientation: portrait) {
   #evidenceLightbox .lightbox-body {
     width: 100% !important;
@@ -14,9 +14,57 @@
     margin-right: auto !important;
     width: auto !important;
     height: auto !important;
-    max-width: 95vw !important;
-    max-height: 82vh !important;
+    max-width: 86vw !important;
+    max-height: 77vh !important;
     object-fit: contain !important;
     object-position: center !important;
+  }
+
+  #evidenceLightbox .lightbox-arrow {
+    z-index: 4 !important;
+    width: 46px !important;
+    height: 42px !important;
+    color: rgba(241,239,231,.62) !important;
+    -webkit-tap-highlight-color: transparent !important;
+    outline: none !important;
+  }
+
+  #evidenceLightbox .lightbox-arrow::before {
+    width: 30px !important;
+  }
+
+  #evidenceLightbox .lightbox-arrow.prev {
+    left: 4px !important;
+  }
+
+  #evidenceLightbox .lightbox-arrow.next {
+    right: 4px !important;
+  }
+
+  #evidenceLightbox .lightbox-arrow:focus,
+  #evidenceLightbox .lightbox-arrow:focus-visible {
+    outline: none !important;
+    color: rgba(241,239,231,.82) !important;
+  }
+
+  #evidenceLightbox .lightbox-close {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    color: rgba(241,239,231,.62) !important;
+  }
+
+  #evidenceLightbox .lightbox-close:focus,
+  #evidenceLightbox .lightbox-close:focus-visible,
+  #evidenceLightbox .lightbox-close:active {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+    color: #f1efe7 !important;
   }
 }
