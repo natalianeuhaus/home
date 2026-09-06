@@ -485,7 +485,6 @@ body.is-portfolio-menu-open .portfolio-menu-toggle span:last-child {
   }
 }
 
-
 /* Phone landscape: use the complete viewport and prevent the short screen
    from stacking six project links into the footer. */
 @media (max-width: 960px) and (orientation: landscape) {
@@ -540,7 +539,6 @@ body.is-portfolio-menu-open .portfolio-menu-toggle span:last-child {
     transform: none !important;
   }
 }
-
 
 /* portrait-menu-header-consistency-v1
    Keep page-specific headers from changing the shared mobile menu. */
@@ -631,5 +629,18 @@ body.is-portfolio-menu-open .portfolio-menu-toggle span:last-child {
     margin: 0 !important;
     display: block !important;
     background: #e9e7df !important;
+  }
+}
+
+/* Milk Route evidence fullscreen: center the document on phone portrait without resizing it. */
+@media (max-width: 760px) and (orientation: portrait) {
+  #evidenceLightbox .lightbox-body {
+    justify-items: center !important;
+  }
+
+  #evidenceLightbox .lightbox-body > img {
+    justify-self: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 }
