@@ -1,4 +1,4 @@
-name: Use Milk Route slideshow image 3 as hero
+name: Repair and verify Milk Route WebP hero
 
 on:
   push:
@@ -10,33 +10,168 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: milk-route-hero-repair
+  cancel-in-progress: false
+
 jobs:
-  update-hero:
+  repair-and-verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 1
 
-      - name: Point hero to existing slideshow image 3
+      - name: Install image validation tools
+        run: python3 -m pip install --quiet pillow
+
+      - name: Remove the stale JPG override and use the confirmed WebP
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          path = Path('milk-route/index.html')
-          text = path.read_text()
-          text = text.replace('src="./Natalia_Neuhaus-9.webp?v=3"', 'src="./landscape/03.webp?v=4"')
-          text = text.replace('src="./Natalia_Neuhaus-9.webp"', 'src="./landscape/03.webp?v=4"')
-          text = text.replace('src="../Natalia_Neuhaus-9.jpg"', 'src="./landscape/03.webp?v=4"')
-          path.write_text(text)
+          from PIL import Image
+          import hashlib
+          import os
+          import re
+
+          image_path = Path('milk-route/landscape/03.webp')
+          image = Image.open(image_path)
+          image.load()
+          assert image.format == 'WEBP', 'The selected image must already be WebP'
+          pixels = list(image.convert('L').resize((8, 8)).getdata())
+          average = sum(pixels) / len(pixels)
+          ahash = f'{int("".join("1" if p >= average else "0" for p in pixels), 2):016x}'
+          pixels = list(image.convert('L').resize((9, 8)).getdata())
+          dhash = f'{int("".join("1" if pixels[y*9+x] > pixels[y*9+x+1] else "0" for y in range(8) for x in range(8)), 2):016x}'
+          assert (ahash, dhash) == ('000098fff7f7f3e0', '32ce8d3d1339292c'), 'Image does not match the user-confirmed photograph'
+          image_sha = hashlib.sha256(image_path.read_bytes()).hexdigest()
+          with open(os.environ['GITHUB_ENV'], 'a') as env:
+              env.write(f'VERIFIED_HERO_SHA256={image_sha}\n')
+          print(f'Confirmed existing WebP: {image_path}, dimensions={image.size}, SHA256={image_sha}')
+
+          css_path = Path('assets/menu-standard.css')
+          css = css_path.read_text()
+          marker = '/* Milk Route hero fallback: use the valid GitHub-hosted JPG while the WebP is repaired. */'
+          selector = 'body:has(.hero-img[alt="Spilled milk on a red-and-white checked tablecloth"])'
+          if marker in css:
+              pattern = re.escape(marker) + r'\s*' + re.escape(selector) + r' \.hero\s*\{[^}]*\}\s*' + re.escape(selector) + r' \.hero-img\s*\{[^}]*\}\s*'
+              css, count = re.subn(pattern, '', css)
+              assert count == 1, 'Expected exactly one known fallback block'
+          assert '../Natalia_Neuhaus-9.jpg' not in css
+          assert '.hero-img' not in css, 'Unexpected hero override remains in the shared loader'
+
+          page_path = Path('milk-route/index.html')
+          page = page_path.read_text()
+          hero_pattern = r'(<img\b[^>]*\bclass="hero-img"[^>]*\bsrc=")[^"]*(")'
+          page, count = re.subn(hero_pattern, r'\g<1>./landscape/03.webp\2', page)
+          assert count == 1, 'Expected one hero image'
+          page, count = re.subn(r'\.\./assets/menu-standard\.css\?[^"\s]+', '../assets/menu-standard.css?v=milk-hero-visible-20260906', page)
+          assert count == 1, 'Expected one shared stylesheet link'
+          css_path.write_text(css)
+          page_path.write_text(page)
+          print('Removed the JPG background and visibility:hidden fallback; hero points directly to ./landscape/03.webp')
+          print('Updated the stylesheet URL so the repaired CSS is fetched')
           PY
 
-      - name: Commit hero link
+      - name: Commit only the hero and stylesheet repair
         run: |
-          git config user.name "natalianeuhaus"
-          git config user.email "natalia@casaneuhaus.com"
-          git add milk-route/index.html
-          if git diff --cached --quiet; then
-            exit 0
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add milk-route/index.html assets/menu-standard.css
+          if ! git diff --cached --quiet; then
+            git diff --cached --stat
+            git commit -m 'Fix Milk Route hero: remove hidden-image JPG fallback and show confirmed WebP'
+            git push origin HEAD:main
           fi
-          git commit -m "Use Milk Route slideshow image 3 as hero"
-          git push
+          echo "REPAIR_COMMIT=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+
+      - name: Install a browser for live verification
+        run: |
+          python3 -m pip install --quiet playwright
+          python3 -m playwright install --with-deps chromium
+
+      - name: Verify the deployed image and browser rendering
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          from playwright.sync_api import sync_playwright
+          from urllib.request import Request, urlopen
+          from urllib.parse import urljoin
+          from io import BytesIO
+          import hashlib
+          import json
+          import os
+          import re
+          import time
+
+          base = 'https://natalianeuhaus.github.io/home/'
+          page_url = urljoin(base, 'milk-route/index.html')
+          css_url = urljoin(base, 'assets/menu-standard.css?v=milk-hero-visible-20260906')
+          image_url = urljoin(base, 'milk-route/landscape/03.webp')
+          expected_sha = os.environ['VERIFIED_HERO_SHA256']
+          marker = 'menu-standard.css?v=milk-hero-visible-20260906'
+
+          def fetch(url):
+              request = Request(url, headers={'Cache-Control': 'no-cache', 'User-Agent': 'MilkRouteHeroVerification/1.0'})
+              with urlopen(request, timeout=25) as response:
+                  return response.read()
+
+          deadline = time.monotonic() + 240
+          while True:
+              try:
+                  page_text = fetch(page_url + '?hero-check=' + str(int(time.time()))).decode('utf-8')
+                  assert marker in page_text, 'Updated HTML has not deployed yet'
+                  assert 'src="./landscape/03.webp"' in page_text
+                  css_text = fetch(css_url).decode('utf-8')
+                  assert '../Natalia_Neuhaus-9.jpg' not in css_text, 'Old JPG fallback is still being served'
+                  assert '.hero-img' not in css_text
+                  data = fetch(image_url)
+                  assert hashlib.sha256(data).hexdigest() == expected_sha, 'Live image differs from the validated repository file'
+                  live_image = Image.open(BytesIO(data))
+                  live_image.load()
+                  assert live_image.format == 'WEBP'
+                  break
+              except Exception as error:
+                  if time.monotonic() >= deadline:
+                      raise
+                  print(f'Waiting for Pages: {error}', flush=True)
+                  time.sleep(12)
+
+          output = Path('hero-verification')
+          output.mkdir(exist_ok=True)
+          results = []
+          with sync_playwright() as p:
+              browser = p.chromium.launch()
+              for name, width, height in [('desktop', 1600, 900), ('mobile', 390, 844)]:
+                  context = browser.new_context(viewport={'width': width, 'height': height})
+                  tab = context.new_page()
+                  tab.route(re.compile(r'.*\.(?:mp4|webm)(?:\?.*)?$'), lambda route: route.abort())
+                  tab.goto(page_url + '?hero-check=' + os.environ['REPAIR_COMMIT'], wait_until='domcontentloaded', timeout=60000)
+                  tab.wait_for_function('document.querySelector(".hero-img").complete && document.querySelector(".hero-img").naturalWidth > 0', timeout=60000)
+                  tab.evaluate('window.scrollTo(0, 0)')
+                  tab.wait_for_timeout(1500)
+                  info = tab.locator('.hero-img').evaluate('''img => ({src: img.currentSrc, visibility: getComputedStyle(img).visibility, display: getComputedStyle(img).display, opacity: getComputedStyle(img).opacity, content: getComputedStyle(img).content, width: img.naturalWidth, height: img.naturalHeight, background: getComputedStyle(img.closest('.hero')).backgroundImage})''')
+                  assert info['src'] == image_url, info
+                  assert info['visibility'] == 'visible', info
+                  assert info['display'] != 'none' and float(info['opacity']) > 0, info
+                  assert info['content'] in ['normal', 'none'], info
+                  assert info['background'] == 'none', info
+                  assert (info['width'], info['height']) == live_image.size, info
+                  tab.screenshot(path=str(output / f'{name}.png'), full_page=False)
+                  results.append({'viewport': name, **info})
+                  print('LIVE_BROWSER_PASS ' + json.dumps(results[-1]), flush=True)
+                  context.close()
+              browser.close()
+          report = {'commit': os.environ['REPAIR_COMMIT'], 'page': page_url, 'sha256': expected_sha, 'image_format': 'WEBP', 'results': results}
+          (output / 'report.json').write_text(json.dumps(report, indent=2))
+          print('LIVE_HERO_VERIFIED: correct spilled-milk WebP visible on desktop and mobile')
+          PY
+
+      - name: Save verification screenshots and report
+        uses: actions/upload-artifact@v4
+        with:
+          name: milk-route-hero-verification
+          path: hero-verification/
+          retention-days: 7
