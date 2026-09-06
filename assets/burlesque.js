@@ -14,6 +14,36 @@
   const introCopy = page.querySelector(".burlesque-intro-copy");
   const copyrightFooter = page.querySelector(".project-copyright-footer--overlay");
   const mobileEnding = window.matchMedia("(max-width: 760px)");
+  const mobileLandscape = window.matchMedia("(max-width: 932px) and (orientation: landscape)");
+
+  const applyLandscapeSafariScrolling = () => {
+    if (mobileLandscape.matches) {
+      document.body.style.overflowX = 'hidden';
+      document.body.style.overflowY = 'auto';
+      page.style.height = 'auto';
+      page.style.minHeight = '200svh';
+      page.style.overflow = 'visible';
+      scroller.style.height = 'auto';
+      scroller.style.overflowY = 'visible';
+      scroller.style.overscrollBehaviorY = 'auto';
+      return;
+    }
+    document.body.style.overflowX = '';
+    document.body.style.overflowY = '';
+    page.style.height = '';
+    page.style.minHeight = '';
+    page.style.overflow = '';
+    scroller.style.height = '';
+    scroller.style.overflowY = '';
+    scroller.style.overscrollBehaviorY = '';
+  };
+
+  applyLandscapeSafariScrolling();
+  if (typeof mobileLandscape.addEventListener === 'function') {
+    mobileLandscape.addEventListener('change', applyLandscapeSafariScrolling);
+  } else {
+    mobileLandscape.addListener(applyLandscapeSafariScrolling);
+  }
 
   const placeBurlesqueEnding = () => {
     if (!introCopy || !backstoryTrigger || !backstoryDialog || !copyrightFooter) return;
@@ -132,6 +162,7 @@
   function createLightbox(slides, startIndex, triggerImage, options = {}) {
     let activeIndex = startIndex;
     const previousOverflow = html.style.overflow;
+    const landscapeBrowserScroll = mobileLandscape.matches;
     const requestBrowserFullscreen = Boolean(options.requestBrowserFullscreen);
     const dialog = document.createElement('div');
     dialog.className = 'intermission-lightbox burlesque-lightbox';
@@ -190,7 +221,14 @@
 
     dialog.append(close, previous, viewport, next, status);
     document.body.append(dialog);
-    html.style.overflow = 'hidden';
+    if (landscapeBrowserScroll) {
+      dialog.style.touchAction = 'pan-y';
+      viewport.style.touchAction = 'pan-y';
+      html.style.overflow = '';
+      applyLandscapeSafariScrolling();
+    } else {
+      html.style.overflow = 'hidden';
+    }
 
     const render = () => {
       dialog.setAttribute('aria-label', `Fullscreen photograph ${activeIndex + 1} of ${slides.length}`);
@@ -228,6 +266,7 @@
       const finish = () => {
         html.style.overflow = previousOverflow;
         dialog.remove();
+        applyLandscapeSafariScrolling();
         triggerImage?.focus({ preventScroll: true });
       };
       const closingTime = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 650;
@@ -271,19 +310,18 @@
       }
     }, { passive: false });
     viewport.addEventListener('touchstart', (event) => {
-      if (!window.matchMedia('(max-width: 932px) and (orientation: landscape)').matches) return;
+      if (!mobileLandscape.matches) return;
       const touch = event.touches.length === 1 ? event.touches[0] : null;
       touchStart = touch ? { x: touch.clientX, y: touch.clientY } : null;
     }, { passive: true });
     viewport.addEventListener('touchend', (event) => {
       const start = touchStart;
       touchStart = null;
-      if (!window.matchMedia('(max-width: 932px) and (orientation: landscape)').matches) return;
+      if (!mobileLandscape.matches) return;
       const touch = event.changedTouches[0];
       if (!start || !touch || event.touches.length) return;
       const horizontalDistance = start.x - touch.clientX;
       const verticalDistance = start.y - touch.clientY;
-      // Match Healers: preserve vertical swipes for Safari's toolbar controls.
       if (
         Math.abs(horizontalDistance) < 48 ||
         Math.abs(horizontalDistance) <= Math.abs(verticalDistance) * 1.25
@@ -437,14 +475,14 @@
     if ('IntersectionObserver' in window) {
       const collectionsObserver = new IntersectionObserver(([entry]) => {
         setSeriesOpen(entry.isIntersecting && entry.intersectionRatio >= 0.35);
-      }, { root: scroller, threshold: [0, 0.35, 0.7] });
+      }, { root: mobileLandscape.matches ? null : scroller, threshold: [0, 0.35, 0.7] });
       collectionsObserver.observe(collections);
     } else {
       const updateCollectionState = () => {
         const rect = collections.getBoundingClientRect();
         setSeriesOpen(rect.top < window.innerHeight * 0.65 && rect.bottom > window.innerHeight * 0.35);
       };
-      scroller.addEventListener('scroll', updateCollectionState, { passive: true });
+      (mobileLandscape.matches ? window : scroller).addEventListener('scroll', updateCollectionState, { passive: true });
       updateCollectionState();
     }
 
