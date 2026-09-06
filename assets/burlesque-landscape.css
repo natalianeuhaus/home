@@ -1,0 +1,59 @@
+/* Burlesque mobile landscape fixes — keep intro copy inside viewport and match Healers fullscreen scale. */
+@media (max-width: 960px) and (orientation: landscape) {
+  .burlesque-intro {
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr) !important;
+    gap: 5vw !important;
+    min-height: 100svh !important;
+    padding: 15svh max(28px, 4.5vw) 8svh !important;
+    align-items: center !important;
+    overflow: visible !important;
+  }
+
+  .burlesque-intro-heading,
+  .burlesque-intro-copy {
+    min-width: 0 !important;
+  }
+
+  .burlesque-intro-heading h1 {
+    font-size: clamp(56px, 10vw, 92px) !important;
+  }
+
+  .burlesque-intro-heading > p {
+    margin-bottom: 20px !important;
+  }
+
+  .burlesque-intro-heading > span {
+    margin-top: 16px !important;
+    font-size: 15px !important;
+  }
+
+  .burlesque-intro-copy {
+    width: 100% !important;
+    max-width: none !important;
+    padding-top: 0 !important;
+    padding-right: max(10px, env(safe-area-inset-right)) !important;
+  }
+
+  .burlesque-intro-copy p {
+    font-size: clamp(15px, 2.15vw, 19px) !important;
+    line-height: 1.32 !important;
+    overflow-wrap: anywhere;
+  }
+
+  /* Exact Healers fullscreen image behavior. */
+  .burlesque-lightbox .intermission-lightbox-track figure > img {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    display: block !important;
+  }
+
+  .burlesque-lightbox .intermission-lightbox-track figure {
+    padding: 22px 56px !important;
+  }
+}
