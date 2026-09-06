@@ -209,6 +209,7 @@
 
     let wheelGestureActive = false;
     let wheelGestureTimer = 0;
+    let touchStart = null;
     let isClosing = false;
     let ownsBrowserFullscreen = false;
     let onFullscreenChange = null;
@@ -269,6 +270,35 @@
         render();
       }
     }, { passive: false });
+    viewport.addEventListener('touchstart', (event) => {
+      if (!window.matchMedia('(max-width: 932px) and (orientation: landscape)').matches) return;
+      const touch = event.touches.length === 1 ? event.touches[0] : null;
+      touchStart = touch ? { x: touch.clientX, y: touch.clientY } : null;
+    }, { passive: true });
+    viewport.addEventListener('touchend', (event) => {
+      const start = touchStart;
+      touchStart = null;
+      if (!window.matchMedia('(max-width: 932px) and (orientation: landscape)').matches) return;
+      const touch = event.changedTouches[0];
+      if (!start || !touch || event.touches.length) return;
+      const horizontalDistance = start.x - touch.clientX;
+      const verticalDistance = start.y - touch.clientY;
+      // Match Healers: preserve vertical swipes for Safari's toolbar controls.
+      if (
+        Math.abs(horizontalDistance) < 48 ||
+        Math.abs(horizontalDistance) <= Math.abs(verticalDistance) * 1.25
+      ) return;
+      if (horizontalDistance > 0 && activeIndex < slides.length - 1) {
+        activeIndex += 1;
+        render();
+      } else if (horizontalDistance < 0 && activeIndex > 0) {
+        activeIndex -= 1;
+        render();
+      }
+    }, { passive: true });
+    viewport.addEventListener('touchcancel', () => {
+      touchStart = null;
+    }, { passive: true });
     first.addEventListener('click', (event) => {
       event.stopPropagation();
       activeIndex = 0;
