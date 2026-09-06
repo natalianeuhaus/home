@@ -1,0 +1,22 @@
+/* Milk Route evidence fullscreen — mobile portrait centering only. */
+@media (max-width: 760px) and (orientation: portrait) {
+  #evidenceLightbox .lightbox-body {
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 20px 0 !important;
+    display: grid !important;
+    place-items: center !important;
+  }
+
+  #evidenceLightbox .lightbox-body img {
+    justify-self: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: 95vw !important;
+    max-height: 82vh !important;
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+}
