@@ -1,0 +1,36 @@
+name: Check Milk Route slideshow image mapping
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/check-milk-route-slide-hashes.yml'
+
+jobs:
+  hashes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Pillow
+        run: python3 -m pip install --quiet pillow
+      - name: Print image hashes
+        run: |
+          python3 - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          def hashes(path):
+              src=Image.open(path)
+              im=src.convert('L').resize((8,8))
+              pix=list(im.getdata()); avg=sum(pix)/len(pix)
+              bits=''.join('1' if x>=avg else '0' for x in pix)
+              ah=hex(int(bits,2))[2:].zfill(16)
+              im2=src.convert('L').resize((9,8)); p=list(im2.getdata()); b=''
+              for y in range(8):
+                  row=p[y*9:(y+1)*9]
+                  for x in range(8): b += '1' if row[x] > row[x+1] else '0'
+              dh=hex(int(b,2))[2:].zfill(16)
+              return src.size, ah, dh
+          for path in sorted(Path('milk-route/landscape').glob('*.webp')):
+              size, ah, dh=hashes(path)
+              print(f'{path.name} {size[0]}x{size[1]} ahash={ah} dhash={dh}')
+          PY
