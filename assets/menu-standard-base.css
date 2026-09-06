@@ -1,0 +1,646 @@
+/* Standard portfolio menu
+   Burlesque is the canonical visual reference. Every global portfolio menu
+   loads this file after its page styles so the navigation cannot drift. */
+
+.menu-panel.menu-standard {
+  width: 70vw;
+  color: #e9e7df;
+  background: #101312;
+  padding: 34px 36px 32px;
+  font-family: Georgia, "Times New Roman", serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.menu-standard .menu-groups {
+  min-height: 0;
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  position: relative;
+}
+
+.menu-standard .menu-groups::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 68px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, .18);
+  pointer-events: none;
+}
+
+.menu-standard .menu-group,
+.menu-standard .menu-group:first-child {
+  grid-column: 1 / -1;
+  padding: 0 64px 28px;
+  border-right: 0;
+  position: relative;
+}
+
+.menu-standard .menu-group::after,
+.menu-standard .menu-group:first-child::after {
+  display: none;
+}
+
+.menu-standard .menu-label {
+  margin: 0 0 42px;
+  color: #e9e7df;
+  opacity: .52;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 38px;
+  letter-spacing: .36em;
+  text-transform: uppercase;
+}
+
+.menu-standard .menu-label a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity .25s ease;
+}
+
+.menu-standard .menu-label a:hover,
+.menu-standard .menu-label a:focus-visible {
+  opacity: 1;
+  outline: none;
+}
+
+.menu-standard .menu-links {
+  border-top: 0;
+}
+
+.menu-standard .menu-links a {
+  display: grid;
+  grid-template-columns: clamp(28px, 3vw, 44px) minmax(0, 1fr);
+  align-items: baseline;
+  column-gap: 18px;
+  padding: 17px 0 15px;
+  color: #e9e7df;
+  opacity: .62;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(16px, 1.35vw, 21px);
+  font-weight: 400;
+  line-height: 1.5;
+  text-decoration: none;
+  transition: opacity .25s ease;
+  position: relative;
+}
+
+.menu-standard .menu-links a::after {
+  display: none;
+}
+
+.menu-standard .menu-links a:hover,
+.menu-standard .menu-links a:focus-visible {
+  color: #e9e7df;
+  opacity: 1;
+  outline: none;
+}
+
+.menu-standard .menu-project-number {
+  color: inherit;
+  opacity: .5;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: .18em;
+}
+
+.menu-standard .menu-links a > span:last-child {
+  width: fit-content;
+  position: relative;
+}
+
+.menu-standard .menu-links a > span:last-child::after {
+  content: "";
+  width: 0;
+  height: 1px;
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  background: currentColor;
+  opacity: .72;
+  transition: width .42s cubic-bezier(.65, 0, .35, 1);
+}
+
+.menu-standard .menu-links a:hover > span:last-child::after,
+.menu-standard .menu-links a:focus-visible > span:last-child::after {
+  width: calc(100% + 14px);
+}
+
+.menu-standard .menu-footer {
+  margin-top: 0;
+  padding: 30px 64px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  border-top: 1px solid rgba(255, 255, 255, .14);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.menu-standard .menu-copyright {
+  max-width: 230px;
+  color: #e9e7df;
+  opacity: .42;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 8px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.menu-standard .menu-footer a {
+  color: #e9e7df;
+  opacity: .42;
+  text-decoration: none;
+  transition: opacity .25s ease;
+}
+
+.menu-standard .menu-footer a:hover,
+.menu-standard .menu-footer a:focus-visible {
+  color: #e9e7df;
+  opacity: 1;
+  outline: none;
+}
+
+@media (max-width: 760px), (max-width: 960px) and (orientation: landscape) {
+  .menu-panel.menu-standard {
+    width: 100%;
+    padding: 22px 20px 24px;
+    overflow-y: auto;
+  }
+
+  .menu-standard .menu-groups {
+    display: block;
+  }
+
+  .menu-standard .menu-groups::before {
+    display: none;
+  }
+
+  .menu-standard .menu-group,
+  .menu-standard .menu-group:first-child {
+    padding: 0 4px 10px;
+  }
+
+  .menu-standard .menu-label {
+    margin-bottom: 18px;
+    font-size: 11px;
+    line-height: 38px;
+  }
+
+  .menu-standard .menu-links {
+    border-top: 1px solid rgba(255, 255, 255, .18);
+  }
+
+  .menu-standard .menu-links a {
+    grid-template-columns: 26px minmax(0, 1fr);
+    column-gap: 12px;
+    font-size: 20px;
+  }
+
+  .menu-standard .menu-footer {
+    padding: 26px 4px 0;
+    gap: 18px;
+    font-size: 15px;
+  }
+
+  .menu-standard .menu-copyright {
+    max-width: 150px;
+    font-size: 7px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-standard,
+  .menu-standard *,
+  .menu-standard *::after {
+    transition-duration: .01ms !important;
+  }
+}
+
+/* Menu-state reliability guard. */
+.menu-scrim {
+  z-index: 9997 !important;
+}
+
+.menu-panel.menu-standard {
+  position: fixed !important;
+  z-index: 9998 !important;
+  inset: 0 0 0 auto !important;
+  display: flex !important;
+  flex-direction: column;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translate3d(102%, 0, 0) !important;
+  pointer-events: none !important;
+  will-change: transform;
+}
+
+.menu-panel.menu-standard.is-open,
+.menu-panel.menu-standard[aria-hidden="false"] {
+  color: #e9e7df !important;
+  background: #101312 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translate3d(0, 0, 0) !important;
+  pointer-events: auto !important;
+}
+
+.menu-panel.menu-standard.is-open > .menu-groups,
+.menu-panel.menu-standard.is-open > .menu-footer,
+.menu-panel.menu-standard[aria-hidden="false"] > .menu-groups,
+.menu-panel.menu-standard[aria-hidden="false"] > .menu-footer {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  pointer-events: auto !important;
+  position: relative;
+  z-index: 2;
+}
+
+.menu-panel.menu-standard.is-open .menu-links,
+.menu-panel.menu-standard.is-open .menu-links a,
+.menu-panel.menu-standard.is-open .menu-footer,
+.menu-panel.menu-standard.is-open .menu-footer a,
+.menu-panel.menu-standard[aria-hidden="false"] .menu-links,
+.menu-panel.menu-standard[aria-hidden="false"] .menu-links a,
+.menu-panel.menu-standard[aria-hidden="false"] .menu-footer,
+.menu-panel.menu-standard[aria-hidden="false"] .menu-footer a {
+  pointer-events: auto !important;
+  touch-action: manipulation;
+}
+
+.menu-panel.menu-standard.is-open .menu-links a,
+.menu-panel.menu-standard[aria-hidden="false"] .menu-links a {
+  position: relative;
+  z-index: 3;
+}
+
+.menu-toggle {
+  z-index: 9999 !important;
+}
+
+/* Keep each page header above the open desktop menu. The panel's reliability
+   guard uses a high stacking level, so the header must join that same global
+   stack or its transformed menu toggle (the close X) is hidden underneath. */
+html.menu-open .site-header {
+  z-index: 10000 !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  pointer-events: none !important;
+}
+
+html.menu-open .site-header .wordmark {
+  display: inline-flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+html.menu-open .site-header .menu-toggle {
+  z-index: 10001 !important;
+  display: grid !important;
+  color: #e9e7df !important;
+  background: transparent !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+html.menu-open .site-header .menu-toggle span {
+  display: block !important;
+  background: #e9e7df !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+html.menu-open .site-header .menu-toggle span:first-child {
+  transform: translateY(4px) rotate(45deg) !important;
+}
+
+html.menu-open .site-header .menu-toggle span:last-child {
+  transform: translateY(-4px) rotate(-45deg) !important;
+}
+
+/* The Greetings dossier uses its casebar as the global page header. */
+body.is-portfolio-menu-open .casebar {
+  z-index: 10000 !important;
+}
+
+body.is-portfolio-menu-open .portfolio-menu-toggle {
+  position: relative;
+  z-index: 10001 !important;
+  display: grid !important;
+  color: #e9e7df !important;
+  background: transparent !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+body.is-portfolio-menu-open .portfolio-menu-toggle span {
+  display: block !important;
+  background: #e9e7df !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+body.is-portfolio-menu-open .portfolio-menu-toggle span:first-child {
+  transform: translateY(4px) rotate(45deg) !important;
+}
+
+body.is-portfolio-menu-open .portfolio-menu-toggle span:last-child {
+  transform: translateY(-4px) rotate(-45deg) !important;
+}
+
+@media (min-width: 761px) {
+  html.menu-open .site-header .menu-toggle,
+  body.is-portfolio-menu-open .portfolio-menu-toggle {
+    transform: translateY(18px) !important;
+  }
+}
+
+@media (max-width: 760px), (max-width: 960px) and (orientation: landscape) {
+  .menu-panel.menu-standard {
+    width: 100% !important;
+    height: 100dvh !important;
+    min-height: 100svh !important;
+    max-height: 100dvh !important;
+    padding-top: max(22px, env(safe-area-inset-top)) !important;
+    padding-bottom: max(24px, env(safe-area-inset-bottom)) !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* The page wordmark becomes the mobile home link while the menu is open. */
+  .menu-panel.menu-standard .menu-label {
+    display: none !important;
+  }
+
+  .menu-panel.menu-standard .menu-links {
+    margin-top: 72px;
+    border-top-color: rgba(255,255,255,.18) !important;
+  }
+
+  .menu-panel.menu-standard .menu-links a {
+    color: #e9e7df !important;
+    opacity: .82 !important;
+    min-height: 56px;
+    -webkit-tap-highlight-color: rgba(255,255,255,.08);
+  }
+
+  .menu-panel.menu-standard .menu-project-number {
+    color: #e9e7df !important;
+    opacity: .42 !important;
+  }
+
+  .menu-panel.menu-standard .menu-footer a {
+    color: #e9e7df !important;
+    opacity: .62 !important;
+  }
+
+  /* Greetings from Niagara uses its own scrim/toggle classes. On mobile the
+     menu fills the viewport, so the scrim must never sit above or intercept
+     taps intended for portfolio links. */
+  .portfolio-menu-scrim {
+    z-index: 9996 !important;
+    pointer-events: none !important;
+  }
+
+  .portfolio-menu-panel.menu-standard {
+    z-index: 9998 !important;
+  }
+
+  .portfolio-menu-toggle {
+    position: relative;
+    z-index: 9999 !important;
+    pointer-events: auto !important;
+  }
+
+  .portfolio-menu-panel.menu-standard .portfolio-menu-links,
+  .portfolio-menu-panel.menu-standard .portfolio-menu-links a {
+    pointer-events: auto !important;
+    touch-action: manipulation;
+  }
+
+  /* Keep the global header above the full-screen panel. This guarantees a
+     visible home link and a visible close control on every light or dark page. */
+  html.menu-open .site-header {
+    z-index: 10000 !important;
+    background: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    pointer-events: none !important;
+  }
+
+  html.menu-open .site-header .wordmark {
+    display: inline-flex !important;
+    color: #e9e7df !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  html.menu-open .site-header .menu-toggle {
+    z-index: 10001 !important;
+    display: grid !important;
+    color: #e9e7df !important;
+    background: transparent !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  html.menu-open .site-header .menu-toggle span {
+    display: block !important;
+    background: #e9e7df !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  html.menu-open .site-header .menu-toggle span:first-child {
+    transform: translateY(4px) rotate(45deg) !important;
+  }
+
+  html.menu-open .site-header .menu-toggle span:last-child {
+    transform: translateY(-4px) rotate(-45deg) !important;
+  }
+}
+
+/* Phone landscape: use the complete viewport and prevent the short screen
+   from stacking six project links into the footer. */
+@media (max-width: 960px) and (orientation: landscape) {
+  .menu-panel.menu-standard {
+    width: 100% !important;
+    height: 100dvh !important;
+    min-height: 100svh !important;
+    max-height: 100dvh !important;
+    padding:
+      max(12px, env(safe-area-inset-top))
+      max(28px, env(safe-area-inset-right))
+      max(12px, env(safe-area-inset-bottom))
+      max(28px, env(safe-area-inset-left)) !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+  }
+
+  .menu-standard .menu-groups {
+    min-height: 0;
+    display: block;
+  }
+
+  .menu-standard .menu-group,
+  .menu-standard .menu-group:first-child {
+    padding: 0 4px 8px;
+  }
+
+  .menu-panel.menu-standard .menu-links {
+    margin-top: 46px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(34px, 8vw, 84px);
+    border-top: 1px solid rgba(255,255,255,.18) !important;
+  }
+
+  .menu-panel.menu-standard .menu-links a {
+    min-height: 42px;
+    padding: 8px 0 7px;
+    grid-template-columns: 22px minmax(0, 1fr);
+    column-gap: 10px;
+    font-size: clamp(15px, 2.35vw, 19px);
+    line-height: 1.3;
+  }
+
+  .menu-standard .menu-footer {
+    padding: 10px 4px 0;
+    font-size: 14px;
+  }
+
+  html.menu-open .site-header .menu-toggle,
+  body.is-portfolio-menu-open .portfolio-menu-toggle {
+    transform: none !important;
+  }
+}
+
+/* portrait-menu-header-consistency-v1
+   Keep page-specific headers from changing the shared mobile menu. */
+@media (max-width: 760px) and (orientation: portrait) {
+  html.menu-open .site-header,
+  body.is-portfolio-menu-open .casebar {
+    position: fixed !important;
+    inset: 0 0 auto !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 22px 20px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    color: #e9e7df !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    mix-blend-mode: normal !important;
+    transform: none !important;
+    pointer-events: none !important;
+  }
+
+  html.menu-open .site-header .wordmark,
+  body.is-portfolio-menu-open .casebar-wordmark {
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    color: #e9e7df !important;
+    background: transparent !important;
+    border: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    font: 400 13px/1.5 Georgia, "Times New Roman", serif !important;
+    letter-spacing: .02em !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    text-shadow: none !important;
+    pointer-events: auto !important;
+  }
+
+  body.is-portfolio-menu-open .casebar-actions {
+    width: auto !important;
+    height: 38px !important;
+    margin-left: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    pointer-events: none !important;
+  }
+
+  body.is-portfolio-menu-open .casebar-actions > :not(.portfolio-menu-toggle) {
+    display: none !important;
+  }
+
+  html.menu-open .site-header .menu-toggle,
+  body.is-portfolio-menu-open .portfolio-menu-toggle {
+    position: relative !important;
+    inset: auto !important;
+    z-index: 10001 !important;
+    width: 46px !important;
+    min-width: 46px !important;
+    height: 38px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: grid !important;
+    place-content: center !important;
+    gap: 7px !important;
+    color: #e9e7df !important;
+    background: transparent !important;
+    border: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    pointer-events: auto !important;
+  }
+
+  html.menu-open .site-header .menu-toggle span,
+  body.is-portfolio-menu-open .portfolio-menu-toggle span {
+    width: 25px !important;
+    height: 1px !important;
+    margin: 0 !important;
+    display: block !important;
+    background: #e9e7df !important;
+  }
+}
+
+/* Milk Route evidence fullscreen: center the document on phone portrait without resizing it. */
+@media (max-width: 760px) and (orientation: portrait) {
+  #evidenceLightbox .lightbox-body {
+    justify-items: center !important;
+  }
+
+  #evidenceLightbox .lightbox-body > img {
+    justify-self: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
