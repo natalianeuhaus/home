@@ -1,4 +1,4 @@
-name: Convert Milk Route hero to WebP
+name: Use Milk Route slideshow image 3 as hero
 
 on:
   push:
@@ -11,41 +11,32 @@ permissions:
   contents: write
 
 jobs:
-  convert:
+  update-hero:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Install WebP tools
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y webp
-
-      - name: Convert the exact Milk Route hero
-        run: |
-          cwebp -quiet -q 88 Natalia_Neuhaus-9.jpg -o milk-route/Natalia_Neuhaus-9.webp
-          file milk-route/Natalia_Neuhaus-9.webp
-
-      - name: Point the Milk Route hero to WebP
+      - name: Point hero to existing slideshow image 3
         run: |
           python3 - <<'PY'
           from pathlib import Path
           path = Path('milk-route/index.html')
           text = path.read_text()
-          text = text.replace('src="../Natalia_Neuhaus-9.jpg"', 'src="./Natalia_Neuhaus-9.webp?v=3"')
-          text = text.replace('src="./Natalia_Neuhaus-9.webp"', 'src="./Natalia_Neuhaus-9.webp?v=3"')
+          text = text.replace('src="./Natalia_Neuhaus-9.webp?v=3"', 'src="./landscape/03.webp?v=4"')
+          text = text.replace('src="./Natalia_Neuhaus-9.webp"', 'src="./landscape/03.webp?v=4"')
+          text = text.replace('src="../Natalia_Neuhaus-9.jpg"', 'src="./landscape/03.webp?v=4"')
           path.write_text(text)
           PY
 
-      - name: Commit the valid WebP and hero link
+      - name: Commit hero link
         run: |
           git config user.name "natalianeuhaus"
           git config user.email "natalia@casaneuhaus.com"
-          git add milk-route/Natalia_Neuhaus-9.webp milk-route/index.html
+          git add milk-route/index.html
           if git diff --cached --quiet; then
             exit 0
           fi
-          git commit -m "Use valid WebP for Milk Route hero"
+          git commit -m "Use Milk Route slideshow image 3 as hero"
           git push
