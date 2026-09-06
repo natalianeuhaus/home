@@ -1,0 +1,34 @@
+name: Prepare uncached Milk Route hero alias
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/alias-milk-route-hero.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  alias:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Create uncached hero alias and update page
+        run: |
+          cp milk-route/landscape/03.webp milk-route/milk-route-hero-spilled-milk.webp
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('milk-route/index.html')
+          s=p.read_text()
+          import re
+          s=re.sub(r'src="\./(?:landscape/03|Natalia_Neuhaus-9)\.webp(?:\?v=\d+)?"', 'src="./milk-route-hero-spilled-milk.webp?v=1"', s, count=1)
+          p.write_text(s)
+          PY
+          git config user.name "natalianeuhaus"
+          git config user.email "natalia@casaneuhaus.com"
+          git add milk-route/milk-route-hero-spilled-milk.webp milk-route/index.html
+          git commit -m "Use uncached spilled milk WebP hero" || exit 0
+          git push
