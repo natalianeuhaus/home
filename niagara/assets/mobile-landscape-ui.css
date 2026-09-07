@@ -1,0 +1,63 @@
+/* Niagara only: phone landscape. Portrait and mouse-driven layouts are unchanged. */
+@media (max-width: 980px) and (orientation: landscape) and (hover: none) and (pointer: coarse) {
+  /* Scroll the whole drawer instead of collapsing its chapter list. */
+  #case-index {
+    height: calc(100vh - var(--top));
+    height: calc(100dvh - var(--top));
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    scroll-padding-block: 12px;
+  }
+  #case-index > .index-heading,
+  #case-index > .index-nav,
+  #case-index > .index-mobile-photographs,
+  #case-index > .index-foot {
+    flex: 0 0 auto;
+  }
+  #case-index > .index-nav {
+    overflow: visible;
+  }
+  /* Keep a generous touch target without the boxed appearance. */
+  .niagara-photo-story.is-fullscreen .niagara-photo-caption-close {
+    position: fixed;
+    top: max(8px, env(safe-area-inset-top, 0px));
+    right: max(12px, env(safe-area-inset-right, 0px));
+    width: 44px;
+    height: 44px;
+    z-index: 50;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    color: #f4f0e8;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    -webkit-appearance: none;
+    appearance: none;
+    -webkit-tap-highlight-color: transparent;
+    font: 26px/1 Arial, Helvetica, sans-serif;
+    letter-spacing: 0;
+    touch-action: manipulation;
+  }
+  .niagara-photo-story.is-fullscreen .niagara-photo-caption-close:focus:not(:focus-visible) {
+    outline: none;
+  }
+  .niagara-photo-story.is-fullscreen .niagara-photo-caption-close:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 2px;
+  }
+}
+@media (min-width: 821px) and (max-width: 980px) and (orientation: landscape) and (hover: none) and (pointer: coarse) {
+  /* A non-scrolling top gutter keeps caption text below the close control,
+     including while the caption itself is scrolled. Image sizing is unchanged. */
+  .niagara-photo-story.is-fullscreen .niagara-photo-caption {
+    border-top: 64px solid #10110f;
+    padding-top: 18px;
+  }
+}
