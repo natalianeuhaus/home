@@ -50,10 +50,11 @@
     for (const match of text.matchAll(arrow)) {
       fragment.append(document.createTextNode(text.slice(offset, match.index)));
       const symbol = aliases[match[0][0]] || match[0][0];
-      const wrapper = document.createElement('span');
+      // Dedicated inline tags avoid existing rules such as .hero-bottom span:first-child.
+      const wrapper = document.createElement('site-arrow');
       wrapper.className = 'site-mobile-arrow';
       wrapper.dataset.direction = directions[symbol];
-      const original = document.createElement('span');
+      const original = document.createElement('site-arrow-original');
       original.className = 'site-mobile-arrow-original';
       original.textContent = match[0];
       const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
