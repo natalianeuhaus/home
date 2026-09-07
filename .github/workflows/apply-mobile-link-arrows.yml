@@ -68,6 +68,7 @@ jobs:
                   except Exception:
                       return False
               deadline = time.time() + 240
+              ready = False
               while time.time() < deadline:
                   with ThreadPoolExecutor(max_workers=7) as pool:
                       ready = all(pool.map(published, pages))
@@ -103,8 +104,9 @@ jobs:
                               page.wait_for_timeout(300)
                               video = page.locator('.intermission-video-link')
                               if touch and video.count():
-                                  assert video.locator('.site-mobile-arrow[data-direction="ne"]').count() == 1, 'Dynamic Arles video arrow missing'
-                                  record['dynamic_video_arrow'] = True
+                                  original_arrows = re.findall('[\u2190-\u2193\u2196-\u2199]', video.inner_text())
+                                  assert video.locator('.site-mobile-arrow').count() == len(original_arrows), 'Changed a plain-text video label'
+                                  record['dynamic_video_link'] = 'original label and direction preserved'
                       if name == 'tapestry-soap-blood-bath/index.html' and touch:
                           more = page.locator('.more').first
                           if more.count():
@@ -125,9 +127,11 @@ jobs:
                               target.scroll_into_view_if_needed()
                               page.screenshot(path=str(out / (name.split('/')[0] + '-portrait.png')), timeout=15000, animations='disabled')
                       results.append(record)
+                      (out / 'report.json').write_text(json.dumps(results, indent=2))
+                      print(mode, label, name, 'icons=',len(icons), 'directions=',sorted(set(i['direction'] for i in icons)), flush=True)
                       page.close()
                   context.close()
-              # Exercise all eight directions and preserve pre-existing rotations and handlers.
+              # All directions, inherited rotations, inserted link text and click handlers.
               context = browser.new_context(viewport={'width':390,'height':844}, is_mobile=True, has_touch=True)
               page = context.new_page()
               symbols = ['\u2197','\u2198','\u2196','\u2199','\u2192','\u2190','\u2191','\u2193']
@@ -142,13 +146,13 @@ jobs:
                   assert button.get_attribute('data-clicked') == '1'
               assert page.locator('[role="dialog"] .site-mobile-arrow').count() == 0
               assert page.locator('#rotated').evaluate('(el) => getComputedStyle(el).transform') == 'matrix(-1, 0, 0, -1, 0, 0)'
+              page.evaluate('''() => {const b=document.createElement('button');b.id='dynamic-test';b.textContent='Open video \u2197';document.body.append(b)}''')
+              page.wait_for_timeout(100)
+              assert page.locator('#dynamic-test .site-mobile-arrow[data-direction="ne"]').count() == 1
               context.close()
               browser.close()
           for name, expected in json.loads(Path('/tmp/mobile-arrow-protected.json').read_text()).items():
               assert hashlib.sha256(Path(name).read_bytes()).hexdigest() == expected, 'Protected source changed: ' + name
-          (out / 'report.json').write_text(json.dumps(results, indent=2))
-          for r in results:
-              print(mode, r['viewport'], r['page'], 'icons=', len(r['icons']), 'directions=', sorted(set(i['direction'] for i in r['icons'])))
           print('PASS: original directions, inherited colors, desktop, fullscreen controls, dynamic links and button handlers')
           PY
       - name: Verify before publishing
