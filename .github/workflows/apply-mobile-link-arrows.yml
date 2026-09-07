@@ -1,14 +1,11 @@
 name: Apply and verify mobile link arrows
-
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/apply-mobile-link-arrows.yml']
+    paths: ['.github/workflows/apply-mobile-link-arrows.yml', 'assets/mobile-link-arrows.js']
   workflow_dispatch:
-
 permissions:
   contents: write
-
 jobs:
   apply:
     runs-on: ubuntu-latest
@@ -18,146 +15,127 @@ jobs:
       - name: Install browser checks
         run: |
           python3 -m pip install --quiet playwright
-          python3 -m playwright install --with-deps webkit > /tmp/mobile-arrows-install.log 2>&1
-      - name: Load the helper only on the other active portfolio pages
+          python3 -m playwright install --with-deps webkit >/tmp/arrow-install.log 2>&1
+      - name: Load helper on active pages without changing existing markup
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          import json, re, hashlib
-          pages = ['index.html', 'healers/index.html', 'intermission/index.html', 'milk-route/index.html', 'tapestry-soap-blood-bath/index.html', 'bio-contact/index.html', 'niagara/dossier-v2.html']
-          protected = ['burlesque-color/index.html', 'niagara/dossier-v2-photographs-stage.html', 'assets/site.css', 'assets/site.js', 'assets/menu-standard.css']
-          hashes = {p: hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in protected}
+          import re,json,hashlib
+          pages=['index.html','healers/index.html','intermission/index.html','milk-route/index.html','tapestry-soap-blood-bath/index.html','bio-contact/index.html','niagara/dossier-v2.html']
+          protected=['burlesque-color/index.html','niagara/dossier-v2-photographs-stage.html','assets/site.css','assets/site.js','assets/menu-standard.css']
+          Path('/tmp/arrow-pages.json').write_text(json.dumps(pages))
+          Path('/tmp/arrow-protected.json').write_text(json.dumps({p:hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in protected}))
           for name in pages:
-              p = Path(name)
-              text = p.read_text()
-              if 'mobile-link-arrows.js' in text:
-                  continue
-              prefix = './' if name == 'index.html' else '../'
-              tag = '<script defer src="' + prefix + 'assets/mobile-link-arrows.js?v=20260907-1"></script>\n'
-              revised, count = re.subn(r'</body>', lambda m: tag + m.group(), text, count=1, flags=re.I)
-              assert count == 1, name
-              assert revised.replace(tag, '', 1) == text, name
+              p=Path(name); text=p.read_text()
+              if 'mobile-link-arrows.js' in text: continue
+              prefix='./' if name=='index.html' else '../'
+              tag='<script defer src="'+prefix+'assets/mobile-link-arrows.js?v=20260907-1"></script>\n'
+              revised,n=re.subn('</body>',lambda m:tag+m.group(),text,count=1,flags=re.I)
+              assert n==1 and revised.replace(tag,'',1)==text,name
               p.write_text(revised)
-          Path('/tmp/mobile-arrow-pages.json').write_text(json.dumps(pages))
-          Path('/tmp/mobile-arrow-protected.json').write_text(json.dumps(hashes))
           PY
-      - name: Create focused mobile and desktop regression checks
+      - name: Prepare browser regression checks
         run: |
-          cat > /tmp/check-mobile-arrows.py <<'PY'
-          import json, sys, time, re, threading, hashlib
+          cat >/tmp/check-arrows.py <<'PY'
+          import json,sys,time,threading,hashlib
           from pathlib import Path
-          from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
-          from urllib.request import urlopen, Request
+          from http.server import ThreadingHTTPServer,SimpleHTTPRequestHandler
+          from urllib.request import urlopen,Request
           from concurrent.futures import ThreadPoolExecutor
           from playwright.sync_api import sync_playwright
-          pages = json.loads(Path('/tmp/mobile-arrow-pages.json').read_text())
-          mode = sys.argv[1]
-          out = Path('/tmp/mobile-arrow-proof') / mode
-          out.mkdir(parents=True, exist_ok=True)
-          if mode == 'preview':
-              server = ThreadingHTTPServer(('127.0.0.1', 8765), SimpleHTTPRequestHandler)
-              threading.Thread(target=server.serve_forever, daemon=True).start()
-              base = 'http://127.0.0.1:8765/'
+          pages=json.loads(Path('/tmp/arrow-pages.json').read_text())
+          mode=sys.argv[1]; out=Path('/tmp/arrow-proof')/mode; out.mkdir(parents=True,exist_ok=True)
+          if mode=='preview':
+              class Handler(SimpleHTTPRequestHandler):
+                  def log_message(self,*args): pass
+              server=ThreadingHTTPServer(('127.0.0.1',8765),Handler)
+              threading.Thread(target=server.serve_forever,daemon=True).start()
+              base='http://127.0.0.1:8765/'
           else:
-              base = 'https://natalianeuhaus.github.io/home/'
-              def published(name):
+              base='https://natalianeuhaus.github.io/home/'
+              def ready(name):
                   try:
-                      req = Request(base + name + '?arrow-check=' + str(time.time_ns()), headers={'Cache-Control':'no-cache'})
-                      with urlopen(req, timeout=15) as r:
+                      with urlopen(Request(base+name+'?arrow-check='+str(time.time_ns()),headers={'Cache-Control':'no-cache'}),timeout=15) as r:
                           return 'mobile-link-arrows.js?v=20260907-1' in r.read().decode()
-                  except Exception:
-                      return False
-              deadline = time.time() + 240
-              ready = False
-              while time.time() < deadline:
-                  with ThreadPoolExecutor(max_workers=7) as pool:
-                      ready = all(pool.map(published, pages))
-                  if ready:
-                      break
+                  except Exception: return False
+              deadline=time.time()+240; published=False
+              while time.time()<deadline:
+                  with ThreadPoolExecutor(max_workers=7) as pool: published=all(pool.map(ready,pages))
+                  if published: break
                   time.sleep(8)
-              assert ready, 'Pages has not published the helper references yet'
-          results = []
-          paths = {'ne':'M5 19L19 5M5 5H19V19','se':'M5 5L19 19M5 19H19V5','nw':'M19 19L5 5M5 19V5H19','sw':'M19 5L5 19M5 5V19H19','e':'M4 12H20M13 5L20 12L13 19','w':'M20 12H4M11 5L4 12L11 19','n':'M12 20V4M5 11L12 4L19 11','s':'M12 4V20M5 13L12 20L19 13'}
-          inspect = '''() => [...document.querySelectorAll('.site-mobile-arrow')].map(el => ({direction:el.dataset.direction, original:el.querySelector('.site-mobile-arrow-original').textContent, path:el.querySelector('path').getAttribute('d'), glyph:getComputedStyle(el.querySelector('.site-mobile-arrow-original')).visibility, display:getComputedStyle(el.querySelector('svg')).display, color:getComputedStyle(el).color, width:el.getBoundingClientRect().width, control:el.closest('a,button,summary,[role="button"]').textContent.trim().slice(0,85)}))'''
+              assert published,'Pages publication has not completed'
+          shapes={'ne':'M5 19L19 5M5 5H19V19','se':'M5 5L19 19M5 19H19V5','nw':'M19 19L5 5M5 19V5H19','sw':'M19 5L5 19M5 5V19H19','e':'M4 12H20M13 5L20 12L13 19','w':'M20 12H4M11 5L4 12L11 19','n':'M12 20V4M5 11L12 4L19 11','s':'M12 4V20M5 13L12 20L19 13'}
+          inspect='''() => [...document.querySelectorAll('.site-mobile-arrow')].map(e=>({direction:e.dataset.direction,original:e.querySelector('.site-mobile-arrow-original').textContent,path:e.querySelector('path').getAttribute('d'),glyph:getComputedStyle(e.querySelector('.site-mobile-arrow-original')).visibility,display:getComputedStyle(e.querySelector('svg')).display,color:getComputedStyle(e).color,width:e.getBoundingClientRect().width,label:e.closest('a,button,summary,[role="button"]').textContent.trim().slice(0,85)}))'''
+          results=[]
           with sync_playwright() as p:
-              browser = p.webkit.launch()
-              for label, width, height, touch in [('portrait',390,844,True),('landscape',844,390,True),('desktop',1440,900,False)]:
-                  context = browser.new_context(viewport={'width':width,'height':height}, is_mobile=touch, has_touch=touch, reduced_motion='reduce')
-                  context.route('**/*', lambda route: route.abort() if route.request.resource_type == 'media' else route.continue_())
+              browser=p.webkit.launch()
+              for viewport,w,h,touch in [('portrait',390,844,True),('landscape',844,390,True),('desktop',1440,900,False)]:
+                  context=browser.new_context(viewport={'width':w,'height':h},is_mobile=touch,has_touch=touch,reduced_motion='reduce')
+                  context.route('**/*',lambda r:r.abort() if r.request.resource_type=='media' else r.continue_())
                   for name in pages:
-                      page = context.new_page()
-                      page.goto(base + name + ('?arrow-proof=20260907' if mode == 'live' else ''), wait_until='domcontentloaded', timeout=45000)
+                      page=context.new_page()
+                      page.goto(base+name+('?arrow-proof=20260907' if mode=='live' else ''),wait_until='domcontentloaded',timeout=45000)
                       page.wait_for_timeout(500)
-                      assert page.locator('#mobile-link-arrow-styles').count() == 1, (mode,label,name,'helper missing')
-                      icons = page.evaluate(inspect)
-                      if not touch:
-                          assert not icons, (name, 'desktop was modified')
+                      assert page.locator('#mobile-link-arrow-styles').count()==1,(viewport,name,'helper missing')
+                      icons=page.evaluate(inspect)
+                      if not touch: assert not icons,(name,'desktop changed')
                       for icon in icons:
-                          assert icon['path'] == paths[icon['direction']], icon
-                          assert icon['glyph'] == 'hidden' and icon['display'] != 'none', icon
-                      assert page.locator('[role="dialog"] .site-mobile-arrow,.intermission-navigation-controls .site-mobile-arrow,#slideControls .site-mobile-arrow').count() == 0, name
-                      record = {'page':name,'viewport':label,'icons':icons,'desktop_unchanged':not touch and not icons}
-                      if name == 'intermission/index.html':
-                          tab = page.locator('#intermission-chapter-tab-2')
-                          if tab.count():
-                              tab.evaluate('(el) => el.click()')
-                              page.wait_for_timeout(300)
-                              video = page.locator('.intermission-video-link')
-                              if touch and video.count():
-                                  original_arrows = re.findall('[\u2190-\u2193\u2196-\u2199]', video.inner_text())
-                                  assert video.locator('.site-mobile-arrow').count() == len(original_arrows), 'Changed a plain-text video label'
-                                  record['dynamic_video_link'] = 'original label and direction preserved'
-                      if name == 'tapestry-soap-blood-bath/index.html' and touch:
-                          more = page.locator('.more').first
-                          if more.count():
-                              summary = more.locator('summary')
-                              summary.evaluate('(el) => el.click()')
-                              assert more.get_attribute('open') is not None
-                              summary.evaluate('(el) => el.click()')
-                              assert more.get_attribute('open') is None
-                              record['expand_collapse_clicks'] = 'passed'
-                      if name == 'milk-route/index.html' and touch:
-                          next_button = page.locator('#nextText')
-                          next_button.evaluate('(el) => el.click()')
+                          assert icon['path']==shapes[icon['direction']],icon
+                          assert icon['glyph']=='hidden' and icon['display']!='none',icon
+                      assert page.locator('[role="dialog"] .site-mobile-arrow,.intermission-navigation-controls .site-mobile-arrow,#slideControls .site-mobile-arrow').count()==0,name
+                      record={'page':name,'viewport':viewport,'icons':icons,'desktop_unchanged':not touch and not icons}
+                      if touch and name=='milk-route/index.html':
+                          assert page.locator('.hero-bottom .site-mobile-arrow[data-direction="s"]').is_visible(),'Entry arrow hidden'
+                          assert page.locator('.short-film-link .site-mobile-arrow[data-direction="ne"]').is_visible(),'Video arrow hidden'
+                          page.locator('#nextText').evaluate('(e)=>e.click()')
                           assert '02 / 48' in page.locator('#slideCount').inner_text()
-                          record['slideshow_navigation'] = 'unchanged and working'
-                      if name in ['bio-contact/index.html','tapestry-soap-blood-bath/index.html','milk-route/index.html'] and label == 'portrait':
-                          target = page.locator('.site-mobile-arrow').first
+                          record['slideshow_navigation']='unchanged and working'
+                      if touch and name=='bio-contact/index.html':
+                          assert len(icons)==10 and all(i['direction']=='ne' for i in icons)
+                      if touch and name=='tapestry-soap-blood-bath/index.html':
+                          more=page.locator('.more').first
+                          if more.count():
+                              more.locator('summary').evaluate('(e)=>e.click()'); assert more.get_attribute('open') is not None
+                              more.locator('summary').evaluate('(e)=>e.click()'); assert more.get_attribute('open') is None
+                              record['expand_collapse_clicks']='passed'
+                      if name=='intermission/index.html':
+                          tab=page.locator('#intermission-chapter-tab-2')
+                          if tab.count():
+                              tab.evaluate('(e)=>e.click()');page.wait_for_timeout(250)
+                              assert page.locator('.intermission-video-link').text_content()=='Stop motion video'
+                              record['chapter_switch']='original plain-text video label preserved'
+                      if viewport=='portrait' and name in ['milk-route/index.html','bio-contact/index.html','tapestry-soap-blood-bath/index.html']:
+                          target=page.locator('.site-mobile-arrow:visible').first
                           if target.count():
-                              target.scroll_into_view_if_needed()
-                              page.screenshot(path=str(out / (name.split('/')[0] + '-portrait.png')), timeout=15000, animations='disabled')
+                              target.evaluate('(e)=>e.scrollIntoView({block:"center",behavior:"instant"})')
+                              page.screenshot(path=str(out/(name.split('/')[0]+'.png')),animations='disabled',timeout=15000)
                       results.append(record)
-                      (out / 'report.json').write_text(json.dumps(results, indent=2))
-                      print(mode, label, name, 'icons=',len(icons), 'directions=',sorted(set(i['direction'] for i in icons)), flush=True)
+                      (out/'report.json').write_text(json.dumps(results,indent=2))
+                      print(mode,viewport,name,'icons',len(icons),'directions',sorted(set(i['direction'] for i in icons)),flush=True)
                       page.close()
                   context.close()
-              # All directions, inherited rotations, inserted link text and click handlers.
-              context = browser.new_context(viewport={'width':390,'height':844}, is_mobile=True, has_touch=True)
-              page = context.new_page()
-              symbols = ['\u2197','\u2198','\u2196','\u2199','\u2192','\u2190','\u2191','\u2193']
-              page.set_content('<html><head><meta name="viewport" content="width=device-width, initial-scale=1"></head><body>' + ''.join('<button onclick="this.dataset.clicked=1">Open '+s+'</button>' for s in symbols) + '<summary><span id="rotated" style="display:inline-block;transform:rotate(180deg)">\u2193</span>More</summary><div role="dialog"><button aria-label="Next">\u2192</button></div></body></html>')
+              context=browser.new_context(viewport={'width':390,'height':844},is_mobile=True,has_touch=True)
+              page=context.new_page()
+              symbols=['\u2197','\u2198','\u2196','\u2199','\u2192','\u2190','\u2191','\u2193']
+              page.set_content('<html><head><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>'+''.join('<button onclick="this.dataset.clicked=1">Open '+s+'</button>' for s in symbols)+'<summary>More <span id="rotated" style="display:inline-block;transform:rotate(180deg)">\u2193</span></summary><div role="dialog"><button aria-label="Next">\u2192</button></div></body></html>')
               page.add_script_tag(path='assets/mobile-link-arrows.js')
-              test_icons = page.evaluate(inspect)
-              assert len(test_icons) == 9
-              for icon in test_icons:
-                  assert icon['path'] == paths[icon['direction']]
-              for button in page.locator('body > button').all():
-                  button.click()
-                  assert button.get_attribute('data-clicked') == '1'
-              assert page.locator('[role="dialog"] .site-mobile-arrow').count() == 0
-              assert page.locator('#rotated').evaluate('(el) => getComputedStyle(el).transform') == 'matrix(-1, 0, 0, -1, 0, 0)'
-              page.evaluate('''() => {const b=document.createElement('button');b.id='dynamic-test';b.textContent='Open video \u2197';document.body.append(b)}''')
+              icons=page.evaluate(inspect); assert len(icons)==9
+              for icon in icons: assert icon['path']==shapes[icon['direction']]
+              for button in page.locator('body>button').all():
+                  button.click(); assert button.get_attribute('data-clicked')=='1'
+              assert page.locator('[role="dialog"] .site-mobile-arrow').count()==0
+              assert page.locator('#rotated').evaluate('(e)=>getComputedStyle(e).transform')=='matrix(-1, 0, 0, -1, 0, 0)'
+              page.evaluate('''()=>{const b=document.createElement('button');b.id='late';b.textContent='Open video \u2197';document.body.append(b)}''')
               page.wait_for_timeout(100)
-              assert page.locator('#dynamic-test .site-mobile-arrow[data-direction="ne"]').count() == 1
-              context.close()
-              browser.close()
-          for name, expected in json.loads(Path('/tmp/mobile-arrow-protected.json').read_text()).items():
-              assert hashlib.sha256(Path(name).read_bytes()).hexdigest() == expected, 'Protected source changed: ' + name
-          print('PASS: original directions, inherited colors, desktop, fullscreen controls, dynamic links and button handlers')
+              assert page.locator('#late .site-mobile-arrow[data-direction="ne"]').count()==1
+              context.close();browser.close()
+          for name,expected in json.loads(Path('/tmp/arrow-protected.json').read_text()).items():
+              assert hashlib.sha256(Path(name).read_bytes()).hexdigest()==expected,name
+          print('PASS: direction, colors, visibility, desktop, dynamic icons, handlers and protected fullscreen sources')
           PY
       - name: Verify before publishing
-        run: python3 /tmp/check-mobile-arrows.py preview
-      - name: Commit only the approved helper references
+        run: python3 /tmp/check-arrows.py preview
+      - name: Commit only helper references
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
@@ -169,11 +147,11 @@ jobs:
             git push origin HEAD:main
           fi
       - name: Verify published pages
-        run: python3 /tmp/check-mobile-arrows.py live
-      - name: Save proof and checks
+        run: python3 /tmp/check-arrows.py live
+      - name: Save proof
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: mobile-link-arrow-proof
-          path: /tmp/mobile-arrow-proof/
+          path: /tmp/arrow-proof/
           retention-days: 7
