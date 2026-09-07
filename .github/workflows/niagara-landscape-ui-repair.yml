@@ -1,0 +1,231 @@
+name: Repair and verify Niagara mobile landscape UI
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/niagara-landscape-ui-repair.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: niagara-landscape-ui-repair
+  cancel-in-progress: false
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install browser test tools
+        run: |
+          python3 -m pip install --quiet playwright
+          python3 -m playwright install --with-deps webkit
+      - name: Apply isolated landscape stylesheet
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          css = '''/* Niagara only: phone landscape. Portrait and mouse-driven layouts are unchanged. */
+          @media (max-width: 980px) and (orientation: landscape) and (hover: none) and (pointer: coarse) {
+            /* Scroll the whole drawer instead of collapsing its chapter list. */
+            #case-index {
+              height: calc(100vh - var(--top));
+              height: calc(100dvh - var(--top));
+              min-height: 0;
+              overflow-x: hidden;
+              overflow-y: auto;
+              overscroll-behavior-y: contain;
+              -webkit-overflow-scrolling: touch;
+              padding-bottom: env(safe-area-inset-bottom, 0px);
+              scroll-padding-block: 12px;
+            }
+            #case-index > .index-heading,
+            #case-index > .index-nav,
+            #case-index > .index-mobile-photographs,
+            #case-index > .index-foot {
+              flex: 0 0 auto;
+            }
+            #case-index > .index-nav {
+              overflow: visible;
+            }
+            /* Keep a generous touch target without the boxed appearance. */
+            .niagara-photo-story.is-fullscreen .niagara-photo-caption-close {
+              position: fixed;
+              top: max(8px, env(safe-area-inset-top, 0px));
+              right: max(12px, env(safe-area-inset-right, 0px));
+              width: 44px;
+              height: 44px;
+              z-index: 50;
+              display: grid;
+              place-items: center;
+              padding: 0;
+              border: 0;
+              border-radius: 0;
+              color: #f4f0e8;
+              background: transparent;
+              backdrop-filter: none;
+              -webkit-backdrop-filter: none;
+              -webkit-appearance: none;
+              appearance: none;
+              -webkit-tap-highlight-color: transparent;
+              font: 26px/1 Arial, Helvetica, sans-serif;
+              letter-spacing: 0;
+              touch-action: manipulation;
+            }
+            .niagara-photo-story.is-fullscreen .niagara-photo-caption-close:focus:not(:focus-visible) {
+              outline: none;
+            }
+            .niagara-photo-story.is-fullscreen .niagara-photo-caption-close:focus-visible {
+              outline: 1px solid currentColor;
+              outline-offset: 2px;
+            }
+          }
+          @media (min-width: 821px) and (max-width: 980px) and (orientation: landscape) and (hover: none) and (pointer: coarse) {
+            /* A non-scrolling top gutter keeps caption text below the close control,
+               including while the caption itself is scrolled. Image sizing is unchanged. */
+            .niagara-photo-story.is-fullscreen .niagara-photo-caption {
+              border-top: 64px solid #10110f;
+              padding-top: 18px;
+            }
+          }
+          '''
+          target = Path('niagara/assets/mobile-landscape-ui.css')
+          target.parent.mkdir(parents=True, exist_ok=True)
+          target.write_text(css, encoding='utf-8')
+          link = '<link rel="stylesheet" href="./assets/mobile-landscape-ui.css?v=20260907-1" />'
+          for name in ['niagara/dossier-v2.html', 'niagara/dossier-v2-photographs-stage.html']:
+              path = Path(name)
+              text = path.read_text(encoding='utf-8')
+              assert text.count('</head>') == 1, name
+              if link not in text:
+                  assert 'mobile-landscape-ui.css' not in text, 'Unexpected existing version: ' + name
+                  text = text.replace('</head>', link + '\n</head>', 1)
+                  path.write_text(text, encoding='utf-8')
+          PY
+      - name: Prepare layout and interaction tests
+        run: |
+          cat > /tmp/verify_niagara_landscape.py <<'PY'
+          import functools, http.server, json, os, pathlib, sys, threading, time, urllib.request
+          from playwright.sync_api import sync_playwright
+          mode = sys.argv[1]
+          out = pathlib.Path('niagara-landscape-proof') / mode
+          out.mkdir(parents=True, exist_ok=True)
+          if mode == 'preview':
+              handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=os.getcwd())
+              server = http.server.ThreadingHTTPServer(('127.0.0.1', 8765), handler)
+              threading.Thread(target=server.serve_forever, daemon=True).start()
+              base = 'http://127.0.0.1:8765/'
+          else:
+              base = 'https://natalianeuhaus.github.io/home/'
+              for attempt in range(24):
+                  try:
+                      urls = ['niagara/dossier-v2.html', 'niagara/dossier-v2-photographs-stage.html', 'niagara/assets/mobile-landscape-ui.css']
+                      texts = []
+                      for u in urls:
+                          request = urllib.request.Request(base + u + '?verify=' + str(time.time_ns()), headers={'Cache-Control':'no-cache'})
+                          texts.append(urllib.request.urlopen(request, timeout=15).read().decode())
+                      if all('mobile-landscape-ui.css?v=20260907-1' in s for s in texts[:2]) and 'flex: 0 0 auto' in texts[2]:
+                          break
+                  except Exception as exc:
+                      print('Waiting for Pages:', str(exc), flush=True)
+                  time.sleep(8)
+              else:
+                  raise AssertionError('The updated Pages files have not become available')
+          reports = []
+          def signature(frame, selectors):
+              return frame.evaluate('''selectors => Object.fromEntries(selectors.map(s => {
+                const e=document.querySelector(s); const c=getComputedStyle(e);
+                return [s, Object.fromEntries(['display','position','height','width','overflowY','flex','paddingTop','borderTopWidth','borderRightWidth','top','right'].map(k=>[k,c[k]]))];
+              }))''', selectors)
+          with sync_playwright() as p:
+              browser = p.webkit.launch()
+              for name, width, height, mobile in [('landscape-large',926,428,True),('landscape',844,390,True),('landscape-small',667,375,True),('portrait',390,844,True),('desktop',1440,900,False)]:
+                  context = browser.new_context(viewport={'width':width,'height':height}, screen={'width':width,'height':height}, is_mobile=mobile, has_touch=mobile, device_scale_factor=1, reduced_motion='reduce')
+                  page = context.new_page()
+                  page.set_default_timeout(25000)
+                  url = base + 'niagara/dossier-v2.html?ui-check=' + str(time.time_ns()) + '#photographs'
+                  page.goto(url, wait_until='domcontentloaded')
+                  page.locator('#dossier-viewer.is-open').wait_for()
+                  page.locator('#dossier-viewer-frame').wait_for()
+                  frame = page.locator('#dossier-viewer-frame').element_handle().content_frame()
+                  frame.locator('[data-photo-caption-toggle]').wait_for(state='attached')
+                  landscape = mobile and width > height
+                  record = {'viewport':name,'size':[width,height],'mode':mode}
+                  if landscape:
+                      page.locator('.index-toggle').click()
+                      page.wait_for_timeout(400)
+                      metrics = page.locator('#case-index').evaluate('''el => ({clientHeight:el.clientHeight,scrollHeight:el.scrollHeight,overflow:getComputedStyle(el).overflowY,navHeight:el.querySelector('.index-nav').getBoundingClientRect().height,links:el.querySelectorAll('a').length})''')
+                      assert metrics['overflow'] == 'auto', metrics
+                      assert metrics['navHeight'] > 350, metrics
+                      assert metrics['scrollHeight'] > metrics['clientHeight'], metrics
+                      page.screenshot(path=str(out / (name+'-index-top.png')))
+                      for link in page.locator('#case-index a').all():
+                          link.scroll_into_view_if_needed()
+                          good = link.evaluate('''el => {const a=el.getBoundingClientRect(), b=el.closest('#case-index').getBoundingClientRect(); return a.top>=b.top-1 && a.bottom<=b.bottom+1;}''')
+                          assert good, 'Index link inaccessible: ' + link.inner_text()
+                      page.screenshot(path=str(out / (name+'-index-bottom.png')))
+                      record['index'] = metrics
+                      page.locator('.index-toggle').click()
+                      assert page.locator('.index-toggle').get_attribute('aria-expanded') == 'false'
+                  frame.locator('[data-photo-caption-toggle]').evaluate('(el)=>el.click()')
+                  frame.locator('.niagara-photo-story.is-fullscreen').wait_for()
+                  frame.locator('[data-photo-strip] button').nth(2).evaluate('(el)=>el.click()')
+                  page.wait_for_timeout(1200)
+                  close = frame.locator('[data-photo-caption-close]')
+                  if landscape:
+                      info = close.evaluate('''el => {const c=getComputedStyle(el),r=el.getBoundingClientRect(),p=document.querySelector('[data-photo-caption-panel]'),m=document.querySelector('.niagara-photo-caption-meta').getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height,right:r.right,bottom:r.bottom,viewportWidth:innerWidth,viewportHeight:innerHeight,border:c.borderTopWidth,position:c.position,metaTop:m.top,panelTop:p.getBoundingClientRect().top,panelBorder:parseFloat(getComputedStyle(p).borderTopWidth)};}''')
+                      assert info['w'] == 44 and info['h'] == 44, info
+                      assert info['border'] == '0px' and info['position'] == 'fixed', info
+                      assert info['x'] >= 0 and info['right'] <= info['viewportWidth'] and info['y'] >= 0, info
+                      assert info['bottom'] + 6 <= info['metaTop'], info
+                      page.screenshot(path=str(out / (name+'-photos.png')))
+                      frame.locator('[data-photo-caption-panel]').evaluate('(el)=>el.scrollTop=250')
+                      assert close.evaluate('''el=>{const r=el.getBoundingClientRect();return document.elementFromPoint(r.x+r.width/2,r.y+r.height/2)===el;}'''), 'Close button obstructed after caption scrolling'
+                      if width > 820:
+                          assert info['bottom'] <= info['panelTop'] + info['panelBorder'], info
+                      record['close'] = info
+                  else:
+                      # Disable just the new link, compare, and restore: proves untouched layouts.
+                      selectors = ['#case-index','.index-nav']
+                      before = signature(page, selectors)
+                      page.locator('link[href*="mobile-landscape-ui.css"]').evaluate('(el)=>el.disabled=true')
+                      assert signature(page,selectors) == before, 'Non-landscape index regression'
+                      page.locator('link[href*="mobile-landscape-ui.css"]').evaluate('(el)=>el.disabled=false')
+                      selectors = ['.niagara-photo-caption','.niagara-photo-caption-close','.niagara-photo-main']
+                      before = signature(frame,selectors)
+                      frame.locator('link[href*="mobile-landscape-ui.css"]').evaluate('(el)=>el.disabled=true')
+                      assert signature(frame,selectors) == before, 'Non-landscape photo regression'
+                      frame.locator('link[href*="mobile-landscape-ui.css"]').evaluate('(el)=>el.disabled=false')
+                      record['unchanged'] = True
+                  close.click()
+                  assert frame.locator('.niagara-photo-story.is-fullscreen').count() == 0, 'Close did not exit photo viewer'
+                  record['closeWorks'] = True
+                  reports.append(record)
+                  (out/'report.json').write_text(json.dumps(reports,indent=2))
+                  print(json.dumps(record), flush=True)
+                  context.close()
+              browser.close()
+          PY
+      - name: Verify preview before publishing
+        run: python3 /tmp/verify_niagara_landscape.py preview
+      - name: Commit only the scoped UI repair
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add niagara/assets/mobile-landscape-ui.css niagara/dossier-v2.html niagara/dossier-v2-photographs-stage.html
+          if ! git diff --cached --quiet; then
+            git commit -m 'Fix Niagara phone landscape index overflow and unbox photo close control'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+      - name: Verify deployed Pages layout
+        run: python3 /tmp/verify_niagara_landscape.py live
+      - name: Save screenshots and test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: niagara-landscape-ui-proof
+          path: niagara-landscape-proof/
+          retention-days: 7
