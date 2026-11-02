@@ -150,8 +150,10 @@ function fallbackToStreetMap() {
   document.getElementById("satellite-button").title = "Satellite imagery temporarily unavailable";
 }
 satelliteLayer.on("tileerror", fallbackToStreetMap);
-satelliteLayer.addTo(map);
-labelsLayer.addTo(map);
+// Start with the key-free street map: the satellite provider currently
+// serves watermark tiles saying "API KEY REQUIRED" with HTTP 200.
+// A tileerror handler cannot detect that condition.
+fallbackToStreetMap();
 
 const tilePreloads = [];
 function preloadSatellite(point, zoom, radius = 2) {
