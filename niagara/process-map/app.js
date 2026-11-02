@@ -133,11 +133,11 @@ const satelliteLayer = L.tileLayer(
   { maxZoom: 18, updateWhenZooming: false, keepBuffer: 8 }
 );
 const labelsLayer = L.tileLayer(
-  `https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png?key=${CARTO_BASEMAP_KEY}`,
+  `https://basemaps.cartocdn.com/rastertiles/light_only_labels/{z}/{x}/{y}.png?key=${CARTO_BASEMAP_KEY}`,
   { subdomains: "abcd", maxZoom: 19, pane: "overlayPane", attribution: CARTO_ATTRIBUTION, updateWhenZooming: false, keepBuffer: 8 }
 );
 const streetLayer = L.tileLayer(
-  `https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=${CARTO_BASEMAP_KEY}`,
+  `https://basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}.png?key=${CARTO_BASEMAP_KEY}`,
   { subdomains: "abcd", maxZoom: 19, attribution: CARTO_ATTRIBUTION, updateWhenZooming: false, keepBuffer: 8 }
 );
 satelliteLayer.addTo(map);
