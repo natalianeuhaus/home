@@ -123,17 +123,22 @@ const map = L.map("map", {
 });
 L.control.zoom({ position: "bottomright" }).addTo(map);
 
+// Public browser-side CARTO basemap key (restrict to the website in CARTO dashboard).
+const CARTO_BASEMAP_KEY = "cb1_50mw_1_000e8b6c4b31738ed9dd42d9";
+const CARTO_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>';
+L.control.attribution({ prefix: false, position: "bottomleft" }).addTo(map);
+
 const satelliteLayer = L.tileLayer(
   "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
   { maxZoom: 18, updateWhenZooming: false, keepBuffer: 8 }
 );
 const labelsLayer = L.tileLayer(
-  "https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png",
-  { subdomains: "abcd", maxZoom: 19, pane: "overlayPane", updateWhenZooming: false, keepBuffer: 8 }
+  `https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png?key=${CARTO_BASEMAP_KEY}`,
+  { subdomains: "abcd", maxZoom: 19, pane: "overlayPane", attribution: CARTO_ATTRIBUTION, updateWhenZooming: false, keepBuffer: 8 }
 );
 const streetLayer = L.tileLayer(
-  "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-  { subdomains: "abcd", maxZoom: 19, updateWhenZooming: false, keepBuffer: 8 }
+  `https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=${CARTO_BASEMAP_KEY}`,
+  { subdomains: "abcd", maxZoom: 19, attribution: CARTO_ATTRIBUTION, updateWhenZooming: false, keepBuffer: 8 }
 );
 satelliteLayer.addTo(map);
 labelsLayer.addTo(map);
