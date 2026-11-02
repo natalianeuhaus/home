@@ -132,8 +132,8 @@ const labelsLayer = L.tileLayer(
   { subdomains: "abcd", maxZoom: 19, pane: "overlayPane", updateWhenZooming: false, keepBuffer: 8 }
 );
 const streetLayer = L.tileLayer(
-  "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-  { subdomains: "abcd", maxZoom: 19, updateWhenZooming: false, keepBuffer: 8 }
+  "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+  { maxZoom: 19, maxNativeZoom: 19, attribution: "&copy; OpenStreetMap contributors", updateWhenZooming: false, keepBuffer: 8 }
 );
 // If the imagery provider returns an API-required/error tile, switch to
 // the public street basemap rather than showing a broken map.
