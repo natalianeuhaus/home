@@ -132,28 +132,11 @@ const labelsLayer = L.tileLayer(
   { subdomains: "abcd", maxZoom: 19, pane: "overlayPane", updateWhenZooming: false, keepBuffer: 8 }
 );
 const streetLayer = L.tileLayer(
-  "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-  { maxZoom: 19, maxNativeZoom: 19, attribution: "&copy; OpenStreetMap contributors", updateWhenZooming: false, keepBuffer: 8 }
+  "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+  { subdomains: "abcd", maxZoom: 19, updateWhenZooming: false, keepBuffer: 8 }
 );
-// If the imagery provider returns an API-required/error tile, switch to
-// the public street basemap rather than showing a broken map.
-let satelliteUnavailable = false;
-function fallbackToStreetMap() {
-  if (satelliteUnavailable) return;
-  satelliteUnavailable = true;
-  if (map.hasLayer(satelliteLayer)) map.removeLayer(satelliteLayer);
-  if (map.hasLayer(labelsLayer)) map.removeLayer(labelsLayer);
-  if (!map.hasLayer(streetLayer)) streetLayer.addTo(map);
-  document.getElementById("satellite-button").classList.remove("is-active");
-  document.getElementById("map-button").classList.add("is-active");
-  document.getElementById("satellite-button").disabled = true;
-  document.getElementById("satellite-button").title = "Satellite imagery temporarily unavailable";
-}
-satelliteLayer.on("tileerror", fallbackToStreetMap);
-// Start with the key-free street map: the satellite provider currently
-// serves watermark tiles saying "API KEY REQUIRED" with HTTP 200.
-// A tileerror handler cannot detect that condition.
-fallbackToStreetMap();
+satelliteLayer.addTo(map);
+labelsLayer.addTo(map);
 
 const tilePreloads = [];
 function preloadSatellite(point, zoom, radius = 2) {
@@ -290,7 +273,6 @@ document.getElementById("next-button").addEventListener("click", () => {
 });
 
 document.getElementById("satellite-button").addEventListener("click", () => {
-  if (satelliteUnavailable) return;
   if (map.hasLayer(streetLayer)) map.removeLayer(streetLayer);
   if (!map.hasLayer(satelliteLayer)) satelliteLayer.addTo(map);
   if (!map.hasLayer(labelsLayer)) labelsLayer.addTo(map);
