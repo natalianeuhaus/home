@@ -644,3 +644,47 @@ body.is-portfolio-menu-open .portfolio-menu-toggle span:last-child {
     margin-right: auto !important;
   }
 }
+
+/* A visible word alongside every portfolio hamburger. The wider button keeps
+   both the text and the two-line icon in one accessible click/tap target. */
+.site-header .menu-toggle,
+html.menu-open .site-header .menu-toggle {
+  position: relative !important;
+  box-sizing: border-box !important;
+  width: 108px !important;
+  min-width: 108px !important;
+  padding: 0 5px 0 55px !important;
+  display: grid !important;
+  place-content: center !important;
+  gap: 7px !important;
+}
+
+.site-header .menu-toggle::before,
+.casebar .portfolio-menu-toggle::before {
+  content: "MENU";
+  position: absolute;
+  left: 3px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: currentColor;
+  font: 400 10px/1 Arial, Helvetica, sans-serif;
+  letter-spacing: .2em;
+  white-space: nowrap;
+}
+
+/* The Niagara dossier has its own casebar rather than a site-header. */
+.casebar .portfolio-menu-toggle,
+body.is-portfolio-menu-open .casebar .portfolio-menu-toggle {
+  position: relative !important;
+  box-sizing: border-box !important;
+  width: 112px !important;
+  min-width: 112px !important;
+  padding: 0 6px 0 55px !important;
+  display: grid !important;
+  place-content: center !important;
+  gap: 7px !important;
+}
+
+.casebar .portfolio-menu-toggle::before {
+  left: 12px;
+}
