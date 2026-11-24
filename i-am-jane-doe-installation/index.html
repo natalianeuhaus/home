@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090707">
+  <meta name="description" content="I AM JANE DOE — an interactive installation by Natalia Neuhaus. Photographic documentation of a red-lit room, a camera, and a collective wall of portraits.">
+  <title>I AM JANE DOE — The Installation | Natalia Neuhaus</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root { color-scheme: dark; --paper:#f1eae3; --red:#d31a18; --deep:#090707; --muted:#9b8e89; --hair:rgba(241,234,227,.29); }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--deep); color:var(--paper); font-family:'DM Mono', 'Courier New', monospace; overflow-x:hidden; }
+    body.modal-open,body.nav-open { overflow:hidden; }
+    a { color:inherit; }
+    button { font:inherit; }
+    button:focus-visible,a:focus-visible { outline:2px solid var(--paper);outline-offset:5px; }
+    ::selection { background:var(--red); color:white; }
+    .site-top { height:78px; width:100%; position:absolute; top:0; left:0; z-index:30; padding:0 clamp(18px,3vw,52px); display:flex; align-items:center; justify-content:space-between; }
+    .wordmark { font-family:Arial,Helvetica,sans-serif; font-size:15px; letter-spacing:-.035em; text-decoration:none; font-weight:400; }
+    .menu-button { border:0; padding:12px 0 12px 16px; color:var(--paper); background:transparent; display:flex; gap:14px; align-items:center; cursor:pointer; font-size:10px; letter-spacing:.2em; }
+    .menu-icon { display:grid;gap:6px; }
+    .menu-icon i { width:26px;height:1px;background:currentColor;display:block;transition:transform .35s ease; }
+    .nav-open .menu-icon i:first-child { transform:translateY(3.5px) rotate(45deg); }
+    .nav-open .menu-icon i:last-child { transform:translateY(-3.5px) rotate(-45deg); }
+    .nav-screen { position:fixed;inset:0;z-index:25;background:#080606f5;padding:110px max(28px,7vw) 38px;display:flex;flex-direction:column;justify-content:space-between;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s; }
+    .nav-open .nav-screen { opacity:1;visibility:visible; }
+    .nav-screen ul { list-style:none;margin:0;padding:0; }
+    .nav-screen li a { display:flex;gap:20px;align-items:baseline;padding:8px 0;text-decoration:none;font:clamp(27px,4.5vw,70px)/1 'Instrument Serif',Georgia,serif;transition:color .2s; }
+    .nav-screen li a:hover { color:var(--red); }
+    .nav-screen li span { font:10px/1 'DM Mono',monospace;color:var(--muted); }
+    .nav-foot { display:flex;justify-content:space-between;gap:30px;font-size:10px;letter-spacing:.13em;text-transform:uppercase; }
+    .eyebrow { font-size:10px;line-height:1.6;letter-spacing:.18em;text-transform:uppercase; }
+    .eyebrow.muted { color:#b9aaa5; }
+    .hero { min-height:100svh;position:relative;isolation:isolate;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;border-bottom:1px solid var(--hair); }
+    .hero-image { position:absolute;inset:0;z-index:-3;width:100%;height:100%;object-fit:cover;object-position:center;transition:opacity .7s ease; }
+    .hero-image.hero-original { opacity:0; }
+    .hero:hover .hero-image.hero-original { opacity:1; }
+    .hero-top-note { position:absolute;top:110px;left:clamp(18px,3vw,52px); }
+    .hero-side-note { position:absolute;top:50%;right:clamp(18px,3vw,52px);writing-mode:vertical-rl;transform:translateY(-50%);font-size:10px;letter-spacing:.2em; }
+    .hero-content { padding:0 clamp(18px,3vw,52px) 35px; width:100%; }
+    .hero-title { margin:0 0 6px;font:clamp(94px,18vw,340px)/.68 'Instrument Serif',Georgia,serif;letter-spacing:-.05em;white-space:nowrap;transform:translateX(-.023em);text-shadow:0 3px 18px #0008; }
+    .hero-title .am { font-style:italic;margin:0 .05em; }
+    .hero-subrow { display:flex;align-items:flex-end;justify-content:space-between;gap:20px;border-top:1px solid #f1eae388;padding-top:20px;margin-top:clamp(20px,4vw,70px); }
+    .hero-subrow strong { font:italic clamp(38px,5.9vw,105px)/.9 'Instrument Serif',Georgia,serif;font-weight:400;letter-spacing:-.05em; }
+    .hero-subrow .eyebrow { text-align:right;max-width:240px; }
+    .hero-scroll { position:absolute;bottom:42%;right:3vw;font-size:10px;letter-spacing:.15em;transform:rotate(90deg) translateX(50%);transform-origin:right bottom; }
+    .statement { display:grid;grid-template-columns:1fr minmax(320px,760px);gap:clamp(30px,8vw,140px);padding:clamp(85px,12vw,180px) clamp(18px,5vw,90px);border-bottom:1px solid var(--hair); }
+    .statement .section-no { color:var(--red); }
+    .statement-copy .lead { margin:0 0 35px;font:clamp(38px,5vw,80px)/1.06 'Instrument Serif',Georgia,serif;letter-spacing:-.04em; }
+    .statement-copy .lead em { color:var(--red);font-weight:normal; }
+    .statement-copy p:not(.lead) { margin:0;max-width:660px;color:#bdb1aa;font:clamp(13px,1.1vw,15px)/1.9 'DM Mono',monospace;letter-spacing:.005em; }
+    .archive-line { display:flex;align-items:center;gap:12px;padding:16px clamp(18px,3vw,52px);border-bottom:1px solid var(--hair);font-size:10px;letter-spacing:.2em;text-transform:uppercase; }
+    .archive-line .moving { overflow:hidden;flex:1;white-space:nowrap;display:flex;justify-content:flex-end;color:#b6a6a0; }
+    .archive-line .dot { display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--red); }
+    .gallery { padding:6px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:6px; }
+    .frame { position:relative;grid-column:span 4;aspect-ratio:1.05;overflow:hidden;margin:0;background:#1a0707;cursor:zoom-in; }
+    .frame.wide { grid-column:span 8;aspect-ratio:1.65; }
+    .frame.slim { grid-column:span 4;aspect-ratio:.72; }
+    .frame.full { grid-column:span 12;aspect-ratio:2.1; }
+    .frame.tall { grid-column:span 6;aspect-ratio:.97; }
+    .frame.mid { grid-column:span 6;aspect-ratio:1.36; }
+    .frame img { position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;transition:opacity .65s ease; }
+    .frame img.original { opacity:0; }
+    .frame:hover img.original,.frame.show-original img.original,.frame:focus-visible img.original { opacity:1; }
+    .frame .frame-no { position:absolute;top:15px;left:17px;z-index:2;font:10px/1 'DM Mono',monospace;letter-spacing:.08em;color:#fff9;opacity:0;transition:opacity .3s; }
+    .frame:hover .frame-no,.frame.show-original .frame-no { opacity:1; }
+    .frame .original-label { position:absolute;bottom:18px;left:17px;z-index:2;font:10px/1 'DM Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:white;opacity:0;transition:opacity .3s; }
+    .frame:hover .original-label,.frame.show-original .original-label { opacity:1; }
+    .interruption { grid-column:span 12;min-height:min(65vh,620px);padding:clamp(45px,6vw,95px);display:flex;align-items:center;justify-content:center;position:relative;text-align:center;background:var(--red);color:#170000; }
+    .interruption .word { font:italic clamp(74px,13vw,250px)/.8 'Instrument Serif',Georgia,serif;letter-spacing:-.07em; }
+    .interruption .small { position:absolute;bottom:20px;left:22px;font-size:10px;letter-spacing:.2em;text-transform:uppercase; }
+    .end-mark { padding:clamp(90px,12vw,170px) clamp(18px,5vw,90px);border-top:1px solid var(--hair); }
+    .end-mark h2 { max-width:1300px;margin:0 0 55px;font:clamp(65px,12vw,230px)/.83 'Instrument Serif',Georgia,serif;letter-spacing:-.065em; }
+    .end-mark h2 em { color:var(--red);font-weight:normal; }
+    .end-mark .end-meta { display:flex;justify-content:space-between;gap:30px;border-top:1px solid var(--hair);padding-top:25px; }
+    .links { background:var(--paper);color:var(--deep);padding:clamp(65px,9vw,140px) clamp(18px,5vw,90px); }
+    .links .links-label { display:block;margin-bottom:35px;font-size:10px;letter-spacing:.2em; }
+    .links a { display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:22px 0;border-bottom:1px solid #19100f5c;text-decoration:none;font:clamp(34px,5vw,83px)/1 'Instrument Serif',Georgia,serif;letter-spacing:-.035em;transition:color .25s; }
+    .links a:first-of-type { border-top:1px solid #19100f5c; }
+    .links a:hover { color:#b81711; }
+    .links a small { flex:none;font:10px/1.5 'DM Mono',monospace;letter-spacing:.12em;text-transform:uppercase; }
+    .links a .arrow { font:normal .55em/1 Arial,sans-serif;display:inline-block;transition:transform .2s; }
+    .links a:hover .arrow { transform:translate(6px,-4px); }
+    footer { display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;padding:32px clamp(18px,3vw,52px);font-size:10px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase; }
+    footer a { text-underline-offset:4px; }
+    dialog { background:#080606;border:0;padding:0;max-width:none;max-height:none;width:100vw;height:100dvh;color:var(--paper);overflow:hidden; }
+    dialog::backdrop { background:#000e; }
+    .lightbox-stage { position:absolute;inset:65px 7vw 70px;display:flex;align-items:center;justify-content:center; }
+    .lightbox-stage img { max-width:100%;max-height:100%;object-fit:contain;filter:none; }
+    .lightbox-top { display:flex;align-items:center;justify-content:space-between;position:absolute;top:24px;left:26px;right:26px;font-size:10px;letter-spacing:.15em; }
+    .lightbox-close,.lightbox-next,.lightbox-prev { border:0;background:transparent;color:var(--paper);cursor:pointer;padding:14px; }
+    .lightbox-close { font-size:22px;line-height:1; }
+    .lightbox-prev,.lightbox-next { position:absolute;top:50%;transform:translateY(-50%);font:29px/1 'Instrument Serif',Georgia,serif; }
+    .lightbox-prev { left:14px; }.lightbox-next { right:14px; }
+    .lightbox-bottom { position:absolute;bottom:23px;left:26px;right:26px;display:flex;justify-content:space-between;font-size:10px;letter-spacing:.15em; }
+    @media(max-width:900px) {
+      .statement { grid-template-columns:1fr;gap:44px; }
+      .hero-title { font-size:19vw; }
+      .hero-side-note { display:none; }
+      .frame,.frame.wide,.frame.slim,.frame.tall,.frame.mid { grid-column:span 6;aspect-ratio:.9; }
+      .frame.full { aspect-ratio:1.5; }
+      .interruption { min-height:45vh; }
+    }
+    @media(max-width:580px) {
+      .site-top { height:65px; }
+      .hero-top-note { top:95px; }
+      .hero { min-height:83svh; }
+      .hero-title { font-size:19.6vw; }
+      .hero-content { padding-bottom:24px; }
+      .hero-subrow { align-items:flex-start;margin-top:25px;padding-top:15px;flex-direction:column; }
+      .hero-subrow strong { font-size:12vw; }
+      .hero-subrow .eyebrow { text-align:left; }
+      .hero-scroll { display:none; }
+      .statement { padding:70px 22px; }
+      .statement-copy .lead { font-size:44px; }
+      .gallery { gap:4px;padding:4px; }
+      .frame,.frame.slim,.frame.tall,.frame.mid,.frame.wide { grid-column:span 6;aspect-ratio:.72; }
+      .frame.full { aspect-ratio:1.05; }
+      .frame .frame-no,.frame .original-label { opacity:.8; }
+      .interruption { min-height:300px;padding:25px; }
+      .interruption .word { font-size:23vw; }
+      .end-mark h2 { font-size:19vw; }
+      .end-mark .end-meta { flex-direction:column; }
+      .links a { font-size:36px;gap:8px; }
+      .links a small { font-size:9px; }
+      .nav-screen { padding:100px 24px 30px; }
+      .nav-screen li a { font-size:37px; }
+      .lightbox-stage { inset:70px 35px 80px; }
+      .lightbox-prev { left:0; }.lightbox-next { right:0; }
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.frame img,.hero-image{transition:none}}
+  </style>
+</head>
+<body>
+  <header class="site-top">
+    <a class="wordmark" href="../index.html">Natalia Neuhaus</a>
+    <button class="menu-button" id="menuButton" type="button" aria-controls="portfolioMenu" aria-expanded="false" aria-label="Open portfolio menu"><span>MENU</span><span class="menu-icon"><i></i><i></i></span></button>
+  </header>
+  <nav class="nav-screen" id="portfolioMenu" aria-label="Portfolio projects" aria-hidden="true">
+    <ul>
+      <li><a href="../tapestry-soap-blood-bath/"><span>01</span>Tapestry, Soap and Blood Bath</a></li>
+      <li><a href="../milk-route/"><span>02</span>The Milk Route</a></li>
+      <li><a href="../niagara/dossier-v2.html"><span>03</span>Greetings from Niagara</a></li>
+      <li><a href="../intermission/"><span>04</span>Intermission</a></li>
+      <li><a href="../healers/"><span>05</span>Healers, Sex Work as a Calling</a></li>
+      <li><a href="../burlesque-color/"><span>06</span>Burlesque Mon Amour</a></li>
+      <li><a href="./index.html" aria-current="page"><span>07</span>I AM JANE DOE — Installation</a></li>
+    </ul>
+    <div class="nav-foot"><span>© Natalia Neuhaus</span><a href="../bio-contact/">Bio &amp; Contact</a></div>
+  </nav>
+
+  <main>
+    <section class="hero" aria-labelledby="title">
+      <img class="hero-image hero-duotone" src="./duotones/Natalia_Neuhaus-10.jpg" alt="The I AM JANE DOE installation room illuminated in red, with portraits on one wall and a projected image at the far end." fetchpriority="high">
+      <img class="hero-image hero-original" src="./originals/Natalia_Neuhaus-10.jpg" alt="" aria-hidden="true">
+      <span class="hero-top-note eyebrow">Natalia Neuhaus<br>Interactive installation / 2026</span>
+      <span class="hero-side-note">THE ROOM / THE MIRROR / THE WALL</span>
+      <div class="hero-content">
+        <h1 class="hero-title" id="title">I <span class="am">AM</span> JANE DOE</h1>
+        <div class="hero-subrow">
+          <strong>We are Jane Doe.</strong>
+          <span class="eyebrow">An encounter<br>becomes an image.<br>An image becomes a wall.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="statement" aria-label="About the installation">
+      <div class="eyebrow section-no">01 / The installation</div>
+      <div class="statement-copy">
+        <p class="lead">One person enters the frame.<br><em>Many faces fill the wall.</em></p>
+        <p><em>I AM JANE DOE</em> is a participatory installation by Natalia Neuhaus. A red-lit room, a mirror, a camera, and a printer turn a private encounter into a public image. Each portrait is printed and added to a collective wall — a growing record of presence, visibility, and refusal to remain silent. The installation is part of a larger project confronting sexual, physical, and psychological violence and the struggle to be heard.</p>
+      </div>
+    </section>
+
+    <div class="archive-line"><span class="dot" aria-hidden="true"></span><span>Photographic documentation</span><span class="moving">Hover to reveal the original photographs&nbsp; / &nbsp;Tap on mobile</span><span>15 views</span></div>
+    <section class="gallery" id="gallery" aria-label="Photographs of the I AM JANE DOE installation"></section>
+
+    <section class="end-mark" aria-label="Closing statement">
+      <span class="eyebrow muted">From I to we</span>
+      <h2>I am.<br><em>We are.</em></h2>
+      <div class="end-meta"><span class="eyebrow muted">I AM JANE DOE / Installation documentation</span><span class="eyebrow muted">Natalia Neuhaus © 2026</span></div>
+    </section>
+
+    <section class="links" aria-label="Explore the wider project">
+      <span class="links-label">CONTINUE / THE LARGER PROJECT</span>
+      <a href="https://natalianeuhaus.github.io/I-AM-JANE-DOE/"><span>I AM JANE DOE</span><small>Project <span class="arrow">↗</span></small></a>
+      <a href="https://natalianeuhaus.github.io/I-AM-JANE-DOE/words/"><span>In Their Words</span><small>Accounts <span class="arrow">↗</span></small></a>
+      <a href="https://natalianeuhaus.github.io/I-AM-JANE-DOE/predatorpedia/"><span>Predatorpedia</span><small>Encyclopedia <span class="arrow">↗</span></small></a>
+    </section>
+  </main>
+
+  <footer><span>© Natalia Neuhaus. All rights reserved.</span><a href="../index.html">Back to portfolio ↑</a><span>Content note: violence and trauma</span></footer>
+
+  <dialog id="lightbox" aria-label="Installation photograph">
+    <div class="lightbox-top"><span>I AM JANE DOE / DOCUMENTATION</span><button class="lightbox-close" id="closeLightbox" aria-label="Close image">×</button></div>
+    <button class="lightbox-prev" id="prevImage" aria-label="Previous photograph">←</button>
+    <div class="lightbox-stage"><img id="lightboxImage" alt="Installation photograph"></div>
+    <button class="lightbox-next" id="nextImage" aria-label="Next photograph">→</button>
+    <div class="lightbox-bottom"><span>ORIGINAL PHOTOGRAPH</span><span id="lightboxCount"></span></div>
+  </dialog>
+
+  <script>
+    (function () {
+      const menuButton = document.getElementById('menuButton');
+      const menu = document.getElementById('portfolioMenu');
+      const closeMenu = () => { document.body.classList.remove('nav-open'); menuButton.setAttribute('aria-expanded','false');menuButton.setAttribute('aria-label','Open portfolio menu');menu.setAttribute('aria-hidden','true'); };
+      menuButton.addEventListener('click', () => { const opened=document.body.classList.toggle('nav-open');menuButton.setAttribute('aria-expanded',String(opened));menuButton.setAttribute('aria-label',opened?'Close portfolio menu':'Open portfolio menu');menu.setAttribute('aria-hidden',String(!opened)); });
+      menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+      const sizes = ['wide','slim','slim','wide','tall','mid','mid','tall','full','slim','wide','slim','mid','mid','wide'];
+      const numbers = [10,9,1,2,13,14,7,8,11,12,3,4,5,6,15];
+      const gallery = document.getElementById('gallery');
+      let selected = 0;
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImage = document.getElementById('lightboxImage');
+      const lightboxCount = document.getElementById('lightboxCount');
+      const duotonePath = n => './duotones/Natalia_Neuhaus-'+n+'.jpg';
+      const originalPath = n => './originals/Natalia_Neuhaus-'+n+'.jpg';
+      numbers.forEach((n,index) => {
+        if (index===10) { const block=document.createElement('div');block.className='interruption';block.innerHTML='<span class="word">WE ARE.</span><span class="small">A collective image / never a single story</span>';gallery.append(block); }
+        const frame=document.createElement('figure');frame.className='frame '+sizes[index];frame.tabIndex=0;frame.setAttribute('role','button');frame.setAttribute('aria-label','View installation photograph '+n);
+        const img=document.createElement('img');img.className='duotone';img.src=duotonePath(n);img.alt='Photographic view '+n+' of the red-lit I AM JANE DOE installation';img.loading=index<3?'eager':'lazy';img.decoding='async';
+        const original=document.createElement('img');original.className='original';original.src=originalPath(n);original.alt='';original.setAttribute('aria-hidden','true');original.loading=index<3?'eager':'lazy';original.decoding='async';
+        const count=document.createElement('span');count.className='frame-no';count.textContent=String(index+1).padStart(2,'0')+' / 15';
+        const note=document.createElement('span');note.className='original-label';note.textContent='Original / View ↗';
+        frame.append(img,original,count,note);
+        frame.addEventListener('click', () => { if (window.matchMedia('(hover: none)').matches && !frame.classList.contains('show-original')) { frame.classList.add('show-original');return; }openLightbox(index); });
+        frame.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openLightbox(index);}});
+        gallery.append(frame);
+      });
+      function renderLightbox(){const n=numbers[selected];lightboxImage.src=originalPath(n);lightboxImage.alt='Original photograph '+n+' of the I AM JANE DOE installation';lightboxCount.textContent=String(selected+1).padStart(2,'0')+' / 15';}
+      function openLightbox(index){selected=index;renderLightbox();lightbox.showModal();document.body.classList.add('modal-open');}
+      const closeLightbox=()=>{lightbox.close();document.body.classList.remove('modal-open');};
+      document.getElementById('closeLightbox').addEventListener('click',closeLightbox);
+      document.getElementById('prevImage').addEventListener('click',()=>{selected=(selected+numbers.length-1)%numbers.length;renderLightbox();});
+      document.getElementById('nextImage').addEventListener('click',()=>{selected=(selected+1)%numbers.length;renderLightbox();});
+      lightbox.addEventListener('close',()=>document.body.classList.remove('modal-open'));
+      lightbox.addEventListener('click',e=>{if(e.target===lightbox)closeLightbox();});
+      window.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('nav-open'))closeMenu();if(!lightbox.open)return;if(e.key==='ArrowLeft'){selected=(selected+numbers.length-1)%numbers.length;renderLightbox();}if(e.key==='ArrowRight'){selected=(selected+1)%numbers.length;renderLightbox();}});
+    }());
+  </script>
+</body>
+</html>
