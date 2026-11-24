@@ -37,15 +37,13 @@
     .eyebrow { font-size:10px;line-height:1.6;letter-spacing:.18em;text-transform:uppercase; }
     .eyebrow.muted { color:#b9aaa5; }
     .hero { min-height:100svh;position:relative;isolation:isolate;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;border-bottom:1px solid var(--hair); }
-    .hero-image { position:absolute;inset:0;z-index:-3;width:100%;height:100%;object-fit:cover;object-position:center;filter:grayscale(1) contrast(1.5) brightness(.82) sepia(1) saturate(3.6) hue-rotate(-42deg);transition:filter 1.2s ease,transform 2s ease;transform:scale(1.015); }
-    .hero:hover .hero-image { filter:none;transform:scale(1.045); }
-    .hero::after { content:'';position:absolute;inset:0;background:linear-gradient(180deg,#08060669 5%,transparent 37%,#080606bb 100%),#7f0c0c35;mix-blend-mode:multiply;z-index:-2;pointer-events:none;transition:opacity 1s; }
-    .hero:hover::after { opacity:.35; }
-    .hero::before { content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,#090707 0%,transparent 45%);pointer-events:none; }
+    .hero-image { position:absolute;inset:0;z-index:-3;width:100%;height:100%;object-fit:cover;object-position:center;transition:opacity .7s ease; }
+    .hero-image.hero-original { opacity:0; }
+    .hero:hover .hero-image.hero-original { opacity:1; }
     .hero-top-note { position:absolute;top:110px;left:clamp(18px,3vw,52px); }
     .hero-side-note { position:absolute;top:50%;right:clamp(18px,3vw,52px);writing-mode:vertical-rl;transform:translateY(-50%);font-size:10px;letter-spacing:.2em; }
     .hero-content { padding:0 clamp(18px,3vw,52px) 35px; width:100%; }
-    .hero-title { margin:0 0 6px;font:clamp(94px,18vw,340px)/.68 'Instrument Serif',Georgia,serif;letter-spacing:-.05em;white-space:nowrap;transform:translateX(-.023em); }
+    .hero-title { margin:0 0 6px;font:clamp(94px,18vw,340px)/.68 'Instrument Serif',Georgia,serif;letter-spacing:-.05em;white-space:nowrap;transform:translateX(-.023em);text-shadow:0 3px 18px #0008; }
     .hero-title .am { font-style:italic;margin:0 .05em; }
     .hero-subrow { display:flex;align-items:flex-end;justify-content:space-between;gap:20px;border-top:1px solid #f1eae388;padding-top:20px;margin-top:clamp(20px,4vw,70px); }
     .hero-subrow strong { font:italic clamp(38px,5.9vw,105px)/.9 'Instrument Serif',Georgia,serif;font-weight:400;letter-spacing:-.05em; }
@@ -66,10 +64,9 @@
     .frame.full { grid-column:span 12;aspect-ratio:2.1; }
     .frame.tall { grid-column:span 6;aspect-ratio:.97; }
     .frame.mid { grid-column:span 6;aspect-ratio:1.36; }
-    .frame img { width:100%;height:100%;display:block;object-fit:cover;filter:grayscale(1) contrast(1.5) brightness(.82) sepia(1) saturate(3.6) hue-rotate(-42deg);transition:filter .68s ease,transform 1.2s cubic-bezier(.21,.61,.18,1);transform:scale(1.01); }
-    .frame::after { content:'';position:absolute;inset:0;background:rgba(114,0,0,.36);mix-blend-mode:multiply;pointer-events:none;transition:opacity .6s; }
-    .frame:hover img,.frame.show-original img,.frame:focus-visible img { filter:none;transform:scale(1.055); }
-    .frame:hover::after,.frame.show-original::after,.frame:focus-visible::after { opacity:0; }
+    .frame img { position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;transition:opacity .65s ease; }
+    .frame img.original { opacity:0; }
+    .frame:hover img.original,.frame.show-original img.original,.frame:focus-visible img.original { opacity:1; }
     .frame .frame-no { position:absolute;top:15px;left:17px;z-index:2;font:10px/1 'DM Mono',monospace;letter-spacing:.08em;color:#fff9;opacity:0;transition:opacity .3s; }
     .frame:hover .frame-no,.frame.show-original .frame-no { opacity:1; }
     .frame .original-label { position:absolute;bottom:18px;left:17px;z-index:2;font:10px/1 'DM Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:white;opacity:0;transition:opacity .3s; }
@@ -136,7 +133,7 @@
       .lightbox-stage { inset:70px 35px 80px; }
       .lightbox-prev { left:0; }.lightbox-next { right:0; }
     }
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.frame img,.hero-image,.frame::after,.hero::after{transition:none}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.frame img,.hero-image{transition:none}}
   </style>
 </head>
 <body>
@@ -159,7 +156,8 @@
 
   <main>
     <section class="hero" aria-labelledby="title">
-      <img class="hero-image" src="./webp/Natalia_Neuhaus-21.webp" alt="The I AM JANE DOE installation room illuminated in red, with portraits on one wall and a projected image at the far end." fetchpriority="high">
+      <img class="hero-image hero-duotone" src="./duotones/Natalia_Neuhaus-10.jpg" alt="The I AM JANE DOE installation room illuminated in red, with portraits on one wall and a projected image at the far end." fetchpriority="high">
+      <img class="hero-image hero-original" src="./originals/Natalia_Neuhaus-10.jpg" alt="" aria-hidden="true">
       <span class="hero-top-note eyebrow">Natalia Neuhaus<br>Interactive installation / 2026</span>
       <span class="hero-side-note">THE ROOM / THE MIRROR / THE WALL</span>
       <div class="hero-content">
@@ -179,7 +177,7 @@
       </div>
     </section>
 
-    <div class="archive-line"><span class="dot" aria-hidden="true"></span><span>Photographic documentation</span><span class="moving">Hover to reveal the original photographs&nbsp; / &nbsp;Tap on mobile</span><span>32 views</span></div>
+    <div class="archive-line"><span class="dot" aria-hidden="true"></span><span>Photographic documentation</span><span class="moving">Hover to reveal the original photographs&nbsp; / &nbsp;Tap on mobile</span><span>15 views</span></div>
     <section class="gallery" id="gallery" aria-label="Photographs of the I AM JANE DOE installation"></section>
 
     <section class="end-mark" aria-label="Closing statement">
@@ -213,26 +211,28 @@
       const closeMenu = () => { document.body.classList.remove('nav-open'); menuButton.setAttribute('aria-expanded','false');menuButton.setAttribute('aria-label','Open portfolio menu');menu.setAttribute('aria-hidden','true'); };
       menuButton.addEventListener('click', () => { const opened=document.body.classList.toggle('nav-open');menuButton.setAttribute('aria-expanded',String(opened));menuButton.setAttribute('aria-label',opened?'Close portfolio menu':'Open portfolio menu');menu.setAttribute('aria-hidden',String(!opened)); });
       menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
-      const sizes = ['wide','slim','slim','wide','tall','mid','mid','tall','full','slim','wide','slim','mid','mid','wide','slim','tall','tall','wide','slim','full','mid','mid','slim','wide','slim','tall','tall','wide','slim','slim','wide'];
-      const numbers = [21,19,1,2,29,30,17,18,23,25,26,27,28,31,32,13,14,15,16,20,3,4,5,6,7,8,9,10,11,12,22,24];
+      const sizes = ['wide','slim','slim','wide','tall','mid','mid','tall','full','slim','wide','slim','mid','mid','wide'];
+      const numbers = [10,9,1,2,13,14,7,8,11,12,3,4,5,6,15];
       const gallery = document.getElementById('gallery');
       let selected = 0;
       const lightbox = document.getElementById('lightbox');
       const lightboxImage = document.getElementById('lightboxImage');
       const lightboxCount = document.getElementById('lightboxCount');
-      const imagePath = n => './webp/Natalia_Neuhaus-'+n+'.webp';
+      const duotonePath = n => './duotones/Natalia_Neuhaus-'+n+'.jpg';
+      const originalPath = n => './originals/Natalia_Neuhaus-'+n+'.jpg';
       numbers.forEach((n,index) => {
         if (index===10) { const block=document.createElement('div');block.className='interruption';block.innerHTML='<span class="word">WE ARE.</span><span class="small">A collective image / never a single story</span>';gallery.append(block); }
         const frame=document.createElement('figure');frame.className='frame '+sizes[index];frame.tabIndex=0;frame.setAttribute('role','button');frame.setAttribute('aria-label','View installation photograph '+n);
-        const img=document.createElement('img');img.src=imagePath(n);img.alt='Photographic view '+n+' of the red-lit I AM JANE DOE installation';img.loading=index<3?'eager':'lazy';img.decoding='async';
-        const count=document.createElement('span');count.className='frame-no';count.textContent=String(index+1).padStart(2,'0')+' / 32';
+        const img=document.createElement('img');img.className='duotone';img.src=duotonePath(n);img.alt='Photographic view '+n+' of the red-lit I AM JANE DOE installation';img.loading=index<3?'eager':'lazy';img.decoding='async';
+        const original=document.createElement('img');original.className='original';original.src=originalPath(n);original.alt='';original.setAttribute('aria-hidden','true');original.loading=index<3?'eager':'lazy';original.decoding='async';
+        const count=document.createElement('span');count.className='frame-no';count.textContent=String(index+1).padStart(2,'0')+' / 15';
         const note=document.createElement('span');note.className='original-label';note.textContent='Original / View ↗';
-        frame.append(img,count,note);
+        frame.append(img,original,count,note);
         frame.addEventListener('click', () => { if (window.matchMedia('(hover: none)').matches && !frame.classList.contains('show-original')) { frame.classList.add('show-original');return; }openLightbox(index); });
         frame.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openLightbox(index);}});
         gallery.append(frame);
       });
-      function renderLightbox(){const n=numbers[selected];lightboxImage.src=imagePath(n);lightboxImage.alt='Original photograph '+n+' of the I AM JANE DOE installation';lightboxCount.textContent=String(selected+1).padStart(2,'0')+' / 32';}
+      function renderLightbox(){const n=numbers[selected];lightboxImage.src=originalPath(n);lightboxImage.alt='Original photograph '+n+' of the I AM JANE DOE installation';lightboxCount.textContent=String(selected+1).padStart(2,'0')+' / 15';}
       function openLightbox(index){selected=index;renderLightbox();lightbox.showModal();document.body.classList.add('modal-open');}
       const closeLightbox=()=>{lightbox.close();document.body.classList.remove('modal-open');};
       document.getElementById('closeLightbox').addEventListener('click',closeLightbox);
