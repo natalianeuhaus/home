@@ -6,15 +6,6 @@
     const panel = document.querySelector(".menu-panel");
     if (!toggle || !panel) return;
 
-    const workLinks = panel.querySelector(".menu-links--numbered");
-    if (workLinks && !workLinks.querySelector('[href*="i-am-jane-doe-installation"]')) {
-      const newLink = document.createElement("a");
-      newLink.href = "https://natalianeuhaus.github.io/home/i-am-jane-doe-installation/";
-      newLink.innerHTML = '<span class="menu-project-number">7</span><span>I AM JANE DOE — Installation</span>';
-      newLink.tabIndex = -1;
-      workLinks.appendChild(newLink);
-    }
-
     let scrim = null;
     const links = Array.from(panel.querySelectorAll("a"));
 
