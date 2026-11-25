@@ -139,10 +139,17 @@
 .archive-row--2 .archive-document,.archive-row--3 .archive-document{grid-column:span 4}
 .archive-row--2 .archive-photo--follow{grid-column:span 3}
 .archive-row--3 .archive-photo--follow{grid-column:span 5}
+/* Periodic oversized photographs interrupt the regular photo/document rhythm. */
+.archive-row:nth-child(6n+1),.archive-row:nth-child(6n+4){height:clamp(460px,50vw,740px);grid-template-rows:repeat(2,minmax(0,1fr))}
+.archive-row:nth-child(6n+1) .archive-photo--lead{grid-column:span 8;grid-row:span 2}
+.archive-row:nth-child(6n+1) .archive-document,.archive-row:nth-child(6n+1) .archive-photo--follow{grid-column:span 4;grid-row:span 1}
+.archive-row:nth-child(6n+4) .archive-photo--lead{grid-column:1/span 4;grid-row:1}
+.archive-row:nth-child(6n+4) .archive-document{grid-column:1/span 4;grid-row:2}
+.archive-row:nth-child(6n+4) .archive-photo--follow{grid-column:5/span 8;grid-row:1/span 2}
 .archive-row .archive-tile{position:relative;min-width:0;min-height:0;width:100%;height:100%;margin:0;padding:0;display:block;overflow:hidden;border:0;border-radius:0;background:#151515;color:#f1efe9;cursor:zoom-in;text-align:left}
 .archive-row .archive-tile img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .7s cubic-bezier(.22,1,.36,1)}
-.archive-row .archive-document{background:#d8d3c9}
-.archive-row .archive-document img{object-fit:contain;padding:clamp(8px,1.2vw,18px);background:#d8d3c9}
+.archive-row .archive-document{background:#050505}
+.archive-row .archive-document img{object-fit:contain;padding:0;background:transparent}
 .archive-row .archive-tile:hover img,.archive-row .archive-tile:focus-visible img{transform:scale(1.025)}
 .archive-row .archive-tile:focus-visible{outline:2px solid #f1efe9;outline-offset:-3px;z-index:1}
 .archive-row .archive-caption{position:absolute;left:0;right:0;bottom:0;display:block;margin:0;padding:40px 16px 15px;background:linear-gradient(transparent,rgba(0,0,0,.74));color:#f1efe9;font:400 9px/1.4 var(--sans);letter-spacing:.14em;text-transform:uppercase;opacity:0;transform:translateY(5px);transition:opacity .25s ease,transform .25s ease;pointer-events:none}
@@ -155,6 +162,9 @@
   .archive-row{grid-template-columns:repeat(2,minmax(0,1fr));height:auto;gap:7px}
   .archive-row .archive-tile{grid-column:span 1;aspect-ratio:3/4;height:auto}
   .archive-row .archive-photo--lead{grid-column:span 2;aspect-ratio:3/2}
+  .archive-row:nth-child(6n+1),.archive-row:nth-child(6n+4){height:auto;grid-template-rows:none}
+  .archive-row:nth-child(6n+1) .archive-tile,.archive-row:nth-child(6n+4) .archive-tile{grid-column:span 1;grid-row:auto}
+  .archive-row:nth-child(6n+1) .archive-photo--lead,.archive-row:nth-child(6n+4) .archive-photo--lead{grid-column:span 2}
   .archive-row .archive-caption{opacity:1;transform:none;padding:24px 9px 10px;font-size:8px}
 }
 @media(prefers-reduced-motion:reduce){.archive-row .archive-tile img,.archive-row .archive-caption{transition:none}}
@@ -196,7 +206,7 @@ function makeArchiveTile(kind,index,position){
   const number=String(index+1).padStart(2,'0');
   const caption=record?record.caption:'Nevada photograph '+number;
   const full=record?record.src:'./landscape/'+number+'.webp';
-  const thumb=record?record.thumb:full;
+  const thumb=full;
   button.dataset.src=full;button.dataset.caption=caption;
   button.setAttribute('aria-label','View full-size '+caption);
   const img=document.createElement('img');img.src=thumb;img.alt=caption;img.loading=index<2?'eager':'lazy';img.decoding='async';
