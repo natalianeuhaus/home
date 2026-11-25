@@ -124,12 +124,12 @@
 
 /* Draft only: photographic landscapes and evidence interwoven as an archive. */
 .archive-mosaic{padding-top:clamp(100px,12vw,180px);padding-bottom:clamp(110px,13vw,190px);background:#050505}
-.archive-mosaic-head{margin:0 0 clamp(54px,7vw,112px)}
+.archive-mosaic-head{margin:0}
 .archive-mosaic-title{max-width:950px;margin:42px 0 34px;font:400 clamp(44px,6.4vw,92px)/.99 var(--serif);letter-spacing:-.045em}
 .archive-mosaic-intro{max-width:775px;margin:0;color:#b8b5ae;font-size:15px;line-height:1.68}
 .archive-mosaic-key{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px 28px;margin-top:clamp(54px,7vw,100px);border-top:1px solid var(--line);padding-top:14px;font:400 9px/1.4 var(--sans);letter-spacing:.16em;color:#8f8d88}
-.archive-mosaic-grid{display:flex;flex-direction:column;gap:clamp(6px,.8vw,12px)}
-.archive-row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(6px,.8vw,12px);height:clamp(300px,32vw,520px)}
+.archive-mosaic-grid{display:flex;flex-direction:column;gap:0;width:calc(100% + var(--pad) + var(--pad));margin-left:calc(0px - var(--pad))}
+.archive-row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:0;height:clamp(300px,32vw,520px)}
 .archive-row .archive-photo--lead{grid-column:span 6}
 .archive-row .archive-document{grid-column:span 3}
 .archive-row .archive-photo--follow{grid-column:span 3}
@@ -140,7 +140,7 @@
 .archive-row--2 .archive-photo--follow{grid-column:span 3}
 .archive-row--3 .archive-photo--follow{grid-column:span 5}
 /* Periodic oversized photographs interrupt the regular photo/document rhythm. */
-.archive-row:nth-child(6n+1),.archive-row:nth-child(6n+4){height:clamp(460px,50vw,740px);grid-template-rows:repeat(2,minmax(0,1fr))}
+.archive-row:nth-child(6n+1),.archive-row:nth-child(6n+4){height:max(560px,100svh);grid-template-rows:repeat(2,minmax(0,1fr))}
 .archive-row:nth-child(6n+1) .archive-photo--lead{grid-column:span 8;grid-row:span 2}
 .archive-row:nth-child(6n+1) .archive-document,.archive-row:nth-child(6n+1) .archive-photo--follow{grid-column:span 4;grid-row:span 1}
 .archive-row:nth-child(6n+4) .archive-photo--lead{grid-column:1/span 4;grid-row:1}
@@ -161,7 +161,7 @@
   .archive-mosaic-title{margin-top:28px;font-size:clamp(44px,10vw,70px)}
   .archive-mosaic-intro{font-size:14px}
   .archive-mosaic-key{gap:10px 18px;margin-top:48px;font-size:8px}
-  .archive-row{grid-template-columns:repeat(2,minmax(0,1fr));height:auto;gap:7px}
+  .archive-row{grid-template-columns:repeat(2,minmax(0,1fr));height:auto;gap:0}
   .archive-row .archive-tile{grid-column:span 1;aspect-ratio:3/4;height:auto}
   .archive-row .archive-photo--lead{grid-column:span 2;aspect-ratio:3/2}
   .archive-row:nth-child(6n+1),.archive-row:nth-child(6n+4){height:auto;grid-template-rows:none}
