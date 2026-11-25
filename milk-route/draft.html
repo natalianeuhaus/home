@@ -149,7 +149,9 @@
 .archive-row .archive-tile{position:relative;min-width:0;min-height:0;width:100%;height:100%;margin:0;padding:0;display:block;overflow:hidden;border:0;border-radius:0;background:#151515;color:#f1efe9;cursor:zoom-in;text-align:left}
 .archive-row .archive-tile img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .7s cubic-bezier(.22,1,.36,1)}
 .archive-row .archive-document{background:#050505}
-.archive-row .archive-document img{object-fit:contain;padding:0;background:transparent}
+.archive-row .archive-document img{object-fit:cover;padding:0;background:transparent}
+.archive-row .archive-document::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.38);opacity:1;transition:opacity .35s ease;pointer-events:none}
+.archive-row .archive-document:hover::after,.archive-row .archive-document:focus-visible::after{opacity:0}
 .archive-row .archive-tile:hover img,.archive-row .archive-tile:focus-visible img{transform:scale(1.025)}
 .archive-row .archive-tile:focus-visible{outline:2px solid #f1efe9;outline-offset:-3px;z-index:1}
 .archive-row .archive-caption{position:absolute;left:0;right:0;bottom:0;display:block;margin:0;padding:40px 16px 15px;background:linear-gradient(transparent,rgba(0,0,0,.74));color:#f1efe9;font:400 9px/1.4 var(--sans);letter-spacing:.14em;text-transform:uppercase;opacity:0;transform:translateY(5px);transition:opacity .25s ease,transform .25s ease;pointer-events:none}
@@ -167,7 +169,7 @@
   .archive-row:nth-child(6n+1) .archive-photo--lead,.archive-row:nth-child(6n+4) .archive-photo--lead{grid-column:span 2}
   .archive-row .archive-caption{opacity:1;transform:none;padding:24px 9px 10px;font-size:8px}
 }
-@media(prefers-reduced-motion:reduce){.archive-row .archive-tile img,.archive-row .archive-caption{transition:none}}
+@media(prefers-reduced-motion:reduce){.archive-row .archive-tile img,.archive-row .archive-caption,.archive-row .archive-document::after{transition:none}}
 </style>
 <link href="../assets/menu-standard.css?v=milk-hero-visible-20260906" rel="stylesheet"/></head>
 <body>
