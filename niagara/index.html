@@ -922,6 +922,8 @@
       .niagara-frame-shell iframe { height:calc(100svh - 58px); min-height:620px; }
       .niagara-photo-story { --photo-panel-height:calc(100svh - 58px); }
       .niagara-photo-layout,.niagara-photo-stage { min-height:var(--photo-panel-height); height:var(--photo-panel-height); }
+      /* On phones, size each landscape photograph consistently and use more of the available width. */
+      .niagara-photo-main { width:calc(100% - 72px) !important; height:auto !important; max-width:calc(100% - 72px) !important; max-height:calc(var(--photo-panel-height) - 150px) !important; object-fit:contain !important; }
       .niagara-photo-control { width:44px; height:62px; font-size:25px; }
       .niagara-photo-prev { left:12px; }
       .niagara-photo-next { right:12px; }
@@ -2065,7 +2067,7 @@
         <div class="niagara-photo-layout">
           <div class="niagara-photo-stage">
             <div class="niagara-photo-viewport" data-photo-viewport tabindex="0" role="region" aria-roledescription="carousel" aria-label="Greetings from Niagara photographs">
-              <img class="niagara-photo-main" data-photo-main src="https://drive.google.com/thumbnail?id=1UiUedeF9j365cxpT9GrTv2wREb7dhidS&amp;sz=w2400" alt="Rainbow Bridge and waterfalls from the Maid of the Mist" style="width:auto;height:var(--photo-panel-height);max-width:100%;max-height:none;object-fit:contain;object-position:center center;" />
+              <img class="niagara-photo-main" data-photo-main src="./photographs/webp/01.webp" alt="Rainbow Bridge and waterfalls from the Maid of the Mist" style="width:auto;height:var(--photo-panel-height);max-width:100%;max-height:none;object-fit:contain;object-position:center center;" />
               <button class="niagara-photo-control niagara-photo-prev" type="button" data-photo-prev aria-label="Previous photograph">←</button>
               <button class="niagara-photo-control niagara-photo-next" type="button" data-photo-next aria-label="Next photograph">→</button>
               <button class="niagara-photo-caption-toggle" type="button" data-photo-caption-toggle aria-expanded="false" aria-controls="niagara-photo-caption">Captions</button>
@@ -2417,7 +2419,7 @@
           thumb.type = 'button';
           thumb.className = 'niagara-photo-thumb';
           thumb.setAttribute('aria-label', `View photograph ${index + 1}: ${photo.title}`);
-          image.dataset.src = photo.src;
+          image.dataset.src = photo.thumb || photo.src;
           image.alt = '';
           image.loading = 'lazy';
           number.textContent = photo.number;
