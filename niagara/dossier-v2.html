@@ -167,6 +167,15 @@
     .case-content { min-width:0; overflow:hidden; }
     .dossier-viewer { display:none; position:fixed; z-index:45; inset:var(--top) 0 0 var(--rail); overflow:hidden; background:var(--paper); }
     .dossier-viewer.is-open { display:block; }
+    /* Hold the embedded radiological map behind a calm loading screen while tiles arrive. */
+    .dossier-viewer[data-view="map"] iframe { opacity:0; transition:opacity .35s ease; }
+    .dossier-viewer[data-view="map"].is-map-ready iframe { opacity:1; }
+    .dossier-viewer[data-view="map"]:not(.is-map-ready)::after {
+      content:"LOADING THE RADIOLOGICAL MAP";
+      position:absolute; inset:0; z-index:2; display:grid; place-items:center;
+      background:var(--paper); color:var(--muted); pointer-events:none;
+      font:700 11px/1.4 var(--sans); letter-spacing:.16em; text-align:center;
+    }
     .dossier-viewer iframe { width:100%; height:100%; display:block; border:0; background:var(--paper); }
     .chapter { position:relative; border-bottom:1px solid var(--line); scroll-margin-top:var(--top); }
     .chapter-cover { min-height:calc(100svh - var(--top)); display:grid; grid-template-columns:minmax(260px,.68fr) minmax(560px,1.32fr); align-items:stretch; }
@@ -1918,6 +1927,39 @@
 
       dossierViewerFrame.addEventListener('load',hideEmbeddedSiteChrome);
 
+      let dossierMapLoadCheck = null;
+      const stopDossierMapLoadCheck = () => {
+        if (dossierMapLoadCheck !== null) clearInterval(dossierMapLoadCheck);
+        dossierMapLoadCheck = null;
+      };
+      const showDossierMapWhenReady = () => {
+        stopDossierMapLoadCheck();
+        if (!dossierViewerOpen || dossierViewer.dataset.view !== 'map') return;
+        const started = Date.now();
+        let settledChecks = 0;
+        const checkTiles = () => {
+          if (!dossierViewerOpen || dossierViewer.dataset.view !== 'map') {
+            stopDossierMapLoadCheck();
+            return;
+          }
+          let tiles = [];
+          try {
+            tiles = [...dossierViewerFrame.contentDocument.querySelectorAll('.leaflet-tile')];
+          } catch (error) {
+            /* Show the map after the fallback interval if frame access is unavailable. */
+          }
+          const loaded = tiles.length >= 8 && tiles.every(tile => tile.complete && tile.naturalWidth > 0);
+          settledChecks = loaded ? settledChecks + 1 : 0;
+          if (settledChecks >= 3 || Date.now() - started > 9500) {
+            stopDossierMapLoadCheck();
+            dossierViewer.classList.add('is-map-ready');
+          }
+        };
+        dossierMapLoadCheck = setInterval(checkTiles,180);
+        checkTiles();
+      };
+      dossierViewerFrame.addEventListener('load',showDossierMapWhenReady);
+
       const setDossierViewerActive = target => {
         dossierViewerLinks.forEach(link => {
           const active = link.dataset.dossierViewerTarget === target;
@@ -1930,6 +1972,8 @@
       const closeDossierViewer = (restorePosition = false) => {
         if (!dossierViewerOpen) return;
         dossierViewerOpen = false;
+        stopDossierMapLoadCheck();
+        dossierViewer.classList.remove('is-map-ready');
         document.body.classList.remove('is-dossier-viewer-open');
         dossierViewer.classList.remove('is-open');
         dossierViewer.setAttribute('aria-hidden','true');
@@ -1957,6 +2001,7 @@
         const route = dossierViewerRoutes[target];
         dossierViewerFrame.title = route.title;
         dossierViewer.dataset.view = target;
+        dossierViewer.classList.remove('is-map-ready');
         const viewerUrl = new URL(route.src,window.location.href);
         if (target === 'map') viewerUrl.searchParams.set('embed','dossier');
         loadDossierViewer(viewerUrl.href);
