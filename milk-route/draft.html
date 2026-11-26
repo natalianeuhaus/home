@@ -129,51 +129,14 @@
 .archive-mosaic-intro{max-width:775px;margin:0;color:#b8b5ae;font-size:15px;line-height:1.68}
 .archive-mosaic-key{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px 28px;margin-top:clamp(54px,7vw,100px);border-top:1px solid var(--line);padding-top:14px;font:400 9px/1.4 var(--sans);letter-spacing:.16em;color:#8f8d88}
 .archive-mosaic-grid{display:flex;flex-direction:column;gap:0;width:calc(100% + var(--pad) + var(--pad));margin-left:calc(0px - var(--pad))}
-/* An edited sequence: monumental views, unequal triptychs and deliberate black pauses. */
-.archive-row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:0;height:clamp(330px,35vw,550px)}
-.archive-row .archive-photo--lead{grid-column:1/span 6}
-.archive-row .archive-document{grid-column:7/span 3}
-.archive-row .archive-photo--follow{grid-column:10/span 3}
-.archive-row .archive-photo--lead,.archive-row .archive-document,.archive-row .archive-photo--follow{grid-row:1}
-.archive-row--hero-left,.archive-row--hero-right{height:max(540px,94svh);grid-template-rows:repeat(2,minmax(0,1fr))}
-.archive-row--hero-left .archive-photo--lead{grid-column:1/span 8;grid-row:1/span 2}
-.archive-row--hero-left .archive-document{grid-column:9/span 4;grid-row:1}
-.archive-row--hero-left .archive-photo--follow{grid-column:9/span 4;grid-row:2}
-.archive-row--hero-right .archive-photo--lead{grid-column:1/span 4;grid-row:1}
-.archive-row--hero-right .archive-document{grid-column:1/span 4;grid-row:2}
-.archive-row--hero-right .archive-photo--follow{grid-column:5/span 8;grid-row:1/span 2}
-.archive-row--wide-left{height:clamp(370px,42vw,630px)}
-.archive-row--wide-left .archive-photo--lead{grid-column:1/span 7}
-.archive-row--wide-left .archive-document{grid-column:8/span 2}
-.archive-row--wide-left .archive-photo--follow{grid-column:10/span 3}
-.archive-row--wide-right{height:clamp(360px,39vw,580px)}
-.archive-row--wide-right .archive-photo--lead{grid-column:1/span 3}
-.archive-row--wide-right .archive-document{grid-column:4/span 2}
-.archive-row--wide-right .archive-photo--follow{grid-column:6/span 7}
-.archive-row--evidence-left .archive-document{grid-column:1/span 3}
-.archive-row--evidence-left .archive-photo--lead{grid-column:4/span 5}
-.archive-row--evidence-left .archive-photo--follow{grid-column:9/span 4}
-.archive-row--evidence-right .archive-photo--lead{grid-column:1/span 6}
-.archive-row--evidence-right .archive-photo--follow{grid-column:7/span 3}
-.archive-row--evidence-right .archive-document{grid-column:10/span 3}
-.archive-row--quiet-center{height:clamp(430px,48vw,680px)}
-.archive-row--quiet-center .archive-photo--lead{grid-column:1/span 3}
-.archive-row--quiet-center .archive-document{grid-column:4/span 6}
-.archive-row--quiet-center .archive-photo--follow{grid-column:10/span 3}
-.archive-row--balanced .archive-photo--lead{grid-column:1/span 4}
-.archive-row--balanced .archive-document{grid-column:5/span 4}
-.archive-row--balanced .archive-photo--follow{grid-column:9/span 4}
-.archive-row--panorama-lead,.archive-row--panorama-follow{height:max(620px,100svh);grid-template-rows:minmax(0,2fr) minmax(0,1fr)}
-.archive-row--panorama-lead .archive-photo--lead{grid-column:1/span 12;grid-row:1}
-.archive-row--panorama-lead .archive-document{grid-column:1/span 4;grid-row:2}
-.archive-row--panorama-lead .archive-photo--follow{grid-column:5/span 8;grid-row:2}
-.archive-row--panorama-follow .archive-photo--follow{grid-column:1/span 12;grid-row:1}
-.archive-row--panorama-follow .archive-photo--lead{grid-column:1/span 6;grid-row:2}
-.archive-row--panorama-follow .archive-document{grid-column:7/span 6;grid-row:2}
-.archive-row--hero-center{height:max(520px,78svh)}
-.archive-row--hero-center .archive-document{grid-column:1/span 3}
-.archive-row--hero-center .archive-photo--lead{grid-column:4/span 6}
-.archive-row--hero-center .archive-photo--follow{grid-column:10/span 3}
+/* Repeat the opening full-bleed composition, mirrored on alternating rows. */
+.archive-row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:0;height:max(540px,94svh)}
+.archive-row .archive-photo--lead{grid-column:1/span 8;grid-row:1/span 2}
+.archive-row .archive-document{grid-column:9/span 4;grid-row:1}
+.archive-row .archive-photo--follow{grid-column:9/span 4;grid-row:2}
+.archive-row--inverted .archive-photo--lead{grid-column:5/span 8;grid-row:1/span 2}
+.archive-row--inverted .archive-document{grid-column:1/span 4;grid-row:1}
+.archive-row--inverted .archive-photo--follow{grid-column:1/span 4;grid-row:2}
 .archive-row .archive-tile{position:relative;min-width:0;min-height:0;width:100%;height:100%;margin:0;padding:0;display:block;overflow:hidden;border:0;border-radius:0;background:#151515;color:#f1efe9;cursor:zoom-in;text-align:left}
 .archive-row .archive-tile img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .7s cubic-bezier(.22,1,.36,1)}
 .archive-row .archive-document{display:flex;align-items:center;justify-content:center;padding:clamp(16px,3vw,52px);background:#050505;text-align:center}
@@ -191,6 +154,8 @@
   .archive-row{grid-template-columns:repeat(2,minmax(0,1fr));height:auto;grid-template-rows:none;gap:0}
   .archive-row .archive-tile{grid-column:span 1!important;grid-row:auto!important;aspect-ratio:3/4;height:auto}
   .archive-row .archive-photo--lead{grid-column:span 2!important;aspect-ratio:3/2}
+  .archive-row--inverted .archive-document{grid-column:2!important;grid-row:2!important}
+  .archive-row--inverted .archive-photo--follow{grid-column:1!important;grid-row:2!important}
   .archive-row .archive-caption{opacity:1;transform:none;padding:24px 9px 10px;font-size:8px}
   .archive-row .archive-document{padding:16px}
   .archive-evidence-title{font-size:10px;letter-spacing:.12em}
@@ -227,13 +192,7 @@
 <script>
 const archiveRecords = [{"src":"./Natalia_Neuhaus-35.webp","caption":"Federal environmental record","thumb":"./evidence-thumbnails/Natalia_Neuhaus-35.webp"},{"src":"./Natalia_Neuhaus-36.webp","caption":"Archival record 36","thumb":"./evidence-thumbnails/Natalia_Neuhaus-36.webp"},{"src":"./Natalia_Neuhaus-37.webp","caption":"Archival record 37","thumb":"./evidence-thumbnails/Natalia_Neuhaus-37.webp"},{"src":"./Natalia_Neuhaus-38.webp","caption":"Fallout forecast","thumb":"./evidence-thumbnails/Natalia_Neuhaus-38.webp"},{"src":"./Natalia_Neuhaus-39.webp","caption":"Archival record 39","thumb":"./evidence-thumbnails/Natalia_Neuhaus-39.webp"},{"src":"./Natalia_Neuhaus-40.webp","caption":"Archival record 40","thumb":"./evidence-thumbnails/Natalia_Neuhaus-40.webp"},{"src":"./Natalia_Neuhaus-41.webp","caption":"Archival record 41","thumb":"./evidence-thumbnails/Natalia_Neuhaus-41.webp"},{"src":"./Natalia_Neuhaus-42.webp","caption":"Archival record 42","thumb":"./evidence-thumbnails/Natalia_Neuhaus-42.webp"},{"src":"./Natalia_Neuhaus-43.webp","caption":"Milk monitoring","thumb":"./evidence-thumbnails/Natalia_Neuhaus-43.webp"},{"src":"./Natalia_Neuhaus-44.webp","caption":"Archival record 44","thumb":"./evidence-thumbnails/Natalia_Neuhaus-44.webp"},{"src":"./Natalia_Neuhaus-45.webp","caption":"Experimental cow groups","thumb":"./evidence-thumbnails/Natalia_Neuhaus-45.webp"},{"src":"./Natalia_Neuhaus-46.webp","caption":"Archival record 46","thumb":"./evidence-thumbnails/Natalia_Neuhaus-46.webp"},{"src":"./Natalia_Neuhaus-47.webp","caption":"Activity in milk","thumb":"./evidence-thumbnails/Natalia_Neuhaus-47.webp"},{"src":"./Natalia_Neuhaus-48.webp","caption":"Archival record 48","thumb":"./evidence-thumbnails/Natalia_Neuhaus-48.webp"},{"src":"./Natalia_Neuhaus-49.webp","caption":"Archival record 49","thumb":"./evidence-thumbnails/Natalia_Neuhaus-49.webp"},{"src":"./Natalia_Neuhaus-50.webp","caption":"Archival record 50","thumb":"./evidence-thumbnails/Natalia_Neuhaus-50.webp"},{"src":"./Natalia_Neuhaus-51.webp","caption":"Archival record 51","thumb":"./evidence-thumbnails/Natalia_Neuhaus-51.webp"},{"src":"./Natalia_Neuhaus-52.webp","caption":"Archival record 52","thumb":"./evidence-thumbnails/Natalia_Neuhaus-52.webp"},{"src":"./Natalia_Neuhaus-53.webp","caption":"Archival record 53","thumb":"./evidence-thumbnails/Natalia_Neuhaus-53.webp"},{"src":"./Natalia_Neuhaus-54.webp","caption":"Archival record 54","thumb":"./evidence-thumbnails/Natalia_Neuhaus-54.webp"},{"src":"./Natalia_Neuhaus-55.webp","caption":"Experimental Farm","thumb":"./evidence-thumbnails/Natalia_Neuhaus-55.webp"},{"src":"./Natalia_Neuhaus-56.webp","caption":"Archival record 56","thumb":"./evidence-thumbnails/Natalia_Neuhaus-56.webp"},{"src":"./Natalia_Neuhaus-57.webp","caption":"Human thyroid I-131 uptake measurement","thumb":"./Natalia_Neuhaus-57.webp"},{"src":"./Natalia_Neuhaus-58.webp","caption":"Archival record 58","thumb":"./evidence-thumbnails/Natalia_Neuhaus-58.webp"}];
 const archiveGrid = document.getElementById('archiveMosaicGrid');
-/* Each row has its own pace; the image order remains the artist's travel sequence. */
-const archiveLayouts = [
-  'hero-left','wide-left','evidence-left','hero-right','wide-right','quiet-center',
-  'hero-left','evidence-left','wide-left','hero-right','panorama-follow','balanced',
-  'panorama-lead','wide-right','wide-left','hero-right','quiet-center','evidence-left',
-  'hero-left','evidence-right','hero-center','balanced','wide-right','hero-right'
-];
+/* Three-piece groups retain the photo sequence and alternate left/right. */
 /* Place the identified evidence near relevant land, food, and animal photographs. */
 const archiveRecordOrder = [0,8,1,2,4,5,6,7,9,11,3,13,10,14,12,15,16,20,17,18,19,21,23,22];
 /* Subject-aware crop points for the tighter frames. Originals remain untouched. */
@@ -264,7 +223,7 @@ function makeArchiveTile(kind,index,position){
   button.append(img,label);return button;
 }
 for(let rowIndex=0;rowIndex<archiveRecords.length;rowIndex++){
-  const row=document.createElement('div');row.className='archive-row archive-row--'+archiveLayouts[rowIndex];
+  const row=document.createElement('div');row.className='archive-row'+(rowIndex%2?' archive-row--inverted':'');
   row.append(makeArchiveTile('photo',rowIndex*2,'lead'),makeArchiveTile('record',archiveRecordOrder[rowIndex],'document'),makeArchiveTile('photo',rowIndex*2+1,'follow'));
   archiveGrid.appendChild(row);
 }
