@@ -129,6 +129,44 @@
 .archive-mosaic-intro{max-width:775px;margin:0;color:#b8b5ae;font-size:15px;line-height:1.68}
 .archive-mosaic-key{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px 28px;margin-top:clamp(54px,7vw,100px);border-top:1px solid var(--line);padding-top:14px;font:400 9px/1.4 var(--sans);letter-spacing:.16em;color:#8f8d88}
 .archive-mosaic-grid{display:flex;flex-direction:column;gap:0;width:calc(100% + var(--pad) + var(--pad));margin-left:calc(0px - var(--pad))}
+
+/* Nevada draft: accurate GIS-derived restricted-land line study, animated once on entry. */
+.archive-route-map{margin:clamp(44px,6vw,86px) 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#050505;color:#f1efe9;overflow:hidden}
+.archive-route-topline,.archive-route-footline{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px 24px;font:400 10px/1.4 var(--sans);letter-spacing:.15em;text-transform:uppercase}
+.archive-route-topline{padding:20px 0 14px}
+.archive-route-topline span:last-child,.archive-route-footline{color:#97948e}
+.archive-route-map svg{display:block;width:100%;height:auto}
+.archive-route-map .range-border{fill:none;stroke:#aaa;stroke-width:1.5;stroke-linejoin:round;opacity:.77}
+.archive-route-map .site-border{fill:none;stroke:#fff;stroke-width:1.65;stroke-linejoin:round}
+.archive-route-map .road-trace{fill:none;stroke:#fff;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.archive-route-map .place-dot{fill:#050505;stroke:#fff;stroke-width:2}
+.archive-route-map .mercury-dot{fill:#fff}
+.archive-route-map .place-label{fill:#fff;font:13px var(--sans);letter-spacing:1.7px}
+.archive-route-map .map-small{fill:#b8b8b8;font:10px var(--sans);letter-spacing:1.4px}
+.archive-route-map .map-callout{opacity:1}
+.archive-route-footline{border-top:1px solid var(--line);padding:14px 0 17px;font-size:9px}
+.archive-route-map.is-prepared .range-border{stroke-dasharray:2200;stroke-dashoffset:2200;opacity:0}
+.archive-route-map.is-prepared .site-border{stroke-dasharray:800;stroke-dashoffset:800;opacity:0}
+.archive-route-map.is-prepared .road-trace{stroke-dasharray:2500;stroke-dashoffset:2500;opacity:0}
+.archive-route-map.is-prepared .map-callout{opacity:0}
+.archive-route-map.is-prepared.is-visible .range-border{animation:archiveRangeDraw 5.7s ease-in-out 0s 1 forwards}
+.archive-route-map.is-prepared.is-visible .site-border{animation:archiveSiteDraw 4.4s ease-in-out 4.5s 1 forwards}
+.archive-route-map.is-prepared.is-visible .road-trace{animation:archiveRoadDraw 12s ease-in-out 9s 1 forwards}
+.archive-route-map.is-prepared.is-visible .map-callout{animation:archiveLabelsReveal 1.4s ease-in-out 8s 1 forwards}
+@keyframes archiveRangeDraw{0%{stroke-dashoffset:2200;opacity:0}5%{opacity:.77}100%{stroke-dashoffset:0;opacity:.77}}
+@keyframes archiveSiteDraw{0%{stroke-dashoffset:800;opacity:0}6%{opacity:1}100%{stroke-dashoffset:0;opacity:1}}
+@keyframes archiveRoadDraw{0%{stroke-dashoffset:2500;opacity:0}3%{opacity:1}100%{stroke-dashoffset:0;opacity:1}}
+@keyframes archiveLabelsReveal{0%{opacity:0}100%{opacity:1}}
+@media(max-width:760px){
+  .archive-route-topline,.archive-route-footline{font-size:8px;letter-spacing:.12em}
+  .archive-route-topline{padding:14px 0 11px}
+  .archive-route-footline{padding:11px 0 14px}
+}
+@media(prefers-reduced-motion:reduce){
+  .archive-route-map.is-prepared .range-border,.archive-route-map.is-prepared .site-border,.archive-route-map.is-prepared .road-trace{animation:none;stroke-dashoffset:0;opacity:1}
+  .archive-route-map.is-prepared .map-callout{animation:none;opacity:1}
+}
+
 /* A full-width photograph separates each normal mosaic from its mirror. */
 .archive-row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:0;height:max(540px,94svh)}
 .archive-row .archive-photo--lead{grid-column:1/span 8;grid-row:1/span 2}
@@ -185,6 +223,46 @@
     <div class="label">04 / THE LANDSCAPE &amp; THE RECORD</div>
     <h2 class="archive-mosaic-title">A record assembled from fragments.</h2>
     <p class="archive-mosaic-intro">928 nuclear tests were conducted at the Nevada National Security Site. The land remains federally controlled and largely inaccessible, its history held behind fences and warning signs. I photographed from the perimeter, beginning and ending in Las Vegas and traveling through Tonopah and Ely, Nevada, and St. George, Utah. The road formed a wide circle around the test site, passing through desert towns and downwind communities. I was searching for what remains when the evidence is no longer visible: the memory held in the land, the fallout carried beyond the boundary, and the silence that settles over a place after the damage has been done.</p>
+    <figure class="archive-route-map" id="archive-route-map" aria-label="The route around the Nevada Test and Training Range and nuclear test site">
+      <div class="archive-route-topline"><span>THE MILK ROUTE / RESTRICTED LAND</span><span>JANUARY 2026</span></div>
+      <svg viewBox="0 0 1120 680" role="img" aria-label="White-line geographic map: Nevada Test and Training Range boundary, nuclear test site boundary, Mercury inside the nuclear test site, and a public-road loop from Las Vegas through Tonopah, Ely, and St. George returning to Las Vegas">
+        <text x="51" y="91" fill="#f5f5f5" font-family="Georgia,serif" font-size="48" letter-spacing="-2">The perimeter</text>
+        <text x="53" y="118" class="map-small">THE TERRITORY I COULD NOT ENTER</text>
+        <g aria-label="Nevada Test and Training Range boundary">
+          <path class="range-border" d="M399,306L402,310L443,310L443,322L464,322L464,335L526,334L525,360L543,360L543,401L522,401L522,405L421,405L421,465L400,465L400,440L396,440L396,438L393,438L393,436L386,436L386,433L382,433L382,431L375,431L375,429L372,429L372,427L365,427L365,425L356,426L359,425L358,423L351,423L351,420L349,420L299,376L298,370L303,368L303,366L306,366L306,364L310,364L309,361L296,360L296,310L402,310L399,306Z"/>
+          <path class="range-border" d="M360,310L358,310L360,310Z"/>
+          <path class="range-border" d="M358,327L361,325L360,322L358,322L358,319L353,319L357,326Z"/>
+          <path class="range-border" d="M640,410L640,490L624,490L624,505L609,505L612,508L612,510L621,514L620,518L616,521L614,522L590,510L585,505L573,505L573,503L568,502L562,505L535,504L556,503L556,490L522,490L521,414L557,414L557,400L640,400L640,408Z"/>
+        </g>
+        <path class="site-border" aria-label="Nuclear test site boundary" d="M452,385L432,385L432,388L425,388L425,390L402,390L402,386L393,386L393,394L397,394L407,409L411,409L414,416L417,416L417,420L420,420L420,492L479,491L493,499L493,506L510,502L510,491L520,491L520,405L470,404L470,392L463,392L463,390L459,390L459,388L452,388Z"/>
+        <g class="map-callout">
+          <text x="334" y="343" text-anchor="middle" class="map-small" style="fill:#eee;font-size:10px">NEVADA TEST</text>
+          <text x="334" y="360" text-anchor="middle" class="map-small" style="fill:#eee;font-size:10px">AND TRAINING</text>
+          <text x="334" y="377" text-anchor="middle" class="map-small" style="fill:#eee;font-size:10px">RANGE</text>
+          <path d="M520 406 L556 374 L581 374" fill="none" stroke="#fff" stroke-width="1"/>
+          <circle cx="520" cy="406" r="2.5" fill="#fff"/>
+          <text x="589" y="379" fill="#fff" font-family="Arial,sans-serif" font-size="12" font-weight="600" letter-spacing="1.7">NUCLEAR TEST SITE</text>
+          <circle class="mercury-dot" cx="507" cy="494" r="3"/>
+          <path d="M507 494 L537 470 L544 470" fill="none" stroke="#fff" stroke-width=".9"/>
+          <text x="550" y="474" fill="#fff" font-family="Arial,sans-serif" font-size="11" letter-spacing="1.6">MERCURY</text>
+        </g>
+        <path class="road-trace" aria-label="Road route around the restricted land" d="M671,567L652,566L651,554L636,542L618,530L612,523L576,506L562,505L541,507L511,502L495,504L488,508L471,507L445,498L403,491L385,483L374,476L363,469L361,464L362,459L360,456L369,450L366,441L359,436L352,426L327,415L286,384L272,350L272,342L269,338L270,337L266,332L268,325L267,306L262,299L262,293L272,286L272,284L270,282L325,280L334,275L344,273L355,275L365,272L434,266L477,223L491,220L507,224L514,222L523,217L537,215L567,200L581,199L607,181L623,173L632,169L641,170L648,167L663,157L690,121L698,112L705,109L717,109L720,105L722,104L726,110L736,119L752,136L759,139L772,135L775,138L784,140L792,153L781,177L769,189L765,210L766,222L776,249L778,279L798,299L809,305L812,324L847,325L866,333L882,334L897,325L905,322L956,336L955,353L947,356L951,361L956,362L960,365L962,371L960,373L963,375L960,381L956,386L949,390L949,394L962,405L960,406L960,410L963,417L966,419L965,420L968,427L970,428L970,433L961,444L950,447L938,447L929,449L924,452L922,455L918,454L904,459L888,468L869,472L857,478L839,476L810,481L795,487L790,492L780,493L764,505L745,517L731,522L726,526L712,543L685,552L676,558L670,566L671,567"/>
+        <g aria-label="Driving route cities">
+          <circle class="place-dot" cx="671" cy="567" r="5"/>
+          <text x="686" y="588" class="place-label">LAS VEGAS</text>
+          <text x="686" y="605" class="map-small">START / RETURN</text>
+          <circle class="place-dot" cx="270" cy="282" r="5"/>
+          <text x="191" y="261" class="place-label">TONOPAH</text>
+          <circle class="place-dot" cx="719" cy="105" r="5"/>
+          <text x="740" y="99" class="place-label">ELY</text>
+          <circle class="place-dot" cx="970" cy="428" r="5"/>
+          <text x="988" y="419" class="place-label">ST. GEORGE</text>
+        </g>
+        <text x="53" y="646" class="map-small">N ↑</text>
+        <text x="1045" y="646" text-anchor="end" class="map-small">PUBLIC-ROAD LOOP / RESTRICTED TERRITORY</text>
+      </svg>
+      <figcaption class="archive-route-footline"><span>TEST AND TRAINING RANGE → NUCLEAR TEST SITE → THE ROAD</span><span>GIS BOUNDARIES: DOD / NDEP · ROAD STUDY: OSM</span></figcaption>
+    </figure>
     <div class="archive-mosaic-key"><span>46 PHOTOGRAPHS</span><span>SELECTED ARCHIVAL RECORDS</span><span>CLICK / TAP TO VIEW FULLSCREEN ↗</span></div>
   </div>
   <div class="archive-mosaic-grid" id="archiveMosaicGrid"></div>
@@ -197,6 +275,20 @@
 <script defer src="../assets/site.js?v=mobile-photo-swipe-2"></script>
 <script>
 const archiveRecords = [{"src":"./Natalia_Neuhaus-35.webp","caption":"Federal environmental record","thumb":"./evidence-thumbnails/Natalia_Neuhaus-35.webp"},{"src":"./Natalia_Neuhaus-36.webp","caption":"Archival record 36","thumb":"./evidence-thumbnails/Natalia_Neuhaus-36.webp"},{"src":"./Natalia_Neuhaus-37.webp","caption":"Archival record 37","thumb":"./evidence-thumbnails/Natalia_Neuhaus-37.webp"},{"src":"./Natalia_Neuhaus-38.webp","caption":"Fallout forecast","thumb":"./evidence-thumbnails/Natalia_Neuhaus-38.webp"},{"src":"./Natalia_Neuhaus-39.webp","caption":"Archival record 39","thumb":"./evidence-thumbnails/Natalia_Neuhaus-39.webp"},{"src":"./Natalia_Neuhaus-40.webp","caption":"Archival record 40","thumb":"./evidence-thumbnails/Natalia_Neuhaus-40.webp"},{"src":"./Natalia_Neuhaus-41.webp","caption":"Archival record 41","thumb":"./evidence-thumbnails/Natalia_Neuhaus-41.webp"},{"src":"./Natalia_Neuhaus-42.webp","caption":"Archival record 42","thumb":"./evidence-thumbnails/Natalia_Neuhaus-42.webp"},{"src":"./Natalia_Neuhaus-43.webp","caption":"Milk monitoring","thumb":"./evidence-thumbnails/Natalia_Neuhaus-43.webp"},{"src":"./Natalia_Neuhaus-44.webp","caption":"Archival record 44","thumb":"./evidence-thumbnails/Natalia_Neuhaus-44.webp"},{"src":"./Natalia_Neuhaus-45.webp","caption":"Experimental cow groups","thumb":"./evidence-thumbnails/Natalia_Neuhaus-45.webp"},{"src":"./Natalia_Neuhaus-46.webp","caption":"Archival record 46","thumb":"./evidence-thumbnails/Natalia_Neuhaus-46.webp"},{"src":"./Natalia_Neuhaus-47.webp","caption":"Activity in milk","thumb":"./evidence-thumbnails/Natalia_Neuhaus-47.webp"},{"src":"./Natalia_Neuhaus-48.webp","caption":"Archival record 48","thumb":"./evidence-thumbnails/Natalia_Neuhaus-48.webp"},{"src":"./Natalia_Neuhaus-49.webp","caption":"Archival record 49","thumb":"./evidence-thumbnails/Natalia_Neuhaus-49.webp"},{"src":"./Natalia_Neuhaus-50.webp","caption":"Archival record 50","thumb":"./evidence-thumbnails/Natalia_Neuhaus-50.webp"},{"src":"./Natalia_Neuhaus-51.webp","caption":"Archival record 51","thumb":"./evidence-thumbnails/Natalia_Neuhaus-51.webp"},{"src":"./Natalia_Neuhaus-52.webp","caption":"Archival record 52","thumb":"./evidence-thumbnails/Natalia_Neuhaus-52.webp"},{"src":"./Natalia_Neuhaus-53.webp","caption":"Archival record 53","thumb":"./evidence-thumbnails/Natalia_Neuhaus-53.webp"},{"src":"./Natalia_Neuhaus-54.webp","caption":"Archival record 54","thumb":"./evidence-thumbnails/Natalia_Neuhaus-54.webp"},{"src":"./Natalia_Neuhaus-55.webp","caption":"Experimental Farm","thumb":"./evidence-thumbnails/Natalia_Neuhaus-55.webp"},{"src":"./Natalia_Neuhaus-56.webp","caption":"Archival record 56","thumb":"./evidence-thumbnails/Natalia_Neuhaus-56.webp"},{"src":"./Natalia_Neuhaus-57.webp","caption":"Human thyroid I-131 uptake measurement","thumb":"./Natalia_Neuhaus-57.webp"},{"src":"./Natalia_Neuhaus-58.webp","caption":"Archival record 58","thumb":"./evidence-thumbnails/Natalia_Neuhaus-58.webp"}];
+
+/* Start the geographic drawing only when it first enters the viewport.
+   The 22-second sequence fills forwards and is never replayed. */
+const archiveRouteMap=document.getElementById('archive-route-map');
+if(archiveRouteMap&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver'in window){
+  archiveRouteMap.classList.add('is-prepared');
+  const routeMapObserver=new IntersectionObserver(entries=>{
+    if(!entries.some(entry=>entry.isIntersecting))return;
+    archiveRouteMap.classList.add('is-visible');
+    routeMapObserver.disconnect();
+  },{threshold:.14});
+  routeMapObserver.observe(archiveRouteMap);
+}
+
 const archiveGrid = document.getElementById('archiveMosaicGrid');
 /* Curate land → fallout → cattle → milk → body: eight archival interventions,
    each followed by one full-bleed photograph and an inverted photo mosaic. */
