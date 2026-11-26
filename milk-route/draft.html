@@ -132,10 +132,10 @@
 /* Repeat the opening full-bleed composition, mirrored on alternating rows. */
 .archive-row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:0;height:max(540px,94svh)}
 .archive-row .archive-photo--lead{grid-column:1/span 8;grid-row:1/span 2}
-.archive-row .archive-document{grid-column:9/span 4;grid-row:1}
+.archive-row .archive-document,.archive-row .archive-photo--upper{grid-column:9/span 4;grid-row:1}
 .archive-row .archive-photo--follow{grid-column:9/span 4;grid-row:2}
 .archive-row--inverted .archive-photo--lead{grid-column:5/span 8;grid-row:1/span 2}
-.archive-row--inverted .archive-document{grid-column:1/span 4;grid-row:1}
+.archive-row--inverted .archive-document,.archive-row--inverted .archive-photo--upper{grid-column:1/span 4;grid-row:1}
 .archive-row--inverted .archive-photo--follow{grid-column:1/span 4;grid-row:2}
 .archive-row .archive-tile{position:relative;min-width:0;min-height:0;width:100%;height:100%;margin:0;padding:0;display:block;overflow:hidden;border:0;border-radius:0;background:#151515;color:#f1efe9;cursor:zoom-in;text-align:left}
 .archive-row .archive-tile img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .7s cubic-bezier(.22,1,.36,1)}
@@ -154,7 +154,7 @@
   .archive-row{grid-template-columns:repeat(2,minmax(0,1fr));height:auto;grid-template-rows:none;gap:0}
   .archive-row .archive-tile{grid-column:span 1!important;grid-row:auto!important;aspect-ratio:3/4;height:auto}
   .archive-row .archive-photo--lead{grid-column:span 2!important;aspect-ratio:3/2}
-  .archive-row--inverted .archive-document{grid-column:2!important;grid-row:2!important}
+  .archive-row--inverted .archive-document,.archive-row--inverted .archive-photo--upper{grid-column:2!important;grid-row:2!important}
   .archive-row--inverted .archive-photo--follow{grid-column:1!important;grid-row:2!important}
   .archive-row .archive-caption{opacity:1;transform:none;padding:24px 9px 10px;font-size:8px}
   .archive-row .archive-document{padding:16px}
@@ -179,22 +179,26 @@
     <div class="label">04 / THE LANDSCAPE &amp; THE RECORD</div>
     <h2 class="archive-mosaic-title">A record assembled from fragments.</h2>
     <p class="archive-mosaic-intro">928 nuclear tests were conducted at the Nevada National Security Site. The land remains federally controlled and largely inaccessible, its history held behind fences and warning signs. I photographed from the perimeter, beginning and ending in Las Vegas and traveling through Tonopah and Ely, Nevada, and St. George, Utah. The road formed a wide circle around the test site, passing through desert towns and downwind communities. I was searching for what remains when the evidence is no longer visible: the memory held in the land, the fallout carried beyond the boundary, and the silence that settles over a place after the damage has been done.</p>
-    <div class="archive-mosaic-key"><span>48 PHOTOGRAPHS</span><span>24 ARCHIVAL RECORDS</span><span>CLICK / TAP TO VIEW FULLSCREEN ↗</span></div>
+    <div class="archive-mosaic-key"><span>48 PHOTOGRAPHS</span><span>SELECTED ARCHIVAL RECORDS</span><span>CLICK / TAP TO VIEW FULLSCREEN ↗</span></div>
   </div>
   <div class="archive-mosaic-grid" id="archiveMosaicGrid"></div>
 </section>
 
 </main>
-<div class="lightbox" id="evidenceLightbox" aria-hidden="true" aria-label="Photographs and archival evidence viewer" aria-modal="true" role="dialog"><div class="lightbox-top"><span>THE ARCHIVE <span class="lightbox-count" id="lightboxCount">01 / 72</span></span><button class="lightbox-close" id="lightboxClose" aria-label="Close evidence slideshow" type="button">×</button></div><div class="lightbox-body"><button class="lightbox-arrow prev" id="lightboxPrev" aria-label="Previous evidence record" type="button"></button><img id="lightboxImage" alt=""><button class="lightbox-arrow next" id="lightboxNext" aria-label="Next evidence record" type="button"></button></div><div class="lightbox-caption" id="lightboxCaption"></div></div>
+<div class="lightbox" id="evidenceLightbox" aria-hidden="true" aria-label="Photographs and archival evidence viewer" aria-modal="true" role="dialog"><div class="lightbox-top"><span>THE ARCHIVE <span class="lightbox-count" id="lightboxCount">01 / 57</span></span><button class="lightbox-close" id="lightboxClose" aria-label="Close evidence slideshow" type="button">×</button></div><div class="lightbox-body"><button class="lightbox-arrow prev" id="lightboxPrev" aria-label="Previous evidence record" type="button"></button><img id="lightboxImage" alt=""><button class="lightbox-arrow next" id="lightboxNext" aria-label="Next evidence record" type="button"></button></div><div class="lightbox-caption" id="lightboxCaption"></div></div>
 <div class="film-modal" id="filmModal" aria-hidden="true" aria-labelledby="filmModalTitle" aria-modal="true" role="dialog" tabindex="-1"><div class="film-modal-top"><span id="filmModalTitle">THIS IS A TEST</span><button class="film-modal-close" id="filmModalClose" aria-label="Close full video" type="button">×</button></div><div class="film-modal-body"><div class="film-modal-frame"><video id="filmModalVideo" data-autoplay-interaction-controls playsinline preload="metadata" poster="../milk-route-40-96-poster-v25.webp" aria-label="This Is a Test"><source src="https://rachelbodyworkmassage.com/wp-content/uploads/videos/This_is_a_Test.mp4" type="video/mp4"></video></div></div></div>
 <footer class="footer"><span>THE MILK ROUTE</span><span>ONGOING</span><span>&copy; NATALIA NEUHAUS. ALL RIGHTS RESERVED.</span></footer>
 <script defer src="../assets/site.js?v=mobile-photo-swipe-2"></script>
 <script>
 const archiveRecords = [{"src":"./Natalia_Neuhaus-35.webp","caption":"Federal environmental record","thumb":"./evidence-thumbnails/Natalia_Neuhaus-35.webp"},{"src":"./Natalia_Neuhaus-36.webp","caption":"Archival record 36","thumb":"./evidence-thumbnails/Natalia_Neuhaus-36.webp"},{"src":"./Natalia_Neuhaus-37.webp","caption":"Archival record 37","thumb":"./evidence-thumbnails/Natalia_Neuhaus-37.webp"},{"src":"./Natalia_Neuhaus-38.webp","caption":"Fallout forecast","thumb":"./evidence-thumbnails/Natalia_Neuhaus-38.webp"},{"src":"./Natalia_Neuhaus-39.webp","caption":"Archival record 39","thumb":"./evidence-thumbnails/Natalia_Neuhaus-39.webp"},{"src":"./Natalia_Neuhaus-40.webp","caption":"Archival record 40","thumb":"./evidence-thumbnails/Natalia_Neuhaus-40.webp"},{"src":"./Natalia_Neuhaus-41.webp","caption":"Archival record 41","thumb":"./evidence-thumbnails/Natalia_Neuhaus-41.webp"},{"src":"./Natalia_Neuhaus-42.webp","caption":"Archival record 42","thumb":"./evidence-thumbnails/Natalia_Neuhaus-42.webp"},{"src":"./Natalia_Neuhaus-43.webp","caption":"Milk monitoring","thumb":"./evidence-thumbnails/Natalia_Neuhaus-43.webp"},{"src":"./Natalia_Neuhaus-44.webp","caption":"Archival record 44","thumb":"./evidence-thumbnails/Natalia_Neuhaus-44.webp"},{"src":"./Natalia_Neuhaus-45.webp","caption":"Experimental cow groups","thumb":"./evidence-thumbnails/Natalia_Neuhaus-45.webp"},{"src":"./Natalia_Neuhaus-46.webp","caption":"Archival record 46","thumb":"./evidence-thumbnails/Natalia_Neuhaus-46.webp"},{"src":"./Natalia_Neuhaus-47.webp","caption":"Activity in milk","thumb":"./evidence-thumbnails/Natalia_Neuhaus-47.webp"},{"src":"./Natalia_Neuhaus-48.webp","caption":"Archival record 48","thumb":"./evidence-thumbnails/Natalia_Neuhaus-48.webp"},{"src":"./Natalia_Neuhaus-49.webp","caption":"Archival record 49","thumb":"./evidence-thumbnails/Natalia_Neuhaus-49.webp"},{"src":"./Natalia_Neuhaus-50.webp","caption":"Archival record 50","thumb":"./evidence-thumbnails/Natalia_Neuhaus-50.webp"},{"src":"./Natalia_Neuhaus-51.webp","caption":"Archival record 51","thumb":"./evidence-thumbnails/Natalia_Neuhaus-51.webp"},{"src":"./Natalia_Neuhaus-52.webp","caption":"Archival record 52","thumb":"./evidence-thumbnails/Natalia_Neuhaus-52.webp"},{"src":"./Natalia_Neuhaus-53.webp","caption":"Archival record 53","thumb":"./evidence-thumbnails/Natalia_Neuhaus-53.webp"},{"src":"./Natalia_Neuhaus-54.webp","caption":"Archival record 54","thumb":"./evidence-thumbnails/Natalia_Neuhaus-54.webp"},{"src":"./Natalia_Neuhaus-55.webp","caption":"Experimental Farm","thumb":"./evidence-thumbnails/Natalia_Neuhaus-55.webp"},{"src":"./Natalia_Neuhaus-56.webp","caption":"Archival record 56","thumb":"./evidence-thumbnails/Natalia_Neuhaus-56.webp"},{"src":"./Natalia_Neuhaus-57.webp","caption":"Human thyroid I-131 uptake measurement","thumb":"./Natalia_Neuhaus-57.webp"},{"src":"./Natalia_Neuhaus-58.webp","caption":"Archival record 58","thumb":"./evidence-thumbnails/Natalia_Neuhaus-58.webp"}];
 const archiveGrid = document.getElementById('archiveMosaicGrid');
-/* Three-piece groups retain the photo sequence and alternate left/right. */
-/* Place the identified evidence near relevant land, food, and animal photographs. */
-const archiveRecordOrder = [0,8,1,2,4,5,6,7,9,11,3,13,10,14,12,15,16,20,17,18,19,21,23,22];
+/* Curate the land → fallout → cattle → milk → body sequence, with a single
+   evidence title between each pair of mirrored photographic compositions. */
+archiveRecords[1].caption='Project Sedan: Ground Zero, Before and After';
+archiveRecords[2].caption='Iodine-131 in Bovine Thyroids';
+archiveRecords[5].caption='Radioiodine in Dairy Cows';
+archiveRecords[9].caption="Iodine-131 in Children’s Thyroids";
+const featuredRecordOrder = [0,1,3,2,5,8,12,9,22];
 /* Subject-aware crop points for the tighter frames. Originals remain untouched. */
 const archivePhotoFocus = {
   9:'62% 50%',10:'54% 53%',15:'50% 40%',16:'48% 43%',
@@ -222,9 +226,17 @@ function makeArchiveTile(kind,index,position){
   label.textContent='NEVADA / PHOTOGRAPH '+number;
   button.append(img,label);return button;
 }
-for(let rowIndex=0;rowIndex<archiveRecords.length;rowIndex++){
+let archivePhotoIndex=0,featuredRecordIndex=0;
+for(let rowIndex=0;archivePhotoIndex<48;rowIndex++){
   const row=document.createElement('div');row.className='archive-row'+(rowIndex%2?' archive-row--inverted':'');
-  row.append(makeArchiveTile('photo',rowIndex*2,'lead'),makeArchiveTile('record',archiveRecordOrder[rowIndex],'document'),makeArchiveTile('photo',rowIndex*2+1,'follow'));
+  const showRecord=rowIndex%2===0 && featuredRecordIndex<featuredRecordOrder.length;
+  row.appendChild(makeArchiveTile('photo',archivePhotoIndex++,'lead'));
+  if(showRecord){
+    row.appendChild(makeArchiveTile('record',featuredRecordOrder[featuredRecordIndex++],'document'));
+  }else{
+    row.appendChild(makeArchiveTile('photo',archivePhotoIndex++,'upper'));
+  }
+  row.appendChild(makeArchiveTile('photo',archivePhotoIndex++,'follow'));
   archiveGrid.appendChild(row);
 }
 const lb=document.getElementById('evidenceLightbox'),lbImg=document.getElementById('lightboxImage'),lbCap=document.getElementById('lightboxCaption'),lbCount=document.getElementById('lightboxCount'),lbClose=document.getElementById('lightboxClose'),lbPrev=document.getElementById('lightboxPrev'),lbNext=document.getElementById('lightboxNext'),evidenceItems=[...document.querySelectorAll('.evidence-item')];let evidenceIndex=0,lbTouchX=0;function renderEvidence(){const el=evidenceItems[evidenceIndex];lbImg.src=el.dataset.src;lbImg.alt=el.dataset.caption;lbCap.textContent=el.dataset.caption;lbCount.textContent=`${String(evidenceIndex+1).padStart(2,'0')} / ${String(evidenceItems.length).padStart(2,'0')}`}function openLB(index){evidenceIndex=index;renderEvidence();lb.classList.add('open');lb.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';lbClose.focus()}function closeLB(){if(!lb.classList.contains('open'))return;lb.classList.remove('open');lb.setAttribute('aria-hidden','true');document.body.style.overflow='';evidenceItems[evidenceIndex].focus()}function moveEvidence(step){evidenceIndex=(evidenceIndex+step+evidenceItems.length)%evidenceItems.length;renderEvidence()}evidenceItems.forEach((el,index)=>el.onclick=()=>openLB(index));lbClose.onclick=closeLB;lbPrev.onclick=()=>moveEvidence(-1);lbNext.onclick=()=>moveEvidence(1);lb.onclick=e=>{if(e.target===lb)closeLB()};lb.addEventListener('touchstart',e=>{lbTouchX=e.changedTouches[0].clientX},{passive:true});lb.addEventListener('touchend',e=>{const distance=e.changedTouches[0].clientX-lbTouchX;if(Math.abs(distance)>45)moveEvidence(distance<0?1:-1)},{passive:true});document.addEventListener('keydown',e=>{if(lb.classList.contains('open')){if(e.key==='Escape')closeLB();if(e.key==='ArrowRight')moveEvidence(1);if(e.key==='ArrowLeft')moveEvidence(-1);return}if(document.getElementById('filmModal').classList.contains('open'))return;});
