@@ -144,8 +144,8 @@
 .archive-row .archive-tile{position:relative;min-width:0;min-height:0;width:100%;height:100%;margin:0;padding:0;display:block;overflow:hidden;border:0;border-radius:0;background:#151515;color:#f1efe9;cursor:zoom-in;text-align:left}
 .archive-row .archive-tile img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .7s cubic-bezier(.22,1,.36,1)}
 .archive-row .archive-document{display:flex;align-items:center;justify-content:center;padding:clamp(16px,3vw,52px);background:#050505;text-align:center}
-.archive-evidence-title{display:block;max-width:26ch;color:#f1efe9;font:300 clamp(11px,1.05vw,16px)/1.6 var(--sans);letter-spacing:.16em;text-transform:scale(1);transition:transform .42s cubic-bezier(.22,1,.36,1)}
-.archive-row .archive-document:hover .archive-evidence-title,.archive-row .archive-document:focus-visible .archive-evidence-title{transform:scale(1.1)}
+.archive-evidence-title{display:block;max-width:26ch;color:rgba(241,239,233,.7);font:300 clamp(11px,1.05vw,16px)/1.6 var(--sans);letter-spacing:.16em;transform:scale(1);transition:transform .42s cubic-bezier(.22,1,.36,1),color .3s ease,text-shadow .3s ease}
+.archive-row .archive-document:hover .archive-evidence-title,.archive-row .archive-document:focus-visible .archive-evidence-title{color:#fff;text-shadow:0 0 17px rgba(255,255,255,.4);transform:scale(1.1)}
 .archive-row .archive-tile:hover img,.archive-row .archive-tile:focus-visible img{transform:scale(1.025)}
 .archive-row .archive-tile:focus-visible{outline:2px solid #f1efe9;outline-offset:-3px;z-index:1}
 .archive-row .archive-caption{position:absolute;left:0;right:0;bottom:0;display:block;margin:0;padding:40px 16px 15px;background:linear-gradient(transparent,rgba(0,0,0,.74));color:#f1efe9;font:400 9px/1.4 var(--sans);letter-spacing:.14em;text-transform:uppercase;opacity:0;transform:translateY(5px);transition:opacity .25s ease,transform .25s ease;pointer-events:none}
@@ -191,7 +191,7 @@
 </section>
 
 </main>
-<div class="lightbox" id="evidenceLightbox" aria-hidden="true" aria-label="Photographs and archival evidence viewer" aria-modal="true" role="dialog"><div class="lightbox-top"><span>THE ARCHIVE <span class="lightbox-count" id="lightboxCount">01 / 54</span></span><button class="lightbox-close" id="lightboxClose" aria-label="Close evidence slideshow" type="button">×</button></div><div class="lightbox-body"><button class="lightbox-arrow prev" id="lightboxPrev" aria-label="Previous evidence record" type="button"></button><img id="lightboxImage" alt=""><button class="lightbox-arrow next" id="lightboxNext" aria-label="Next evidence record" type="button"></button></div><div class="lightbox-caption" id="lightboxCaption"></div></div>
+<div class="lightbox" id="evidenceLightbox" aria-hidden="true" aria-label="Photographs and archival evidence viewer" aria-modal="true" role="dialog"><div class="lightbox-top"><span>THE ARCHIVE <span class="lightbox-count" id="lightboxCount">01 / 70</span></span><button class="lightbox-close" id="lightboxClose" aria-label="Close evidence slideshow" type="button">×</button></div><div class="lightbox-body"><button class="lightbox-arrow prev" id="lightboxPrev" aria-label="Previous evidence record" type="button"></button><img id="lightboxImage" alt=""><button class="lightbox-arrow next" id="lightboxNext" aria-label="Next evidence record" type="button"></button></div><div class="lightbox-caption" id="lightboxCaption"></div></div>
 <div class="film-modal" id="filmModal" aria-hidden="true" aria-labelledby="filmModalTitle" aria-modal="true" role="dialog" tabindex="-1"><div class="film-modal-top"><span id="filmModalTitle">THIS IS A TEST</span><button class="film-modal-close" id="filmModalClose" aria-label="Close full video" type="button">×</button></div><div class="film-modal-body"><div class="film-modal-frame"><video id="filmModalVideo" data-autoplay-interaction-controls playsinline preload="metadata" poster="../milk-route-40-96-poster-v25.webp" aria-label="This Is a Test"><source src="https://rachelbodyworkmassage.com/wp-content/uploads/videos/This_is_a_Test.mp4" type="video/mp4"></video></div></div></div>
 <footer class="footer"><span>THE MILK ROUTE</span><span>ONGOING</span><span>&copy; NATALIA NEUHAUS. ALL RIGHTS RESERVED.</span></footer>
 <script defer src="../assets/site.js?v=mobile-photo-swipe-2"></script>
@@ -253,7 +253,70 @@ for(let batchIndex=0;batchIndex<featuredRecordOrder.length;batchIndex++){
   inverted.append(...invertedTiles.map(([position,index])=>makeArchiveTile('photo',index,position)));
   archiveGrid.append(normal,...(full.childElementCount?[full]:[]),inverted);
 }
-const lb=document.getElementById('evidenceLightbox'),lbImg=document.getElementById('lightboxImage'),lbCap=document.getElementById('lightboxCaption'),lbCount=document.getElementById('lightboxCount'),lbClose=document.getElementById('lightboxClose'),lbPrev=document.getElementById('lightboxPrev'),lbNext=document.getElementById('lightboxNext'),evidenceItems=[...document.querySelectorAll('.evidence-item')];let evidenceIndex=0,lbTouchX=0;function renderEvidence(){const el=evidenceItems[evidenceIndex];lbImg.src=el.dataset.src;lbImg.alt=el.dataset.caption;lbCap.textContent=el.dataset.caption;lbCount.textContent=`${String(evidenceIndex+1).padStart(2,'0')} / ${String(evidenceItems.length).padStart(2,'0')}`}function openLB(index){evidenceIndex=index;renderEvidence();lb.classList.add('open');lb.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';lbClose.focus()}function closeLB(){if(!lb.classList.contains('open'))return;lb.classList.remove('open');lb.setAttribute('aria-hidden','true');document.body.style.overflow='';evidenceItems[evidenceIndex].focus()}function moveEvidence(step){evidenceIndex=(evidenceIndex+step+evidenceItems.length)%evidenceItems.length;renderEvidence()}evidenceItems.forEach((el,index)=>el.onclick=()=>openLB(index));lbClose.onclick=closeLB;lbPrev.onclick=()=>moveEvidence(-1);lbNext.onclick=()=>moveEvidence(1);lb.onclick=e=>{if(e.target===lb)closeLB()};lb.addEventListener('touchstart',e=>{lbTouchX=e.changedTouches[0].clientX},{passive:true});lb.addEventListener('touchend',e=>{const distance=e.changedTouches[0].clientX-lbTouchX;if(Math.abs(distance)>45)moveEvidence(distance<0?1:-1)},{passive:true});document.addEventListener('keydown',e=>{if(lb.classList.contains('open')){if(e.key==='Escape')closeLB();if(e.key==='ArrowRight')moveEvidence(1);if(e.key==='ArrowLeft')moveEvidence(-1);return}if(document.getElementById('filmModal').classList.contains('open'))return;});
+const lb=document.getElementById('evidenceLightbox'),
+  lbImg=document.getElementById('lightboxImage'),
+  lbCap=document.getElementById('lightboxCaption'),
+  lbCount=document.getElementById('lightboxCount'),
+  lbClose=document.getElementById('lightboxClose'),
+  lbPrev=document.getElementById('lightboxPrev'),
+  lbNext=document.getElementById('lightboxNext'),
+  evidenceItems=[...document.querySelectorAll('.evidence-item')];
+/* Keep the eight curated evidence tiles in the mosaic. Restore the other
+   archival records as slideshow-only entries, scattered in a stable random order. */
+const featuredRecordSet=new Set(featuredRecordOrder);
+const slideshowItems=evidenceItems.map(tile=>({
+  src:tile.dataset.src,caption:tile.dataset.caption,tile
+}));
+let slideshowSeed=20260113;
+function nextSlideshowRandom(){
+  slideshowSeed=(Math.imul(slideshowSeed,1664525)+1013904223)>>>0;
+  return slideshowSeed/4294967296;
+}
+archiveRecords.forEach((record,index)=>{
+  if(featuredRecordSet.has(index))return;
+  const insertAt=1+Math.floor(nextSlideshowRandom()*(slideshowItems.length-1));
+  slideshowItems.splice(insertAt,0,{src:record.src,caption:record.caption,tile:null});
+});
+const slideshowIndexByTile=new Map(slideshowItems.flatMap((slide,index)=>slide.tile?[[slide.tile,index]]:[]));
+let evidenceIndex=0,lbTouchX=0,lastOpenedTile=null;
+function renderEvidence(){
+  const slide=slideshowItems[evidenceIndex];
+  lbImg.src=slide.src;
+  lbImg.alt=slide.caption;
+  lbCap.textContent=slide.caption;
+  lbCount.textContent=String(evidenceIndex+1).padStart(2,'0')+' / '+String(slideshowItems.length).padStart(2,'0');
+}
+function openLB(index,tile){
+  evidenceIndex=index;lastOpenedTile=tile;renderEvidence();
+  lb.classList.add('open');lb.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';lbClose.focus();
+}
+function closeLB(){
+  if(!lb.classList.contains('open'))return;
+  lb.classList.remove('open');lb.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+  if(lastOpenedTile)lastOpenedTile.focus();
+}
+function moveEvidence(step){
+  evidenceIndex=(evidenceIndex+step+slideshowItems.length)%slideshowItems.length;
+  renderEvidence();
+}
+evidenceItems.forEach(tile=>tile.onclick=()=>openLB(slideshowIndexByTile.get(tile),tile));
+lbClose.onclick=closeLB;
+lbPrev.onclick=()=>moveEvidence(-1);
+lbNext.onclick=()=>moveEvidence(1);
+lb.onclick=e=>{if(e.target===lb)closeLB()};
+lb.addEventListener('touchstart',e=>{lbTouchX=e.changedTouches[0].clientX},{passive:true});
+lb.addEventListener('touchend',e=>{const distance=e.changedTouches[0].clientX-lbTouchX;if(Math.abs(distance)>45)moveEvidence(distance<0?1:-1)},{passive:true});
+document.addEventListener('keydown',e=>{
+  if(lb.classList.contains('open')){
+    if(e.key==='Escape')closeLB();
+    if(e.key==='ArrowRight')moveEvidence(1);
+    if(e.key==='ArrowLeft')moveEvidence(-1);
+    return;
+  }
+  if(document.getElementById('filmModal').classList.contains('open'))return;
+});
 const filmModal=document.getElementById('filmModal'),filmModalVideo=document.getElementById('filmModalVideo'),filmOpen=document.getElementById('filmOpen'),filmSurface=document.getElementById('short-film'),filmModalClose=document.getElementById('filmModalClose');
 function openFilm(){
   filmModal.classList.add('open');
