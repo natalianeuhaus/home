@@ -135,7 +135,7 @@
 .archive-route-topline,.archive-route-footline{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px 24px;font:400 10px/1.4 var(--sans);letter-spacing:.15em;text-transform:uppercase}
 .archive-route-topline{padding:20px 0 14px}
 .archive-route-topline span:last-child,.archive-route-footline{color:#97948e}
-.archive-route-map svg{display:block;width:100%;height:auto}
+.archive-route-map svg{display:block;width:88%;max-width:1480px;height:auto;margin-inline:auto}
 .archive-route-map .range-border{fill:none;stroke:#aaa;stroke-width:1.5;stroke-linejoin:round;opacity:.77}
 .archive-route-map .site-border{fill:none;stroke:#fff;stroke-width:1.65;stroke-linejoin:round}
 .archive-route-map .road-trace{fill:none;stroke:#fff;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
@@ -149,10 +149,10 @@
 .archive-route-map.is-prepared .site-border{stroke-dasharray:800;stroke-dashoffset:800;opacity:0}
 .archive-route-map.is-prepared .road-trace{stroke-dasharray:2500;stroke-dashoffset:2500;opacity:0}
 .archive-route-map.is-prepared .map-callout{opacity:0}
-.archive-route-map.is-prepared.is-visible .range-border{animation:archiveRangeDraw 5.7s ease-in-out 0s 1 forwards}
-.archive-route-map.is-prepared.is-visible .site-border{animation:archiveSiteDraw 4.4s ease-in-out 4.5s 1 forwards}
-.archive-route-map.is-prepared.is-visible .road-trace{animation:archiveRoadDraw 12s ease-in-out 9s 1 forwards}
-.archive-route-map.is-prepared.is-visible .map-callout{animation:archiveLabelsReveal 1.4s ease-in-out 8s 1 forwards}
+.archive-route-map.is-prepared.is-visible .range-border{animation:archiveRangeDraw 7.7s ease-in-out 0s 1 forwards}
+.archive-route-map.is-prepared.is-visible .site-border{animation:archiveSiteDraw 5.9s ease-in-out 6.1s 1 forwards}
+.archive-route-map.is-prepared.is-visible .road-trace{animation:archiveRoadDraw 16.2s ease-in-out 12.2s 1 forwards}
+.archive-route-map.is-prepared.is-visible .map-callout{animation:archiveLabelsReveal 1.8s ease-in-out 10.8s 1 forwards}
 @keyframes archiveRangeDraw{0%{stroke-dashoffset:2200;opacity:0}5%{opacity:.77}100%{stroke-dashoffset:0;opacity:.77}}
 @keyframes archiveSiteDraw{0%{stroke-dashoffset:800;opacity:0}6%{opacity:1}100%{stroke-dashoffset:0;opacity:1}}
 @keyframes archiveRoadDraw{0%{stroke-dashoffset:2500;opacity:0}3%{opacity:1}100%{stroke-dashoffset:0;opacity:1}}
@@ -160,6 +160,7 @@
 @media(max-width:760px){
   .archive-route-topline,.archive-route-footline{font-size:8px;letter-spacing:.12em}
   .archive-route-topline{padding:14px 0 11px}
+  .archive-route-map svg{width:100%}
   .archive-route-footline{padding:11px 0 14px}
 }
 @media(prefers-reduced-motion:reduce){
