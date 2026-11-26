@@ -120,6 +120,91 @@
   .site-header{padding:22px 20px}
   .site-header .wordmark{font-size:13px}
 }
+
+/* Draft only: photographic landscapes and evidence interwoven as an archive. */
+.archive-mosaic{padding-top:clamp(100px,12vw,180px);padding-bottom:clamp(110px,13vw,190px);background:#050505}
+.archive-mosaic-head{margin:0}
+.archive-mosaic-title{max-width:950px;margin:42px 0 34px;font:400 clamp(44px,6.4vw,92px)/.99 var(--serif);letter-spacing:-.045em}
+.archive-mosaic-intro{max-width:775px;margin:0;color:#b8b5ae;font-size:15px;line-height:1.68}
+.archive-mosaic-key{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px 28px;margin-top:clamp(54px,7vw,100px);border-top:1px solid var(--line);padding-top:14px;font:400 9px/1.4 var(--sans);letter-spacing:.16em;color:#8f8d88}
+.archive-mosaic-grid{display:flex;flex-direction:column;gap:0;width:calc(100% + var(--pad) + var(--pad));margin-left:calc(0px - var(--pad))}
+
+/* Nevada draft: accurate GIS-derived restricted-land line study, animated once on entry. */
+.archive-route-map{margin:clamp(44px,6vw,86px) 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#050505;color:#f1efe9;overflow:hidden}
+.archive-route-topline,.archive-route-footline{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px 24px;font:400 10px/1.4 var(--sans);letter-spacing:.15em;text-transform:uppercase}
+.archive-route-topline{padding:20px 0 14px}
+.archive-route-topline span:last-child,.archive-route-footline{color:#97948e}
+.archive-route-map svg{display:block;width:88%;max-width:1480px;height:auto;margin-inline:auto}
+.archive-route-map .range-border{fill:none;stroke:#aaa;stroke-width:1.5;stroke-linejoin:round;opacity:.77}
+.archive-route-map .site-border{fill:none;stroke:#fff;stroke-width:1.65;stroke-linejoin:round}
+.archive-route-map .road-trace{fill:none;stroke:#fff;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.archive-route-map .place-dot{fill:#050505;stroke:#fff;stroke-width:2}
+.archive-route-map .mercury-dot{fill:#fff}
+.archive-route-map .place-label{fill:#fff;font:13px var(--sans);letter-spacing:1.7px}
+.archive-route-map .map-small{fill:#b8b8b8;font:10px var(--sans);letter-spacing:1.4px}
+.archive-route-map .map-callout{opacity:1}
+.archive-route-footline{border-top:1px solid var(--line);padding:14px 0 17px;font-size:9px}
+.archive-route-map.is-prepared .range-border{stroke-dasharray:2200;stroke-dashoffset:2200;opacity:0}
+.archive-route-map.is-prepared .site-border{stroke-dasharray:800;stroke-dashoffset:800;opacity:0}
+.archive-route-map.is-prepared .road-trace{stroke-dasharray:2500;stroke-dashoffset:2500;opacity:0}
+.archive-route-map.is-prepared .map-callout{opacity:0}
+.archive-route-map.is-prepared.is-visible .range-border{animation:archiveRangeDraw 5.4s ease-in-out 0s 1 forwards}
+.archive-route-map.is-prepared.is-visible .site-border{animation:archiveSiteDraw 4.2s ease-in-out 4.3s 1 forwards}
+.archive-route-map.is-prepared.is-visible .road-trace{animation:archiveRoadDraw 11.7s ease-in-out 8.3s 1 forwards}
+.archive-route-map.is-prepared.is-visible .map-callout{animation:archiveLabelsReveal 1.3s ease-in-out 7.6s 1 forwards}
+@keyframes archiveRangeDraw{0%{stroke-dashoffset:2200;opacity:0}5%{opacity:.77}100%{stroke-dashoffset:0;opacity:.77}}
+@keyframes archiveSiteDraw{0%{stroke-dashoffset:800;opacity:0}6%{opacity:1}100%{stroke-dashoffset:0;opacity:1}}
+@keyframes archiveRoadDraw{0%{stroke-dashoffset:2500;opacity:0}3%{opacity:1}100%{stroke-dashoffset:0;opacity:1}}
+@keyframes archiveLabelsReveal{0%{opacity:0}100%{opacity:1}}
+@media(max-width:760px){
+  .archive-route-topline,.archive-route-footline{font-size:8px;letter-spacing:.12em}
+  .archive-route-topline{padding:14px 0 11px}
+  .archive-route-map svg{width:100%}
+  .archive-route-footline{padding:11px 0 14px}
+}
+@media(prefers-reduced-motion:reduce){
+  .archive-route-map.is-prepared .range-border,.archive-route-map.is-prepared .site-border,.archive-route-map.is-prepared .road-trace{animation:none;stroke-dashoffset:0;opacity:1}
+  .archive-route-map.is-prepared .map-callout{animation:none;opacity:1}
+}
+
+/* A full-width photograph separates each normal mosaic from its mirror. */
+.archive-row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:0;height:max(540px,94svh)}
+.archive-row .archive-photo--lead{grid-column:1/span 8;grid-row:1/span 2}
+.archive-row .archive-document,.archive-row .archive-photo--upper{grid-column:9/span 4;grid-row:1}
+.archive-row .archive-photo--follow{grid-column:9/span 4;grid-row:2}
+.archive-row--inverted .archive-photo--lead{grid-column:5/span 8;grid-row:1/span 2}
+.archive-row--inverted .archive-document,.archive-row--inverted .archive-photo--upper{grid-column:1/span 4;grid-row:1}
+.archive-row--inverted .archive-photo--follow{grid-column:1/span 4;grid-row:2}
+/* A two-image row closes the gap when a photograph is removed from the edit. */
+.archive-row--inverted.archive-row--duo .archive-photo--follow{grid-row:1/span 2}
+.archive-row--full{display:block;height:max(540px,94svh)}
+.archive-row--full .archive-photo--full{width:100%;height:100%}
+.archive-row .archive-tile{position:relative;min-width:0;min-height:0;width:100%;height:100%;margin:0;padding:0;display:block;overflow:hidden;border:0;border-radius:0;background:#151515;color:#f1efe9;cursor:zoom-in;text-align:left}
+.archive-row .archive-tile img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .7s cubic-bezier(.22,1,.36,1)}
+.archive-row .archive-document{display:flex;align-items:center;justify-content:center;padding:clamp(16px,3vw,52px);background:#050505;text-align:center}
+.archive-evidence-title{display:block;max-width:26ch;color:rgba(241,239,233,.7);font:300 clamp(11px,1.05vw,16px)/1.6 var(--sans);letter-spacing:.16em;transform:scale(1);transition:transform .42s cubic-bezier(.22,1,.36,1),color .3s ease,text-shadow .3s ease}
+.archive-row .archive-document:hover .archive-evidence-title,.archive-row .archive-document:focus-visible .archive-evidence-title{color:#fff;text-shadow:0 0 17px rgba(255,255,255,.4);transform:scale(1.1)}
+.archive-row .archive-tile:hover img,.archive-row .archive-tile:focus-visible img{transform:scale(1.025)}
+.archive-row .archive-tile:focus-visible{outline:2px solid #f1efe9;outline-offset:-3px;z-index:1}
+.archive-row .archive-caption{position:absolute;left:0;right:0;bottom:0;display:block;margin:0;padding:40px 16px 15px;background:linear-gradient(transparent,rgba(0,0,0,.74));color:#f1efe9;font:400 9px/1.4 var(--sans);letter-spacing:.14em;text-transform:uppercase;opacity:0;transform:translateY(5px);transition:opacity .25s ease,transform .25s ease;pointer-events:none}
+.archive-row .archive-tile:hover .archive-caption,.archive-row .archive-tile:focus-visible .archive-caption{opacity:1;transform:none}
+@media(max-width:760px){
+  .archive-mosaic{padding-top:96px;padding-bottom:110px}
+  .archive-mosaic-title{margin-top:28px;font-size:clamp(44px,10vw,70px)}
+  .archive-mosaic-intro{font-size:14px}
+  .archive-mosaic-key{gap:10px 18px;margin-top:48px;font-size:8px}
+  .archive-row{grid-template-columns:repeat(2,minmax(0,1fr));height:auto;grid-template-rows:none;gap:0}
+  .archive-row .archive-tile{grid-column:span 1!important;grid-row:auto!important;aspect-ratio:3/4;height:auto}
+  .archive-row .archive-photo--lead{grid-column:span 2!important;aspect-ratio:3/2}
+  .archive-row--full .archive-photo--full{aspect-ratio:3/2;height:auto}
+  .archive-row--inverted .archive-document,.archive-row--inverted .archive-photo--upper{grid-column:2!important;grid-row:2!important}
+  .archive-row--inverted .archive-photo--follow{grid-column:1!important;grid-row:2!important}
+  .archive-row--inverted.archive-row--duo .archive-photo--follow{grid-column:span 2!important;grid-row:auto!important;aspect-ratio:3/2}
+  .archive-row .archive-caption{opacity:1;transform:none;padding:24px 9px 10px;font-size:8px}
+  .archive-row .archive-document{padding:16px}
+  .archive-evidence-title{font-size:10px;letter-spacing:.12em}
+}
+@media(prefers-reduced-motion:reduce){.archive-row .archive-tile img,.archive-row .archive-caption,.archive-evidence-title{transition:none}}
 </style>
 <link href="../assets/menu-standard.css?v=milk-hero-visible-20260906" rel="stylesheet"/></head>
 <body>
@@ -132,18 +217,199 @@
 <section class="route pad"><div class="label">03 / THE ROUTE</div><div class="route-intro"><h2>A contamination pathway disguised as an ordinary food chain.</h2></div><div class="route-line"><div class="node"><b>NEVADA</b><small>atmospheric testing</small></div><div class="arrow">→</div><div class="node"><b>PASTURE</b><small>fallout on forage</small></div><div class="arrow">→</div><div class="node"><b>COW</b><small>biological uptake</small></div><div class="arrow">→</div><div class="node"><b>MILK</b><small>daily distribution</small></div><div class="arrow">→</div><div class="node"><b>BODY</b><small>thyroid / generations</small></div></div></section>
 <section class="residue"><div class="closing-pair"><div class="evidence-canvas"><img src="./thyroid.webp" alt="Archival page documenting human thyroid iodine-131 uptake measurement" width="1365" height="2048"></div><img src="./Natalia_Neuhaus-12.webp" alt="Milk bottles casting long shadows on a green surface" width="1365" height="2048"></div></section>
 <figure class="statement-image" id="testScaleImage"><img src="./Natalia_Neuhaus-69.webp" alt="Black-and-white close-up photograph of a cow" width="2048" height="1365"><figcaption class="test-scale-card"><p class="test-scale-measure" aria-hidden="true"><span class="test-scale-band">Between 1951 and 1962, the U.S. Atomic Energy Commission oversaw 100 atmospheric tests in the Nevada desert. Together, they produced about one megaton of explosive force—roughly equivalent to 67 Hiroshima bombs or 48 Nagasaki bombs, and about 28 times the two bombings combined. The fallout did not remain in Nevada; it drifted across the continental United States, settling onto pasture and entering the food chain through milk.</span></p><p class="test-scale-typed"><span class="test-scale-band test-scale-copy" id="testScaleCopy" aria-label="Between 1951 and 1962, the U.S. Atomic Energy Commission oversaw 100 atmospheric tests in the Nevada desert. Together, they produced about one megaton of explosive force—roughly equivalent to 67 Hiroshima bombs or 48 Nagasaki bombs, and about 28 times the two bombings combined. The fallout did not remain in Nevada; it drifted across the continental United States, settling onto pasture and entering the food chain through milk.">Between 1951 and 1962, the U.S. Atomic Energy Commission oversaw 100 atmospheric tests in the Nevada desert. Together, they produced about one megaton of explosive force—roughly equivalent to 67 Hiroshima bombs or 48 Nagasaki bombs, and about 28 times the two bombings combined. The fallout did not remain in Nevada; it drifted across the continental United States, settling onto pasture and entering the food chain through milk.</span></p></figcaption></figure>
-<section class="evidence pad"><div class="label">04 / EVIDENCE</div><div class="evidence-intro"><h2>A record assembled from fragments.</h2></div><div class="evidence-strip"><button class="evidence-item" data-src="./Natalia_Neuhaus-35.webp" data-caption="Federal environmental record"><div class="evidence-thumb"><img src="./evidence-thumbnails/Natalia_Neuhaus-35.webp" loading="lazy" decoding="async" alt="Federal environmental record"></div><span>Federal environmental record</span></button><button class="evidence-item" data-src="./Natalia_Neuhaus-36.webp" data-caption="Archival record 36"><div class="evidence-thumb"><img src="./evidence-thumbnails/Natalia_Neuhaus-36.webp" loading="lazy" decoding="async" alt="Archival record 36"></div><span>Archival record 36</span></button><button class="evidence-item" data-src="./Natalia_Neuhaus-37.webp" data-caption="Archival record 37"><div class="evidence-thumb"><img src="./evidence-thumbnails/Natalia_Neuhaus-37.webp" loading="lazy" decoding="async" alt="Archival record 37"></div><span>Archival record 37</span></button><button class="evidence-item" data-src="./Natalia_Neuhaus-38.webp" data-caption="Fallout forecast"><div class="evidence-thumb"><img src="./evidence-thumbnails/Natalia_Neuhaus-38.webp" loading="lazy" decoding="async" alt="Fallout forecast"></div><span>Fallout forecast</span></button><button class="evidence-item" data-src="./Natalia_Neuhaus-39.webp" data-caption="Archival record 39"><div class="evidence-thumb"><img src="./evidence-thumbnails/Natalia_Neuhaus-39.webp" loading="lazy" decoding="async" alt="Archival record 39"></div><span>Archival record 39</span></button><button class="evidence-item" data-src="./Natalia_Neuhaus-40.webp" data-caption="Archival record 40"><div class="evidence-thumb"><img src="./evidence-thumbnails/Natalia_Neuhaus-40.webp" loading="lazy" decoding="async" alt="Archival record 40"></div><span>Archival record 40</span></button><button class="evidence-item" data-src="./Natalia_Neuhaus-41.webp" data-caption="Archival record 41"><div class="evidence-thumb"><img src="./evidence-thumbnails/Natalia_Neuhaus-41.webp" loading="lazy" decoding="async" alt="Archival record 41"></div><span>Archival record 41</span></button><button class="evidence-item" data-src="./Natalia_Neuhaus-42.webp" data-caption="Archival record 42"><div class="evidence-thumb"><img src="./evidence-thumbnails/Natalia_Neuhaus-42.webp" loading="lazy" decoding="async" alt="Archival record 42"></div><span>Archival record 42</span></button><button class="evidence-item" data-src="./Natalia_Neuhaus-43.webp" data-caption="Milk monitoring"><div class="evidence-thumb"><img src="./evidence-thumbnails/Natalia_Neuhaus-43.webp" loading="lazy" decoding="async" alt="Milk monitoring"></div><span>Milk monitoring</span></button><button class="evidence-item" data-src="./Natalia_Neuhaus-44.webp" data-caption="Archival record 44"><div class="evidence-thumb"><img src="./evidence-thumbnails/Natalia_Neuhaus-44.webp" loading="lazy" decoding="async" alt="Archival record 44"></div><span>Archival record 44</span></button><button class="evidence-item" data-src="./Natalia_Neuhaus-45.webp" data-caption="Experimental cow groups"><div class="evidence-thumb"><img src="./evidence-thumbnails/Natalia_Neuhaus-45.webp" loading="lazy" decoding="async" alt="Experimental cow groups"></div><span>Experimental cow groups</span></button><button class="evidence-item" data-src="./Natalia_Neuhaus-46.webp" data-caption="Archival record 46"><div class="evidence-thumb"><img src="./evidence-thumbnails/Natalia_Neuhaus-46.webp" loading="lazy" decoding="async" alt="Archival record 46"></div><span>Archival record 46</span></button><button class="evidence-item" data-src="./Natalia_Neuhaus-47.webp" data-caption="Activity in milk"><div class="evidence-thumb"><img src="./evidence-thumbnails/Natalia_Neuhaus-47.webp" loading="lazy" decoding="async" alt="Activity in milk"></div><span>Activity in milk</span></button><button class="evidence-item" data-src="./Natalia_Neuhaus-48.webp" data-caption="Archival record 48"><div class="evidence-thumb"><img src="./evidence-thumbnails/Natalia_Neuhaus-48.webp" loading="lazy" decoding="async" alt="Archival record 48"></div><span>Archival record 48</span></button><button class="evidence-item" data-src="./Natalia_Neuhaus-49.webp" data-caption="Archival record 49"><div class="evidence-thumb"><img src="./evidence-thumbnails/Natalia_Neuhaus-49.webp" loading="lazy" decoding="async" alt="Archival record 49"></div><span>Archival record 49</span></button><button class="evidence-item" data-src="./Natalia_Neuhaus-50.webp" data-caption="Archival record 50"><div class="evidence-thumb"><img src="./evidence-thumbnails/Natalia_Neuhaus-50.webp" loading="lazy" decoding="async" alt="Archival record 50"></div><span>Archival record 50</span></button><button class="evidence-item" data-src="./Natalia_Neuhaus-51.webp" data-caption="Archival record 51"><div class="evidence-thumb"><img src="./evidence-thumbnails/Natalia_Neuhaus-51.webp" loading="lazy" decoding="async" alt="Archival record 51"></div><span>Archival record 51</span></button><button class="evidence-item" data-src="./Natalia_Neuhaus-52.webp" data-caption="Archival record 52"><div class="evidence-thumb"><img src="./evidence-thumbnails/Natalia_Neuhaus-52.webp" loading="lazy" decoding="async" alt="Archival record 52"></div><span>Archival record 52</span></button><button class="evidence-item" data-src="./Natalia_Neuhaus-53.webp" data-caption="Archival record 53"><div class="evidence-thumb"><img src="./evidence-thumbnails/Natalia_Neuhaus-53.webp" loading="lazy" decoding="async" alt="Archival record 53"></div><span>Archival record 53</span></button><button class="evidence-item" data-src="./Natalia_Neuhaus-54.webp" data-caption="Archival record 54"><div class="evidence-thumb"><img src="./evidence-thumbnails/Natalia_Neuhaus-54.webp" loading="lazy" decoding="async" alt="Archival record 54"></div><span>Archival record 54</span></button><button class="evidence-item" data-src="./Natalia_Neuhaus-55.webp" data-caption="Experimental Farm"><div class="evidence-thumb"><img src="./evidence-thumbnails/Natalia_Neuhaus-55.webp" loading="lazy" decoding="async" alt="Experimental Farm"></div><span>Experimental Farm</span></button><button class="evidence-item" data-src="./Natalia_Neuhaus-56.webp" data-caption="Archival record 56"><div class="evidence-thumb"><img src="./evidence-thumbnails/Natalia_Neuhaus-56.webp" loading="lazy" decoding="async" alt="Archival record 56"></div><span>Archival record 56</span></button><button class="evidence-item" data-src="./Natalia_Neuhaus-57.webp" data-caption="Human thyroid I-131 uptake measurement"><div class="evidence-thumb"><img src="./Natalia_Neuhaus-57.webp" alt="Human thyroid I-131 uptake measurement"></div><span>Human thyroid I-131 uptake measurement</span></button><button class="evidence-item" data-src="./Natalia_Neuhaus-58.webp" data-caption="Archival record 58"><div class="evidence-thumb"><img src="./evidence-thumbnails/Natalia_Neuhaus-58.webp" loading="lazy" decoding="async" alt="Archival record 58"></div><span>Archival record 58</span></button></div><div class="evidence-footer"><span>ARCHIVAL RECORDS</span><span>NEVADA / FALLOUT / MILK</span></div></section>
 
-<section class="slideshow pad"><div class="slideshow-head"><div><div class="label">05 / PHOTOGRAPHS — NEVADA</div><h2 class="slideshow-title">The landscape</h2></div></div><p class="slideshow-journey">928 nuclear tests were conducted at the Nevada National Security Site. The land remains federally controlled and largely inaccessible, its history held behind fences and warning signs. I photographed from the perimeter, beginning and ending in Las Vegas and traveling through Tonopah and Ely, Nevada, and St. George, Utah. The road formed a wide circle around the test site, passing through desert towns and downwind communities. I was searching for what remains when the evidence is no longer visible: the memory held in the land, the fallout carried beyond the boundary, and the silence that settles over a place after the damage has been done.</p><div class="stage"><img id="slideImage" alt="Nevada photograph"></div><div class="controls" id="slideControls"><button id="prevText">← PREVIOUS</button><span class="slide-count" id="slideCount">01 / 48</span><button class="next-text" id="nextText">NEXT →</button></div></section>
+<section class="archive-mosaic pad" id="archive-mosaic" aria-label="Nevada photographs and archival records">
+  <div class="archive-mosaic-head">
+    <div class="label">04 / THE LANDSCAPE &amp; THE RECORD</div>
+    <h2 class="archive-mosaic-title">A record assembled from fragments.</h2>
+    <p class="archive-mosaic-intro">928 nuclear tests were conducted at the Nevada National Security Site. The land remains federally controlled and largely inaccessible, its history held behind fences and warning signs. I photographed from the perimeter, beginning and ending in Las Vegas and traveling through Tonopah and Ely, Nevada, and St. George, Utah. The road formed a wide circle around the test site, passing through desert towns and downwind communities. I was searching for what remains when the evidence is no longer visible: the memory held in the land, the fallout carried beyond the boundary, and the silence that settles over a place after the damage has been done.</p>
+    <figure class="archive-route-map" id="archive-route-map" aria-label="The route around the Nevada Test and Training Range and nuclear test site">
+      <div class="archive-route-topline"><span>THE MILK ROUTE / RESTRICTED LAND</span><span>JANUARY 2026</span></div>
+      <svg viewBox="0 0 1120 680" role="img" aria-label="White-line geographic map: Nevada Test and Training Range boundary, nuclear test site boundary, Mercury inside the nuclear test site, and a public-road loop from Las Vegas through Tonopah, Ely, and St. George returning to Las Vegas">
+        <text x="51" y="91" fill="#f5f5f5" font-family="Georgia,serif" font-size="48" letter-spacing="-2">Restricted land</text>
+        <text x="53" y="118" class="map-small">THE FALLOUT THAT TRAVELED BEYOND IT</text>
+        <g aria-label="Nevada Test and Training Range boundary">
+          <path class="range-border" d="M399,306L402,310L443,310L443,322L464,322L464,335L526,334L525,360L543,360L543,401L522,401L522,405L421,405L421,465L400,465L400,440L396,440L396,438L393,438L393,436L386,436L386,433L382,433L382,431L375,431L375,429L372,429L372,427L365,427L365,425L356,426L359,425L358,423L351,423L351,420L349,420L299,376L298,370L303,368L303,366L306,366L306,364L310,364L309,361L296,360L296,310L402,310L399,306Z"/>
+          <path class="range-border" d="M360,310L358,310L360,310Z"/>
+          <path class="range-border" d="M358,327L361,325L360,322L358,322L358,319L353,319L357,326Z"/>
+          <path class="range-border" d="M640,410L640,490L624,490L624,505L609,505L612,508L612,510L621,514L620,518L616,521L614,522L590,510L585,505L573,505L573,503L568,502L562,505L535,504L556,503L556,490L522,490L521,414L557,414L557,400L640,400L640,408Z"/>
+        </g>
+        <path class="site-border" aria-label="Nuclear test site boundary" d="M452,385L432,385L432,388L425,388L425,390L402,390L402,386L393,386L393,394L397,394L407,409L411,409L414,416L417,416L417,420L420,420L420,492L479,491L493,499L493,506L510,502L510,491L520,491L520,405L470,404L470,392L463,392L463,390L459,390L459,388L452,388Z"/>
+        <g class="map-callout">
+          <text x="334" y="343" text-anchor="middle" class="map-small" style="fill:#eee;font-size:10px">NEVADA TEST</text>
+          <text x="334" y="360" text-anchor="middle" class="map-small" style="fill:#eee;font-size:10px">AND TRAINING</text>
+          <text x="334" y="377" text-anchor="middle" class="map-small" style="fill:#eee;font-size:10px">RANGE</text>
+          <path d="M520 406 L556 374 L581 374" fill="none" stroke="#fff" stroke-width="1"/>
+          <circle cx="520" cy="406" r="2.5" fill="#fff"/>
+          <text x="589" y="379" fill="#fff" font-family="Arial,sans-serif" font-size="12" font-weight="600" letter-spacing="1.7">NUCLEAR TEST SITE</text>
+          <circle class="mercury-dot" cx="507" cy="494" r="3"/>
+          <path d="M507 494 L537 470 L544 470" fill="none" stroke="#fff" stroke-width=".9"/>
+          <text x="550" y="474" fill="#fff" font-family="Arial,sans-serif" font-size="11" letter-spacing="1.6">MERCURY</text>
+        </g>
+        <path class="road-trace" aria-label="Road route around the restricted land" d="M671,567L652,566L651,554L636,542L618,530L612,523L576,506L562,505L541,507L511,502L495,504L488,508L471,507L445,498L403,491L385,483L374,476L363,469L361,464L362,459L360,456L369,450L366,441L359,436L352,426L327,415L286,384L272,350L272,342L269,338L270,337L266,332L268,325L267,306L262,299L262,293L272,286L272,284L270,282L325,280L334,275L344,273L355,275L365,272L434,266L477,223L491,220L507,224L514,222L523,217L537,215L567,200L581,199L607,181L623,173L632,169L641,170L648,167L663,157L690,121L698,112L705,109L717,109L720,105L722,104L726,110L736,119L752,136L759,139L772,135L775,138L784,140L792,153L781,177L769,189L765,210L766,222L776,249L778,279L798,299L809,305L812,324L847,325L866,333L882,334L897,325L905,322L956,336L955,353L947,356L951,361L956,362L960,365L962,371L960,373L963,375L960,381L956,386L949,390L949,394L962,405L960,406L960,410L963,417L966,419L965,420L968,427L970,428L970,433L961,444L950,447L938,447L929,449L924,452L922,455L918,454L904,459L888,468L869,472L857,478L839,476L810,481L795,487L790,492L780,493L764,505L745,517L731,522L726,526L712,543L685,552L676,558L670,566L671,567"/>
+        <g aria-label="Driving route cities">
+          <circle class="place-dot" cx="671" cy="567" r="5"/>
+          <text x="686" y="588" class="place-label">LAS VEGAS</text>
+          <text x="686" y="605" class="map-small">START / RETURN</text>
+          <circle class="place-dot" cx="270" cy="282" r="5"/>
+          <text x="191" y="261" class="place-label">TONOPAH</text>
+          <circle class="place-dot" cx="719" cy="105" r="5"/>
+          <text x="740" y="99" class="place-label">ELY</text>
+          <circle class="place-dot" cx="970" cy="428" r="5"/>
+          <text x="988" y="419" class="place-label">ST. GEORGE</text>
+        </g>
+        <text x="53" y="646" class="map-small">N ↑</text>
+        <text x="1045" y="646" text-anchor="end" class="map-small">PUBLIC-ROAD LOOP / RESTRICTED TERRITORY</text>
+      </svg>
+      <figcaption class="archive-route-footline"><span>TEST AND TRAINING RANGE → NUCLEAR TEST SITE → THE ROAD</span><span>GIS BOUNDARIES: DOD / NDEP · ROAD STUDY: OSM</span></figcaption>
+    </figure>
+    <div class="archive-mosaic-key"><span>46 PHOTOGRAPHS</span><span>SELECTED ARCHIVAL RECORDS</span><span>CLICK / TAP TO VIEW FULLSCREEN ↗</span></div>
+  </div>
+  <div class="archive-mosaic-grid" id="archiveMosaicGrid"></div>
+</section>
 
 </main>
-<div class="lightbox" id="evidenceLightbox" aria-hidden="true" aria-label="Evidence slideshow" aria-modal="true" role="dialog"><div class="lightbox-top"><span>EVIDENCE <span class="lightbox-count" id="lightboxCount">01 / 24</span></span><button class="lightbox-close" id="lightboxClose" aria-label="Close evidence slideshow" type="button">×</button></div><div class="lightbox-body"><button class="lightbox-arrow prev" id="lightboxPrev" aria-label="Previous evidence record" type="button"></button><img id="lightboxImage" alt=""><button class="lightbox-arrow next" id="lightboxNext" aria-label="Next evidence record" type="button"></button></div><div class="lightbox-caption" id="lightboxCaption"></div></div>
+<div class="lightbox" id="evidenceLightbox" aria-hidden="true" aria-label="Photographs and archival evidence viewer" aria-modal="true" role="dialog"><div class="lightbox-top"><span>THE ARCHIVE <span class="lightbox-count" id="lightboxCount">01 / 70</span></span><button class="lightbox-close" id="lightboxClose" aria-label="Close evidence slideshow" type="button">×</button></div><div class="lightbox-body"><button class="lightbox-arrow prev" id="lightboxPrev" aria-label="Previous evidence record" type="button"></button><img id="lightboxImage" alt=""><button class="lightbox-arrow next" id="lightboxNext" aria-label="Next evidence record" type="button"></button></div><div class="lightbox-caption" id="lightboxCaption"></div></div>
 <div class="film-modal" id="filmModal" aria-hidden="true" aria-labelledby="filmModalTitle" aria-modal="true" role="dialog" tabindex="-1"><div class="film-modal-top"><span id="filmModalTitle">THIS IS A TEST</span><button class="film-modal-close" id="filmModalClose" aria-label="Close full video" type="button">×</button></div><div class="film-modal-body"><div class="film-modal-frame"><video id="filmModalVideo" data-autoplay-interaction-controls playsinline preload="metadata" poster="../milk-route-40-96-poster-v25.webp" aria-label="This Is a Test"><source src="https://rachelbodyworkmassage.com/wp-content/uploads/videos/This_is_a_Test.mp4" type="video/mp4"></video></div></div></div>
 <footer class="footer"><span>THE MILK ROUTE</span><span>ONGOING</span><span>&copy; NATALIA NEUHAUS. ALL RIGHTS RESERVED.</span></footer>
 <script defer src="../assets/site.js?v=mobile-photo-swipe-2"></script>
 <script>
-const photos=Array.from({length:48},(_,index)=>String(index+1).padStart(2,'0'));let i=0;const img=document.getElementById('slideImage'),count=document.getElementById('slideCount'),controls=document.getElementById('slideControls');function syncControlsWidth(){const width=Math.round(img.getBoundingClientRect().width);if(width)controls.style.width=`${width}px`}function animateSlide(direction){img.classList.remove('slide-enter-next','slide-enter-prev');void img.offsetWidth;img.classList.add(direction>0?'slide-enter-next':'slide-enter-prev')}function render(direction=0){const p=photos[i];img.onload=()=>{syncControlsWidth();if(direction)animateSlide(direction)};img.src=`./landscape/${p}.webp`;img.dataset.slideIndex=String(i);img.alt=`Nevada landscape photograph ${i+1}`;count.textContent=`${String(i+1).padStart(2,'0')} / ${photos.length}`}function next(){i=(i+1)%photos.length;render(1)}function prev(){i=(i-1+photos.length)%photos.length;render(-1)}document.getElementById('prevText').onclick=prev;document.getElementById('nextText').onclick=next;if('ResizeObserver'in window){const slideResizeObserver=new ResizeObserver(syncControlsWidth);slideResizeObserver.observe(img)}else{window.addEventListener('resize',syncControlsWidth)}render();
-const lb=document.getElementById('evidenceLightbox'),lbImg=document.getElementById('lightboxImage'),lbCap=document.getElementById('lightboxCaption'),lbCount=document.getElementById('lightboxCount'),lbClose=document.getElementById('lightboxClose'),lbPrev=document.getElementById('lightboxPrev'),lbNext=document.getElementById('lightboxNext'),evidenceItems=[...document.querySelectorAll('.evidence-item')];let evidenceIndex=0,lbTouchX=0;function renderEvidence(){const el=evidenceItems[evidenceIndex];lbImg.src=el.dataset.src;lbImg.alt=el.dataset.caption;lbCap.textContent=el.dataset.caption;lbCount.textContent=`${String(evidenceIndex+1).padStart(2,'0')} / ${String(evidenceItems.length).padStart(2,'0')}`}function openLB(index){evidenceIndex=index;renderEvidence();lb.classList.add('open');lb.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';lbClose.focus()}function closeLB(){if(!lb.classList.contains('open'))return;lb.classList.remove('open');lb.setAttribute('aria-hidden','true');document.body.style.overflow='';evidenceItems[evidenceIndex].focus()}function moveEvidence(step){evidenceIndex=(evidenceIndex+step+evidenceItems.length)%evidenceItems.length;renderEvidence()}evidenceItems.forEach((el,index)=>el.onclick=()=>openLB(index));lbClose.onclick=closeLB;lbPrev.onclick=()=>moveEvidence(-1);lbNext.onclick=()=>moveEvidence(1);lb.onclick=e=>{if(e.target===lb)closeLB()};lb.addEventListener('touchstart',e=>{lbTouchX=e.changedTouches[0].clientX},{passive:true});lb.addEventListener('touchend',e=>{const distance=e.changedTouches[0].clientX-lbTouchX;if(Math.abs(distance)>45)moveEvidence(distance<0?1:-1)},{passive:true});document.addEventListener('keydown',e=>{if(lb.classList.contains('open')){if(e.key==='Escape')closeLB();if(e.key==='ArrowRight')moveEvidence(1);if(e.key==='ArrowLeft')moveEvidence(-1);return}if(document.getElementById('filmModal').classList.contains('open'))return;if(e.key==='ArrowRight')next();if(e.key==='ArrowLeft')prev()});
+const archiveRecords = [{"src":"./Natalia_Neuhaus-35.webp","caption":"Federal environmental record","thumb":"./evidence-thumbnails/Natalia_Neuhaus-35.webp"},{"src":"./Natalia_Neuhaus-36.webp","caption":"Archival record 36","thumb":"./evidence-thumbnails/Natalia_Neuhaus-36.webp"},{"src":"./Natalia_Neuhaus-37.webp","caption":"Archival record 37","thumb":"./evidence-thumbnails/Natalia_Neuhaus-37.webp"},{"src":"./Natalia_Neuhaus-38.webp","caption":"Fallout forecast","thumb":"./evidence-thumbnails/Natalia_Neuhaus-38.webp"},{"src":"./Natalia_Neuhaus-39.webp","caption":"Archival record 39","thumb":"./evidence-thumbnails/Natalia_Neuhaus-39.webp"},{"src":"./Natalia_Neuhaus-40.webp","caption":"Archival record 40","thumb":"./evidence-thumbnails/Natalia_Neuhaus-40.webp"},{"src":"./Natalia_Neuhaus-41.webp","caption":"Archival record 41","thumb":"./evidence-thumbnails/Natalia_Neuhaus-41.webp"},{"src":"./Natalia_Neuhaus-42.webp","caption":"Archival record 42","thumb":"./evidence-thumbnails/Natalia_Neuhaus-42.webp"},{"src":"./Natalia_Neuhaus-43.webp","caption":"Milk monitoring","thumb":"./evidence-thumbnails/Natalia_Neuhaus-43.webp"},{"src":"./Natalia_Neuhaus-44.webp","caption":"Archival record 44","thumb":"./evidence-thumbnails/Natalia_Neuhaus-44.webp"},{"src":"./Natalia_Neuhaus-45.webp","caption":"Experimental cow groups","thumb":"./evidence-thumbnails/Natalia_Neuhaus-45.webp"},{"src":"./Natalia_Neuhaus-46.webp","caption":"Archival record 46","thumb":"./evidence-thumbnails/Natalia_Neuhaus-46.webp"},{"src":"./Natalia_Neuhaus-47.webp","caption":"Activity in milk","thumb":"./evidence-thumbnails/Natalia_Neuhaus-47.webp"},{"src":"./Natalia_Neuhaus-48.webp","caption":"Archival record 48","thumb":"./evidence-thumbnails/Natalia_Neuhaus-48.webp"},{"src":"./Natalia_Neuhaus-49.webp","caption":"Archival record 49","thumb":"./evidence-thumbnails/Natalia_Neuhaus-49.webp"},{"src":"./Natalia_Neuhaus-50.webp","caption":"Archival record 50","thumb":"./evidence-thumbnails/Natalia_Neuhaus-50.webp"},{"src":"./Natalia_Neuhaus-51.webp","caption":"Archival record 51","thumb":"./evidence-thumbnails/Natalia_Neuhaus-51.webp"},{"src":"./Natalia_Neuhaus-52.webp","caption":"Archival record 52","thumb":"./evidence-thumbnails/Natalia_Neuhaus-52.webp"},{"src":"./Natalia_Neuhaus-53.webp","caption":"Archival record 53","thumb":"./evidence-thumbnails/Natalia_Neuhaus-53.webp"},{"src":"./Natalia_Neuhaus-54.webp","caption":"Archival record 54","thumb":"./evidence-thumbnails/Natalia_Neuhaus-54.webp"},{"src":"./Natalia_Neuhaus-55.webp","caption":"Experimental Farm","thumb":"./evidence-thumbnails/Natalia_Neuhaus-55.webp"},{"src":"./Natalia_Neuhaus-56.webp","caption":"Archival record 56","thumb":"./evidence-thumbnails/Natalia_Neuhaus-56.webp"},{"src":"./Natalia_Neuhaus-57.webp","caption":"Human thyroid I-131 uptake measurement","thumb":"./Natalia_Neuhaus-57.webp"},{"src":"./Natalia_Neuhaus-58.webp","caption":"Archival record 58","thumb":"./evidence-thumbnails/Natalia_Neuhaus-58.webp"}];
+
+/* Start the geographic drawing only when it first enters the viewport.
+   The 22-second sequence fills forwards and is never replayed. */
+const archiveRouteMap=document.getElementById('archive-route-map');
+if(archiveRouteMap&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver'in window){
+  archiveRouteMap.classList.add('is-prepared');
+  const routeMapObserver=new IntersectionObserver(entries=>{
+    if(!entries.some(entry=>entry.isIntersecting))return;
+    archiveRouteMap.classList.add('is-visible');
+    routeMapObserver.disconnect();
+  },{threshold:.14});
+  routeMapObserver.observe(archiveRouteMap);
+}
+
+const archiveGrid = document.getElementById('archiveMosaicGrid');
+/* Curate land → fallout → cattle → milk → body: eight archival interventions,
+   each followed by one full-bleed photograph and an inverted photo mosaic. */
+archiveRecords[1].caption='Project Sedan: Ground Zero, Before and After';
+archiveRecords[2].caption='Iodine-131 in Bovine Thyroids';
+archiveRecords[5].caption='Radioiodine in Dairy Cows';
+archiveRecords[9].caption="Iodine-131 in Children’s Thyroids";
+const featuredRecordOrder = [0,1,3,2,5,8,9,22];
+const excludedPhotoNumbers = new Set([3,11]); // Photographs 03 (already used in the opening hero) and 11 are excluded from the series and slideshow; originals retained.
+/* Subject-aware crop points for the tighter frames. Originals remain untouched. */
+const archivePhotoFocus = {
+  9:'62% 50%',10:'54% 53%',15:'50% 40%',16:'48% 43%',
+  18:'55% 30%',21:'48% 50%',22:'48% 48%',25:'48% 55%',
+  26:'42% 8%',30:'53% 55%',32:'50% 58%',38:'50% 55%',
+  41:'49% 39%',42:'51% 50%',43:'52% 56%',48:'50% 58%'
+};
+function makeArchiveTile(kind,index,position){
+  const button=document.createElement('button');button.type='button';
+  button.className='evidence-item archive-tile '+(kind==='record'?'archive-document':'archive-photo archive-photo--'+position);
+  const record=kind==='record'?archiveRecords[index]:null;
+  const number=String(index+1).padStart(2,'0');
+  const caption=record?record.caption:'Nevada photograph '+number;
+  const full=record?record.src:'./landscape/'+number+'.webp';
+  const thumb=full;
+  button.dataset.src=full;button.dataset.caption=caption;
+  button.setAttribute('aria-label','View full-size '+caption);
+  if(record){
+    const title=document.createElement('span');title.className='archive-evidence-title';title.textContent=caption;
+    button.appendChild(title);return button;
+  }
+  const img=document.createElement('img');img.src=thumb;img.alt=caption;img.loading=index<2?'eager':'lazy';img.decoding='async';
+  img.style.objectPosition=archivePhotoFocus[index+1]||'center';
+  const label=document.createElement('span');label.className='archive-caption';
+  label.textContent='NEVADA / PHOTOGRAPH '+number;
+  button.append(img,label);return button;
+}
+for(let batchIndex=0;batchIndex<featuredRecordOrder.length;batchIndex++){
+  const firstPhoto=batchIndex*6;
+  const normal=document.createElement('div');normal.className='archive-row';
+  normal.append(
+    makeArchiveTile('photo',firstPhoto,'lead'),
+    makeArchiveTile('record',featuredRecordOrder[batchIndex],'document'),
+    makeArchiveTile('photo',firstPhoto+1,'follow')
+  );
+  const full=document.createElement('div');full.className='archive-row archive-row--full';
+  if(!excludedPhotoNumbers.has(firstPhoto+3))full.appendChild(makeArchiveTile('photo',firstPhoto+2,'full'));
+  const inverted=document.createElement('div');inverted.className='archive-row archive-row--inverted';
+  const swapDeerAndPlanes=batchIndex===featuredRecordOrder.length-1;
+  const invertedTiles = [
+    [swapDeerAndPlanes?'follow':'lead',firstPhoto+3],
+    ['upper',firstPhoto+4],
+    [swapDeerAndPlanes?'lead':'follow',firstPhoto+5]
+  ].filter(([,index])=>!excludedPhotoNumbers.has(index+1));
+  if(invertedTiles.length===2)inverted.classList.add('archive-row--duo');
+  inverted.append(...invertedTiles.map(([position,index])=>makeArchiveTile('photo',index,position)));
+  archiveGrid.append(normal,...(full.childElementCount?[full]:[]),inverted);
+}
+const lb=document.getElementById('evidenceLightbox'),
+  lbImg=document.getElementById('lightboxImage'),
+  lbCap=document.getElementById('lightboxCaption'),
+  lbCount=document.getElementById('lightboxCount'),
+  lbClose=document.getElementById('lightboxClose'),
+  lbPrev=document.getElementById('lightboxPrev'),
+  lbNext=document.getElementById('lightboxNext'),
+  evidenceItems=[...document.querySelectorAll('.evidence-item')];
+/* Keep the eight curated evidence tiles in the mosaic. Restore the other
+   archival records as slideshow-only entries, scattered in a stable random order. */
+const featuredRecordSet=new Set(featuredRecordOrder);
+const slideshowItems=evidenceItems.map(tile=>({
+  src:tile.dataset.src,caption:tile.dataset.caption,tile
+}));
+let slideshowSeed=20260113;
+function nextSlideshowRandom(){
+  slideshowSeed=(Math.imul(slideshowSeed,1664525)+1013904223)>>>0;
+  return slideshowSeed/4294967296;
+}
+archiveRecords.forEach((record,index)=>{
+  if(featuredRecordSet.has(index))return;
+  const insertAt=1+Math.floor(nextSlideshowRandom()*(slideshowItems.length-1));
+  slideshowItems.splice(insertAt,0,{src:record.src,caption:record.caption,tile:null});
+});
+const slideshowIndexByTile=new Map(slideshowItems.flatMap((slide,index)=>slide.tile?[[slide.tile,index]]:[]));
+let evidenceIndex=0,lbTouchX=0,lastOpenedTile=null;
+function renderEvidence(){
+  const slide=slideshowItems[evidenceIndex];
+  lbImg.src=slide.src;
+  lbImg.alt=slide.caption;
+  lbCap.textContent=slide.caption;
+  lbCount.textContent=String(evidenceIndex+1).padStart(2,'0')+' / '+String(slideshowItems.length).padStart(2,'0');
+}
+function openLB(index,tile){
+  evidenceIndex=index;lastOpenedTile=tile;renderEvidence();
+  lb.classList.add('open');lb.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';lbClose.focus();
+}
+function closeLB(){
+  if(!lb.classList.contains('open'))return;
+  lb.classList.remove('open');lb.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+  if(lastOpenedTile)lastOpenedTile.focus();
+}
+function moveEvidence(step){
+  evidenceIndex=(evidenceIndex+step+slideshowItems.length)%slideshowItems.length;
+  renderEvidence();
+}
+evidenceItems.forEach(tile=>tile.onclick=()=>openLB(slideshowIndexByTile.get(tile),tile));
+lbClose.onclick=closeLB;
+lbPrev.onclick=()=>moveEvidence(-1);
+lbNext.onclick=()=>moveEvidence(1);
+lb.onclick=e=>{if(e.target===lb)closeLB()};
+lb.addEventListener('touchstart',e=>{lbTouchX=e.changedTouches[0].clientX},{passive:true});
+lb.addEventListener('touchend',e=>{const distance=e.changedTouches[0].clientX-lbTouchX;if(Math.abs(distance)>45)moveEvidence(distance<0?1:-1)},{passive:true});
+document.addEventListener('keydown',e=>{
+  if(lb.classList.contains('open')){
+    if(e.key==='Escape')closeLB();
+    if(e.key==='ArrowRight')moveEvidence(1);
+    if(e.key==='ArrowLeft')moveEvidence(-1);
+    return;
+  }
+  if(document.getElementById('filmModal').classList.contains('open'))return;
+});
 const filmModal=document.getElementById('filmModal'),filmModalVideo=document.getElementById('filmModalVideo'),filmOpen=document.getElementById('filmOpen'),filmSurface=document.getElementById('short-film'),filmModalClose=document.getElementById('filmModalClose');
 function openFilm(){
   filmModal.classList.add('open');
