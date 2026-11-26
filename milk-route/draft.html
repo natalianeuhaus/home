@@ -129,7 +129,7 @@
 .archive-mosaic-intro{max-width:775px;margin:0;color:#b8b5ae;font-size:15px;line-height:1.68}
 .archive-mosaic-key{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px 28px;margin-top:clamp(54px,7vw,100px);border-top:1px solid var(--line);padding-top:14px;font:400 9px/1.4 var(--sans);letter-spacing:.16em;color:#8f8d88}
 .archive-mosaic-grid{display:flex;flex-direction:column;gap:0;width:calc(100% + var(--pad) + var(--pad));margin-left:calc(0px - var(--pad))}
-/* Repeat the opening full-bleed composition, mirrored on alternating rows. */
+/* A full-width photograph separates each normal mosaic from its mirror. */
 .archive-row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:0;height:max(540px,94svh)}
 .archive-row .archive-photo--lead{grid-column:1/span 8;grid-row:1/span 2}
 .archive-row .archive-document,.archive-row .archive-photo--upper{grid-column:9/span 4;grid-row:1}
@@ -137,6 +137,8 @@
 .archive-row--inverted .archive-photo--lead{grid-column:5/span 8;grid-row:1/span 2}
 .archive-row--inverted .archive-document,.archive-row--inverted .archive-photo--upper{grid-column:1/span 4;grid-row:1}
 .archive-row--inverted .archive-photo--follow{grid-column:1/span 4;grid-row:2}
+.archive-row--full{display:block;height:max(540px,94svh)}
+.archive-row--full .archive-photo--full{width:100%;height:100%}
 .archive-row .archive-tile{position:relative;min-width:0;min-height:0;width:100%;height:100%;margin:0;padding:0;display:block;overflow:hidden;border:0;border-radius:0;background:#151515;color:#f1efe9;cursor:zoom-in;text-align:left}
 .archive-row .archive-tile img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .7s cubic-bezier(.22,1,.36,1)}
 .archive-row .archive-document{display:flex;align-items:center;justify-content:center;padding:clamp(16px,3vw,52px);background:#050505;text-align:center}
@@ -154,6 +156,7 @@
   .archive-row{grid-template-columns:repeat(2,minmax(0,1fr));height:auto;grid-template-rows:none;gap:0}
   .archive-row .archive-tile{grid-column:span 1!important;grid-row:auto!important;aspect-ratio:3/4;height:auto}
   .archive-row .archive-photo--lead{grid-column:span 2!important;aspect-ratio:3/2}
+  .archive-row--full .archive-photo--full{aspect-ratio:3/2;height:auto}
   .archive-row--inverted .archive-document,.archive-row--inverted .archive-photo--upper{grid-column:2!important;grid-row:2!important}
   .archive-row--inverted .archive-photo--follow{grid-column:1!important;grid-row:2!important}
   .archive-row .archive-caption{opacity:1;transform:none;padding:24px 9px 10px;font-size:8px}
@@ -185,20 +188,20 @@
 </section>
 
 </main>
-<div class="lightbox" id="evidenceLightbox" aria-hidden="true" aria-label="Photographs and archival evidence viewer" aria-modal="true" role="dialog"><div class="lightbox-top"><span>THE ARCHIVE <span class="lightbox-count" id="lightboxCount">01 / 57</span></span><button class="lightbox-close" id="lightboxClose" aria-label="Close evidence slideshow" type="button">×</button></div><div class="lightbox-body"><button class="lightbox-arrow prev" id="lightboxPrev" aria-label="Previous evidence record" type="button"></button><img id="lightboxImage" alt=""><button class="lightbox-arrow next" id="lightboxNext" aria-label="Next evidence record" type="button"></button></div><div class="lightbox-caption" id="lightboxCaption"></div></div>
+<div class="lightbox" id="evidenceLightbox" aria-hidden="true" aria-label="Photographs and archival evidence viewer" aria-modal="true" role="dialog"><div class="lightbox-top"><span>THE ARCHIVE <span class="lightbox-count" id="lightboxCount">01 / 56</span></span><button class="lightbox-close" id="lightboxClose" aria-label="Close evidence slideshow" type="button">×</button></div><div class="lightbox-body"><button class="lightbox-arrow prev" id="lightboxPrev" aria-label="Previous evidence record" type="button"></button><img id="lightboxImage" alt=""><button class="lightbox-arrow next" id="lightboxNext" aria-label="Next evidence record" type="button"></button></div><div class="lightbox-caption" id="lightboxCaption"></div></div>
 <div class="film-modal" id="filmModal" aria-hidden="true" aria-labelledby="filmModalTitle" aria-modal="true" role="dialog" tabindex="-1"><div class="film-modal-top"><span id="filmModalTitle">THIS IS A TEST</span><button class="film-modal-close" id="filmModalClose" aria-label="Close full video" type="button">×</button></div><div class="film-modal-body"><div class="film-modal-frame"><video id="filmModalVideo" data-autoplay-interaction-controls playsinline preload="metadata" poster="../milk-route-40-96-poster-v25.webp" aria-label="This Is a Test"><source src="https://rachelbodyworkmassage.com/wp-content/uploads/videos/This_is_a_Test.mp4" type="video/mp4"></video></div></div></div>
 <footer class="footer"><span>THE MILK ROUTE</span><span>ONGOING</span><span>&copy; NATALIA NEUHAUS. ALL RIGHTS RESERVED.</span></footer>
 <script defer src="../assets/site.js?v=mobile-photo-swipe-2"></script>
 <script>
 const archiveRecords = [{"src":"./Natalia_Neuhaus-35.webp","caption":"Federal environmental record","thumb":"./evidence-thumbnails/Natalia_Neuhaus-35.webp"},{"src":"./Natalia_Neuhaus-36.webp","caption":"Archival record 36","thumb":"./evidence-thumbnails/Natalia_Neuhaus-36.webp"},{"src":"./Natalia_Neuhaus-37.webp","caption":"Archival record 37","thumb":"./evidence-thumbnails/Natalia_Neuhaus-37.webp"},{"src":"./Natalia_Neuhaus-38.webp","caption":"Fallout forecast","thumb":"./evidence-thumbnails/Natalia_Neuhaus-38.webp"},{"src":"./Natalia_Neuhaus-39.webp","caption":"Archival record 39","thumb":"./evidence-thumbnails/Natalia_Neuhaus-39.webp"},{"src":"./Natalia_Neuhaus-40.webp","caption":"Archival record 40","thumb":"./evidence-thumbnails/Natalia_Neuhaus-40.webp"},{"src":"./Natalia_Neuhaus-41.webp","caption":"Archival record 41","thumb":"./evidence-thumbnails/Natalia_Neuhaus-41.webp"},{"src":"./Natalia_Neuhaus-42.webp","caption":"Archival record 42","thumb":"./evidence-thumbnails/Natalia_Neuhaus-42.webp"},{"src":"./Natalia_Neuhaus-43.webp","caption":"Milk monitoring","thumb":"./evidence-thumbnails/Natalia_Neuhaus-43.webp"},{"src":"./Natalia_Neuhaus-44.webp","caption":"Archival record 44","thumb":"./evidence-thumbnails/Natalia_Neuhaus-44.webp"},{"src":"./Natalia_Neuhaus-45.webp","caption":"Experimental cow groups","thumb":"./evidence-thumbnails/Natalia_Neuhaus-45.webp"},{"src":"./Natalia_Neuhaus-46.webp","caption":"Archival record 46","thumb":"./evidence-thumbnails/Natalia_Neuhaus-46.webp"},{"src":"./Natalia_Neuhaus-47.webp","caption":"Activity in milk","thumb":"./evidence-thumbnails/Natalia_Neuhaus-47.webp"},{"src":"./Natalia_Neuhaus-48.webp","caption":"Archival record 48","thumb":"./evidence-thumbnails/Natalia_Neuhaus-48.webp"},{"src":"./Natalia_Neuhaus-49.webp","caption":"Archival record 49","thumb":"./evidence-thumbnails/Natalia_Neuhaus-49.webp"},{"src":"./Natalia_Neuhaus-50.webp","caption":"Archival record 50","thumb":"./evidence-thumbnails/Natalia_Neuhaus-50.webp"},{"src":"./Natalia_Neuhaus-51.webp","caption":"Archival record 51","thumb":"./evidence-thumbnails/Natalia_Neuhaus-51.webp"},{"src":"./Natalia_Neuhaus-52.webp","caption":"Archival record 52","thumb":"./evidence-thumbnails/Natalia_Neuhaus-52.webp"},{"src":"./Natalia_Neuhaus-53.webp","caption":"Archival record 53","thumb":"./evidence-thumbnails/Natalia_Neuhaus-53.webp"},{"src":"./Natalia_Neuhaus-54.webp","caption":"Archival record 54","thumb":"./evidence-thumbnails/Natalia_Neuhaus-54.webp"},{"src":"./Natalia_Neuhaus-55.webp","caption":"Experimental Farm","thumb":"./evidence-thumbnails/Natalia_Neuhaus-55.webp"},{"src":"./Natalia_Neuhaus-56.webp","caption":"Archival record 56","thumb":"./evidence-thumbnails/Natalia_Neuhaus-56.webp"},{"src":"./Natalia_Neuhaus-57.webp","caption":"Human thyroid I-131 uptake measurement","thumb":"./Natalia_Neuhaus-57.webp"},{"src":"./Natalia_Neuhaus-58.webp","caption":"Archival record 58","thumb":"./evidence-thumbnails/Natalia_Neuhaus-58.webp"}];
 const archiveGrid = document.getElementById('archiveMosaicGrid');
-/* Curate the land → fallout → cattle → milk → body sequence, with a single
-   evidence title between each pair of mirrored photographic compositions. */
+/* Curate land → fallout → cattle → milk → body: eight archival interventions,
+   each followed by one full-bleed photograph and an inverted photo mosaic. */
 archiveRecords[1].caption='Project Sedan: Ground Zero, Before and After';
 archiveRecords[2].caption='Iodine-131 in Bovine Thyroids';
 archiveRecords[5].caption='Radioiodine in Dairy Cows';
 archiveRecords[9].caption="Iodine-131 in Children’s Thyroids";
-const featuredRecordOrder = [0,1,3,2,5,8,12,9,22];
+const featuredRecordOrder = [0,1,3,2,5,8,9,22];
 /* Subject-aware crop points for the tighter frames. Originals remain untouched. */
 const archivePhotoFocus = {
   9:'62% 50%',10:'54% 53%',15:'50% 40%',16:'48% 43%',
@@ -226,18 +229,23 @@ function makeArchiveTile(kind,index,position){
   label.textContent='NEVADA / PHOTOGRAPH '+number;
   button.append(img,label);return button;
 }
-let archivePhotoIndex=0,featuredRecordIndex=0;
-for(let rowIndex=0;archivePhotoIndex<48;rowIndex++){
-  const row=document.createElement('div');row.className='archive-row'+(rowIndex%2?' archive-row--inverted':'');
-  const showRecord=rowIndex%2===0 && featuredRecordIndex<featuredRecordOrder.length;
-  row.appendChild(makeArchiveTile('photo',archivePhotoIndex++,'lead'));
-  if(showRecord){
-    row.appendChild(makeArchiveTile('record',featuredRecordOrder[featuredRecordIndex++],'document'));
-  }else{
-    row.appendChild(makeArchiveTile('photo',archivePhotoIndex++,'upper'));
-  }
-  row.appendChild(makeArchiveTile('photo',archivePhotoIndex++,'follow'));
-  archiveGrid.appendChild(row);
+for(let batchIndex=0;batchIndex<featuredRecordOrder.length;batchIndex++){
+  const firstPhoto=batchIndex*6;
+  const normal=document.createElement('div');normal.className='archive-row';
+  normal.append(
+    makeArchiveTile('photo',firstPhoto,'lead'),
+    makeArchiveTile('record',featuredRecordOrder[batchIndex],'document'),
+    makeArchiveTile('photo',firstPhoto+1,'follow')
+  );
+  const full=document.createElement('div');full.className='archive-row archive-row--full';
+  full.appendChild(makeArchiveTile('photo',firstPhoto+2,'full'));
+  const inverted=document.createElement('div');inverted.className='archive-row archive-row--inverted';
+  inverted.append(
+    makeArchiveTile('photo',firstPhoto+3,'lead'),
+    makeArchiveTile('photo',firstPhoto+4,'upper'),
+    makeArchiveTile('photo',firstPhoto+5,'follow')
+  );
+  archiveGrid.append(normal,full,inverted);
 }
 const lb=document.getElementById('evidenceLightbox'),lbImg=document.getElementById('lightboxImage'),lbCap=document.getElementById('lightboxCaption'),lbCount=document.getElementById('lightboxCount'),lbClose=document.getElementById('lightboxClose'),lbPrev=document.getElementById('lightboxPrev'),lbNext=document.getElementById('lightboxNext'),evidenceItems=[...document.querySelectorAll('.evidence-item')];let evidenceIndex=0,lbTouchX=0;function renderEvidence(){const el=evidenceItems[evidenceIndex];lbImg.src=el.dataset.src;lbImg.alt=el.dataset.caption;lbCap.textContent=el.dataset.caption;lbCount.textContent=`${String(evidenceIndex+1).padStart(2,'0')} / ${String(evidenceItems.length).padStart(2,'0')}`}function openLB(index){evidenceIndex=index;renderEvidence();lb.classList.add('open');lb.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';lbClose.focus()}function closeLB(){if(!lb.classList.contains('open'))return;lb.classList.remove('open');lb.setAttribute('aria-hidden','true');document.body.style.overflow='';evidenceItems[evidenceIndex].focus()}function moveEvidence(step){evidenceIndex=(evidenceIndex+step+evidenceItems.length)%evidenceItems.length;renderEvidence()}evidenceItems.forEach((el,index)=>el.onclick=()=>openLB(index));lbClose.onclick=closeLB;lbPrev.onclick=()=>moveEvidence(-1);lbNext.onclick=()=>moveEvidence(1);lb.onclick=e=>{if(e.target===lb)closeLB()};lb.addEventListener('touchstart',e=>{lbTouchX=e.changedTouches[0].clientX},{passive:true});lb.addEventListener('touchend',e=>{const distance=e.changedTouches[0].clientX-lbTouchX;if(Math.abs(distance)>45)moveEvidence(distance<0?1:-1)},{passive:true});document.addEventListener('keydown',e=>{if(lb.classList.contains('open')){if(e.key==='Escape')closeLB();if(e.key==='ArrowRight')moveEvidence(1);if(e.key==='ArrowLeft')moveEvidence(-1);return}if(document.getElementById('filmModal').classList.contains('open'))return;});
 const filmModal=document.getElementById('filmModal'),filmModalVideo=document.getElementById('filmModalVideo'),filmOpen=document.getElementById('filmOpen'),filmSurface=document.getElementById('short-film'),filmModalClose=document.getElementById('filmModalClose');
