@@ -337,10 +337,11 @@ for(let batchIndex=0;batchIndex<featuredRecordOrder.length;batchIndex++){
   const full=document.createElement('div');full.className='archive-row archive-row--full';
   if(!excludedPhotoNumbers.has(firstPhoto+3))full.appendChild(makeArchiveTile('photo',firstPhoto+2,'full'));
   const inverted=document.createElement('div');inverted.className='archive-row archive-row--inverted';
+  const swapDeerAndPlanes=batchIndex===featuredRecordOrder.length-1;
   const invertedTiles = [
-    ['lead',firstPhoto+3],
+    [swapDeerAndPlanes?'follow':'lead',firstPhoto+3],
     ['upper',firstPhoto+4],
-    ['follow',firstPhoto+5]
+    [swapDeerAndPlanes?'lead':'follow',firstPhoto+5]
   ].filter(([,index])=>!excludedPhotoNumbers.has(index+1));
   if(invertedTiles.length===2)inverted.classList.add('archive-row--duo');
   inverted.append(...invertedTiles.map(([position,index])=>makeArchiveTile('photo',index,position)));
