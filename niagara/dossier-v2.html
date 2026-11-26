@@ -128,7 +128,7 @@
 
     .waterfalls-control { appearance:none; width:64px; height:42px; position:absolute; z-index:8; bottom:15px; padding:0; border:0; color:rgba(18,20,17,.58); background:transparent; cursor:pointer; font-size:0; transition:color .22s ease,opacity .25s ease,transform .25s ease; }
     .waterfalls-prev { left:42%; opacity:0; pointer-events:none; }
-    .waterfalls-next { left:58%; }
+    .waterfalls-next { left:auto; right:calc(clamp(28px,4vw,58px) + 373px); }
     .waterfalls-control::before { content:""; position:absolute; top:50%; width:44px; height:1px; background:currentColor; }
     .waterfalls-prev::before { right:8px; }
     .waterfalls-next::before { left:8px; }
