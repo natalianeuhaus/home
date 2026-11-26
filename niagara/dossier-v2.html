@@ -2003,7 +2003,7 @@
         dossierViewer.dataset.view = target;
         dossierViewer.classList.remove('is-map-ready');
         const viewerUrl = new URL(route.src,window.location.href);
-        if (target === 'map') { viewerUrl.searchParams.set('embed','dossier'); viewerUrl.searchParams.set('v','responsive-map-20261126'); }
+        if (target === 'map') { viewerUrl.searchParams.set('embed','dossier'); viewerUrl.searchParams.set('v','landscape-map-20261126'); }
         loadDossierViewer(viewerUrl.href);
         dossierViewer.classList.add('is-open');
         dossierViewer.setAttribute('aria-hidden','false');
