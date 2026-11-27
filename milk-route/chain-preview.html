@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#080808">
+<title>The Milk Route — Five-Second Chain Animation Preview</title>
+<style>
+:root{--bg:#080808;--fg:#f1efe9;--muted:#92908a;--line:rgba(241,239,233,.19);--pad:clamp(20px,4.7vw,76px);--serif:Georgia,'Times New Roman',serif;--sans:Arial,Helvetica,sans-serif}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.45 var(--sans)}
+button{font:inherit}
+.preview-top{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:23px var(--pad);border-bottom:1px solid var(--line);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.preview-top .name{font:22px/1 var(--serif);letter-spacing:-.025em;text-transform:none}
+.preview-top span:last-child{color:var(--muted);text-align:right}
+.route{min-height:calc(100svh - 130px);display:flex;flex-direction:column;justify-content:center;padding:clamp(74px,11vw,152px) var(--pad) clamp(64px,9vw,122px);border-bottom:1px solid var(--line)}
+.label{color:var(--muted);font-size:10px;letter-spacing:.17em;text-transform:uppercase}
+.route-intro{display:grid;grid-template-columns:1.25fr .75fr;gap:9vw;align-items:end;margin-top:42px}
+.route h1{max-width:1050px;margin:0;font:400 clamp(42px,6vw,88px)/.98 var(--serif);letter-spacing:-.04em}
+.route-line{margin-top:88px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr) 40px) minmax(0,1fr);align-items:start}
+.node{position:relative;border-top:1px solid rgba(241,239,233,.22);padding-top:10px;min-height:95px}
+.node::before{content:"";position:absolute;top:-1px;left:0;right:0;height:1px;background:var(--fg);transform:scaleX(1);transform-origin:left}
+.node b{display:block;font-size:10px;letter-spacing:.15em;font-weight:400}
+.node small{display:block;margin-top:7px;font:15px var(--serif);color:var(--muted)}
+.arrow{padding-top:8px;text-align:center;color:var(--fg);font:21px var(--serif)}
+.route-line.is-prepared .node{opacity:.16;filter:blur(1px)}
+.route-line.is-prepared .node::before{transform:scaleX(0)}
+.route-line.is-prepared .arrow{opacity:.06;clip-path:inset(0 100% 0 0)}
+.route-line.is-prepared.is-playing .node{animation:nodeReveal .55s ease-out var(--delay) 1 forwards}
+.route-line.is-prepared.is-playing .node::before{animation:lineReveal .55s ease-out var(--delay) 1 forwards}
+.route-line.is-prepared.is-playing .arrow{animation:arrowReveal .42s ease-in-out var(--delay) 1 forwards}
+@keyframes nodeReveal{0%{opacity:.16;filter:blur(1px)}100%{opacity:1;filter:blur(0)}}
+@keyframes lineReveal{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes arrowReveal{from{opacity:.06;clip-path:inset(0 100% 0 0)}to{opacity:1;clip-path:inset(0 0 0 0)}}
+.preview-foot{padding:22px var(--pad) 28px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.preview-note{margin:0;color:var(--muted);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.replay{min-height:42px;padding:11px 17px;border:1px solid rgba(241,239,233,.45);background:transparent;color:var(--fg);font-size:10px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background .2s,color .2s}
+.replay:hover,.replay:focus-visible{background:var(--fg);color:var(--bg)}
+@media(max-width:800px){
+.preview-top{padding:18px 20px}
+.preview-top .name{font-size:19px}
+.route{min-height:0;padding:84px 20px 76px}
+.route-intro{grid-template-columns:1fr;gap:30px;margin-top:32px}
+.route h1{font-size:clamp(42px,11vw,64px)}
+.route-line{grid-template-columns:1fr;margin-top:58px}
+.node{min-height:auto;padding-bottom:13px}
+.arrow{transform:rotate(90deg);text-align:left;padding:0 0 4px 22px}
+.preview-foot{padding:22px 20px}
+}
+@media(prefers-reduced-motion:reduce){
+.route-line.is-prepared .node{opacity:1;filter:none;animation:none!important}
+.route-line.is-prepared .node::before{transform:scaleX(1);animation:none!important}
+.route-line.is-prepared .arrow{opacity:1;clip-path:none;animation:none!important}
+}
+</style>
+</head>
+<body>
+<header class="preview-top"><span class="name">NATALIA NEUHAUS</span><span>THE MILK ROUTE / MOTION STUDY · 05 SECONDS</span></header>
+<main class="route">
+  <div class="label">03 / THE ROUTE</div>
+  <div class="route-intro"><h1>A contamination pathway disguised as an ordinary food chain.</h1></div>
+  <div class="route-line" id="routeChain" aria-label="Radioactive contamination pathway from Nevada atmospheric testing through pasture, cow, milk, and the body">
+    <div class="node" style="--delay:0s"><b>NEVADA</b><small>atmospheric testing</small></div>
+    <div class="arrow" style="--delay:.55s" aria-hidden="true">→</div>
+    <div class="node" style="--delay:1.05s"><b>PASTURE</b><small>fallout on forage</small></div>
+    <div class="arrow" style="--delay:1.55s" aria-hidden="true">→</div>
+    <div class="node" style="--delay:2.05s"><b>COW</b><small>biological uptake</small></div>
+    <div class="arrow" style="--delay:2.55s" aria-hidden="true">→</div>
+    <div class="node" style="--delay:3.05s"><b>MILK</b><small>daily distribution</small></div>
+    <div class="arrow" style="--delay:3.55s" aria-hidden="true">→</div>
+    <div class="node" style="--delay:4.05s"><b>BODY</b><small>thyroid / generations</small></div>
+  </div>
+</main>
+<footer class="preview-foot">
+  <p class="preview-note">PREVIEW ONLY · PLAYS ONCE AND HOLDS · LIVE PAGE UNCHANGED</p>
+  <button class="replay" type="button" id="replay">REPLAY 5 SECONDS ↻</button>
+</footer>
+<script>
+(function(){
+  const chain=document.getElementById('routeChain');
+  const replay=document.getElementById('replay');
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduced)return;
+  chain.classList.add('is-prepared');
+  function start(){
+    chain.classList.add('is-playing');
+  }
+  if('IntersectionObserver' in window){
+    const observer=new IntersectionObserver(function(entries){
+      if(!entries.some(entry=>entry.isIntersecting))return;
+      start();
+      observer.disconnect();
+    },{threshold:.2});
+    observer.observe(chain);
+  }else{
+    start();
+  }
+  replay.addEventListener('click',function(){
+    chain.classList.remove('is-playing');
+    void chain.offsetWidth;
+    start();
+  });
+})();
+</script>
+</body>
+</html>
