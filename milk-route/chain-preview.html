@@ -24,9 +24,8 @@ button{font:inherit}
 .node::before{content:"";position:absolute;top:-1px;left:0;right:0;height:1px;background:var(--fg);transform:scaleX(1);transform-origin:left}
 .node b{display:block;font-size:10px;letter-spacing:.15em;font-weight:400}
 .node small{display:block;margin-top:7px;font:15px var(--serif);color:var(--muted)}
-.arrow{position:relative;min-height:30px;padding:0;color:var(--fg);font:0/0 var(--serif)}
-.arrow::before{content:"";position:absolute;top:0;left:3px;right:8px;height:1px;background:currentColor}
-.arrow::after{content:"";position:absolute;top:-4px;right:7px;width:8px;height:8px;border-top:1px solid currentColor;border-right:1px solid currentColor;transform:rotate(45deg)}
+.arrow{display:flex;align-items:center;justify-content:center;height:1px;min-height:1px;padding:0;color:var(--fg);font:400 20px/1 var(--sans)}
+.arrow span{display:block;line-height:1}
 .route-line.is-prepared .node{opacity:.16;filter:blur(1px)}
 .route-line.is-prepared .node::before{transform:scaleX(0)}
 .route-line.is-prepared .arrow{opacity:0}
@@ -48,9 +47,8 @@ button{font:inherit}
 .route h1{font-size:clamp(42px,11vw,64px)}
 .route-line{grid-template-columns:1fr;margin-top:58px}
 .node{min-height:auto;padding-bottom:13px}
-.arrow{height:34px;min-height:34px;transform:none}
-.arrow::before{left:22px;top:0;bottom:9px;right:auto;width:1px;height:auto}
-.arrow::after{left:18px;top:14px;right:auto;transform:rotate(135deg)}
+.arrow{height:34px;min-height:34px;width:40px}
+.arrow span{transform:rotate(90deg)}
 .preview-foot{padding:22px 20px}
 }
 @media(prefers-reduced-motion:reduce){
@@ -67,13 +65,13 @@ button{font:inherit}
   <div class="route-intro"><h1>A contamination pathway disguised as an ordinary food chain.</h1></div>
   <div class="route-line" id="routeChain" aria-label="Radioactive contamination pathway from Nevada atmospheric testing through pasture, cow, milk, and the body">
     <div class="node" style="--delay:0s"><b>NEVADA</b><small>atmospheric testing</small></div>
-    <div class="arrow" style="--delay:.55s" aria-hidden="true">→</div>
+    <div class="arrow" style="--delay:.55s" aria-hidden="true"><span>&gt;</span></div>
     <div class="node" style="--delay:1.05s"><b>PASTURE</b><small>fallout on forage</small></div>
-    <div class="arrow" style="--delay:1.55s" aria-hidden="true">→</div>
+    <div class="arrow" style="--delay:1.55s" aria-hidden="true"><span>&gt;</span></div>
     <div class="node" style="--delay:2.05s"><b>COW</b><small>biological uptake</small></div>
-    <div class="arrow" style="--delay:2.55s" aria-hidden="true">→</div>
+    <div class="arrow" style="--delay:2.55s" aria-hidden="true"><span>&gt;</span></div>
     <div class="node" style="--delay:3.05s"><b>MILK</b><small>daily distribution</small></div>
-    <div class="arrow" style="--delay:3.55s" aria-hidden="true">→</div>
+    <div class="arrow" style="--delay:3.55s" aria-hidden="true"><span>&gt;</span></div>
     <div class="node" style="--delay:4.05s"><b>BODY</b><small>thyroid / generations</small></div>
   </div>
 </main>
