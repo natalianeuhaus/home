@@ -24,16 +24,18 @@ button{font:inherit}
 .node::before{content:"";position:absolute;top:-1px;left:0;right:0;height:1px;background:var(--fg);transform:scaleX(1);transform-origin:left}
 .node b{display:block;font-size:10px;letter-spacing:.15em;font-weight:400}
 .node small{display:block;margin-top:7px;font:15px var(--serif);color:var(--muted)}
-.arrow{padding-top:8px;text-align:center;color:var(--fg);font:21px var(--serif)}
+.arrow{position:relative;min-height:30px;padding:0;color:var(--fg);font:0/0 var(--serif)}
+.arrow::before{content:"";position:absolute;top:0;left:3px;right:8px;height:1px;background:currentColor}
+.arrow::after{content:"";position:absolute;top:-4px;right:7px;width:8px;height:8px;border-top:1px solid currentColor;border-right:1px solid currentColor;transform:rotate(45deg)}
 .route-line.is-prepared .node{opacity:.16;filter:blur(1px)}
 .route-line.is-prepared .node::before{transform:scaleX(0)}
-.route-line.is-prepared .arrow{opacity:.06;clip-path:inset(0 100% 0 0)}
+.route-line.is-prepared .arrow{opacity:0}
 .route-line.is-prepared.is-playing .node{animation:nodeReveal .55s ease-out var(--delay) 1 forwards}
 .route-line.is-prepared.is-playing .node::before{animation:lineReveal .55s ease-out var(--delay) 1 forwards}
-.route-line.is-prepared.is-playing .arrow{animation:arrowReveal .42s ease-in-out var(--delay) 1 forwards}
+.route-line.is-prepared.is-playing .arrow{animation:arrowFade .7s ease-in-out var(--delay) 1 forwards}
 @keyframes nodeReveal{0%{opacity:.16;filter:blur(1px)}100%{opacity:1;filter:blur(0)}}
 @keyframes lineReveal{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-@keyframes arrowReveal{from{opacity:.06;clip-path:inset(0 100% 0 0)}to{opacity:1;clip-path:inset(0 0 0 0)}}
+@keyframes arrowFade{from{opacity:0}to{opacity:1}}
 .preview-foot{padding:22px var(--pad) 28px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
 .preview-note{margin:0;color:var(--muted);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
 .replay{min-height:42px;padding:11px 17px;border:1px solid rgba(241,239,233,.45);background:transparent;color:var(--fg);font-size:10px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background .2s,color .2s}
@@ -46,13 +48,15 @@ button{font:inherit}
 .route h1{font-size:clamp(42px,11vw,64px)}
 .route-line{grid-template-columns:1fr;margin-top:58px}
 .node{min-height:auto;padding-bottom:13px}
-.arrow{transform:rotate(90deg);text-align:left;padding:0 0 4px 22px}
+.arrow{height:34px;min-height:34px;transform:none}
+.arrow::before{left:22px;top:0;bottom:9px;right:auto;width:1px;height:auto}
+.arrow::after{left:18px;top:14px;right:auto;transform:rotate(135deg)}
 .preview-foot{padding:22px 20px}
 }
 @media(prefers-reduced-motion:reduce){
 .route-line.is-prepared .node{opacity:1;filter:none;animation:none!important}
 .route-line.is-prepared .node::before{transform:scaleX(1);animation:none!important}
-.route-line.is-prepared .arrow{opacity:1;clip-path:none;animation:none!important}
+.route-line.is-prepared .arrow{opacity:1;animation:none!important}
 }
 </style>
 </head>
