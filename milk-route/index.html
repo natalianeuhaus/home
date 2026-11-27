@@ -133,6 +133,8 @@
 @media(max-width:760px){
   .site-header{padding:22px 20px}
   .site-header .wordmark{font-size:13px}
+  /* Keep scrolling copy from appearing through the fixed mobile navigation. */
+  .site-header.is-scrolled{background:#080808;mix-blend-mode:normal;border-bottom:1px solid rgba(255,255,255,.15)}
 }
 
 /* Draft only: photographic landscapes and evidence interwoven as an archive. */
@@ -288,6 +290,14 @@
 <footer class="footer"><span>THE MILK ROUTE</span><span>ONGOING</span><span>&copy; NATALIA NEUHAUS. ALL RIGHTS RESERVED.</span></footer>
 <script defer src="../assets/site.js?v=mobile-photo-swipe-2"></script>
 <script>
+/* Mobile navigation stays transparent on the hero, opaque over scrolled copy. */
+(function(){
+  const header=document.querySelector(".site-header");
+  if(!header)return;
+  const update=()=>header.classList.toggle("is-scrolled",window.scrollY>48);
+  update();
+  window.addEventListener("scroll",update,{passive:true});
+})();
 /* Milk-route chain: reveal once on entry, hold the final state. */
 (function(){
   const chain=document.getElementById("milkRouteChain");
