@@ -179,10 +179,12 @@
 @keyframes archiveRoadDraw{0%{stroke-dashoffset:2500;opacity:0}3%{opacity:1}100%{stroke-dashoffset:0;opacity:1}}
 @keyframes archiveLabelsReveal{0%{opacity:0}100%{opacity:1}}
 @media(max-width:760px){
-  .archive-route-topline,.archive-route-footline{font-size:8px;letter-spacing:.12em}
-  .archive-route-topline{padding:14px 0 11px}
+  /* Let the geographic study fill the phone, preserving its complete SVG viewBox. */
+  .archive-route-map{width:calc(100% + var(--pad) + var(--pad));margin-left:calc(0px - var(--pad))}
+  .archive-route-topline,.archive-route-footline{font-size:8px;letter-spacing:.12em;padding-left:var(--pad);padding-right:var(--pad)}
+  .archive-route-topline{padding-top:14px;padding-bottom:11px}
   .archive-route-map svg{width:100%}
-  .archive-route-footline{padding:11px 0 14px}
+  .archive-route-footline{padding-top:11px;padding-bottom:14px}
 }
 @media(prefers-reduced-motion:reduce){
   .archive-route-map.is-prepared .range-border,.archive-route-map.is-prepared .site-border,.archive-route-map.is-prepared .road-trace{animation:none;stroke-dashoffset:0;opacity:1}
